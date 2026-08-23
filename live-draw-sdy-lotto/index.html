@@ -186,17 +186,14 @@
 
     const dataByDate = {};
     
-    // Memasukkan data paito secara berurutan dari bawah ke atas (dari tanggal terbaru ke masa lalu)
     let numIndex = numberList.length - 1;
-    for (let i = dates.length - 1; i >= 0; i--) {
-      const d = dates[i];
-      if (numIndex >= 0) {
-        dataByDate[d.dateStr] = numberList[numIndex];
-        numIndex--;
-      } else {
-        dataByDate[d.dateStr] = "-";
-      }
-    }
+for (let i = dates.length - 1; i >= 0; i--) {
+  const d = dates[i];
+  if (numIndex >= 0) {
+    dataByDate[d.dateStr] = numberList[numIndex];
+    numIndex--;
+  } else { ... }
+}
 
     // Ambil data untuk hari ini (angka paling akhir di data paito)
     const todayStr = dates[dates.length - 1].dateStr;
