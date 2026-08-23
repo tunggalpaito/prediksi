@@ -105,7 +105,7 @@
     </header>
 
     <main class="container">
-        <!-- KOTAK LIVE RESULT LIVE TERBARU DARI BERKAS JS -->
+        <!-- KOTAK LIVE RESULT TERBARU OTOMATIS DARI BARIS TERAKHIR -->
         <section class="live-result-card">
             <div class="live-result-title">🔴 DATA RESULT TERBARU SDY 4D</div>
             <div id="angka-terbaru-box" class="live-result-number">----</div>
@@ -266,44 +266,6 @@ hs.src='//s10.histats.com/js15_as.js';
 <script>
 let warnaKuasAktif = "transparent";
 
-if (typeof LIVE_RESULT_SDY !== 'undefined') {
-    const angkaSah = LIVE_RESULT_SDY.latestResult;
-    const boxAngka = document.getElementById('angka-terbaru-box');
-    const boxStatusWaktu = document.getElementById('waktu-terbaru-box');
-    
-    boxAngka.innerText = "xxxx"; 
-    boxStatusWaktu.innerText = "Sinkronisasi data live...";
-
-    let indeksDigit = 0;
-    let wadahAngka = ["x", "x", "x", "x"];
-
-    const animasiAngka = setInterval(() => {
-        if (indeksDigit < angkaSah.length) {
-            wadahAngka[indeksDigit] = angkaSah[indeksDigit];
-            boxAngka.innerText = wadahAngka.join("");
-            indeksDigit++;
-        } else {
-            clearInterval(animasiAngka);
-            const tgl = new Date();
-            const infoWaktu = `${String(tgl.getDate()).padStart(2, '0')}-${String(tgl.getMonth()+1).padStart(2, '0')}-${tgl.getFullYear()}`;
-            boxStatusWaktu.innerText = "Update Sah Hari Ini: " + infoWaktu;
-        }
-    }, 3000); 
-
-} else {
-    document.getElementById('angka-terbaru-box').innerText = "xxxx";
-    document.getElementById('waktu-terbaru-box').innerText = "Gagal memuat berkas JS.";
-}
-
-const tombolWarna = document.querySelectorAll('.color-palette .color-btn');
-tombolWarna.forEach(btn => {
-    btn.addEventListener('click', function() {
-        tombolWarna.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        warnaKuasAktif = this.getAttribute('data-color');
-    });
-});
-
 function perbaruiJamOtomatis() {
     const sekarang = new Date();
     const jam = String(sekarang.getHours()).padStart(2, '0');
@@ -323,10 +285,38 @@ if (paitoTbody && teksMentah.trim() !== "") {
     paitoTbody.innerHTML = '';
     
     // Ambil semua angka murni dari file JS
-   let dataAngkaMurni = teksMentah.split(',')
+    let dataAngkaMurni = teksMentah.split(',')
     .map(x => x.replace(/\s+/g, '').trim()) // Menghapus spasi enter tersembunyi
     .filter(x => x !== "" && x.length >= 4); // Hanya mengambil data yang murni berupa angka 4 digit
 
+    // OTOMATIS AMBIL ANGKA TERBARU DARI DATA PALING AKHIR
+    if (dataAngkaMurni.length > 0) {
+        const angkaSah = dataAngkaMurni[dataAngkaMurni.length - 1];
+        const boxAngka = document.getElementById('angka-terbaru-box');
+        const boxStatusWaktu = document.getElementById('waktu-terbaru-box');
+        
+        boxAngka.innerText = "xxxx"; 
+        boxStatusWaktu.innerText = "Sinkronisasi data live...";
+
+        let indeksDigit = 0;
+        let wadahAngka = ["x", "x", "x", "x"];
+
+        const animasiAngka = setInterval(() => {
+            if (indeksDigit < angkaSah.length) {
+                wadahAngka[indeksDigit] = angkaSah[indeksDigit];
+                boxAngka.innerText = wadahAngka.join("");
+                indeksDigit++;
+            } else {
+                clearInterval(animasiAngka);
+                const tgl = new Date();
+                const infoWaktu = `${String(tgl.getDate()).padStart(2, '0')}-${String(tgl.getMonth()+1).padStart(2, '0')}-${tgl.getFullYear()}`;
+                boxStatusWaktu.innerText = "Update Sah Hari Ini: " + infoWaktu;
+            }
+        }, 3000); 
+    } else {
+        document.getElementById('angka-terbaru-box').innerText = "xxxx";
+        document.getElementById('waktu-terbaru-box').innerText = "Data angka kosong.";
+    }
     
     // Pecah data menjadi baris-baris berkapasitas maksimal 7 angka keluaran per minggu
     let indeksData = 0;
@@ -383,7 +373,18 @@ if (paitoTbody && teksMentah.trim() !== "") {
     }
 } else if (paitoTbody) {
     paitoTbody.innerHTML = '<tr><td colspan="8" style="color:var(--text-muted); padding:10px;">Data Berkas Kosong.</td></tr>';
+    document.getElementById('angka-terbaru-box').innerText = "xxxx";
+    document.getElementById('waktu-terbaru-box').innerText = "Gagal memuat berkas JS.";
 }
+
+const tombolWarna = document.querySelectorAll('.color-palette .color-btn');
+tombolWarna.forEach(btn => {
+    btn.addEventListener('click', function() {
+        tombolWarna.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        warnaKuasAktif = this.getAttribute('data-color');
+    });
+});
 
 paitoTbody.addEventListener('click', function(e) {
     if (e.target && e.target.tagName === 'SPAN') {
@@ -424,9 +425,6 @@ document.getElementById('btn-cari-pola').addEventListener('click', function() {
     });
 });
 
-document.getElementById('btn-bersih-pola').addEventListener('fold', function() {
-    // Tombol bersih pola reset penanda kuas manual
-});
 document.getElementById('btn-bersih-pola').addEventListener('click', function() {
     document.getElementById('input-kepala').value = "";
     document.getElementById('input-ekor').value = "";
@@ -457,5 +455,14 @@ document.getElementById('btn-bersih-pola').addEventListener('click', function() 
     window.history.replaceState(null, '', '/' + namaHalaman + '/' + hariParam);
   }
 </script>
-
+<script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false; // Blokir F12 (Inspect Element)
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    }
+</script>
 </html>
