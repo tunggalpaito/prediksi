@@ -65,7 +65,3 @@ const DATA_PAITO_MACAU = `
   22 Aug,4237,0799,8542,4636,5832,3297,
   23 Aug,9177,6739,
 `;
-
-const LIVE_RESULT_MACAU = {
-    latestResult: "9177"
-};
