@@ -22,7 +22,3 @@ const DATA_PAITO_SDY = `
   0332,3041,3416,4276,8405,9522,5065,
   0709,9154,1429,5472,6933,0189,8493,
 `;
-
-const LIVE_RESULT_SDY = {
-    latestResult: "8493"
-};
