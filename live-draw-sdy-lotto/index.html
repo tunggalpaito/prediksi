@@ -184,20 +184,42 @@
       .split(',')
       .filter(n => n.length > 0);
 
-    const dataByDate = {};
-    
-    let numIndex = numberList.length - 1;
-for (let i = dates.length - 1; i >= 0; i--) {
-  const d = dates[i];
-  if (numIndex >= 0) {
-    dataByDate[d.dateStr] = numberList[numIndex];
-    numIndex--;
-  } else { ... }
-}
+    // Cek waktu saat ini (Jam 13:55)
+    const now = new Date();
+    const currentHours = now.getHours();
+    const currentMinutes = now.getMinutes();
+    const currentTimeInMinutes = currentHours * 60 + currentMinutes;
+    const targetStartTime = 13 * 60 + 55; // Pukul 13:55
 
-    // Ambil data untuk hari ini (angka paling akhir di data paito)
+    const dataByDate = {};
     const todayStr = dates[dates.length - 1].dateStr;
-    const todayResult = dataByDate[todayStr] || "-";
+    
+    // Indeks mulai dari angka paling belakang data paito untuk hari ini
+    let numIndex = numberList.length - 1;
+
+    // 1. Tentukan dulu untuk HARI INI
+    if (currentTimeInMinutes < targetStartTime) {
+      // Belum jam 13:55, paksa jadi strip "-"
+      dataByDate[todayStr] = "-";
+    } else {
+      // Sudah lewat jam 13:55, ambil angka terakhir dari paito
+      dataByDate[todayStr] = numIndex >= 0 ? numberList[numIndex] : "-";
+      numIndex--; // Geser indeks untuk hari-hari kemarin
+    }
+
+    // 2. Masukkan data untuk tanggal-tanggal kemarin ke atas secara berurutan
+    for (let i = dates.length - 2; i >= 0; i--) {
+      const d = dates[i];
+      if (numIndex >= 0) {
+        dataByDate[d.dateStr] = numberList[numIndex];
+        numIndex--;
+      } else {
+        dataByDate[d.dateStr] = "-";
+      }
+    }
+
+    // Ambil nilai hasil untuk hari ini guna keperluan kotak live di atas
+    const todayResult = dataByDate[todayStr];
 
     // Render Tabel Bulanan
     const tbody = document.getElementById('table-body');
@@ -216,19 +238,12 @@ for (let i = dates.length - 1; i >= 0; i--) {
       tbody.appendChild(tr);
     }
 
-    // Logika Waktu Kelap-Kelip (Diset tepat jam 13:55)
-    const now = new Date();
-    const currentHours = now.getHours();
-    const currentMinutes = now.getMinutes();
-    const currentTimeInMinutes = currentHours * 60 + currentMinutes;
-    const targetStartTime = 13 * 60 + 55; // Pukul 13:55
-
+    // Logika Waktu Kelap-Kelip Kotak Live (Diset tepat jam 13:55)
     const container = document.getElementById('number-container');
 
     if (animationInterval) clearInterval(animationInterval);
 
-    // Jika waktu live belum tiba (sebelum 13:55), tampilkan strip "-" di kotak live (meski di file JS sudah terisi untuk keperluan tabel)
-    if (currentTimeInMinutes < targetStartTime && todayResult !== "-") {
+    if (currentTimeInMinutes < targetStartTime) {
       container.classList.remove('blinking');
       renderStaticDigits("----");
       lastRenderedResult = null;
@@ -301,16 +316,6 @@ for (let i = dates.length - 1; i >= 0; i--) {
   setInterval(() => {
     location.reload();
   }, 60000);
-</script>
-<script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) return false; // Blokir F12 (Inspect Element)
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-    }
 </script>
 </body>
 </html>
