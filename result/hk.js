@@ -16,6 +16,3 @@ const DATA_PAITO_HK = `
   7604,0929,8240,7834,6928,9487,0747,
   9160,0863,0507,3732,8710,9925,
 `;
-const LIVE_RESULT_HK = {
-    latestResult: "9925"
-};
