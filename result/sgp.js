@@ -16,6 +16,3 @@ const DATA_PAITO_SGP = `
   3525,2375,3200,6714,6149,
   8754,4478,7269,3001,
 `;
-const LIVE_RESULT_SGP = {
-    latestResult: "3001"
-};
