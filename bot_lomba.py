@@ -74,6 +74,8 @@ for nama_pasaran, info in pasaran_result.items():
         except Exception as e:
             print(f"   [{i}/{jumlah_bot}] Error: {e}")
             
-        time.sleep(random.uniform(2.0, 7.0))
+        # Jeda antar bot diperlebar (20 s.d 60 detik) agar aman dari deteksi invalid traffic iklan
+        jeda_aman = random.uniform(20.0, 60.0)
+        time.sleep(jeda_aman)
 
 print("\n🎉 Selesai! Semua bot terkirim ke masing-masing URL pasaran dengan aman.")
