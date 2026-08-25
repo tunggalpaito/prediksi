@@ -52,6 +52,13 @@ footer p span{color:var(--accent);font-weight:700}
     50% { color: #ff5252; text-shadow: 0 0 15px rgba(255,82,82,0.8), 0 0 25px rgba(255,23,68,0.6); }
     100% { color: #ff1744; text-shadow: 0 0 5px rgba(255,23,68,0.4), 0 0 10px rgba(255,23,68,0.2); }
 }
+
+@keyframes marqueeGlow {
+    0% { filter: drop-shadow(0 0 2px rgba(255,23,68,0.3)); }
+    50% { filter: drop-shadow(0 0 8px rgba(255,23,68,0.7)); }
+    100% { filter: drop-shadow(0 0 2px rgba(255,23,68,0.3)); }
+}
+
 .ruang-lomba-block {
     background: var(--bg-card);
     border: 1px solid var(--border-glow);
@@ -75,7 +82,7 @@ footer p span{color:var(--accent);font-weight:700}
 </head>
 <body>
 <div class="main-wrapper">
-<div id=merdekaPopup class=merdeka-popup>
+<div id=merdekaPopup class="merdeka-popup hidden">
 <div class=merdeka-content>
 <div class=flag-wrapper>
 <div class=flag-pole></div>
@@ -169,7 +176,6 @@ footer p span{color:var(--accent);font-weight:700}
 <div class="status-badge open">Active</div>
 </a>
 </div>
-<!-- TABEL RUANG LOMBA BARU DI ATAS LIVE DRAW -->
 <div class=ruang-lomba-block>
 <div class=ruang-lomba-title>RUANG LOMBA</div>
 <div class=link-grid>
@@ -202,12 +208,31 @@ LIVE DRAW TERCEPAT </a>
 </div>
 </div>
 </div>
-<footer><p>&copy; <span id=year></span> <span>TUNGGAL PAITO</span> All Rights Reserved. <br>| <a href=https://tunggalpaito.online/privacy-policy style=color:#ffb703;text-decoration:none>Kebijakan Privasi</a><span class=tunggal-paito-original data-owner=TunggalPaito data-signature=2026-Protected style=display:none!important><a href=https://tunggalpaito.online/ rel=dofollow>Tunggal Paito</a></span></p><script>document.getElementById("year").textContent=(new Date).getFullYear();const tp_sig="TunggalPaito_Official_Source_Verified";console.log("Protected by Tunggal Paito © 2026")</script></footer>
+<footer>
+<p>&copy; <span id=year></span> <span>TUNGGAL PAITO</span> All Rights Reserved. <br>| <a href=https://tunggalpaito.online/privacy-policy style=color:#ffb703;text-decoration:none>Kebijakan Privasi</a>
+<span class=tunggal-paito-original data-owner=TunggalPaito data-signature=protected style=display:none!important><a href=https://tunggalpaito.online/ rel=dofollow>Tunggal Paito</a></span></p>
+</footer>
 </div>
 <script>document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}</script>
-<script>function tutupMerdeka(){const e=document.getElementById("merdekaPopup");e.classList.remove("show-content"),setTimeout((()=>{e.classList.add("hidden")}),400)}function toggleHimbauan(){document.getElementById("himbauanContent").classList.toggle("active")}document.getElementById("year").textContent=(new Date).getFullYear(),window.addEventListener("load",(function(){const e=new Date,t=e.getMonth(),n=e.getDate();7===t&&n>=17&&n<=24?setTimeout((()=>{document.getElementById("merdekaPopup").classList.add("show-content")}),300):document.getElementById("merdekaPopup").classList.add("hidden");const a=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"][e.getDay()];document.getElementById("namaHari").innerText=a;const s=document.getElementById("sgpBadge");"Selasa"===a||"Jumat"===a?(s.innerText="Libur",s.className="status-badge closed"):(s.innerText="Active",s.className="status-badge open")}))</script>
+<script>
+function tutupMerdeka(){const e=document.getElementById("merdekaPopup");e.classList.remove("show-content"),setTimeout((()=>{e.classList.add("hidden")}),400)}
+function toggleHimbauan(){document.getElementById("himbauanContent").classList.toggle("active")}
+
+window.addEventListener("load",(function(){
+const currentYear = new Date().getFullYear();
+document.getElementById("year").textContent = currentYear;
+
+const e=new Date,t=e.getMonth(),n=e.getDate();
+7===t&&n>=17&&n<=24?setTimeout((()=>{document.getElementById("merdekaPopup").classList.add("show-content")}),300):document.getElementById("merdekaPopup").classList.add("hidden");
+
+const a=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"][e.getDay()];
+document.getElementById("namaHari").innerText=a;
+
+const s=document.getElementById("sgpBadge");
+"Selasa"===a||"Jumat"===a?(s.innerText="Libur",s.className="status-badge closed"):(s.innerText="Active",s.className="status-badge open")
+}))</script>
 <div id=age-gate style=position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.98);z-index:30000;display:flex;justify-content:center;align-items:center;color:#fff;font-family:sans-serif;text-align:center>
-<div style="background:#0c0c0c;padding:30px;border-radius:12px;max-width:400px;border:1px solid rgba(0,243,255,.3);box-shadow:0 0 30px rgba(0,0,0,.9)">
+<div style="background:#0c0c0c;padding:30px;border-radius:12px;width:90%;max-width:400px;border:1px solid rgba(0,243,255,.3);box-shadow:0 0 30px rgba(0,0,0,.9)">
 <h2 style=color:#ffeb3b;margin-bottom:10px>PERINGATAN: KONTEN DEWASA</h2>
 <p style=color:#ccc;margin-bottom:20px;font-size:.95rem>Situs ini berisi konten yang hanya boleh diakses oleh orang dewasa (18+). Apakah Anda berusia 18 tahun atau lebih?</p>
 <button onclick=allowAccess() style="background:#00e676;color:#000;font-weight:700;border:none;padding:10px 20px;font-size:15px;border-radius:6px;cursor:pointer;margin-right:10px;box-shadow:0 0 10px rgba(0,230,118,.4)">YA, SAYA 18+</button>
