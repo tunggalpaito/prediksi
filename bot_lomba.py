@@ -5,12 +5,12 @@ import requests
 # Daftar 10 Pasaran lengkap dengan Jam Result (Jam Tutup) dan URL Firebase yang sudah disesuaikan
 pasaran_result = {
     "Cambodia": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-cambodia.json", "hour": 11, "minute": 50},
-    "Sydney Pools": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sydneypools.json", "hour": 13, "minute": 35},
+    "Sydney Pools": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sydney.json", "hour": 13, "minute": 35},
     "Sydney Lotto": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sdylotto.json", "hour": 13, "minute": 50},
     "China": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-china.json", "hour": 15, "minute": 15},
     "Macau": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-macau.json", "hour": 16, "minute": 0},
     "Japan": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-japan.json", "hour": 17, "minute": 20},
-    "SGP": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sgp.json", "hour": 17, "minute": 30},
+    "SGP": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-singapore.json", "hour": 17, "minute": 30},
     "Taiwan": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-taiwan.json", "hour": 20, "minute": 35},
     "Hongkong Pools": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-hongkong.json", "hour": 22, "minute": 45},
     "Hongkong Lotto": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-hklotto.json", "hour": 23, "minute": 0}
