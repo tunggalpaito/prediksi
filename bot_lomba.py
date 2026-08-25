@@ -2,21 +2,20 @@ import random
 import time
 import requests
 
-# Daftar 10 Pasaran Lengkap beserta URL Firebase-nya masing-masing
-pasaran_list = {
-    "Macau": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-macau.json",
-    "Cambodia": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-cambodia.json",
-    "Sydney Pools": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sydneypools.json",
-    "Sydney Lotto": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sdylotto.json",
-    "China": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-china.json",
-    "Japan": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-japan.json",
-    "SGP": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sgp.json",
-    "Taiwan": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-taiwan.json",
-    "Hongkong Pools": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-hkpools.json",
-    "Hongkong Lotto": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-hklotto.json"
+# Daftar 10 Pasaran lengkap dengan Jam Result (Jam Tutup) dan URL Firebase yang sudah disesuaikan
+pasaran_result = {
+    "Cambodia": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-cambodia.json", "hour": 11, "minute": 50},
+    "Sydney Pools": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sydneypools.json", "hour": 13, "minute": 35},
+    "Sydney Lotto": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sdylotto.json", "hour": 13, "minute": 50},
+    "China": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-china.json", "hour": 15, "minute": 15},
+    "Macau": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-macau.json", "hour": 16, "minute": 0},
+    "Japan": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-japan.json", "hour": 17, "minute": 20},
+    "SGP": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-sgp.json", "hour": 17, "minute": 30},
+    "Taiwan": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-taiwan.json", "hour": 20, "minute": 35},
+    "Hongkong Pools": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-hongkong.json", "hour": 22, "minute": 45},
+    "Hongkong Lotto": {"url": "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/komentar/lomba-hklotto.json", "hour": 23, "minute": 0}
 }
 
-# Daftar 50 Nama Cowok Indonesia untuk Bot
 daftar_nama = [
     "Dimas Pratama", "Rizky Ramadhan", "Bayu Saputra", "Arya Nugraha", "Aditya Wicaksono",
     "Fajar Hidayat", "Rehan Mahendra", "Gilang Permana", "Andika Putra", "Eko Prasetyo",
@@ -30,29 +29,29 @@ daftar_nama = [
     "Guntur Bumi", "Heru Setiawan", "Irfan Bachdim", "Joko Widodo", "Krisna Murti"
 ]
 
-print("🤖 Memulai bot otomatis multi-pasaran dengan variasi waktu acak...")
+print("🤖 Memulai sistem bot otomatis berbasis jam result acak...")
 
-# Beri jeda awal acak secara keseluruhan agar tidak langsung jalan bersamaan pas program nyala
-waktu_tunggu_awal = random.randint(5, 30)
-time.sleep(waktu_tunggu_awal)
-
-for nama_pasaran, url_firebase in pasaran_list.items():
-    print(f"\n🚀 Mengirim bot untuk pasaran: {nama_pasaran}")
+for nama_pasaran, info in pasaran_result.items():
+    url_firebase = info["url"]
+    target_hour = info["hour"]
+    target_minute = info["minute"]
     
-    # Acak jumlah bot yang ikut tiap hari (misal antara 25 sampai 35 orang saja)
-    jumlah_bot_hari_ini = random.randint(25, 35)
+    # Mengacak waktu mundur dari jam result (antara 15 sampai 60 menit sebelum tutup)
+    pengurangan_menit = random.randint(15, 60)
+    total_target_menit = (target_hour * 60 + target_minute) - pengurangan_menit
+    jam_mulai = total_target_menit // 60
+    menit_mulai = total_target_menit % 60
     
-    for i in range(1, jumlah_bot_hari_ini + 1):
-        # Ambil nama secara acak
+    print(f"\n🚀 Pasaran {nama_pasaran}: Result asli {target_hour:02d}:{target_minute:02d}. Bot mulai posting sekitar jam {jam_mulai:02d}:{menit_mulai:02d}")
+    
+    jumlah_bot = random.randint(25, 35)
+    
+    for i in range(1, jumlah_bot + 1):
         nama_bot = random.choice(daftar_nama)
         
-        # Line tebakan diacak dari 2 sampai 15 line
         jumlah_line = random.randint(2, 15)
         tebakan_list = [f"{random.randint(0, 99):02d}" for _ in range(jumlah_line)]
         isi_tebakan = " ".join(tebakan_list)
-        
-        # Timestamp saat ini + sedikit variasi detik acak agar tidak kembar
-        current_time_ms = int(time.time() * 1000) + random.randint(100, 90000)
         
         data_payload = {
             "nama": nama_bot,
@@ -60,8 +59,8 @@ for nama_pasaran, url_firebase in pasaran_list.items():
             "isi": isi_tebakan,
             "rawDate": "2026-06-06",
             "tglFormat": "06/06/2026",
-            "timestamp": current_time_ms,
-            "waktu": f"6 Jun 2026, 12:{random.randint(10, 45):02d} WIB", # Jam menit dibuat variatif
+            "timestamp": int(time.time() * 1000),
+            "waktu": f"6 Jun 2026, {jam_mulai:02d}:{random.randint(0, 59):02d} WIB",
             "deviceId": f"device_{nama_pasaran}_{i}_{random.randint(1000,9999)}",
             "editCount": 1
         }
@@ -69,15 +68,12 @@ for nama_pasaran, url_firebase in pasaran_list.items():
         try:
             response = requests.post(url_firebase, json=data_payload, timeout=5)
             if response.status_code == 200:
-                print(f"   [{i}/{jumlah_bot_hari_ini}] Berhasil: {nama_bot} ({jumlah_line} Line)")
+                print(f"   [{i}/{jumlah_bot}] Berhasil: {nama_bot} ({jumlah_line} Line)")
             else:
-                print(f"   [{i}/{jumlah_bot_hari_ini}] Gagal: {nama_bot}")
+                print(f"   [{i}/{jumlah_bot}] Gagal: {nama_bot}")
         except Exception as e:
-            print(f"   [{i}/{jumlah_bot_hari_ini}] Error koneksi: {e}")
+            print(f"   [{i}/{jumlah_bot}] Error: {e}")
             
-        # Jeda waktu antar bot dibuat acak (antara 2 detik sampai 8 detik) 
-        # supaya terlihat seperti orang ngirim satu-satu secara bergantian
-        jeda_acak = random.uniform(2.0, 8.0)
-        time.sleep(jeda_acak)
+        time.sleep(random.uniform(2.0, 7.0))
 
-print("\n🎉 Selesai! Semua bot terkirim dengan pola acak yang natural.")
+print("\n🎉 Selesai! Semua bot terkirim ke masing-masing URL pasaran dengan aman.")
