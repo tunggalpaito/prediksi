@@ -9,7 +9,7 @@ on:
       - 'robots.txt'
 
 permissions:
-  contents: read
+  contents: write    # <-- Pastikan ini write, bukan read
   pages: write
   id-token: write
 
@@ -26,9 +26,9 @@ jobs:
           node-version: '20'
 
       - name: Jalankan Skrip Pembuat Sitemap
-        run: node main.js # Sesuaikan dengan nama file js Anda jika bukan main.js
+        run: node main.js
 
-      - name: Commit Hasil Sitemap (Opsional agar tersimpan di repo)
+      - name: Commit Hasil Sitemap
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update sitemap.xml dan robots.txt"
