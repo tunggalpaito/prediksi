@@ -199,9 +199,6 @@ async function muatPaitoOtomatis() {
         if (n.length > 0) {
             let e = n[n.length - 1].trim();
             e !== lastLoadedResult4D && (lastLoadedResult4D = e, forceOpenForm = !0, tampilkanResult(e));
-            
-            // Simpan mapping result harian jika tersedia dari sumber hk.js (format diasumsikan berurutan atau parse dari data)
-            // Mengambil beberapa result terakhir untuk dicocokkan dengan tanggal arsip jika format memperbolehkan
         }
     } catch (e) {
         console.error("gagal menghubungkan sumber resmi", e)
@@ -330,14 +327,12 @@ async function bukaArsip() {
     if (sortedDates.length === 0) {
         n = '<p style="color: #888; text-align: center;">Belum ada arsip Lomba</p>';
     } else {
-        // Ambil data result harian dari sumber eksternal untuk ditampilkan di arsip jika ada
         let fetchedResults = {};
         try {
             let res = await fetch("/result/hk.js?v=" + (new Date).getTime());
             let text = res ? await res.text() : "";
             let match = text.match(/['"`]([\s\S]*?)['"`]/);
             let arr = (match ? match[1] : text).replace(/[\s\n\r]/g, "").split(",").filter(x => x.length >= 4);
-            // Susun mapping jika memungkinkan atau gunakan placeholder/result terakhir hari tersebut
             sortedDates.forEach((dKey, idx) => {
                 if (arr.length > 0 && arr[arr.length - 1 - idx]) {
                     fetchedResults[dKey] = arr[arr.length - 1 - idx];
@@ -349,11 +344,9 @@ async function bukaArsip() {
             let items = groupedByDate[dateKey];
             let displayDateLabel = items[0].tglFormat || dateKey;
             
-            // Kotak Arsip per Hari
             n += `<div style="background: #111; border: 1px solid #444; padding: 10px; margin-bottom: 15px; border-radius: 5px;">`;
             n += `<h4 style="color: #fc0; margin: 0 0 10px 0; text-align: center; border-bottom: 1px solid #333; padding-bottom: 5px;">Tanggal : ${displayDateLabel}</h4>`;
 
-            // 1. Komentar / Postingan peserta memanjang
             items.forEach(e => {
                 n += `<div style="background: #222; border: 1px solid #444; color: #fff; padding: 8px; margin-bottom: 8px; border-radius: 3px;">`;
                 n += `<strong>${e.nama}</strong> <span style="font-size: 10px; color: #aaa;">(${e.waktu})</span>`;
@@ -361,7 +354,6 @@ async function bukaArsip() {
                 n += `</div>`;
             });
 
-            // 2. Hasil Result 4D muncul di bawah komentar terakhir hari tersebut
             let res4D = fetchedResults[dateKey] || (dateKey === new Date().toISOString().split("T")[0] && lastLoadedResult4D ? lastLoadedResult4D : "----");
             let b1 = res4D[0] || "-", b2 = res4D[1] || "-", b3 = res4D[2] || "-", b4 = res4D[3] || "-";
 
@@ -375,7 +367,7 @@ async function bukaArsip() {
             n += `</div>`;
             n += `</div>`;
 
-            n += `</div>`; // Tutup box hari
+            n += `</div>`;
         });
     }
 
@@ -406,7 +398,7 @@ function renderKlasemenBulanan() {
         l.sort(((e, t) => t.point !== e.point ? t.point - e.point : e.totalLine !== t.totalLine ? e.totalLine - t.totalLine : e.timestamp - t.timestamp));
         let r = "";
         0 === l.length ? r = '<tr><td colspan="4" style="color: #888;">Belum ada data klasemen untuk bulan ini.</td></tr>' : l.forEach(((e, t) => {
-            r += `<tr>\n                        <td>${t+1}</td>\n                        <td style="color: #39ff14;">${e.nama}</td>\n                        <td style="color: #ff3333;">${e.point} Poin</td>\n                        <td>${e.firstGoal}</td>\n                    </tr>`
+            r += `<tr>\n                    <td>${t+1}</td>\n                    <td style="color: #39ff14;">${e.nama}</td>\n                    <td style="color: #ff3333;">${e.point} Poin</td>\n                    <td>${e.firstGoal}</td>\n                </tr>`
         })), t.innerHTML = r
     }), 100)
 }
