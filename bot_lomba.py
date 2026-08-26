@@ -1,6 +1,16 @@
 import random
 import time
 import requests
+from datetime import datetime
+
+# Mengambil tanggal, bulan, dan tahun secara otomatis hari ini
+sekarang = datetime.now()
+raw_date_hari_ini = sekarang.strftime("%Y-%m-%d")       # Contoh: "2026-08-26"
+tgl_format_hari_ini = sekarang.strftime("%d/%m/%Y")     # Contoh: "26/08/2026"
+
+# Konversi nama bulan ke format teks Indonesia
+nama_bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Ags", "Sep", "Okt", "Nov", "Des"]
+format_waktu_teks = f"{sekarang.day} {nama_bulan[sekarang.month - 1]} {sekarang.year}"
 
 # Daftar 10 Pasaran lengkap dengan Jam Result (Jam Tutup) dan URL Firebase yang sudah disesuaikan
 pasaran_result = {
@@ -29,7 +39,7 @@ daftar_nama = [
     "Guntur Bumi", "Heru Setiawan", "Irfan Bachdim", "Joko Widodo", "Krisna Murti"
 ]
 
-print("🤖 Memulai sistem bot otomatis berbasis jam result acak...")
+print(f"🤖 Memulai sistem bot otomatis untuk tanggal: {tgl_format_hari_ini}...")
 
 for nama_pasaran, info in pasaran_result.items():
     url_firebase = info["url"]
@@ -53,14 +63,16 @@ for nama_pasaran, info in pasaran_result.items():
         tebakan_list = [f"{random.randint(0, 99):02d}" for _ in range(jumlah_line)]
         isi_tebakan = " ".join(tebakan_list)
         
+        # Menggunakan tanggal otomatis hari ini
+        menit_acak = random.randint(0, 59)
         data_payload = {
             "nama": nama_bot,
             "email": f"bot_{nama_pasaran.lower().replace(' ', '_')}_{i}@gmail.com",
             "isi": isi_tebakan,
-            "rawDate": "2026-06-06",
-            "tglFormat": "06/06/2026",
+            "rawDate": raw_date_hari_ini,
+            "tglFormat": tgl_format_hari_ini,
             "timestamp": int(time.time() * 1000),
-            "waktu": f"6 Jun 2026, {jam_mulai:02d}:{random.randint(0, 59):02d} WIB",
+            "waktu": f"{format_waktu_teks}, {jam_mulai:02d}:{menit_acak:02d} WIB",
             "deviceId": f"device_{nama_pasaran}_{i}_{random.randint(1000,9999)}",
             "editCount": 1
         }
