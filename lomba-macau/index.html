@@ -263,12 +263,17 @@ async function muatPaitoOtomatis(){
         let t=DATA_PAITO_MACAU,a=t.match(/['"`]([\s\S]*?)['"`]/),n=(a?a[1]:t).replace(/[\s\n\r]/g,"").split(",").filter(e=>e.length>=4);
         if(n.length>0){
             let e=n[n.length-1].trim();
-            e!==lastLoadedResult4D&&(lastLoadedResult4D=e,forceOpenForm=!0,tampilkanResult(e));
-            let d=new Date();
-            d.setDate(d.getDate()-(n.length-1));
-            latestResultDate=d.toISOString().split("T")[0]
+            e!==lastLoadedResult4D&&(lastLoadedResult4D=e,forceOpenForm=!0,tampilkanResult(e))
         }
     }catch(e){console.error("Gagal memuat data paito lokal",e)}
+    
+    // PATOKAN UTAMA MENGGUNAKAN TANGGAL REAL-TIME WIB HARI INI
+    let dWIB=getWaktuWIB();
+    let tahun=dWIB.getFullYear();
+    let bulan=String(dWIB.getMonth()+1).padStart(2,"0");
+    let tanggal=String(dWIB.getDate()).padStart(2,"0");
+    latestResultDate=`${tahun}-${bulan}-${tanggal}`;
+
     let e=localStorage.getItem("cache_data_lomba_macau");
     if(e)try{globalSnapshotData=JSON.parse(e),prosesDanTampilkanData(globalSnapshotData)}catch(e){}
 }
@@ -298,11 +303,86 @@ async function hitungDanSimpanStreak(e,t){
 }
 
 function prosesDanTampilkanData(e){
-    let t=getWaktuWIB().toISOString().split("T")[0],a=[],n=[];
-    Object.keys(e).forEach((i=>{let l={id:i,...e[i]};let targetValidationDate=latestResultDate||t;l.rawDate===t&&a.push(l),globalResult2D&&l.isi&&l.rawDate===targetValidationDate&&l.isi.replace(/[^0-9]/g," ").split(/\s+/).includes(globalResult2D)&&n.push(l)})),a.sort(((e,t)=>e.timestamp-t.timestamp)),globalResult2D&&n.length>0&&hitungDanSimpanStreak(n,t);
+    let dWIB=getWaktuWIB();
+    let t=`${dWIB.getFullYear()}-${String(dWIB.getMonth()+1).padStart(2,"0")}-${String(dWIB.getDate()).padStart(2,"0")}`;
+    let a=[],n=[];
+    
+    Object.keys(e).forEach((i=>{
+        let l={id:i,...e[i]};
+        if(l.rawDate===t) {
+            a.push(l);
+        }
+        if(globalResult2D&&l.isi&&l.rawDate===t){
+            let angkaArr=l.isi.replace(/[^0-9]/g," ").split(/\s+/).filter(Boolean);
+            if(angkaArr.includes(globalResult2D)){
+                n.push(l);
+            }
+        }
+    }));
+    
+    a.sort(((e,t)=>e.timestamp-t.timestamp));
+    if(globalResult2D&&n.length>0) {
+        hitungDanSimpanStreak(n,t);
+    }
+    
     let i="";
-    0===a.length?i='<p style="color: #888;">Belum ada peserta lomba hari ini</p>':a.forEach((e=>{let a=e.email?e.email.trim().toLowerCase():e.nama,n=`https://www.gravatar.com/avatar/${"function"==typeof md5?md5(a):"default"}?s=40&d=identicon`,l=!1;let targetValidationDate=latestResultDate||t;globalResult2D&&e.isi&&e.rawDate===targetValidationDate&&e.isi.replace(/[^0-9]/g," ").split(/\s+/).includes(globalResult2D)&&(l=!0);let r="";l&&(r='<div style="margin-top: 5px; background: #e6ffed; border: 1px dashed #28a745; padding: 5px; border-radius: 3px; font-size: 11px; color: #155724; font-weight: bold; text-align: center;">SELAMAT BOSKU ANDA JP 😎</div>'),i+=`<div style="background: #fff; color: #000; padding: 8px; margin-bottom: 8px; border-radius: 3px; display: flex; align-items: flex-start; gap: 10px;">\n\t\t\t<img src="${n}" alt="Avatar" style="width: 35px; height: 35px; border-radius: 50%; border: 1px solid #ccc; background: #eee; flex-shrink: 0;" onerror="this.src='https://www.gravatar.com/avatar/default?s=40&d=identicon'">\n\t\t\t<div style="flex-grow: 1; overflow: hidden;">\n\t\t\t\t<strong>${e.nama}</strong> <span style="font-size: 10px; color: #666;">(${e.waktu})</span>\n\t\t\t\t<p style="margin: 5px 0 0 0; font-family: monospace; font-weight: bold; color: #0056b3; word-break: break-all;">${e.isi}</p>\n\t\t\t\t${r}\n\t\t\t</div>\n\t\t</div>`}));
-    document.getElementById("tp-daftar-list").innerHTML=i,db.ref("streaks/lomba-macau/users").once("value",(e=>{let t=e.val()||{},a="";if(globalResult2D)if(0===n.length)a="<li>Belum ada yang tembus pada periode ini</li>";else{let groups={};n.forEach((item=>{let streakCount=Math.min(5, t[item.email]?(t[item.email].streak||1):1);groups[streakCount]||(groups[streakCount]=[]),groups[streakCount].includes(item.nama)||groups[streakCount].push(item.nama)}));let sortedPutaran=Object.keys(groups).sort(((x,y)=>Number(x)-Number(y)));a="",sortedPutaran.forEach((putaran=>{let putaranNum=Number(putaran);a+=`<div style="margin-bottom: 12px;">`,a+=`<strong style="color: #39ff14; display: block; border-bottom: 1px dashed #444; padding-bottom: 3px; margin-bottom: 5px;">PUTARAN ${putaranNum}</strong>`,a+=`<ul style="color: #ffffff; padding-left: 20px; margin: 0;">`,groups[putaran].forEach((namaMaster=>{a+=`<li>${namaMaster}`;if(putaranNum===5){a+=`<br><span style="color: #fc0; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 4px;">Selamat bosku memenangkan lomba harian 5x putaran tanpa putus!<br>Silahkan bosku klaim hadiah di ruang obrolan.</span>`;}a+=`</li>`;})),a+=`</ul>`,a+=`</div>`}))}else a="<li>Menunggu sinkronisasi result...</li>";document.getElementById("list-putaran-otomatis").innerHTML=a})),renderKlasemenBulanan()
+    if(0===a.length){
+        i='<p style="color: #888;">Belum ada peserta lomba hari ini</p>';
+    }else{
+        a.forEach((e=>{
+            let a=e.email?e.email.trim().toLowerCase():e.nama,
+                n=`https://www.gravatar.com/avatar/${"function"==typeof md5?md5(a):"default"}?s=40&d=identicon`,
+                l=!1;
+                
+            if(globalResult2D&&e.isi&&e.rawDate===t){
+                let arrIsi=e.isi.replace(/[^0-9]/g," ").split(/\s+/).filter(Boolean);
+                if(arrIsi.includes(globalResult2D)) l=!0;
+            }
+            
+            let r="";
+            l&&(r='<div style="margin-top: 5px; background: #e6ffed; border: 1px dashed #28a745; padding: 5px; border-radius: 3px; font-size: 11px; color: #155724; font-weight: bold; text-align: center;">SELAMAT BOSKU ANDA JP 😎</div>');
+            
+            i+=`<div style="background: #fff; color: #000; padding: 8px; margin-bottom: 8px; border-radius: 3px; display: flex; align-items: flex-start; gap: 10px;">\n\t\t\t<img src="${n}" alt="Avatar" style="width: 35px; height: 35px; border-radius: 50%; border: 1px solid #ccc; background: #eee; flex-shrink: 0;" onerror="this.src='https://www.gravatar.com/avatar/default?s=40&d=identicon'">\n\t\t\t<div style="flex-grow: 1; overflow: hidden;">\n\t\t\t\t<strong>${e.nama}</strong> <span style="font-size: 10px; color: #666;">(${e.waktu})</span>\n\t\t\t\t<p style="margin: 5px 0 0 0; font-family: monospace; font-weight: bold; color: #0056b3; word-break: break-all;">${e.isi}</p>\n\t\t\t\t${r}\n\t\t\t</div>\n\t\t</div>`;
+        }));
+    }
+    
+    document.getElementById("tp-daftar-list").innerHTML=i;
+    
+    db.ref("streaks/lomba-macau/users").once("value",(e=>{
+        let t=e.val()||{},a="";
+        if(globalResult2D){
+            if(0===n.length){
+                a="<li>Belum ada yang tembus pada periode ini</li>";
+            }else{
+                let groups={};
+                n.forEach((item=>{
+                    let streakCount=Math.min(5,t[item.email]?(t[item.email].streak||1):1);
+                    groups[streakCount]||(groups[streakCount]=[]),
+                    groups[streakCount].includes(item.nama)||groups[streakCount].push(item.nama);
+                }));
+                let sortedPutaran=Object.keys(groups).sort(((x,y)=>Number(x)-Number(y)));
+                sortedPutaran.forEach((putaran=>{
+                    let putaranNum=Number(putaran);
+                    a+=`<div style="margin-bottom: 12px;">`;
+                    a+=`<strong style="color: #39ff14; display: block; border-bottom: 1px dashed #444; padding-bottom: 3px; margin-bottom: 5px;">PUTARAN ${putaranNum}</strong>`;
+                    a+=`<ul style="color: #ffffff; padding-left: 20px; margin: 0;">`;
+                    groups[putaran].forEach((namaMaster=>{
+                        a+=`<li>${namaMaster}`;
+                        if(putaranNum===5){
+                            a+=`<br><span style="color: #fc0; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 4px;">Selamat bosku memenangkan lomba harian 5x putaran tanpa putus!<br>Silahkan bosku klaim hadiah di ruang obrolan.</span>`;
+                        }
+                        a+=`</li>`;
+                    }));
+                    a+=`</ul></div>`;
+                }));
+            }
+        }else{
+            a="<li>Menunggu sinkronisasi result...</li>";
+        }
+        document.getElementById("list-putaran-otomatis").innerHTML=a;
+    }));
+    
+    renderKlasemenBulanan();
 }
 
 async function bukaArsip(){
@@ -329,7 +409,7 @@ function renderKlasemenBulanan(){
     let e=document.getElementById("select-bulan-otomatis");
     if(!e||""===e.value)return;
     let t=document.getElementById("tabel-klasemen-body");
-    t.innerHTML='<tr><td colspan="4" style="color: #39ff14;">Memuat data klasemen...</td></tr>',setTimeout((()=>{let a=e.value,n=globalSnapshotData,i={};Object.keys(n).forEach((e=>{let t=n[e],l=t.rawDate?t.rawDate.substring(0,7):"";if(t.isi&&l===a){let e=t.isi.replace(/[^0-9]/g," ").split(/\s+/).filter(Boolean);i[t.nama]||(i[t.nama]={nama:t.nama,point:0,totalLine:e.length,timestamp:t.timestamp||0,firstGoal:t.tglFormat||"Hari Ini"}),i[t.nama].point+=10}}));let l=Object.values(i);l.sort(((e,t)=>t.point!==e.point?t.point-e.point:e.totalLine!==t.totalLine?e.totalLine-t.totalLine:e.timestamp-t.timestamp));let r="";0===l.length?r='<tr><td colspan="4" style="color: #888;">Belum ada data klasemen untuk bulan ini.</i></tr>':l.forEach(((e,t)=>{r+=`<tr>\n\t\t\t\t<td>${t+1}</td>\n\t\t\t\t<td style="color: #39ff14;">${e.nama}</td>\n\t\t\t\t<td style="color: #ff3333;">${e.point} Poin</td>\n\t\t\t\t<td>${e.firstGoal}</td>\n\t\t\t</tr>`})),t.innerHTML=r}),100)
+    t.innerHTML='<tr><td colspan="4" style="color: #39ff14;">Memuat data klasemen...</td></tr>',setTimeout((()=>{let a=e.value,n=globalSnapshotData,i={};Object.keys(n).forEach((e=>{let t=n[e],l=t.rawDate?t.rawDate.substring(0,7):"";if(t.isi&&l===a){let e=t.isi.replace(/[^0-9]/g," ").split(/\s+/).filter(Boolean);i[t.nama]||(i[t.nama]={nama:t.nama,point:0,totalLine:e.length,timestamp:t.timestamp||0,firstGoal:t.tglFormat||"Hari Ini"}),i[t.nama].point+=10}}));let l=Object.values(i);l.sort(((e,t)=>t.point!==e.point?t.point-e.point:e.totalLine!==l.totalLine?e.totalLine-t.totalLine:e.timestamp-t.timestamp));let r="";0===l.length?r='<tr><td colspan="4" style="color: #888;">Belum ada data klasemen untuk bulan ini.</i></tr>':l.forEach(((e,t)=>{r+=`<tr>\n\t\t\t\t<td>${t+1}</td>\n\t\t\t\t<td style="color: #39ff14;">${e.nama}</td>\n\t\t\t\t<td style="color: #ff3333;">${e.point} Poin</td>\n\t\t\t\t<td>${e.firstGoal}</td>\n\t\t\t</tr>`})),t.innerHTML=r}),100)
 }
 
 async function tpKirimPublik(){
@@ -345,7 +425,7 @@ async function tpKirimPublik(){
     let i=globalSnapshotData,l=null,r=0,o=getWaktuWIB().getTime(),s=!1;
     if(Object.keys(i).forEach((e=>{let n=i[e],d=n.timestamp||0;if(o-d<=1728e5){let i=n.deviceId&&n.deviceId===currentDeviceID,o=n.email&&n.email.trim().toLowerCase()===a,d=n.nama&&n.nama.trim().toLowerCase()===t.toLowerCase();!i||o||d||(s=!0),(o||d||i)&&(l=e,r=n.editCount||1)}})),s)return alert("⛔ Peringatan Keamanan! Perangkat ini terdeteksi sudah digunakan untuk mengirim dengan akun/nama lain. Dilarang menggunakan lebih dari 1 akun dalam 1 perangkat!");
     if(l&&r>=2)return alert("⚠️ Bosku sudah mencapai batas maksimal mengganti/mengubah angka sebanyak 2 kali dalam Lomba periode kali ini!");
-    let d=getWaktuWIB(),m=`${d.toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"})}, ${d.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"})} WIB`,p=d.getTime(),u=d.toISOString().split("T")[0],g=document.getElementById("tp-btn-submit");
+    let d=getWaktuWIB(),m=`${d.toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"})}, ${d.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"})} WIB`,p=d.getTime(),u=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`,g=document.getElementById("tp-btn-submit");
     g.disabled=!0,g.innerText="Mengirim...";
     try{
         let n,i=l?r+1:1;
