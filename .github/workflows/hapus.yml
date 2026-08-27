@@ -16,3 +16,5 @@ jobs:
           repository: ${{ github.repository }}
           retain_days: 0 # Hapus semua tanpa sisa hari
           keep_minimum_runs: 0
+          # Opsional: Jika masih error pada run tertentu, 
+          # Anda bisa abaikan atau targetkan workflow tertentu saja
