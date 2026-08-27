@@ -1,0 +1,57 @@
+name: Build and Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'sitemap.xml'
+      - 'robots.txt'
+
+permissions:
+  contents: write    # <-- Pastikan ini write, bukan read
+  pages: write
+  id-token: write
+
+jobs:
+  fix-sitemap-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil Kode Repositori
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Jalankan Skrip Pembuat Sitemap
+        run: node main.js
+
+      - name: Commit Hasil Sitemap
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update sitemap.xml dan robots.txt"
+          file_pattern: sitemap.xml robots.txt
+
+  deploy-job:
+    needs: fix-sitemap-job
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Ambil Kode Repositori
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Artifact Website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy ke GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
