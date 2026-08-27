@@ -602,5 +602,15 @@ Kunjungi Sponsor
 </div>
 </div>
 <script>function tutupPopup(){document.getElementById("popup-iklan").style.display="none",sessionStorage.setItem("popupSudahDitutup","true")}window.addEventListener("DOMContentLoaded",(function(){sessionStorage.getItem("popupSudahDitutup")||setTimeout((function(){document.getElementById("popup-iklan").style.display="flex"}),3e3)}))</script>
+<script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false; // Blokir F12 (Inspect Element)
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    }
+</script>
 </body>
 </html>
