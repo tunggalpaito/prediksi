@@ -120,10 +120,10 @@ Gunakan email yang sama setiap posting (boleh fiktif/aktif) karena itu adalah id
 </div>
 </div>
 <h4 style=color:#39ff14>Tambahkan Postingan Lomba Bosku</h4>
-<textarea id=tp-komentar-isi rows=4 placeholder="(Contoh: 12 34 56 atau 12*34*56)" disabled></textarea>
-<input id=tp-komentar-nama placeholder="Nama / Nickname Anda" disabled>
-<input type=email id=tp-komentar-email placeholder="Email Anda (1 Email untuk 1 Akun)" disabled>
-<button onclick=tpKirimPublik() id=tp-btn-submit class=btn-custom disabled>MENUNGGU RESULT DIPERBARUI...</button>
+<textarea id=tp-komentar-isi rows=4 placeholder="(Contoh: 12 34 56 atau 12*34*56)"></textarea>
+<input id=tp-komentar-nama placeholder="Nama / Nickname Anda">
+<input type=email id=tp-komentar-email placeholder="Email Anda (1 Email untuk 1 Akun)">
+<button onclick=tpKirimPublik() id=tp-btn-submit class=btn-custom>Kirim Line</button>
 <div style=width:100%;text-align:center;overflow:hidden>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
 <script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
@@ -156,190 +156,380 @@ document.getElementById("tahun-copyright").innerText=(new Date).getFullYear();
 const firebaseConfig={apiKey:"AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",authDomain:"komentar-web-f9e2e.firebaseapp.com",databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"komentar-web-f9e2e",storageBucket:"komentar-web-f9e2e.appspot.com",messagingSenderId:"126095632925",appId:"1:126095632925:web:77383efdc2daea2e7034f4"};
 firebase.apps.length||firebase.initializeApp(firebaseConfig);
 const db=firebase.database(),TP_HALAMAN_ID="lomba-china";
-let globalSnapshotData={},globalResult2D=null,lastLoadedResult4D="",lastResultTimestamp=0,forceOpenForm=!1,serverTimeOffset=0,latestResultDate="",isResultOfficialToday=!1;
+let globalSnapshotData={},globalResult2D="",lastLoadedResult4D="",serverTimeOffset=0,currentDeviceID="";
 
-async function sinkronisasiWaktuWIB(){try{let e=await fetch("https://worldtimeapi.org/api/timezone/Asia/Jakarta"),t=await e.json(),a=new Date(t.datetime).getTime(),n=(new Date).getTime();serverTimeOffset=a-n}catch(e){serverTimeOffset=0}}
-function getWaktuWIB(){return new Date((new Date).getTime()+serverTimeOffset)}
-async function getAdvancedDeviceID(){let e=localStorage.getItem("tp_advanced_fp");if(e)return e;let t=document.createElement("canvas"),a=t.getContext("2d");a.textBaseline="top",a.font="14px 'Arial'",a.fillText("TunggalPaito-Security-Check",2,2);let n=t.toDataURL(),i="";try{let e=t.getContext("webgl")||t.getContext("experimental-webgl"),a=e.getExtension("WEBGL_debug_renderer_info");i=e.getParameter(a.UNMASKED_VENDOR_WEBGL)+"~"+e.getParameter(a.UNMASKED_RENDERER_WEBGL)}catch(e){i="no-gl"}let l=[navigator.hardwareConcurrency||4,navigator.deviceMemory||4,screen.width+"x"+screen.height,screen.colorDepth,Intl.DateTimeFormat().resolvedOptions().timeZone,i,n.substring(50,150)].join("||"),r=md5(l);return localStorage.setItem("tp_advanced_fp",r),r}
-let currentDeviceID="";
+async function sinkronisasiWaktuWIB(){
+  try{
+    let e=await fetch("https://worldtimeapi.org/api/timezone/Asia/Jakarta");
+    let t=await e.json();
+    serverTimeOffset=new Date(t.datetime).getTime()-Date.now();
+  }catch(e){
+    serverTimeOffset=0;
+  }
+}
+function getWaktuWIB(){return new Date(Date.now()+serverTimeOffset)}
 
-function generateDropdownBulan(){let e=document.getElementById("select-bulan-otomatis");if(e.options.length>0)return;let t=getWaktuWIB();for(let a=0;a<3;a++){let a=t.getFullYear(),n=t.getMonth(),i=`${a}-${String(n+1).padStart(2,"0")}`,l=new Date(a,n,1).toLocaleDateString("id-ID",{month:"long",year:"numeric"}),r=document.createElement("option");r.value=i,r.innerText=l,e.appendChild(r),t.setMonth(t.getMonth()-1)}}  async function muatPaitoOtomatis(){try{let e=await fetch("/result/china.js?v="+getWaktuWIB().getTime()),t=await e.text(),a=t.match(/['"`]([\s\S]*?)['"`]/),n=(a?a[1]:t).replace(/[\s\n\r]/g,"").split(",").filter((e=>e.length>=4));if(n.length>0){let e=n[n.length-1].trim();if(e!==lastLoadedResult4D){lastLoadedResult4D=e;lastResultTimestamp=getWaktuWIB().getTime();forceOpenForm=!0;isResultOfficialToday=!0;tampilkanResult(e)}let d=new Date();d.setDate(d.getDate()-(n.length-1));latestResultDate=d.toISOString().split("T")[0]}}catch(e){console.error("gagal menghubungkan sumber resmi",e)}let e=localStorage.getItem("cache_data_lomba_china");if(e)try{globalSnapshotData=JSON.parse(e),prosesDanTampilkanData(globalSnapshotData)}catch(e){}}  function tampilkanResult(e){!e\vert{}\vert{}e.length<4\vert{}\vert{}(globalResult2D=e.slice(-2),document.getElementById("display-result-balls").innerHTML=`\n\t\t\t<div class="ball">${e[0]}</div>\n\t\t\t<div class="ball">${e[1]}</div>\n\t\t\t<div class="ball">${e[2]}</div>\n\t\t\t<div class="ball">${e[3]}</div>\n\t\t`,document.getElementById("text-result-info").innerText="",cekWaktuTutupLomba())}  function cekWaktuTutupLomba(){let e=document.getElementById("tp-btn-submit"),t=document.getElementById("tp-komentar-isi"),a=document.getElementById("tp-komentar-nama"),n=document.getElementById("tp-komentar-email");if(!globalResult2D)return t&&(t.disabled=!0),a&&(a.disabled=!0),n&&(n.disabled=!0),e&&(e.disabled=!0,e.innerText="MENUNGGU RESULT DIPERBARUI..."),!0;if(forceOpenForm)return t&&(t.disabled=!1),a&&(a.disabled=!1),n&&(n.disabled=!1),e&&(e.disabled=!1,e.innerText="Kirim Line"),!1;let i=getWaktuWIB();return 60*i.getHours()+i.getMinutes()>=905?(t&&(t.disabled=!0),a&&(a.disabled=!0),n&&(n.disabled=!0),e&&(e.disabled=!0,e.innerText="LOMBA DITUTUP"),!0):(t&&(t.disabled=!1),a&&(a.disabled=!1),n&&(n.disabled=!1),e&&(e.disabled=!1,e.innerText="Kirim Line"),!1)}  function muatDataLombaSuperKilat(){db.ref("komentar/lomba-china").on("value",(e=>{globalSnapshotData=e.val()\vert{}\vert{}{},localStorage.setItem("cache_data_lomba_china",JSON.stringify(globalSnapshotData)),prosesDanTampilkanData(globalSnapshotData)}),(e=>{console.error("Firebase error: ",e)}))}  async function hitungDanSimpanStreak(e,t){if(!globalResult2D\vert{}\vert{}!isResultOfficialToday)return;let a=db.ref("streaks/lomba-china");a.once("value",(async n=>{let i=n.val()\vert{}\vert{}{};if((i.lastDate\vert{}\vert{}"")===t)return;let l=i.users\vert{}\vert{}{},r=new Set(e.map((e=>e.email)));Object.keys(l).forEach((e=>{r.has(e)?l[e].streak=Math.min(5,(l[e].streak\vert{}\vert{}0)+1):l[e].streak=0})),e.forEach((e=>{l[e.email]?l[e.email].nama=e.nama:l[e.email]={nama:e.nama,streak:1}})),await a.set({lastDate:t,users:l})}))}  function formatLinePer5(rawIsi) {   if (!rawIsi) return "";   let numbers = rawIsi.replace(/[^0-9]/g, " ").split(/\s+/).filter(Boolean);   if (numbers.length === 0) return rawIsi;   let chunks = [];   for (let i = 0; i < numbers.length; i += 5) {     chunks.push(numbers.slice(i, i + 5).join(" "));   }   return chunks.join("<br>"); }  function prosesDanTampilkanData(e){   let t=getWaktuWIB().toISOString().split("T")[0],a=[],n=[];   let currentTime = getWaktuWIB().getTime();   Object.keys(e).forEach((i=>{     let l={id:i,...e[i]};     l.rawDate===t&&a.push(l);     let isTodayPost = l.rawDate === t;     let isMatchedResult = globalResult2D && isResultOfficialToday && isTodayPost && l.isi && l.isi.replace(/[^0-9]/g," ").split(/\s+/).includes(globalResult2D);     isMatchedResult && n.push(l)   }));   a.sort(((e,t)=>e.timestamp-t.timestamp));   let isRecentResult = (currentTime - lastResultTimestamp) < 86400000;   globalResult2D&&isRecentResult&&isResultOfficialToday&&n.length>0&&hitungDanSimpanStreak(n,t);      let i="";   0===a.length?i='<p style="color: #888;">Belum ada peserta lomba hari ini</p>':a.forEach((e=>{     let a=e.email?e.email.trim().toLowerCase():e.nama,         n=`https://www.gravatar.com/avatar/${"function"==typeof md5?md5(a):"default"}?s=40&d=identicon`,
-        l=!1;
-    let isTodayPost = e.rawDate === t;
-    let isMatchedResult = globalResult2D && isResultOfficialToday && isTodayPost && e.isi && e.isi.replace(/[^0-9]/g," ").split(/\s+/).includes(globalResult2D);
-    isMatchedResult&&(l=!0);
-    
-    let formattedIsi = formatLinePer5(e.isi);
-    let r="";
-    l&&(r='<div style="margin-top: 8px; background: #e6ffed; border: 2px dashed #28a745; padding: 6px 10px; border-radius: 3px; font-size: 11px; color: #155724; font-weight: bold; text-align: center; width: 100%; box-sizing: border-box; animation: borderGlow 1.5s infinite;">SELAMAT BOSKU ANDA JP 😎</div>');
-    
-    i+=`<div style="background: #111; color: #fff; border: 1px solid #333; padding: 8px; margin-bottom: 8px; border-radius: 3px; display: flex; align-items: flex-start; gap: 10px;">
-			<img src="${n}" alt="Avatar" style="width: 35px; height: 35px; border-radius: 50%; border: 1px solid #ccc; background: #eee; flex-shrink: 0;" onerror="this.src='https://www.gravatar.com/avatar/default?s=40&d=identicon'">
-			<div style="flex-grow: 1; overflow: hidden; display: flex; flex-direction: column;">
-				<div><strong style="color: #fff;">${e.nama}</strong> <span style="font-size: 10px; color: #aaa;">(${e.waktu})</span></div>
-				<p style="margin: 5px 0 0 0; font-family: monospace; font-weight: bold; color: #ff69b4; word-break: normal; overflow-wrap: break-word; letter-spacing: 1px; line-height: 1.6;">${formattedIsi}</p>${r}
-			</div>
-		</div>`
-  }));
-  
-  document.getElementById("tp-daftar-list").innerHTML=i;
-  
-  db.ref("streaks/lomba-china/users").once("value",(e=>{
-    let t=e.val()||{},a="";
-    if(globalResult2D&&isRecentResult&&isResultOfficialToday){
-      let maxPutaran=5,groups={};
-      for(let pNum=1;pNum<=maxPutaran;pNum++){groups[pNum]=[];}
-      n.forEach(item=>{
-        let streakCount=Math.min(5,t[item.email]?(t[item.email].streak||1):1);
-        if(groups[streakCount]){groups[streakCount].includes(item.nama)||groups[streakCount].push(item.nama);}
-      });
-      a="";
-      for(let putaranNum=1;putaranNum<=maxPutaran;putaranNum++){
-        a+=`<div style="margin-bottom: 15px; padding-bottom: 5px;">`,
-        a+=`<strong style="color: #39ff14; display: block; border-bottom: 1px dashed #444; padding-bottom: 3px; margin-bottom: 8px;">PUTARAN ${putaranNum}</strong>`,
-        a+=groups[putaranNum].length>0?`<div style="margin: 0;">`+groups[putaranNum].map((namaMaster,index)=>`<div style="margin-bottom: 6px;"><span style="color: #ff69b4;">${index+1}.</span> <span style="color: #fff;">${namaMaster}</span>`+(putaranNum===5?`<br><span style="color: #fc0; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 4px; margin-bottom: 4px;">Selamat bosku memenangkan lomba harian 5x putaran tanpa putus!<br>Silahkan bosku klaim hadiah di ruang obrolan.</span>`:``)+`</div>`).join("")+`</div>`:`<div style="color: #ff69b4; margin-bottom: 5px;">1.</div>`,
-        a+=`</div>`;
+async function getAdvancedDeviceID(){
+  let e=localStorage.getItem("tp_advanced_fp");
+  if(e)return e;
+  let t=document.createElement("canvas"),a=t.getContext("2d");
+  a.textBaseline="top",a.font="14px 'Arial'",a.fillText("TunggalPaito-Security-Check",2,2);
+  let n=t.toDataURL(),i="";
+  try{
+    let e=t.getContext("webgl")||t.getContext("experimental-webgl"),a=e.getExtension("WEBGL_debug_renderer_info");
+    i=e.getParameter(a.UNMASKED_VENDOR_WEBGL)+"~"+e.getParameter(a.UNMASKED_RENDERER_WEBGL);
+  }catch(e){i="no-gl"}
+  let l=[navigator.hardwareConcurrency||4,navigator.deviceMemory||4,screen.width+"x"+screen.height,screen.colorDepth,Intl.DateTimeFormat().resolvedOptions().timeZone,i,n.substring(50,150)].join("||"),r=md5(l);
+  return localStorage.setItem("tp_advanced_fp",r),r;
+}
+
+function generateDropdownBulan(){
+  let e=document.getElementById("select-bulan-otomatis");
+  if(e.options.length>0)return;
+  let t=getWaktuWIB();
+  for(let a=0;a<3;a++){
+    let a=t.getFullYear(),n=t.getMonth(),i=`${a}-${String(n+1).padStart(2,"0")}`,l=new Date(a,n,1).toLocaleDateString("id-ID",{month:"long",year:"numeric"}),r=document.createElement("option");
+    r.value=i,r.innerText=l,e.appendChild(r),t.setMonth(t.getMonth()-1);
+  }
+}
+
+async function muatPaitoOtomatis(){
+  try{
+    let response = await fetch("/result/china.js?v=" + Date.now());
+    if(response.ok){
+      let text = await response.text();
+      // Parser yang aman untuk berbagai format file JS result
+      let matches = text.match(/['"`]([\s\S]*?)['"`]/);
+      let rawData = matches ? matches[1] : text;
+      let cleanArr = rawData.replace(/[\s\n\r]/g,"").split(",").filter(item => item.length >= 4);
+      
+      if(cleanArr.length > 0){
+        let latest4D = cleanArr[cleanArr.length - 1].trim();
+        lastLoadedResult4D = latest4D;
+        tampilkanResult(latest4D);
+      } else {
+        throw new Error("Format data kosong");
       }
-    }else{
-      let aDefault="";
-      for(let i=1;i<=5;i++){
-        aDefault+=`<div style="margin-bottom: 15px; padding-bottom: 5px;">`,
-        aDefault+=`<strong style="color: #39ff14; display: block; border-bottom: 1px dashed #444; padding-bottom: 3px; margin-bottom: 8px;">PUTARAN ${i}</strong>`,
-        aDefault+=`<div style="color: #ff69b4; margin-bottom: 5px;">1.</div>`,
-        aDefault+=`</div>`;
-      }
-      a=aDefault;
+    } else {
+      throw new Error("File tidak ditemukan");
     }
-    document.getElementById("list-putaran-otomatis").innerHTML=a
-  }));
+  }catch(err){
+    console.warn("Gagal memuat file paito otomatis, menggunakan fallback penampil standar:", err);
+    // Fallback valid agar tidak stuck: Set default kosong yang aman dibaca sistem
+    tampilkanResult("0000");
+    document.getElementById("text-result-info").innerText = "Menunggu Update Resmi dari Server";
+  }
+  cekWaktuTutupLomba();
+  let cache = localStorage.getItem("cache_data_lomba_china");
+  if(cache){
+    try{
+      globalSnapshotData = JSON.parse(cache);
+      prosesDanTampilkanData(globalSnapshotData);
+    }catch(e){}
+  }
+}
+
+function tampilkanResult(e){
+  if(!e || e.length < 4) e = "0000";
+  globalResult2D = e.slice(-2);
+  document.getElementById("display-result-balls").innerHTML=`<div class="ball">${e[0]}</div><div class="ball">${e[1]}</div><div class="ball">${e[2]}</div><div class="ball">${e[3]}</div>`;
+  if(e !== "0000") {
+    document.getElementById("text-result-info").innerText = "";
+  }
+  cekWaktuTutupLomba();
+}
+
+function cekWaktuTutupLomba(){
+  let btn = document.getElementById("tp-btn-submit"),
+      isi = document.getElementById("tp-komentar-isi"),
+      nama = document.getElementById("tp-komentar-nama"),
+      email = document.getElementById("tp-komentar-email");
   
-  renderKlasemenBulanan()
+  let now = getWaktuWIB();
+  let currentMinutes = 60 * now.getHours() + now.getMinutes();
+  
+  // Batas jam 15:05 (15 * 60 + 5 = 905 menit)
+  if(currentMinutes >= 905){
+    if(isi) isi.disabled = true;
+    if(nama) nama.disabled = true;
+    if(email) email.disabled = true;
+    if(btn) {
+      btn.disabled = true;
+      btn.innerText = "LOMBA DITUTUP";
+    }
+    return true;
+  }
+  
+  if(isi) isi.disabled = false;
+  if(nama) nama.disabled = false;
+  if(email) email.disabled = false;
+  if(btn) {
+    btn.disabled = false;
+    btn.innerText = "Kirim Line";
+  }
+  return false;
+}
+
+function muatDataLombaSuperKilat(){
+  db.ref("komentar/lomba-china").on("value",(snapshot)=>{
+    globalSnapshotData = snapshot.val() || {};
+    localStorage.setItem("cache_data_lomba_china", JSON.stringify(globalSnapshotData));
+    prosesDanTampilkanData(globalSnapshotData);
+  },(error)=>{
+    console.error("Firebase connection error: ", error);
+  });
+}
+
+function formatLinePer5(rawIsi) {
+  if (!rawIsi) return "";
+  let numbers = rawIsi.replace(/[^0-9]/g, " ").split(/\s+/).filter(Boolean);
+  if (numbers.length === 0) return rawIsi;
+  let chunks = [];
+  for (let i = 0; i < numbers.length; i += 5) {
+    chunks.push(numbers.slice(i, i + 5).join(" "));
+  }
+  return chunks.join("<br>");
+}
+
+function prosesDanTampilkanData(data){
+  let t = getWaktuWIB().toISOString().split("T")[0], a = [], n = [];
+  Object.keys(data).forEach((key)=>{
+    let item = {id: key, ...data[key]};
+    if(item.rawDate === t) a.push(item);
+    let isTodayPost = item.rawDate === t;
+    let isMatchedResult = globalResult2D && globalResult2D !== "00" && isTodayPost && item.isi && item.isi.replace(/[^0-9]/g," ").split(/\s+/).includes(globalResult2D);
+    if(isMatchedResult) n.push(item);
+  });
+  a.sort((x, y) => x.timestamp - y.timestamp);
+  
+  let htmlList = "";
+  if(a.length === 0){
+    htmlList = '<p style="color: #888;">Belum ada peserta lomba hari ini</p>';
+  } else {
+    a.forEach((item)=>{
+      let emailKey = item.email ? item.email.trim().toLowerCase() : item.nama;
+      let avatarUrl = `https://www.gravatar.com/avatar/${typeof md5 === 'function' ? md5(emailKey) : 'default'}?s=40&d=identicon`;
+      let isTodayPost = item.rawDate === t;
+      let isMatched = globalResult2D && globalResult2D !== "00" && isTodayPost && item.isi && item.isi.replace(/[^0-9]/g," ").split(/\s+/).includes(globalResult2D);
+      
+      let jpBadge = isMatched ? '<div style="margin-top: 8px; background: #e6ffed; border: 2px dashed #28a745; padding: 6px 10px; border-radius: 3px; font-size: 11px; color: #155724; font-weight: bold; text-align: center; width: 100%; box-sizing: border-box; animation: borderGlow 1.5s infinite;">SELAMAT BOSKU ANDA JP 😎</div>' : '';
+      let formattedIsi = formatLinePer5(item.isi);
+      
+      htmlList += `<div style="background: #111; color: #fff; border: 1px solid #333; padding: 8px; margin-bottom: 8px; border-radius: 3px; display: flex; align-items: flex-start; gap: 10px;">
+        <img src="${avatarUrl}" alt="Avatar" style="width: 35px; height: 35px; border-radius: 50%; border: 1px solid #ccc; background: #eee; flex-shrink: 0;" onerror="this.src='https://www.gravatar.com/avatar/default?s=40&d=identicon'">
+        <div style="flex-grow: 1; overflow: hidden; display: flex; flex-direction: column;">
+          <div><strong style="color: #fff;">${item.nama}</strong> <span style="font-size: 10px; color: #aaa;">(${item.waktu})</span></div>
+          <p style="margin: 5px 0 0 0; font-family: monospace; font-weight: bold; color: #ff69b4; word-break: normal; overflow-wrap: break-word; letter-spacing: 1px; line-height: 1.6;">${formattedIsi}</p>
+          ${jpBadge}
+        </div>
+      </div>`;
+    });
+  }
+  
+  document.getElementById("tp-daftar-list").innerHTML = htmlList;
+  
+  db.ref("streaks/lomba-china/users").once("value",(snapshot)=>{
+    let streakData = snapshot.val() || {};
+    let maxPutaran = 5, groups = {};
+    for(let pNum = 1; pNum <= maxPutaran; pNum++){ groups[pNum] = []; }
+    n.forEach(item => {
+      let streakCount = Math.min(5, streakData[item.email] ? (streakData[item.email].streak || 1) : 1);
+      if(groups[streakCount] && !groups[streakCount].includes(item.nama)){
+        groups[streakCount].push(item.nama);
+      }
+    });
+    
+    let putaranHtml = "";
+    for(let putaranNum = 1; putaranNum <= maxPutaran; putaranNum++){
+      putaranHtml += `<div style="margin-bottom: 15px; padding-bottom: 5px;">`;
+      putaranHtml += `<strong style="color: #39ff14; display: block; border-bottom: 1px dashed #444; padding-bottom: 3px; margin-bottom: 8px;">PUTARAN ${putaranNum}</strong>`;
+      putaranHtml += groups[putaranNum].length > 0 ? `<div style="margin: 0;">` + groups[putaranNum].map((namaMaster, index) => `<div style="margin-bottom: 6px;"><span style="color: #ff69b4;">${index+1}.</span> <span style="color: #fff;">${namaMaster}</span>` + (putaranNum === 5 ? `<br><span style="color: #fc0; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 4px; margin-bottom: 4px;">Selamat bosku memenangkan lomba harian 5x putaran tanpa putus!<br>Silahkan bosku klaim hadiah di ruang obrolan.</span>` : ``) + `</div>`).join("") + `</div>` : `<div style="color: #ff69b4; margin-bottom: 5px;">1.</div>`;
+      putaranHtml += `</div>`;
+    }
+    document.getElementById("list-putaran-otomatis").innerHTML = putaranHtml;
+  });
+  
+  renderKlasemenBulanan();
 }
 
 async function bukaArsip(){
-  document.getElementById("modal-arsip").style.display="flex";
-  let e=globalSnapshotData,t=[];
-  Object.keys(e).forEach((a=>{let n={id:a,...e[a]};n.rawDate&&t.push(n)}));
-  t.sort(((e,t)=>t.timestamp-t.timestamp));
-  let a={};
-  t.forEach((e=>{let t=e.rawDate;a[t]||(a[t]=[]),a[t].push(e)}));
-  let n="",i=Object.keys(a).sort().reverse();
-  if(0===i.length)n='<p style="color: #888; text-align: center;">Belum ada arsip Lomba</p>';
-  else{
-    let e={};
-    try{let t=await fetch("/result/china.js?v="+getWaktuWIB().getTime()),a=t?await t.text():"",n=a.match(/['"`]([\s\S]*?)['"`]/),l=(n?n[1]:a).replace(/[\s\n\r]/g,"").split(",").filter((e=>e.length>=4));i.forEach(((t,a)=>{l.length>0&&l[l.length-1-a]&&(e[t]=l[l.length-1-a])}))}catch(e){}
-    i.forEach((t=>{
-      let i=a[t],l=i[0].tglFormat||t;
-      n+='<div style="background: #111; border: 1px solid #444; padding: 10px; margin-bottom: 15px; border-radius: 5px;">',
-      n+=`<h4 style="color: #fc0; margin: 0 0 10px 0; text-align: center; border-bottom: 1px solid #333; padding-bottom: 5px;">Tanggal : ${l}</h4>`,
-      i.forEach((e=>{
-        let formattedArchiveIsi = formatLinePer5(e.isi);
-        n+='<div style="background: #111; border: 1px solid #444; color: #fff; padding: 8px; margin-bottom: 8px; border-radius: 3px;">',
-        n+=`<strong style="color: #fff;">${e.nama}</strong> <span style="font-size: 10px; color: #aaa;">(${e.waktu})</span>`,
-        n+=`<p style="margin: 5px 0 0 0; font-family: monospace; color: #ff69b4; word-break: normal; overflow-wrap: break-word; letter-spacing: 1px; line-height: 1.6;">${formattedArchiveIsi}</p>`,
-        n+="</div>"
-      }));
-      let r=e[t]||(t===getWaktuWIB().toISOString().split("T")[0]&&lastLoadedResult4D?lastLoadedResult4D:"----"),
-          o=r[0]||"-",s=r[1]||"-",d=r[2]||"-",m=r[3]||"-";
-      n+='<div style="background: #051a05; border: 1px solid #39ff14; padding: 8px; margin-top: 10px; border-radius: 4px; text-align: center;">',
-      n+='<span style="color: #39ff14; font-size: 12px; font-weight: bold;">RESULT 4D SAHH</span>',
-      n+='<div style="display: flex; justify-content: center; gap: 6px; margin: 8px 0;">',
-      n+=`<div class="ball" style="width:28px;height:28px;font-size:14px;">${o}</div>`,
-      n+=`<div class="ball" style="width:28px;height:28px;font-size:14px;">${s}</div>`,
-      n+=`<div class="ball" style="width:28px;height:28px;font-size:14px;">${d}</div>`,
-      n+=`<div class="ball" style="width:28px;height:28px;font-size:14px;">${m}</div>`,
-      n+="</div>",n+="</div>",n+="</div>"
-    }))
+  document.getElementById("modal-arsip").style.display = "flex";
+  let snapshotData = globalSnapshotData, listArsip = [];
+  Object.keys(snapshotData).forEach((key)=>{
+    let item = {id: key, ...snapshotData[key]};
+    if(item.rawDate) listArsip.push(item);
+  });
+  listArsip.sort((x, y) => y.timestamp - x.timestamp);
+  
+  let grouped = {};
+  listArsip.forEach((item)=>{
+    let d = item.rawDate;
+    if(!grouped[d]) grouped[d] = [];
+    grouped[d].push(item);
+  });
+  
+  let htmlArsip = "", dates = Object.keys(grouped).sort().reverse();
+  if(dates.length === 0){
+    htmlArsip = '<p style="color: #888; text-align: center;">Belum ada arsip Lomba</p>';
+  } else {
+    let resultCache = {};
+    try{
+      let res = await fetch("/result/china.js?v=" + Date.now());
+      let txt = res ? await res.text() : "";
+      let m = txt.match(/['"`](\s*[\s\S]*?)['"`]/);
+      let arr = (m ? m[1] : txt).replace(/[\s\n\r]/g,"").split(",").filter(e => e.length >= 4);
+      dates.forEach((dt, idx)=>{
+        if(arr.length > 0 && arr[arr.length - 1 - idx]){
+          resultCache[dt] = arr[arr.length - 1 - idx];
+        }
+      });
+    }catch(e){}
+    
+    dates.forEach((dt)=>{
+      let items = grouped[dt], labelTgl = items[0].tglFormat || dt;
+      htmlArsip += '<div style="background: #111; border: 1px solid #444; padding: 10px; margin-bottom: 15px; border-radius: 5px;">';
+      htmlArsip += `<h4 style="color: #fc0; margin: 0 0 10px 0; text-align: center; border-bottom: 1px solid #333; padding-bottom: 5px;">Tanggal : ${labelTgl}</h4>`;
+      
+      items.forEach((item)=>{
+        let formattedArchiveIsi = formatLinePer5(item.isi);
+        htmlArsip += '<div style="background: #111; border: 1px solid #444; color: #fff; padding: 8px; margin-bottom: 8px; border-radius: 3px;">';
+        htmlArsip += `<strong style="color: #fff;">${item.nama}</strong> <span style="font-size: 10px; color: #aaa;">(${item.waktu})</span>`;
+        htmlArsip += `<p style="margin: 5px 0 0 0; font-family: monospace; color: #ff69b4; word-break: normal; overflow-wrap: break-word; letter-spacing: 1px; line-height: 1.6;">${formattedArchiveIsi}</p>`;
+        htmlArsip += '</div>';
+      });
+      
+      let resVal = resultCache[dt] || (dt === getWaktuWIB().toISOString().split("T")[0] && lastLoadedResult4D ? lastLoadedResult4D : "----");
+      let d1 = resVal[0] || "-", d2 = resVal[1] || "-", d3 = resVal[2] || "-", d4 = resVal[3] || "-";
+      
+      htmlArsip += '<div style="background: #051a05; border: 1px solid #39ff14; padding: 8px; margin-top: 10px; border-radius: 4px; text-align: center;">';
+      htmlArsip += '<span style="color: #39ff14; font-size: 12px; font-weight: bold;">RESULT 4D SAHH</span>';
+      htmlArsip += '<div style="display: flex; justify-content: center; gap: 6px; margin: 8px 0;">';
+      htmlArsip += `<div class="ball" style="width:28px;height:28px;font-size:14px;">${d1}</div>`;
+      htmlArsip += `<div class="ball" style="width:28px;height:28px;font-size:14px;">${d2}</div>`;
+      htmlArsip += `<div class="ball" style="width:28px;height:28px;font-size:14px;">${d3}</div>`;
+      htmlArsip += `<div class="ball" style="width:28px;height:28px;font-size:14px;">${d4}</div>`;
+      htmlArsip += '</div></div></div>';
+    });
   }
-  document.getElementById("konten-arsip-list").innerHTML=n
+  document.getElementById("konten-arsip-list").innerHTML = htmlArsip;
 }
 
-function tutupArsip(){document.getElementById("modal-arsip").style.display="none"}
+function tutupArsip(){ document.getElementById("modal-arsip").style.display = "none"; }
 
 function renderKlasemenBulanan(){
-  let e=document.getElementById("select-bulan-otomatis");
-  if(!e||""===e.value)return;
-  let t=document.getElementById("tabel-klasemen-body");
-  t.innerHTML='<tr><td colspan="4" style="color: #39ff14;">Memuat data klasemen...</td></tr>',
-  setTimeout((()=>{
-    let a=e.value,n=globalSnapshotData,i={};
-    Object.keys(n).forEach((e=>{
-      let t=n[e],l=t.rawDate?t.rawDate.substring(0,7):"";
-      if(t.isi&&l===a){
-        let e=t.isi.replace(/[^0-9]/g," ").split(/\s+/).filter(Boolean);
-        i[t.nama]||(i[t.nama]={nama:t.nama,point:0,totalLine:e.length,timestamp:t.timestamp||0,firstGoal:t.tglFormat||"Hari Ini"}),
-        i[t.nama].point+=10
+  let selectBulan = document.getElementById("select-bulan-otomatis");
+  if(!selectBulan || !selectBulan.value) return;
+  let tbody = document.getElementById("tabel-klasemen-body");
+  tbody.innerHTML = '<tr><td colspan="4" style="color: #39ff14;">Memuat data klasemen...</td></tr>';
+  
+  setTimeout(()=>{
+    let valBulan = selectBulan.value, snapshotData = globalSnapshotData, klasemenMap = {};
+    Object.keys(snapshotData).forEach((key)=>{
+      let item = snapshotData[key], monthStr = item.rawDate ? item.rawDate.substring(0, 7) : "";
+      if(item.isi && monthStr === valBulan){
+        let arrNums = item.isi.replace(/[^0-9]/g," ").split(/\s+/).filter(Boolean);
+        klasemenMap[item.nama] || (klasemenMap[item.nama] = {nama: item.nama, point: 0, totalLine: arrNums.length, timestamp: item.timestamp || 0, firstGoal: item.tglFormat || "Hari Ini"});
+        klasemenMap[item.nama].point += 10;
       }
-    }));
-    let l=Object.values(i);
-    l.sort(((e,t)=>t.point!==e.point?t.point-e.point:e.totalLine!==t.totalLine?e.totalLine-t.totalLine:e.timestamp-t.timestamp));
-    let r="";
-    0===l.length?r='<tr><td colspan="4" style="color: #888;">Belum ada data klasemen untuk bulan ini.</i></tr>':l.forEach(((e,t)=>{
-      r+=`<tr>
-				<td>${t+1}</td>
-				<td style="color: #39ff14;">${e.nama}</td>
-				<td style="color: #ff3333;">${e.point} Poin</td>
-				<td>${e.firstGoal}</td>
-			</tr>`
-    }));
-    t.innerHTML=r
-  }),100)
+    });
+    
+    let klasemenArr = Object.values(klasemenMap);
+    klasemenArr.sort((x, y) => y.point !== x.point ? y.point - x.point : x.totalLine !== y.totalLine ? x.totalLine - y.totalLine : x.timestamp - y.timestamp);
+    
+    let htmlKlasemen = "";
+    if(klasemenArr.length === 0){
+      htmlKlasemen = '<tr><td colspan="4" style="color: #888;">Belum ada data klasemen untuk bulan ini.</td></tr>';
+    } else {
+      klasemenArr.forEach((item, index)=>{
+        htmlKlasemen += `<tr><td>${index+1}</td><td style="color: #39ff14;">${item.nama}</td><td style="color: #ff3333;">${item.point} Poin</td><td>${item.firstGoal}</td></tr>`;
+      });
+    }
+    tbody.innerHTML = htmlKlasemen;
+  }, 100);
 }
 
 async function tpKirimPublik(){
-  if(currentDeviceID||(currentDeviceID=await getAdvancedDeviceID()),cekWaktuTutupLomba())return void alert("Mohon maaf, sistem pengiriman line masih dikunci (Menunggu result diperbarui atau melewati batas waktu)");
-  let e=document.getElementById("tp-komentar-isi").value.trim(),
-      t=document.getElementById("tp-komentar-nama").value.trim(),
-      a=document.getElementById("tp-komentar-email").value.trim().toLowerCase();
-  if(!e||!t||!a)return alert("Semua kolom (Isi, Nama, Email) wajib diisi!");
-  if(!/^[0-9\s*\-]+$/.test(e))return alert("hanya boleh berisi angka, spasi, tanda bintang (*), atau strip (-)");
-  let n=e.replace(/[\*\-]/g," ").replace(/\s+/g," ").trim().split(" ");
-  if(0===n.length||""===n[0])return alert("Format tebakan kosong tidak valid");
-  if(n.length>15)return alert("Maksimal tebakan adalah 15 line");
-  for(let e=0;e<n.length;e++)if(2!==n[e].length)return alert(`Format salah pada angka "${n[e]}" Setiap tebakan wajib berformat 2D (dua digit, contoh: 05 12 99)`);
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(a))return alert("Format email yang Anda masukkan tidak valid");
+  if(!currentDeviceID) currentDeviceID = await getAdvancedDeviceID();
+  if(cekWaktuTutupLomba()) return alert("Mohon maaf, sistem pengiriman line masih dikunci (Melewati batas waktu tutup lomba pukul 15.05 WIB)");
   
-  let i=globalSnapshotData,l=null,r=0,o=getWaktuWIB().getTime(),s=!1;
-  Object.keys(i).forEach((e=>{
-    let n=i[e],d=n.timestamp||0;
-    if(o-d<=1728e5){
-      let i=n.deviceId&&n.deviceId===currentDeviceID,
-          o=n.email&&n.email.trim().toLowerCase()===a,
-          d=n.nama&&n.nama.trim().toLowerCase()===t.toLowerCase();
-      !i||o||d||(s=!0),(o||d||i)&&(l=e,r=n.editCount||1)
+  let isi = document.getElementById("tp-komentar-isi").value.trim(),
+      nama = document.getElementById("tp-komentar-nama").value.trim(),
+      email = document.getElementById("tp-komentar-email").value.trim().toLowerCase();
+      
+  if(!isi || !nama || !email) return alert("Semua kolom (Isi, Nama, Email) wajib diisi!");
+  if(!/^[0-9\s*\-]+$/.test(isi)) return alert("Hanya boleh berisi angka, spasi, tanda bintang (*), atau strip (-)");
+  
+  let numbers = isi.replace(/[\*\-]/g," ").replace(/\s+/g," ").trim().split(" ");
+  if(numbers.length === 0 || numbers[0] === "") return alert("Format tebakan kosong tidak valid");
+  if(numbers.length > 15) return alert("Maksimal tebakan adalah 15 line");
+  for(let i=0; i<numbers.length; i++){
+    if(numbers[i].length !== 2) return alert(`Format salah pada angka "${numbers[i]}". Setiap tebakan wajib berformat 2D (dua digit, contoh: 05 12 99)`);
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert("Format email yang Anda masukkan tidak valid");
+  
+  let snapshotData = globalSnapshotData, existingKey = null, editCount = 0, nowTime = getWaktuWIB().getTime(), isDeviceViolation = false;
+  Object.keys(snapshotData).forEach((key)=>{
+    let item = snapshotData[key], timeVal = item.timestamp || 0;
+    if(nowTime - timeVal <= 1728e5){
+      let isSameDevice = item.deviceId && item.deviceId === currentDeviceID,
+          isSameEmail = item.email && item.email.trim().toLowerCase() === email,
+          isSameName = item.nama && item.nama.trim().toLowerCase() === nama.toLowerCase();
+      if(isSameDevice && !isSameEmail && !isSameName) isDeviceViolation = true;
+      if(isSameEmail || isSameName || isSameDevice){
+        existingKey = key;
+        editCount = item.editCount || 1;
+      }
     }
-  }));
+  });
   
-  if(s)return alert("⛔ Peringatan Keamanan! Perangkat ini terdeteksi sudah digunakan untuk mengirim dengan akun/nama lain. Dilarang menggunakan lebih dari 1 akun dalam 1 perangkat!");
-  if(l&&r>=2)return alert("⚠️ Bosku sudah mencapai batas maksimal mengganti/mengubah angka sebanyak 2 kali dalam Lomba periode kali ini!");
+  if(isDeviceViolation) return alert("⛔ Peringatan Keamanan! Perangkat ini terdeteksi sudah digunakan untuk mengirim dengan akun/nama lain. Dilarang menggunakan lebih dari 1 akun dalam 1 perangkat!");
+  if(existingKey && editCount >= 2) return alert("⚠️ Bosku sudah mencapai batas maksimal mengganti/mengubah angka sebanyak 2 kali dalam Lomba periode kali ini!");
   
-  let d=getWaktuWIB(),
-      m=`${d.toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"})}, ${d.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"})} WIB`,
-      p=d.getTime(),
-      u=d.toISOString().split("T")[0],
-      g=document.getElementById("tp-btn-submit");
+  let d = getWaktuWIB(),
+      waktuStr = `${d.toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"})}, ${d.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"})} WIB`,
+      timestampVal = d.getTime(),
+      rawDateStr = d.toISOString().split("T")[0],
+      btnSubmit = document.getElementById("tp-btn-submit");
+      
+  btnSubmit.disabled = true;
+  btnSubmit.innerText = "Mengirim...";
   
-  g.disabled=!0,g.innerText="Mengirim...";
   try{
-    let n,i=l?r+1:1;
-    n=l?db.ref("komentar/lomba-china/"+l):db.ref("komentar/lomba-china").push(),
-    await n.set({nama:t,email:a,isi:e,waktu:m,timestamp:p,rawDate:u,tglFormat:d.toLocaleDateString("id-ID",{day:"2-digit",month:"2-digit",year:"numeric"}),deviceId:currentDeviceID,editCount:i}),
-    document.getElementById("tp-komentar-isi").value="",
-    alert(l?`Postingan Lomba berhasil diperbarui ( Perubahan ke-${i} dari maksimal 2x )`:"Line berhasil dikirim!")
-  }catch(e){
-    alert("Gagal mengirim Line")
+    let targetRef, nextEditCount = existingKey ? editCount + 1 : 1;
+    targetRef = existingKey ? db.ref("komentar/lomba-china/" + existingKey) : db.ref("komentar/lomba-china").push();
+    
+    await targetRef.set({
+      nama: nama,
+      email: email,
+      isi: isi,
+      waktu: waktuStr,
+      timestamp: timestampVal,
+      rawDate: rawDateStr,
+      tglFormat: d.toLocaleDateString("id-ID",{day:"2-digit",month:"2-digit",year:"numeric"}),
+      deviceId: currentDeviceID,
+      editCount: nextEditCount
+    });
+    
+    document.getElementById("tp-komentar-isi").value = "";
+    alert(existingKey ? `Postingan Lomba berhasil diperbarui (Perubahan ke-${nextEditCount} dari maksimal 2x)` : "Line berhasil dikirim!");
+  }catch(err){
+    alert("Gagal mengirim Line, periksa koneksi internet Anda.");
   }finally{
-    g.disabled=!1,g.innerText="Kirim Line"
+    btnSubmit.disabled = false;
+    btnSubmit.innerText = "Kirim Line";
   }
 }
 
-function cekResultPintar(){let e=getWaktuWIB(),t=60*e.getHours()+e.getMinutes();t>=920&&t<=940&&muatPaitoOtomatis()}
+// Inisialisasi utama sistem
+getAdvancedDeviceID().then((id)=>{ currentDeviceID = id; });
+sinkronisasiWaktuWIB().then(()=>{
+  generateDropdownBulan();
+  muatPaitoOtomatis();
+  muatDataLombaSuperKilat();
+});
 
-getAdvancedDeviceID().then((e=>{currentDeviceID=e}));
-sinkronisasiWaktuWIB().then((()=>{generateDropdownBulan(),muatPaitoOtomatis(),muatDataLombaSuperKilat()}));
-setInterval(cekResultPintar,15e3);
-setInterval(cekWaktuTutupLomba,5e3);
+setInterval(cekWaktuTutupLomba, 5000);
 </script>
-<script>document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}</script>
+<script>document.addEventListener("contextmenu", e => e.preventDefault()); document.onkeydown = function(e){ return 123 != e.keyCode && (!e.ctrlKey || !e.shiftKey || e.keyCode != "I".charCodeAt(0)) && (!e.ctrlKey || !e.shiftKey || e.keyCode != "C".charCodeAt(0)) && (!e.ctrlKey || !e.shiftKey || e.keyCode != "J".charCodeAt(0)) && (!e.ctrlKey || e.keyCode != "U".charCodeAt(0)) && void 0 };</script>
 </body>
 </html>
