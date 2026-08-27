@@ -123,10 +123,10 @@ Gunakan email yang sama setiap posting (boleh fiktif/aktif) karena itu adalah id
 </div>
 </div>
 <h4 style=color:#39ff14>Tambahkan Postingan Lomba Bosku</h4>
-<textarea id=tp-komentar-isi rows=4 placeholder="(Contoh: 12 34 56 atau 12*34*56)" disabled></textarea>
-<input id=tp-komentar-nama placeholder="Nama / Nickname Anda" disabled>
-<input type=email id=tp-komentar-email placeholder="Email Anda (1 Email untuk 1 Akun)" disabled>
-<button onclick=tpKirimPublik() id=tp-btn-submit class=btn-custom disabled>MENUNGGU RESULT DIPERBARUI...</button>
+<textarea id=tp-komentar-isi rows=4 placeholder="(Contoh: 12 34 56 atau 12*34*56)"></textarea>
+<input id=tp-komentar-nama placeholder="Nama / Nickname Anda">
+<input type=email id=tp-komentar-email placeholder="Email Anda (1 Email untuk 1 Akun)">
+<button onclick=tpKirimPublik() id=tp-btn-submit class=btn-custom>Kirim Line</button>
 <div style=width:100%;text-align:center;overflow:hidden>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
 <script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
@@ -151,87 +151,19 @@ Gunakan email yang sama setiap posting (boleh fiktif/aktif) karena itu adalah id
 <button onclick=tutupArsip() class=btn-custom style=background:#dc3545;border-color:#bd2130;margin-top:15px>Tutup</button>
 </div>
 </div>
+
+<!-- Memanggil file external macau.js langsung dari server -->
+<script src="/result/macau.js"></script>
+
 <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js></script>
 <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js></script>
 <script>
-const DATA_PAITO_MACAU = `
-  20 Jun,9453,5324,9805,2842,9691,5385,
-  21 Jun,3713,3501,5487,7184,8239,9150,
-  22 Jun,1648,5963,5985,5305,2727,3081,
-  23 Jun,4368,5019,1892,2020,4890,7430,
-  24 Jun,9343,2267,5260,8514,4143,6630,
-  25 Jun,7974,3140,7585,6723,6306,0031,
-  26 Jun,3290,6717,3325,1320,9747,7939,
-  27 Jun,4639,8302,0658,1612,9934,4544,
-  28 Jun,7090,9004,2520,6691,2656,4669,
-  29 Jun,6211,5111,0000,3507,0053,3914,
-  30 Jun,7997,2873,8119,5607,5834,5342,
-  01 Jul,5055,1970,8502,0370,0007,9305,
-  02 Jul,1822,1194,3790,8227,3807,2231,
-  03 Jul,5717,6689,0085,7216,9119,6761,
-  04 Jul,2167,6164,3076,1351,5634,8843,
-  05 Jul,2800,4196,6997,5953,0971,1182,
-  06 Jul,3618,1771,1424,0448,8442,5228,
-  07 Jul,0065,6147,2455,7751,5393,2507,
-  08 Jul,5770,1928,9186,7695,7675,8933,
-  09 Jul,5649,5755,9516,7515,3161,7259,
-  10 Jul,1073,1354,2943,3078,4621,8024,
-  11 Jul,2548,0213,5907,6570,6980,2577,
-  12 Jul,4526,0470,7095,8036,5979,4587,
-  13 Jul,0226,7463,9354,9228,5598,6597,
-  14 Jul,4006,2891,1105,6290,7111,4485,
-  15 Jul,3444,8425,1464,9372,9634,1820,
-  16 Jul,7414,9256,6539,2315,6603,1195,
-  17 Jul,0768,2723,6031,1030,2157,0489,
-  18 Jul,2714,3569,3406,7113,1545,6913,
-  19 Jul,1668,3230,2472,6654,8004,6959,
-  20 Jul,7209,7123,2640,5614,3522,9940,
-  21 Jul,0674,8159,3493,4948,2131,6785,
-  22 Jul,3486,9372,2013,3587,7095,0504,
-  23 Jul,3635,3799,3479,3798,2643,0732,
-  24 Jul,6601,4165,3029,1857,5050,8468,
-  25 Jul,7715,3238,7377,4684,2684,2916,
-  26 Jul,1434,7494,0431,2044,3417,7013,
-  27 Jul,7289,2326,9199,5821,7426,7906,
-  28 Jul,2333,3658,7632,4748,9871,4120,
-  29 Jul,3097,6842,0762,4519,7078,5110,
-  30 Jul,6221,1072,7919,2130,0967,4462,
-  31 Jul,5915,6207,0448,9199,4905,6290,
-  01 Aug,4046,7781,9107,8639,2767,5593,
-  02 Aug,0711,8208,8886,3674,3231,2777,
-  03 Aug,9564,2590,7124,0433,5797,9942,
-  04 Aug,4094,9201,1664,0213,8103,6148,
-  05 Aug,9554,0629,2900,9401,0991,1563,
-  06 Aug,2153,9894,0597,5843,3064,1391,
-  07 Aug,6529,6300,7875,6303,9178,9141,
-  08 Aug,4072,0342,2957,9031,6525,1109,
-  09 Aug,5131,7545,0712,9658,3916,8421,
-  10 Aug,7107,2008,4471,4425,3545,7458,
-  11 Aug,2352,3886,0624,6215,5735,8756,
-  12 Aug,5093,6876,7221,0947,4277,7845,
-  13 Aug,3960,5837,6847,1487,2031,7694,
-  14 Aug,0143,3920,3881,4220,1828,5386,
-  15 Aug,6344,9494,8480,6464,3062,6021,
-  16 Aug,1126,1480,2750,7204,7003,2060,
-  17 Aug,8474,1143,4641,8372,0607,5697,
-  18 Aug,7262,8142,7324,8755,2197,2194,
-  19 Aug,9532,4831,6284,0004,2023,6038,
-  20 Aug,5717,3653,2673,2022,4105,6138,
-  21 Aug,8771,9485,2576,4392,3222,8080,
-  22 Aug,4237,0799,8542,4636,5832,3297,
-  23 Aug,9177,6739,5088,3236,1595,3697,
-  24 Aug,8927,2725,8052,6415,0655,4518,
-  25 Aug,6641,6378,0257,5338,4424,2697,
-  26 Aug,6625,4062,3202,5366,5862,3184,
-  27 Aug,8456,4062,3202,5366,5862,3184
-`;
-
 document.getElementById("tahun-copyright").innerText=(new Date).getFullYear();
 const firebaseConfig={apiKey:"AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",authDomain:"komentar-web-f9e2e.firebaseapp.com",databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"komentar-web-f9e2e",storageBucket:"komentar-web-f9e2e.appspot.com",messagingSenderId:"126095632925",appId:"1:126095632925:web:77383efdc2daea2e7034f4"};
 firebase.apps.length||firebase.initializeApp(firebaseConfig);
 const db=firebase.database(),TP_HALAMAN_ID="lomba-macau";
-let globalSnapshotData={},globalResult2D=null,lastLoadedResult4D="",lastResultTimestamp=0,forceOpenForm=!1,serverTimeOffset=0,latestResultDate="",isResultOfficialToday=!1;
+let globalSnapshotData={},globalResult2D=null,lastLoadedResult4D="",lastResultTimestamp=0,forceOpenForm=!0,serverTimeOffset=0,latestResultDate="",isResultOfficialToday=!0;
 
 async function sinkronisasiWaktuWIB(){try{let e=await fetch("https://worldtimeapi.org/api/timezone/Asia/Jakarta"),t=await e.json(),a=new Date(t.datetime).getTime(),n=(new Date).getTime();serverTimeOffset=a-n}catch(e){serverTimeOffset=0}}
 function getWaktuWIB(){return new Date((new Date).getTime()+serverTimeOffset)}
@@ -242,32 +174,40 @@ function generateDropdownBulan(){let e=document.getElementById("select-bulan-oto
 
 async function muatPaitoOtomatis(){
     try{
-        let t=DATA_PAITO_MACAU,a=t.match(/['"`]([\s\S]*?)['"`]/),cleanText=(a?a[1]:t).trim(),rows=cleanText.split("\n").map(r=>r.trim()).filter(r=>r.length>0);
-        if(rows.length>0){
-            let latestRow=rows[rows.length-1],columns=latestRow.split(",").map(c=>c.trim()),result4D=columns[1];
-            if(result4D&&result4D!==lastLoadedResult4D){
-                lastLoadedResult4D=result4D;
-                lastResultTimestamp=getWaktuWIB().getTime();
-                forceOpenForm=!0;
-                isResultOfficialToday=!0;
-                tampilkanResult(result4D);
+        if(typeof DATA_PAITO_MACAU === 'undefined'){
+            console.warn("DATA_PAITO_MACAU belum dimuat dari /result/macau.js");
+        }
+        isResultOfficialToday = !0;
+        forceOpenForm = !0;
+        
+        let dummyResult = "1234";
+        let t = (typeof DATA_PAITO_MACAU !== 'undefined') ? DATA_PAITO_MACAU : "";
+        let cleanText = t.trim(), rows = cleanText.split("\n").map(r => r.trim()).filter(r => r.length > 0);
+        
+        if(rows.length > 0){
+            let latestRow = rows[rows.length - 1], columns = latestRow.split(",").map(c => c.trim()), result4D = columns[1];
+            if(result4D && result4D !== "----" && result4D.length >= 4){
+                dummyResult = result4D;
             }
         }
-    }catch(e){console.error("Gagal memuat data paito lokal",e)}
-    let e=localStorage.getItem("cache_data_lomba_macau");
-    if(e)try{globalSnapshotData=JSON.parse(e),prosesDanTampilkanData(globalSnapshotData)}catch(e){}
+        lastLoadedResult4D = dummyResult;
+        tampilkanResult(dummyResult);
+    }catch(e){
+        console.error("Gagal memuat data paito lokal", e);
+        isResultOfficialToday = !0;
+        forceOpenForm = !0;
+        tampilkanResult("1234");
+    }
+    
+    let e = localStorage.getItem("cache_data_lomba_macau");
+    if(e) try { globalSnapshotData = JSON.parse(e), prosesDanTampilkanData(globalSnapshotData) } catch(e) {}
 }
 
 function tampilkanResult(e){!e||e.length<4||(globalResult2D=e.slice(-2),document.getElementById("display-result-balls").innerHTML=`\n\t\t\t<div class="ball">${e[0]}</div>\n\t\t\t<div class="ball">${e[1]}</div>\n\t\t\t<div class="ball">${e[2]}</div>\n\t\t\t<div class="ball">${e[3]}</div>\n\t\t`,document.getElementById("text-result-info").innerText="",cekWaktuTutupLomba())}
 
 function cekWaktuTutupLomba(){
     let e=document.getElementById("tp-btn-submit"),t=document.getElementById("tp-komentar-isi"),a=document.getElementById("tp-komentar-nama"),n=document.getElementById("tp-komentar-email");
-    if(!globalResult2D)return t&&(t.disabled=!0),a&&(a.disabled=!0),n&&(n.disabled=!0),e&&(e.disabled=!0,e.innerText="MENUNGGU RESULT DIPERBARUI..."),!0;
-    if(forceOpenForm)return t&&(t.disabled=!1),a&&(a.disabled=!1),n&&(n.disabled=!1),e&&(e.disabled=!1,e.innerText="Kirim Line"),!1;
-    let i=getWaktuWIB(),totalMinutes=60*i.getHours()+i.getMinutes();
-    let closedTimes=[770,950,1130,1310,1370,1430],isClosed=!1;
-    for(let m of closedTimes){if(totalMinutes>=m&&totalMinutes<m+20){isClosed=!0;break}}
-    return isClosed?(t&&(t.disabled=!0),a&&(a.disabled=!0),n&&(n.disabled=!0),e&&(e.disabled=!0,e.innerText="LOMBA DITUTUP"),!0):(t&&(t.disabled=!1),a&&(a.disabled=!1),n&&(n.disabled=!1),e&&(e.disabled=!1,e.innerText="Kirim Line"),!1)
+    return t&&(t.disabled=!1),a&&(a.disabled=!1),n&&(n.disabled=!1),e&&(e.disabled=!1,e.innerText="Kirim Line"),!1;
 }
 
 function muatDataLombaSuperKilat(){db.ref("komentar/lomba-macau").on("value",(e=>{globalSnapshotData=e.val()||{},localStorage.setItem("cache_data_lomba_macau",JSON.stringify(globalSnapshotData)),prosesDanTampilkanData(globalSnapshotData)}),(e=>{console.error("Firebase error: ",e)}))}
@@ -361,7 +301,7 @@ async function bukaArsip(){
     else{
         let e={};
         try{
-            let t=DATA_PAITO_MACAU,cleanText=t.match(/['"`]([\s\S]*?)['"`]/)[1].trim(),l=cleanText.split("\n").map(r=>r.trim()).filter(r=>r.length>0);
+            let t=DATA_PAITO_MACAU,cleanText=t.trim(),l=cleanText.split("\n").map(r=>r.trim()).filter(r=>r.length>0);
             i.forEach(((t,a)=>{l.length>0&&l[l.length-1-a]&&(e[t]=l[l.length-1-a].split(",").map(c=>c.trim()))}))
         }catch(e){}
         i.forEach((t=>{
@@ -423,7 +363,7 @@ function renderKlasemenBulanan(){
 }
 
 async function tpKirimPublik(){
-    if(currentDeviceID||(currentDeviceID=await getAdvancedDeviceID()),cekWaktuTutupLomba())return void alert("Mohon maaf, sistem pengiriman line masih dikunci (Menunggu result diperbarui atau melewati batas waktu)");
+    if(currentDeviceID||(currentDeviceID=await getAdvancedDeviceID()),cekWaktuTutupLomba())return void alert("Mohon maaf, sistem pengiriman line masih dikunci");
     let e=document.getElementById("tp-komentar-isi").value.trim(),
         t=document.getElementById("tp-komentar-nama").value.trim(),
         a=document.getElementById("tp-komentar-email").value.trim().toLowerCase();
