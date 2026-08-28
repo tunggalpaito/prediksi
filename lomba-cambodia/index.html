@@ -113,17 +113,17 @@ Gunakan email yang sama setiap posting (boleh fiktif/aktif) karena itu adalah id
 <div class=ball>-</div><div class=ball>-</div><div class=ball>-</div><div class=ball>-</div>
 </div>
 <p style=text-align:center;color:#39ff14;font-size:13px;font-weight:700 id=text-result-info>Memuat Result...</p>
-<h4 style=color:#39ff14;margin-top:15px>Master Yang GooL Tembus 2D</h4>
+<h4 style=color:#39ff14;margin-top:15px>Nama Master Line JP 2D</h4>
 <div style=font-size:12px;color:#fc0;text-align:center;margin-bottom:10px></div>
 <div id=list-putaran-otomatis style="color:#39ff14;padding-left:0px">
 <p style="color:#888;">Menunggu sinkronisasi result...</p>
 </div>
 </div>
 <h4 style=color:#39ff14>Tambahkan Postingan Lomba Bosku</h4>
-<textarea id=tp-komentar-isi rows=4 placeholder="(Contoh: 12 34 56 atau 12*34*56)" disabled></textarea>
-<input id=tp-komentar-nama placeholder="Nama / Nickname Anda" disabled>
-<input type=email id=tp-komentar-email placeholder="Email Anda (1 Email untuk 1 Akun)" disabled>
-<button onclick=tpKirimPublik() id=tp-btn-submit class=btn-custom disabled>MENUNGGU RESULT DIPERBARUI...</button>
+<textarea id=tp-komentar-isi rows=4 placeholder="(Contoh: 12 34 56 atau 12*34*56)"></textarea>
+<input id=tp-komentar-nama placeholder="Nama / Nickname Anda">
+<input type=email id=tp-komentar-email placeholder="Email Anda (1 Email untuk 1 Akun)">
+<button onclick=tpKirimPublik() id=tp-btn-submit class=btn-custom>Kirim Line</button>
 <div style=width:100%;text-align:center;overflow:hidden>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
 <script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
@@ -156,24 +156,168 @@ document.getElementById("tahun-copyright").innerText=(new Date).getFullYear();
 const firebaseConfig={apiKey:"AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",authDomain:"komentar-web-f9e2e.firebaseapp.com",databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"komentar-web-f9e2e",storageBucket:"komentar-web-f9e2e.appspot.com",messagingSenderId:"126095632925",appId:"1:126095632925:web:77383efdc2daea2e7034f4"};
 firebase.apps.length||firebase.initializeApp(firebaseConfig);
 const db=firebase.database(),TP_HALAMAN_ID="lomba-cambodia";
-let globalSnapshotData={},globalResult2D=null,lastLoadedResult4D="",lastResultTimestamp=0,forceOpenForm=!1,serverTimeOffset=0,latestResultDate="",isResultOfficialToday=!1;
+let globalSnapshotData={},globalResult2D=null,lastLoadedResult4D="",lastResultTimestamp=0,serverTimeOffset=0,latestResultDate="",isResultOfficialToday=!1;
 
-async function sinkronisasiWaktuWIB(){try{let e=await fetch("https://worldtimeapi.org/api/timezone/Asia/Jakarta"),t=await e.json(),a=new Date(t.datetime).getTime(),n=(new Date).getTime();serverTimeOffset=a-n}catch(e){serverTimeOffset=0}}
+async function sinkronisasiWaktuWIB(){
+    try{
+        let e=await fetch("https://worldtimeapi.org/api/timezone/Asia/Jakarta"),
+            t=await e.json(),
+            a=new Date(t.datetime).getTime(),
+            n=(new Date).getTime();
+        serverTimeOffset=a-n;
+    }catch(e){
+        console.warn("Gagal terhubung ke World Time API, menggunakan waktu lokal perangkat:", e);
+        serverTimeOffset=0;
+    }
+}
 function getWaktuWIB(){return new Date((new Date).getTime()+serverTimeOffset)}
-async function getAdvancedDeviceID(){let e=localStorage.getItem("tp_advanced_fp");if(e)return e;let t=document.createElement("canvas"),a=t.getContext("2d");a.textBaseline="top",a.font="14px 'Arial'",a.fillText("TunggalPaito-Security-Check",2,2);let n=t.toDataURL(),i="";try{let e=t.getContext("webgl")||t.getContext("experimental-webgl"),a=e.getExtension("WEBGL_debug_renderer_info");i=e.getParameter(a.UNMASKED_VENDOR_WEBGL)+"~"+e.getParameter(a.UNMASKED_RENDERER_WEBGL)}catch(e){i="no-gl"}let l=[navigator.hardwareConcurrency||4,navigator.deviceMemory||4,screen.width+"x"+screen.height,screen.colorDepth,Intl.DateTimeFormat().resolvedOptions().timeZone,i,n.substring(50,150)].join("||"),r=md5(l);return localStorage.setItem("tp_advanced_fp",r),r}
+
+async function getAdvancedDeviceID(){
+    let e=localStorage.getItem("tp_advanced_fp");
+    if(e)return e;
+    let t=document.createElement("canvas"),a=t.getContext("2d");
+    a.textBaseline="top",a.font="14px 'Arial'",a.fillText("TunggalPaito-Security-Check",2,2);
+    let n=t.toDataURL(),i="";
+    try{
+        let e=t.getContext("webgl")||t.getContext("experimental-webgl"),
+            a=e.getExtension("WEBGL_debug_renderer_info");
+        i=e.getParameter(a.UNMASKED_VENDOR_WEBGL)+"~"+e.getParameter(a.UNMASKED_RENDERER_WEBGL);
+    }catch(e){i="no-gl"}
+    let l=[navigator.hardwareConcurrency||4,navigator.deviceMemory||4,screen.width+"x"+screen.height,screen.colorDepth,Intl.DateTimeFormat().resolvedOptions().timeZone,i,n.substring(50,150)].join("||"),
+        r=md5(l);
+    return localStorage.setItem("tp_advanced_fp",r),r;
+}
 let currentDeviceID="";
 
-function generateDropdownBulan(){let e=document.getElementById("select-bulan-otomatis");if(e.options.length>0)return;let t=getWaktuWIB();for(let a=0;a<3;a++){let a=t.getFullYear(),n=t.getMonth(),i=`${a}-${String(n+1).padStart(2,"0")}`,l=new Date(a,n,1).toLocaleDateString("id-ID",{month:"long",year:"numeric"}),r=document.createElement("option");r.value=i,r.innerText=l,e.appendChild(r),t.setMonth(t.getMonth()-1)}}
+function generateDropdownBulan(){
+    let e=document.getElementById("select-bulan-otomatis");
+    if(e.options.length>0)return;
+    let t=getWaktuWIB();
+    for(let a=0;a<3;a++){
+        let a=t.getFullYear(),n=t.getMonth(),
+            i=`${a}-${String(n+1).padStart(2,"0")}`,
+            l=new Date(a,n,1).toLocaleDateString("id-ID",{month:"long",year:"numeric"}),
+            r=document.createElement("option");
+        r.value=i,r.innerText=l,e.appendChild(r),t.setMonth(t.getMonth()-1);
+    }
+}
 
-async function muatPaitoOtomatis(){try{let e=await fetch("/result/cambodia.js?v="+getWaktuWIB().getTime()),t=await e.text(),a=t.match(/['"`]([\s\S]*?)['"`]/),n=(a?a[1]:t).replace(/[\s\n\r]/g,"").split(",").filter((e=>e.length>=4));if(n.length>0){let e=n[n.length-1].trim();if(e!==lastLoadedResult4D){lastLoadedResult4D=e;lastResultTimestamp=getWaktuWIB().getTime();forceOpenForm=!0;isResultOfficialToday=!0;tampilkanResult(e)}let d=new Date();d.setDate(d.getDate()-(n.length-1));latestResultDate=d.toISOString().split("T")[0]}}catch(e){console.error("gagal menghubungkan sumber resmi",e)}let e=localStorage.getItem("cache_data_lomba_cambodia");if(e)try{globalSnapshotData=JSON.parse(e),prosesDanTampilkanData(globalSnapshotData)}catch(e){}}
+function tampilkanResult(e){
+    if (!e || e.length < 4) return;
+    globalResult2D = e.slice(-2);
+    isResultOfficialToday = true;
+    document.getElementById("display-result-balls").innerHTML = `
+        <div class="ball">${e[0]}</div>
+        <div class="ball">${e[1]}</div>
+        <div class="ball">${e[2]}</div>
+        <div class="ball">${e[3]}</div>
+    `;
+    document.getElementById("text-result-info").innerText = "";
+    cekWaktuTutupLomba();
+    muatDataLombaSuperKilat(); // Refresh data lomba agar warna JP / streak langsung ter-update setelah result masuk
+}
 
-function tampilkanResult(e){!e||e.length<4||(globalResult2D=e.slice(-2),document.getElementById("display-result-balls").innerHTML=`\n\t\t\t<div class="ball">${e[0]}</div>\n\t\t\t<div class="ball">${e[1]}</div>\n\t\t\t<div class="ball">${e[2]}</div>\n\t\t\t<div class="ball">${e[3]}</div>\n\t\t`,document.getElementById("text-result-info").innerText="",cekWaktuTutupLomba())}
+function muatResultCambodia() {
+    db.ref("live/cambodia").on("value", (snapshot) => {
+        let data = snapshot.val();
+        if (data) {
+            // Ambil tanggal hari ini dalam format DD-MM-YYYY (sesuai key di Firebase)
+            let d = getWaktuWIB();
+            let todayKey = `${String(d.getDate()).padStart(2, '0')}-${String(d.getMonth() + 1).padStart(2, '0')}-${d.getFullYear()}`;
+            
+            // Ambil string berdasarkan tanggal hari ini, atau fallback ke key terakhir yang ada di object jika hari ini belum ada
+            let rawString = data[todayKey] || Object.values(data).pop();
+            
+            if (rawString && typeof rawString === "string") {
+                // Pisahkan berdasarkan koma, lalu ambil elemen paling akhir (paling kanan)
+                let listAngka = rawString.split(",").map(item => item.trim()).filter(Boolean);
+                let resultTerbaru = listAngka[listAngka.length - 1]; // Mengambil data paling kanan
+                
+                if (resultTerbaru) {
+                    lastLoadedResult4D = String(resultTerbaru);
+                    tampilkanResult(lastLoadedResult4D);
+                }
+            }
+        } else {
+            document.getElementById("text-result-info").innerText = "Menunggu result live...";
+        }
+    }, (error) => {
+        console.error("Gagal memuat result live:", error);
+        document.getElementById("text-result-info").innerText = "Gagal memuat result live";
+    });
+}
 
-function cekWaktuTutupLomba(){let e=document.getElementById("tp-btn-submit"),t=document.getElementById("tp-komentar-isi"),a=document.getElementById("tp-komentar-nama"),n=document.getElementById("tp-komentar-email");if(!globalResult2D)return t&&(t.disabled=!0),a&&(a.disabled=!0),n&&(n.disabled=!0),e&&(e.disabled=!0,e.innerText="MENUNGGU RESULT DIPERBARUI..."),!0;if(forceOpenForm)return t&&(t.disabled=!1),a&&(a.disabled=!1),n&&(n.disabled=!1),e&&(e.disabled=!1,e.innerText="Kirim Line"),!1;let i=getWaktuWIB();return 60*i.getHours()+i.getMinutes()>=705?(t&&(t.disabled=!0),a&&(a.disabled=!0),n&&(n.disabled=!0),e&&(e.disabled=!0,e.innerText="LOMBA DITUTUP"),!0):(t&&(t.disabled=!1),a&&(a.disabled=!1),n&&(n.disabled=!1),e&&(e.disabled=!1,e.innerText="Kirim Line"),!1)}
+function cekWaktuTutupLomba(){
+    let e=document.getElementById("tp-btn-submit"),
+        t=document.getElementById("tp-komentar-isi"),
+        a=document.getElementById("tp-komentar-nama"),
+        n=document.getElementById("tp-komentar-email"),
+        i=getWaktuWIB();
+    if(60*i.getHours()+i.getMinutes()>=705){
+        t&&(t.disabled=!0);
+        a&&(a.disabled=!0);
+        n&&(n.disabled=!0);
+        e&&(e.disabled=!0,e.innerText="LOMBA DITUTUP");
+        return !0;
+    } else {
+        t&&(t.disabled=!1);
+        a&&(a.disabled=!1);
+        n&&(n.disabled=!1);
+        e&&(e.disabled=!1,e.innerText="Kirim Line");
+        return !1;
+    }
+}
 
-function muatDataLombaSuperKilat(){db.ref("komentar/lomba-cambodia").on("value",(e=>{globalSnapshotData=e.val()||{},localStorage.setItem("cache_data_lomba_cambodia",JSON.stringify(globalSnapshotData)),prosesDanTampilkanData(globalSnapshotData)}),(e=>{console.error("Firebase error: ",e)}))}
+function muatDataLombaSuperKilat(){
+    let todayStr = getWaktuWIB().toISOString().split("T")[0];
+    db.ref("komentar/" + TP_HALAMAN_ID).orderByChild("rawDate").equalTo(todayStr).on("value",(e=>{
+        let todayData = e.val()||{};
+        db.ref("komentar/" + TP_HALAMAN_ID).once("value",(snapshotAll)=>{
+            globalSnapshotData = snapshotAll.val()||{};
+            localStorage.setItem("cache_data_lomba_cambodia",JSON.stringify(globalSnapshotData));
+        });
+        prosesDanTampilkanData(todayData);
+    }),(e=>{console.error("Firebase error: ",e)}));
+}
 
-async function hitungDanSimpanStreak(e,t){if(!globalResult2D||!isResultOfficialToday)return;let a=db.ref("streaks/lomba-cambodia");a.once("value",(async n=>{let i=n.val()||{};if((i.lastDate||"")===t)return;let l=i.users||{},r=new Set(e.map((e=>e.email)));Object.keys(l).forEach((e=>{r.has(e)?l[e].streak=Math.min(5,(l[e].streak||0)+1):l[e].streak=0})),e.forEach((e=>{l[e.email]?l[e.email].nama=e.nama:l[e.email]={nama:e.nama,streak:1}})),await a.set({lastDate:t,users:l})}))}
+async function hitungDanSimpanStreak(e, t) {
+    if (!globalResult2D || !isResultOfficialToday) return;
+    let a = db.ref("streaks/lomba-cambodia");
+    a.once("value", (async n => {
+        let i = n.val() || {};
+        let savedDate = i.lastDate || "";
+        let l = i.users || {};
+        let r = new Set(e.map((e => e.email)));
+
+        if (savedDate !== t) {
+            Object.keys(l).forEach((userEmail => {
+                if (!r.has(userEmail)) {
+                    l[userEmail].streak = 0;
+                }
+            }));
+            e.forEach((item => {
+                if (l[item.email]) {
+                    l[item.email].nama = item.nama;
+                    l[item.email].streak = 1;
+                } else {
+                    l[item.email] = { nama: item.nama, streak: 1 };
+                }
+            }));
+        } else {
+            Object.keys(l).forEach((userEmail => {
+                if (r.has(userEmail)) {
+                    l[userEmail].streak = Math.min(5, (l[userEmail].streak || 0) + 1);
+                }
+            }));
+            e.forEach((item => {
+                if (!l[item.email]) {
+                    l[item.email] = { nama: item.nama, streak: 1 };
+                }
+            }));
+        }
+        await a.set({ lastDate: t, users: l });
+    }));
+}
 
 function formatLinePer5(rawIsi) {
   if (!rawIsi) return "";
@@ -186,16 +330,18 @@ function formatLinePer5(rawIsi) {
   return chunks.join("<br>");
 }
 
-function prosesDanTampilkanData(e){
+function prosesDanTampilkanData(todayData){
   let t=getWaktuWIB().toISOString().split("T")[0],a=[],n=[];
   let currentTime = getWaktuWIB().getTime();
-  Object.keys(e).forEach((i=>{
-    let l={id:i,...e[i]};
+  
+  Object.keys(todayData).forEach((i=>{
+    let l={id:i,...todayData[i]};
     l.rawDate===t&&a.push(l);
     let isTodayPost = l.rawDate === t;
     let isMatchedResult = globalResult2D && isResultOfficialToday && isTodayPost && l.isi && l.isi.replace(/[^0-9]/g," ").split(/\s+/).includes(globalResult2D);
-    isMatchedResult && n.push(l)
+    isMatchedResult && n.push(l);
   }));
+  
   a.sort(((e,t)=>e.timestamp-t.timestamp));
   let isRecentResult = (currentTime - lastResultTimestamp) < 86400000;
   globalResult2D&&isRecentResult&&isResultOfficialToday&&n.length>0&&hitungDanSimpanStreak(n,t);
@@ -220,7 +366,7 @@ function prosesDanTampilkanData(e){
 				<p style="margin: 5px 0 0 0; font-family: monospace; font-weight: bold; color: #ff69b4; word-break: normal; overflow-wrap: break-word; letter-spacing: 1px; line-height: 1.6;">${formattedIsi}</p>
 				${r}
 			</div>
-		</div>`
+		</div>`;
   }));
   
   document.getElementById("tp-daftar-list").innerHTML=i;
@@ -251,10 +397,10 @@ function prosesDanTampilkanData(e){
       }
       a=aDefault;
     }
-    document.getElementById("list-putaran-otomatis").innerHTML=a
+    document.getElementById("list-putaran-otomatis").innerHTML=a;
   }));
   
-  renderKlasemenBulanan()
+  renderKlasemenBulanan();
 }
 
 async function bukaArsip(){
@@ -267,8 +413,6 @@ async function bukaArsip(){
   let n="",i=Object.keys(a).sort().reverse();
   if(0===i.length)n='<p style="color: #888; text-align: center;">Belum ada arsip Lomba</p>';
   else{
-    let e={};
-    try{let t=await fetch("/result/cambodia.js?v="+getWaktuWIB().getTime()),a=t?await t.text():"",n=a.match(/['"`]([\s\S]*?)['"`]/),l=(n?n[1]:a).replace(/[\s\n\r]/g,"").split(",").filter((e=>e.length>=4));i.forEach(((t,a)=>{l.length>0&&l[l.length-1-a]&&(e[t]=l[l.length-1-a])}))}catch(e){}
     i.forEach((t=>{
       let i=a[t],l=i[0].tglFormat||t;
       n+='<div style="background: #111; border: 1px solid #444; padding: 10px; margin-bottom: 15px; border-radius: 5px;">',
@@ -278,21 +422,12 @@ async function bukaArsip(){
         n+='<div style="background: #111; border: 1px solid #444; color: #fff; padding: 8px; margin-bottom: 8px; border-radius: 3px;">',
         n+=`<strong style="color: #fff;">${e.nama}</strong> <span style="font-size: 10px; color: #aaa;">(${e.waktu})</span>`,
         n+=`<p style="margin: 5px 0 0 0; font-family: monospace; color: #ff69b4; word-break: normal; overflow-wrap: break-word; letter-spacing: 1px; line-height: 1.6;">${formattedArchiveIsi}</p>`,
-        n+="</div>"
+        n+="</div>";
       }));
-      let r=e[t]||(t===getWaktuWIB().toISOString().split("T")[0]&&lastLoadedResult4D?lastLoadedResult4D:"----"),
-          o=r[0]||"-",s=r[1]||"-",d=r[2]||"-",m=r[3]||"-";
-      n+='<div style="background: #051a05; border: 1px solid #39ff14; padding: 8px; margin-top: 10px; border-radius: 4px; text-align: center;">',
-      n+='<span style="color: #39ff14; font-size: 12px; font-weight: bold;">RESULT 4D SAHH</span>',
-      n+='<div style="display: flex; justify-content: center; gap: 6px; margin: 8px 0;">',
-      n+=`<div class="ball" style="width:28px;height:28px;font-size:14px;">${o}</div>`,
-      n+=`<div class="ball" style="width:28px;height:28px;font-size:14px;">${s}</div>`,
-      n+=`<div class="ball" style="width:28px;height:28px;font-size:14px;">${d}</div>`,
-      n+=`<div class="ball" style="width:28px;height:28px;font-size:14px;">${m}</div>`,
-      n+="</div>",n+="</div>",n+="</div>"
-    }))
+      n+="</div>";
+    }));
   }
-  document.getElementById("konten-arsip-list").innerHTML=n
+  document.getElementById("konten-arsip-list").innerHTML=n;
 }
 
 function tutupArsip(){document.getElementById("modal-arsip").style.display="none"}
@@ -309,50 +444,58 @@ function renderKlasemenBulanan(){
       if(t.isi&&l===a){
         let e=t.isi.replace(/[^0-9]/g," ").split(/\s+/).filter(Boolean);
         i[t.nama]||(i[t.nama]={nama:t.nama,point:0,totalLine:e.length,timestamp:t.timestamp||0,firstGoal:t.tglFormat||"Hari Ini"}),
-        i[t.nama].point+=10
+        i[t.nama].point+=1;
       }
     }));
     let l=Object.values(i);
     l.sort(((e,t)=>t.point!==e.point?t.point-e.point:e.totalLine!==t.totalLine?e.totalLine-t.totalLine:e.timestamp-t.timestamp));
     let r="";
-    0===l.length?r='<tr><td colspan="4" style="color: #888;">Belum ada data klasemen untuk bulan ini.</i></tr>':l.forEach(((e,t)=>{
+    0===l.length?r='<tr><td colspan="4" style="color: #888;">Belum ada data klasemen untuk bulan ini.</td></tr>':l.forEach(((e,t)=>{
       r+=`<tr>
 				<td>${t+1}</td>
 				<td style="color: #39ff14;">${e.nama}</td>
 				<td style="color: #ff3333;">${e.point} Poin</td>
 				<td>${e.firstGoal}</td>
-			</tr>`
+			</tr>`;
     }));
-    t.innerHTML=r
-  }),100)
+    t.innerHTML=r;
+  }),100);
 }
 
 async function tpKirimPublik(){
-  if(currentDeviceID||(currentDeviceID=await getAdvancedDeviceID()),cekWaktuTutupLomba())return void alert("Mohon maaf, sistem pengiriman line masih dikunci (Menunggu result diperbarui atau melewati batas waktu)");
+  if(currentDeviceID||(currentDeviceID=await getAdvancedDeviceID()),cekWaktuTutupLomba())return void alert("Mohon maaf, sistem pengiriman line masih dikunci (Melewati batas waktu)");
   let e=document.getElementById("tp-komentar-isi").value.trim(),
       t=document.getElementById("tp-komentar-nama").value.trim(),
       a=document.getElementById("tp-komentar-email").value.trim().toLowerCase();
   if(!e||!t||!a)return alert("Semua kolom (Isi, Nama, Email) wajib diisi!");
-  if(!/^[0-9\s*\-]+$/.test(e))return alert("hanya boleh berisi angka, spasi, tanda bintang (*), atau strip (-)");
+  if(!/^[0-9\s*\-]+$/.test(e))return alert("Hanya boleh berisi angka, spasi, tanda bintang (*), atau strip (-)");
   let n=e.replace(/[\*\-]/g," ").replace(/\s+/g," ").trim().split(" ");
   if(0===n.length||""===n[0])return alert("Format tebakan kosong tidak valid");
   if(n.length>15)return alert("Maksimal tebakan adalah 15 line");
-  for(let e=0;e<n.length;e++)if(2!==n[e].length)return alert(`Format salah pada angka "${n[e]}" Setiap tebakan wajib berformat 2D (dua digit, contoh: 05 12 99)`);
+  for(let i=0;i<n.length;i++)if(2!==n[i].length)return alert(`Format salah pada angka "${n[i]}" Setiap tebakan wajib berformat 2D (dua digit, contoh: 05 12 99)`);
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(a))return alert("Format email yang Anda masukkan tidak valid");
   
-  let i=globalSnapshotData,l=null,r=0,o=getWaktuWIB().getTime(),s=!1;
-  Object.keys(i).forEach((e=>{
-    let n=i[e],d=n.timestamp||0;
-    if(o-d<=1728e5){
-      let i=n.deviceId&&n.deviceId===currentDeviceID,
-          o=n.email&&n.email.trim().toLowerCase()===a,
-          d=n.nama&&n.nama.trim().toLowerCase()===t.toLowerCase();
-      !i||o||d||(s=!0),(o||d||i)&&(l=e,r=n.editCount||1)
+  let i=globalSnapshotData,l=null,r=0,todayStr=getWaktuWIB().toISOString().split("T")[0],s=!1,userTodayPostCount=0;
+  Object.keys(i).forEach((dbKey=>{
+    let item=i[dbKey];
+    if(item.rawDate===todayStr){
+      let isSameDevice=item.deviceId&&item.deviceId===currentDeviceID,
+          isSameEmail=item.email&&item.email.trim().toLowerCase()===a,
+          isSameName=item.nama&&item.nama.trim().toLowerCase()===t.toLowerCase();
+      if(!isSameDevice&&(isSameEmail||isSameName)){
+        s=!0;
+      }
+      if(isSameDevice||isSameEmail||isSameName){
+        userTodayPostCount++;
+        l=dbKey;
+        r=item.editCount||0;
+      }
     }
   }));
   
   if(s)return alert("⛔ Peringatan Keamanan! Perangkat ini terdeteksi sudah digunakan untuk mengirim dengan akun/nama lain. Dilarang menggunakan lebih dari 1 akun dalam 1 perangkat!");
-  if(l&&r>=2)return alert("⚠️ Bosku sudah mencapai batas maksimal mengganti/mengubah angka sebanyak 2 kali dalam Lomba periode kali ini!");
+  if(userTodayPostCount>=2&&!l)return alert("⚠️ Bosku sudah mencapai batas maksimal 2x komentar per hari di pasaran ini!");
+  if(l&&r>=2)return alert("⚠️ Bosku sudah mencapai batas maksimal mengganti/mengubah angka sebanyak 2 kali dalam hari ini!");
   
   let d=getWaktuWIB(),
       m=`${d.toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"})}, ${d.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"})} WIB`,
@@ -362,23 +505,27 @@ async function tpKirimPublik(){
   
   g.disabled=!0,g.innerText="Mengirim...";
   try{
-    let n,i=l?r+1:1;
-    n=l?db.ref("komentar/lomba-cambodia/"+l):db.ref("komentar/lomba-cambodia").push(),
-    await n.set({nama:t,email:a,isi:e,waktu:m,timestamp:p,rawDate:u,tglFormat:d.toLocaleDateString("id-ID",{day:"2-digit",month:"2-digit",year:"numeric"}),deviceId:currentDeviceID,editCount:i}),
-    document.getElementById("tp-komentar-isi").value="",
-    alert(l?`Postingan Lomba berhasil diperbarui ( Perubahan ke-${i} dari maksimal 2x )`:"Line berhasil dikirim!")
+      let targetRef,editCountNum=l?r+1:1;
+      targetRef=l?db.ref("komentar/" + TP_HALAMAN_ID + "/" + l):db.ref("komentar/" + TP_HALAMAN_ID).push();
+      await targetRef.set({nama:t,email:a,isi:e,waktu:m,timestamp:p,rawDate:u,tglFormat:d.toLocaleDateString("id-ID",{day:"2-digit",month:"2-digit",year:"numeric"}),deviceId:currentDeviceID,editCount:editCountNum});
+      document.getElementById("tp-komentar-isi").value="";
+      alert(l?`Postingan Lomba berhasil ditimpa / diperbarui ( Timpa ke-${editCountNum} dari maksimal 2x )`:"Line berhasil dikirim!");
   }catch(e){
-    alert("Gagal mengirim Line")
+      alert("Gagal mengirim Line");
   }finally{
-    g.disabled=!1,g.innerText="Kirim Line"
+      g.disabled=!1,g.innerText="Kirim Line";
   }
 }
 
-function cekResultPintar(){let e=getWaktuWIB(),t=60*e.getHours()+e.getMinutes();t>=720&&t<=740&&muatPaitoOtomatis()}
-
 getAdvancedDeviceID().then((e=>{currentDeviceID=e}));
-sinkronisasiWaktuWIB().then((()=>{generateDropdownBulan(),muatPaitoOtomatis(),muatDataLombaSuperKilat()}));
-setInterval(cekResultPintar,15e3);
+
+// === INISIALISASI UTAMA (DITAMBAHKAN muatResultCambodia) ===
+sinkronisasiWaktuWIB().then((()=>{
+    generateDropdownBulan();
+    muatDataLombaSuperKilat();
+    muatResultCambodia(); // <-- Menarik result 4D otomatis dari Firebase
+}));
+
 setInterval(cekWaktuTutupLomba,5e3);
 </script>
 <script>document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}</script>
