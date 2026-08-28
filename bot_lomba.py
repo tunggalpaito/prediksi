@@ -5,7 +5,7 @@ from datetime import datetime
 
 # Mengambil tanggal, bulan, dan tahun secara otomatis hari ini
 sekarang = datetime.now()
-raw_date_hari_ini = sekarang.strftime("%Y-%m-%d")       # Contoh: "2026-08-26"
+raw_date_hari_ini = sekarang.strftime("%Y-%m-%d")        # Contoh: "2026-08-26"
 tgl_format_hari_ini = sekarang.strftime("%d/%m/%Y")     # Contoh: "26/08/2026"
 
 # Konversi nama bulan ke format teks Indonesia
@@ -73,18 +73,19 @@ for nama_pasaran, info in pasaran_result.items():
             "tglFormat": tgl_format_hari_ini,
             "timestamp": int(time.time() * 1000),
             "waktu": f"{format_waktu_teks}, {jam_mulai:02d}:{menit_acak:02d} WIB",
-            "deviceId": f"device_{nama_pasaran}_{i}_{random.randint(1000,9999)}",
+            "deviceId": f"github-bot-{nama_pasaran}-{i}-{random.randint(1000,9999)}",
+            "source": "github-bot",  # <-- Penanda wajib agar lolos Rules Firebase baru
             "editCount": 1
         }
         
         try:
             response = requests.post(url_firebase, json=data_payload, timeout=5)
             if response.status_code == 200:
-                print(f"   [{i}/{jumlah_bot}] Berhasil: {nama_bot} ({jumlah_line} Line)")
+                print(f"    [{i}/{jumlah_bot}] Berhasil: {nama_bot} ({jumlah_line} Line)")
             else:
-                print(f"   [{i}/{jumlah_bot}] Gagal: {nama_bot}")
+                print(f"    [{i}/{jumlah_bot}] Gagal: {nama_bot} (Status: {response.status_code})")
         except Exception as e:
-            print(f"   [{i}/{jumlah_bot}] Error: {e}")
+            print(f"    [{i}/{jumlah_bot}] Error: {e}")
             
         # Jeda antar bot diperlebar (20 s.d 60 detik) agar aman dari deteksi invalid traffic iklan
         jeda_aman = random.uniform(20.0, 60.0)
