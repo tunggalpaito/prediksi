@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel AMOLED Premium - Kirim Result Lomba</title>
+    <title>Admin Panel</title>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -39,7 +39,7 @@
 
         .btn-kirim { background: #10b981; border: 1px solid #34d399; color: #fff; padding: 10px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
         .btn-kirim:hover { background: #059669; box-shadow: 0 0 10px rgba(16,185,129,0.5); }
-        #statusFirebase { font-size: 11px; text-align: center; color: #94a3b8; margin-top: 4px; }
+        .status-firebase { font-size: 11px; text-align: center; color: #94a3b8; margin-top: 4px; }
 
         .list-menu { display: flex; flex-direction: column; gap: 6px; }
 
@@ -72,10 +72,30 @@
         </div>
     </div>
 
-    <div class="section-title">📌 KIRIM RESULT & DATA PASARAN</div>
-
+    <div class="section-title">📡 Update Live Result</div>
     <div class="input-result-box">
-        <label for="pilihPasaran">🎯 Pilih Pasaran Lomba</label>
+        <select id="pilihPasaranLive">
+            <option value="macau" selected>Result Macau</option>
+            <option value="cambodia">Result Cambodia</option>
+            <option value="sydney">Result Sydney</option>
+            <option value="china">Result China</option>
+            <option value="japan">Result Japan</option>
+            <option value="singapore">Result Singapore</option>
+            <option value="taiwan">Result Taiwan</option>
+            <option value="hongkong">Result Hongkong</option>
+            <option value="sdylotto">Sdy Lotto</option>
+            <option value="hklotto">HK Lotto</option>
+        </select>
+        
+        <input type="text" id="inputAngkaLive" placeholder="Result 4D" autocomplete="off" maxlength="4">
+        
+        <button type="button" class="btn-kirim" onclick="kirimLiveKeFirebase()">Update Live ke Firebase</button>
+        
+        <div id="statusLive" class="status-firebase"></div>
+    </div>
+
+    <div class="section-title">📌 Result Lomba</div>
+    <div class="input-result-box">
         <select id="pilihPasaran">
             <option value="macau">Lomba Macau</option>
             <option value="cambodia" selected>Lomba Cambodia</option>
@@ -89,11 +109,11 @@
             <option value="hklotto">Lomba HK Lotto</option>
         </select>
 
-        <label for="inputAngkaResult">🔢 Masukkan Angka Result 4D</label>
-        <input type="text" id="inputAngkaResult" placeholder="Contoh: 4321" autocomplete="off" maxlength="4">
+        <input type="text" id="inputAngkaResult" placeholder="Result 4D" autocomplete="off" maxlength="4">
         
         <button type="button" class="btn-kirim" onclick="kirimKeFirebase()">Kirim ke Firebase</button>
-        <div id="statusFirebase">Masukkan Result 4D</div>
+        
+        <div id="statusFirebase" class="status-firebase"></div>
     </div>
 
     <div class="section-title">📌 EDIT REPOSITORY GITHUB (RESULT)</div>
@@ -117,7 +137,6 @@
         <a href="https://github.com/tunggalpaito/prediksi/edit/main/admin/index.html" class="btn-sub c-prediksi">Admin</a>
     </div>
     
-        <!-- KATEGORI 2: PREDIKSI -->
     <div class="section-title">📌 EDIT HALAMAN PREDIKSI</div>
     <div class="list-menu">
         <a href="https://github.com/tunggalpaito/.online/edit/main/index.html" class="btn-sub c-prediksi">HOME</a>
@@ -131,7 +150,7 @@
         <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-hongkong-hari-ini/index.html" class="btn-sub c-prediksi">HK</a>
         <a href="https://github.com/tunggalpaito/prediksi/edit/main/prediksi-togel-sydney-lotto-hari-ini/index.html" class="btn-sub c-prediksi">SDY LOTTO</a>
         <a href="https://github.com/tunggalpaito/prediksi/edit/main/prediksi-togel-hongkong-lotto-hari-ini/index.html" class="btn-sub c-prediksi">HK LOTTO</a>
-        </div>
+    </div>
 
     <div class="section-title">📌 EDIT HALAMAN LOMBA</div>
     <div class="list-menu">
@@ -183,6 +202,47 @@
   }
   const database = firebase.database();
 
+  // Fungsi Kirim Live (Menambahkan data baru di sebelah kanan / belakang string)
+  function kirimLiveKeFirebase() {
+      const pasaranLive = document.getElementById('pilihPasaranLive').value;
+      const angkaBaru = document.getElementById('inputAngkaLive').value.trim();
+      const statusLive = document.getElementById('statusLive');
+
+      if (!angkaBaru || angkaBaru.length < 4) {
+          statusLive.style.color = '#f87171';
+          statusLive.innerText = "Error: Masukkan angka 4D live yang valid!";
+          return;
+      }
+
+      statusLive.style.color = '#38bdf8';
+      statusLive.innerText = `Memperbarui ${pasaranLive.toUpperCase()}...`;
+
+      const refPasaran = database.ref('live/' + pasaranLive);
+
+      refPasaran.once('value').then((snapshot) => {
+          let dataLama = snapshot.val();
+          let dataBaruString = "";
+
+          if (dataLama && typeof dataLama === 'string' && dataLama.trim() !== "") {
+              dataBaruString = dataLama + "," + angkaBaru;
+          } else {
+              dataBaruString = angkaBaru;
+          }
+
+          return refPasaran.set(dataBaruString);
+      })
+      .then(() => {
+          statusLive.style.color = '#34d399';
+          statusLive.innerText = `Sukses! Live ${pasaranLive.toUpperCase()} (${angkaBaru})`;
+          document.getElementById('inputAngkaLive').value = '';
+      })
+      .catch((error) => {
+          statusLive.style.color = '#f87171';
+          statusLive.innerText = "Gagal: " + error.message;
+      });
+  }
+
+  // Fungsi Kirim Result Lomba
   function kirimKeFirebase() {
       const pasaranTerpilih = document.getElementById('pilihPasaran').value;
       const nilaiAngka = document.getElementById('inputAngkaResult').value.trim();
@@ -199,7 +259,6 @@
 
       const tanggalHariIni = new Date().toISOString().split("T")[0];
 
-      // Menggunakan .set() langsung ke path terstruktur agar sesuai dengan Firebase Rules ['$pasaran']
       database.ref('result/' + pasaranTerpilih).set({
           rawDate: tanggalHariIni,
           result4d: nilaiAngka,
