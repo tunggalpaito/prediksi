@@ -74,6 +74,7 @@
 
     <div class="section-title">📡 Update Live Result</div>
     <div class="input-result-box">
+      <input type="text" id="inputAngkaLive" placeholder="Result 4D" autocomplete="off" maxlength="4">
         <select id="pilihPasaranLive">
             <option value="macau" selected>Result Macau</option>
             <option value="cambodia">Result Cambodia</option>
@@ -87,51 +88,13 @@
             <option value="hklotto">HK Lotto</option>
         </select>
         
-        <input type="text" id="inputAngkaLive" placeholder="Result 4D" autocomplete="off" maxlength="4">
-        
         <button type="button" class="btn-kirim" onclick="kirimLiveKeFirebase()">Update Live ke Firebase</button>
         
         <div id="statusLive" class="status-firebase"></div>
     </div>
 
-    <div class="section-title">📌 Result Lomba</div>
-    <div class="input-result-box">
-        <select id="pilihPasaran">
-            <option value="macau">Lomba Macau</option>
-            <option value="cambodia" selected>Lomba Cambodia</option>
-            <option value="sydney">Lomba Sydney</option>
-            <option value="china">Lomba China</option>
-            <option value="japan">Lomba Japan</option>
-            <option value="singapore">Lomba Singapore</option>
-            <option value="taiwan">Lomba Taiwan</option>
-            <option value="hongkong">Lomba Hongkong</option>
-            <option value="sdylotto">Lomba SDY Lotto</option>
-            <option value="hklotto">Lomba HK Lotto</option>
-        </select>
-
-        <input type="text" id="inputAngkaResult" placeholder="Result 4D" autocomplete="off" maxlength="4">
-        
-        <button type="button" class="btn-kirim" onclick="kirimKeFirebase()">Kirim ke Firebase</button>
-        
-        <div id="statusFirebase" class="status-firebase"></div>
-    </div>
-
-    <div class="section-title">📌 EDIT REPOSITORY GITHUB (RESULT)</div>
-    <div class="list-menu">
-        <a href="https://github.com/tunggalpaito/.online/edit/main/result/macau.js" class="btn-sub c-result">Macau</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/result/cambodia.js" class="btn-sub c-result">Cambodia</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/result/sdy.js" class="btn-sub c-result">SDY</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/result/china.js" class="btn-sub c-result">China</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/result/japan.js" class="btn-sub c-result">Japan</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/result/sgp.js" class="btn-sub c-result">SGP</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/result/taiwan.js" class="btn-sub c-result">Taiwan</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/result/hk.js" class="btn-sub c-result">HK</a>
-    </div>
-
     <div class="section-title"></div>
     <div class="list-menu">
-        <a href="https://github.com/tunggalpaito/prediksi/edit/main/result/sdylotto.js" class="btn-sub c-live">SDY LOTTO</a>
-        <a href="https://github.com/tunggalpaito/prediksi/edit/main/result/hklotto.js" class="btn-sub c-live">HK LOTTO</a>
         <a href="https://www.toptal.com/developers/html-minifier/" class="btn-sub c-live">Cut HTML</a>
         <a href="https://github.com/tunggalpaito/prediksi/edit/main/live-draw-tercepat-semua-togel/index.html" class="btn-sub c-live">Edit Live Draw</a>
         <a href="https://github.com/tunggalpaito/prediksi/edit/main/admin/index.html" class="btn-sub c-prediksi">Admin</a>
