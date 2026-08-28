@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel AMOLED Premium - Kirim Result Lomba</title>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
@@ -42,13 +41,6 @@
         .btn-kirim:hover { background: #059669; box-shadow: 0 0 10px rgba(16,185,129,0.5); }
         #statusFirebase { font-size: 11px; text-align: center; color: #94a3b8; margin-top: 4px; }
 
-        /* Style Area Login Google */
-        #login-section { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; padding: 30px 15px; text-align: center; }
-        .btn-google { background: #ffffff; color: #1e293b; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition: 0.2s; text-transform: uppercase; }
-        .btn-google:hover { background: #f1f5f9; transform: translateY(-2px); }
-        
-        #panel-utama { display: none; } /* Disembunyikan otomatis jika belum login */
-
         .list-menu { display: flex; flex-direction: column; gap: 6px; }
 
         .btn-sub { display: flex; align-items: center; justify-content: center; text-decoration: none; padding: 11px; border-radius: 6px; font-size: 12px; font-weight: 700; color: #f1f5f9; text-align: center; transition: all 0.2s ease; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.08); width: 100%; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1); }
@@ -68,113 +60,110 @@
 
 <div class="admin-container">
 
+    <div class="top-tracker">
+        <div id="histats_counter" style="display:flex; justify-content:center; align-items:center; height:18px; overflow:hidden; transform:scale(.75); transform-origin:center; opacity:.95;"></div>
+    </div>
+
     <div class="header">
         <h2>PANEL ADMIN</h2>
+        <div class="main-nav">
+            <a href="https://tunggalpaito.online/" class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
+            <a href="https://tunggalpaito.online/" class="btn-utama btn-stat">TUNGGAL PAITO</a>
+        </div>
     </div>
 
-    <div id="login-section">
-        <p style="font-size: 13px; color: #94a3b8; margin-bottom: 5px;">Silakan login dengan akun Google Anda untuk membuka akses panel admin.</p>
-        <button type="button" class="btn-google" onclick="loginGoogle()">
-            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.15 21.3 7.22 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.18C.43 8.12 0 9.81 0 12s.43 3.88 1.18 5.4l4.09-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.22 0 3.15 2.7 1.18 6.6l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-            Login dengan Google
-        </button>
-        <div id="statusLogin" style="font-size: 11px; color: #cbd5e1;">Menunggu autentikasi...</div>
+    <div class="section-title">📌 KIRIM RESULT & DATA PASARAN</div>
+
+    <div class="input-result-box">
+        <label for="pilihPasaran">🎯 Pilih Pasaran Lomba</label>
+        <select id="pilihPasaran">
+            <option value="macau">Lomba Macau</option>
+            <option value="cambodia" selected>Lomba Cambodia</option>
+            <option value="sydney">Lomba Sydney</option>
+            <option value="china">Lomba China</option>
+            <option value="japan">Lomba Japan</option>
+            <option value="singapore">Lomba Singapore</option>
+            <option value="taiwan">Lomba Taiwan</option>
+            <option value="hongkong">Lomba Hongkong</option>
+            <option value="sdylotto">Lomba SDY Lotto</option>
+            <option value="hklotto">Lomba HK Lotto</option>
+        </select>
+
+        <label for="inputAngkaResult">🔢 Masukkan Angka Result 4D</label>
+        <input type="text" id="inputAngkaResult" placeholder="Contoh: 4321" autocomplete="off" maxlength="4">
+        
+        <button type="button" class="btn-kirim" onclick="kirimKeFirebase()">Kirim ke Firebase</button>
+        <div id="statusFirebase">Masukkan Result 4D</div>
     </div>
 
-    <div id="panel-utama">
-        <div class="top-tracker">
-            <div id="histats_counter" style="display:flex; justify-content:center; align-items:center; height:18px; overflow:hidden; transform:scale(.75); transform-origin:center; opacity:.95;"></div>
+    <div class="section-title">📌 EDIT REPOSITORY GITHUB (RESULT)</div>
+    <div class="list-menu">
+        <a href="https://github.com/tunggalpaito/.online/edit/main/result/macau.js" class="btn-sub c-result">Macau</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/result/cambodia.js" class="btn-sub c-result">Cambodia</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/result/sdy.js" class="btn-sub c-result">SDY</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/result/china.js" class="btn-sub c-result">China</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/result/japan.js" class="btn-sub c-result">Japan</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/result/sgp.js" class="btn-sub c-result">SGP</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/result/taiwan.js" class="btn-sub c-result">Taiwan</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/result/hk.js" class="btn-sub c-result">HK</a>
+    </div>
+
+    <div class="section-title"></div>
+    <div class="list-menu">
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/result/sdylotto.js" class="btn-sub c-live">SDY LOTTO</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/result/hklotto.js" class="btn-sub c-live">HK LOTTO</a>
+        <a href="https://www.toptal.com/developers/html-minifier/" class="btn-sub c-live">Cut HTML</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/live-draw-tercepat-semua-togel/index.html" class="btn-sub c-live">Edit Live Draw</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/admin/index.html" class="btn-sub c-prediksi">Admin</a>
+    </div>
+    
+        <!-- KATEGORI 2: PREDIKSI -->
+    <div class="section-title">📌 EDIT HALAMAN PREDIKSI</div>
+    <div class="list-menu">
+        <a href="https://github.com/tunggalpaito/.online/edit/main/index.html" class="btn-sub c-prediksi">HOME</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-macau-hari-ini/index.html" class="btn-sub c-prediksi">Macau</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-cambodia-hari-ini/index.html" class="btn-sub c-prediksi">Cambodia</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-sydney-hari-ini/index.html" class="btn-sub c-prediksi">SDY</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-china-hari-ini/index.html" class="btn-sub c-prediksi">China</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-japan-hari-ini/index.html" class="btn-sub c-prediksi">Japan</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-singapore-hari-ini/index.html" class="btn-sub c-prediksi">SGP</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-taiwan-hari-ini/index.html" class="btn-sub c-prediksi">Taiwan</a>
+        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-hongkong-hari-ini/index.html" class="btn-sub c-prediksi">HK</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/prediksi-togel-sydney-lotto-hari-ini/index.html" class="btn-sub c-prediksi">SDY LOTTO</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/prediksi-togel-hongkong-lotto-hari-ini/index.html" class="btn-sub c-prediksi">HK LOTTO</a>
         </div>
 
-        <div class="header" style="border-bottom: none; margin-bottom: 10px; padding-bottom: 0;">
-            <div class="main-nav">
-                <a href="https://tunggalpaito.online/" class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
-                <a href="https://tunggalpaito.online/" class="btn-utama btn-stat">TUNGGAL PAITO</a>
-            </div>
-        </div>
+    <div class="section-title">📌 EDIT HALAMAN LOMBA</div>
+    <div class="list-menu">
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-macau/index.html" class="btn-sub c-prediksi">Lomba Macau</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-cambodia/index.html" class="btn-sub c-prediksi">Lomba Cambodia</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-sydney/index.html" class="btn-sub c-prediksi">Lomba SDY</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-china/index.html" class="btn-sub c-prediksi">Lomba China</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-japan/index.html" class="btn-sub c-prediksi">Lomba Japan</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-singapore/index.html" class="btn-sub c-prediksi">Lomba SGP</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-taiwan/index.html" class="btn-sub c-prediksi">Lomba Taiwan</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-hongkong/index.html" class="btn-sub c-prediksi">Lomba HK</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-sdylotto/index.html" class="btn-sub c-prediksi">Lomba SDY LOTTO</a>
+        <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-hklotto/index.html" class="btn-sub c-prediksi">Lomba HK LOTTO</a>
+    </div>
 
-        <div class="section-title">📌 KIRIM RESULT & DATA PASARAN</div>
+    <div class="section-title">📌 DASHBOARD & LAINNYA</div>
+    <div class="list-menu">
+        <a href="https://github.com/tunggalpaito/.online/new/main" class="btn-sub c-top2d">+ Code</a>
+        <a href="https://github.com/tunggalpaito/.online/actions" class="btn-sub c-top2d">Robot</a>
+        <a href="https://new.clientzone.rumahweb.com/login" class="btn-sub c-top2d">Domain</a>
+        <a href="https://console.firebase.google.com/u/0/project/komentar-web-f9e2e/database/komentar-web-f9e2e-default-rtdb/data/~2F?hl=id" class="btn-sub c-top2d">Komentar Public</a>
+        <a href="https://beta.publishers.adsterra.com/payout-information" class="btn-sub c-top2d">Pembayaran</a>
+        <a href="https://search.google.com/u/0/search-console/inspect?resource_id=sc-domain:tunggalpaito.online&id=psGZNeTWNpYJ657ba21jnw" class="btn-sub c-top2d">Inspeksi URL</a>
+    </div>
 
-        <div class="input-result-box">
-            <label for="pilihPasaran">🎯 Pilih Pasaran Lomba</label>
-            <select id="pilihPasaran">
-                <option value="macau">Lomba Macau</option>
-                <option value="cambodia" selected>Lomba Cambodia</option>
-                <option value="sydney">Lomba Sydney</option>
-                <option value="china">Lomba China</option>
-                <option value="japan">Lomba Japan</option>
-                <option value="singapore">Lomba Singapore</option>
-                <option value="taiwan">Lomba Taiwan</option>
-                <option value="hongkong">Lomba Hongkong</option>
-                <option value="sdylotto">Lomba SDY Lotto</option>
-                <option value="hklotto">Lomba HK Lotto</option>
-            </select>
-
-            <label for="inputAngkaResult">🔢 Masukkan Angka Result 4D</label>
-            <input type="text" id="inputAngkaResult" placeholder="Contoh: 4321" autocomplete="off" maxlength="4">
-            
-            <button type="button" class="btn-kirim" onclick="kirimKeFirebase()">Kirim ke Firebase</button>
-            <div id="statusFirebase">Status: Terotentikasi & Siap...</div>
-        </div>
-
-        <div class="section-title">📌 EDIT REPOSITORY GITHUB (RESULT)</div>
-        <div class="list-menu">
-            <a href="https://github.com/tunggalpaito/.online/edit/main/result/macau.js" class="btn-sub c-result">Macau</a>
-            <a href="https://github.com/tunggalpaito/.online/edit/main/result/cambodia.js" class="btn-sub c-result">Cambodia</a>
-            <a href="https://github.com/tunggalpaito/.online/edit/main/result/sdy.js" class="btn-sub c-result">SDY</a>
-            <a href="https://github.com/tunggalpaito/.online/edit/main/result/china.js" class="btn-sub c-result">China</a>
-            <a href="https://github.com/tunggalpaito/.online/edit/main/result/japan.js" class="btn-sub c-result">Japan</a>
-            <a href="https://github.com/tunggalpaito/.online/edit/main/result/sgp.js" class="btn-sub c-result">SGP</a>
-            <a href="https://github.com/tunggalpaito/.online/edit/main/result/taiwan.js" class="btn-sub c-result">Taiwan</a>
-            <a href="https://github.com/tunggalpaito/.online/edit/main/result/hk.js" class="btn-sub c-result">HK</a>
-        </div>
-
-        <div class="section-title"></div>
-        <div class="list-menu">
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/result/sdylotto.js" class="btn-sub c-live">SDY LOTTO</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/result/hklotto.js" class="btn-sub c-live">HK LOTTO</a>
-            <a href="https://www.toptal.com/developers/html-minifier/" class="btn-sub c-live">Cut HTML</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/live-draw-tercepat-semua-togel/index.html" class="btn-sub c-live">Edit Live Draw</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/admin/index.html" class="btn-sub c-prediksi">Admin</a>
-        </div>
-
-        <div class="section-title">📌 EDIT HALAMAN PREDIKSI & LOMBA</div>
-        <div class="list-menu">
-            <a href="https://github.com/tunggalpaito/.online/edit/main/index.html" class="btn-sub c-prediksi">HOME</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-macau/index.html" class="btn-sub c-prediksi">Lomba Macau</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-cambodia/index.html" class="btn-sub c-prediksi">Lomba Cambodia</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-sydney/index.html" class="btn-sub c-prediksi">Lomba SDY</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-china/index.html" class="btn-sub c-prediksi">Lomba China</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-japan/index.html" class="btn-sub c-prediksi">Lomba Japan</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-singapore/index.html" class="btn-sub c-prediksi">Lomba SGP</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-taiwan/index.html" class="btn-sub c-prediksi">Lomba Taiwan</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-hongkong/index.html" class="btn-sub c-prediksi">Lomba HK</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-sdylotto/index.html" class="btn-sub c-prediksi">Lomba SDY LOTTO</a>
-            <a href="https://github.com/tunggalpaito/prediksi/edit/main/lomba-hklotto/index.html" class="btn-sub c-prediksi">Lomba HK LOTTO</a>
-        </div>
-
-        <div class="section-title">📌 DASHBOARD & LAINNYA</div>
-        <div class="list-menu">
-            <a href="https://github.com/tunggalpaito/.online/new/main" class="btn-sub c-top2d">+ Code</a>
-            <a href="https://github.com/tunggalpaito/.online/actions" class="btn-sub c-top2d">Robot</a>
-            <a href="https://new.clientzone.rumahweb.com/login" class="btn-sub c-top2d">Domain</a>
-            <a href="https://console.firebase.google.com/u/0/project/komentar-web-f9e2e/database/komentar-web-f9e2e-default-rtdb/data/~2F?hl=id" class="btn-sub c-top2d">Komentar Public</a>
-            <a href="https://beta.publishers.adsterra.com/payout-information" class="btn-sub c-top2d">Pembayaran</a>
-            <a href="https://search.google.com/u/0/search-console/inspect?resource_id=sc-domain:tunggalpaito.online&id=psGZNeTWNpYJ657ba21jnw" class="btn-sub c-top2d">Inspeksi URL</a>
-        </div>
-
-        <div class="section-title">📌 PING WEB</div>
-        <div class="list-menu">
-            <a href="https://pingomatic.com" target="_blank" class="btn-sub c-ping">🌐 Ping-O-Matic</a>
-            <a href="https://pingler.com" target="_blank" class="btn-sub c-ping">🌐 Pingler</a>
-            <a href="http://totalping.com" target="_blank" class="btn-sub c-ping">🌐 TotalPing</a>
-            <a href="http://brainbliss.com" target="_blank" class="btn-sub c-ping">🌐 Feed Shark</a>
-            <a href="https://smallseotools.com" target="_blank" class="btn-sub c-ping">🌐 SmallSEOTools Ping</a>
-        </div>
-
-        <div style="margin-top: 25px; text-align: center;">
-            <button type="button" onclick="logoutAdmin()" style="background: #dc2626; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px;">🚪 Keluar (Logout)</button>
-        </div>
+    <div class="section-title">📌 PING WEB</div>
+    <div class="list-menu">
+        <a href="https://pingomatic.com" target="_blank" class="btn-sub c-ping">🌐 Ping-O-Matic</a>
+        <a href="https://pingler.com" target="_blank" class="btn-sub c-ping">🌐 Pingler</a>
+        <a href="http://totalping.com" target="_blank" class="btn-sub c-ping">🌐 TotalPing</a>
+        <a href="http://brainbliss.com" target="_blank" class="btn-sub c-ping">🌐 Feed Shark</a>
+        <a href="https://smallseotools.com" target="_blank" class="btn-sub c-ping">🌐 SmallSEOTools Ping</a>
     </div>
 </div>
 
@@ -192,43 +181,7 @@
   } else {
       firebase.app();
   }
-
-  const auth = firebase.auth();
   const database = firebase.database();
-
-  // Cek Status Login Otomatis & Proses Hasil Redirect
-  auth.getRedirectResult().catch((error) => {
-      document.getElementById('statusLogin').style.color = '#f87171';
-      document.getElementById('statusLogin').innerText = "Gagal Login: " + error.message;
-  });
-
-  auth.onAuthStateChanged((user) => {
-      if (user) {
-          document.getElementById('login-section').style.display = 'none';
-          document.getElementById('panel-utama').style.display = 'block';
-      } else {
-          document.getElementById('login-section').style.display = 'flex';
-          document.getElementById('panel-utama').style.display = 'none';
-      }
-  });
-
-  // Fungsi Login dengan Redirect (Aman untuk HP / Tanpa Pop-up Blocker)
-  function loginGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const statusLogin = document.getElementById('statusLogin');
-      
-      statusLogin.style.color = '#38bdf8';
-      statusLogin.innerText = "Mengarahkan ke halaman Google...";
-
-      auth.signInWithRedirect(provider);
-  }
-
-  // Fungsi Logout
-  function logoutAdmin() {
-      auth.signOut().then(() => {
-          document.getElementById('statusLogin').innerText = "Menunggu autentikasi...";
-      });
-  }
 
   function kirimKeFirebase() {
       const pasaranTerpilih = document.getElementById('pilihPasaran').value;
@@ -246,6 +199,7 @@
 
       const tanggalHariIni = new Date().toISOString().split("T")[0];
 
+      // Menggunakan .set() langsung ke path terstruktur agar sesuai dengan Firebase Rules ['$pasaran']
       database.ref('result/' + pasaranTerpilih).set({
           rawDate: tanggalHariIni,
           result4d: nilaiAngka,
@@ -295,4 +249,4 @@ hs.src='//s10.histats.com/js15_as.js';
   }
 </script>
 </body>
-    </html>
+</html>
