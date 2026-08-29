@@ -13,18 +13,17 @@ if not firebase_admin._apps:
         'databaseURL': database_url
     })
 
-# Daftar seluruh pasaran beserta ID halaman dan estimasi jam result (WIB) untuk pengecekan
-# Format jam: (Jam, Menit) waktu Indonesia Barat
+# Daftar seluruh pasaran (Cambodia, Sydney, China, Japan, Singapore, Taiwan, Hongkong)
 PASARAN_LIST = [
-    {"id": "lomba-cambodia", "db_key": "cambodia", "jam_result": (11, 35)},
-    {"id": "lomba-sydney-pools", "db_key": "sydneypools", "jam_result": (13, 50)},
-    {"id": "lomba-sydney-lotto", "db_key": "sydneylotto", "jam_result": (14, 15)},
-    {"id": "lomba-china", "db_key": "china", "jam_result": (15, 30)},
-    {"id": "lomba-japan", "db_key": "japan", "jam_result": (17, 20)},
-    {"id": "lomba-singapore", "db_key": "singapore", "jam_result": (17, 45)},
-    {"id": "lomba-taiwan", "db_key": "taiwan", "jam_result": (20, 50)},
-    {"id": "lomba-hongkong-pools", "db_key": "hongkongpools", "jam_result": (23, 00)},
-    {"id": "lomba-hongkong-lotto", "db_key": "hongkonglotto", "jam_result": (23, 30)}
+    {"id": "lomba-cambodia", "db_key": "cambodia"},
+    {"id": "lomba-sydney-pools", "db_key": "sydneypools"},
+    {"id": "lomba-sydney-lotto", "db_key": "sydneylotto"},
+    {"id": "lomba-china", "db_key": "china"},
+    {"id": "lomba-japan", "db_key": "japan"},
+    {"id": "lomba-singapore", "db_key": "singapore"},
+    {"id": "lomba-taiwan", "db_key": "taiwan"},
+    {"id": "lomba-hongkong-pools", "db_key": "hongkongpools"},
+    {"id": "lomba-hongkong-lotto", "db_key": "hongkonglotto"}
 ]
 
 def proses_rekap_pasaran(pasaran, tanggal_hari_ini):
@@ -33,7 +32,7 @@ def proses_rekap_pasaran(pasaran, tanggal_hari_ini):
     
     print(f"\n--- Memeriksa Pasaran: {halaman_id.upper()} ---")
 
-    # 1. Ambil data result resmi pasaran dari Firebase (live/{db_key})
+    # 1. Ambil data result resmi dari Firebase (live/{db_key})
     ref_live = db.reference(f"live/{db_key}/{tanggal_hari_ini}")
     result_str = ref_live.get()
     
@@ -47,10 +46,10 @@ def proses_rekap_pasaran(pasaran, tanggal_hari_ini):
                 print(f"[{halaman_id}] Result 4D Sah: {last_4d} -> 2D Acuan: {match_2d}")
 
     if not match_2d:
-        print(f"[{halaman_id}] Result resmi belum tersedia atau belum lengkap untuk tanggal {tanggal_hari_ini}.")
+        print(f"[{halaman_id}] Result resmi belum tersedia untuk tanggal {tanggal_hari_ini}.")
         return
 
-    # 2. Ambil data komentar peserta lomba di pasaran tersebut
+    # 2. Ambil data komentar peserta lomba
     ref_komentar = db.reference(f"komentar/{halaman_id}")
     data_komentar = ref_komentar.get()
 
@@ -69,10 +68,9 @@ def proses_rekap_pasaran(pasaran, tanggal_hari_ini):
             # Cek apakah angka peserta cocok dengan 2D result
             if match_2d in deret_angka:
                 current_streak = item.get("streakCount", 1)
-                # Tandai JP dan tingkatkan streak
                 updates[f"{key}/isGoal"] = True
-                updates[f"{key}/streakCount"] = current_streak + 1
-                print(f"[{halaman_id}] User {item.get('nama')} JP! Streak bertambah.")
+                updates[f"{key}/streakCount"] = current_streak + 1  # Dikoreksi agar streak bertambah dengan benar
+                print(f"[{halaman_id}] User {item.get('nama')} JP! Streak menjadi {current_streak + 1}.")
 
     # Terapkan pembaruan ke Firebase
     if updates:
