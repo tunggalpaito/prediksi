@@ -243,25 +243,143 @@ function tutupLoaderAmoled() {
     if (loader) {
         setTimeout(() => {
             loader.style.opacity = "0";
-            setTimeout(() => loader.remove(), 400); // Waktu transisi fade-out
-        }, 1000); // Angka 1000 berarti tunda 1 detik (dalam milidetik)
+            setTimeout(() => loader.remove(), 400);
+        }, 1000);
     }
 }
 
-function hitungPrediksiKuatTengahLemah(t){let e=String(t).trim();e.length<4?e=e.padStart(4,"0"):e.length>4&&(e=e.slice(-4));let[a,n,l,r]=e.split("").map(Number);const i=[0,9,8,7,6,5,4,3,2,1],o=[5,6,7,8,9,0,1,2,3,4];let s=[],c=(t,e,a=new Set)=>{let n,l,r,c=0;do{for(n=(41*t+43*c+47*e)%10;a.has(n);)n=(n+3)%10;for(l=(7*n+(c%2==0?i:o)[(3*n+e)%10]+5*c)%10;a.has(l)||l===n;)l=(l+7)%10;if(r=[n,l].sort(((t,e)=>t-e)).join(""),c++,c>50)break}while(s.includes(r));return s.push(r),`${n}${l}`},d=(23*a+19*r+13*n+7*l+11)%10,g=(23*n+17*l+11*a+5*r+13)%10,u=(7*Math.abs(a*r-n*l)+17)%10,m=(29*r+19*l+13*a+7*n+19)%10,p=(Math.floor(Math.pow(a+n+l+r,1.3))+3*[7,6,9,8,2,3,1,0,5,4][a])%10,b=c(d,1,new Set),h=new Set(b.split("").map(Number)),f=c(g,2,new Set),k=c(u,3,new Set),y=c(m,4,h),v=c(p,5,new Set),E=0;for(;x(b,y)&&E<40;)m=(m+23*E+37)%10,y=c(m,50+E,h),E++;function x(t,e){let a=new Set(t.split(""));return e.split("").some((t=>a.has(t)))}return{angkaMain1:b,angkaMain2:f,angkaMain3:k,angkaMain4:y,angkaMain5:v}}async function ambilDataFirebase(){try{const t=(await firebase.database().ref("live/china").once("value")).val()||"";let e="",a="";if("object"==typeof t&&null!==t){let n=Object.keys(t);n.length>0&&(a=n[n.length-1],e=t[a],"object"==typeof e&&(e=e.result||e.angka||Object.values(e)[0]))}else e=String(t);if(""!==String(e).trim()){let t=String(e).split(",").map((t=>t.replace(/\s+/g,"").trim())).filter((t=>""!==t&&t.length>=4));if(trackPrediksiList&&t.length>0&&(trackPrediksiList.innerHTML="",t.slice(-8).forEach(((t,e)=>{let a=String(t).trim();a.length<4?a=a.padStart(4,"0"):a.length>4&&(a=a.slice(-4));let n=hitungPrediksiKuatTengahLemah(a);const l=document.createElement("div");l.className="track-item",l.innerHTML=0===e||4===e?`<div class="track-result">RESULT <a href="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec" target="_blank">${a}</a> : ${n.angkaMain1} vs ${n.angkaMain4}</div>`:`<div class="track-result">RESULT ${a} : ${n.angkaMain1} vs ${n.angkaMain4}</div>`,trackPrediksiList.appendChild(l)}))),paitoTbody){if(paitoTbody.innerHTML="",t.length>0){const e=document.getElementById("box-as"),n=document.getElementById("box-kop"),l=document.getElementById("box-kepala"),r=document.getElementById("box-ekor"),i=document.getElementById("waktu-terbaru-box");let o=t[t.length-1];(!o||o.length<4)&&(o="0000"),o.length>4&&(o=o.slice(-4));let[s,c,d,g]=o.split("");
-if(a && a.length > 3) {
-    let parts = a.split("-");
-    let formattedDateString = parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : a;
-    let targetDate = new Date(formattedDateString);
-    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    let namaHariTanggal = targetDate.toLocaleDateString("id-ID", options);
-    i.innerText = "Result " + namaHariTanggal;
-} else {
-    const t = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-    i.innerText = "" + (new Date).toLocaleDateString("id-ID", t);
-}const u=[e,n,l,r],m=[s,c,d,g];!function(){u.forEach((t=>{t.classList.remove("active"),t.innerText="-"}));let t=0;const e=setInterval((()=>{t>0&&u[t-1].classList.remove("active"),t<4?(u[t].innerText=m[t],u[t].classList.add("active"),t++):(clearInterval(e),u.forEach((t=>t.classList.add("active"))))}),3e3)}()}let e=0;for(;e<t.length||0===e;){let a=t.slice(e,e+7),n=a.length,l="7",r="";for(n<7?(l=String(n),r='class="mgg-row minggu-berjalan"'):r='class="mgg-row"';a.length<7;)a.push("KOSONG");let i="<tr>";i+=`<td ${r}>${l}</td>`,a.forEach((t=>{let e=String(t).trim();"-"===e||""===e||"KOSONG"===e?e="xxxx":e.length<4?e=e.padStart(4,"0"):e.length>4&&(e=e.slice(-4));let a="",n=0;for(let t of e)a+=`<span data-pos="${n}" ${"x"===t?'style="color:var(--text-muted); opacity:0.4;"':""}>${t}</span>`,n++;i+=`<td class="paito-cell">${a}</td>`})),i+="</tr>",paitoTbody.innerHTML+=i,e+=7}}}}catch(t){console.error("Gagal mengambil data:",t)}finally{
-    tutupLoaderAmoled();
-}}ambilDataFirebase();
+function hitungPrediksiKuatTengahLemah(t){let e=String(t).trim();e.length<4?e=e.padStart(4,"0"):e.length>4&&(e=e.slice(-4));let[a,n,l,r]=e.split("").map(Number);const i=[0,9,8,7,6,5,4,3,2,1],o=[5,6,7,8,9,0,1,2,3,4];let s=[],c=(t,e,a=new Set)=>{let n,l,r,c=0;do{for(n=(41*t+43*c+47*e)%10;a.has(n);)n=(n+3)%10;for(l=(7*n+(c%2==0?i:o)[(3*n+e)%10]+5*c)%10;a.has(l)||l===n;)l=(l+7)%10;if(r=[n,l].sort(((t,e)=>t-e)).join(""),c++,c>50)break}while(s.includes(r));return s.push(r),`${n}${l}`},d=(23*a+19*r+13*n+7*l+11)%10,g=(23*n+17*l+11*a+5*r+13)%10,u=(7*Math.abs(a*r-n*l)+17)%10,m=(29*r+19*l+13*a+7*n+19)%10,p=(Math.floor(Math.pow(a+n+l+r,1.3))+3*[7,6,9,8,2,3,1,0,5,4][a])%10,b=c(d,1,new Set),h=new Set(b.split("").map(Number)),f=c(g,2,new Set),k=c(u,3,new Set),y=c(m,4,h),v=c(p,5,new Set),E=0;for(;x(b,y)&&E<40;)m=(m+23*E+37)%10,y=c(m,50+E,h),E++;function x(t,e){let a=new Set(t.split(""));return e.split("").some((t=>a.has(t)))}return{angkaMain1:b,angkaMain2:f,angkaMain3:k,angkaMain4:y,angkaMain5:v}}
+
+async function ambilDataFirebase(){
+    try{
+        const snapshot = await firebase.database().ref("live/china").once("value");
+        const rawData = snapshot.val() || {};
+        
+        let allResults = [];
+        let latestKey = "";
+
+        if(typeof rawData === "object" && rawData !== null){
+            let keys = Object.keys(rawData);
+            if(keys.length > 0){
+                keys.sort();
+                latestKey = keys[keys.length - 1];
+                
+                keys.forEach(k => {
+                    let val = rawData[k];
+                    if(typeof val === "object" && val !== null){
+                        val = val.result || val.angka || Object.values(val)[0];
+                    }
+                    if(val){
+                        let stringVal = String(val).trim();
+                        let splitItems = stringVal.split(",");
+                        
+                        splitItems.forEach(item => {
+                            let cleanVal = item.replace(/\s+/g,"").trim();
+                            if(cleanVal.length >= 4){
+                                allResults.push(cleanVal.slice(-4));
+                            }
+                        });
+                    }
+                });
+            }
+        } else {
+            let cleanStr = String(rawData).replace(/\s+/g,"").trim();
+            if(cleanStr){
+                allResults = cleanStr.split(",").map(x => x.trim()).filter(x => x.length >= 4);
+            }
+        }
+
+        if(trackPrediksiList && allResults.length > 0){
+            trackPrediksiList.innerHTML="";
+            allResults.slice(-8).forEach(((t,e)=>{
+                let a=String(t).trim();
+                let n=hitungPrediksiKuatTengahLemah(a);
+                const l=document.createElement("div");
+                l.className="track-item";
+                l.innerHTML=0===e||4===e?`<div class="track-result">RESULT <a href="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec" target="_blank">${a}</a> : ${n.angkaMain1} vs ${n.angkaMain4}</div>`:`<div class="track-result">RESULT ${a} : ${n.angkaMain1} vs ${n.angkaMain4}</div>`;
+                trackPrediksiList.appendChild(l);
+            }));
+        }
+
+        if(paitoTbody){
+            paitoTbody.innerHTML="";
+            if(allResults.length > 0){
+                const e=document.getElementById("box-as"),n=document.getElementById("box-kop"),l=document.getElementById("box-kepala"),r=document.getElementById("box-ekor"),i=document.getElementById("waktu-terbaru-box");
+                let o=allResults[allResults.length-1];
+                let[s,c,d,g]=o.split("");
+
+                if(latestKey && latestKey.length > 3) {
+                    let parts = latestKey.split("-");
+                    let formattedDateString = parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : latestKey;
+                    let targetDate = new Date(formattedDateString);
+                    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    i.innerText = "Result " + targetDate.toLocaleDateString("id-ID", options);
+                } else {
+                    const t = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+                    i.innerText = "" + (new Date).toLocaleDateString("id-ID", t);
+                }
+
+                const u=[e,n,l,r],m=[s,c,d,g];
+                (function(){
+                    u.forEach((t=>{t.classList.remove("active"),t.innerText="-"}));
+                    let t=0;
+                    const e=setInterval((()=>{
+                        t>0&&u[t-1].classList.remove("active"),
+                        t<4?(u[t].innerText=m[t],u[t].classList.add("active"),t++):(clearInterval(e),u.forEach((t=>t.classList.add("active"))))
+                    }),3e3);
+                })();
+
+                let indexData = 0;
+                while(indexData < allResults.length || indexData === 0){
+                    let chunk = allResults.slice(indexData, indexData + 7);
+                    let len = chunk.length;
+                    let mingguLabel = "7";
+                    let rowClass = "";
+                    
+                    if(len < 7 && allResults.length > 0){
+                        mingguLabel = String(len);
+                        rowClass = 'class="mgg-row minggu-berjalan"';
+                    } else {
+                        rowClass = 'class="mgg-row"';
+                    }
+
+                    if(chunk.length === 0 && allResults.length === 0) break;
+
+                    while(chunk.length < 7) chunk.push("KOSONG");
+                    
+                    let rowHTML = "<tr>";
+                    rowHTML += `<td ${rowClass}>${mingguLabel}</td>`;
+                    
+                    chunk.forEach(val=>{
+                        let cleanVal = String(val).trim();
+                        if("-"===cleanVal||""===cleanVal||"KOSONG"===cleanVal){
+                            cleanVal="xxxx";
+                        } else {
+                            cleanVal=cleanVal.length<4?cleanVal.padStart(4,"0"):cleanVal.length>4?cleanVal.slice(-4):cleanVal;
+                        }
+                        let spanHTML="", pos=0;
+                        for(let digit of cleanVal){
+                            spanHTML+=`<span data-pos="${pos}" ${"x"===digit?'style="color:var(--text-muted); opacity:0.4;"':""}>${digit}</span>`;
+                            pos++;
+                        }
+                        rowHTML+=`<td class="paito-cell">${spanHTML}</td>`;
+                    });
+                    
+                    rowHTML+="</tr>";
+                    paitoTbody.innerHTML+=rowHTML;
+                    
+                    indexData += 7;
+                    if(indexData >= allResults.length) break;
+                }
+            }
+        }
+    }catch(t){
+        console.error("Gagal mengambil data:",t);
+    }finally{
+        tutupLoaderAmoled();
+    }
+}
+ambilDataFirebase();
 
 const tombolWarna=document.querySelectorAll(".color-palette .color-btn");tombolWarna.forEach((t=>{t.addEventListener("click",(function(){tombolWarna.forEach((t=>t.classList.remove("active"))),this.classList.add("active"),warnaKuasAktif=this.getAttribute("data-color")}))})),paitoTbody.addEventListener("click",(function(t){t.target&&"SPAN"===t.target.tagName&&("transparent"===warnaKuasAktif?(t.target.style.backgroundColor="transparent",t.target.style.color="x"===t.target.innerText?"var(--text-muted)":"var(--text-main)"):(t.target.style.backgroundColor=warnaKuasAktif,t.target.style.color="#000000"))})),document.getElementById("btn-cari-pola").addEventListener("click",(function(){const t=document.getElementById("input-as").value.trim(),e=document.getElementById("input-kop").value.trim(),a=document.getElementById("input-kepala").value.trim(),n=document.getElementById("input-ekor").value.trim(),l=paitoTbody.querySelectorAll(".paito-cell span");""!==t||""!==e||""!==a||""!==n?l.forEach((l=>{if("x"===l.innerText)return;const r=l.getAttribute("data-pos");""!==t&&"0"===r&&l.innerText===t&&(l.style.backgroundColor="#4cc9f0",l.style.color="#000000",l.style.fontWeight="bold"),""!==e&&"1"===r&&l.innerText===e&&(l.style.backgroundColor="#ffb703",l.style.color="#000000",l.style.fontWeight="bold"),""!==a&&"2"===r&&l.innerText===a&&(l.style.backgroundColor="#e63946",l.style.color="#000000",l.style.fontWeight="bold"),""!==n&&"3"===r&&l.innerText===n&&(l.style.backgroundColor="#2a9d8f",l.style.color="#000000",l.style.fontWeight="bold")})):alert("Masukkan minimal salah satu angka As, Kop, Kepala, atau Ekor terlebih dahulu!")})),document.getElementById("btn-bersih-pola")&&document.getElementById("btn-bersih-pola").addEventListener("click",(function(){document.getElementById("input-as").value="",document.getElementById("input-kop").value="",document.getElementById("input-kepala").value="",document.getElementById("input-ekor").value="",paitoTbody.querySelectorAll(".paito-cell span").forEach((t=>{t.style.backgroundColor="transparent",t.style.color="x"===t.innerText?"var(--text-muted)":"var(--text-main)",t.style.fontWeight="normal"}))}))
 </script>
