@@ -165,7 +165,7 @@
   }
   const database = firebase.database();
 
-// Fungsi Kirim Live yang Diperbarui dengan Menyertakan Tanggal Akurat
+  // Fungsi Kirim Live dengan .update() agar tanggal lama tidak hilang
   function kirimLiveKeFirebase() {
       const pasaranLive = document.getElementById('pilihPasaranLive').value;
       const angkaBaru = document.getElementById('inputAngkaLive').value.trim();
@@ -180,46 +180,32 @@
       statusLive.style.color = '#38bdf8';
       statusLive.innerText = `Memperbarui ${pasaranLive.toUpperCase()}...`;
 
-      // Mengambil tanggal hari ini (Format: DD-MM-YYYY atau YYYY-MM-DD)
+      // Mengambil tanggal hari ini (Format: DD-MM-YYYY)
       const tanggalHariIni = new Date().toLocaleDateString('id-ID', {
           day: '2-digit',
           month: '2-digit',
           year: 'numeric'
-      }).replace(/\//g, '-'); // Menghasilkan misal: "29-08-2026"
+      }).replace(/\//g, '-');
 
       const refPasaran = database.ref('live/' + pasaranLive);
 
       refPasaran.once('value').then((snapshot) => {
           let dataLama = snapshot.val();
-          let dataBaruString = "";
+          let dataBaruString = angkaBaru;
 
-          // Cek apakah data lama berbentuk objek (sudah berformat baru dengan tanggal) atau string lama
           if (dataLama && typeof dataLama === 'object') {
-              // Jika di dalam objek sudah ada tanggal hari ini, update string angkanya
               let stringAngkaLama = dataLama[tanggalHariIni] || "";
               if (stringAngkaLama !== "") {
                   dataBaruString = stringAngkaLama + "," + angkaBaru;
-              } else {
-                  dataBaruString = angkaBaru;
               }
-              
-              // Simpan kembali dalam bentuk objek berkey tanggal hari ini
-              return refPasaran.set({
-                  [tanggalHariIni]: dataBaruString
-              });
-          } else {
-              // Jika data sebelumnya masih berupa string murni, kita ubah langsung formatnya
-              if (typeof dataLama === 'string' && dataLama.trim() !== "") {
-                  dataBaruString = dataLama + "," + angkaBaru;
-              } else {
-                  dataBaruString = angkaBaru;
-              }
-
-              // Timpa dengan struktur objek agar memiliki key tanggal akurat
-              return refPasaran.set({
-                  [tanggalHariIni]: dataBaruString
-              });
+          } else if (typeof dataLama === 'string' && dataLama.trim() !== "") {
+              dataBaruString = dataLama + "," + angkaBaru;
           }
+
+          // Menggunakan .update() agar tanggal-tanggal sebelumnya aman / tidak terhapus
+          return refPasaran.update({
+              [tanggalHariIni]: dataBaruString
+          });
       })
       .then(() => {
           statusLive.style.color = '#34d399';
