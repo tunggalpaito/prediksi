@@ -1,0 +1,55 @@
+name: Rekap Lomba Otomatis (Hemat Kuota)
+
+on:
+  schedule:
+    # Jadwal disesuaikan pasca jam result masing-masing pasaran (WIB dikonversi ke UTC / -7 jam)
+    # 1. Cambodia (Result ~11:35 WIB -> Eksekusi jam 11:45 WIB / 04:45 UTC)
+    - cron: '45 4 * * *'
+    
+    # 2. Sydney Pools (Result ~13:50 WIB -> Eksekusi jam 14:00 WIB / 07:00 UTC)
+    - cron: '0 7 * * *'
+    
+    # 3. Sydney Lotto (Result ~14:15 WIB -> Eksekusi jam 14:25 WIB / 07:25 UTC)
+    - cron: '25 7 * * *'
+    
+    # 4. China (Result ~15:30 WIB -> Eksekusi jam 15:40 WIB / 08:40 UTC)
+    - cron: '40 8 * * *'
+    
+    # 5. Japan (Result ~17:20 WIB -> Eksekusi jam 17:30 WIB / 10:30 UTC)
+    - cron: '30 10 * * *'
+    
+    # 6. Singapore (Result ~17:45 WIB -> Eksekusi jam 17:55 WIB / 10:55 UTC)
+    - cron: '55 10 * * *'
+    
+    # 7. Taiwan (Result ~20:50 WIB -> Eksekusi jam 21:00 WIB / 14:00 UTC)
+    - cron: '0 14 * * *'
+    
+    # 8. Hongkong Pools (Result ~23:00 WIB -> Eksekusi jam 23:10 WIB / 16:10 UTC)
+    - cron: '10 16 * * *'
+    
+    # 9. Hongkong Lotto (Result ~23:30 WIB -> Eksekusi jam 23:40 WIB / 16:40 UTC)
+    - cron: '40 16 * * *'
+
+  workflow_dispatch: # Tombol manual jika ingin tes kapan saja
+
+jobs:
+  run-rekap-pasaran:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install firebase-admin requests pytz
+
+      - name: Jalankan Script Rekap
+        env:
+          FIREBASE_PROJECT_ID: "komentar-web-f9e2e"
+        run: |
+          python rekap.py
