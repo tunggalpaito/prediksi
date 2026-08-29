@@ -2,8 +2,8 @@ name: Bot Lomba Berbasis Jam Result
 
 on:
   schedule:
-    # Server menyala setiap hari jam 03:00 UTC (10:00 pagi WIB) untuk memproses semua pasaran hari itu
-    - cron: '0 3 * * *'
+    # Contoh: Bot menyala setiap 4 jam sekali untuk mencakup pasaran yang berbeda sepanjang hari
+    - cron: '0 */4 * * *'
   
   workflow_dispatch:
 
