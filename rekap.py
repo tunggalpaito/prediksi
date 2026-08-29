@@ -5,40 +5,36 @@ import pytz
 import firebase_admin
 from firebase_admin import credentials, db
 
-# 1. Inisialisasi Koneksi ke Firebase menggunakan Environment Variables atau konfigurasi langsung
-# (Disarankan menggunakan Firebase Service Account JSON yang disimpan di GitHub Secrets)
-cred_dict = {
-    "type": "service_account",
-    "project_id": os.environ.get("FIREBASE_PROJECT_ID", "komentar-web-f9e2e"),
-    "private_key_id": os.environ.get("FIREBASE_PRIVATE_KEY_ID", ""),
-    "private_key": os.environ.get("FIREBASE_PRIVATE_KEY", "").replace('\\n', '\n'),
-    "client_email": os.environ.get("FIREBASE_CLIENT_EMAIL", ""),
-    "client_id": os.environ.get("FIREBASE_CLIENT_ID", ""),
-    "auth_uri": "https://accounts.google.com/oauth/v2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": os.environ.get("FIREBASE_CERT_URL", "")
-}
-
-# Jika dijalankan tanpa service account JSON lengkap, bisa menggunakan Database URL langsung
+# Konfigurasi Database Firebase
 database_url = "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
 
 if not firebase_admin._apps:
-    # Alternatif inisialisasi dengan Database URL saja (menggunakan aturan auth public/secret token jika diizinkan)
     firebase_admin.initialize_app(options={
         'databaseURL': database_url
     })
 
-def jalankan_rekap_otomatis():
-    # Set waktu zona WIB (Jakarta)
-    tz_wib = pytz.timezone('Asia/Jakarta')
-    waktu_sekarang = datetime.now(tz_wib)
-    tanggal_hari_ini = waktu_sekarang.strftime('%Y-%m-%d')
-    
-    print(f"Memulai proses rekap otomatis untuk tanggal: {tanggal_hari_ini} (WIB)")
+# Daftar seluruh pasaran beserta ID halaman dan estimasi jam result (WIB) untuk pengecekan
+# Format jam: (Jam, Menit) waktu Indonesia Barat
+PASARAN_LIST = [
+    {"id": "lomba-cambodia", "db_key": "cambodia", "jam_result": (11, 35)},
+    {"id": "lomba-sydney-pools", "db_key": "sydneypools", "jam_result": (13, 50)},
+    {"id": "lomba-sydney-lotto", "db_key": "sydneylotto", "jam_result": (14, 15)},
+    {"id": "lomba-china", "db_key": "china", "jam_result": (15, 30)},
+    {"id": "lomba-japan", "db_key": "japan", "jam_result": (17, 20)},
+    {"id": "lomba-singapore", "db_key": "singapore", "jam_result": (17, 45)},
+    {"id": "lomba-taiwan", "db_key": "taiwan", "jam_result": (20, 50)},
+    {"id": "lomba-hongkong-pools", "db_key": "hongkongpools", "jam_result": (23, 00)},
+    {"id": "lomba-hongkong-lotto", "db_key": "hongkonglotto", "jam_result": (23, 30)}
+]
 
-    # 1. Ambil data result resmi Cambodia hari ini (contoh endpoint atau dari node live/cambodia)
-    ref_live = db.reference(f"live/cambodia/{tanggal_hari_ini}")
+def proses_rekap_pasaran(pasaran, tanggal_hari_ini):
+    halaman_id = pasaran["id"]
+    db_key = pasaran["db_key"]
+    
+    print(f"\n--- Memeriksa Pasaran: {halaman_id.upper()} ---")
+
+    # 1. Ambil data result resmi pasaran dari Firebase (live/{db_key})
+    ref_live = db.reference(f"live/{db_key}/{tanggal_hari_ini}")
     result_str = ref_live.get()
     
     match_2d = None
@@ -48,40 +44,55 @@ def jalankan_rekap_otomatis():
             last_4d = parts[-1]
             if len(last_4d) >= 4:
                 match_2d = last_4d[-2:]
-                print(f"Result 4D Sah: {last_4d} -> 2D Acuan: {match_2d}")
+                print(f"[{halaman_id}] Result 4D Sah: {last_4d} -> 2D Acuan: {match_2d}")
 
-    # 2. Ambil data komentar/peserta lomba
-    halaman_id = "lomba-cambodia"
+    if not match_2d:
+        print(f"[{halaman_id}] Result resmi belum tersedia atau belum lengkap untuk tanggal {tanggal_hari_ini}.")
+        return
+
+    # 2. Ambil data komentar peserta lomba di pasaran tersebut
     ref_komentar = db.reference(f"komentar/{halaman_id}")
     data_komentar = ref_komentar.get()
 
     if not data_komentar:
-        print("Tidak ada data peserta lomba ditemukan.")
+        print(f"[{halaman_id}] Tidak ada data peserta lomba.")
         return
 
     updates = {}
     for key, item in data_komentar.items():
         raw_date = item.get("rawDate", "")
         
-        # Validasi jika postingan adalah hari ini dan ada result 2D
-        if raw_date == tanggal_hari_ini and match_2d and "isi" in item:
+        if raw_date == tanggal_hari_ini and "isi" in item:
             tebakan_str = item.get("isi", "")
-            # Bersihkan format angka tebakan
             deret_angka = [x for x in tebakan_str.replace("*", " ").replace("-", " ").split() if len(x) == 2]
             
+            # Cek apakah angka peserta cocok dengan 2D result
             if match_2d in deret_angka:
                 current_streak = item.get("streakCount", 1)
-                # Update status goal dan tingkatkan streak jika tembus
+                # Tandai JP dan tingkatkan streak
                 updates[f"{key}/isGoal"] = True
                 updates[f"{key}/streakCount"] = current_streak + 1
-                print(f"User {item.get('nama')} JP! Streak bertambah.")
+                print(f"[{halaman_id}] User {item.get('nama')} JP! Streak bertambah.")
 
-    # Terapkan pembaruan status ke Firebase jika ada yang JP
+    # Terapkan pembaruan ke Firebase
     if updates:
         ref_komentar.update(updates)
-        print("Database Firebase berhasil diperbarui untuk status JP hari ini.")
+        print(f"[{halaman_id}] Database Firebase berhasil diperbarui untuk status JP.")
     else:
-        print("Tidak ada peserta yang JP atau result belum lengkap.")
+        print(f"[{halaman_id}] Tidak ada peserta yang tembus (JP) hari ini.")
+
+def jalankan_semua_rekap():
+    tz_wib = pytz.timezone('Asia/Jakarta')
+    waktu_sekarang = datetime.now(tz_wib)
+    tanggal_hari_ini = waktu_sekarang.strftime('%Y-%m-%d')
+    
+    print(f"Menjalankan pengecekan multi-pasaran otomatis pada: {waktu_sekarang.strftime('%Y-%m-%d %H:%M:%S')} WIB")
+
+    for pasaran in PASARAN_LIST:
+        try:
+            proses_rekap_pasaran(pasaran, tanggal_hari_ini)
+        except Exception as e:
+            print(f"Error pada pasaran {pasaran['id']}: {str(e)}")
 
 if __name__ == "__main__":
-    jalankan_rekap_otomatis()
+    jalankan_semua_rekap()
