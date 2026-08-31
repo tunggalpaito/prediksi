@@ -210,34 +210,22 @@ Halaman resmi <strong id=seo-strong-tag>PREDIKSI TOGEL CAMBODIA</strong> harian 
   const KamusAngka={mistikLama:t=>({0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6}[t]??t),mistikBaru:t=>({0:8,1:7,2:6,3:9,4:5,5:4,6:2,7:1,8:0,9:3}[t]??t),index:t=>({0:5,1:6,2:7,3:8,4:9,5:0,6:1,7:2,8:3,9:4}[t]??t),tysen:t=>({0:7,1:4,2:9,3:8,4:1,5:2,6:3,7:0,8:5,9:6}[t]??t)};let cacheRumusMaster3D={};try{const t=localStorage.getItem("sdy_master_3d_permanent_cache");t&&(cacheRumusMaster3D=JSON.parse(t))}catch(t){console.error("Gagal memuat cache localStorage Sydney",t)}function hitungRumusKomplit3D(t){if(!t||"string"!=typeof t||4!==t.length)return"012";if(cacheRumusMaster3D[t])return cacheRumusMaster3D[t];let e=t.split("").map(Number),a={};for(let t=0;t<=9;t++)a[t]=460;e.forEach(((t,n)=>{let s=Math.floor(Math.abs(10*Math.sin(t+n)))%10,i=e[(n+3)%e.length],l=KamusAngka.mistikLama((t+s)%10),r=KamusAngka.mistikBaru((7*i+s)%10),c=KamusAngka.index((Math.abs(t-i)+s)%10),o=KamusAngka.tysen((t*i+n)%10),m=1+.28*n;a[l]+=Math.floor(185*m),a[r]+=Math.floor(195*m),a[c]+=Math.floor(210*m),a[o]+=Math.floor(225*m)}));let n=parseInt(t,10),s=(23130^Math.imul(n,37))%10,i=((n>>2)+(n<<1))%10,l=KamusAngka.index(13*n%10),r=(n%7*9+3)%10;s<0&&(s=Math.abs(s)%10),i<0&&(i=Math.abs(i)%10),a[s]+=430,a[i]+=390,a[l]+=360,a[r]+=330;let c=Object.keys(a).map(Number).sort(((t,e)=>a[e]-a[t])),o=[];for(let t of c)if(o.includes(t)||o.push(t),2===o.length)break;o.sort(((t,e)=>t-e));let m=(6+(o[0]^o[1]))%10;if(o.includes(m))for(let t of c)if(!o.includes(t)){m=t;break}o.push(m),o.sort(((t,e)=>t-e));let u=o.join("");cacheRumusMaster3D[t]=u;try{localStorage.setItem("sdy_master_3d_permanent_cache",JSON.stringify(cacheRumusMaster3D))}catch(t){console.error("Gagal menyimpan cache ke localStorage Sydney",t)}return u}
   function prosesDanTampilkanTrack(t){const e=document.getElementById("cambodia-track");if(!e)return;e.innerHTML="",t.forEach(((a,n)=>{let s=hitungRumusKomplit3D(a),i="";if(n<t.length-1){let e=t[n+1].slice(-2),a=!1;for(let t of s)if(e.includes(t)){a=!0;break}i=a?'<span class="status-check status-win">✔</span>':'<span class="status-check status-lose">✘</span>'}else i='<span class="status-check"></span>';e.innerHTML+=`\n      <div class="history-item" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 10px; margin-bottom: 10px;">\n        <span style="min-width: 70px;">\n        &nbsp;&nbsp;<strong>${a}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : </span>\n        &nbsp;&nbsp;\n        <span class="am-badge" style="margin-left: 20px;">${s}</span>\n        <span style="margin-left: auto; text-align: right;">${i}</span>\n      </div>`}));let a=hitungRumusKomplit3D(t[t.length-1]);const n=document.getElementById("sisa-6-digit");n&&(n.innerText=a)}</script>
 <script>
-document.addEventListener("DOMContentLoaded",(()=>{
-  const t=document.getElementById("pasaran-cambodia");
-  t&&t.classList.add("active");
-  db.ref("live/cambodia").once("value").then(snapshot=>{
-    let val=snapshot.val();
-    let str="";
-    let latestDateKey="";
-    
-    if(typeof val==="string"){
-      str=val;
-    }else if(val && typeof val==="object"){
-      let keys=Object.keys(val).sort();
-      latestDateKey=keys[keys.length - 1] || "";
-      let arr=keys.map(k=>val[k]);
-      str=arr.join(",");
-    }
-    
-    if(str && str.trim()!==""){
+document.addEventListener("DOMContentLoaded", (() => {
+  const t = document.getElementById("pasaran-cambodia");
+  t && t.classList.add("active");
+
+  const renderData = (str, latestDateKey) => {
+    if (str && str.trim() !== "") {
       let t = str.slice(-50000).match(/\b\d{4}\b/g), a = t ? t.slice(-4) : [];
-      if(a.length>=4){
+      if (a.length >= 4) {
         prosesDanTampilkanTrack(a);
         const lastVal = a[a.length - 1];
         const headerEl = document.getElementById("latest-result-header");
-        if(headerEl) {
+        if (headerEl) {
           let formattedDate = "";
-          if(latestDateKey) {
+          if (latestDateKey) {
             let parts = latestDateKey.split("-");
-            if(parts.length === 3) {
+            if (parts.length === 3) {
               let dateObj = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
               formattedDate = dateObj.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             } else {
@@ -248,19 +236,49 @@ document.addEventListener("DOMContentLoaded",(()=>{
           }
           headerEl.innerHTML = `<span style="color:#2ecc71;">${formattedDate}<br>${lastVal} Sahh</span>`;
         }
+      } else {
+        const track = document.getElementById("cambodia-track");
+        if (track) track.innerHTML = '<div style="color:#e74c3c; font-weight:bold;">Format data Firebase Cambodia tidak valid</div>';
       }
-      else{
-        const track=document.getElementById("cambodia-track");
-        if(track) track.innerHTML='<div style="color:#e74c3c; font-weight:bold;">Format data Firebase Cambodia tidak valid</div>';
-      }
-    }else{
-      const track=document.getElementById("cambodia-track");
-      track&&(track.innerHTML='<div style="color:#e74c3c; font-weight:bold;">Gagal menghubungkan dengan server cambodia</div>');
+    } else {
+      const track = document.getElementById("cambodia-track");
+      track && (track.innerHTML = '<div style="color:#e74c3c; font-weight:bold;">Gagal menghubungkan dengan server cambodia</div>');
     }
-  }).catch(err=>{
+  };
+
+  // Optimasi Kecepatan: Cek cache lokal terlebih dahulu agar langsung instan
+  const cachedData = localStorage.getItem("firebase_cambodia_cache");
+  const cachedKey = localStorage.getItem("firebase_cambodia_key");
+  if (cachedData) {
+    renderData(cachedData, cachedKey);
+  }
+
+  // Ambil data terbaru dari Firebase (membatasi atau menggunakan limitToLast jika berupa list agar lebih ringan)
+  db.ref("live/cambodia").limitToLast(30).once("value").then(snapshot => {
+    let val = snapshot.val();
+    let str = "";
+    let latestDateKey = "";
+    
+    if (typeof val === "string") {
+      str = val;
+    } else if (val && typeof val === "object") {
+      let keys = Object.keys(val).sort();
+      latestDateKey = keys[keys.length - 1] || "";
+      let arr = keys.map(k => val[k]);
+      str = arr.join(",");
+    }
+
+    if (str) {
+      localStorage.setItem("firebase_cambodia_cache", str);
+      localStorage.setItem("firebase_cambodia_key", latestDateKey);
+      renderData(str, latestDateKey);
+    }
+  }).catch(err => {
     console.error(err);
-    const track=document.getElementById("cambodia-track");
-    track&&(track.innerHTML='<div style="color:#e74c3c; font-weight:bold;">Gagal memuat data dari Firebase</div>');
+    if (!cachedData) {
+      const track = document.getElementById("cambodia-track");
+      track && (track.innerHTML = '<div style="color:#e74c3c; font-weight:bold;">Gagal memuat data dari Firebase</div>');
+    }
   });
 }));
 </script>
