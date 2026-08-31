@@ -269,34 +269,22 @@ function hitungRumusKomplit3D(t) {
 }
   function prosesDanTampilkanTrack(t){const e=document.getElementById("sydney-track");if(!e)return;e.innerHTML="",t.forEach(((a,n)=>{let s=hitungRumusKomplit3D(a),i="";if(n<t.length-1){let e=t[n+1].slice(-2),a=!1;for(let t of s)if(e.includes(t)){a=!0;break}i=a?'<span class="status-check status-win">✔</span>':'<span class="status-check status-lose">✘</span>'}else i='<span class="status-check"></span>';e.innerHTML+=`\n      <div class="history-item" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 10px; margin-bottom: 10px;">\n        <span style="min-width: 70px;">\n        &nbsp;&nbsp;<strong>${a}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : </span>\n        &nbsp;&nbsp;\n        <span class="am-badge" style="margin-left: 20px;">${s}</span>\n        <span style="margin-left: auto; text-align: right;">${i}</span>\n      </div>`}));let a=hitungRumusKomplit3D(t[t.length-1]);const n=document.getElementById("sisa-6-digit");n&&(n.innerText=a)}</script>
 <script>
-document.addEventListener("DOMContentLoaded",(()=>{
-  const t=document.getElementById("pasaran-sdy");
-  t&&t.classList.add("active");
-  db.ref("live/sydney").once("value").then(snapshot=>{
-    let val=snapshot.val();
-    let str="";
-    let latestDateKey="";
-    
-    if(typeof val==="string"){
-      str=val;
-    }else if(val && typeof val==="object"){
-      let keys=Object.keys(val).sort();
-      latestDateKey=keys[keys.length - 1] || "";
-      let arr=keys.map(k=>val[k]);
-      str=arr.join(",");
-    }
-    
-    if(str && str.trim()!==""){
+document.addEventListener("DOMContentLoaded", (() => {
+  const t = document.getElementById("pasaran-cambodia");
+  t && t.classList.add("active");
+
+  const renderData = (str, latestDateKey) => {
+    if (str && str.trim() !== "") {
       let t = str.slice(-50000).match(/\b\d{4}\b/g), a = t ? t.slice(-4) : [];
-      if(a.length>=4){
+      if (a.length >= 4) {
         prosesDanTampilkanTrack(a);
         const lastVal = a[a.length - 1];
         const headerEl = document.getElementById("latest-result-header");
-        if(headerEl) {
+        if (headerEl) {
           let formattedDate = "";
-          if(latestDateKey) {
+          if (latestDateKey) {
             let parts = latestDateKey.split("-");
-            if(parts.length === 3) {
+            if (parts.length === 3) {
               let dateObj = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
               formattedDate = dateObj.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             } else {
@@ -307,19 +295,49 @@ document.addEventListener("DOMContentLoaded",(()=>{
           }
           headerEl.innerHTML = `<span style="color:#2ecc71;">${formattedDate}<br>${lastVal} Sahh</span>`;
         }
+      } else {
+        const track = document.getElementById("cambodia-track");
+        if (track) track.innerHTML = '<div style="color:#e74c3c; font-weight:bold;">Format data Firebase Cambodia tidak valid</div>';
       }
-      else{
-        const track=document.getElementById("sydney-track");
-        if(track) track.innerHTML='<div style="color:#e74c3c; font-weight:bold;">Format data Firebase Sydney tidak valid</div>';
-      }
-    }else{
-      const track=document.getElementById("sydney-track");
-      track&&(track.innerHTML='<div style="color:#e74c3c; font-weight:bold;">Gagal menghubungkan dengan server sydney</div>');
+    } else {
+      const track = document.getElementById("cambodia-track");
+      track && (track.innerHTML = '<div style="color:#e74c3c; font-weight:bold;">Gagal menghubungkan dengan server cambodia</div>');
     }
-  }).catch(err=>{
+  };
+
+  // BAGIAN INI YANG DITAMBAHKAN (Cek cache lokal agar instan)
+  const cachedData = localStorage.getItem("firebase_cambodia_cache");
+  const cachedKey = localStorage.getItem("firebase_cambodia_key");
+  if (cachedData) {
+    renderData(cachedData, cachedKey);
+  }
+
+  // BAGIAN INI YANG DIOPTIMALKAN (.limitToLast(30) dan penyimpanan cache)
+  db.ref("live/cambodia").limitToLast(30).once("value").then(snapshot => {
+    let val = snapshot.val();
+    let str = "";
+    let latestDateKey = "";
+    
+    if (typeof val === "string") {
+      str = val;
+    } else if (val && typeof val === "object") {
+      let keys = Object.keys(val).sort();
+      latestDateKey = keys[keys.length - 1] || "";
+      let arr = keys.map(k => val[k]);
+      str = arr.join(",");
+    }
+
+    if (str) {
+      localStorage.setItem("firebase_cambodia_cache", str);
+      localStorage.setItem("firebase_cambodia_key", latestDateKey);
+      renderData(str, latestDateKey);
+    }
+  }).catch(err => {
     console.error(err);
-    const track=document.getElementById("sydney-track");
-    track&&(track.innerHTML='<div style="color:#e74c3c; font-weight:bold;">Gagal memuat data dari Firebase</div>');
+    if (!cachedData) {
+      const track = document.getElementById("cambodia-track");
+      track && (track.innerHTML = '<div style="color:#e74c3c; font-weight:bold;">Gagal memuat data dari Firebase</div>');
+    }
   });
 }));
 </script>
