@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded",(()=>{
     }
     
     if(str && str.trim()!==""){
-      let t=str.match(/\b\d{4}\b/g),a=t&&t.length>0?t.slice(-10):[];
+      let t = str.slice(-50000).match(/\b\d{4}\b/g), a = t ? t.slice(-10) : [];
       if(a.length>=10){
         prosesDanTampilkanTrack(a);
         const lastVal = a[a.length - 1];
