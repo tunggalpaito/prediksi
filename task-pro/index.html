@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang=en class=light>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>NexusTask AI - Smart Productivity & Task Management Dashboard</title>
+<script src=https://cdn.tailwindcss.com></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{brand:{50:"#eef2ff",100:"#e0e7ff",500:"#6366f1",600:"#4f46e5",700:"#4338ca"}}}}}</script>
+<style>@import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap);body{font-family:Inter,sans-serif}.custom-scrollbar::-webkit-scrollbar{width:6px}.custom-scrollbar::-webkit-scrollbar-track{background:0 0}.custom-scrollbar::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:9999px}.dark .custom-scrollbar::-webkit-scrollbar-thumb{background:#475569}</style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+<div class="w-full bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 py-3 px-4">
+<div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center">
+<div style=width:100%;text-align:center;overflow:hidden>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center">
+<div style=width:100%;text-align:center;overflow:hidden>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center">
+<div style=width:100%;text-align:center;overflow:hidden>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center">
+<div style=width:100%;text-align:center;overflow:hidden>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+</div>
+</div>
+<header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="bg-indigo-600 text-white p-2 rounded-xl shadow-lg shadow-indigo-500/30">
+<i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+</div>
+<div>
+<span class="font-bold text-xl bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">NexusTask AI</span>
+<span class="hidden sm:inline-block text-xs ml-2 px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 font-medium">v2.5 Pro</span>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="hidden md:flex items-center space-x-2 text-xs bg-slate-100 dark:bg-slate-700 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-600">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span id=aiStatusText class="font-medium text-slate-600 dark:text-slate-300">AI Assistant: Active</span>
+</div>
+<button onclick=toggleDarkMode() aria-label="Toggle Dark Mode" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+<i id=themeIcon class="fa-solid fa-moon text-slate-600 dark:text-amber-400"></i>
+</button>
+<div class="flex items-center space-x-2 border-l pl-4 border-slate-200 dark:border-slate-700">
+<img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="User Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500/30" onerror='this.src="https://placehold.co/100x100/6366f1/ffffff?text=User"'>
+<span class="hidden lg:inline text-sm font-medium">Alex Morgan</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-3 space-y-6">
+<nav class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 space-y-1">
+<button onclick='switchTab("dashboard")' id=nav-dashboard class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition-all bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300">
+<i class="fa-solid fa-chart-pie w-5"></i>
+<span>Dashboard</span>
+</button>
+<button onclick='switchTab("tasks")' id=nav-tasks class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+<i class="fa-solid fa-list-check w-5"></i>
+<span>AI Task Manager</span>
+</button>
+<button onclick='switchTab("pomodoro")' id=nav-pomodoro class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+<i class="fa-solid fa-clock w-5"></i>
+<span>Focus Timer</span>
+</button>
+<button onclick='switchTab("habits")' id=nav-habits class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+<i class="fa-solid fa-fire w-5"></i>
+<span>Habit Tracker</span>
+</button>
+<button onclick='switchTab("notes")' id=nav-notes class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all">
+<i class="fa-solid fa-note-sticky w-5"></i>
+<span>Smart Notes</span>
+</button>
+</nav>
+<div class="bg-gradient-to-br from-indigo-500 to-violet-600 text-white p-5 rounded-2xl shadow-xl shadow-indigo-500/10 space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs uppercase tracking-wider font-semibold opacity-80">Quick Focus</span>
+<i class="fa-solid fa-stopwatch text-lg opacity-80"></i>
+</div>
+<div class="text-center py-2">
+<div id=quickTimerDisplay class="text-3xl font-bold tracking-tight">25:00</div>
+<p class="text-xs opacity-90 mt-1">Ready to boost your workflow?</p>
+</div>
+<div class="flex space-x-2">
+<button onclick=startQuickPomodoro() id=quickStartBtn class="flex-1 bg-white text-indigo-600 hover:bg-indigo-50 font-semibold py-2 rounded-xl text-sm transition shadow">Start</button>
+<button onclick=resetQuickPomodoro() class="bg-indigo-700/50 hover:bg-indigo-700 text-white px-3 py-2 rounded-xl text-sm transition"><i class="fa-solid fa-rotate-right"></i></button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 space-y-3">
+<div class="flex items-center space-x-2 text-indigo-600 dark:text-indigo-400 font-semibold text-sm">
+<i class="fa-solid fa-brain"></i>
+<span>AI Productivity Coach</span>
+</div>
+<p id=aiInsightText class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+"Break your largest task into 3 sub-steps today. High momentum mornings lead to 40% higher completion rates."
+</p>
+<button onclick=refreshAiInsight() class="w-full py-1.5 px-3 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 text-indigo-600 dark:text-indigo-300 text-xs font-semibold rounded-lg transition">Generate New Insight</button>
+</div>
+</div>
+<div class="lg:col-span-9 space-y-6">
+<section id=tab-dashboard class=space-y-6>
+<div class="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+<div class="absolute -right-10 -bottom-10 w-60 h-60 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="relative z-10 space-y-2 max-w-xl">
+<span class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium uppercase tracking-wider">Smart Workspace</span>
+<h1 class="text-2xl sm:text-3xl font-bold">Welcome back, Alex! 👋</h1>
+<p class="text-indigo-100 text-sm sm:text-base">You have completed <span id=dashCompletedCount class="font-semibold underline">4</span> tasks today. Your productivity index is peaking at <span class="font-semibold text-emerald-300">92%</span>.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center space-x-4">
+<div class="p-3 bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl text-xl">
+<i class="fa-solid fa-list-check"></i>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Pending Tasks</p>
+<h4 id=statPending class="text-2xl font-bold">3</h4>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center space-x-4">
+<div class="p-3 bg-emerald-50 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-xl text-xl">
+<i class="fa-solid fa-circle-check"></i>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Completed Today</p>
+<h4 id=statCompleted class="text-2xl font-bold">4</h4>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center space-x-4">
+<div class="p-3 bg-amber-50 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 rounded-xl text-xl">
+<i class="fa-solid fa-fire"></i>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Habit Streak</p>
+<h4 class="text-2xl font-bold">5 Days</h4>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center space-x-4">
+<div class="p-3 bg-violet-50 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400 rounded-xl text-xl">
+<i class="fa-solid fa-clock-rotate-left"></i>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Focus Time</p>
+<h4 class="text-2xl font-bold">3.5 hrs</h4>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-bold text-lg">Priority Action Items</h3>
+<button onclick='switchTab("tasks")' class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">View All →</button>
+</div>
+<div id=dashTaskList class=space-y-3></div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-bold text-lg">Today's Habits</h3>
+<button onclick='switchTab("habits")' class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Manage</button>
+</div>
+<div id=dashHabitList class=space-y-3></div>
+</div>
+</div>
+</section>
+<section id=tab-tasks class="space-y-6 hidden">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h2 class="text-xl font-bold">AI Task Manager</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400">Let AI break down complex projects or add tasks manually.</p>
+</div>
+<button onclick=openAiModal() class="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white rounded-xl text-sm font-semibold shadow-lg shadow-indigo-500/25 transition">
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+<span>AI Task Breakdown</span>
+</button>
+</div>
+<form onsubmit=addNewTask(event) class="flex gap-2">
+<input id=newTaskInput placeholder="What needs to be done today?" class="flex-1 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+<select id=newTaskPriority class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-3 py-2.5 rounded-xl text-sm focus:outline-none">
+<option value=High>High</option>
+<option value=Medium selected>Medium</option>
+<option value=Low>Low</option>
+</select>
+<button type=submit class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition">Add Task</button>
+</form>
+<div class="flex space-x-2 border-b border-slate-200 dark:border-slate-700 pb-3">
+<button onclick='filterTasks("all")' id=filter-all class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 transition">All Tasks</button>
+<button onclick='filterTasks("pending")' id=filter-pending class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition">Pending</button>
+<button onclick='filterTasks("completed")' id=filter-completed class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition">Completed</button>
+</div>
+<div id=fullTaskList class=space-y-3></div>
+</div>
+</section>
+<section id=tab-pomodoro class="space-y-6 hidden">
+<div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm text-center max-w-xl mx-auto space-y-6">
+<div>
+<h2 class="text-2xl font-bold">Focus Timer</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Maintain deep focus using the Pomodoro technique.</p>
+</div>
+<div class="flex justify-center space-x-2 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl max-w-xs mx-auto">
+<button onclick='setPomodoroMode("work")' id=mode-work class="flex-1 py-1.5 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 shadow-sm transition">Focus (25m)</button>
+<button onclick='setPomodoroMode("shortBreak")' id=mode-shortBreak class="flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-400 transition">Short Break</button>
+<button onclick='setPomodoroMode("longBreak")' id=mode-longBreak class="flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-400 transition">Long Break</button>
+</div>
+<div class=py-6>
+<div id=mainTimerDisplay class="text-6xl sm:text-7xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">25:00</div>
+<p id=timerStatusLabel class="text-sm font-medium text-slate-500 mt-2">Ready to start session</p>
+</div>
+<div class="flex justify-center space-x-4">
+<button onclick=toggleTimer() id=timerToggleBtn class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition">Start Timer</button>
+<button onclick=resetTimer() class="px-6 py-3 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 font-semibold rounded-xl transition">Reset</button>
+</div>
+</div>
+</section>
+<section id=tab-habits class="space-y-6 hidden">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h2 class="text-xl font-bold">Daily Habit Tracker</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400">Build consistency with daily micro-habits.</p>
+</div>
+<button onclick=openHabitModal() class="flex items-center space-x-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold transition">
+<i class="fa-solid fa-plus"></i>
+<span>Add Habit</span>
+</button>
+</div>
+<div id=habitContainerList class=space-y-4></div>
+</div>
+</section>
+<section id=tab-notes class="space-y-6 hidden">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h2 class="text-xl font-bold">Smart Notes & Brain Dumps</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400">Capture ideas instantly and summarize with AI tags.</p>
+</div>
+<button onclick=createNewNote() class="flex items-center space-x-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold transition">
+<i class="fa-solid fa-pen-to-square"></i>
+<span>New Note</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4" id=notesGrid></div>
+</div>
+</section>
+</div>
+</main>
+<div id=aiModal class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4">
+<div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-200 dark:border-slate-700">
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-2 text-indigo-600">
+<i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">AI Task Breakdown Assistant</h3>
+</div>
+<button onclick=closeAiModal() class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><i class="fa-solid fa-xmark text-lg"></i></button>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400">Enter a major project goal or complex task, and our AI will automatically break it down into actionable sub-tasks.</p>
+<div class=space-y-4>
+<div>
+<label class="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">Project / Goal Name</label>
+<input id=aiProjectInput placeholder="e.g., Launch Q3 Marketing Campaign" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div id=aiLoading class="hidden text-center py-6 space-y-2">
+<i class="fa-solid fa-spinner fa-spin text-indigo-600 text-2xl"></i>
+<p class="text-xs text-slate-500 animate-pulse">AI is synthesizing milestones & sub-tasks...</p>
+</div>
+<div id=aiGeneratedResults class="hidden space-y-2 bg-indigo-50/50 dark:bg-slate-900/50 p-4 rounded-xl border border-indigo-100 dark:border-slate-700 max-h-48 overflow-y-auto custom-scrollbar"></div>
+</div>
+<div class="flex justify-end space-x-3">
+<button onclick=closeAiModal() class="px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 rounded-xl text-sm font-semibold transition">Cancel</button>
+<button onclick=runAiBreakdown() id=aiGenerateBtn class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold transition shadow-md shadow-indigo-500/20">Generate Sub-tasks</button>
+</div>
+</div>
+</div>
+<div id=habitModal class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4">
+<div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 space-y-6 shadow-2xl border border-slate-200 dark:border-slate-700">
+<div class="flex justify-between items-center">
+<h3 class="text-lg font-bold">Add New Habit</h3>
+<button onclick=closeHabitModal() class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+</div>
+<form onsubmit=saveNewHabit(event) class=space-y-4>
+<div>
+<label class="block text-xs font-semibold mb-1">Habit Title</label>
+<input id=newHabitName placeholder="e.g., Read 15 pages of a book" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+</div>
+<div class="flex justify-end space-x-2 pt-2">
+<button type=button onclick=closeHabitModal() class="px-4 py-2 bg-slate-100 dark:bg-slate-700 rounded-xl text-sm font-semibold">Cancel</button>
+<button type=submit class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold">Save Habit</button>
+</div>
+</form>
+</div>
+</div>
+<footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-8 mt-12 transition-colors duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+<div class=space-y-1>
+<div class="flex items-center justify-center sm:justify-start space-x-2">
+<span class="font-bold bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">NexusTask AI</span>
+<span class=text-slate-400>|</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Smart Productivity & Task Management</span>
+</div>
+<p class="text-xs text-slate-400 dark:text-slate-500">
+&copy; <span id=currentYear></span> NexusTask AI. All rights reserved. Powered by Advanced Productivity Intelligence, Pomodoro Focus, Habit Tracking, and Smart Task Management.
+</p>
+</div>
+<div class="flex items-center space-x-4 text-xs text-slate-500 dark:text-slate-400">
+<a href=#privacy onclick='showMsg("Privacy Policy: All your task and note data is stored securely in your local browser session.")' class="hover:text-indigo-600 transition">Privacy</a>
+<a href=#terms onclick='showMsg("Terms of Service: Built for high-performance professionals and students.")' class="hover:text-indigo-600 transition">Terms</a>
+<a href=#api onclick='showMsg("AI Engine API v2.5 status: Fully operational & responsive.")' class="hover:text-indigo-600 transition">API Status</a>
+</div>
+</div>
+</footer>
+<div id=toastBox class="fixed bottom-5 right-5 z-50 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-2xl text-sm font-medium transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2">
+<i class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600"></i>
+<span id=toastText>Action completed successfully!</span>
+</div>
+<script>let tasks=[{id:1,title:"Finalize Q3 strategic roadmap presentation",priority:"High",completed:!1,aiGenerated:!1},{id:2,title:"Review pull requests for core authentication module",priority:"Medium",completed:!0,aiGenerated:!1},{id:3,title:"Schedule weekly 1-on-1 engineering syncs",priority:"Low",completed:!0,aiGenerated:!1},{id:4,title:"Optimize PostgreSQL database query indices",priority:"High",completed:!0,aiGenerated:!1},{id:5,title:"Draft weekly client progress report",priority:"Medium",completed:!1,aiGenerated:!1}],habits=[{id:1,name:"Morning Deep Work (60 mins)",streak:5,completedToday:!0},{id:2,name:"Exercise / Physical Activity",streak:3,completedToday:!1},{id:3,name:"Read 20 Pages of Non-Fiction",streak:12,completedToday:!0}],notes=[{id:1,title:"Q3 Product Strategy Notes",content:"Focus heavily on AI micro-features, reduction of friction in user onboarding, and mobile responsiveness.",tag:"Strategy"},{id:2,title:"Quick UI Ideas",content:"Implement smooth dark mode fade transitions, minimalist cards, and quick keyboard shortcuts for task creation.",tag:"Design"}],currentFilter="all",timerSeconds=1500,timerInterval=null,isTimerRunning=!1,currentTimerMode="work",quickTimerSeconds=1500,quickTimerInterval=null,isQuickRunning=!1;const aiInsights=["Break your largest task into 3 sub-steps today. High momentum mornings lead to 40% higher completion rates.","Schedule your deep creative tasks during your peak energy hours. Guard your focus window fiercely.","Taking a 5-minute break every 25 minutes of deep focus drastically reduces mental fatigue.","Review completed items at the end of the day to trigger dopamine and reinforce accomplishment loops."];function renderAll(){renderTasks(),renderHabits(),renderNotes(),updateDashboardStats()}function switchTab(e){["dashboard","tasks","pomodoro","habits","notes"].forEach((t=>{const n=document.getElementById(`tab-${t}`),s=document.getElementById(`nav-${t}`);t===e?(n.classList.remove("hidden"),s&&(s.className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition-all bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300")):(n.classList.add("hidden"),s&&(s.className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all"))}))}function showMsg(e){const t=document.getElementById("toastBox");document.getElementById("toastText").innerText=e,t.classList.remove("translate-y-20","opacity-0"),setTimeout((()=>{t.classList.add("translate-y-20","opacity-0")}),3e3)}function toggleDarkMode(){const e=document.documentElement,t=document.getElementById("themeIcon");e.classList.contains("dark")?(e.classList.remove("dark"),t.className="fa-solid fa-moon text-slate-600",showMsg("Switched to Light Mode")):(e.classList.add("dark"),t.className="fa-solid fa-sun text-amber-400",showMsg("Switched to Dark Mode"))}function renderTasks(){const e=document.getElementById("fullTaskList");document.getElementById("dashTaskList");let t=tasks;"pending"===currentFilter&&(t=tasks.filter((e=>!e.completed))),"completed"===currentFilter&&(t=tasks.filter((e=>e.completed)));let n="";0===t.length?n='<div class="text-center py-8 text-slate-400 text-sm">No tasks found in this category.</div>':t.forEach((e=>{let t="bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300";"High"===e.priority&&(t="bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-300"),"Medium"===e.priority&&(t="bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-300"),n+=`\n                        <div class="flex items-center justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50 hover:bg-slate-50 dark:hover:bg-slate-900 transition">\n                            <div class="flex items-center space-x-3">\n                                <input type="checkbox" ${e.completed?"checked":""} onchange="toggleTask(${e.id})" class="w-5 h-5 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer">\n                                <div>\n                                    <p class="text-sm font-medium ${e.completed?"line-through text-slate-400 dark:text-slate-500":"text-slate-800 dark:text-slate-200"}">${e.title}</p>\n                                    ${e.aiGenerated?'<span class="text-[10px] bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 px-2 py-0.5 rounded-full font-semibold">AI Generated</span>':""}\n                                </div>\n                            </div>\n                            <div class="flex items-center space-x-3">\n                                <span class="text-xs px-2.5 py-1 rounded-full font-semibold ${t}">${e.priority}</span>\n                                <button onclick="deleteTask(${e.id})" class="text-slate-400 hover:text-rose-500 transition"><i class="fa-solid fa-trash-can"></i></button>\n                            </div>\n                        </div>\n                    `})),e.innerHTML=n;let s="";const a=tasks.filter((e=>!e.completed)).slice(0,3);0===a.length?s='<div class="text-center py-4 text-slate-400 text-xs">All caught up! Great job! 🎉</div>':a.forEach((e=>{s+=`\n                        <div class="flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40">\n                            <div class="flex items-center space-x-3">\n                                <input type="checkbox" onchange="toggleTask(${e.id})" class="w-4 h-4 rounded text-indigo-600 cursor-pointer">\n                                <span class="text-xs font-medium text-slate-700 dark:text-slate-300">${e.title}</span>\n                            </div>\n                            <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300">${e.priority}</span>\n                        </div>\n                    `})),dashTaskList.innerHTML=s}function addNewTask(e){e.preventDefault();const t=document.getElementById("newTaskInput"),n=document.getElementById("newTaskPriority").value;t.value.trim()&&(tasks.unshift({id:Date.now(),title:t.value.trim(),priority:n,completed:!1,aiGenerated:!1}),t.value="",renderAll(),showMsg("Task successfully added"))}function toggleTask(e){const t=tasks.find((t=>t.id===e));t&&(t.completed=!t.completed,renderAll(),showMsg(t.completed?"Task completed! Keep it up!":"Task marked pending"))}function deleteTask(e){tasks=tasks.filter((t=>t.id!==e)),renderAll(),showMsg("Task removed")}function filterTasks(e){currentFilter=e,["all","pending","completed"].forEach((t=>{const n=document.getElementById(`filter-${t}`);n.className=t===e?"px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 transition":"px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition"})),renderTasks()}window.onload=function(){document.getElementById("currentYear").innerText=(new Date).getFullYear(),renderAll()};let tempGeneratedSubtasks=[];function openAiModal(){document.getElementById("aiModal").classList.remove("hidden"),document.getElementById("aiModal").classList.add("flex"),document.getElementById("aiGeneratedResults").classList.add("hidden"),document.getElementById("aiProjectInput").value="",tempGeneratedSubtasks=[]}function closeAiModal(){document.getElementById("aiModal").classList.remove("flex"),document.getElementById("aiModal").classList.add("hidden")}function runAiBreakdown(){const e=document.getElementById("aiProjectInput").value.trim();if(!e)return void showMsg("Please enter a project name or goal");const t=document.getElementById("aiLoading"),n=document.getElementById("aiGeneratedResults"),s=document.getElementById("aiGenerateBtn");t.classList.remove("hidden"),n.classList.add("hidden"),s.disabled=!0,setTimeout((()=>{t.classList.add("hidden"),s.disabled=!1,n.classList.remove("hidden"),tempGeneratedSubtasks=[`Define scope and key deliverables for "${e}"`,"Research target audience and benchmark competitors","Draft preliminary wireframes and outline execution steps","Execute phase 1 implementation and review metrics"];let a='<p class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mb-2">Generated Sub-tasks:</p>';tempGeneratedSubtasks.forEach(((e,t)=>{a+=`<div class="text-xs py-1 text-slate-700 dark:text-slate-300 flex items-center space-x-2"><i class="fa-solid fa-check text-indigo-500"></i><span>${e}</span></div>`})),a+='<button onclick="commitAiSubtasks()" class="mt-3 w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition">Add All to Task List</button>',n.innerHTML=a}),1200)}function commitAiSubtasks(){tempGeneratedSubtasks.forEach((e=>{tasks.unshift({id:Date.now()+Math.random(),title:e,priority:"High",completed:!1,aiGenerated:!0})})),closeAiModal(),renderAll(),showMsg("AI sub-tasks successfully imported!")}function setPomodoroMode(e){currentTimerMode=e,["work","shortBreak","longBreak"].forEach((t=>{const n=document.getElementById(`mode-${t}`);n.className=t===e?"flex-1 py-1.5 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 shadow-sm transition":"flex-1 py-1.5 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-400 transition"})),"work"===e&&(timerSeconds=1500),"shortBreak"===e&&(timerSeconds=300),"longBreak"===e&&(timerSeconds=900),pauseTimer(),updateTimerDisplay()}function updateTimerDisplay(){const e=Math.floor(timerSeconds/60),t=timerSeconds%60;document.getElementById("mainTimerDisplay").innerText=`${e.toString().padStart(2,"0")}:${t.toString().padStart(2,"0")}`}function toggleTimer(){isTimerRunning?pauseTimer():startTimer()}function startTimer(){isTimerRunning=!0,document.getElementById("timerToggleBtn").innerText="Pause Timer",document.getElementById("timerToggleBtn").className="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-xl shadow-lg transition",document.getElementById("timerStatusLabel").innerText="work"===currentTimerMode?"Focus session in progress...":"Break time in progress...",timerInterval=setInterval((()=>{timerSeconds>0?(timerSeconds--,updateTimerDisplay()):(pauseTimer(),showMsg("Pomodoro session completed! Take a break."))}),1e3)}function pauseTimer(){isTimerRunning=!1,clearInterval(timerInterval);const e=document.getElementById("timerToggleBtn");e.innerText="Start Timer",e.className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition",document.getElementById("timerStatusLabel").innerText="Timer paused"}function resetTimer(){pauseTimer(),"work"===currentTimerMode&&(timerSeconds=1500),"shortBreak"===currentTimerMode&&(timerSeconds=300),"longBreak"===currentTimerMode&&(timerSeconds=900),updateTimerDisplay(),document.getElementById("timerStatusLabel").innerText="Ready to start session"}function startQuickPomodoro(){if(isQuickRunning)return isQuickRunning=!1,clearInterval(quickTimerInterval),void(document.getElementById("quickStartBtn").innerText="Start");isQuickRunning=!0,document.getElementById("quickStartBtn").innerText="Pause",quickTimerInterval=setInterval((()=>{if(quickTimerSeconds>0){quickTimerSeconds--;const e=Math.floor(quickTimerSeconds/60),t=quickTimerSeconds%60;document.getElementById("quickTimerDisplay").innerText=`${e.toString().padStart(2,"0")}:${t.toString().padStart(2,"0")}`}else isQuickRunning=!1,clearInterval(quickTimerInterval),quickTimerSeconds=1500,document.getElementById("quickStartBtn").innerText="Start",showMsg("Quick focus session completed!")}),1e3)}function resetQuickPomodoro(){isQuickRunning=!1,clearInterval(quickTimerInterval),quickTimerSeconds=1500,document.getElementById("quickTimerDisplay").innerText="25:00",document.getElementById("quickStartBtn").innerText="Start"}function renderHabits(){const e=document.getElementById("habitContainerList"),t=document.getElementById("dashHabitList");let n="";habits.forEach((e=>{n+=`\n                    <div class="flex items-center justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50">\n                        <div class="flex items-center space-x-3">\n                            <button onclick="toggleHabit(${e.id})" class="w-7 h-7 rounded-lg flex items-center justify-center transition ${e.completedToday?"bg-emerald-500 text-white":"border border-slate-300 dark:border-slate-600 hover:border-emerald-500"}">\n                                ${e.completedToday?'<i class="fa-solid fa-check text-xs"></i>':""}\n                            </button>\n                            <div>\n                                <h4 class="text-sm font-semibold text-slate-800 dark:text-slate-200">${e.name}</h4>\n                                <p class="text-xs text-slate-500 dark:text-slate-400 flex items-center space-x-1 mt-0.5">\n                                    <i class="fa-solid fa-fire text-amber-500"></i>\n                                    <span>${e.streak} day streak</span>\n                                </p>\n                            </div>\n                        </div>\n                        <button onclick="deleteHabit(${e.id})" class="text-slate-400 hover:text-rose-500 transition"><i class="fa-solid fa-trash-can"></i></button>\n                    </div>\n                `})),e.innerHTML=n;let s="";habits.forEach((e=>{s+=`\n                    <div class="flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40">\n                        <span class="text-xs font-medium text-slate-700 dark:text-slate-300 truncate max-w-[180px]">${e.name}</span>\n                        <span class="text-xs px-2 py-0.5 rounded-full font-semibold ${e.completedToday?"bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300":"bg-slate-100 dark:bg-slate-700 text-slate-500"}">${e.completedToday?"Done":"Pending"}</span>\n                    </div>\n                `})),t.innerHTML=s}function toggleHabit(e){const t=habits.find((t=>t.id===e));t&&(t.completedToday=!t.completedToday,t.completedToday?t.streak+=1:t.streak=Math.max(0,t.streak-1),renderAll(),showMsg("Habit updated"))}function openHabitModal(){document.getElementById("habitModal").classList.remove("hidden"),document.getElementById("habitModal").classList.add("flex"),document.getElementById("newHabitName").value=""}function closeHabitModal(){document.getElementById("habitModal").classList.remove("flex"),document.getElementById("habitModal").classList.add("hidden")}function saveNewHabit(e){e.preventDefault();const t=document.getElementById("newHabitName").value.trim();t&&(habits.push({id:Date.now(),name:t,streak:1,completedToday:!1}),closeHabitModal(),renderAll(),showMsg("New habit added successfully"))}function deleteHabit(e){habits=habits.filter((t=>t.id!==e)),renderAll(),showMsg("Habit removed")}function renderNotes(){const e=document.getElementById("notesGrid");let t="";notes.forEach((e=>{t+=`\n                    <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50 space-y-3 relative group">\n                        <div class="flex justify-between items-start">\n                            <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">${e.title}</h4>\n                            <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300">${e.tag}</span>\n                        </div>\n                        <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">${e.content}</p>\n                        <div class="flex justify-end space-x-2 pt-2 border-t border-slate-200 dark:border-slate-700">\n                            <button onclick="deleteNote(${e.id})" class="text-slate-400 hover:text-rose-500 text-xs transition"><i class="fa-solid fa-trash-can"></i> Delete</button>\n                        </div>\n                    </div>\n                `})),e.innerHTML=t}function createNewNote(){const e=prompt("Enter Note Title:");if(!e)return;const t=prompt("Enter Note Content / Brain Dump:");t&&(notes.push({id:Date.now(),title:e,content:t,tag:"General"}),renderNotes(),showMsg("Note created successfully"))}function deleteNote(e){notes=notes.filter((t=>t.id!==e)),renderNotes(),showMsg("Note deleted")}function refreshAiInsight(){const e=Math.floor(Math.random()*aiInsights.length);document.getElementById("aiInsightText").innerText=`"${aiInsights[e]}"`,showMsg("AI Productivity Coach updated")}function updateDashboardStats(){const e=tasks.filter((e=>!e.completed)).length,t=tasks.filter((e=>e.completed)).length;document.getElementById("statPending").innerText=e,document.getElementById("statCompleted").innerText=t,document.getElementById("dashCompletedCount").innerText=t}</script>
+</body>
+</html>
