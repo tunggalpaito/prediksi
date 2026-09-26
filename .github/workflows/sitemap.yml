@@ -31,3 +31,5 @@ jobs:
         with:
           commit_message: "Auto-update sitemap.xml dan robots.txt"
           file_pattern: sitemap.xml robots.txt
+          push_options: '--force'
+          skip_ci: true
