@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUNGGAL PAITO - Red Edition</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#030712',
+                            neonRed: '#ff1e56',
+                            neonCrimson: '#ff3366',
+                            neonOrange: '#ff8c00'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        orbitron: ['Orbitron', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts for Futuristic Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050508;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .font-cyber {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Animated gradient background mesh with red accents */
+        .bg-mesh {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 30, 86, 0.15), rgba(15, 15, 25, 0.9) 50%, #030712 90%),
+                        radial-gradient(circle at 20% 20%, rgba(255, 51, 102, 0.1), transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(200, 20, 60, 0.08), transparent 40%);
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Red neon glowing text effect */
+        .neon-glow-red {
+            color: #ff1e56;
+            text-shadow: 0 0 10px rgba(255, 30, 86, 0.6),
+                         0 0 20px rgba(255, 30, 86, 0.4),
+                         0 0 40px rgba(255, 30, 86, 0.3),
+                         0 0 80px rgba(255, 0, 50, 0.2);
+            animation: pulseRedGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseRedGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 30, 86, 0.5),
+                             0 0 20px rgba(255, 30, 86, 0.3),
+                             0 0 40px rgba(255, 0, 50, 0.2);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 30, 86, 0.9),
+                             0 0 40px rgba(255, 30, 86, 0.7),
+                             0 0 80px rgba(255, 0, 50, 0.5),
+                             0 0 120px rgba(255, 0, 0, 0.4);
+            }
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(18, 12, 16, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 30, 86, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Cyberpunk Red Button */
+        .cyber-btn-red {
+            position: relative;
+            background: linear-gradient(135deg, #ff1e56 0%, #c50531 100%);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 30, 86, 0.4);
+        }
+        .cyber-btn-red:hover {
+            box-shadow: 0 0 30px rgba(255, 30, 86, 0.8), 0 0 50px rgba(255, 0, 50, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Floating particles canvas styling */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-mesh min-h-screen flex flex-col justify-between selection:bg-rose-600 selection:text-white relative">
+
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Header / Navbar -->
+    <header class="relative z-10 w-full px-6 py-6 flex justify-between items-center max-w-7xl mx-auto">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 to-red-900 flex items-center justify-center shadow-lg shadow-rose-600/30">
+                <i class="fa-solid fa-cube text-white text-lg"></i>
+            </div>
+            <span class="font-cyber font-bold tracking-wider text-lg text-rose-500">
+                TUNGGAL PAITO
+            </span>
+        </div>
+        <div class="hidden md:flex items-center space-x-6 text-sm text-gray-400">
+            <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span> System Online</span>
+            <span class="text-xs px-3 py-1 rounded-full glass-card border-rose-500/30 text-rose-400 font-cyber">v3.0.26</span>
+        </div>
+    </header>
+
+    <!-- Main Hero Content -->
+    <main class="relative z-10 flex-grow flex items-center justify-center px-4 py-12">
+        <div class="max-w-4xl w-full text-center">
+            
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 border border-rose-500/30 shadow-lg shadow-rose-500/10 animate-bounce">
+                <i class="fa-solid fa-bolt text-rose-500"></i>
+                <span class="text-xs md:text-sm font-semibold tracking-widest uppercase text-rose-400">
+                    Next-Gen Data Analytics & Prediction Engine
+                </span>
+            </div>
+
+            <!-- Main Heading with Red Neon Glow -->
+            <h1 class="font-cyber font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight uppercase mb-6 neon-glow-red">
+                TUNGGAL PAITO
+            </h1>
+
+            <!-- Subtitle Description -->
+            <p class="text-gray-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-10">
+                Mahakarya sistem paito digital masa depan dengan perhitungan tingkat akurasi tinggi, antarmuka visual futuristik merah menyala, dan performa instan tanpa batas.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="triggerNotification()" class="cyber-btn-red w-full sm:w-auto px-8 py-4 rounded-xl font-bold font-cyber tracking-wider text-sm flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span>INISIASI SISTEM</span>
+                </button>
+                <button onclick="scrollToFeatures()" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-semibold font-cyber tracking-wider text-sm hover:border-rose-500/50 transition-all flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-compass text-rose-500"></i>
+                    <span>EKSPLORASI</span>
+                </button>
+            </div>
+
+            <!-- Grid Feature Highlights -->
+            <div id="features-section" class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 text-left">
+                <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-rose-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center text-rose-500 mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-microchip text-xl"></i>
+                    </div>
+                    <h3 class="font-cyber font-bold text-lg text-white mb-2">Algoritma Quantum</h3>
+                    <p class="text-gray-400 text-sm">Pemrosesan data pola paito tingkat lanjut menggunakan simulasi matriks berkecepatan tinggi.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-rose-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center text-rose-500 mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <h3 class="font-cyber font-bold text-lg text-white mb-2">Keamanan Enkripsi</h3>
+                    <p class="text-gray-400 text-sm">Dilindungi dengan protokol keamanan berlapis tinggi untuk menjaga integritas data.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-white/5 hover:border-rose-500/40 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center text-rose-500 mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt-lightning text-xl"></i>
+                    </div>
+                    <h3 class="font-cyber font-bold text-lg text-white mb-2">Respons Real-Time</h3>
+                    <p class="text-gray-400 text-sm">Visualisasi instan dengan latensi mendekati nol untuk pengalaman pengguna yang mulus.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer with Automatic Copyright Year -->
+    <footer class="relative z-10 w-full py-8 border-t border-rose-500/10 text-center px-4 bg-black/60 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+            <div class="flex items-center space-x-2">
+                <span class="font-cyber text-rose-500 tracking-wider">TUNGGAL PAITO</span>
+                <span>— All Rights Reserved.</span>
+            </div>
+            <div>
+                <p>&copy; <span id="current-year"></span> TUNGGAL PAITO. Crafted with futuristic red excellence.</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hover:text-rose-500 transition-colors"><i class="fa-brands fa-github text-base"></i></a>
+                <a href="#" class="hover:text-rose-500 transition-colors"><i class="fa-brands fa-telegram text-base"></i></a>
+                <a href="#" class="hover:text-rose-500 transition-colors"><i class="fa-brands fa-discord text-base"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Elements & Particle Simulation JavaScript -->
+    <script>
+        // Automatic Copyright Year Update (guaranteed to reflect current year automatically)
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Smooth scroll for exploration button
+        function scrollToFeatures() {
+            document.getElementById('features-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Custom non-intrusive notification message box instead of alert()
+        function triggerNotification() {
+            const existingToast = document.getElementById('cyber-toast');
+            if (existingToast) existingToast.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'cyber-toast';
+            toast.className = 'fixed bottom-10 right-10 z-50 glass-card px-6 py-4 rounded-xl border border-rose-500/40 text-white shadow-2xl flex items-center space-x-3 transition-all transform translate-y-10 opacity-0';
+            toast.innerHTML = `
+                <div class="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center text-rose-500">
+                    <i class="fa-solid fa-check-circle"></i>
+                </div>
+                <div>
+                    <h4 class="font-cyber text-xs text-rose-500 font-bold uppercase tracking-wider">Status Sistem</h4>
+                    <p class="text-sm text-gray-300">Modul TUNGGAL PAITO berhasil diinisiasi!</p>
+                </div>
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 400);
+            }, 3500);
+        }
+
+        // Futuristic Red Particle Canvas Background Animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 60;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.color = Math.random() > 0.4 ? 'rgba(255, 30, 86, 0.45)' : 'rgba(200, 20, 60, 0.3)';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+
+            // Connect nearby particles with subtle red lines
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a + 1; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(255, 30, 86, ${0.1 * (1 - distance / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
