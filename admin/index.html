@@ -33,13 +33,15 @@
 
         .input-result-box { background: #0f172a; border: 1px solid #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.6); }
         .input-result-box label { font-size: 11px; font-weight: bold; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; }
-        .input-result-box input, .input-result-box select { width: 100%; background: #020617; border: 1px solid #334155; color: #f8fafc; padding: 10px 12px; border-radius: 6px; font-size: 14px; outline: none; transition: 0.2s; text-align: center; font-weight: bold; }
-        .input-result-box input { letter-spacing: 2px; }
-        .input-result-box input:focus, .input-result-box select:focus { border-color: #38bdf8; box-shadow: 0 0 8px rgba(56,189,248,0.4); }
+        .input-result-box input, .input-result-box select, .input-result-box textarea { width: 100%; background: #020617; border: 1px solid #334155; color: #f8fafc; padding: 10px 12px; border-radius: 6px; font-size: 14px; outline: none; transition: 0.2s; font-weight: bold; }
+        .input-result-box input[type="text"] { text-align: center; letter-spacing: 2px; }
+        .input-result-box input[type="date"] { text-align: center; }
+        .input-result-box textarea { resize: vertical; height: 120px; font-family: monospace; text-align: left; font-weight: normal; }
+        .input-result-box input:focus, .input-result-box select:focus, .input-result-box textarea:focus { border-color: #38bdf8; box-shadow: 0 0 8px rgba(56,189,248,0.4); }
 
         .btn-kirim { background: #10b981; border: 1px solid #34d399; color: #fff; padding: 10px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
         .btn-kirim:hover { background: #059669; box-shadow: 0 0 10px rgba(16,185,129,0.5); }
-        .status-firebase { font-size: 11px; text-align: center; color: #94a3b8; margin-top: 4px; }
+        .status-firebase { font-size: 11px; text-align: center; color: #94a3b8; margin-top: 4px; font-weight: bold; }
 
         .list-menu { display: flex; flex-direction: column; gap: 6px; }
 
@@ -74,7 +76,7 @@
 
     <div class="section-title">📡 Update Live Result</div>
     <div class="input-result-box">
-      <input type="text" id="inputAngkaLive" placeholder="Result 4D" autocomplete="off" maxlength="4">
+        <input type="text" id="inputAngkaLive" placeholder="Result 4D" autocomplete="off" maxlength="4">
         <select id="pilihPasaranLive">
             <option value="macau" selected>Result Macau</option>
             <option value="cambodia">Result Cambodia</option>
@@ -90,8 +92,33 @@
         </select>
         
         <button type="button" class="btn-kirim" onclick="kirimLiveKeFirebase()">Update Live ke Firebase</button>
-        
         <div id="statusLive" class="status-firebase"></div>
+    </div>
+
+    <div class="section-title">🎯 Input Data Prediksi</div>
+    <div class="input-result-box">
+        <label for="pasaran-pred-select">Pilih Pasaran:</label>
+        <select id="pasaran-pred-select">
+            <option value="macau">Macau</option>
+            <option value="cambodia">Cambodia</option>
+            <option value="sydney">Sydney (SDY)</option>
+            <option value="china">China</option>
+            <option value="japan">Japan</option>
+            <option value="singapore">Singapore (SGP)</option>
+            <option value="taiwan">Taiwan</option>
+            <option value="hongkong" selected>Hongkong (HK)</option>
+            <option value="sdylotto">Sdy Lotto</option>
+            <option value="hklotto">HK Lotto</option>
+        </select>
+
+        <label for="pred-date">Pilih Tanggal:</label>
+        <input type="date" id="pred-date">
+
+        <label for="pred-data">Masukkan Data (Satu baris satu prediksi, format: <code>0123 : 45</code>):</label>
+        <textarea id="pred-data" placeholder="2036 : 85&#10;9608 : 52&#10;4659 : 30&#10;0823 : xx"></textarea>
+
+        <button type="button" class="btn-kirim" id="save-pred-btn">Simpan Prediksi ke Firebase</button>
+        <div id="statusPrediksi" class="status-firebase"></div>
     </div>
 
     <div class="section-title"></div>
@@ -121,18 +148,17 @@
 
     <div class="section-title">📌 HALAMAN JITU</div>
     <div class="list-menu">
-    <a href="https://tunggalpaito.online/prediksi-togel-macau-hari-ini/" target="_blank" class="btn-sub c-ping">Macau</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-cambodia/" target="_blank" class="btn-sub c-ping">Cambodia</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-sydney/" target="_blank" class="btn-sub c-ping">Sydney</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-china/" target="_blank" class="btn-sub c-ping">China</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-japan/" target="_blank" class="btn-sub c-ping">Japan</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-singapore/" target="_blank" class="btn-sub c-ping">SGP</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-taiwan/" target="_blank" class="btn-sub c-ping">Taiwan</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-hongkong/" target="_blank" class="btn-sub c-ping">Hongkong</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-sydney-lotto/" target="_blank" class="btn-sub c-ping">SDY LOTTO</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-hongkong-lotto/" target="_blank" class="btn-sub c-ping">HK LOTTO</a>
-    <a href="https://tunggalpaito.online/prediksi-togel-jitu-carolinaday/" target="_blank" class="btn-sub c-ping">Carolina Day</a>
-   
+        <a href="https://tunggalpaito.online/prediksi-togel-macau-hari-ini/" target="_blank" class="btn-sub c-ping">Macau</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-cambodia/" target="_blank" class="btn-sub c-ping">Cambodia</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-sydney/" target="_blank" class="btn-sub c-ping">Sydney</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-china/" target="_blank" class="btn-sub c-ping">China</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-japan/" target="_blank" class="btn-sub c-ping">Japan</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-singapore/" target="_blank" class="btn-sub c-ping">SGP</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-taiwan/" target="_blank" class="btn-sub c-ping">Taiwan</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-hongkong/" target="_blank" class="btn-sub c-ping">Hongkong</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-sydney-lotto/" target="_blank" class="btn-sub c-ping">SDY LOTTO</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-hongkong-lotto/" target="_blank" class="btn-sub c-ping">HK LOTTO</a>
+        <a href="https://tunggalpaito.online/prediksi-togel-jitu-carolinaday/" target="_blank" class="btn-sub c-ping">Carolina Day</a>
     </div>
 
     <div class="section-title">📌 LIVE RESULT</div>
@@ -186,6 +212,12 @@
   }
   const database = firebase.database();
 
+  // Otomatis isi tanggal hari ini untuk input prediksi
+  const dateInput = document.getElementById('pred-date');
+  if (dateInput) {
+      dateInput.value = new Date().toISOString().split('T')[0];
+  }
+
   // Fungsi Kirim Live dengan .update() agar tanggal lama tidak hilang
   function kirimLiveKeFirebase() {
       const pasaranLive = document.getElementById('pilihPasaranLive').value;
@@ -201,7 +233,6 @@
       statusLive.style.color = '#38bdf8';
       statusLive.innerText = `Memperbarui ${pasaranLive.toUpperCase()}...`;
 
-      // Mengambil tanggal hari ini (Format: DD-MM-YYYY)
       const tanggalHariIni = new Date().toLocaleDateString('id-ID', {
           day: '2-digit',
           month: '2-digit',
@@ -223,7 +254,6 @@
               dataBaruString = dataLama + "," + angkaBaru;
           }
 
-          // Menggunakan .update() agar tanggal-tanggal sebelumnya aman / tidak terhapus
           return refPasaran.update({
               [tanggalHariIni]: dataBaruString
           });
@@ -237,40 +267,44 @@
           statusLive.style.color = '#f87171';
           statusLive.innerText = "Gagal: " + error.message;
       });
-      }
+  }
 
-  // Fungsi Kirim Result Lomba
-  function kirimKeFirebase() {
-      const pasaranTerpilih = document.getElementById('pilihPasaran').value;
-      const nilaiAngka = document.getElementById('inputAngkaResult').value.trim();
-      const statusDiv = document.getElementById('statusFirebase');
+  // Fungsi Simpan Data Prediksi Multi Baris ke Firebase (Sesuai Format Kode Baru)
+  document.getElementById('save-pred-btn').addEventListener('click', () => {
+      const selectedPasaran = document.getElementById('pasaran-pred-select').value;
+      const selectedDate = document.getElementById('pred-date').value; 
+      const rawText = document.getElementById('pred-data').value;
+      const statusMsg = document.getElementById('statusPrediksi');
 
-      if (!nilaiAngka || nilaiAngka.length < 4) {
-          statusDiv.style.color = '#f87171';
-          statusDiv.innerText = "Error: Masukkan angka result 4D yang valid!";
+      if (!selectedDate || !rawText) {
+          statusMsg.style.color = '#ff4444';
+          statusMsg.textContent = 'Error: Tanggal dan data prediksi tidak boleh kosong!';
           return;
       }
 
-      statusDiv.style.color = '#38bdf8';
-      statusDiv.innerText = `Mengirim result ke ${pasaranTerpilih.toUpperCase()}...`;
+      statusMsg.style.color = '#38bdf8';
+      statusMsg.textContent = `Menyimpan prediksi ${selectedPasaran.toUpperCase()}...`;
 
-      const tanggalHariIni = new Date().toISOString().split("T")[0];
+      const dataArray = rawText.split('\n')
+                               .map(item => item.trim())
+                               .filter(item => item.length > 0);
 
-      database.ref('result/' + pasaranTerpilih).set({
-          rawDate: tanggalHariIni,
-          result4d: nilaiAngka,
-          timestamp: Date.now()
-      })
-      .then(() => {
-          statusDiv.style.color = '#34d399';
-          statusDiv.innerText = `Sukses! Result ${pasaranTerpilih.toUpperCase()} (${nilaiAngka}) terkirim!`;
-          document.getElementById('inputAngkaResult').value = '';
-      })
-      .catch((error) => {
-          statusDiv.style.color = '#f87171';
-          statusDiv.innerText = "Gagal: " + error.message;
-      });
-  }
+      const parts = selectedDate.split('-');
+      const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+
+      // Disimpan ke path node 'live/[pasaran]/[tanggal]' atau 'prediksi/' sesuai yang diinginkan
+      const dbRef = database.ref(`live/${selectedPasaran}/${formattedDate}`);
+
+      dbRef.set(dataArray)
+          .then(() => {
+              statusMsg.style.color = '#34d399';
+              statusMsg.textContent = `Sukses menyimpan data prediksi ${selectedPasaran.toUpperCase()}!`;
+          })
+          .catch((error) => {
+              statusMsg.style.color = '#ff4444';
+              statusMsg.textContent = 'Gagal: ' + error.message;
+          });
+  });
 </script>
 
 <script type="text/javascript">
