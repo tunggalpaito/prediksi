@@ -1,345 +1,147 @@
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html lang=id>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
-        /* Tema AMOLED: Hitam Pekat Total */
-        body { background: #000000; color: #e2e8f0; padding: 20px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 100vh; }
-
-        .admin-container { background: #080808; width: 100%; max-width: 500px; padding: 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); border: 1px solid #1a1a1a; margin-bottom: 20px; }
-
-        .top-tracker { display: flex; justify-content: center; align-items: center; width: 100%; margin-bottom: 15px; background: rgba(15, 15, 15, 0.8); padding: 5px; border-radius: 8px; border: 1px dashed #262626; }
-
-        .header { text-align: center; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 2px solid #1a1a1a; }
-        h2 { color: #38bdf8; font-size: 22px; font-weight: 800; letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase; text-shadow: 0 0 10px rgba(56,189,248,0.3); }
-
-        .main-nav { display: flex; gap: 12px; justify-content: center; width: 100%; }
-
-        .btn-utama { flex: 1; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 12px 15px; border-radius: 8px; font-weight: bold; font-size: 13px; color: #fff; transition: 0.2s; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
-        .btn-menu-awal { background: #00b894; border: 1px solid #00e6ac; }
-        .btn-menu-awal:hover { background: #009473; transform: translateY(-2px); box-shadow: 0 0 12px rgba(0,184,148,0.5); }
-        .btn-stat { background: #6366f1; border: 1px solid #818cf8; }
-        .btn-stat:hover { background: #4f46e5; transform: translateY(-2px); box-shadow: 0 0 12px rgba(99,102,241,0.5); }
-
-        .section-title { font-size: 12px; font-weight: bold; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px; text-align: left; margin: 25px 0 12px 5px; display: flex; align-items: center; }
-        .section-title::after { content: ""; flex: 1; height: 1px; background: #1a1a1a; margin-left: 10px; }
-
-        .input-result-box { background: #0f172a; border: 1px solid #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.6); }
-        .input-result-box label { font-size: 11px; font-weight: bold; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; }
-        .input-result-box input, .input-result-box select, .input-result-box textarea { width: 100%; background: #020617; border: 1px solid #334155; color: #f8fafc; padding: 10px 12px; border-radius: 6px; font-size: 14px; outline: none; transition: 0.2s; font-weight: bold; }
-        .input-result-box input[type="text"] { text-align: center; letter-spacing: 2px; }
-        .input-result-box input[type="date"] { text-align: center; }
-        .input-result-box textarea { resize: vertical; height: 120px; font-family: monospace; text-align: left; font-weight: normal; }
-        .input-result-box input:focus, .input-result-box select:focus, .input-result-box textarea:focus { border-color: #38bdf8; box-shadow: 0 0 8px rgba(56,189,248,0.4); }
-
-        .btn-kirim { background: #10b981; border: 1px solid #34d399; color: #fff; padding: 10px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
-        .btn-kirim:hover { background: #059669; box-shadow: 0 0 10px rgba(16,185,129,0.5); }
-        .status-firebase { font-size: 11px; text-align: center; color: #94a3b8; margin-top: 4px; font-weight: bold; }
-
-        .list-menu { display: flex; flex-direction: column; gap: 6px; }
-
-        .btn-sub { display: flex; align-items: center; justify-content: center; text-decoration: none; padding: 11px; border-radius: 6px; font-size: 12px; font-weight: 700; color: #f1f5f9; text-align: center; transition: all 0.2s ease; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.08); width: 100%; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1); }
-        .btn-sub:hover { transform: translateY(-1px); filter: brightness(1.2); box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
-
-        .c-result { background: #0369a1; border-color: #0284c7; }
-        .c-prediksi { background: #9a3412; border-color: #c2410c; }
-        .c-top2d { background: #5b21b6; border-color: #7c3aed; }
-        .c-live { background: #9f1239; border-color: #e11d48; }
-        .c-ping { background: #1e293b; border-color: #334155; color: #38bdf8; }
-
-        footer { text-align: center; font-size: 12px; color: #475569; margin-top: 10px; margin-bottom: 20px; }
-        footer span { color: #38bdf8; font-weight: bold; }
-    </style>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Admin Panel</title>
+<script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js></script>
+<script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js></script>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}.admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:5px;border-radius:8px;border:1px dashed #262626}.header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:20px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}.main-nav{display:flex;gap:12px;justify-content:center;width:100%}.btn-utama{flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 15px;border-radius:8px;font-weight:700;font-size:13px;color:#fff;transition:.2s;text-transform:uppercase;box-shadow:0 4px 10px rgba(0,0,0,.4)}.btn-menu-awal{background:#00b894;border:1px solid #00e6ac}.btn-menu-awal:hover{background:#009473;transform:translateY(-2px);box-shadow:0 0 12px rgba(0,184,148,.5)}.btn-stat{background:#6366f1;border:1px solid #818cf8}.btn-stat:hover{background:#4f46e5;transform:translateY(-2px);box-shadow:0 0 12px rgba(99,102,241,.5)}.section-title{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;text-align:left;margin:25px 0 12px 5px;display:flex;align-items:center}.section-title::after{content:"";flex:1;height:1px;background:#1a1a1a;margin-left:10px}.input-result-box{background:#0f172a;border:1px solid #1e293b;padding:15px;border-radius:8px;margin-bottom:15px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}.input-result-box label{font-size:11px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.5px}.input-result-box input,.input-result-box select,.input-result-box textarea{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:10px 12px;border-radius:6px;font-size:14px;outline:0;transition:.2s;font-weight:700}.input-result-box input[type=text]{text-align:center;letter-spacing:2px}.input-result-box input[type=date]{text-align:center}.input-result-box textarea{resize:vertical;height:120px;font-family:monospace;text-align:left;font-weight:400}.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{border-color:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.4)}.btn-kirim{background:#10b981;border:1px solid #34d399;color:#fff;padding:10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;text-transform:uppercase;transition:.2s}.btn-kirim:hover{background:#059669;box-shadow:0 0 10px rgba(16,185,129,.5)}.status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700}.list-menu{display:flex;flex-direction:column;gap:6px}.btn-sub{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:11px;border-radius:6px;font-size:12px;font-weight:700;color:#f1f5f9;text-align:center;transition:all .2s ease;text-transform:uppercase;border:1px solid rgba(255,255,255,.08);width:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.btn-sub:hover{transform:translateY(-1px);filter:brightness(1.2);box-shadow:0 4px 12px rgba(0,0,0,.6)}.c-result{background:#0369a1;border-color:#0284c7}.c-prediksi{background:#9a3412;border-color:#c2410c}.c-top2d{background:#5b21b6;border-color:#7c3aed}.c-live{background:#9f1239;border-color:#e11d48}.c-ping{background:#1e293b;border-color:#334155;color:#38bdf8}footer{text-align:center;font-size:12px;color:#475569;margin-top:10px;margin-bottom:20px}footer span{color:#38bdf8;font-weight:700}</style>
 </head>
 <body>
-
-<div class="admin-container">
-
-    <div class="top-tracker">
-        <div id="histats_counter" style="display:flex; justify-content:center; align-items:center; height:18px; overflow:hidden; transform:scale(.75); transform-origin:center; opacity:.95;"></div>
-    </div>
-
-    <div class="header">
-        <h2>PANEL ADMIN</h2>
-        <div class="main-nav">
-            <a href="https://tunggalpaito.online/" class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
-            <a href="https://tunggalpaito.online/" class="btn-utama btn-stat">TUNGGAL PAITO</a>
-        </div>
-    </div>
-
-    <div class="section-title">📡 Update Live Result</div>
-    <div class="input-result-box">
-        <input type="text" id="inputAngkaLive" placeholder="Result 4D" autocomplete="off" maxlength="4">
-        <select id="pilihPasaranLive">
-            <option value="macau" selected>Result Macau</option>
-            <option value="cambodia">Result Cambodia</option>
-            <option value="sydney">Result Sydney</option>
-            <option value="china">Result China</option>
-            <option value="japan">Result Japan</option>
-            <option value="singapore">Result Singapore</option>
-            <option value="taiwan">Result Taiwan</option>
-            <option value="hongkong">Result Hongkong</option>
-            <option value="sdylotto">Sdy Lotto</option>
-            <option value="hklotto">HK Lotto</option>
-            <option value="carolinaday">Carolina Day</option>
-        </select>
-        
-        <button type="button" class="btn-kirim" onclick="kirimLiveKeFirebase()">Update Live ke Firebase</button>
-        <div id="statusLive" class="status-firebase"></div>
-    </div>
-
-    <div class="section-title">🎯 Input Data Prediksi</div>
-    <div class="input-result-box">
-        <label for="pasaran-pred-select">Pilih Pasaran:</label>
-        <select id="pasaran-pred-select">
-            <option value="mcn">Macau</option>
-            <option value="cmb">Cambodia</option>
-            <option value="sdy">SDY</option>
-            <option value="chn">China</option>
-            <option value="jpn">Japan</option>
-            <option value="sgp">SGP</option>
-            <option value="twn">Taiwan</option>
-            <option value="hk" selected>HK</option>
-            <option value="sdylot">Sdy Lotto</option>
-            <option value="hklot">HK Lotto</option>
-        </select>
-        <label for="pred-date">Pilih Tanggal:</label>
-        <input type="date" id="pred-date">
-
-        <label for="pred-data">Masukkan Data (Satu baris satu prediksi, format: <code>0123 : 45</code>):</label>
-        <textarea id="pred-data" placeholder="2036 : 85&#10;9608 : 52&#10;4659 : 30&#10;0823 : xx"></textarea>
-
-        <button type="button" class="btn-kirim" id="save-pred-btn">Simpan Prediksi ke Firebase</button>
-        <div id="statusPrediksi" class="status-firebase"></div>
-    </div>
-
-    <div class="section-title"></div>
-    <div class="list-menu">
-        <a href="https://tunggalpaito.online/prediksi/sdy/" class="btn-sub c-live">SDY</a>
-        <a href="https://tunggalpaito.online/prediksi/sgp/" class="btn-sub c-live">SGP</a>
-        <a href="https://tunggalpaito.online/prediksi/hk/" class="btn-sub c-live">HK</a>
-        <a href="https://www.facebook.com/tunggalpaito" class="btn-sub c-live">Facebook</a>
-        <a href="https://tunggalpaito.online/bola-prediksi/" class="btn-sub c-live">Bola Merah</a>
-        <a href="https://www.toptal.com/developers/html-minifier/" class="btn-sub c-live">Cut HTML</a>
-        <a href="https://github.com/tunggalpaito/prediksi/edit/main/live-draw-tercepat-semua-togel/index.html" class="btn-sub c-live">Edit Live Draw</a>
-        <a href="https://github.com/tunggalpaito/prediksi/edit/main/admin/index.html" class="btn-sub c-prediksi">Admin</a>
-        <a href="https://voli.kit4d.info/mobile" class="btn-sub c-prediksi">BO</a>
-        <a href="https://www.croxyproxy.com/_id/proxy" class="btn-sub c-prediksi">Froxy VPN</a>
-    </div>
-    
-    <div class="section-title">📌 EDIT HALAMAN PREDIKSI</div>
-    <div class="list-menu">
-        <a href="https://github.com/tunggalpaito/.online/edit/main/index.html" class="btn-sub c-prediksi">HOME</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-macau-hari-ini/index.html" class="btn-sub c-prediksi">Macau</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-cambodia-hari-ini/index.html" class="btn-sub c-prediksi">Cambodia</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-sydney-hari-ini/index.html" class="btn-sub c-prediksi">SDY</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-china-hari-ini/index.html" class="btn-sub c-prediksi">China</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-japan-hari-ini/index.html" class="btn-sub c-prediksi">Japan</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-singapore-hari-ini/index.html" class="btn-sub c-prediksi">SGP</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-taiwan-hari-ini/index.html" class="btn-sub c-prediksi">Taiwan</a>
-        <a href="https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-hongkong-hari-ini/index.html" class="btn-sub c-prediksi">HK</a>
-        <a href="https://github.com/tunggalpaito/prediksi/edit/main/prediksi-togel-sdylotto-hari-ini/index.html" class="btn-sub c-prediksi">SDY LOTTO</a>
-        <a href="https://github.com/tunggalpaito/prediksi/edit/main/prediksi-togel-hklotto-hari-ini/index.html" class="btn-sub c-prediksi">HK LOTTO</a>
-    </div>
-
-    <div class="section-title">📌 HALAMAN JITU</div>
-    <div class="list-menu">
-        <a href="https://tunggalpaito.online/prediksi-togel-macau-hari-ini/" target="_blank" class="btn-sub c-ping">Macau</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-cambodia/" target="_blank" class="btn-sub c-ping">Cambodia</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-sydney/" target="_blank" class="btn-sub c-ping">Sydney</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-china/" target="_blank" class="btn-sub c-ping">China</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-japan/" target="_blank" class="btn-sub c-ping">Japan</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-singapore/" target="_blank" class="btn-sub c-ping">SGP</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-taiwan-hari-ini/" target="_blank" class="btn-sub c-ping">Taiwan</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-hongkong/" target="_blank" class="btn-sub c-ping">Hongkong</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-sydney-lotto/" target="_blank" class="btn-sub c-ping">SDY LOTTO</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-hongkong-lotto/" target="_blank" class="btn-sub c-ping">HK LOTTO</a>
-        <a href="https://tunggalpaito.online/prediksi-togel-jitu-carolinaday/" target="_blank" class="btn-sub c-ping">Carolina Day</a>
-    </div>
-
-    <div class="section-title">📌 LIVE RESULT</div>
-    <div class="list-menu">
-        <a href="https://online-marketplaces.hawaiifarmersmarkets.org/" class="btn-sub c-prediksi">Macau</a>
-        <a href="https://livecmd.live/" class="btn-sub c-prediksi">Cambodia</a>
-        <a href="https://atomic-wallet.trade/" class="btn-sub c-prediksi">SDY</a>
-        <a href="http://167.71.211.127/#popup1" class="btn-sub c-prediksi">China</a>
-        <a href="https://livedrawjapan.pics/" class="btn-sub c-prediksi">Japan</a>
-        <a href="https://sgnlive.org/" class="btn-sub c-prediksi">SGP</a>
-        <a href="https://resulttaiwan.site/" class="btn-sub c-prediksi">Taiwan</a>
-        <a href="https://lotto88.blog/" class="btn-sub c-prediksi">HK</a>
-        <a href="https://atomic-wallet.trade/" class="btn-sub c-prediksi">SDY LOTTO</a>
-        <a href="https://lotto88.blog/" class="btn-sub c-prediksi">HK LOTTO</a>
-        <a href="https://w35.angkanet.cyou/paito-warna-north-carolina-day/" class="btn-sub c-prediksi">Carolina Day</a>
-    </div>
-
-    <div class="section-title">📌 DASHBOARD & LAINNYA</div>
-    <div class="list-menu">
-        <a href="https://github.com/tunggalpaito/.online/new/main" class="btn-sub c-top2d">+ Code</a>
-        <a href="https://github.com/tunggalpaito/.online/actions" class="btn-sub c-top2d">Robot</a>
-        <a href="https://new.clientzone.rumahweb.com/login" class="btn-sub c-top2d">Domain</a>
-        <a href="https://console.firebase.google.com/u/0/project/komentar-web-f9e2e/database/komentar-web-f9e2e-default-rtdb/data/~2F?hl=id" class="btn-sub c-top2d">Komentar Public</a>
-        <a href="https://beta.publishers.adsterra.com/payout-information" class="btn-sub c-top2d">Pembayaran</a>
-        <a href="https://search.google.com/search-console?utm_source=about-page&resource_id=sc-domain:tunggalpaito.online" class="btn-sub c-top2d">Inspeksi URL</a>
-    </div>
-
-    <div class="section-title">📌 PING WEB</div>
-    <div class="list-menu">
-        <a href="https://pingomatic.com" target="_blank" class="btn-sub c-ping">🌐 Ping-O-Matic</a>
-        <a href="https://pingler.com" target="_blank" class="btn-sub c-ping">🌐 Pingler</a>
-        <a href="http://totalping.com" target="_blank" class="btn-sub c-ping">🌐 TotalPing</a>
-        <a href="http://brainbliss.com" target="_blank" class="btn-sub c-ping">🌐 Feed Shark</a>
-        <a href="https://smallseotools.com" target="_blank" class="btn-sub c-ping">🌐 SmallSEOTools Ping</a>
-    </div>
+<div class=admin-container>
+<div class=top-tracker>
+<div id=histats_counter style=display:flex;justify-content:center;align-items:center;height:18px;overflow:hidden;transform:scale(.75);transform-origin:center;opacity:.95></div>
 </div>
-
+<div class=header>
+<h2>PANEL ADMIN</h2>
+<div class=main-nav>
+<a href=https://tunggalpaito.online/ class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
+<a href=https://tunggalpaito.online/ class="btn-utama btn-stat">TUNGGAL PAITO</a>
+</div>
+</div>
+<div class=section-title>📡 Update Live Result</div>
+<div class=input-result-box>
+<input id=inputAngkaLive placeholder="Result 4D" autocomplete=off maxlength=4>
+<select id=pilihPasaranLive>
+<option value=macau selected>Result Macau</option>
+<option value=cambodia>Result Cambodia</option>
+<option value=sydney>Result Sydney</option>
+<option value=china>Result China</option>
+<option value=japan>Result Japan</option>
+<option value=singapore>Result Singapore</option>
+<option value=taiwan>Result Taiwan</option>
+<option value=hongkong>Result Hongkong</option>
+<option value=sdylotto>Sdy Lotto</option>
+<option value=hklotto>HK Lotto</option>
+<option value=carolinaday>Carolina Day</option>
+</select>
+<button type=button class=btn-kirim onclick=kirimLiveKeFirebase()>Update Live ke Firebase</button>
+<div id=statusLive class=status-firebase></div>
+</div>
+<div class=section-title>🎯 Input Data Prediksi</div>
+<div class=input-result-box>
+<label for=pasaran-pred-select>Pilih Pasaran:</label>
+<select id=pasaran-pred-select>
+<option value=mcn>Macau</option>
+<option value=cmb>Cambodia</option>
+<option value=sdy>SDY</option>
+<option value=chn>China</option>
+<option value=jpn>Japan</option>
+<option value=sgp>SGP</option>
+<option value=twn>Taiwan</option>
+<option value=hk selected>HK</option>
+<option value=sdylot>Sdy Lotto</option>
+<option value=hklot>HK Lotto</option>
+</select>
+<label for=pred-date>Pilih Tanggal:</label>
+<input type=date id=pred-date>
+<label for=pred-data>Masukkan Data (Satu baris satu prediksi, format: <code>0123 : 45</code>):</label>
+<textarea id=pred-data placeholder="2036 : 85&#10;9608 : 52&#10;4659 : 30&#10;0823 : xx"></textarea>
+<button type=button class=btn-kirim id=save-pred-btn>Simpan Prediksi ke Firebase</button>
+<div id=statusPrediksi class=status-firebase></div>
+</div>
+<div class=section-title></div>
+<div class=list-menu>
+<a href=https://tunggalpaito.online/prediksi/sdy/ class="btn-sub c-live">SDY</a>
+<a href=https://tunggalpaito.online/prediksi/sgp/ class="btn-sub c-live">SGP</a>
+<a href=https://tunggalpaito.online/prediksi/hk/ class="btn-sub c-live">HK</a>
+<a href=https://www.facebook.com/tunggalpaito class="btn-sub c-live">Facebook</a>
+<a href=https://tunggalpaito.online/bola-prediksi/ class="btn-sub c-live">Bola Merah</a>
+<a href=https://www.toptal.com/developers/html-minifier/ class="btn-sub c-live">Cut HTML</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/live-draw-tercepat-semua-togel/index.html class="btn-sub c-live">Edit Live Draw</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/admin/index.html class="btn-sub c-prediksi">Admin</a>
+<a href=https://voli.kit4d.info/mobile class="btn-sub c-prediksi">BO</a>
+<a href=https://www.croxyproxy.com/_id/proxy class="btn-sub c-prediksi">Froxy VPN</a>
+</div>
+<div class=section-title>📌 EDIT HALAMAN PREDIKSI</div>
+<div class=list-menu>
+<a href=https://github.com/tunggalpaito/.online/edit/main/index.html class="btn-sub c-prediksi">HOME</a>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-macau-hari-ini/index.html class="btn-sub c-prediksi">Macau</a>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-cambodia-hari-ini/index.html class="btn-sub c-prediksi">Cambodia</a>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-sydney-hari-ini/index.html class="btn-sub c-prediksi">SDY</a>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-china-hari-ini/index.html class="btn-sub c-prediksi">China</a>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-japan-hari-ini/index.html class="btn-sub c-prediksi">Japan</a>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-singapore-hari-ini/index.html class="btn-sub c-prediksi">SGP</a>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-taiwan-hari-ini/index.html class="btn-sub c-prediksi">Taiwan</a>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi-togel-hongkong-hari-ini/index.html class="btn-sub c-prediksi">HK</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/prediksi-togel-sdylotto-hari-ini/index.html class="btn-sub c-prediksi">SDY LOTTO</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/prediksi-togel-hklotto-hari-ini/index.html class="btn-sub c-prediksi">HK LOTTO</a>
+</div>
+<div class=section-title>📌 HALAMAN JITU</div>
+<div class=list-menu>
+<a href=https://tunggalpaito.online/prediksi-togel-macau-hari-ini/ target=_blank class="btn-sub c-ping">Macau</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-cambodia/ target=_blank class="btn-sub c-ping">Cambodia</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-sydney/ target=_blank class="btn-sub c-ping">Sydney</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-china/ target=_blank class="btn-sub c-ping">China</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-japan/ target=_blank class="btn-sub c-ping">Japan</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-singapore/ target=_blank class="btn-sub c-ping">SGP</a>
+<a href=https://tunggalpaito.online/prediksi-togel-taiwan-hari-ini/ target=_blank class="btn-sub c-ping">Taiwan</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-hongkong/ target=_blank class="btn-sub c-ping">Hongkong</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-sydney-lotto/ target=_blank class="btn-sub c-ping">SDY LOTTO</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-hongkong-lotto/ target=_blank class="btn-sub c-ping">HK LOTTO</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-carolinaday/ target=_blank class="btn-sub c-ping">Carolina Day</a>
+</div>
+<div class=section-title>📌 LIVE RESULT</div>
+<div class=list-menu>
+<a href=https://online-marketplaces.hawaiifarmersmarkets.org/ class="btn-sub c-prediksi">Macau</a>
+<a href=https://livecmd.live/ class="btn-sub c-prediksi">Cambodia</a>
+<a href=https://atomic-wallet.trade/ class="btn-sub c-prediksi">SDY</a>
+<a href=http://167.71.211.127/#popup1 class="btn-sub c-prediksi">China</a>
+<a href=https://livedrawjapan.pics/ class="btn-sub c-prediksi">Japan</a>
+<a href=https://sgnlive.org/ class="btn-sub c-prediksi">SGP</a>
+<a href=https://resulttaiwan.site/ class="btn-sub c-prediksi">Taiwan</a>
+<a href=https://lotto88.blog/ class="btn-sub c-prediksi">HK</a>
+<a href=https://atomic-wallet.trade/ class="btn-sub c-prediksi">SDY LOTTO</a>
+<a href=https://lotto88.blog/ class="btn-sub c-prediksi">HK LOTTO</a>
+<a href=https://w35.angkanet.cyou/paito-warna-north-carolina-day/ class="btn-sub c-prediksi">Carolina Day</a>
+</div>
+<div class=section-title>📌 DASHBOARD & LAINNYA</div>
+<div class=list-menu>
+<a href=https://github.com/tunggalpaito/.online/new/main class="btn-sub c-top2d">+ Code</a>
+<a href=https://github.com/tunggalpaito/.online/actions class="btn-sub c-top2d">Robot</a>
+<a href=https://new.clientzone.rumahweb.com/login class="btn-sub c-top2d">Domain</a>
+<a href="https://console.firebase.google.com/u/0/project/komentar-web-f9e2e/database/komentar-web-f9e2e-default-rtdb/data/~2F?hl=id" class="btn-sub c-top2d">Komentar Public</a>
+<a href=https://beta.publishers.adsterra.com/payout-information class="btn-sub c-top2d">Pembayaran</a>
+<a href="https://search.google.com/search-console?utm_source=about-page&resource_id=sc-domain:tunggalpaito.online" class="btn-sub c-top2d">Inspeksi URL</a>
+</div>
+<div class=section-title>📌 PING WEB</div>
+<div class=list-menu>
+<a href=https://pingomatic.com target=_blank class="btn-sub c-ping">🌐 Ping-O-Matic</a>
+<a href=https://pingler.com target=_blank class="btn-sub c-ping">🌐 Pingler</a>
+<a href=http://totalping.com target=_blank class="btn-sub c-ping">🌐 TotalPing</a>
+<a href=http://brainbliss.com target=_blank class="btn-sub c-ping">🌐 Feed Shark</a>
+<a href=https://smallseotools.com target=_blank class="btn-sub c-ping">🌐 SmallSEOTools Ping</a>
+</div>
+</div>
 <footer>
-    <p>&copy; 2026 <span>TUNGGAL PAITO</span>. All Rights Reserved.</p>
+<p>&copy; 2026 <span>TUNGGAL PAITO</span>. All Rights Reserved.</p>
 </footer>
-
-<script>
-  const firebaseConfig = {
-    databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
-  };
-
-  if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-  } else {
-      firebase.app();
-  }
-  const database = firebase.database();
-
-  // Otomatis isi tanggal hari ini untuk input prediksi
-  const dateInput = document.getElementById('pred-date');
-  if (dateInput) {
-      dateInput.value = new Date().toISOString().split('T')[0];
-  }
-
-  // Fungsi Kirim Live dengan .update() agar tanggal lama tidak hilang
-  function kirimLiveKeFirebase() {
-      const pasaranLive = document.getElementById('pilihPasaranLive').value;
-      const angkaBaru = document.getElementById('inputAngkaLive').value.trim();
-      const statusLive = document.getElementById('statusLive');
-
-      if (!angkaBaru || angkaBaru.length < 4) {
-          statusLive.style.color = '#f87171';
-          statusLive.innerText = "Error: Masukkan angka 4D live yang valid!";
-          return;
-      }
-
-      statusLive.style.color = '#38bdf8';
-      statusLive.innerText = `Memperbarui ${pasaranLive.toUpperCase()}...`;
-
-      const tanggalHariIni = new Date().toLocaleDateString('id-ID', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric'
-      }).replace(/\//g, '-');
-
-      const refPasaran = database.ref('live/' + pasaranLive);
-
-      refPasaran.once('value').then((snapshot) => {
-          let dataLama = snapshot.val();
-          let dataBaruString = angkaBaru;
-
-          if (dataLama && typeof dataLama === 'object') {
-              let stringAngkaLama = dataLama[tanggalHariIni] || "";
-              if (stringAngkaLama !== "") {
-                  dataBaruString = stringAngkaLama + "," + angkaBaru;
-              }
-          } else if (typeof dataLama === 'string' && dataLama.trim() !== "") {
-              dataBaruString = dataLama + "," + angkaBaru;
-          }
-
-          return refPasaran.update({
-              [tanggalHariIni]: dataBaruString
-          });
-      })
-      .then(() => {
-          statusLive.style.color = '#34d399';
-          statusLive.innerText = `Sukses! Live ${pasaranLive.toUpperCase()} (${angkaBaru}) - ${tanggalHariIni}`;
-          document.getElementById('inputAngkaLive').value = '';
-      })
-      .catch((error) => {
-          statusLive.style.color = '#f87171';
-          statusLive.innerText = "Gagal: " + error.message;
-      });
-  }
-
-  // Fungsi Simpan Data Prediksi Multi Baris ke Firebase (Sesuai Format Kode Baru)
-  document.getElementById('save-pred-btn').addEventListener('click', () => {
-      const selectedPasaran = document.getElementById('pasaran-pred-select').value;
-      const selectedDate = document.getElementById('pred-date').value; 
-      const rawText = document.getElementById('pred-data').value;
-      const statusMsg = document.getElementById('statusPrediksi');
-
-      if (!selectedDate || !rawText) {
-          statusMsg.style.color = '#ff4444';
-          statusMsg.textContent = 'Error: Tanggal dan data prediksi tidak boleh kosong!';
-          return;
-      }
-
-      statusMsg.style.color = '#38bdf8';
-      statusMsg.textContent = `Menyimpan prediksi ${selectedPasaran.toUpperCase()}...`;
-
-      const dataArray = rawText.split('\n')
-                               .map(item => item.trim())
-                               .filter(item => item.length > 0);
-
-      const parts = selectedDate.split('-');
-      const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-
-      // Disimpan ke path node 'live/[pasaran]/[tanggal]' atau 'prediksi/' sesuai yang diinginkan
-      const dbRef = database.ref(`live/${selectedPasaran}/${formattedDate}`);
-
-      dbRef.set(dataArray)
-          .then(() => {
-              statusMsg.style.color = '#34d399';
-              statusMsg.textContent = `Sukses menyimpan data prediksi ${selectedPasaran.toUpperCase()}!`;
-          })
-          .catch((error) => {
-              statusMsg.style.color = '#ff4444';
-              statusMsg.textContent = 'Gagal: ' + error.message;
-          });
-  });
-</script>
-
-<script type="text/javascript">
-var _Hasync= _Hasync || [];
-_Hasync.push(['Histats.start', '1,5037448,4,600,110,30,00001001']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function(){
-var hs=document.createElement('script');
-hs.type='text/javascript'; hs.async=true;
-hs.src='//s10.histats.com/js15_as.js';
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();
-</script>
+<script>const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);const database=firebase.database(),dateInput=document.getElementById("pred-date");if(dateInput){const e=new Date,t=e.getFullYear(),a=String(e.getMonth()+1).padStart(2,"0"),n=String(e.getDate()).padStart(2,"0");dateInput.value=`${t}-${a}-${n}`}function kirimLiveKeFirebase(){const e=document.getElementById("pilihPasaranLive").value,t=document.getElementById("inputAngkaLive").value.trim(),a=document.getElementById("statusLive");if(!t||t.length<4)return a.style.color="#f87171",void(a.innerText="Error: Masukkan angka 4D live yang valid!");a.style.color="#38bdf8",a.innerText=`Memperbarui ${e.toUpperCase()}...`;const n=(new Date).toLocaleDateString("id-ID",{day:"2-digit",month:"2-digit",year:"numeric"}).replace(/\//g,"-"),i=database.ref("live/"+e);i.once("value").then((e=>{let a=e.val(),r=t;if(a&&"object"==typeof a){let e=a[n]||"";""!==e&&(r=e+","+t)}else"string"==typeof a&&""!==a.trim()&&(r=a+","+t);return i.update({[n]:r})})).then((()=>{a.style.color="#34d399",a.innerText=`Sukses! Live ${e.toUpperCase()} (${t}) - ${n}`,document.getElementById("inputAngkaLive").value=""})).catch((e=>{a.style.color="#f87171",a.innerText="Gagal: "+e.message}))}document.getElementById("save-pred-btn").addEventListener("click",(()=>{const e=document.getElementById("pasaran-pred-select").value,t=document.getElementById("pred-date").value,a=document.getElementById("pred-data").value,n=document.getElementById("statusPrediksi");if(!t||!a)return n.style.color="#ff4444",void(n.textContent="Error: Tanggal dan data prediksi tidak boleh kosong!");n.style.color="#38bdf8",n.textContent=`Menyimpan prediksi ${e.toUpperCase()}...`;const i=a.split("\n").map((e=>e.trim())).filter((e=>e.length>0)),r=t.split("-"),s=`${r[2]}-${r[1]}-${r[0]}`;database.ref(`live/${e}/${s}`).set(i).then((()=>{n.style.color="#34d399",n.textContent=`Sukses menyimpan data prediksi ${e.toUpperCase()}!`})).catch((e=>{n.style.color="#ff4444",n.textContent="Gagal: "+e.message}))}))</script>
+<script>var _Hasync=_Hasync||[];_Hasync.push(["Histats.start","1,5037448,4,600,110,30,00001001"]),_Hasync.push(["Histats.fasi","1"]),_Hasync.push(["Histats.track_hits",""]),function(){var s=document.createElement("script");s.type="text/javascript",s.async=!0,s.src="//s10.histats.com/js15_as.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(s)}()</script>
 <noscript>
-<a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?5037448&101" alt="" border="0"></a>
+<a href=/ target=_blank><img src=//sstatic1.histats.com/0.gif?5037448&101 alt="" border=0></a>
 </noscript>
-<script>
-  document.querySelectorAll('a').forEach(link => {
-    let href = link.getAttribute('href');
-    if (href && href.includes('.html?hari=')) {
-      let pasaran = href.split('.html')[0];
-      let hari = href.split('?hari=')[1];
-      link.setAttribute('href', '/' + pasaran + '/' + hari);
-    }
-  });
-  const urlParams = new URLSearchParams(window.location.search);
-  const hariParam = urlParams.get('hari');
-  if (hariParam) {
-    const namaHalaman = window.location.pathname.split('/').pop().replace('.html', '');
-    window.history.replaceState(null, '', '/' + namaHalaman + '/' + hariParam);
-  }
-</script>
+<script>document.querySelectorAll("a").forEach((a=>{let t=a.getAttribute("href");if(t&&t.includes(".html?hari=")){let r=t.split(".html")[0],e=t.split("?hari=")[1];a.setAttribute("href","/"+r+"/"+e)}}));const urlParams=new URLSearchParams(window.location.search),hariParam=urlParams.get("hari");if(hariParam){const a=window.location.pathname.split("/").pop().replace(".html","");window.history.replaceState(null,"","/"+a+"/"+hariParam)}</script>
 </body>
 </html>
