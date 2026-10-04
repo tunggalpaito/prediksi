@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang=id>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Paito Warna Tunggal Paito</title>
+<meta name=description content="Paito warna terlengkap. Data pengeluaran Singapore Sydney Hongkong, tabel paito warna SGP HK SDY mingguan, prediksi angka jitu, dan live draw SGP HK SDY di Tunggal Paito.">
+<meta name=keywords content="paito warna sgp sdy hk, data sgp sdy hk, paito singapore sydney hongkong, pengeluaran sgp hk sdy, live sgp sdy hk, result sgp hk sdy, tunggal paito">
+<script src=https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js></script>
+<script src=https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js></script>
+<style>:root{--primary-color:#1b263b;--secondary-color:#415a77;--accent-color:#e63946;--bg-color:#f8f9fa;--card-bg:#ffffff;--text-color:#212529;--border-color:#dee2e6}*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}body{background-color:var(--bg-color);color:var(--text-color);line-height:1.5;padding:10px}.container{max-width:1000px;margin:0 auto}header{text-align:center;margin-bottom:15px}h1{color:var(--primary-color);font-size:1.5rem;margin-bottom:3px}p.subtitle{color:var(--secondary-color);font-size:.85rem}.ads-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-bottom:15px;background:#fff;padding:10px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.05)}.ad-box{background:#f1f3f5;border:1px dashed #adb5bd;border-radius:6px;display:flex;align-items:center;justify-content:center;min-height:60px;overflow:hidden;padding:5px}.nav-links-container{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}.nav-link-btn{display:block;text-align:center;background:var(--primary-color);color:#fff;text-decoration:none;padding:10px;border-radius:6px;font-weight:600;font-size:.9rem;box-shadow:0 2px 4px rgba(0,0,0,.05);transition:background .2s}.nav-link-btn:hover{background:var(--secondary-color)}.card{background:var(--card-bg);border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,.05);padding:15px;margin-bottom:20px}.section-title{font-size:1.1rem;color:var(--primary-color);margin-bottom:12px;border-bottom:2px solid var(--accent-color);padding-bottom:4px;display:inline-block}.table-responsive{width:100%;overflow-x:hidden;margin-bottom:15px;border:1px solid var(--border-color);border-radius:6px}.paito-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:.75rem}.paito-table td,.paito-table th{border:1px solid var(--border-color);padding:4px 1px;text-align:center;vertical-align:top}.paito-table th{background-color:var(--primary-color);color:#fff;font-weight:600;font-size:.8rem}.paito-table tr:nth-child(2n){background-color:#f8f9fa}.number-group{display:inline-block;padding:2px 3px;background:#f1f3f5;border-radius:4px;border:1px solid #e9ecef;margin:1px 0;font-family:monospace;letter-spacing:1px}.digit{display:inline-block;width:12px;text-align:center;cursor:pointer;font-weight:600}.color-controls{margin-top:15px;padding:12px;background:#f8f9fa;border-radius:6px;border:1px solid var(--border-color)}.color-controls h3{font-size:.9rem;margin-bottom:8px;color:var(--primary-color)}.palette-options{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.color-btn{width:28px;height:28px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 3px rgba(0,0,0,.3);cursor:pointer;transition:transform .2s}.color-btn:hover{transform:scale(1.1)}.btn-reset{padding:5px 12px;background:var(--accent-color);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.8rem;font-weight:700}.btn-reset:hover{opacity:.9}.auto-search-controls{margin-top:15px;padding:12px;background:#fff;border-radius:6px;border:1px solid var(--border-color)}.auto-search-controls h3{font-size:.9rem;margin-bottom:8px;color:var(--primary-color)}.position-group{margin-bottom:8px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.pos-btn{padding:4px 10px;background:#e9ecef;border:1px solid #ced4da;border-radius:4px;cursor:pointer;font-size:.75rem;font-weight:650}.pos-btn.active{background:var(--primary-color);color:#fff;border-color:var(--primary-color)}.digit-select-group{display:flex;gap:5px;flex-wrap:wrap;align-items:center}.dig-btn{width:24px;height:24px;background:#f1f3f5;border:1px solid #adb5bd;border-radius:3px;cursor:pointer;font-size:.75rem;font-weight:600}.dig-btn:hover{background:var(--secondary-color);color:#fff}.search-pattern-box{margin-top:12px;padding-top:10px;border-top:1px dashed var(--border-color)}.search-pattern-box input{padding:5px 8px;font-size:.8rem;border:1px solid #ced4da;border-radius:4px;width:120px;margin-right:5px}.btn-pattern{padding:5px 10px;background:var(--secondary-color);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.75rem;font-weight:600;margin-right:4px}.btn-pattern:hover{opacity:.9}.c-0{background-color:#ffadad!important;color:#000}.c-1{background-color:#ffd6a5!important;color:#000}.c-2{background-color:#fdffb6!important;color:#000}.c-3{background-color:#caffbf!important;color:#000}.c-4{background-color:#9bf6ff!important;color:#000}.c-5{background-color:#a0c4ff!important;color:#000}.c-6{background-color:#bdb2ff!important;color:#000}.c-7{background-color:#ffc6ff!important;color:#000}.c-8{background-color:#fffffc!important;color:#000}.c-9{background-color:#ffb703!important;color:#000}.seo-section{margin-top:20px;font-size:.8rem;color:#6c757d;background:#fff;padding:12px;border-radius:8px;border:1px solid var(--border-color)}.seo-section h4{margin-bottom:6px;color:var(--secondary-color)}footer{text-align:center;margin-top:15px;padding:10px;font-size:.85rem;color:var(--secondary-color);border-top:1px solid var(--border-color)}#loading{text-align:center;padding:15px;font-style:italic;color:var(--secondary-color);font-size:.85rem}</style>
+</head>
+<body>
+<div class=container>
+<header>
+<h1>Paito Warna Tunggal Paito</h1>
+<p class=subtitle>Data Pengeluaran & Paito Warna Lengkap</p>
+</header>
+<div class=ads-container>
+<div class=ad-box>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+<div class=ad-box>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+<div class=ad-box>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+<div class=ad-box>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+
+<!-- Navigasi Paito Warna -->
+<div class="nav-links-container">
+<a href="https://tunggalpaito.online/paito-warna/sdy/" class="nav-link-btn">SYDNEY</a>
+<a href="https://tunggalpaito.online/paito-warna/sgp/" class="nav-link-btn">SINGAPORE</a>
+<a href="https://tunggalpaito.online/paito-warna/hk/" class="nav-link-btn">HONGKONG</a>
+</div>
+
+<div class=seo-section>
+<h4>Informasi & Kata Kunci Terkait</h4>
+<p>
+Paito warna SGP HK SDY, data pengeluaran Singapore SGP HK SDY Pools, live result SGP SDY HK, paito harian sdy hk sgp, paito 4D SGP SDY HK, angka jitu sgp hk sdy, bocoran togel SGP HK SDY, situs resmi Tunggal Paito.
+</p>
+</div>
+<footer>
+&copy; <span id=currentYear></span> Tunggal Paito. All Rights Reserved.
+</footer>
+</div>
+<script>document.getElementById("currentYear").textContent=(new Date).getFullYear();const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"};firebase.apps.length||firebase.initializeApp(firebaseConfig);const db=firebase.database(),sgpRef=db.ref("live/data-sgp");let activeColorClass="c-0",selectedPosIndex=0;function setSelectedColor(t){activeColorClass=t}function resetColors(){document.querySelectorAll(".digit").forEach((t=>{t.className="digit"}))}function toggleDigitColor(t){let e=!1;for(let a=0;a<=9;a++)if(t.classList.contains("c-"+a)){e=!0;break}if(e)for(let e=0;e<=9;e++)t.classList.remove("c-"+e);else{for(let e=0;e<=9;e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}}function selectPosition(t,e){selectedPosIndex=t,document.querySelectorAll(".pos-btn").forEach((t=>t.classList.remove("active"))),e.classList.add("active")}function autoColorByPosition(t){document.querySelectorAll(".number-group").forEach((e=>{let a=e.querySelectorAll(".digit");if(a.length>selectedPosIndex){let e=a[selectedPosIndex];if(parseInt(e.textContent.trim())===t){for(let t=0;t<=9;t++)e.classList.remove("c-"+t);e.classList.add(activeColorClass)}}}))}function searchPattern(t){const e=document.getElementById("patternInput").value.trim();if(!e||isNaN(e))return void alert("Masukkan angka yang valid (contoh: 1234 atau 56)!");const a=e.split("");document.querySelectorAll(".number-group").forEach((s=>{const l=s.querySelectorAll(".digit");if(0===l.length)return;let o="";l.forEach((t=>o+=t.textContent.trim()));let n=!1;if(t)o.includes(e)&&(n=!0);else{let t=o;n=!0;for(let e of a){let a=t.indexOf(e);if(-1===a){n=!1;break}t=t.substring(0,a)+t.substring(a+1)}}n&&l.forEach((t=>{for(let e=0;e<=9;e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}))}))}sgpRef.once("value").then((t=>{const e=document.getElementById("loading"),a=document.getElementById("paitoTable"),s=document.getElementById("tableBody");if(e.style.display="none",a.style.display="table",!t.exists())return void(s.innerHTML='<tr><td colspan="5" style="text-align:center;">Belum ada data SGP di database.</td></tr>');const l=t.val();let o={};Object.keys(l).forEach((t=>{let e=t.split("-");if(3!==e.length)return;let a=new Date(`${e[2]}-${e[1]}-${e[0]}`);if(isNaN(a))return;let s=function(t){let e=new Date(t),a=e.getDay(),s=e.getDate()-a+(0===a?-6:1);return new Date(e.setDate(s))}(a),n=`${(i=s).getFullYear()}-${String(i.getMonth()+1).padStart(2,"0")}-${String(i.getDate()).padStart(2,"0")}`;var i;o[n]||(o[n]={1:"",3:"",4:"",6:"",0:""});let r=a.getDay(),c=l[t].split(",").map((t=>`<span class="number-group">${t.trim().split("").map((t=>`<span class="digit" onclick="toggleDigitColor(this)">${t}</span>`)).join("")}</span>`)).join("<br>");o[n][r]=c}));let n=Object.keys(o).sort(),i="";const r='<span class="number-group" style="letter-spacing:1px;"><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span></span>';n.forEach((t=>{let e=o[t],a=e[1]||r,s=e[3]||r,l=e[4]||r,n=e[6]||r,c=e[0]||r;i+=`<tr><td>${a}</td><td>${s}</td><td>${l}</td><td>${n}</td><td>${c}</td></tr>`})),s.innerHTML=i||'<tr><td colspan="5" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>'})).catch((t=>{console.error("Gagal mengambil data:",t),document.getElementById("loading").textContent="Gagal memuat data dari Firebase."}))</script>
+</body>
+</html>
