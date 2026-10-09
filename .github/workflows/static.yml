@@ -30,12 +30,17 @@ jobs:
       - name: Jalankan Skrip Pembuat Sitemap
         run: node main.js
 
+      - name: Tarik Perubahan Terbaru
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull origin main --rebase
+
       - name: Commit Hasil Sitemap
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update sitemap.xml dan robots.txt"
-          file_pattern: sitemap.xml robots.txt
-          push_options: '--force'
+          file_pattern: "sitemap.xml robots.txt"
           skip_ci: true
 
   deploy-job:
