@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Ambil Kode Repositori
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,6 +35,8 @@ jobs:
         with:
           commit_message: "Auto-update sitemap.xml dan robots.txt"
           file_pattern: sitemap.xml robots.txt
+          push_options: '--force'
+          skip_ci: true
 
   deploy-job:
     needs: fix-sitemap-job
