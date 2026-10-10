@@ -5,14 +5,20 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Prediksi Togel Jitu</title>
 <script src=https://html2canvas.hertzen.com/dist/html2canvas.min.js></script>
-<style>body{background:#111;color:#fff;font-family:Arial,sans-serif;padding:15px;display:flex;flex-direction:column;align-items:center}button,select,textarea{width:100%;max-width:360px;padding:10px;margin:5px 0;border:none;border-radius:8px;box-sizing:border-box}button{background:#fc0;font-weight:700;cursor:pointer}textarea{height:160px}#capture{width:100%;max-width:450px;padding:15px;text-align:center;border-radius:12px;background:#111;transition:background .3s ease}.row{background:#000;padding:10px;margin:8px 0;border-radius:10px;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap}.ball{width:32px;height:32px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:22px;font-weight:900}.red{background:red;color:#fff}.white{background:#fff;color:#000}.colon{font-size:28px;font-weight:700}#tanggal{display:block;width:fit-content;min-width:260px;max-width:90%;margin:0 auto 10px auto;text-align:center;font-weight:700;font-size:16px;color:#0f6;background:#000;border:1px solid #0f6;border-radius:25px;padding:8px 20px;box-sizing:border-box}.footer{margin-top:15px;font-size:14px;font-weight:700;color:#0f0;text-shadow:0 0 3px #0f0;opacity:1}</style>
+<style>body{background:#111;color:#fff;font-family:Arial,sans-serif;padding:15px;display:flex;flex-direction:column;align-items:center}button,select,textarea,input[type=date]{width:100%;max-width:360px;padding:10px;margin:5px 0;border:none;border-radius:8px;box-sizing:border-box}button{background:#fc0;font-weight:700;cursor:pointer}textarea{height:160px}input[type=date]{background:#222;color:#fff;border:1px solid #444;font-size:14px;text-align:center;font-weight:700}#capture{width:100%;max-width:450px;padding:15px;text-align:center;border-radius:12px;background:#111;transition:background .3s ease}.row{background:#000;padding:10px;margin:8px 0;border-radius:10px;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap}.ball{width:32px;height:32px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:22px;font-weight:900}.red{background:red;color:#fff}.white{background:#fff;color:#000}.colon{font-size:28px;font-weight:700}#tanggal{display:block;width:fit-content;min-width:260px;max-width:90%;margin:0 auto 10px auto;text-align:center;font-weight:700;font-size:16px;color:#0f6;background:#000;border:1px solid #0f6;border-radius:25px;padding:8px 20px;box-sizing:border-box}.footer{margin-top:15px;font-size:14px;font-weight:700;color:#0f0;text-shadow:0 0 3px #0f0;opacity:1}</style>
 </head>
 <body>
 <select id=flag onchange=setFlag()>
-<option value=🇳🇿 data-name=SDY data-market=sdy data-bg=#002b49>🇳🇿 New Zealand</option>
-<option value=🇸🇬 data-name=SGP data-market=sgp data-bg=#003300>🇸🇬 Singapore</option>
-<option value=🇭🇰 data-name=HK data-market=hk data-bg=#8b0000>🇭🇰 Hong Kong</option>
+<option value=🇳🇿 data-name="SDY" data-market=sdy data-bg=#002b49>🇳🇿 SDY POOLS</option>
+<option value=🇸🇬 data-name="SGP" data-market=sgp data-bg=#003300>🇸🇬 SGP</option>
+<option value=🇭🇰 data-name="HK" data-market=hk data-bg=#8b0000>🇭🇰 HK POOLS</option>
+<option value=🇳🇿 data-name="SDY LOTTO" data-market=sdylotto data-bg=#ff5500>🇳🇿 SDY LOTTO</option>
+<option value=🇭🇰 data-name="HK LOTTO" data-market=hklotto data-bg=#cc4400>🇭🇰 HK LOTTO</option>
 </select>
+
+<!-- Input Kalender Praktis -->
+<input type="date" id="inputCalendar" onchange="formatTanggalKalender()">
+
 <textarea id=input placeholder="Contoh:
 0933:02
 1521:08
@@ -28,7 +34,44 @@
 <div id=output></div>
 <div class=footer>© TUNGGAL PAITO</div>
 </div>
-<script>function updateTanggal(){let e=new Date;document.getElementById("tanggal").value=e.toLocaleDateString("id-ID",{weekday:"long",year:"numeric",month:"long",day:"numeric"})}function setFlag(){let e=document.getElementById("flag"),t=e.options[e.selectedIndex],n=t.value,a=t.getAttribute("data-name"),l=t.getAttribute("data-bg");document.getElementById("bendera").innerText=n,document.getElementById("titleText").innerText="PREDIKSI "+a+" HARI INI",document.getElementById("capture").style.background=l}updateTanggal(),setFlag();let data=[];function makeBalls(e,t){let n="";const a=[...e];for(let e=0;e<a.length;e++){let l=a[e];"̶"===a[e+1]&&(l+=a[e+1],e++),n+=`<div class="ball ${t}">${l}</div>`}return n}function ambilDigit(e,t){let n="",a=0;for(let l=0;l<e.length&&(n+=e[l],/[0-9]/.test(e[l])&&a++,"̶"===e[l+1]&&(n+=e[l+1],l++),!(a>=t));l++);return n}function generate(){let e=document.getElementById("input").value.split("\n").filter((e=>""!=e.trim()));data=e.map((e=>{let t=e.split(":"),n=(t[0]||"").replace(/\s+/g,""),a=(t[1]||"").replace(/\s+/g,"");return{red:ambilDigit(n,4),white:ambilDigit(a,4)}})),render()}function render(){let e="";data.forEach((t=>{e+=`\n<div class="row">\n${makeBalls(t.red,"red")}\n<div class="colon">:</div>\n${makeBalls(t.white,"white")}\n</div>\n`})),document.getElementById("output").innerHTML=e}function resetData(){document.getElementById("input").value="",document.getElementById("output").innerHTML=""}function downloadImage(){let e=document.getElementById("flag"),t=`prediksi-${(e.options[e.selectedIndex].getAttribute("data-market")||"pasaran").toLowerCase()}-${document.getElementById("tanggal").value.trim().toLowerCase().replace(/[\/,]/g,"-").replace(/\s+/g,"-").replace(/-+/g,"-")}.png`;html2canvas(document.getElementById("capture"),{backgroundColor:null,scale:2,useCORS:!0}).then((function(e){let n=document.createElement("a");n.download=t,n.href=e.toDataURL("image/png"),n.click()}))}</script>
+<script>
+function setTodayCalendar(){
+let today = new Date();
+let yyyy = today.getFullYear();
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let dd = String(today.getDate()).padStart(2, '0');
+document.getElementById("inputCalendar").value = `${yyyy}-${mm}-${dd}`;
+formatTanggalKalender();
+}
+
+function formatTanggalKalender(){
+let val = document.getElementById("inputCalendar").value;
+if(!val) return;
+let parts = val.split("-");
+let dt = new Date(parts[0], parts[1] - 1, parts[2]);
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+let formatted = dt.toLocaleDateString('id-ID', options);
+document.getElementById("tanggal").value = formatted;
+}
+
+function setFlag(){
+let e=document.getElementById("flag"),t=e.options[e.selectedIndex],n=t.value,a=t.getAttribute("data-name"),l=t.getAttribute("data-bg");
+document.getElementById("bendera").innerText=n;
+document.getElementById("titleText").innerText="PREDIKSI "+a+" HARI INI";
+document.getElementById("capture").style.background=l;
+}
+
+setTodayCalendar();
+setFlag();
+
+let data=[];
+function makeBalls(e,t){let n="";const a=[...e];for(let e=0;e<a.length;e++){let l=a[e];"̶"===a[e+1]&&(l+=a[e+1],e++),n+=`<div class="ball ${t}">${l}</div>`}return n}
+function ambilDigit(e,t){let n="",a=0;for(let l=0;l<e.length&&(n+=e[l],/[0-9]/.test(e[l])&&a++,"̶"===e[l+1]&&(n+=e[l+1],l++),!(a>=t));l++);return n}
+function generate(){let e=document.getElementById("input").value.split("\n").filter((e=>""!=e.trim()));data=e.map((e=>{let t=e.split(":"),n=(t[0]||"").replace(/\s+/g,""),a=(t[1]||"").replace(/\s+/g,"");return{red:ambilDigit(n,4),white:ambilDigit(a,4)}})),render()}
+function render(){let e="";data.forEach((t=>{e+=`\n<div class="row">\n${makeBalls(t.red,"red")}\n<div class="colon">:</div>\n${makeBalls(t.white,"white")}\n</div>\n`})),document.getElementById("output").innerHTML=e}
+function resetData(){document.getElementById("input").value="",document.getElementById("output").innerHTML=""}
+function downloadImage(){let e=document.getElementById("flag"),t=`prediksi-${(e.options[e.selectedIndex].getAttribute("data-market")||"pasaran").toLowerCase()}-${document.getElementById("tanggal").value.trim().toLowerCase().replace(/[\/,]/g,"-").replace(/\s+/g,"-").replace(/-+/g,"-")}.png`;html2canvas(document.getElementById("capture"),{backgroundColor:null,scale:2,useCORS:!0}).then((function(e){let n=document.createElement("a");n.download=t,n.href=e.toDataURL("image/png"),n.click()}))}
+</script>
 <script>document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&((!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0))))}</script>
 </body>
 </html>
