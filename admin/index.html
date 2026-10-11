@@ -6,7 +6,7 @@
 <title>Admin Panel - Tunggal Paito</title>
 <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js></script>
 <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js></script>
-<style>*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}.admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:5px;border-radius:8px;border:1px dashed #262626}.header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:20px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}.main-nav{display:flex;gap:12px;justify-content:center;width:100%}.btn-utama{flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 15px;border-radius:8px;font-weight:700;font-size:13px;color:#fff;transition:.2s;text-transform:uppercase;box-shadow:0 4px 10px rgba(0,0,0,.4)}.btn-menu-awal{background:#00b894;border:1px solid #00e6ac}.btn-menu-awal:hover{background:#009473;transform:translateY(-2px);box-shadow:0 0 12px rgba(0,184,148,.5)}.btn-stat{background:#6366f1;border:1px solid #818cf8}.btn-stat:hover{background:#4f46e5;transform:translateY(-2px);box-shadow:0 0 12px rgba(99,102,241,.5)}.section-title{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;text-align:left;margin:25px 0 12px 5px;display:flex;align-items:center}.section-title::after{content:"";flex:1;height:1px;background:#1a1a1a;margin-left:10px}.input-result-box{background:#0f172a;border:1px solid #1e293b;padding:15px;border-radius:8px;margin-bottom:15px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}.input-result-box label{font-size:11px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.5px}.input-result-box input,.input-result-box select,.input-result-box textarea{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:10px 12px;border-radius:6px;font-size:14px;outline:0;transition:.2s;font-weight:700}.input-result-box input[type=text]{text-align:left;letter-spacing:1px}.input-result-box input[type=date]{text-align:center}.input-result-box textarea{resize:vertical;height:120px;font-family:monospace;text-align:left;font-weight:400}.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{border-color:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.4)}.btn-kirim{background:#10b981;border:1px solid #34d399;color:#fff;padding:10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;text-transform:uppercase;transition:.2s}.btn-kirim:hover{background:#059669;box-shadow:0 0 10px rgba(16,185,129,.5)}.status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700}.list-menu{display:flex;flex-direction:column;gap:6px}.btn-sub{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:11px;border-radius:6px;font-size:12px;font-weight:700;color:#f1f5f9;text-align:center;transition:all .2s ease;text-transform:uppercase;border:1px solid rgba(255,255,255,.08);width:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.btn-sub:hover{transform:translateY(-1px);filter:brightness(1.2);box-shadow:0 4px 12px rgba(0,0,0,.6)}.c-result{background:#0369a1;border-color:#0284c7}.c-prediksi{background:#9a3412;border-color:#c2410c}.c-top2d{background:#5b21b6;border-color:#7c3aed}.c-live{background:#9f1239;border-color:#e11d48}.c-ping{background:#1e293b;border-color:#334155;color:#38bdf8}footer{text-align:center;font-size:12px;color:#475569;margin-top:10px;margin-bottom:20px}footer span{color:#38bdf8;font-weight:700}</style>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}.admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:5px;border-radius:8px;border:1px dashed #262626}.header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:20px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}.main-nav{display:flex;gap:12px;justify-content:center;width:100%}.btn-utama{flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 15px;border-radius:8px;font-weight:700;font-size:13px;color:#fff;transition:.2s;text-transform:uppercase;box-shadow:0 4px 10px rgba(0,0,0,.4)}.btn-menu-awal{background:#00b894;border:1px solid #00e6ac}.btn-menu-awal:hover{background:#009473;transform:translateY(-2px);box-shadow:0 0 12px rgba(0,184,148,.5)}.btn-stat{background:#6366f1;border:1px solid #818cf8}.btn-stat:hover{background:#4f46e5;transform:translateY(-2px);box-shadow:0 0 12px rgba(99,102,241,.5)}.section-title{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;text-align:left;margin:25px 0 12px 5px;display:flex;align-items:center}.section-title::after{content:"";flex:1;height:1px;background:#1a1a1a;margin-left:10px}.input-result-box{background:#0f172a;border:1px solid #1e293b;padding:15px;border-radius:8px;margin-bottom:15px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}.input-result-box label{font-size:11px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.5px}.input-result-box input,.input-result-box select,.input-result-box textarea{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:10px 12px;border-radius:6px;font-size:14px;outline:0;transition:.2s;font-weight:700}.input-result-box input[type=text]{text-align:left;letter-spacing:1px}.input-result-box input[type=date]{text-align:center;color-scheme:dark}.input-result-box textarea{resize:vertical;height:120px;font-family:monospace;text-align:left;font-weight:400}.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{border-color:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.4)}.btn-kirim{background:#10b981;border:1px solid #34d399;color:#fff;padding:10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;text-transform:uppercase;transition:.2s}.btn-kirim:hover{background:#059669;box-shadow:0 0 10px rgba(16,185,129,.5)}.status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700}.list-menu{display:flex;flex-direction:column;gap:6px}.btn-sub{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:11px;border-radius:6px;font-size:12px;font-weight:700;color:#f1f5f9;text-align:center;transition:all .2s ease;text-transform:uppercase;border:1px solid rgba(255,255,255,.08);width:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.btn-sub:hover{transform:translateY(-1px);filter:brightness(1.2);box-shadow:0 4px 12px rgba(0,0,0,.6)}.c-result{background:#0369a1;border-color:#0284c7}.c-prediksi{background:#9a3412;border-color:#c2410c}.c-top2d{background:#5b21b6;border-color:#7c3aed}.c-live{background:#9f1239;border-color:#e11d48}.c-ping{background:#1e293b;border-color:#334155;color:#38bdf8}footer{text-align:center;font-size:12px;color:#475569;margin-top:10px;margin-bottom:20px}footer span{color:#38bdf8;font-weight:700}</style>
 </head>
 <body>
 <div class=admin-container>
@@ -152,7 +152,23 @@
 <p>&copy; 2026 <span>TUNGGAL PAITO</span>. All Rights Reserved.</p>
 </footer>
 <script>
-const BASE_URL_FOTO="https://tunggalpaito.online/",firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);const database=firebase.database();function setTodayDate(e){const t=document.getElementById(e);if(t){const e=new Date,a=e.getFullYear(),n=String(e.getMonth()+1).padStart(2,"0"),o=String(e.getDate()).padStart(2,"0");t.value=`${a}-${n}-${o}`}}
+const BASE_URL_FOTO="https://tunggalpaito.online/",firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};
+firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);
+const database=firebase.database();
+
+function setTodayDate(e){
+    const t=document.getElementById(e);
+    if(t){
+        const now=new Date(),
+              a=now.getFullYear(),
+              n=String(now.getMonth()+1).padStart(2,"0"),
+              o=String(now.getDate()).padStart(2,"0");
+        t.value=`${a}-${n}-${o}`;
+        // Memicu event agar browser langsung me-render tampilan tanggal secara instan
+        t.dispatchEvent(new Event('input', { bubbles: true }));
+        t.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+}
 
 function saveDataPaito(){
     const e = document.getElementById("marketSelect").value,
@@ -162,26 +178,29 @@ function saveDataPaito(){
     if(!t || !a) return n.style.color="#f87171",void(n.textContent="Tanggal dan angka tidak boleh kosong!");
     const o = t.split("-"),
           l = `${o[2]}-${o[1]}-${o[0]}`,
-          refPath = database.ref("live/"+e).child(l);
+          dbRef = database.ref("live/"+e);
           
     n.style.color="#38bdf8";
     n.textContent=`Menyimpan data ${e.toUpperCase()}...`;
     
-    // Mengecek apakah sudah ada data di tanggal tersebut, jika ada digabung dengan koma agar tidak menimpa
-    refPath.once("value").then(snapshot => {
-        let existingData = snapshot.val();
+    dbRef.once("value").then(snapshot => {
+        let rootVal = snapshot.val();
         let finalData = a;
-        if(existingData && typeof existingData === "string" && existingData.trim() !== ""){
-            finalData = existingData + "," + a;
+        
+        if(rootVal && typeof rootVal === "object" && rootVal[l]){
+            let existingVal = rootVal[l];
+            if(typeof existingVal === "string" && existingVal.trim() !== ""){
+                finalData = existingVal + "," + a;
+            }
         }
-        return refPath.set(finalData);
+        return dbRef.update({[l]: finalData});
     }).then(()=>{
-        n.style.color="#34d399",
-        n.textContent=`Berhasil menyimpan data ${e.toUpperCase()} untuk tanggal ${l}!`,
-        document.getElementById("inputNumbers").value=""
+        n.style.color="#34d399";
+        n.textContent=`Berhasil menyimpan data ${e.toUpperCase()} untuk tanggal ${l}!`;
+        document.getElementById("inputNumbers").value="";
     }).catch((err)=>{
-        n.style.color="#f87171",
-        n.textContent="Gagal menyimpan: "+err.message
+        n.style.color="#f87171";
+        n.textContent="Gagal menyimpan: "+err.message;
     });
 }
 
@@ -208,16 +227,20 @@ function kirimLiveKeFirebase(){
         }
         return i.update({[l]:n})
     })).then((()=>{
-        n.style.color="#34d399",
-        n.innerText=`Sukses! Live ${e.toUpperCase()} (${t}) - ${l}`,
-        document.getElementById("inputAngkaLive").value=""
+        n.style.color="#34d399";
+        n.innerText=`Sukses! Live ${e.toUpperCase()} (${t}) - ${l}`;
+        document.getElementById("inputAngkaLive").value="";
     })).catch((err=>{
-        n.style.color="#f87171",
-        n.innerText="Gagal: "+err.message
+        n.style.color="#f87171";
+        n.innerText="Gagal: "+err.message;
     }));
 }
 
-setTodayDate("inputDate"), setTodayDate("inputDateLive");
+// Inisialisasi tanggal hari ini saat load halaman
+window.addEventListener("DOMContentLoaded", () => {
+    setTodayDate("inputDate");
+    setTodayDate("inputDateLive");
+});
 
 const marketFotoSelect=document.getElementById("marketFotoSelect"),
       inputLinkFoto=document.getElementById("input-link-foto");
@@ -235,8 +258,8 @@ function loadFotoPasaran(e){
 loadFotoPasaran(marketFotoSelect.value);
 
 marketFotoSelect.addEventListener("change",(()=>{
-    loadFotoPasaran(marketFotoSelect.value),
-    document.getElementById("statusFoto").textContent=""
+    loadFotoPasaran(marketFotoSelect.value);
+    document.getElementById("statusFoto").textContent="";
 }));
 
 document.getElementById("save-foto-btn").addEventListener("click",(()=>{
@@ -245,13 +268,13 @@ document.getElementById("save-foto-btn").addEventListener("click",(()=>{
     const a=document.getElementById("statusFoto");
     if(!t)return a.style.color="#ff4444",void(a.textContent="Error: Nama file foto tidak boleh kosong!");
     const n=BASE_URL_FOTO+t.replace(/^\/+/,"");
-    a.style.color="#38bdf8",a.textContent="Menyimpan link foto...",
+    a.style.color="#38bdf8",a.textContent="Menyimpan link foto...";
     database.ref("live/"+e).set(n).then((()=>{
-        a.style.color="#34d399",
-        a.textContent=`Sukses memperbarui link foto ${e.toUpperCase().replace("_"," ")} ke Firebase!`
-    })).catch((err)=>{
-        a.style.color="#ff4444",
-        a.textContent="Gagal: "+err.message
+        a.style.color="#34d399";
+        a.textContent=`Sukses memperbarui link foto ${e.toUpperCase().replace("_"," ")} ke Firebase!`;
+    })).catch((err=>{
+        a.style.color="#ff4444";
+        a.textContent="Gagal: "+err.message;
     }));
 }));
 </script>
