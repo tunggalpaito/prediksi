@@ -20,6 +20,25 @@
 <a href=https://tunggalpaito.online/prediksi class="btn-utama btn-stat">TUNGGAL PAITO</a>
 </div>
 </div>
+
+<div class=section-title>📡 Update Prediksi Kepala & Ekor</div>
+<div class=input-result-box>
+<label for=inputPasaranPrediksi>Pilih Pasaran</label>
+<select id=inputPasaranPrediksi>
+<option value=sdy>SDY</option>
+<option value=sgp>SGP</option>
+<option value=hk>HK</option>
+</select>
+<label for=inputResultKey>Nomor Result 4D</label>
+<input id=inputResultKey placeholder="Contoh: 6469" autocomplete=off maxlength=4>
+<label for=inputKepala>Angka Kepala (Pisah dengan spasi)</label>
+<input id=inputKepala placeholder="Contoh: 2 3 4" autocomplete=off>
+<label for=inputEkor>Angka Ekor (Pisah dengan spasi)</label>
+<input id=inputEkor placeholder="Contoh: 3 4 5" autocomplete=off>
+<button type=button class=btn-kirim onclick=savePrediksiTunggal()>Kirim Prediksi ke Firebase</button>
+<div id=statusPrediksi class=status-firebase></div>
+</div>
+
 <div class=section-title>📡 Update Data Paito Warna</div>
 <div class=input-result-box>
 <label for=marketSelect>Pilih Pasaran</label>
@@ -37,6 +56,7 @@
 <button type=button class=btn-kirim onclick=saveDataPaito()>Kirim ke Firebase</button>
 <div id=message class=status-firebase></div>
 </div>
+
 <div class=section-title>📡 Update Live Draw</div>
 <div class=input-result-box>
 <label for=pilihPasaranLive>Pilih Pasaran Live</label>
@@ -52,6 +72,7 @@
 <button type=button class=btn-kirim onclick=kirimLiveKeFirebase()>Kirim ke Firebase</button>
 <div id=statusLive class=status-firebase></div>
 </div>
+
 <div class=section-title>📡 Update Link Foto Prediksi</div>
 <div class=input-result-box>
 <label for=marketFotoSelect>Pilih Pasaran</label>
@@ -70,6 +91,7 @@
 <button type=button class=btn-kirim id=save-foto-btn>Simpan Foto ke Firebase</button>
 <div id=statusFoto class=status-firebase></div>
 </div>
+
 <div class=section-title></div>
 <div class=list-menu>
 <a href=https://gemini.google.com/app?hl=id class="btn-sub c-live">Gemini</a>
@@ -164,10 +186,47 @@ function setTodayDate(e){
               n=String(now.getMonth()+1).padStart(2,"0"),
               o=String(now.getDate()).padStart(2,"0");
         t.value=`${a}-${n}-${o}`;
-        // Memicu event agar browser langsung me-render tampilan tanggal secara instan
         t.dispatchEvent(new Event('input', { bubbles: true }));
         t.dispatchEvent(new Event('change', { bubbles: true }));
     }
+}
+
+function savePrediksiTunggal(){
+    const pasaran = document.getElementById("inputPasaranPrediksi").value;
+    const resultKey = document.getElementById("inputResultKey").value.trim();
+    const kepalaVal = document.getElementById("inputKepala").value.trim();
+    const ekorVal = document.getElementById("inputEkor").value.trim();
+    const statusDiv = document.getElementById("statusPrediksi");
+
+    if(!resultKey || resultKey.length !== 4){
+        statusDiv.style.color = "#f87171";
+        statusDiv.innerText = "Error: Masukkan 4 digit nomor result dengan benar!";
+        return;
+    }
+    if(!kepalaVal || !ekorVal){
+        statusDiv.style.color = "#f87171";
+        statusDiv.innerText = "Error: Kepala dan Ekor tidak boleh kosong!";
+        return;
+    }
+
+    statusDiv.style.color = "#38bdf8";
+    statusDiv.innerText = `Menyimpan riwayat prediksi ${pasaran.toUpperCase()}...`;
+
+    // Menggunakan .push() agar data tidak menimpa, melainkan bertambah mencatat frekuensi/riwayat
+    database.ref(`live/targetData/${pasaran}/${resultKey}`).push({
+        kepala: kepalaVal,
+        ekor: ekorVal,
+        timestamp: Date.now()
+    }).then(() => {
+        statusDiv.style.color = "#34d399";
+        statusDiv.innerText = `Sukses! Riwayat ${pasaran.toUpperCase()} (${resultKey}) berhasil ditambahkan.`;
+        document.getElementById("inputResultKey").value = "";
+        document.getElementById("inputKepala").value = "";
+        document.getElementById("inputEkor").value = "";
+    }).catch((err) => {
+        statusDiv.style.color = "#f87171";
+        statusDiv.innerText = "Gagal: " + err.message;
+    });
 }
 
 function saveDataPaito(){
@@ -236,7 +295,6 @@ function kirimLiveKeFirebase(){
     }));
 }
 
-// Inisialisasi tanggal hari ini saat load halaman
 window.addEventListener("DOMContentLoaded", () => {
     setTodayDate("inputDate");
     setTodayDate("inputDateLive");
