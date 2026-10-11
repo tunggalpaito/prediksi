@@ -5,31 +5,7 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Prediksi Togel Jitu</title>
 <script src=https://html2canvas.hertzen.com/dist/html2canvas.min.js></script>
-<style>
-body{background:#111;color:#fff;font-family:Arial,sans-serif;padding:15px;display:flex;flex-direction:column;align-items:center}
-button,input[type=date],select,textarea{width:100%;max-width:360px;padding:10px;margin:5px 0;border:none;border-radius:8px;box-sizing:border-box}
-button{background:#fc0;font-weight:700;cursor:pointer}
-textarea{height:160px}
-input[type=date]{background:#222;color:#fff;border:1px solid #444;font-size:14px;text-align:center;font-weight:700}
-#capture{width:100%;max-width:480px;padding:15px;text-align:center;border-radius:12px;background:#111;transition:background .3s ease}
-.row{background:#000;padding:8px 10px;margin:6px 0;border-radius:10px;display:flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap}
-
-/* Ukuran Bola Normal (Untuk Line 2D & Paito/Prediksi Biasa) */
-.ball{width:32px;height:32px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:22px;font-weight:900}
-
-/* Ukuran Khusus Bola BBFS (Dikecilkan proporsional agar 8+ digit muat rapi tanpa terpecah) */
-.ball.bbfs-ball{width:20px;height:20px;font-size:12px}
-
-.red{background:red;color:#fff}
-.white{background:#fff;color:#000}
-.colon{font-size:28px;font-weight:700;margin:0 4px}
-
-/* Penyesuaian colon khusus bbfs */
-.colon.bbfs-colon{font-size:16px;margin:0 2px}
-
-#tanggal{display:block;width:fit-content;min-width:260px;max-width:90%;margin:0 auto 10px auto;text-align:center;font-weight:700;font-size:16px;color:#0f6;background:#000;border:1px solid #0f6;border-radius:25px;padding:8px 20px;box-sizing:border-box}
-.footer{margin-top:15px;font-size:14px;font-weight:700;color:#0f0;text-shadow:0 0 3px #0f0;opacity:1}
-</style>
+<style>body{background:#111;color:#fff;font-family:Arial,sans-serif;padding:15px;display:flex;flex-direction:column;align-items:center}button,input[type=date],select,textarea{width:100%;max-width:360px;padding:10px;margin:5px 0;border:none;border-radius:8px;box-sizing:border-box}button{background:#fc0;font-weight:700;cursor:pointer}textarea{height:160px}input[type=date]{background:#222;color:#fff;border:1px solid #444;font-size:14px;text-align:center;font-weight:700}#capture{width:100%;max-width:480px;padding:15px;text-align:center;border-radius:12px;background:#111;transition:background .3s ease}.row{background:#000;padding:6px 6px;margin:6px 0;border-radius:10px;display:flex;justify-content:center;align-items:center;gap:2px;flex-wrap:nowrap;overflow-x:auto;max-width:100%}.row::-webkit-scrollbar{height:3px}.row::-webkit-scrollbar-thumb{background:#333;border-radius:3px}.ball{width:24px;height:24px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:15px;font-weight:900;flex-shrink:0}.ball.bbfs-ball{width:18px;height:18px;font-size:11px}.red{background:red;color:#fff}.white{background:#fff;color:#000}.colon{font-size:20px;font-weight:700;margin:0 2px;flex-shrink:0}.colon.bbfs-colon{font-size:14px;margin:0 1px}.vs-3d{font-size:14px;font-weight:900;font-style:italic;margin:0 4px;background:linear-gradient(180deg,#ffe600 0,#f80 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 1px 0 #950,0 2px 0 #730,0 2px 4px rgba(0,0,0,.8),0 0 6px rgba(255,200,0,.8);letter-spacing:.5px;display:inline-block;transform:skewX(-10deg);flex-shrink:0}#tanggal{display:block;width:fit-content;min-width:260px;max-width:90%;margin:0 auto 10px auto;text-align:center;font-weight:700;font-size:16px;color:#0f6;background:#000;border:1px solid #0f6;border-radius:25px;padding:8px 20px;box-sizing:border-box}.footer{margin-top:15px;font-size:14px;font-weight:700;color:#0f0;text-shadow:0 0 3px #0f0;opacity:1}</style>
 </head>
 <body>
 <select id=flag onchange=updateTitleAndFlag()>
@@ -40,13 +16,16 @@ input[type=date]{background:#222;color:#fff;border:1px solid #444;font-size:14px
 <option value=🇭🇰 data-name="HK LOTTO" data-market=hklotto data-bg=#cc4400>🇳🇿 HK LOTTO</option>
 </select>
 <input type=date id=inputCalendar onchange=formatTanggalKalender()>
-<textarea id=input placeholder="Contoh Prediksi / BBFS 8 Digit:
+<textarea id=input placeholder="Contoh Format Baru:
+3398 : 036 vs 579
+
+Atau BBFS 8 Digit / Paito Biasa:
 3897 : 3489412088
 1234 : 01
 
 Atau Line 2D:
 12
-21" oninput="updateTitleAndFlag()"></textarea>
+21" oninput=updateTitleAndFlag()></textarea>
 <button onclick=generate()>✔ Proses</button>
 <button onclick=resetData()>🔄 Reset</button>
 <button onclick=downloadImage()>📥 Download Gambar</button>
@@ -57,137 +36,7 @@ Atau Line 2D:
 <div id=output></div>
 <div class=footer>© TUNGGAL PAITO</div>
 </div>
-<script>
-function setTodayCalendar(){
-  let e=new Date,t=e.getFullYear(),n=String(e.getMonth()+1).padStart(2,"0"),l=String(e.getDate()).padStart(2,"0");
-  document.getElementById("inputCalendar").value=`${t}-${n}-${l}`,formatTanggalKalender()
-}
-
-function formatTanggalKalender(){
-  let e=document.getElementById("inputCalendar").value;
-  if(!e)return;
-  let t=e.split("-"),n=new Date(t[0],t[1]-1,t[2]).toLocaleDateString("id-ID",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
-  document.getElementById("tanggal").value=n
-}
-
-function updateTitleAndFlag(){
-  let e=document.getElementById("flag"),
-      t=e.options[e.selectedIndex],
-      n=t.value,
-      l=t.getAttribute("data-name"),
-      a=t.getAttribute("data-bg");
-      
-  document.getElementById("bendera").innerText=n;
-  document.getElementById("capture").style.background=a;
-  
-  let rawInput = document.getElementById("input").value.trim();
-  let lines = rawInput.split("\n").filter(line => line.trim() !== "");
-  
-  if(lines.length === 0){
-    document.getElementById("titleText").innerText = "PREDIKSI " + l + " HARI INI";
-    return;
-  }
-  
-  let hasBbfs = lines.some(line => {
-    if(line.includes(":")){
-      let parts = line.split(":");
-      let rightVal = (parts[1] || "").replace(/\s+/g, "");
-      return rightVal.length >= 5;
-    }
-    return false;
-  });
-
-  let isLine2D = !rawInput.includes(":");
-
-  if(isLine2D){
-    document.getElementById("titleText").innerText = "LINE 2D " + l + " HARI INI";
-  } else if(hasBbfs){
-    document.getElementById("titleText").innerText = "PREDIKSI BBFS " + l + " HARI INI";
-  } else {
-    document.getElementById("titleText").innerText = "PREDIKSI " + l + " HARI INI";
-  }
-}
-
-setTodayCalendar(),updateTitleAndFlag();
-let data=[];
-
-function makeBalls(e,t,isBbfs){
-  let n="";
-  const l=[...e];
-  let ballClass = isBbfs ? `ball ${t} bbfs-ball` : `ball ${t}`;
-  for(let e=0;e<l.length;e++){
-    let a=l[e];
-    "̶"===l[e+1]&&(a+=l[e+1],e++),n+=`<div class="${ballClass}">${a}</div>`
-  }
-  return n
-}
-
-function ambilDigit(e,t){
-  let n="",l=0;
-  let max = t ? t : e.length;
-  for(let a=0;a<e.length&&(n+=e[a],/[0-9]/.test(e[a])&&l++,"̶"===e[a+1]&&(n+=e[a+1],a++),!(l>=max));a++);
-  return n
-}
-
-function generate(){
-  let e=document.getElementById("input").value.split("\n").filter((e=>""!==e.trim()));
-  data=e.map((e=>{
-    let t=e.trim();
-    if(t.includes(":")){
-      let e=t.split(":"),
-          n=(e[0]||"").replace(/\s+/g,""),
-          l=(e[1]||"").replace(/\s+/g,""),
-          isBbfs = l.length >= 5;
-      
-      return {
-        type: isBbfs ? "bbfs" : "paito",
-        red: ambilDigit(n),
-        white: ambilDigit(l)
-      }
-    }
-    let a=t.replace(/\s+/g,"");
-    return{type:"line2d",red:ambilDigit(a, a.length)}
-  }));
-  updateTitleAndFlag();
-  render()
-}
-
-function render(){
-  let e="";
-  data.forEach((t=>{
-    if("line2d"===t.type){
-      e+=`\n<div class="row">\n${makeBalls(t.red,"red",false)}\n</div>\n`;
-    }else if("paito"===t.type){
-      e+=`\n<div class="row">\n${makeBalls(t.red,"red",false)}\n<div class="colon">:</div>\n${makeBalls(t.white,"white",false)}\n</div>\n`;
-    }else{
-      e+=`\n<div class="row">\n${makeBalls(t.red,"red",true)}\n<div class="colon bbfs-colon">:</div>\n${makeBalls(t.white,"white",true)}\n</div>\n`;
-    }
-  }));
-  document.getElementById("output").innerHTML=e
-}
-
-function resetData(){
-  document.getElementById("input").value="",document.getElementById("output").innerHTML="",updateTitleAndFlag()
-}
-
-function downloadImage(){
-  let e=document.getElementById("flag"),
-      t=(e.options[e.selectedIndex].getAttribute("data-market")||"sdy").toLowerCase(),
-      tglRaw=document.getElementById("tanggal").value.trim().toLowerCase(),
-      tglFormatted=tglRaw.replace(/[\/,]/g,"").replace(/\s+/g,"-").replace(/-+/g,"-"),
-      fileName=`bbfs-${t}-${tglFormatted}.png`;
-  
-  html2canvas(document.getElementById("capture"),{backgroundColor:null,scale:2,useCORS:!0}).then((function(e){
-    let t=document.createElement("a");
-    t.download=fileName,t.href=e.toDataURL("image/png"),t.click()
-  }))
-}
-</script>
-<script>
-document.addEventListener("contextmenu",(e=>e.preventDefault()));
-document.onkeydown=function(e){
-  return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0
-}
-</script>
+<script>function setTodayCalendar(){let e=new Date,t=e.getFullYear(),n=String(e.getMonth()+1).padStart(2,"0"),l=String(e.getDate()).padStart(2,"0");document.getElementById("inputCalendar").value=`${t}-${n}-${l}`,formatTanggalKalender()}function formatTanggalKalender(){let e=document.getElementById("inputCalendar").value;if(!e)return;let t=e.split("-"),n=new Date(t[0],t[1]-1,t[2]).toLocaleDateString("id-ID",{weekday:"long",year:"numeric",month:"long",day:"numeric"});document.getElementById("tanggal").value=n}function updateTitleAndFlag(){let e=document.getElementById("flag"),t=e.options[e.selectedIndex],n=t.value,l=t.getAttribute("data-name"),a=t.getAttribute("data-bg");document.getElementById("bendera").innerText=n,document.getElementById("capture").style.background=a;let i=document.getElementById("input").value.trim(),d=i.split("\n").filter((e=>""!==e.trim()));if(0===d.length)return void(document.getElementById("titleText").innerText="PREDIKSI "+l+" HARI INI");let r=d.some((e=>{if(e.includes("vs"))return!1;if(e.includes(":")){return(e.split(":")[1]||"").replace(/\s+/g,"").length>=5}return!1})),o=!i.includes(":")&&!i.includes("vs");document.getElementById("titleText").innerText=o?"LINE 2D "+l+" HARI INI":r?"PREDIKSI BBFS "+l+" HARI INI":"PREDIKSI "+l+" HARI INI"}setTodayCalendar(),updateTitleAndFlag();let data=[];function makeBalls(e,t,n){let l="";const a=[...e];let i=n?`ball ${t} bbfs-ball`:`ball ${t}`;for(let e=0;e<a.length;e++){let t=a[e];"̶"===a[e+1]&&(t+=a[e+1],e++),l+=`<div class="${i}">${t}</div>`}return l}function ambilDigit(e,t){let n="",l=0,a=t||e.length;for(let t=0;t<e.length&&(n+=e[t],/[0-9]/.test(e[t])&&l++,"̶"===e[t+1]&&(n+=e[t+1],t++),!(l>=a));t++);return n}function generate(){let e=document.getElementById("input").value.split("\n").filter((e=>""!==e.trim()));data=e.map((e=>{let t=e.trim();if(t.includes("vs")){let e=t.split(":"),n=(e[0]||"").replace(/\s+/g,""),l=(e[1]||"").split("vs"),a=(l[0]||"").replace(/\s+/g,""),i=(l[1]||"").replace(/\s+/g,"");return{type:"vs_format",red:ambilDigit(n),white1:ambilDigit(a),white2:ambilDigit(i)}}if(t.includes(":")){let e=t.split(":"),n=(e[0]||"").replace(/\s+/g,""),l=(e[1]||"").replace(/\s+/g,"");return{type:l.length>=5?"bbfs":"paito",red:ambilDigit(n),white:ambilDigit(l)}}let n=t.replace(/\s+/g,"");return{type:"line2d",red:ambilDigit(n,n.length)}})),updateTitleAndFlag(),render()}function render(){let e="";data.forEach((t=>{"line2d"===t.type?e+=`\n<div class="row">\n${makeBalls(t.red,"red",!1)}\n</div>\n`:"paito"===t.type?e+=`\n<div class="row">\n${makeBalls(t.red,"red",!1)}\n<div class="colon">:</div>\n${makeBalls(t.white,"white",!1)}\n</div>\n`:"vs_format"===t.type?e+=`\n<div class="row">\n${makeBalls(t.red,"red",!1)}\n<div class="colon">:</div>\n${makeBalls(t.white1,"white",!1)}\n<span class="vs-3d">VS</span>\n${makeBalls(t.white2,"white",!1)}\n</div>\n`:e+=`\n<div class="row">\n${makeBalls(t.red,"red",!0)}\n<div class="colon bbfs-colon">:</div>\n${makeBalls(t.white,"white",!0)}\n</div>\n`})),document.getElementById("output").innerHTML=e}function resetData(){document.getElementById("input").value="",document.getElementById("output").innerHTML="",updateTitleAndFlag()}function downloadImage(){let e=document.getElementById("flag"),t=`bbfs-${(e.options[e.selectedIndex].getAttribute("data-market")||"sdy").toLowerCase()}-${document.getElementById("tanggal").value.trim().toLowerCase().replace(/[\/,]/g,"").replace(/\s+/g,"-").replace(/-+/g,"-")}.png`;html2canvas(document.getElementById("capture"),{backgroundColor:null,scale:2,useCORS:!0}).then((function(e){let n=document.createElement("a");n.download=t,n.href=e.toDataURL("image/png"),n.click()}))}</script>
+<script>document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}</script>
 </body>
 </html>
