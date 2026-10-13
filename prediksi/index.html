@@ -7,9 +7,24 @@
 <script src=https://cdn.tailwindcss.com></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet>
-<style>body{font-family:Inter,sans-serif;background-color:#030712;color:#f3f4f6;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.ad-container{width:100%;min-height:66px;display:flex;justify-content:center;align-items:center;overflow:hidden;margin-bottom:12px}#ads-popup{position:fixed;bottom:25px;right:15px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 15px 20px rgba(0, 0, 0, .85));transition:transform .1s ease}#ads-popup:active{cursor:grabbing}</style>
+<style>body{font-family:Inter,sans-serif;background-color:#030712;color:#f3f4f6;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.ad-container{width:100%;min-height:66px;display:flex;justify-content:center;align-items:center;overflow:hidden;margin-bottom:12px}#ads-popup{position:fixed;bottom:25px;right:15px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 15px 20px rgba(0, 0, 0, .85));transition:transform .1s ease}#ads-popup:active{cursor:grabbing}#buyer-notification{position:fixed;bottom:25px;left:15px;z-index:9998;max-width:280px;transform:translateY(100px);opacity:0;transition:all .5s cubic-bezier(.68, -.55, .27, 1.55);pointer-events:none}#buyer-notification.show{transform:translateY(0);opacity:1}</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-yellow-500 selection:text-slate-950">
+<div id=buyer-notification>
+<div class="bg-slate-900/95 border border-emerald-500/50 rounded-xl p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)] backdrop-blur-xl flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
+<i class="fa-solid fa-circle-check text-lg"></i>
+</div>
+<div class=overflow-hidden>
+<div class="flex items-center space-x-1">
+<span id=buyer-name class="text-xs font-bold text-white truncate">Budi Santoso</span>
+<span class="text-[10px] text-slate-400">baru saja</span>
+</div>
+<p id=buyer-apk class="text-[11px] text-emerald-400 font-semibold truncate">Membeli APK BBFS 🔥</p>
+<span id=buyer-time class="text-[9px] text-slate-500">Baru saja</span>
+</div>
+</div>
+</div>
 <div id=ads-popup>
 <div class="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black border border-amber-500/40 rounded-xl p-2.5 w-44 shadow-[0_0_15px_rgba(245,158,11,0.2)] backdrop-blur-xl">
 <button onclick='document.getElementById("ads-popup").style.display="none"' class="absolute -top-1.5 -right-1.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-slate-700 transition-colors shadow">
@@ -40,19 +55,43 @@ PREDIKSI TOGEL HARI INI
 </span>
 </a>
 </div>
-
-<!-- Tombol Download APK & Teks Informasi di atas Tombol Facebook -->
 <div class="mb-4 w-full text-center">
-<a href="https://drive.google.com/file/d/1XsGnOlSyOxUFpgokKiiy86Jte_Uiygr_/view?usp=drivesdk" target="_blank" class="flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all border border-emerald-500/50 mb-2">
-<i class="fa-solid fa-download text-lg"></i>
+<a href="https://drive.google.com/file/d/1XsGnOlSyOxUFpgokKiiy86Jte_Uiygr_/view?usp=drivesdk" target=_blank class="flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-[0_4px_20px_rgba(16,185,129,0.3)] transition-all border border-emerald-400/40 mb-3 group">
+<i class="fa-solid fa-cloud-arrow-down text-xl group-hover:scale-110 transition-transform"></i>
 <span class="text-sm tracking-wide">Download APK Tunggal Paito</span>
 </a>
-<p class="text-xs text-slate-300">
-APK Jitu khusus SDY, SGP, atau HK silahkan hubungi admin 
-<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20tertarik%20ingin%20mendapatkan%20APK%20Jitu%20khusus%20SDY,%20SGP,%20atau%20HK.%20Mohon%20informasinya." target="_blank" class="text-amber-400 font-semibold underline hover:text-amber-300">di sini</a>.
-</p>
+<div class="bg-gradient-to-br from-slate-900/90 via-slate-950 to-slate-900 border border-amber-500/30 rounded-2xl p-4 shadow-xl backdrop-blur-md relative overflow-hidden">
+<div class="absolute -right-6 -top-6 w-20 h-20 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-amber-400 text-xs font-bold mb-2">
+<i class="fa-solid fa-fire text-amber-500 animate-bounce"></i>
+<span>JP MAKSIMAL HANYA DI APK!</span>
 </div>
-
+<p class="text-xs text-slate-300 font-medium mb-3">
+Miliki secara permanen • <span class="text-red-400 font-bold underline">Stok Terbatas!</span>
+</p>
+<div class="grid grid-cols-3 gap-2 mb-3">
+<div class="bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 p-2 rounded-xl text-center transition-all">
+<i class="fa-solid fa-shield-halved text-emerald-400 text-sm mb-1"></i>
+<div class="text-[11px] font-bold text-slate-200">APK BBFS</div>
+<span class="text-[9px] text-slate-400"></span>
+</div>
+<div class="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 p-2 rounded-xl text-center transition-all">
+<i class="fa-solid fa-bolt text-blue-400 text-sm mb-1"></i>
+<div class="text-[11px] font-bold text-slate-200">APK LINE 2D</div>
+<span class="text-[9px] text-slate-400"></span>
+</div>
+<div class="bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 p-2 rounded-xl text-center transition-all">
+<i class="fa-solid fa-star text-purple-400 text-sm mb-1"></i>
+<div class="text-[11px] font-bold text-slate-200">COLOK BEBAS</div>
+<span class="text-[9px] text-slate-400"></span>
+</div>
+</div>
+<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20tertarik%20ingin%20mendapatkan%20APK%20Jitu%20khusus%20SDY,%20SGP,%20atau%20HK.%20Mohon%20informasinya." target=_blank class="inline-flex items-center justify-center space-x-1.5 w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-2 px-3 rounded-xl text-xs shadow-lg transition-all">
+<i class="fa-brands fa-whatsapp text-sm"></i>
+<span>Info APK</span>
+</a>
+</div>
+</div>
 <div class="mb-4 w-full">
 <a href=https://www.facebook.com/share/1FkwuwQHpw/ class="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all border border-blue-500/50">
 <i class="fa-brands fa-facebook text-lg"></i>
@@ -249,7 +288,7 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 <div class="grid grid-cols-1 gap-2 text-xs">
 <a href=https://tunggalpaito.online/prediksi/hklotto class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-red-500/10 border border-slate-800 hover:border-red-500/40 p-2.5 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-red-400 font-medium"><i class="fa-solid fa-chart-pie mr-2 text-red-400"></i>Prediksi Angka Main HK Lotto hari ini</span>
-<i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-red-400"></i>
+<i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-rose-400"></i>
 </a>
 </div>
 </div>
@@ -260,6 +299,7 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </footer>
 <script>document.getElementById("current-year").textContent=(new Date).getFullYear()</script>
 <script>const popup=document.getElementById("ads-popup");let startX,startY,initialX,initialY,isDragging=!1;function dragStart(t){if(t.target.closest("a")||t.target.closest("button"))return;isDragging=!0,startX="touchstart"===t.type?t.touches[0].clientX:t.clientX,startY="touchstart"===t.type?t.touches[0].clientY:t.clientY;const e=popup.getBoundingClientRect();initialX=e.left,initialY=e.top,popup.style.bottom="auto",popup.style.right="auto",popup.style.left=initialX+"px",popup.style.top=initialY+"px"}function drag(t){if(!isDragging)return;t.preventDefault();const e="touchmove"===t.type?t.touches[0].clientX:t.clientX,n="touchmove"===t.type?t.touches[0].clientY:t.clientY,i=e-startX,o=n-startY;popup.style.left=initialX+i+"px",popup.style.top=initialY+o+"px"}function dragEnd(){isDragging=!1}popup.addEventListener("mousedown",dragStart),document.addEventListener("mousemove",drag),document.addEventListener("mouseup",dragEnd),popup.addEventListener("touchstart",dragStart,{passive:!1}),document.addEventListener("touchmove",drag,{passive:!1}),document.addEventListener("touchend",dragEnd)</script>
-<script>const adUrl="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0},document.addEventListener("copy",(e=>{e.preventDefault(),window.location.href=adUrl})),history.pushState(null,null,location.href),window.addEventListener("popstate",(function(){window.location.href=adUrl})),document.addEventListener("click",(function(e){e.target.closest("a")||(window.location.href=adUrl)}))</script>
+<script>const buyerList=[{name:"Budi Santoso",apk:"Membeli APK BBFS",time:"Baru saja"},{name:"Eko Prasetyo",apk:"Membeli APK LINE 2D",time:"1 menit lalu"},{name:"Agung Wibowo",apk:"Membeli APK COLOK BEBAS",time:"Baru saja"},{name:"Rian Hidayat",apk:"Membeli APK BBFS",time:"2 menit lalu"},{name:"Joko Susilo",apk:"Membeli APK LINE 2D",time:"Baru saja"},{name:"Dedi Kurniawan",apk:"Membeli APK COLOK BEBAS",time:"3 menit lalu"},{name:"Ahmad Fauzi",apk:"Membeli APK BBFS",time:"Baru saja"},{name:"Hendra Gunawan",apk:"Membeli APK LINE 2D",time:"1 menit lalu"},{name:"Rahmat Hidayat",apk:"Membeli APK COLOK BEBAS",time:"Baru saja"},{name:"Doni Saputra",apk:"Membeli APK BBFS",time:"4 menit lalu"},{name:"Fajar Nugraha",apk:"Membeli APK LINE 2D",time:"Baru saja"},{name:"Wahyu Setiawan",apk:"Membeli APK COLOK BEBAS",time:"2 menit lalu"},{name:"Andi Pratama",apk:"Membeli APK BBFS",time:"Baru saja"},{name:"Bayu Saputra",apk:"Membeli APK LINE 2D",time:"3 menit lalu"},{name:"Yoga Pratama",apk:"Membeli APK COLOK BEBAS",time:"Baru saja"},{name:"Rizal Maulana",apk:"Membeli APK BBFS",time:"1 menit lalu"},{name:"Iwan Setiawan",apk:"Membeli APK LINE 2D",time:"Baru saja"},{name:"Reza Pahlevi",apk:"Membeli APK COLOK BEBAS",time:"2 menit lalu"},{name:"Dimas Anggara",apk:"Membeli APK BBFS",time:"Baru saja"},{name:"Gilang Ramadhan",apk:"Membeli APK LINE 2D",time:"5 menit lalu"}];function showRandomBuyer(){const a=document.getElementById("buyer-notification"),e=document.getElementById("buyer-name"),m=document.getElementById("buyer-apk"),t=document.getElementById("buyer-time"),i=buyerList[Math.floor(Math.random()*buyerList.length)];e.textContent=i.name,m.textContent=i.apk,t.textContent=i.time,a.classList.add("show"),setTimeout((()=>{a.classList.remove("show")}),4e3)}setTimeout(showRandomBuyer,3e3),setInterval(showRandomBuyer,8e3)</script>
+<script>const adUrl="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0},document.addEventListener("copy",(e=>{e.preventDefault(),window.location.href=adUrl})),history.pushState(null,null,location.href),window.addEventListener("popstate",(function(){window.location.href=adUrl})),document.addEventListener("click",(function(e){e.target.closest("a")||(window.location.href=adUrl))}</script>
 </body>
 </html>
