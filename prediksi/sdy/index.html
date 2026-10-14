@@ -17,6 +17,13 @@ body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;alig
 .generator-result{margin-top:15px;text-align:left;font-size:13px;display:none}
 .generator-result div{margin-bottom:8px;background:rgba(56,189,248,.1);padding:8px;border-radius:6px;border-left:3px solid #38bdf8}
 
+/* KARTU STATUS PENGUNJUNG ONLINE DINAMIS */
+.visitor-card{width:100%;max-width:420px;background:rgba(7,19,38,0.8);border:1px solid #38bdf8;border-radius:8px;padding:10px 15px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(56,189,248,.15)}
+.visitor-card .visitor-info{font-size:12px;color:#cbd5e1;display:flex;align-items:center;gap:6px}
+.visitor-card .online-dot{width:8px;height:8px;background-color:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e;animation:blink 1.5s infinite}
+.visitor-card .visitor-count{font-size:14px;font-weight:bold;color:#38bdf8;transition:all 0.5s ease}
+@keyframes blink{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+
 /* TOMBOL ANGKA TUNGGAL JITU VIA WA ADMIN */
 .btn-daftar-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 15px;border-radius:8px;margin-top:12px;box-shadow:0 4px 12px rgba(37,211,102,.4);text-transform:uppercase;letter-spacing:.5px;border:1px solid #4ade80;transition:all .2s ease-in-out}
 .btn-daftar-wa:hover{background:linear-gradient(135deg,#128c7e,#25d366);transform:translateY(-2px);box-shadow:0 6px 16px rgba(37,211,102,.6)}
@@ -73,10 +80,19 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </div>
 </div>
 
+<!-- KARTU STATUS PENGUNJUNG ONLINE -->
+<div class="visitor-card">
+<div class="visitor-info">
+<div class="online-dot"></div>
+<span>Pengunjung Online :</span>
+</div>
+<div class="visitor-count" id="visitor-count-text"></div>
+</div>
+
 <div class=generator-card>
 <h3>GENERATOR ANGKA SDY</h3>
 <div class=guide-text>
-<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Sistem paito cerdas akan membedah selisih matematis dan frekuensi angka untuk merumuskan prediksi berikutnya.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika! catatan berhubung tidak mungkin setiap posisi angka tepat, maka pakai mana yg dominan saja bosku, ups..
+<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Sistem paito cerdas akan membedah selisih matematis dan frekuensi angka untuk merumuskan prediksi berikutnya.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
 </div>
 <input id=input-angka maxlength=4 placeholder="Contoh: 9267">
 <br>
@@ -84,7 +100,6 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <div class=generator-result id=generator-result>
 <div><strong>Angka Main :</strong> <span id=res-bbfs></span></div>
 <div><strong>Colok Bebas :</strong> <span id=res-cb></span></div>
-<div><strong>Colok Macau :</strong> <span id=res-cm></span></div>
 </div>
 
 <!-- TOMBOL ANGKA TUNGGAL JITU VIA WA ADMIN -->
@@ -94,7 +109,7 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </a>
 </div>
 
-<!-- KARTU SISTEM SAWERAN & TITIP PASANG (JASTIP) -->
+<!-- KARTU SISTEM SAWERAN & TITIP PASANG -->
 <div class=sawer-card>
 <h3>🎉 Salam HOKI Satu HATI</h3>
 <p>
@@ -152,7 +167,6 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       db=getDatabase(app),
       dbRef=ref(db);
 
-// FUNGSI MEMATIKAN TAMPILAN JIKA GAMBAR ERROR / GAGAL LOAD
 function handleImageError(imgEl, boxEl) {
     imgEl.onerror = function() {
         boxEl.style.display = "none";
@@ -160,7 +174,6 @@ function handleImageError(imgEl, boxEl) {
     };
 }
 
-// LOGIKA MENGAMBIL DAN MENAMPILKAN 2 FOTO DARI FIREBASE (live/sdy_foto)
 get(child(dbRef,"live/sdy_foto")).then((e=>{
     if(e.exists() && e.val()){
         const val = e.val().trim();
@@ -179,15 +192,12 @@ get(child(dbRef,"live/sdy_foto")).then((e=>{
         handleImageError(imgSebelumnya, boxSebelumnya);
 
         if (linksArray.length >= 2) {
-            // FOTO TERBARU (Indeks Terakhir) -> DI ATAS
             imgTerbaru.src = linksArray[linksArray.length - 1];
             boxTerbaru.style.display = "block";
 
-            // FOTO SEBELUMNYA (Indeks Sebelum Terakhir) -> DI BAWAH
             imgSebelumnya.src = linksArray[linksArray.length - 2];
             boxSebelumnya.style.display = "block";
         } else if (linksArray.length === 1) {
-            // JIKA HANYA ADA 1 FOTO
             imgTerbaru.src = linksArray[0];
             boxTerbaru.style.display = "block";
             boxSebelumnya.style.display = "none";
@@ -200,6 +210,7 @@ get(child(dbRef,"live/sdy_foto")).then((e=>{
     console.error("Gagal mengambil data foto SDY:", e);
 }));
 
+// GENERATOR ANGKA SDY
 document.getElementById("btn-generate").addEventListener("click",(function(){
 const e=document.getElementById("input-angka").value.trim();
 if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
@@ -210,15 +221,80 @@ t.forEach(((e,t)=>{a[e]+=5-t}));
 t.forEach((e=>{let t=(e+4)%10;a[3*e%10]+=2,a[t]+=2}));
 let n=Object.keys(a).sort(((e,t)=>a[t]-a[e])).map(Number).slice(0,6),
 o=n.join(" "),
-c=`${n[0]} & ${n[2]}`,
-i=`${`${n[0]}${n[3]}`} & ${`${n[1]}${n[4]}`}`;
+c=`${n[0]} & ${n[2]}`;
 document.getElementById("res-bbfs").textContent=o;
 document.getElementById("res-cb").textContent=c;
-document.getElementById("res-cm").textContent=i;
 document.getElementById("generator-result").style.display="block"
 }));
 
-// SKRIP IKLAN DIPERBAIKI: Mengecualikan elemen Tombol Sawer (btn-sawer-bebas) dan tombol WhatsApp agar tidak terganggu iklan
+// LOGIKA PENGUNJUNG CERDAS (1 SAMPAI 5000)
+let currentVisitors = 0;
+let hasStartedScroll = false;
+let updateTimer = null;
+let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+let lastScrollTime = Date.now();
+const visitorText = document.getElementById("visitor-count-text");
+
+function updateVisitorCount(isFastScroll = false) {
+    if (!hasStartedScroll) return;
+
+    if (isFastScroll) {
+        // SCROLL CEPAT: PENGUNJUNG NAIK DRASTIS (BISA NAIK HINGGA 5000)
+        let boost = Math.floor(Math.random() * 25) + 10;
+        currentVisitors += boost;
+    } else {
+        // SCROLL LAMBAT / DIAM: PENGUNJUNG TURUN
+        let drop = Math.floor(Math.random() * 15) + 5;
+        currentVisitors -= drop;
+    }
+
+    // MENJAGA BATAS ATAS (MAX 5000) DAN BATAS BAWAH (MIN 1)
+    if (currentVisitors > 5000) {
+        currentVisitors = 5000;
+    } else if (currentVisitors < 1) {
+        currentVisitors = 1;
+    }
+
+    visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
+    scheduleNextUpdate();
+}
+
+function scheduleNextUpdate() {
+    clearTimeout(updateTimer);
+    // Interval acak antara 5 s/d 20 detik
+    let randomDelay = Math.floor(Math.random() * (20000 - 5000 + 1)) + 5000;
+    updateTimer = setTimeout(() => {
+        updateVisitorCount(false); // Otomatis berkurang saat diam
+    }, randomDelay);
+}
+
+// BARU MUNCUL PERTAMA KALI SAAT DILAKUKAN SCROLL (START 150 - 300)
+window.addEventListener("scroll", function() {
+    if (!hasStartedScroll) {
+        hasStartedScroll = true;
+        currentVisitors = Math.floor(Math.random() * 151) + 150; // Angka awal 150 - 300
+        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
+        
+        scheduleNextUpdate();
+        return;
+    }
+
+    const now = Date.now();
+    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const distance = Math.abs(currentScrollTop - lastScrollTop);
+    const timeElapsed = now - lastScrollTime;
+
+    if (timeElapsed > 150) {
+        let speed = distance / timeElapsed;
+        if (speed > 1.2) {
+            updateVisitorCount(true);
+        }
+        lastScrollTop = currentScrollTop;
+        lastScrollTime = now;
+    }
+});
+
+// SKRIP IKLAN
 let clickCount=0;
 const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 document.addEventListener("click",(function(e){
