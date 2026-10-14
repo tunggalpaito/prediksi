@@ -64,7 +64,7 @@ footer span{color:#38bdf8;font-weight:700}
 </head>
 <body>
 
-<!-- KOTAK LOGIN ADMIN (DEFAULT MUNCUL / FLEX) -->
+<!-- KOTAK LOGIN ADMIN -->
 <div id="adminLoginOverlay" class="login-overlay" style="display:flex;">
     <div class="login-box">
         <h3>Login Admin Tunggal Paito</h3>
@@ -287,12 +287,12 @@ function loginAdmin() {
 
     if(!email || !password) {
         errorMsg.style.color = "#ef4444";
-        errorMsg.innerText = "Email dan Password wajib diisi!";
+        errorMsg.innerText = "⚠️ Email dan Password wajib diisi!";
         return;
     }
 
     errorMsg.style.color = "#38bdf8";
-    errorMsg.innerText = "Memverifikasi...";
+    errorMsg.innerText = "⏳ Memverifikasi...";
 
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
@@ -301,7 +301,17 @@ function loginAdmin() {
         })
         .catch((error) => {
             errorMsg.style.color = "#ef4444";
-            errorMsg.innerText = "Gagal Login: " + error.message;
+            
+            // NOTIFIKASI SANDI / EMAIL SALAH DALAM BAHASA INDONESIA
+            if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential' || error.code === 'auth/invalid-email') {
+                errorMsg.innerText = "❌ Kata sandi atau email salah!";
+            } else if (error.code === 'auth/user-not-found') {
+                errorMsg.innerText = "❌ Akun admin tidak ditemukan!";
+            } else if (error.code === 'auth/too-many-requests') {
+                errorMsg.innerText = "⚠️ Terlalu banyak percobaan gagal. Coba lagi nanti.";
+            } else {
+                errorMsg.innerText = "❌ Gagal: " + error.message;
+            }
         });
 }
 
