@@ -7,6 +7,11 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}
+
+/* TOMBOL KEMBALI KE MENU UTAMA */
+.btn-back-main{width:100%;max-width:420px;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(7,19,38,0.8);color:#38bdf8;text-decoration:none;font-weight:700;font-size:13px;padding:10px 15px;border-radius:8px;border:1px solid #38bdf8;margin-bottom:15px;transition:all .2s ease;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
+.btn-back-main:hover{background:#38bdf8;color:#000;transform:translateY(-2px)}
+
 .ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
 .ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
 .generator-card{width:100%;max-width:420px;background-color:#102a52;border:1px solid #38bdf8;border-radius:12px;padding:15px;margin-bottom:20px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2)}
@@ -53,6 +58,13 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </style>
 </head>
 <body>
+
+<!-- TOMBOL KEMBALI KE MENU UTAMA -->
+<a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
+<svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+<span>Kembali ke Menu Utama</span>
+</a>
+
 <div class=ads-container>
 <div class=ad-box>
 <div style=width:100%;text-align:center;overflow:hidden>
@@ -239,16 +251,13 @@ function updateVisitorCount(isFastScroll = false) {
     if (!hasStartedScroll) return;
 
     if (isFastScroll) {
-        // SCROLL CEPAT: PENGUNJUNG NAIK DRASTIS (BISA NAIK HINGGA 5000)
         let boost = Math.floor(Math.random() * 25) + 10;
         currentVisitors += boost;
     } else {
-        // SCROLL LAMBAT / DIAM: PENGUNJUNG TURUN
         let drop = Math.floor(Math.random() * 15) + 5;
         currentVisitors -= drop;
     }
 
-    // MENJAGA BATAS ATAS (MAX 5000) DAN BATAS BAWAH (MIN 1)
     if (currentVisitors > 5000) {
         currentVisitors = 5000;
     } else if (currentVisitors < 1) {
@@ -261,20 +270,17 @@ function updateVisitorCount(isFastScroll = false) {
 
 function scheduleNextUpdate() {
     clearTimeout(updateTimer);
-    // Interval acak antara 5 s/d 20 detik
     let randomDelay = Math.floor(Math.random() * (20000 - 5000 + 1)) + 5000;
     updateTimer = setTimeout(() => {
-        updateVisitorCount(false); // Otomatis berkurang saat diam
+        updateVisitorCount(false);
     }, randomDelay);
 }
 
-// BARU MUNCUL PERTAMA KALI SAAT DILAKUKAN SCROLL (START 150 - 300)
 window.addEventListener("scroll", function() {
     if (!hasStartedScroll) {
         hasStartedScroll = true;
-        currentVisitors = Math.floor(Math.random() * 151) + 150; // Angka awal 150 - 300
+        currentVisitors = Math.floor(Math.random() * 151) + 150;
         visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
-        
         scheduleNextUpdate();
         return;
     }
@@ -303,6 +309,9 @@ document.addEventListener("click",(function(e){
     return;
   }
   if (e.target.closest('a[href*="wa.me"]')) {
+    return;
+  }
+  if (e.target.closest('.btn-back-main')) {
     return;
   }
   clickCount++;
