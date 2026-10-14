@@ -11,7 +11,11 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
 body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}
 .admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}
-.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:5px;border-radius:8px;border:1px dashed #262626}
+
+/* PERBAIKAN HISTATS CONTAINER */
+.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:10px;border-radius:8px;border:1px dashed #262626;min-height:40px;}
+#histats_counter { display: flex; justify-content: center; align-items: center; width: 100%; }
+
 .header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}
 h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}
 
@@ -38,41 +42,6 @@ h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom
 .btn-kirim{background:#10b981;border:1px solid #34d399;color:#fff;padding:10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;text-transform:uppercase;transition:.2s}
 .btn-kirim:hover{background:#059669;box-shadow:0 0 10px rgba(16,185,129,.5)}
 .status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700}
-
-/* STYLING KARTU MEMBER / PENDING */
-.member-card {
-    background: #020617;
-    border: 1px solid #334155;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 12px;
-}
-.member-card p {
-    margin-bottom: 5px;
-    word-break: break-all;
-}
-.status-pending { color: #f59e0b; font-weight: bold; }
-.status-active { color: #34d399; font-weight: bold; }
-.status-expired { color: #ef4444; font-weight: bold; }
-
-.btn-member-action {
-    width: 100%;
-    padding: 8px;
-    margin-top: 6px;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 11px;
-    cursor: pointer;
-    text-transform: uppercase;
-}
-.btn-activate { background: #d97706; color: #fff; }
-.btn-activate:hover { background: #b45309; }
-.btn-renew { background: #2563eb; color: #fff; }
-.btn-renew:hover { background: #1d4ed8; }
-.btn-delete { background: #dc2626; color: #fff; }
-.btn-delete:hover { background: #b91c1c; }
 
 .list-menu{display:flex;flex-direction:column;gap:6px}
 .btn-sub{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:11px;border-radius:6px;font-size:12px;font-weight:700;color:#f1f5f9;text-align:center;transition:all .2s ease;text-transform:uppercase;border:1px solid rgba(255,255,255,.08);width:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
@@ -113,8 +82,9 @@ footer span{color:#38bdf8;font-weight:700}
 
 <div class=admin-container>
 <div class=top-tracker>
-<div id=histats_counter style=display:flex;justify-content:center;align-items:center;height:18px;overflow:hidden;transform:scale(.75);transform-origin:center;opacity:.95></div>
+<div id=histats_counter></div>
 </div>
+
 <div class=header>
 <h2>PANEL ADMIN</h2>
 <!-- INDIKATOR STATUS & TOMBOL LOGOUT -->
@@ -126,12 +96,6 @@ footer span{color:#38bdf8;font-weight:700}
 <a href=https://tunggalpaito.online/ class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
 <a href=https://tunggalpaito.online/prediksi class="btn-utama btn-stat">TUNGGAL PAITO</a>
 </div>
-</div>
-
-<!-- SECTION KELOLA MEMBER VIP (PENDING & AKTIF) -->
-<div class=section-title>👥 Daftar Member VIP (Pending & Aktif)</div>
-<div class=input-result-box>
-<div id=memberListContainer>Memuat data member...</div>
 </div>
 
 <div class=section-title>📡 Update Prediksi Kepala & Ekor</div>
@@ -205,7 +169,87 @@ footer span{color:#38bdf8;font-weight:700}
 <div id=statusFoto class=status-firebase></div>
 </div>
 
-<!-- Menu Navigasi Lainnya tetap utuh -->
+<!-- MENU NAVIGASI LAINNYA -->
+<div class=section-title></div>
+<div class=list-menu>
+<a href=https://gemini.google.com/app?hl=id class="btn-sub c-live">Gemini</a>
+<a href=https://deeparena.ai/?gad_source=1&gad_campaignid=24230892688&gbraid=0AAAABDmrVjVyG11hzAXm-0FFgOihnBpRM&gclid=CjwKCAjw_pzWBhAkEiwAwDCi1dSOc5a6YhIgqWeMCEQJfCz28ZgXdM9pe4WsYh2KLLDGYSiIiT1hoCQ3QQAvD_BwE class="btn-sub c-live">Robot AI</a>
+<a href=https://github.com/tunggalpaito/prediksi/upload/main class="btn-sub c-live">Upload Foto</a>
+<a href=https://tunggalpaito.online/paito-warna/ class="btn-sub c-live">Paito Warna</a>
+<a href=https://tunggalpaito.online/live-draw/ class="btn-sub c-live">Live Draw</a>
+<a href=https://tunggalpaito.online/prediksi/ class="btn-sub c-live">Prediksi</a>
+<a href=https://www.facebook.com/tunggalpaito class="btn-sub c-live">Facebook</a>
+<a href=https://tunggalpaito.online/bola-prediksi/ class="btn-sub c-live">Bola Merah</a>
+<a href=https://www.toptal.com/developers/html-minifier/ class="btn-sub c-live">Cut HTML</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/admin/index.html class="btn-sub c-prediksi">Admin</a>
+<a href=https://voli.kit4d.info/mobile class="btn-sub c-prediksi">BO</a>
+<a href=https://www.croxyproxy.com/_id/proxy class="btn-sub c-prediksi">Froxy VPN</a>
+</div>
+<div class=section-title>✋ EDIT RUMUS</div>
+<div class=list-menu>
+<a href=https://www.webintoapp.com/author/dashboard class="btn-sub c-prediksi">BUAT APK</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/bola-prediksi/index.html class="btn-sub c-prediksi">Bola Prediksi</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/rumus/sdy/index.html class="btn-sub c-prediksi">SDY</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/rumus/sgp/index.html class="btn-sub c-prediksi">SGP</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/rumus/hk/index.html class="btn-sub c-prediksi">HK</a>
+</div>
+<div class=section-title>📌 EDIT HALAMAN</div>
+<div class=list-menu>
+<a href=https://github.com/tunggalpaito/.online/edit/main/prediksi/index.html class="btn-sub c-prediksi">HOME</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/prediksi/sdy/index.html class="btn-sub c-prediksi">SDY</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/prediksi-sdy/index.html class="btn-sub c-prediksi">SDY 2</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/prediksi/sgp/index.html class="btn-sub c-prediksi">SGP</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/prediksi-sgp/index.html class="btn-sub c-prediksi">SGP 2</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/prediksi/hk/index.html class="btn-sub c-prediksi">HK</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/prediksi-hk/index.html class="btn-sub c-prediksi">HK 2</a>
+<a href=https://github.com/tunggalpaito/prediksi/edit/main/live-draw/index.html class="btn-sub c-prediksi">Live</a>
+</div>
+<div class=section-title>📌 HALAMAN JITU</div>
+<div class=list-menu>
+<a href=https://tunggalpaito.online/prediksi-togel-macau-hari-ini/ target=_blank class="btn-sub c-ping">Macau</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-cambodia/ target=_blank class="btn-sub c-ping">Cambodia</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-sydney/ target=_blank class="btn-sub c-ping">Sydney</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-china/ target=_blank class="btn-sub c-ping">China</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-japan/ target=_blank class="btn-sub c-ping">Japan</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-singapore/ target=_blank class="btn-sub c-ping">SGP</a>
+<a href=https://tunggalpaito.online/prediksi-togel-taiwan-hari-ini/ target=_blank class="btn-sub c-ping">Taiwan</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-hongkong/ target=_blank class="btn-sub c-ping">Hongkong</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-sydney-lotto/ target=_blank class="btn-sub c-ping">SDY LOTTO</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-hongkong-lotto/ target=_blank class="btn-sub c-ping">HK LOTTO</a>
+<a href=https://tunggalpaito.online/prediksi-togel-jitu-carolinaday/ target=_blank class="btn-sub c-ping">Carolina Day</a>
+</div>
+<div class=section-title>📌 LIVE RESULT</div>
+<div class=list-menu>
+<a href=https://online-marketplaces.hawaiifarmersmarkets.org/ class="btn-sub c-prediksi">Macau</a>
+<a href=https://livecmd.live/ class="btn-sub c-prediksi">Cambodia</a>
+<a href=https://atomic-wallet.trade/ class="btn-sub c-prediksi">SDY</a>
+<a href=http://167.71.211.127/#popup1 class="btn-sub c-prediksi">China</a>
+<a href=https://livedrawjapan.pics/ class="btn-sub c-prediksi">Japan</a>
+<a href=https://sgnlive.org/ class="btn-sub c-prediksi">SGP</a>
+<a href=https://resulttaiwan.site/ class="btn-sub c-prediksi">Taiwan</a>
+<a href=https://lotto88.blog/ class="btn-sub c-prediksi">HK</a>
+<a href=https://atomic-wallet.trade/ class="btn-sub c-prediksi">SDY LOTTO</a>
+<a href=https://lotto88.blog/ class="btn-sub c-prediksi">HK LOTTO</a>
+<a href=https://w35.angkanet.cyou/paito-warna-north-carolina-day/ class="btn-sub c-prediksi">Carolina Day</a>
+</div>
+<div class=section-title>📌 DASHBOARD & LAINNYA</div>
+<div class=list-menu>
+<a href=https://github.com/tunggalpaito/.online/new/main class="btn-sub c-top2d">+ Code</a>
+<a href=https://github.com/tunggalpaito/.online/actions class="btn-sub c-top2d">Robot</a>
+<a href=https://new.clientzone.rumahweb.com/login class="btn-sub c-top2d">Domain</a>
+<a href="https://console.firebase.google.com/u/0/project/komentar-web-f9e2e/database/komentar-web-f9e2e-default-rtdb/data/~2F?hl=id" class="btn-sub c-top2d">Komentar Public</a>
+<a href=https://beta.publishers.adsterra.com/payout-information class="btn-sub c-top2d">Pembayaran</a>
+<a href="https://search.google.com/search-console?utm_source=about-page&resource_id=sc-domain:tunggalpaito.online" class="btn-sub c-top2d">Inspeksi URL</a>
+</div>
+<div class=section-title>📌 PING WEB</div>
+<div class=list-menu>
+<a href=https://pingomatic.com target=_blank class="btn-sub c-ping">🌐 Ping-O-Matic</a>
+<a href=https://pingler.com target=_blank class="btn-sub c-ping">🌐 Pingler</a>
+<a href=http://totalping.com target=_blank class="btn-sub c-ping">🌐 TotalPing</a>
+<a href=http://brainbliss.com target=_blank class="btn-sub c-ping">🌐 Feed Shark</a>
+<a href=https://smallseotools.com target=_blank class="btn-sub c-ping">🌐 SmallSEOTools Ping</a>
+</div>
+
 </div>
 <footer>
 <p>&copy; 2026 <span>TUNGGAL PAITO</span>. All Rights Reserved.</p>
@@ -267,7 +311,6 @@ function loginAdmin() {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
             document.getElementById("adminLoginOverlay").style.display = "none";
-            loadMemberList();
         })
         .catch((error) => {
             errorMsg.style.color = "#ef4444";
@@ -289,12 +332,9 @@ function logoutAdmin() {
     });
 }
 
-let authChecked = false;
-
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(() => {
         firebase.auth().onAuthStateChanged((user) => {
-            authChecked = true;
             const overlay = document.getElementById("adminLoginOverlay");
             const statusBadge = document.getElementById("authStatusIndicator");
             const btnLogout = document.getElementById("btnLogout");
@@ -306,7 +346,6 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                     statusBadge.innerHTML = `🟢 Status: <b>SUDAH LOGIN</b> (${user.email})`;
                 }
                 if (btnLogout) btnLogout.style.display = "inline-block";
-                loadMemberList();
             } else {
                 if (overlay) overlay.style.display = "flex";
                 if (statusBadge) {
@@ -318,79 +357,199 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         });
     });
 
-function loadMemberList() {
-    database.ref('users').on('value', (snapshot) => {
-        const users = snapshot.val();
-        const container = document.getElementById('memberListContainer');
-        if(!container) return;
-        container.innerHTML = '';
+function savePrediksiTunggal(){
+    const pasaran = document.getElementById("inputPasaranPrediksi").value;
+    const resultKey = document.getElementById("inputResultKey").value.trim();
+    const kepalaVal = document.getElementById("inputKepala").value.trim();
+    const ekorVal = document.getElementById("inputEkor").value.trim();
+    const statusDiv = document.getElementById("statusPrediksi");
 
-        if (!users) {
-            container.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:12px;">Belum ada member yang mendaftar.</p>';
-            return;
-        }
-
-        Object.keys(users).reverse().forEach(key => {
-            const user = users[key];
-            const now = new Date().getTime();
-            let statusText = '';
-            let actionBtn = '';
-
-            if (user.status === 'pending') {
-                statusText = '<span class="status-pending">PENDING (Menunggu Konfirmasi Bayar)</span>';
-                actionBtn = `<button class="btn-member-action btn-activate" onclick="activateUser('${key}')">AKTIFKAN 14 HARI (Rp 50K)</button>`;
-            } else if (user.expiry && now > user.expiry) {
-                statusText = '<span class="status-expired">KEDALUWARSA (Masa aktif habis)</span>';
-                actionBtn = `<button class="btn-member-action btn-renew" onclick="activateUser('${key}')">PERPANJANG 14 HARI</button>`;
-            } else {
-                const sisaHari = Math.ceil((user.expiry - now) / (1000 * 60 * 60 * 24));
-                statusText = `<span class="status-active">AKTIF (Sisa ${sisaHari} Hari Lagi)</span>`;
-                actionBtn = `<button class="btn-member-action btn-renew" onclick="activateUser('${key}')">TAMBAH/RESET 14 HARI</button>`;
-            }
-
-            const div = document.createElement('div');
-            div.className = 'member-card';
-            div.innerHTML = `
-                <p><strong>Email:</strong> ${user.email}</p>
-                <p><strong>No HP:</strong> ${user.phone || '-'}</p>
-                <p><strong>Sumber:</strong> ${user.source || '-'}</p>
-                <p><strong>Status:</strong> ${statusText}</p>
-                ${actionBtn}
-                <button class="btn-member-action btn-delete" onclick="deleteUser('${key}')">Hapus Akun</button>
-            `;
-            container.appendChild(div);
-        });
-    });
-}
-
-function activateUser(userKey) {
-    const fourteenDaysMs = 14 * 24 * 60 * 60 * 1000;
-    const newExpiry = new Date().getTime() + fourteenDaysMs;
-
-    database.ref('users/' + userKey).update({
-        status: 'active',
-        expiry: newExpiry
-    }, (error) => {
-        if (error) {
-            alert("Gagal mengaktifkan akun!");
-        } else {
-            alert("Sukses! Akun member berhasil diaktifkan selama 14 hari.");
-        }
-    });
-}
-
-function deleteUser(userKey) {
-    if(confirm("Yakin ingin menghapus akun member ini secara permanen?")) {
-        database.ref('users/' + userKey).remove().then(() => {
-            alert("Akun berhasil dihapus.");
-        });
+    if(!resultKey || resultKey.length !== 4){
+        statusDiv.style.color = "#f87171";
+        statusDiv.innerText = "Error: Masukkan 4 digit nomor result dengan benar!";
+        return;
     }
+    if(!kepalaVal || !ekorVal){
+        statusDiv.style.color = "#f87171";
+        statusDiv.innerText = "Error: Kepala dan Ekor tidak boleh kosong!";
+        return;
+    }
+
+    statusDiv.style.color = "#38bdf8";
+    statusDiv.innerText = `Menyimpan riwayat prediksi ${pasaran.toUpperCase()}...`;
+
+    database.ref(`live/targetData/${pasaran}/${resultKey}`).push({
+        kepala: kepalaVal,
+        ekor: ekorVal,
+        timestamp: Date.now()
+    }).then(() => {
+        statusDiv.style.color = "#34d399";
+        statusDiv.innerText = `Sukses! Riwayat ${pasaran.toUpperCase()} (${resultKey}) berhasil ditambahkan.`;
+        document.getElementById("inputResultKey").value = "";
+        document.getElementById("inputKepala").value = "";
+        document.getElementById("inputEkor").value = "";
+    }).catch((err) => {
+        statusDiv.style.color = "#f87171";
+        statusDiv.innerText = "Gagal: " + err.message;
+    });
 }
 
-// Fungsi pendukung lainnya (Prediksi, Paito, Live, Foto) tetap berjalan normal...
-function savePrediksiTunggal(){ /* ... */ }
-function saveDataPaito(){ /* ... */ }
-function kirimLiveKeFirebase(){ /* ... */ }
+function saveDataPaito(){
+    const e = document.getElementById("marketSelect").value;
+    let t = document.getElementById("inputDate").value || getTodayString();
+    const a = document.getElementById("inputNumbers").value.trim(),
+          n = document.getElementById("message");
+          
+    if(!a) return n.style.color="#f87171",void(n.textContent="Angka tidak boleh kosong!");
+    
+    const o = t.split("-"),
+          l = `${o[2]}-${o[1]}-${o[0]}`,
+          dbRef = database.ref("live/"+e);
+          
+    n.style.color="#38bdf8";
+    n.textContent=`Menyimpan data ${e.toUpperCase()}...`;
+    
+    dbRef.once("value").then(snapshot => {
+        let rootVal = snapshot.val();
+        let finalData = a;
+        
+        if(rootVal && typeof rootVal === "object" && rootVal[l]){
+            let existingVal = rootVal[l];
+            if(typeof existingVal === "string" && existingVal.trim() !== ""){
+                finalData = existingVal + "," + a;
+            }
+        }
+        return dbRef.update({[l]: finalData});
+    }).then(()=>{
+        n.style.color="#34d399";
+        n.textContent=`Berhasil menyimpan data ${e.toUpperCase()} untuk tanggal ${l}!`;
+        document.getElementById("inputNumbers").value="";
+    }).catch((err)=>{
+        n.style.color="#f87171";
+        n.textContent="Gagal menyimpan: "+err.message;
+    });
+}
+
+function kirimLiveKeFirebase(){
+    const e=document.getElementById("pilihPasaranLive").value,
+          t=document.getElementById("inputAngkaLive").value.trim();
+    let a=document.getElementById("inputDateLive").value || getTodayString();
+    const n=document.getElementById("statusLive");
+    
+    if(!t||t.length<4)return n.style.color="#f87171",void(n.innerText="Error: Masukkan angka 4D live yang valid!");
+    n.style.color="#38bdf8",n.innerText=`Memperbarui ${e.toUpperCase()}...`;
+    
+    const o=a.split("-"),
+          l=`${o[2]}-${o[1]}-${o[0]}`,
+          i=database.ref("live/"+e);
+          
+    i.once("value").then((snapshot=>{
+        let a = snapshot.val(), n = t;
+        if(a && "object"==typeof a){
+            let existingVal = a[l] || "";
+            ""!==existingVal && (n = existingVal+","+t)
+        } else if("string"==typeof a && ""!==a.trim()){
+            n = a+","+t;
+        }
+        return i.update({[l]:n})
+    })).then((()=>{
+        n.style.color="#34d399";
+        n.innerText=`Sukses! Live ${e.toUpperCase()} (${t}) - ${l}`;
+        document.getElementById("inputAngkaLive").value="";
+    })).catch((err=>{
+        n.style.color="#f87171";
+        n.innerText="Gagal: "+err.message;
+    }));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const marketFotoSelect = document.getElementById("marketFotoSelect");
+    const inputLinkFoto = document.getElementById("input-link-foto");
+    const saveFotoBtn = document.getElementById("save-foto-btn");
+    const statusFoto = document.getElementById("statusFoto");
+
+    if (marketFotoSelect && inputLinkFoto) {
+        function loadFotoPasaran(e){
+            database.ref("live/"+e).once("value").then((snapshot)=>{
+                let t = snapshot.exists() ? snapshot.val() : "";
+                if(typeof t === "string" && t.startsWith(BASE_URL_FOTO)){
+                    t = t.replace(BASE_URL_FOTO,"");
+                }
+                if (typeof t === "string" && t.includes(",")) {
+                    let parts = t.split(",");
+                    t = parts[parts.length - 1].trim();
+                }
+                inputLinkFoto.value = typeof t === "string" ? t : "";
+            }).catch(err => {
+                console.error("Gagal load foto:", err);
+            });
+        }
+
+        loadFotoPasaran(marketFotoSelect.value);
+
+        marketFotoSelect.addEventListener("change", () => {
+            loadFotoPasaran(marketFotoSelect.value);
+            statusFoto.textContent = "";
+        });
+
+        if (saveFotoBtn) {
+            saveFotoBtn.addEventListener("click", () => {
+                const e = marketFotoSelect.value;
+                let t = inputLinkFoto.value.trim();
+                
+                if(!t) {
+                    statusFoto.style.color = "#ff4444";
+                    statusFoto.textContent = "❌ Error: Nama file foto tidak boleh kosong!";
+                    return;
+                }
+                
+                const newFullUrl = BASE_URL_FOTO + t.replace(/^\/+/,"");
+                statusFoto.style.color = "#38bdf8";
+                statusFoto.textContent = "⏳ Mengirim & memperbarui data foto...";
+
+                const fotoRef = database.ref("live/" + e);
+                
+                fotoRef.once("value").then((snapshot) => {
+                    let existingVal = snapshot.exists() ? snapshot.val() : "";
+                    let linksArray = [];
+
+                    if (typeof existingVal === "string" && existingVal.trim() !== "") {
+                        linksArray = existingVal.split(",").map(item => item.trim()).filter(item => item !== "");
+                    }
+
+                    linksArray.push(newFullUrl);
+
+                    if (linksArray.length > 2) {
+                        linksArray = linksArray.slice(linksArray.length - 2);
+                    }
+
+                    let finalString = linksArray.join(",");
+                    return fotoRef.set(finalString);
+                }).then(() => {
+                    statusFoto.style.color = "#34d399";
+                    statusFoto.innerHTML = `✅ <b>SUKSES!</b> Foto ${e.toUpperCase().replace("_"," ")} berhasil disimpan (2 data terakhir aktif).`;
+                    inputLinkFoto.value = "";
+                    
+                    setTimeout(() => {
+                        if(statusFoto.innerHTML.includes("SUKSES")) {
+                            statusFoto.innerHTML = "";
+                        }
+                    }, 5000);
+                }).catch((err) => {
+                    statusFoto.style.color = "#ff4444";
+                    statusFoto.textContent = "❌ Gagal: " + err.message;
+                });
+            });
+        }
+    }
+});
 </script>
+
+<!-- SCRIPT HISTATS YANG DIPERBAIKI -->
+<script>var _Hasync=_Hasync||[];_Hasync.push(["Histats.start","1,5037448,4,600,110,30,00001001"]),_Hasync.push(["Histats.fasi","1"]),_Hasync.push(["Histats.track_hits",""]),function(){var s=document.createElement("script");s.type="text/javascript",s.async=!0,s.src="//s10.histats.com/js15_as.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(s)}()</script>
+<noscript>
+<a href=/ target=_blank><img src=//sstatic1.histats.com/0.gif?5037448&101 alt="" border=0></a>
+</noscript>
+
 </body>
 </html>
