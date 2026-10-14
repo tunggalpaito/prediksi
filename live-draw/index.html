@@ -60,5 +60,15 @@
 &copy; <span id=current-year></span> Tunggal Paito. All Rights Reserved.
 </footer>
 <script>function redirectToAds(t){"A"===t.target.tagName||"IFRAME"===t.target.tagName||t.target.closest("iframe")||t.target.closest(".ad-box")||window.open("https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec","_blank")}document.getElementById("current-year").textContent=(new Date).getFullYear();const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};firebase.initializeApp(firebaseConfig);const db=firebase.database();function extractRightmostResult(t){if(!t)return"-";let e=String(t).trim();if(e.includes(",")){let t=e.split(",");e=t[t.length-1].trim()}let a=e.replace(/\D/g,"");return a.length>0?a:"-"}function initLiveDraw(){const t=["MINGGU","SENIN","SELASA","RABU","KAMIS","JUMAT","SABTU"],e=document.getElementById("live-draw-data");let a=JSON.parse(localStorage.getItem("tunggalpaito_persistent_backup"))||{},r=[];for(let e=0;e<30;e++){let a=new Date;a.setDate(a.getDate()-e);let n=`${String(a.getDate()).padStart(2,"0")}-${String(a.getMonth()+1).padStart(2,"0")}-${a.getFullYear()}`,d=t[a.getDay()];r.push({dateStr:n,dayName:d})}e.innerHTML="",r.forEach((t=>{let r=a[t.dateStr]||{hk:"-",sgp:"-",sdy:"-"},n=r.hk&&""!==r.hk?r.hk:"-",d=r.sgp&&""!==r.sgp?r.sgp:"-",s=r.sdy&&""!==r.sdy?r.sdy:"-",i=`<tr>\n            <td>${t.dateStr}</td>\n            <td>${t.dayName}</td>\n            <td id="val-hk-${t.dateStr}">${n}</td>\n            <td id="val-sgp-${t.dateStr}">${d}</td>\n            <td id="val-sdy-${t.dateStr}">${s}</td>\n        </tr>`;e.innerHTML+=i}));const n={hk:"hongkong",sgp:"singapore",sdy:"sydney"};r.forEach((t=>{["hk","sgp","sdy"].forEach((e=>{let r=n[e];db.ref(`live/${r}/${t.dateStr}`).on("value",(r=>{let n=r.val(),d="-";if(null!=n){let t=extractRightmostResult(n);"-"!==t&&(d=t)}a[t.dateStr]||(a[t.dateStr]={hk:"-",sgp:"-",sdy:"-"}),a[t.dateStr][e]=d,localStorage.setItem("tunggalpaito_persistent_backup",JSON.stringify(a));let s=document.getElementById(`val-${e}-${t.dateStr}`);s&&(s.innerText=d)}))}))}))}initLiveDraw()</script>
+<script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false; // Blokir F12 (Inspect Element)
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    }
+</script>
 </body>
 </html>
