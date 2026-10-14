@@ -112,7 +112,173 @@ Kunjungi Halaman Utama Tunggal Paito
 <footer>
 &copy; <span id=currentYear></span> Tunggal Paito. All rights reserved.
 </footer>
-<script>const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};firebase.initializeApp(firebaseConfig);const db=firebase.database();let firebaseTargetData={};const ADMIN_WA="6288970383950";function renderAds(){["ad-slot-1","ad-slot-2","ad-slot-3","ad-slot-4"].forEach(((e,t)=>{setTimeout((()=>{const t=document.getElementById(e);if(t){t.innerHTML="";const e=document.createElement("div");e.style.cssText="width:100%;text-align:center;overflow:hidden";const a=document.createElement("script");a.text='var atOptions = { key: "119c8bb3217ed264a8fa223c3197bf69", format: "iframe", height: 50, width: 320, params: {} };';const n=document.createElement("script");n.src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js",e.appendChild(a),e.appendChild(n),t.appendChild(e)}}),150*t)}))}function sanitizeKey(e){return e.replace(/\./g,"_dot_").replace(/@/g,"_at_").replace(/[^a-zA-Z0-9_]/g,"")}async function isUserVIPActive(){const e=JSON.parse(sessionStorage.getItem("tp_firebase_user")||"null");if(!e)return!1;try{const t=(await db.ref("users/"+e.userKey).once("value")).val();if(!t)return!1;if("active"!==t.status)return!1;return!((new Date).getTime()>t.expiry)}catch(e){return console.error("Gagal verifikasi sesi:",e),!1}}async function fetchFirebaseData(){try{let e=await fetch("https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/live/sydney.json"),t=await e.json(),a=await fetch("https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/live/targetData/sdy.json"),n=await a.json();n&&(firebaseTargetData=n);let r=document.getElementById("firebaseHistoryBody");if(r.innerHTML="",t&&"object"==typeof t){let e=Object.keys(t).slice(-7).reverse(),a=await isUserVIPActive();e.forEach(((e,n)=>{let i=t[e],o=document.createElement("tr");o.className="history-row",0!==n||a?(o.onclick=function(){document.getElementById("resultInput").value=i,window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})},o.innerHTML=`\n                        <td>${e}</td>\n                        <td><span class="badge-result">${i}</span></td>\n                    `):(o.onclick=function(){openAuthModal()},o.innerHTML=`\n                        <td>${e}</td>\n                        <td><span class="badge-locked" onclick="openAuthModal()">Daftar</span></td>\n                    `),r.appendChild(o)}))}else r.innerHTML='<tr><td colspan="2" style="color: var(--text-muted); text-align: center;">Tidak ada data ditemukan</td></tr>'}catch(e){console.error("Gagal memuat firebase:",e),document.getElementById("firebaseHistoryBody").innerHTML='<tr><td colspan="2" style="color: #ef4444; text-align: center;">Gagal memuat data firebase</td></tr>'}}function openAuthModal(){document.getElementById("authModalOverlay").style.display="flex"}function closeAuthModal(){document.getElementById("authModalOverlay").style.display="none"}function switchTab(e){document.querySelectorAll(".auth-tab").forEach((e=>e.classList.remove("active"))),document.querySelectorAll(".auth-form").forEach((e=>e.classList.remove("active"))),"login"===e?(document.querySelectorAll(".auth-tab")[0].classList.add("active"),document.getElementById("loginForm").classList.add("active")):(document.querySelectorAll(".auth-tab")[1].classList.add("active"),document.getElementById("registerForm").classList.add("active"))}function validatePassword(e){if(e.length<4)return"Sandi minimal harus 4 karakter!";if(!/[A-Z]/.test(e))return"Sandi harus mengandung minimal 1 Huruf Besar!";const t=e.match(/\d/g);return!t||t.length<2?"Sandi harus mengandung minimal 2 Angka!":null}async function submitRegister(){const e=document.getElementById("regEmail").value.trim(),t=document.getElementById("regPhone").value.trim(),a=document.getElementById("regPass").value.trim(),n=document.getElementById("regSource").value;if(document.getElementById("regEmailError").textContent="",document.getElementById("regPassError").textContent="",!e||!t||!a)return void alert("Semua kolom wajib diisi!");let r=validatePassword(a);if(r)return void(document.getElementById("regPassError").textContent="Koreksi: "+r);const i=sanitizeKey(e),o=db.ref("users/"+i);if((await o.once("value")).exists())return void(document.getElementById("regEmailError").textContent="Koreksi: Email ini sudah terdaftar. Silakan login atau hubungi admin.");await o.set({email:e,phone:t,pass:a,source:n,status:"pending",createdAt:(new Date).getTime(),expiry:0}),closeAuthModal(),alert("Pendaftaran Berhasil! Silakan konfirmasi pembayaran Rp 50.000 ke WhatsApp Admin agar akun diaktifkan.");const s=encodeURIComponent(`Halo Admin Tunggal Paito,\nSaya telah mendaftar dan ingin konfirmasi pembayaran 50k (14 Hari) untuk Sydney.\n\n*Detail Pendaftaran:*\n- Email: ${e}\n- No. HP: ${t}\n- Sumber Info: ${n}`);window.open(`https://wa.me/${ADMIN_WA}?text=${s}`,"_blank")}async function submitLogin(){const e=document.getElementById("loginId").value.trim(),t=document.getElementById("loginPass").value.trim();if(document.getElementById("loginError").textContent="",!e||!t)return void alert("Email/No HP dan Sandi wajib diisi!");const a=db.ref("users"),n=(await a.once("value")).val();let r=null,i=null;if(n&&Object.keys(n).forEach((t=>{n[t].email!==e&&n[t].phone!==e||(r=t,i=n[t])})),!i)return void(document.getElementById("loginError").textContent="Koreksi: Email atau Nomor HP belum terdaftar!");if(i.pass!==t)return void(document.getElementById("loginError").textContent="Koreksi: Kata sandi yang Anda masukkan salah!");if("pending"===i.status)return void(document.getElementById("loginError").textContent="Koreksi: Akun Anda masih PENDING. Silakan lakukan pembayaran 50k & konfirmasi ke WA Admin.");const o=(new Date).getTime();i.expiry&&o>i.expiry?document.getElementById("loginError").textContent="Koreksi: Masa aktif 14 hari Anda telah berakhir. Hubungi Admin WA untuk memperpanjang.":(sessionStorage.setItem("tp_firebase_user",JSON.stringify({userKey:r})),closeAuthModal(),await fetchFirebaseData(),alert("Login Berhasil! Result terbaru telah terbuka."))}function prosesPrediksi(){const e=document.getElementById("resultInput").value.trim();4!==e.length||isNaN(e)?alert("Harap masukkan tepat 4 digit angka result!"):(document.getElementById("loadingOverlay").style.display="flex",setTimeout((()=>{let t="- - -",a="- - -";if(firebaseTargetData&&firebaseTargetData[e]){let n=firebaseTargetData[e];if("object"==typeof n&&null!==n){let e=Object.keys(n);if(e.length>0)if(n.kepala&&n.ekor)t=n.kepala,a=n.ekor;else{let r=e.reduce(((e,t)=>{let a=n[e]?.timestamp||0;return(n[t]?.timestamp||0)>=a?t:e}),e[0]);t=n[r].kepala||"- - -",a=n[r].ekor||"- - -"}}}else{const n=parseInt(e[0]),r=parseInt(e[1]),i=parseInt(e[2]),o=(n+parseInt(e[3]))%10,s=(o+1)%10;t=`${o} ${s} ${(s+1)%10}`;const l=(r+i)%10,d=(l+1)%10;a=`${l} ${d} ${(d+1)%10}`}document.getElementById("kepalaResult").textContent=t,document.getElementById("ekorResult").textContent=a,document.getElementById("loadingOverlay").style.display="none",renderAds()}),1200))}document.getElementById("currentYear").textContent=(new Date).getFullYear(),fetchFirebaseData(),renderAds()</script>
+<script>
+const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+let firebaseTargetData={};
+const ADMIN_WA="6288970383950";
+
+function renderAds(){
+    ["ad-slot-1","ad-slot-2","ad-slot-3","ad-slot-4"].forEach(((e,t)=>{
+        setTimeout((()=>{
+            const t=document.getElementById(e);
+            if(t){
+                t.innerHTML="";
+                const e=document.createElement("div");
+                e.style.cssText="width:100%;text-align:center;overflow:hidden";
+                const a=document.createElement("script");
+                a.text='var atOptions = { key: "119c8bb3217ed264a8fa223c3197bf69", format: "iframe", height: 50, width: 320, params: {} };';
+                const n=document.createElement("script");
+                n.src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js",e.appendChild(a),e.appendChild(n),t.appendChild(e)
+            }
+        }),150*t)
+    }))
+}
+
+function sanitizeKey(e){
+    return e.replace(/\./g,"_dot_").replace(/@/g,"_at_").replace(/[^a-zA-Z0-9_]/g,"")
+}
+
+async function isUserVIPActive(){
+    const e=JSON.parse(sessionStorage.getItem("tp_firebase_user")||"null");
+    if(!e)return!1;
+    try{
+        const t=(await db.ref("users/"+e.userKey).once("value")).val();
+        if(!t)return!1;
+        if("active"!==t.status)return!1;
+        return!((new Date).getTime()>t.expiry)
+    }catch(e){
+        return console.error("Gagal verifikasi sesi:",e),!1
+    }
+}
+
+async function fetchFirebaseData(){
+    try{
+        let e=await fetch("https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/live/sydney.json"),
+            t=await e.json(),
+            a=await fetch("https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/live/targetData/sdy.json"),
+            n=await a.json();
+        n&&(firebaseTargetData=n);
+        let r=document.getElementById("firebaseHistoryBody");
+        if(r.innerHTML="",t&&"object"==typeof t){
+            let e=Object.keys(t).slice(-7).reverse(),a=await isUserVIPActive();
+            e.forEach(((e,n)=>{
+                let i=t[e],o=document.createElement("tr");
+                o.className="history-row",0!==n||a?(o.onclick=function(){
+                    document.getElementById("resultInput").value=i,window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})
+                },o.innerHTML=`\n <td>${e}</td>\n <td><span class="badge-result">${i}</span></td>\n `):(o.onclick=function(){
+                    openAuthModal()
+                },o.innerHTML=`\n <td>${e}</td>\n <td><span class="badge-locked" onclick="openAuthModal()">Daftar</span></td>\n `),r.appendChild(o)
+            }))
+        }else r.innerHTML='<tr><td colspan="2" style="color: var(--text-muted); text-align: center;">Tidak ada data ditemukan</td></tr>'
+    }catch(e){
+        console.error("Gagal memuat firebase:",e),document.getElementById("firebaseHistoryBody").innerHTML='<tr><td colspan="2" style="color: #ef4444; text-align: center;">Gagal memuat data firebase</td></tr>'
+    }
+}
+
+function openAuthModal(){document.getElementById("authModalOverlay").style.display="flex"}
+function closeAuthModal(){document.getElementById("authModalOverlay").style.display="none"}
+function switchTab(e){
+    document.querySelectorAll(".auth-tab").forEach((e=>e.classList.remove("active"))),
+    document.querySelectorAll(".auth-form").forEach((e=>e.classList.remove("active"))),
+    "login"===e?(document.querySelectorAll(".auth-tab")[0].classList.add("active"),document.getElementById("loginForm").classList.add("active")):(document.querySelectorAll(".auth-tab")[1].classList.add("active"),document.getElementById("registerForm").classList.add("active"))
+}
+
+function validatePassword(e){
+    if(e.length<4)return"Sandi minimal harus 4 karakter!";
+    if(!/[A-Z]/.test(e))return"Sandi harus mengandung minimal 1 Huruf Besar!";
+    const t=e.match(/\d/g);
+    return!t||t.length<2?"Sandi harus mengandung minimal 2 Angka!":null
+}
+
+/* FUNGSI PENDAFTARAN YANG SUDAH DIPERBAIKI (LANGSUNG KONEK WA) */
+async function submitRegister(){
+    const e=document.getElementById("regEmail").value.trim(),
+          t=document.getElementById("regPhone").value.trim(),
+          a=document.getElementById("regPass").value.trim(),
+          n=document.getElementById("regSource").value;
+
+    document.getElementById("regEmailError").textContent="";
+    document.getElementById("regPassError").textContent="";
+
+    if(!e||!t||!a) return void alert("Semua kolom wajib diisi!");
+
+    let r=validatePassword(a);
+    if(r) return void(document.getElementById("regPassError").textContent="Koreksi: "+r);
+
+    const i=sanitizeKey(e),
+          o=db.ref("users/"+i);
+
+    if((await o.once("value")).exists()) return void(document.getElementById("regEmailError").textContent="Koreksi: Email ini sudah terdaftar. Silakan login atau hubungi admin.");
+
+    // Simpan data pendaftaran ke Realtime Database Firebase
+    await o.set({
+        email: e,
+        phone: t,
+        pass: a,
+        source: n,
+        status: "pending",
+        createdAt: (new Date).getTime(),
+        expiry: 0
+    });
+
+    closeAuthModal();
+
+    // Buat format pesan teks otomatis untuk WA
+    const s=encodeURIComponent(`Halo Admin Tunggal Paito,\nSaya telah mendaftar dan ingin konfirmasi pembayaran 50k (14 Hari) untuk Sydney.\n\n*Detail Pendaftaran:*\n- Email: ${e}\n- No. HP: ${t}\n- Sumber Info: ${n}`);
+    
+    // Langsung arahkan halaman ke WhatsApp agar tidak diblokir browser HP
+    window.location.href = `https://wa.me/${ADMIN_WA}?text=${s}`;
+}
+
+async function submitLogin(){
+    const e=document.getElementById("loginId").value.trim(),
+          t=document.getElementById("loginPass").value.trim();
+
+    if(document.getElementById("loginError").textContent="",!e||!t) return void alert("Email/No HP dan Sandi wajib diisi!");
+
+    const a=db.ref("users"),
+          n=(await a.once("value")).val();
+
+    let r=null,i=null;
+    if(n&&Object.keys(n).forEach((t=>{n[t].email!==e&&n[t].phone!==e||(r=t,i=n[t])})),!i) return void(document.getElementById("loginError").textContent="Koreksi: Email atau Nomor HP belum terdaftar!");
+    if(i.pass!==t) return void(document.getElementById("loginError").textContent="Koreksi: Kata sandi yang Anda masukkan salah!");
+    if("pending"===i.status) return void(document.getElementById("loginError").textContent="Koreksi: Akun Anda masih PENDING. Silakan lakukan pembayaran 50k & konfirmasi ke WA Admin.");
+
+    const o=(new Date).getTime();
+    i.expiry&&o>i.expiry?document.getElementById("loginError").textContent="Koreksi: Masa aktif 14 hari Anda telah berakhir. Hubungi Admin WA untuk memperpanjang.":(sessionStorage.setItem("tp_firebase_user",JSON.stringify({userKey:r})),closeAuthModal(),await fetchFirebaseData(),alert("Login Berhasil! Result terbaru telah terbuka."))
+}
+
+function prosesPrediksi(){
+    const e=document.getElementById("resultInput").value.trim();
+    4!==e.length||isNaN(e)?alert("Harap masukkan tepat 4 digit angka result!"):(document.getElementById("loadingOverlay").style.display="flex",setTimeout((()=>{
+        let t="- - -",a="- - -";
+        if(firebaseTargetData&&firebaseTargetData[e]){
+            let n=firebaseTargetData[e];
+            if("object"==typeof n&&null!==n){
+                let e=Object.keys(n);
+                if(e.length>0)if(n.kepala&&n.ekor)t=n.kepala,a=n.ekor;
+                else{
+                    let r=e.reduce(((e,t)=>{let a=n[e]?.timestamp||0;return(n[t]?.timestamp||0)>=a?t:e}),e[0]);
+                    t=n[r].kepala||"- - -",a=n[r].ekor||"- - -"
+                }
+            }
+        }else{
+            const n=parseInt(e[0]),r=parseInt(e[1]),i=parseInt(e[2]),o=(n+parseInt(e[3]))%10,s=(o+1)%10;
+            t=`${o} ${s} ${(s+1)%10}`;
+            const l=(r+i)%10,d=(l+1)%10;
+            a=`${l} ${d} ${(d+1)%10}`
+        }
+        document.getElementById("kepalaResult").textContent=t,
+        document.getElementById("ekorResult").textContent=a,
+        document.getElementById("loadingOverlay").style.display="none",
+        renderAds()
+    }),1200))
+}
+
+document.getElementById("currentYear").textContent=(new Date).getFullYear(),fetchFirebaseData(),renderAds();
+</script>
 <script>document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&((!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0))))}</script>
 </body>
 </html>
