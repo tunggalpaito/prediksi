@@ -83,5 +83,15 @@ function searchPattern(t){const e=document.getElementById("patternInput").value.
 
 sgpRef.once("value").then((t=>{const e=document.getElementById("loading"),a=document.getElementById("paitoTable"),s=document.getElementById("tableBody");if(e.style.display="none",a.style.display="table",!t.exists())return void(s.innerHTML='<tr><td colspan="5" style="text-align:center;">Belum ada data SGP di database.</td></tr>');const l=t.val();let o={};Object.keys(l).forEach((t=>{let e=t.split("-");if(3!==e.length)return;let a=new Date(`${e[2]}-${e[1]}-${e[0]}`);if(isNaN(a))return;let s=function(t){let e=new Date(t),a=e.getDay(),s=e.getDate()-a+(0===a?-6:1);return new Date(e.setDate(s))}(a),n=`${(i=s).getFullYear()}-${String(i.getMonth()+1).padStart(2,"0")}-${String(i.getDate()).padStart(2,"0")}`;var i;o[n]||(o[n]={1:"",3:"",4:"",6:"",0:""});let r=a.getDay(),c=l[t].split(",").map((t=>`<span class="number-group">${t.trim().split("").map((t=>`<span class="digit" onclick="toggleDigitColor(this)">${t}</span>`)).join("")}</span>`)).join("<br>");o[n][r]=c}));let n=Object.keys(o).sort(),i="";const r='<span class="number-group" style="letter-spacing:1px;"><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span></span>';n.forEach((t=>{let e=o[t],a=e[1]||r,s=e[3]||r,l=e[4]||r,n=e[6]||r,c=e[0]||r;i+=`<tr><td>${a}</td><td>${s}</td><td>${l}</td><td>${n}</td><td>${c}</td></tr>`})),s.innerHTML=i||'<tr><td colspan="5" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>'})).catch((t=>{console.error("Gagal mengambil data:",t),document.getElementById("loading").textContent="Gagal memuat data dari Firebase."}))
 </script>
+<script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) return false; // Blokir F12 (Inspect Element)
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    }
+</script>
 </body>
 </html>
