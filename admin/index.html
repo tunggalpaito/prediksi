@@ -64,8 +64,8 @@ footer span{color:#38bdf8;font-weight:700}
 </head>
 <body>
 
-<!-- KOTAK LOGIN ADMIN -->
-<div id="adminLoginOverlay" class="login-overlay" style="display:none;">
+<!-- KOTAK LOGIN ADMIN (DEFAULT MUNCUL / FLEX) -->
+<div id="adminLoginOverlay" class="login-overlay" style="display:flex;">
     <div class="login-box">
         <h3>Login Admin Tunggal Paito</h3>
         <input type="email" id="adminEmail" placeholder="Email Admin (tunggalpaito@gmail.com)">
@@ -313,10 +313,13 @@ function logoutAdmin() {
     });
 }
 
-/* PANTAU STATUS LOGIN SECARA REAL-TIME + NOTIFIKASI */
+/* PANTAU STATUS LOGIN AMAN DENGAN TIMEOUT PENCEGAH MACET */
+let authChecked = false;
+
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(() => {
         firebase.auth().onAuthStateChanged((user) => {
+            authChecked = true;
             const overlay = document.getElementById("adminLoginOverlay");
             const statusBadge = document.getElementById("authStatusIndicator");
             const btnLogout = document.getElementById("btnLogout");
@@ -331,7 +334,7 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 if (btnLogout) btnLogout.style.display = "inline-block";
                 loadMemberList();
             } else {
-                // KONDISI: SUDAH LOGOUT / BELUM LOGIN
+                // KONDISI: BELUM LOGIN / LOGOUT
                 if (overlay) overlay.style.display = "flex";
                 if (statusBadge) {
                     statusBadge.className = "auth-status-badge status-logged-out";
@@ -341,6 +344,19 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             }
         });
     });
+
+// Fallback: Jika dalam 3 detik server auth tidak merespons, pastikan form login langsung tampil
+setTimeout(() => {
+    if (!authChecked) {
+        const overlay = document.getElementById("adminLoginOverlay");
+        const statusBadge = document.getElementById("authStatusIndicator");
+        if (overlay) overlay.style.display = "flex";
+        if (statusBadge) {
+            statusBadge.className = "auth-status-badge status-logged-out";
+            statusBadge.innerHTML = `🔴 Status: <b>BELUM LOGIN / TIMEOUT</b>`;
+        }
+    }
+}, 3000);
 
 function loadMemberList() {
     database.ref('users').on('value', (snapshot) => {
