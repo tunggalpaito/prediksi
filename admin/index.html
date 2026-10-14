@@ -254,9 +254,22 @@ footer span{color:#38bdf8;font-weight:700}
 </footer>
 
 <script>
-const BASE_URL_FOTO="https://tunggalpaito.online/",firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};
-firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);
-const database=firebase.database();
+const BASE_URL_FOTO = "https://tunggalpaito.online/";
+
+// KONFIGURASI LENGKAP DENGAN API KEY ANDA
+const firebaseConfig = {
+  apiKey: "AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",
+  authDomain: "komentar-web-f9e2e.firebaseapp.com",
+  databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "komentar-web-f9e2e",
+  storageBucket: "komentar-web-f9e2e.firebasestorage.app",
+  messagingSenderId: "126095632925",
+  appId: "1:126095632925:web:77383efdc2daea2e7034f4",
+  measurementId: "G-C3CVJPFTMN"
+};
+
+firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
 
 function getTodayString() {
     const now = new Date();
