@@ -6,7 +6,23 @@
 <title>Admin Panel - Tunggal Paito</title>
 <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js></script>
 <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js></script>
-<style>*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}.admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:5px;border-radius:8px;border:1px dashed #262626}.header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:20px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}.main-nav{display:flex;gap:12px;justify-content:center;width:100%}.btn-utama{flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 15px;border-radius:8px;font-weight:700;font-size:13px;color:#fff;transition:.2s;text-transform:uppercase;box-shadow:0 4px 10px rgba(0,0,0,.4)}.btn-menu-awal{background:#00b894;border:1px solid #00e6ac}.btn-menu-awal:hover{background:#009473;transform:translateY(-2px);box-shadow:0 0 12px rgba(0,184,148,.5)}.btn-stat{background:#6366f1;border:1px solid #818cf8}.btn-stat:hover{background:#4f46e5;transform:translateY(-2px);box-shadow:0 0 12px rgba(99,102,241,.5)}.section-title{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;text-align:left;margin:25px 0 12px 5px;display:flex;align-items:center}.section-title::after{content:"";flex:1;height:1px;background:#1a1a1a;margin-left:10px}.input-result-box{background:#0f172a;border:1px solid #1e293b;padding:15px;border-radius:8px;margin-bottom:15px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}.input-result-box label{font-size:11px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.5px}.input-result-box input,.input-result-box select,.input-result-box textarea{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:10px 12px;border-radius:6px;font-size:14px;outline:0;transition:.2s;font-weight:700}.input-result-box input[type=text]{text-align:left;letter-spacing:1px}.input-result-box input[type=date]{text-align:center;color-scheme:dark}.input-result-box textarea{resize:vertical;height:120px;font-family:monospace;text-align:left;font-weight:400}.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{border-color:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.4)}.btn-kirim{background:#10b981;border:1px solid #34d399;color:#fff;padding:10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;text-transform:uppercase;transition:.2s}.btn-kirim:hover{background:#059669;box-shadow:0 0 10px rgba(16,185,129,.5)}.status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700}.list-menu{display:flex;flex-direction:column;gap:6px}.btn-sub{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:11px;border-radius:6px;font-size:12px;font-weight:700;color:#f1f5f9;text-align:center;transition:all .2s ease;text-transform:uppercase;border:1px solid rgba(255,255,255,.08);width:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.btn-sub:hover{transform:translateY(-1px);filter:brightness(1.2);box-shadow:0 4px 12px rgba(0,0,0,.6)}.c-result{background:#0369a1;border-color:#0284c7}.c-prediksi{background:#9a3412;border-color:#c2410c}.c-top2d{background:#5b21b6;border-color:#7c3aed}.c-live{background:#9f1239;border-color:#e11d48}.c-ping{background:#1e293b;border-color:#334155;color:#38bdf8}footer{text-align:center;font-size:12px;color:#475569;margin-top:10px;margin-bottom:20px}footer span{color:#38bdf8;font-weight:700}</style>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}.admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:5px;border-radius:8px;border:1px dashed #262626}.header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:20px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}.main-nav{display:flex;gap:12px;justify-content:center;width:100%}.btn-utama{flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 15px;border-radius:8px;font-weight:700;font-size:13px;color:#fff;transition:.2s;text-transform:uppercase;box-shadow:0 4px 10px rgba(0,0,0,.4)}.btn-menu-awal{background:#00b894;border:1px solid #00e6ac}.btn-menu-awal:hover{background:#009473;transform:translateY(-2px);box-shadow:0 0 12px rgba(0,184,148,.5)}.btn-stat{background:#6366f1;border:1px solid #818cf8}.btn-stat:hover{background:#4f46e5;transform:translateY(-2px);box-shadow:0 0 12px rgba(99,102,241,.5)}.section-title{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;text-align:left;margin:25px 0 12px 5px;display:flex;align-items:center}.section-title::after{content:"";flex:1;height:1px;background:#1a1a1a;margin-left:10px}.input-result-box{background:#0f172a;border:1px solid #1e293b;padding:15px;border-radius:8px;margin-bottom:15px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}.input-result-box label{font-size:11px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.5px}.input-result-box input,.input-result-box select,.input-result-box textarea{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:10px 12px;border-radius:6px;font-size:14px;outline:0;transition:.2s;font-weight:700}.input-result-box input[type=text]{text-align:left;letter-spacing:1px}.input-result-box input[type=date]{text-align:center;color-scheme:dark}.input-result-box textarea{resize:vertical;height:120px;font-family:monospace;text-align:left;font-weight:400}.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{border-color:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.4)}.btn-kirim{background:#10b981;border:1px solid #34d399;color:#fff;padding:10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;text-transform:uppercase;transition:.2s}.btn-kirim:hover{background:#059669;box-shadow:0 0 10px rgba(16,185,129,.5)}.status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700}.list-menu{display:flex;flex-direction:column;gap:6px}.btn-sub{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:11px;border-radius:6px;font-size:12px;font-weight:700;color:#f1f5f9;text-align:center;transition:all .2s ease;text-transform:uppercase;border:1px solid rgba(255,255,255,.08);width:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.btn-sub:hover{transform:translateY(-1px);filter:brightness(1.2);box-shadow:0 4px 12px rgba(0,0,0,.6)}.c-result{background:#0369a1;border-color:#0284c7}.c-prediksi{background:#9a3412;border-color:#c2410c}.c-top2d{background:#5b21b6;border-color:#7c3aed}.c-live{background:#9f1239;border-color:#e11d48}.c-ping{background:#1e293b;border-color:#334155;color:#38bdf8}footer{text-align:center;font-size:12px;color:#475569;margin-top:10px;margin-bottom:20px}footer span{color:#38bdf8;font-weight:700}
+
+/* CSS KHUSUS PANEL MEMBER */
+.member-card{background:#0f172a;border:1px solid #1e293b;padding:14px;border-radius:8px;margin-bottom:10px}
+.member-card p{font-size:12px;color:#94a3b8;margin-bottom:4px}
+.member-card p strong{color:#f8fafc}
+.status-pending{color:#f59e0b;font-weight:700}
+.status-active{color:#10b981;font-weight:700}
+.status-expired{color:#ef4444;font-weight:700}
+.btn-member-action{width:100%;padding:9px;border:none;border-radius:6px;font-weight:700;cursor:pointer;margin-top:8px;font-size:11px;text-transform:uppercase;transition:.2s}
+.btn-activate{background:#2563eb;color:#fff}
+.btn-activate:hover{background:#1d4ed8}
+.btn-renew{background:#16a34a;color:#fff}
+.btn-renew:hover{background:#15803d}
+.btn-delete{background:#dc2626;color:#fff;margin-top:4px}
+.btn-delete:hover{background:#b91c1c}
+</style>
 </head>
 <body>
 <div class=admin-container>
@@ -19,6 +35,12 @@
 <a href=https://tunggalpaito.online/ class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
 <a href=https://tunggalpaito.online/prediksi class="btn-utama btn-stat">TUNGGAL PAITO</a>
 </div>
+</div>
+
+<!-- SECTION KELOLA MEMBER VIP -->
+<div class=section-title>👥 Kelola Member VIP (14 Hari / 50K)</div>
+<div class=input-result-box>
+<div id=memberListContainer>Memuat data member...</div>
 </div>
 
 <div class=section-title>📡 Update Prediksi Kepala & Ekor</div>
@@ -180,6 +202,82 @@ const BASE_URL_FOTO="https://tunggalpaito.online/",firebaseConfig={databaseURL:"
 firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);
 const database=firebase.database();
 
+// --- FITUR LOAD & KELOLA MEMBER VIP DI ADMIN ---
+function loadMemberList() {
+    database.ref('users').on('value', (snapshot) => {
+        const users = snapshot.val();
+        const container = document.getElementById('memberListContainer');
+        container.innerHTML = '';
+
+        if (!users) {
+            container.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:12px;">Belum ada member yang mendaftar.</p>';
+            return;
+        }
+
+        Object.keys(users).reverse().forEach(key => {
+            const user = users[key];
+            const now = new Date().getTime();
+            let statusText = '';
+            let actionBtn = '';
+
+            if (user.status === 'pending') {
+                statusText = '<span class="status-pending">PENDING (Belum Bayar)</span>';
+                actionBtn = `<button class="btn-member-action btn-activate" onclick="activateUser('${key}')">AKTIFKAN 14 HARI (Rp 50K)</button>`;
+            } else if (user.expiry && now > user.expiry) {
+                statusText = '<span class="status-expired">KEDALUWARSA (Lewat 14 Hari)</span>';
+                actionBtn = `<button class="btn-member-action btn-renew" onclick="activateUser('${key}')">PERPANJANG 14 HARI</button>`;
+            } else {
+                const sisaHari = Math.ceil((user.expiry - now) / (1000 * 60 * 60 * 24));
+                statusText = `<span class="status-active">AKTIF (Sisa ${sisaHari} Hari Lagi)</span>`;
+                actionBtn = `<button class="btn-member-action btn-renew" onclick="activateUser('${key}')">TAMBAH/RESET 14 HARI</button>`;
+            }
+
+            const div = document.createElement('div');
+            div.className = 'member-card';
+            div.innerHTML = `
+                <p><strong>Email:</strong> ${user.email}</p>
+                <p><strong>No HP:</strong> ${user.phone}</p>
+                <p><strong>Sumber:</strong> ${user.source || '-'}</p>
+                <p><strong>Status:</strong> ${statusText}</p>
+                ${actionBtn}
+                <button class="btn-member-action btn-delete" onclick="deleteUser('${key}')">Hapus Akun</button>
+            `;
+            container.appendChild(div);
+        });
+    });
+}
+
+// Fungsi Aktifkan 14 Hari
+function activateUser(userKey) {
+    const fourteenDaysMs = 14 * 24 * 60 * 60 * 1000;
+    const newExpiry = new Date().getTime() + fourteenDaysMs;
+
+    database.ref('users/' + userKey).update({
+        status: 'active',
+        expiry: newExpiry
+    }, (error) => {
+        if (error) {
+            alert("Gagal mengaktifkan akun!");
+        } else {
+            alert("Sukses! Akun member diaktifkan selama 14 hari ke depan.");
+        }
+    });
+}
+
+// Fungsi Hapus Akun Member
+function deleteUser(userKey) {
+    if(confirm("Yakin ingin menghapus akun member ini?")) {
+        database.ref('users/' + userKey).remove().then(() => {
+            alert("Akun berhasil dihapus.");
+        });
+    }
+}
+
+// Jalankan fungsi load member saat halaman dibuka
+window.addEventListener("DOMContentLoaded", () => {
+    loadMemberList();
+});
+
 function setTodayDate(e){
     const t=document.getElementById(e);
     if(t){
@@ -214,7 +312,6 @@ function savePrediksiTunggal(){
     statusDiv.style.color = "#38bdf8";
     statusDiv.innerText = `Menyimpan riwayat prediksi ${pasaran.toUpperCase()}...`;
 
-    // Menggunakan .push() agar data tidak menimpa, melainkan bertambah mencatat frekuensi/riwayat
     database.ref(`live/targetData/${pasaran}/${resultKey}`).push({
         kepala: kepalaVal,
         ekor: ekorVal,
