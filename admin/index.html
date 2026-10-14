@@ -6,6 +6,8 @@
 <title>Admin Panel - Tunggal Paito</title>
 <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js></script>
 <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js></script>
+<!-- TAMBAHKAN SCRIPT AUTH DI SINI -->
+<script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js></script>
 <style>*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}.admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:5px;border-radius:8px;border:1px dashed #262626}.header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:20px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}.main-nav{display:flex;gap:12px;justify-content:center;width:100%}.btn-utama{flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 15px;border-radius:8px;font-weight:700;font-size:13px;color:#fff;transition:.2s;text-transform:uppercase;box-shadow:0 4px 10px rgba(0,0,0,.4)}.btn-menu-awal{background:#00b894;border:1px solid #00e6ac}.btn-menu-awal:hover{background:#009473;transform:translateY(-2px);box-shadow:0 0 12px rgba(0,184,148,.5)}.btn-stat{background:#6366f1;border:1px solid #818cf8}.btn-stat:hover{background:#4f46e5;transform:translateY(-2px);box-shadow:0 0 12px rgba(99,102,241,.5)}.section-title{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;text-align:left;margin:25px 0 12px 5px;display:flex;align-items:center}.section-title::after{content:"";flex:1;height:1px;background:#1a1a1a;margin-left:10px}.input-result-box{background:#0f172a;border:1px solid #1e293b;padding:15px;border-radius:8px;margin-bottom:15px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}.input-result-box label{font-size:11px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.5px}.input-result-box input,.input-result-box select,.input-result-box textarea{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:10px 12px;border-radius:6px;font-size:14px;outline:0;transition:.2s;font-weight:700}.input-result-box input[type=text]{text-align:left;letter-spacing:1px}.input-result-box input[type=date]{text-align:center;color-scheme:dark}.input-result-box textarea{resize:vertical;height:120px;font-family:monospace;text-align:left;font-weight:400}.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{border-color:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.4)}.btn-kirim{background:#10b981;border:1px solid #34d399;color:#fff;padding:10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;text-transform:uppercase;transition:.2s}.btn-kirim:hover{background:#059669;box-shadow:0 0 10px rgba(16,185,129,.5)}.status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700}.list-menu{display:flex;flex-direction:column;gap:6px}.btn-sub{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:11px;border-radius:6px;font-size:12px;font-weight:700;color:#f1f5f9;text-align:center;transition:all .2s ease;text-transform:uppercase;border:1px solid rgba(255,255,255,.08);width:100%;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.btn-sub:hover{transform:translateY(-1px);filter:brightness(1.2);box-shadow:0 4px 12px rgba(0,0,0,.6)}.c-result{background:#0369a1;border-color:#0284c7}.c-prediksi{background:#9a3412;border-color:#c2410c}.c-top2d{background:#5b21b6;border-color:#7c3aed}.c-live{background:#9f1239;border-color:#e11d48}.c-ping{background:#1e293b;border-color:#334155;color:#38bdf8}footer{text-align:center;font-size:12px;color:#475569;margin-top:10px;margin-bottom:20px}footer span{color:#38bdf8;font-weight:700}
 
 /* CSS KHUSUS PANEL MEMBER */
@@ -22,9 +24,29 @@
 .btn-renew:hover{background:#15803d}
 .btn-delete{background:#dc2626;color:#fff;margin-top:4px}
 .btn-delete:hover{background:#b91c1c}
+
+/* CSS TAMBAHAN UNTUK LOGIN ADMIN */
+.login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px}
+.login-box{background:#080808;border:1px solid #334155;padding:25px;border-radius:12px;width:100%;max-width:380px;box-shadow:0 10px 25px rgba(0,0,0,0.8)}
+.login-box h3{color:#38bdf8;text-align:center;margin-bottom:15px;font-size:16px;text-transform:uppercase}
+.login-box input{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:12px;border-radius:6px;margin-bottom:12px;font-size:14px;outline:0}
+.login-box button{width:100%;background:#10b981;color:#fff;border:none;padding:12px;border-radius:6px;font-weight:700;cursor:pointer;text-transform:uppercase}
+.login-error{color:#ef4444;font-size:12px;text-align:center;margin-top:8px}
 </style>
 </head>
 <body>
+
+<!-- KOTAK LOGIN ADMIN (MUNCUL SEKALI SAJA JIKA BELUM LOGIN) -->
+<div id="adminLoginOverlay" class="login-overlay" style="display:none;">
+    <div class="login-box">
+        <h3>Login Admin Tunggal Paito</h3>
+        <input type="email" id="adminEmail" placeholder="Email Admin (tunggalpaito@gmail.com)">
+        <input type="password" id="adminPassword" placeholder="Kata Sandi Admin">
+        <button type="button" onclick="loginAdmin()">MASUK PANEL</button>
+        <div id="loginErrorMsg" class="login-error"></div>
+    </div>
+</div>
+
 <div class=admin-container>
 <div class=top-tracker>
 <div id=histats_counter style=display:flex;justify-content:center;align-items:center;height:18px;overflow:hidden;transform:scale(.75);transform-origin:center;opacity:.95></div>
@@ -202,6 +224,48 @@ const BASE_URL_FOTO="https://tunggalpaito.online/",firebaseConfig={databaseURL:"
 firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);
 const database=firebase.database();
 
+// --- FUNGSI LOGIN ADMIN ---
+function loginAdmin() {
+    const email = document.getElementById("adminEmail").value.trim();
+    const password = document.getElementById("adminPassword").value.trim();
+    const errorMsg = document.getElementById("loginErrorMsg");
+
+    if(!email || !password) {
+        errorMsg.style.color = "#ef4444";
+        errorMsg.innerText = "Email dan Password wajib diisi!";
+        return;
+    }
+
+    errorMsg.style.color = "#38bdf8";
+    errorMsg.innerText = "Memverifikasi...";
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+            document.getElementById("adminLoginOverlay").style.display = "none";
+            loadMemberList();
+        })
+        .catch((error) => {
+            errorMsg.style.color = "#ef4444";
+            errorMsg.innerText = "Gagal Login: " + error.message;
+        });
+}
+
+// Cek sesi login otomatis permanen (Autologin)
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(() => {
+        firebase.auth().onAuthStateChanged((user) => {
+            const overlay = document.getElementById("adminLoginOverlay");
+            if (user) {
+                // Jika sudah login sebelumnya, sembunyikan kotak login secara total
+                if (overlay) overlay.style.display = "none";
+                loadMemberList();
+            } else {
+                // Jika belum pernah login, tampilkan kotak login
+                if (overlay) overlay.style.display = "flex";
+            }
+        });
+    });
+
 // --- FITUR LOAD & KELOLA MEMBER VIP DI ADMIN ---
 function loadMemberList() {
     database.ref('users').on('value', (snapshot) => {
@@ -272,11 +336,6 @@ function deleteUser(userKey) {
         });
     }
 }
-
-// Jalankan fungsi load member saat halaman dibuka
-window.addEventListener("DOMContentLoaded", () => {
-    loadMemberList();
-});
 
 function setTodayDate(e){
     const t=document.getElementById(e);
