@@ -256,7 +256,6 @@ footer span{color:#38bdf8;font-weight:700}
 <script>
 const BASE_URL_FOTO = "https://tunggalpaito.online/";
 
-// KONFIGURASI LENGKAP DENGAN API KEY ANDA
 const firebaseConfig = {
   apiKey: "AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",
   authDomain: "komentar-web-f9e2e.firebaseapp.com",
@@ -314,8 +313,6 @@ function loginAdmin() {
         })
         .catch((error) => {
             errorMsg.style.color = "#ef4444";
-            
-            // NOTIFIKASI SANDI / EMAIL SALAH DALAM BAHASA INDONESIA
             if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential' || error.code === 'auth/invalid-email') {
                 errorMsg.innerText = "❌ Kata sandi atau email salah!";
             } else if (error.code === 'auth/user-not-found') {
@@ -336,7 +333,6 @@ function logoutAdmin() {
     });
 }
 
-/* PANTAU STATUS LOGIN AMAN DENGAN TIMEOUT PENCEGAH MACET */
 let authChecked = false;
 
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -348,7 +344,6 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             const btnLogout = document.getElementById("btnLogout");
 
             if (user) {
-                // KONDISI: SUDAH LOGIN
                 if (overlay) overlay.style.display = "none";
                 if (statusBadge) {
                     statusBadge.className = "auth-status-badge status-logged-in";
@@ -357,7 +352,6 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 if (btnLogout) btnLogout.style.display = "inline-block";
                 loadMemberList();
             } else {
-                // KONDISI: BELUM LOGIN / LOGOUT
                 if (overlay) overlay.style.display = "flex";
                 if (statusBadge) {
                     statusBadge.className = "auth-status-badge status-logged-out";
@@ -368,7 +362,6 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         });
     });
 
-// Fallback: Jika dalam 3 detik server auth tidak merespons, pastikan form login langsung tampil
 setTimeout(() => {
     if (!authChecked) {
         const overlay = document.getElementById("adminLoginOverlay");
@@ -555,7 +548,7 @@ function kirimLiveKeFirebase(){
     }));
 }
 
-/* LOGIKA KELOLA FOTO PREDIKSI */
+/* LOGIKA KELOLA FOTO PREDIKSI (MENYIMPAN 2 LINK TERAKHIR DENGAN KOMA) */
 document.addEventListener("DOMContentLoaded", () => {
     const marketFotoSelect = document.getElementById("marketFotoSelect");
     const inputLinkFoto = document.getElementById("input-link-foto");
@@ -571,7 +564,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 if (typeof t === "string" && t.includes(",")) {
                     let parts = t.split(",");
-                    t = parts[parts.length - 1].trim();
+                    t = parts[parts.length - 1].trim(); // Ambil foto terbaru untuk ditampilkan di input
                 }
                 inputLinkFoto.value = typeof t === "string" ? decodeURIComponent(t) : "";
             }).catch(err => {
@@ -600,12 +593,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 t = encodeURI(t);
                 const newFullUrl = BASE_URL_FOTO + t.replace(/^\/+/,"");
                 statusFoto.style.color = "#38bdf8";
-                statusFoto.textContent = "⏳ Simpan & memperbarui link foto...";
+                statusFoto.textContent = "⏳ Menyimpan & memperbarui data 2 foto terakhir...";
 
-                database.ref("live/" + e).set(newFullUrl)
-                .then(() => {
+                const fotoRef = database.ref("live/" + e);
+
+                // Ambil data lama, gabungkan agar tersimpan 2 foto terakhir (sebelumnya & terbaru)
+                fotoRef.once("value").then((snapshot) => {
+                    let existingVal = snapshot.exists() ? snapshot.val() : "";
+                    let linksArray = [];
+
+                    if (typeof existingVal === "string" && existingVal.trim() !== "") {
+                        linksArray = existingVal.split(",").map(item => item.trim()).filter(item => item !== "");
+                    }
+
+                    // Tambahkan URL foto baru ke dalam daftar
+                    linksArray.push(newFullUrl);
+
+                    // Batasi hanya mengambil maksimal 2 foto terakhir
+                    if (linksArray.length > 2) {
+                        linksArray = linksArray.slice(linksArray.length - 2);
+                    }
+
+                    // Gabungkan kembali dengan koma (contoh: "foto_sebelumnya.png,foto_terbaru.png")
+                    let finalString = linksArray.join(",");
+                    return fotoRef.set(finalString);
+
+                }).then(() => {
                     statusFoto.style.color = "#34d399";
-                    statusFoto.innerHTML = `✅ <b>SUKSES!</b> Foto ${e.toUpperCase().replace("_"," ")} berhasil diperbarui.`;
+                    statusFoto.innerHTML = `✅ <b>SUKSES!</b> 2 Data foto ${e.toUpperCase().replace("_"," ")} berhasil diperbarui (Sebelumnya & Terbaru).`;
                     
                     setTimeout(() => {
                         if(statusFoto.innerHTML.includes("SUKSES")) {
