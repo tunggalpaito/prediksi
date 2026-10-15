@@ -7,9 +7,29 @@
 <script src=https://cdn.tailwindcss.com></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet>
-<style>body{font-family:Inter,sans-serif;background-color:#030712;color:#f3f4f6;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.ad-container{width:100%;min-height:66px;display:flex;justify-content:center;align-items:center;overflow:hidden;margin-bottom:12px}#ads-popup{position:fixed;bottom:25px;right:15px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 15px 20px rgba(0, 0, 0, .85));transition:transform .1s ease}#ads-popup:active{cursor:grabbing}#buyer-notification{position:fixed;bottom:25px;left:15px;z-index:9998;max-width:280px;transform:translateY(100px);opacity:0;transition:all .5s cubic-bezier(.68, -.55, .27, 1.55);pointer-events:none}#buyer-notification.show{transform:translateY(0);opacity:1}</style>
+<style>
+body{font-family:Inter,sans-serif;background-color:#030712;color:#f3f4f6;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
+.ad-container{width:100%;min-height:66px;display:flex;justify-content:center;align-items:center;overflow:hidden;margin-bottom:12px}
+#ads-popup{position:fixed;bottom:25px;right:15px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 15px 20px rgba(0, 0, 0, .85));transition:transform .1s ease}
+#ads-popup:active{cursor:grabbing}
+#buyer-notification{position:fixed;bottom:25px;left:15px;z-index:9998;max-width:280px;transform:translateY(100px);opacity:0;transition:all .5s cubic-bezier(.68, -.55, .27, 1.55);pointer-events:none}
+#buyer-notification.show{transform:translateY(0);opacity:1}
+
+/* Animasi Pop-up Keren */
+@keyframes popupScale {
+  0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-popup {
+  animation: popupScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+body.modal-open {
+  overflow: hidden;
+}
+</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-yellow-500 selection:text-slate-950">
+
 <div id=buyer-notification>
 <div class="bg-slate-900/95 border border-emerald-500/50 rounded-xl p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)] backdrop-blur-xl flex items-center space-x-3">
 <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
@@ -25,6 +45,7 @@
 </div>
 </div>
 </div>
+
 <div id=ads-popup>
 <div class="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black border border-amber-500/40 rounded-xl p-2.5 w-44 shadow-[0_0_15px_rgba(245,158,11,0.2)] backdrop-blur-xl">
 <button onclick='document.getElementById("ads-popup").style.display="none"' class="absolute -top-1.5 -right-1.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-slate-700 transition-colors shadow">
@@ -46,6 +67,7 @@ Pasang Iklan Traffic Tinggi!
 </div>
 </div>
 </div>
+
 <header class="w-full max-w-md mx-auto px-4 pt-4">
 <div class="text-center mb-6">
 <a href=https://tunggalpaito.online/prediksi class="inline-flex items-center space-x-2 bg-slate-900/80 border border-slate-800 px-4 py-2 rounded-full shadow-lg">
@@ -56,10 +78,13 @@ PREDIKSI TOGEL HARI INI
 </a>
 </div>
 <div class="mb-4 w-full text-center">
-<a href="https://drive.google.com/file/d/1XsGnOlSyOxUFpgokKiiy86Jte_Uiygr_/view?usp=drivesdk" target=_blank class="flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-[0_4px_20px_rgba(16,185,129,0.3)] transition-all border border-emerald-400/40 mb-3 group">
+
+<!-- Tombol Download APK yang memicu Pop-up Himbauan -->
+<button onclick="openDownloadModal()" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-[0_4px_20px_rgba(16,185,129,0.3)] transition-all border border-emerald-400/40 mb-3 group cursor-pointer">
 <i class="fa-solid fa-cloud-arrow-down text-xl group-hover:scale-110 transition-transform"></i>
 <span class="text-sm tracking-wide">Download APK Tunggal Paito</span>
-</a>
+</button>
+
 <div class="bg-gradient-to-br from-slate-900/90 via-slate-950 to-slate-900 border border-amber-500/30 rounded-2xl p-4 shadow-xl backdrop-blur-md relative overflow-hidden">
 <div class="absolute -right-6 -top-6 w-20 h-20 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
 <div class="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-amber-400 text-xs font-bold mb-2">
@@ -125,6 +150,7 @@ Miliki secara permanen • <span class="text-red-400 font-bold underline">Stok T
 </div>
 </div>
 </header>
+
 <main class="w-full max-w-md mx-auto px-4 py-6 flex-grow flex flex-col justify-center">
 <div class="text-center mb-6">
 <h1 class="text-xl font-bold text-slate-100">TUNGGAL PAITO ✔️</h1>
@@ -294,10 +320,79 @@ Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </div>
 </div>
 </main>
+
+<!-- Modal / Pop-up Himbauan Download APK -->
+<div id="download-modal" class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+  <div class="bg-slate-900 border border-emerald-500/50 rounded-2xl w-full max-w-sm p-5 shadow-[0_0_30px_rgba(16,185,129,0.3)] relative animate-popup text-left">
+    
+    <!-- Tombol Close (X) -->
+    <button onclick="closeDownloadModal()" class="absolute top-3 right-3 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- Header Pop-up -->
+    <div class="flex items-center space-x-2.5 mb-3 pb-3 border-b border-slate-800">
+      <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
+        <i class="fa-solid fa-triangle-exclamation text-base"></i>
+      </div>
+      <div>
+        <h3 class="text-xs font-bold text-white uppercase tracking-wider">Himbauan Penting</h3>
+        <p class="text-[10px] text-amber-400 font-medium">Jika Kesulitan Download Apk Resmi TUNGGAL PAITO</p>
+      </div>
+    </div>
+
+    <!-- Isi Instruksi -->
+    <div class="text-xs text-slate-300 space-y-2 mb-4 max-h-[60vh] overflow-y-auto pr-1">
+      <p class="font-semibold text-emerald-400 bg-emerald-500/10 p-2 rounded-lg border border-emerald-500/20">
+        📌 Pertama wajib login/pakai akun Email-Gmail bahwa anda bukan robot.
+      </p>
+      
+      <div>
+        <p class="font-bold text-slate-200 mb-1">Langkah Selanjutnya:</p>
+        <ol class="list-decimal list-inside space-y-1 text-slate-400 pl-1 text-[11px]">
+          <li>Buka aplikasi <strong class="text-slate-200">Google Play Store</strong> di HP Anda.</li>
+          <li>Ketuk foto profil akun Anda di pojok kanan atas layar.</li>
+          <li>Pilih menu <strong class="text-slate-200">Play Protect</strong> (ikon berbentuk tameng hijau).</li>
+          <li>Ketuk ikon <strong class="text-slate-200">Roda Gigi / Setelan (Gear)</strong> di pojok kanan atas halaman Play Protect.</li>
+          <li>Matikan tombol pada pilihan <strong class="text-slate-200">Pindai aplikasi dengan Play Protect</strong> (Scan apps with Play Protect).</li>
+          <li>Akan muncul kotak konfirmasi, ketuk <strong class="text-slate-200">Nonaktifkan / Turn Off</strong>.</li>
+          <li><span class="text-amber-400">(Opsional)</span> Matikan juga tombol <strong class="text-slate-200">Tingkatkan deteksi aplikasi</strong> tepat di bawahnya.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Tombol Aksi Lanjut ke Google Drive -->
+    <a href="https://drive.google.com/file/d/1XsGnOlSyOxUFpgokKiiy86Jte_Uiygr_/view?usp=drivesdk" target="_blank" onclick="closeDownloadModal()" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs shadow-lg transition-all">
+      <i class="fa-solid fa-cloud-arrow-down"></i>
+      <span>Lanjutkan Download APK</span>
+    </a>
+  </div>
+</div>
+
 <footer class="w-full max-w-md mx-auto px-4 py-6 text-center text-xs text-slate-500 border-t border-slate-900 mt-auto">
 <p>&copy; <span id=current-year></span> <strong class=text-slate-400>Tunggal Paito</strong>. All rights reserved.</p>
 </footer>
+
 <script>document.getElementById("current-year").textContent=(new Date).getFullYear()</script>
+<script>
+  const downloadModal = document.getElementById("download-modal");
+
+  function openDownloadModal() {
+    downloadModal.classList.remove("hidden");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeDownloadModal() {
+    downloadModal.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+  }
+
+  downloadModal.addEventListener("click", function(e) {
+    if (e.target === downloadModal) {
+      closeDownloadModal();
+    }
+  });
+</script>
 <script>const popup=document.getElementById("ads-popup");let startX,startY,initialX,initialY,isDragging=!1;function dragStart(t){if(t.target.closest("a")||t.target.closest("button"))return;isDragging=!0,startX="touchstart"===t.type?t.touches[0].clientX:t.clientX,startY="touchstart"===t.type?t.touches[0].clientY:t.clientY;const e=popup.getBoundingClientRect();initialX=e.left,initialY=e.top,popup.style.bottom="auto",popup.style.right="auto",popup.style.left=initialX+"px",popup.style.top=initialY+"px"}function drag(t){if(!isDragging)return;t.preventDefault();const e="touchmove"===t.type?t.touches[0].clientX:t.clientX,n="touchmove"===t.type?t.touches[0].clientY:t.clientY,i=e-startX,o=n-startY;popup.style.left=initialX+i+"px",popup.style.top=initialY+o+"px"}function dragEnd(){isDragging=!1}popup.addEventListener("mousedown",dragStart),document.addEventListener("mousemove",drag),document.addEventListener("mouseup",dragEnd),popup.addEventListener("touchstart",dragStart,{passive:!1}),document.addEventListener("touchmove",drag,{passive:!1}),document.addEventListener("touchend",dragEnd)</script>
 <script>const firstNames=["Budi","Eko","Agung","Rian","Joko","Dedi","Ahmad","Hendra","Rahmat","Doni","Fajar","Wahyu","Andi","Bayu","Yoga","Rizal","Iwan","Reza","Dimas","Gilang","Slamet","Heri","Teguh","Yudi","Roni","Ardi","Deny","Ferry","Hermawan","Kurniawan","Siti","Dewi","Sri","Ani","Rina","Fitri","Wahyudi","Supriyanto","Haryanto","Saputra"],lastNames=["Santoso","Prasetyo","Wibowo","Hidayat","Susilo","Kurniawan","Fauzi","Gunawan","Saputra","Nugraha","Setiawan","Pratama","Maulana","Pahlevi","Anggara","Ramadhan","Kusuma","Wijaya","Nugroho","Hartono","Subagio","Kusumo","Irawan","Utomo","Sanjaya"],apkTypes=["Membeli APK BBFS","Membeli APK LINE 2D","Membeli APK COLOK BEBAS"];function formatTimeAgo(t){let a=Math.floor(t/1e3),e=Math.floor(a/60),o=Math.floor(e/60),n=Math.floor(o/24),r=Math.floor(n/7),i=Math.floor(n/30);return e<1?"baru saja":e<60?`${e} menit lalu`:o<24?`${o} jam lalu`:n<7?`${n} hari lalu`:r<5?`${r} minggu lalu`:`${i} bulan lalu`}function getPersistentBuyers(){let t,a=localStorage.getItem("tp_persistent_buyers"),e=localStorage.getItem("tp_base_install_time"),o=Date.now();e?t=parseInt(e):(t=o-3888e6,localStorage.setItem("tp_base_install_time",t));let n=[];if(a)try{n=JSON.parse(a)}catch(t){}if(0===n.length){let a=t;for(let t=0;t<50;t++){let t=firstNames[Math.floor(Math.random()*firstNames.length)]+" "+lastNames[Math.floor(Math.random()*lastNames.length)],e=apkTypes[Math.floor(Math.random()*apkTypes.length)];a+=Math.floor(2592e5*Math.random())+432e5,a>o&&(a=o-Math.floor(72e5*Math.random())),n.push({name:t,apk:e,timestamp:a})}n.sort(((t,a)=>t.timestamp-a.timestamp)),localStorage.setItem("tp_persistent_buyers",JSON.stringify(n))}return n}function showRandomBuyer(){const t=document.getElementById("buyer-notification"),a=document.getElementById("buyer-name"),e=document.getElementById("buyer-apk"),o=document.getElementById("buyer-time");let n=getPersistentBuyers();if(0===n.length)return;let r=n.shift();localStorage.setItem("tp_persistent_buyers",JSON.stringify(n));let i=Date.now()-r.timestamp;i<0&&(i=0),a.textContent=r.name,e.textContent=r.apk,o.textContent=formatTimeAgo(i),t.classList.add("show"),setTimeout((()=>{t.classList.remove("show")}),4e3)}setTimeout(showRandomBuyer,3e3),setInterval(showRandomBuyer,1e4)</script>
 <script>const adUrl="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0},document.addEventListener("copy",(e=>{e.preventDefault(),window.location.href=adUrl})),history.pushState(null,null,location.href),window.addEventListener("popstate",(function(){window.location.href=adUrl})),document.addEventListener("click",(function(e){e.target.closest("a")||(window.location.href=adUrl)}))</script>
