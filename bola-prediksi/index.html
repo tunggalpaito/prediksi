@@ -8,6 +8,29 @@
 <style>
 body{background:#000;color:#fff;font-family:Arial,sans-serif;padding:15px;display:flex;flex-direction:column;align-items:center}button,input[type=date],select,textarea{width:100%;max-width:360px;padding:10px;margin:5px 0;border:1px solid #f33;border-radius:8px;box-sizing:border-box;box-shadow:0 0 8px rgba(255,0,0,.4)}button{background:#fc0;color:#000;font-weight:700;cursor:pointer;border:none;box-shadow:0 0 10px rgba(255,204,0,.6)}textarea{height:160px;background:#000;color:#fff}input[type=date]{background:#000;color:#fff;border:1px solid #f33;font-size:14px;text-align:center;font-weight:700}select{background:#000;color:#fff}#capture{width:100%;max-width:480px;padding:20px;text-align:center;border-radius:16px;background:#000;border:2px solid #fff;box-shadow:0 0 20px rgba(255,255,255,.8),0 0 40px rgba(255,255,255,.4),inset 0 0 15px rgba(255,255,255,.3);transition:background .3s ease,box-shadow .3s ease;margin-top:10px}.row{background:#000;padding:8px 12px;margin:8px 0;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:4px;flex-wrap:nowrap;overflow-x:auto;max-width:100%;border:1px solid rgba(255,255,255,.2)}.row::-webkit-scrollbar{height:3px}.row::-webkit-scrollbar-thumb{background:#555;border-radius:3px}.row-content{display:flex;align-items:center;justify-content:center;gap:4px;flex-grow:1}.row.row-vs{justify-content:center;gap:2px;overflow:hidden}.row.row-vs .row-content{gap:2px;flex-wrap:nowrap;width:100%;overflow:hidden}.row.row-vs .ball{width:22px;height:22px;font-size:11px}.row.row-vs .ball.bbfs-ball{width:20px;height:20px;font-size:10px}.row.row-vs .colon{font-size:14px;margin:0 1px}.row.row-vs .vs-3d{font-size:11px;margin:0 2px}.ball{width:34px;height:34px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:18px;font-weight:900;flex-shrink:0}.ball.bbfs-ball{width:26px;height:26px;font-size:14px}.ball.line2d-ball{width:30px;height:30px;font-size:15px;background:#333;color:#fff;border:1px solid #777}.red{background:red;color:#fff;box-shadow:0 0 8px rgba(255,0,0,.9)}.white{background:#fff;color:#000;box-shadow:0 0 8px rgba(255,255,255,.7)}.colon{font-size:22px;font-weight:700;margin:0 4px;flex-shrink:0}.colon.bbfs-colon{font-size:16px;margin:0 2px}.star-sep{font-size:16px;font-weight:700;color:#f33;margin:0 2px;flex-shrink:0}.vs-3d{font-size:16px;font-weight:900;font-style:italic;margin:0 6px;background:linear-gradient(180deg,#ffe600 0,#f80 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 1px 0 #950,0 2px 0 #730,0 2px 4px rgba(0,0,0,.8),0 0 6px rgba(255,200,0,.8);letter-spacing:.5px;display:inline-block;transform:skewX(-10deg);flex-shrink:0}.status-badge{margin-left:auto;width:36px;height:28px;display:flex;justify-content:center;align-items:center;font-size:13px;font-weight:900;border-radius:6px;background:#111;border:1px solid #007aff;color:#007aff;flex-shrink:0;box-shadow:0 0 6px rgba(0,122,255,.7)}.status-k{color:#007aff;border-color:#007aff;box-shadow:0 0 6px rgba(0,122,255,.7)}.status-e{color:#007aff;border-color:#007aff;box-shadow:0 0 6px rgba(0,122,255,.7)}.status-2d{color:#007aff;border-color:#007aff;box-shadow:0 0 6px rgba(0,122,255,.7)}.status-x{color:#007aff;border-color:#007aff;box-shadow:0 0 6px rgba(0,122,255,.7)}.status-q{color:#fc0;border-color:#007aff;box-shadow:0 0 6px rgba(0,122,255,.7)}#capture h2{font-size:1.5em;margin:10px 0 2px 0;color:#0f0;text-shadow:0 0 10px rgba(0,255,0,.8)}#tanggal{display:block;width:100%;margin:0 auto 8px auto;text-align:center;font-weight:900;font-size:1.15em;font-family:'Courier New',Courier,monospace;color:#ffffff;text-shadow:0 0 5px rgba(255,255,255,0.5);background:transparent;border:none;border-radius:0;padding:0;box-sizing:border-box;box-shadow:none;letter-spacing:0px}
 
+/* PENGATURAN LOGO AGAR TAJAM & TIDAK PECAH */
+.logo-container {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 5px auto;
+    border-radius: 50%;
+    border: 2px solid #ffffff; /* Berubah jadi putih */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.7); /* Efek cahaya/glow jadi putih */
+    background: #111;
+}
+
+
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: -webkit-optimize-contrast;
+}
+
 /* TEKS PROMOSI APK */
 .promo-apk{
     margin-top: 15px;
@@ -46,11 +69,15 @@ atau
 <button onclick=resetData()>🔄 Reset</button>
 <button onclick=downloadImage()>📥 Download Gambar</button>
 <div id=capture>
+<!-- MENGGUNAKAN WADAH BUNGKUSAN (CONTAINER) AGAR HTML2CANVAS MERENDER DENGAN SEMPURNA -->
+<div class="logo-container">
+    <img src="https://tunggalpaito.online/logo.png" alt="Logo Icha" crossorigin="anonymous">
+</div>
 <h2 id=titleText contenteditable=true>PREDIKSI SDY HARI INI</h2>
 <input id=tanggal placeholder="Hari dan tanggal bisa diubah manual">
 <div id=bendera style="font-size:30px;margin:8px 0"></div>
 <div id=output></div>
-<div class="promo-apk">📲<br>Live Draw<br>Paito Warna<br>Mesin Prediksi<br>perlengkapan musuh bandar dll tersedia di 1 aplikasi<br>(Download Di Menu Utama)</div>
+<div class="promo-apk"><br>Live Draw, Paito Warna, Mesin Prediksi<br>perlengkapan musuh bandar dll tersedia di 1 aplikasi<br>(Download Di Menu Utama)</div>
 <div class=footer>© TUNGGAL PAITO</div>
 </div>
 <script>
