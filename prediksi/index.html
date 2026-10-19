@@ -7,12 +7,12 @@
 <script src=https://cdn.tailwindcss.com></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel=stylesheet>
-<style>body{font-family:Inter,sans-serif;background-color:#030712;color:#f3f4f6;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.recommendation-card{width:100%;background:rgba(15,23,42,.9);border:1px solid rgba(245,158,11,.5);border-radius:.75rem;padding:.75rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);position:relative;overflow:hidden;margin-bottom:0}.bottom-ad-container{width:100%;display:flex;justify-content:center;align-items:center;background:rgba(15,23,42,.5);border:1px solid rgba(51,65,85,.8);border-radius:.75rem;padding:.5rem;margin-bottom:12px;box-shadow:0 1px 2px 0 rgba(0,0,0,.05)}#ads-popup{position:fixed;bottom:25px;right:15px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 15px 20px rgba(0, 0, 0, .85));transition:transform .1s ease}#ads-popup:active{cursor:grabbing}#buyer-notification{position:fixed;bottom:25px;left:15px;z-index:9998;max-width:280px;transform:translateY(100px);opacity:0;transition:all .5s cubic-bezier(.68, -.55, .27, 1.55);pointer-events:none}#buyer-notification.show{transform:translateY(0);opacity:1}@keyframes popupScale{0%{opacity:0;transform:scale(.9) translateY(20px)}100%{opacity:1;transform:scale(1) translateY(0)}}.animate-popup{animation:popupScale .3s cubic-bezier(.16,1,.3,1) forwards}body.modal-open{overflow:hidden}</style>
+<style>body{font-family:Inter,sans-serif;background-color:#030712;background-image:radial-gradient(circle at 50% 0,rgba(30,41,59,.5) 0,#030712 75%);color:#f3f4f6;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.recommendation-card{width:100%;background:linear-gradient(135deg,rgba(15,23,42,.95) 0,rgba(30,41,59,.7) 100%);border:1px solid rgba(245,158,11,.3);border-radius:1rem;padding:.85rem;box-shadow:0 10px 25px -5px rgba(0,0,0,.3),0 0 15px rgba(245,158,11,.05);position:relative;overflow:hidden;margin-bottom:0;backdrop-filter:blur(12px);transition:all .3s cubic-bezier(.4, 0, .2, 1)}.recommendation-card:hover{border-color:rgba(245,158,11,.7);transform:translateY(-2px);box-shadow:0 15px 30px -5px rgba(0,0,0,.4),0 0 20px rgba(245,158,11,.15)}.bottom-ad-container{width:100%;display:flex;justify-content:center;align-items:center;background:rgba(15,23,42,.5);border:1px solid rgba(51,65,85,.8);border-radius:.75rem;padding:.5rem;margin-bottom:12px;box-shadow:0 1px 2px 0 rgba(0,0,0,.05)}#ads-popup{position:fixed;bottom:25px;right:15px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 15px 20px rgba(0, 0, 0, .85));transition:transform .1s ease}#ads-popup:active{cursor:grabbing}#buyer-notification{position:fixed;bottom:25px;left:15px;z-index:9998;max-width:280px;transform:translateY(100px);opacity:0;transition:all .5s cubic-bezier(.68, -.55, .27, 1.55);pointer-events:none}#buyer-notification.show{transform:translateY(0);opacity:1}@keyframes popupScale{0%{opacity:0;transform:scale(.9) translateY(20px)}100%{opacity:1;transform:scale(1) translateY(0)}}.animate-popup{animation:popupScale .3s cubic-bezier(.16,1,.3,1) forwards}body.modal-open{overflow:hidden}</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-yellow-500 selection:text-slate-950">
 <div id=buyer-notification>
-<div class="bg-slate-900/95 border border-emerald-500/50 rounded-xl p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)] backdrop-blur-xl flex items-center space-x-3">
-<div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
+<div class="bg-slate-900/95 border border-emerald-500/50 rounded-2xl p-3 shadow-[0_0_25px_rgba(16,185,129,0.3)] backdrop-blur-xl flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
 <i class="fa-solid fa-circle-check text-lg"></i>
 </div>
 <div class=overflow-hidden>
@@ -26,7 +26,7 @@
 </div>
 </div>
 <div id=ads-popup>
-<div class="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black border border-amber-500/40 rounded-xl p-2.5 w-44 shadow-[0_0_15px_rgba(245,158,11,0.2)] backdrop-blur-xl">
+<div class="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black border border-amber-500/40 rounded-2xl p-2.5 w-44 shadow-[0_0_20px_rgba(245,158,11,0.25)] backdrop-blur-xl">
 <button onclick='document.getElementById("ads-popup").style.display="none"' class="absolute -top-1.5 -right-1.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-slate-700 transition-colors shadow">
 <i class="fa-solid fa-xmark"></i>
 </button>
@@ -37,70 +37,70 @@
 </div>
 <div class=text-center>
 <p class="text-[10px] text-slate-300 font-medium mb-2 leading-tight"> Pasang Iklan Traffic Tinggi! </p>
-<a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target=_blank class="flex items-center justify-center space-x-1 bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-slate-950 font-bold py-1 px-2 rounded-lg text-[10px] shadow-[0_3px_10px_rgba(16,185,129,0.35)] transition-all">
+<a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target=_blank class="flex items-center justify-center space-x-1 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-1.5 px-2 rounded-xl text-[10px] shadow-[0_4px_12px_rgba(16,185,129,0.4)] transition-all">
 <i class="fa-brands fa-whatsapp text-xs"></i> <span>Chat Admin</span>
 </a>
 </div>
 </div>
 </div>
-<header class="w-full max-w-md mx-auto px-4 pt-4">
+<header class="w-full max-w-md mx-auto px-4 pt-5">
 <div class="text-center mb-6">
-<a href=https://tunggalpaito.online/prediksi class="inline-flex items-center space-x-2 bg-slate-900/80 border border-slate-800 px-4 py-2 rounded-full shadow-lg">
-<i class="fa-solid fa-chart-line text-yellow-500 text-lg"></i>
-<span class="font-extrabold tracking-wider bg-gradient-to-r from-yellow-400 to-amber-200 bg-clip-text text-transparent text-base"> PREDIKSI TOGEL HARI INI </span>
+<a href=https://tunggalpaito.online/prediksi class="inline-flex items-center space-x-2.5 bg-slate-900/90 border border-amber-500/30 px-5 py-2.5 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.15)] backdrop-blur-md hover:border-amber-500 transition-all group">
+<i class="fa-solid fa-chart-line text-amber-400 text-lg group-hover:scale-110 transition-transform"></i>
+<span class="font-extrabold tracking-wider bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent text-sm uppercase"> PREDIKSI TOGEL HARI INI </span>
 </a>
 </div>
-<div class="mb-4 w-full text-center">
-<button onclick=openDownloadModal(event) class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-[0_4px_20px_rgba(16,185,129,0.3)] transition-all border border-emerald-400/40 mb-3 group cursor-pointer">
+<div class="mb-5 w-full text-center">
+<button onclick=openDownloadModal(event) class="w-full flex items-center justify-center space-x-2.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold py-4 px-4 rounded-2xl shadow-[0_8px_25px_rgba(16,185,129,0.35)] transition-all border border-emerald-300/40 mb-3.5 group cursor-pointer active:scale-[0.98]">
 <i class="fa-solid fa-cloud-arrow-down text-xl group-hover:scale-110 transition-transform"></i>
 <span class="text-sm tracking-wide">Download APK Tunggal Paito</span>
 </button>
-<div class="bg-gradient-to-br from-slate-900/90 via-slate-950 to-slate-900 border border-amber-500/30 rounded-2xl p-4 shadow-xl backdrop-blur-md relative overflow-hidden">
-<div class="absolute -right-6 -top-6 w-20 h-20 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
-<div class="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-amber-400 text-xs font-bold mb-2">
+<div class="bg-gradient-to-br from-slate-900/95 via-slate-950 to-slate-900 border border-amber-500/30 rounded-2xl p-4 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+<div class="absolute -right-6 -top-6 w-24 h-24 bg-amber-500/15 rounded-full blur-2xl pointer-events-none"></div>
+<div class="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-amber-400 text-[11px] font-bold mb-3">
 <i class="fa-solid fa-fire text-amber-500 animate-bounce"></i>
 <span>MILIKI SECARA PERMANEN</span>
 </div>
-<div class="grid grid-cols-3 gap-2 mb-3">
-<div class="bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 p-2 rounded-xl text-center transition-all">
-<i class="fa-solid fa-shield-halved text-emerald-400 text-sm mb-1"></i>
+<div class="grid grid-cols-3 gap-2.5 mb-3.5">
+<div class="bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 p-2.5 rounded-xl text-center transition-all group">
+<i class="fa-solid fa-shield-halved text-emerald-400 text-base mb-1 group-hover:scale-110 transition-transform"></i>
 <div class="text-[11px] font-bold text-slate-200">APK BBFS</div>
 <span class="text-[9px] text-slate-400"></span>
 </div>
-<div class="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 p-2 rounded-xl text-center transition-all">
-<i class="fa-solid fa-bolt text-blue-400 text-sm mb-1"></i>
+<div class="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 p-2.5 rounded-xl text-center transition-all group">
+<i class="fa-solid fa-bolt text-blue-400 text-base mb-1 group-hover:scale-110 transition-transform"></i>
 <div class="text-[11px] font-bold text-slate-200">APK LINE 2D</div>
 <span class="text-[9px] text-slate-400"></span>
 </div>
-<div class="bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 p-2 rounded-xl text-center transition-all">
-<i class="fa-solid fa-star text-purple-400 text-sm mb-1"></i>
+<div class="bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 p-2.5 rounded-xl text-center transition-all group">
+<i class="fa-solid fa-star text-purple-400 text-base mb-1 group-hover:scale-110 transition-transform"></i>
 <div class="text-[11px] font-bold text-slate-200">COLOK BEBAS</div>
 <span class="text-[9px] text-slate-400"></span>
 </div>
 </div>
-<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20tertarik%20ingin%20mendapatkan%20APK%20Jitu%20khusus%20SDY,%20SGP,%20atau%20HK.%20Mohon%20informasinya." target=_blank class="inline-flex items-center justify-center space-x-1.5 w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-2 px-3 rounded-xl text-xs shadow-lg transition-all">
+<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20tertarik%20ingin%20mendapatkan%20APK%20Jitu%20khusus%20SDY,%20SGP,%20atau%20HK.%20Mohon%20informasinya." target=_blank class="inline-flex items-center justify-center space-x-2 w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold py-2.5 px-3 rounded-xl text-xs shadow-lg transition-all active:scale-[0.98]">
 <i class="fa-brands fa-whatsapp text-sm"></i>
 <span>Info APK</span>
 </a>
 </div>
 </div>
 <div class="mb-4 w-full">
-<a href=https://www.facebook.com/share/1FkwuwQHpw/ class="flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all border border-blue-500/50">
+<a href=https://www.facebook.com/share/1FkwuwQHpw/ class="flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold py-3.5 px-4 rounded-2xl shadow-lg transition-all border border-blue-400/40 active:scale-[0.98]">
 <i class="fa-brands fa-facebook text-lg"></i>
 <span class="text-sm tracking-wide">Kembali ke Facebook</span>
 </a>
 </div>
-<div class="flex flex-col space-y-2 items-center w-full">
+<div class="flex flex-col space-y-2.5 items-center w-full">
 <div class=recommendation-card>
-<div class="flex items-center space-x-3 w-full">
-<img src=https://tunggalpaito.online/pohon-uang.png alt="Pohon Uang" class="w-16 h-16 object-cover rounded-lg border border-amber-500/30 shrink-0">
+<div class="flex items-center space-x-3.5 w-full">
+<img src=https://tunggalpaito.online/pohon-uang.png alt="Pohon Uang" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0 shadow-md">
 <div class="flex-grow text-left overflow-hidden">
-<div class="flex items-center space-x-1 mb-0.5">
-<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded border border-amber-500/30 uppercase">Rekomendasi</span>
+<div class="flex items-center space-x-1 mb-1">
+<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30 uppercase tracking-wider">Rekomendasi</span>
 </div>
 <h4 class="text-xs font-bold text-white truncate">FA CAI SHU Pohon Uang Fengshui</h4>
-<p class="text-[10px] text-slate-400 mb-2 leading-tight">Pajangan Fa Cai Shu Pohon Kekayaan pembawa hoki rezeki berlimpah.</p>
-<a href=https://s.shopee.co.id/8pmfJYOWUw target=_blank class="inline-flex items-center justify-center space-x-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-1 px-3 rounded-lg text-[10px] shadow transition-all">
+<p class="text-[10px] text-slate-400 mb-2.5 leading-tight">Pajangan Fa Cai Shu Pohon Kekayaan pembawa hoki rezeki berlimpah.</p>
+<a href=https://s.shopee.co.id/8pmfJYOWUw target=_blank class="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold py-1.5 px-3.5 rounded-xl text-[10px] shadow-md transition-all active:scale-95">
 <i class="fa-solid fa-cart-shopping text-[10px]"></i>
 <span>Beli di Shopee</span>
 </a>
@@ -108,15 +108,15 @@
 </div>
 </div>
 <div class=recommendation-card>
-<div class="flex items-center space-x-3 w-full">
-<img src=https://tunggalpaito.online/parfum-kopi.png alt="Parfum Kopi" class="w-16 h-16 object-cover rounded-lg border border-amber-500/30 shrink-0">
+<div class="flex items-center space-x-3.5 w-full">
+<img src=https://tunggalpaito.online/parfum-kopi.png alt="Parfum Kopi" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0 shadow-md">
 <div class="flex-grow text-left overflow-hidden">
-<div class="flex items-center space-x-1 mb-0.5">
-<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded border border-amber-500/30 uppercase">Rekomendasi</span>
+<div class="flex items-center space-x-1 mb-1">
+<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30 uppercase tracking-wider">Rekomendasi</span>
 </div>
 <h4 class="text-xs font-bold text-white truncate">Parfum Kopi Asli & Tahan Lama</h4>
-<p class="text-[10px] text-slate-400 mb-2 leading-tight">Pengharum ruangan & mobil aroma kopi nikmat menyegarkan.</p>
-<a href=https://s.shopee.co.id/20wL9zj7xc target=_blank class="inline-flex items-center justify-center space-x-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-1 px-3 rounded-lg text-[10px] shadow transition-all">
+<p class="text-[10px] text-slate-400 mb-2.5 leading-tight">Pengharum ruangan & mobil aroma kopi nikmat menyegarkan.</p>
+<a href=https://s.shopee.co.id/20wL9zj7xc target=_blank class="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold py-1.5 px-3.5 rounded-xl text-[10px] shadow-md transition-all active:scale-95">
 <i class="fa-solid fa-cart-shopping text-[10px]"></i>
 <span>Beli di Shopee</span>
 </a>
@@ -124,15 +124,15 @@
 </div>
 </div>
 <div class=recommendation-card>
-<div class="flex items-center space-x-3 w-full">
-<img src=https://tunggalpaito.online/cakradayu.png alt=CAKRADAYU class="w-16 h-16 object-cover rounded-lg border border-amber-500/30 shrink-0">
+<div class="flex items-center space-x-3.5 w-full">
+<img src=https://tunggalpaito.online/cakradayu.png alt=CAKRADAYU class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0 shadow-md">
 <div class="flex-grow text-left overflow-hidden">
-<div class="flex items-center space-x-1 mb-0.5">
-<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded border border-amber-500/30 uppercase">Rekomendasi</span>
+<div class="flex items-center space-x-1 mb-1">
+<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30 uppercase tracking-wider">Rekomendasi</span>
 </div>
 <h4 class="text-xs font-bold text-white truncate">CAKRADAYU</h4>
-<p class="text-[10px] text-slate-400 mb-2 leading-tight">Plat Fengshui Kui Jin Hiu Mantra 5 Dewa Pembawa Kabar Baik.</p>
-<a href=https://s.shopee.co.id/9V2M7NOyv1 target=_blank class="inline-flex items-center justify-center space-x-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-1 px-3 rounded-lg text-[10px] shadow transition-all">
+<p class="text-[10px] text-slate-400 mb-2.5 leading-tight">Plat Fengshui Kui Jin Hiu Mantra 5 Dewa Pembawa Kabar Baik.</p>
+<a href=https://s.shopee.co.id/9V2M7NOyv1 target=_blank class="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold py-1.5 px-3.5 rounded-xl text-[10px] shadow-md transition-all active:scale-95">
 <i class="fa-solid fa-cart-shopping text-[10px]"></i>
 <span>Beli di Shopee</span>
 </a>
@@ -140,15 +140,15 @@
 </div>
 </div>
 <div class=recommendation-card>
-<div class="flex items-center space-x-3 w-full">
-<img src=https://tunggalpaito.online/patung-kodok.png alt="PATUNG HOKI" class="w-16 h-16 object-cover rounded-lg border border-amber-500/30 shrink-0">
+<div class="flex items-center space-x-3.5 w-full">
+<img src=https://tunggalpaito.online/patung-kodok.png alt="PATUNG HOKI" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0 shadow-md">
 <div class="flex-grow text-left overflow-hidden">
-<div class="flex items-center space-x-1 mb-0.5">
-<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded border border-amber-500/30 uppercase">Rekomendasi</span>
+<div class="flex items-center space-x-1 mb-1">
+<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30 uppercase tracking-wider">Rekomendasi</span>
 </div>
 <h4 class="text-xs font-bold text-white truncate">PATUNG HOKI</h4>
-<p class="text-[10px] text-slate-400 mb-2 leading-tight">Patung Kodok Fengsui Warna Emas Patung Keberuntungan</p>
-<a href=https://s.shopee.co.id/8fTF86vESt target=_blank class="inline-flex items-center justify-center space-x-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-1 px-3 rounded-lg text-[10px] shadow transition-all">
+<p class="text-[10px] text-slate-400 mb-2.5 leading-tight">Patung Kodok Fengsui Warna Emas Patung Keberuntungan</p>
+<a href=https://s.shopee.co.id/8fTF86vESt target=_blank class="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold py-1.5 px-3.5 rounded-xl text-[10px] shadow-md transition-all active:scale-95">
 <i class="fa-solid fa-cart-shopping text-[10px]"></i>
 <span>Beli di Shopee</span>
 </a>
@@ -156,15 +156,15 @@
 </div>
 </div>
 <div class=recommendation-card>
-<div class="flex items-center space-x-3 w-full">
-<img src=https://tunggalpaito.online/koin-tiongkok.png alt="KOIN TIONGKOK" class="w-16 h-16 object-cover rounded-lg border border-amber-500/30 shrink-0">
+<div class="flex items-center space-x-3.5 w-full">
+<img src=https://tunggalpaito.online/koin-tiongkok.png alt="KOIN TIONGKOK" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0 shadow-md">
 <div class="flex-grow text-left overflow-hidden">
-<div class="flex items-center space-x-1 mb-0.5">
-<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded border border-amber-500/30 uppercase">Rekomendasi</span>
+<div class="flex items-center space-x-1 mb-1">
+<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30 uppercase tracking-wider">Rekomendasi</span>
 </div>
 <h4 class="text-xs font-bold text-white truncate">KOIN TIONGKOK</h4>
-<p class="text-[10px] text-slate-400 mb-2 leading-tight">Gantungan Fengshui Koin 5 Kaisar Koin Tiongkok Kuno Penolak Bala</p>
-<a href=https://s.shopee.co.id/70L19Mcixt target=_blank class="inline-flex items-center justify-center space-x-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-1 px-3 rounded-lg text-[10px] shadow transition-all">
+<p class="text-[10px] text-slate-400 mb-2.5 leading-tight">Gantungan Fengshui Koin 5 Kaisar Koin Tiongkok Kuno Penolak Bala</p>
+<a href=https://s.shopee.co.id/70L19Mcixt target=_blank class="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold py-1.5 px-3.5 rounded-xl text-[10px] shadow-md transition-all active:scale-95">
 <i class="fa-solid fa-cart-shopping text-[10px]"></i>
 <span>Beli di Shopee</span>
 </a>
@@ -172,15 +172,15 @@
 </div>
 </div>
 <div class=recommendation-card>
-<div class="flex items-center space-x-3 w-full">
-<img src=https://tunggalpaito.online/gelang-pixiu.png alt="GELANG PIXIU" class="w-16 h-16 object-cover rounded-lg border border-amber-500/30 shrink-0">
+<div class="flex items-center space-x-3.5 w-full">
+<img src=https://tunggalpaito.online/gelang-pixiu.png alt="GELANG PIXIU" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0 shadow-md">
 <div class="flex-grow text-left overflow-hidden">
-<div class="flex items-center space-x-1 mb-0.5">
-<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded border border-amber-500/30 uppercase">Rekomendasi</span>
+<div class="flex items-center space-x-1 mb-1">
+<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30 uppercase tracking-wider">Rekomendasi</span>
 </div>
 <h4 class="text-xs font-bold text-white truncate">GELANG PIXIU</h4>
-<p class="text-[10px] text-slate-400 mb-2 leading-tight">GELANG BATU PIXIU OBSIDIAN JIMAT MANTRA BUDDHA</p>
-<a href=https://s.shopee.co.id/4B0pmNq6Yb target=_blank class="inline-flex items-center justify-center space-x-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-1 px-3 rounded-lg text-[10px] shadow transition-all">
+<p class="text-[10px] text-slate-400 mb-2.5 leading-tight">GELANG BATU PIXIU OBSIDIAN JIMAT MANTRA BUDDHA</p>
+<a href=https://s.shopee.co.id/4B0pmNq6Yb target=_blank class="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold py-1.5 px-3.5 rounded-xl text-[10px] shadow-md transition-all active:scale-95">
 <i class="fa-solid fa-cart-shopping text-[10px]"></i>
 <span>Beli di Shopee</span>
 </a>
@@ -188,15 +188,15 @@
 </div>
 </div>
 <div class=recommendation-card>
-<div class="flex items-center space-x-3 w-full">
-<img src=https://tunggalpaito.online/kayu-kesehatan.png alt="KAYU KESEHATAN" class="w-16 h-16 object-cover rounded-lg border border-amber-500/30 shrink-0">
+<div class="flex items-center space-x-3.5 w-full">
+<img src=https://tunggalpaito.online/kayu-kesehatan.png alt="KAYU KESEHATAN" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0 shadow-md">
 <div class="flex-grow text-left overflow-hidden">
-<div class="flex items-center space-x-1 mb-0.5">
-<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded border border-amber-500/30 uppercase">Rekomendasi</span>
+<div class="flex items-center space-x-1 mb-1">
+<span class="bg-amber-500/20 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30 uppercase tracking-wider">Rekomendasi</span>
 </div>
 <h4 class="text-xs font-bold text-white truncate">KAYU KESEHATAN</h4>
-<p class="text-[10px] text-slate-400 mb-2 leading-tight">Tasbih Scang Kayu Kesehatan 8mm 100butir Rendam Air Minum</p>
-<a href=https://s.shopee.co.id/6VOkZ7O0R7 target=_blank class="inline-flex items-center justify-center space-x-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold py-1 px-3 rounded-lg text-[10px] shadow transition-all">
+<p class="text-[10px] text-slate-400 mb-2.5 leading-tight">Tasbih Scang Kayu Kesehatan 8mm 100butir Rendam Air Minum</p>
+<a href=https://s.shopee.co.id/6VOkZ7O0R7 target=_blank class="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold py-1.5 px-3.5 rounded-xl text-[10px] shadow-md transition-all active:scale-95">
 <i class="fa-solid fa-cart-shopping text-[10px]"></i>
 <span>Beli di Shopee</span>
 </a>
@@ -204,25 +204,25 @@
 </div>
 </div>
 <div class=bottom-ad-container>
-<div style=width:100%;text-align:center;overflow:hidden>
+<div style=width:100%;min-height:50px;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
 <script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
 </div>
 </div>
 <div class=bottom-ad-container>
-<div style=width:100%;text-align:center;overflow:hidden>
+<div style=width:100%;min-height:50px;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
 <script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
 </div>
 </div>
 <div class=bottom-ad-container>
-<div style=width:100%;text-align:center;overflow:hidden>
+<div style=width:100%;min-height:50px;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
 <script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
 </div>
 </div>
 <div class=bottom-ad-container>
-<div style=width:100%;text-align:center;overflow:hidden>
+<div style=width:100%;min-height:50px;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
 <script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
 </div>
@@ -231,13 +231,13 @@
 </header>
 <main class="w-full max-w-md mx-auto px-4 py-6 flex-grow flex flex-col justify-center">
 <div class="text-center mb-6">
-<h1 class="text-xl font-bold text-slate-100">TUNGGAL PAITO ✔️</h1>
-<p class="text-xs text-slate-400 mt-1">menyediakan prediksi angka pasaran populer yang banyak diminati dari berbagai kalangan, jp prioritas utama <br> ⇲ salam hoki satu hati <br> #liveprediksi <br> #tunggalpaitosdy <br> #tunggalpaitosgp <br> #tunggalpaitohk <br> #tunggalpaitoweb <br> #prediksitunggalpaito <br> Silakan pilih menu prediksi atau fitur di bawah ini</p>
+<h1 class="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">TUNGGAL PAITO ✔️</h1>
+<p class="text-xs text-slate-400 mt-1 leading-relaxed">menyediakan prediksi angka pasaran populer yang banyak diminati dari berbagai kalangan, jp prioritas utama <br> ⇲ salam hoki satu hati <br> #liveprediksi <br> #tunggalpaitosdy <br> #tunggalpaitosgp <br> #tunggalpaitohk <br> #tunggalpaitoweb <br> #prediksitunggalpaito <br> Silakan pilih menu prediksi atau fitur di bawah ini</p>
 </div>
-<div class="flex flex-col space-y-4">
-<a href=https://tunggalpaito.online/live-draw/ class="ad-trigger flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 border border-slate-700/60 hover:border-sky-500/60 p-4 rounded-2xl shadow-lg transition-all group">
-<div class="flex items-center space-x-3">
-<div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
+<div class="flex flex-col space-y-3.5">
+<a href=https://tunggalpaito.online/live-draw/ class="ad-trigger flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 border border-slate-700/60 hover:border-sky-500/60 p-4 rounded-2xl shadow-xl transition-all group">
+<div class="flex items-center space-x-3.5">
+<div class="w-11 h-11 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform border border-sky-500/20">
 <i class="fa-solid fa-tower-broadcast"></i>
 </div>
 <div>
@@ -247,9 +247,9 @@
 </div>
 <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-sky-400 transition-colors"></i>
 </a>
-<a href=https://tunggalpaito.online/paito-warna/ class="ad-trigger flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 border border-slate-700/60 hover:border-purple-500/60 p-4 rounded-2xl shadow-lg transition-all group">
-<div class="flex items-center space-x-3">
-<div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
+<a href=https://tunggalpaito.online/paito-warna/ class="ad-trigger flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 border border-slate-700/60 hover:border-purple-500/60 p-4 rounded-2xl shadow-xl transition-all group">
+<div class="flex items-center space-x-3.5">
+<div class="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform border border-purple-500/20">
 <i class="fa-solid fa-palette"></i>
 </div>
 <div>
@@ -259,9 +259,9 @@
 </div>
 <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-purple-400 transition-colors"></i>
 </a>
-<a href=https://tunggalpaito.online/rumus/ class="ad-trigger flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 border border-slate-700/60 hover:border-amber-500/60 p-4 rounded-2xl shadow-lg transition-all group">
-<div class="flex items-center space-x-3">
-<div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
+<a href=https://tunggalpaito.online/rumus/ class="ad-trigger flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 border border-slate-700/60 hover:border-amber-500/60 p-4 rounded-2xl shadow-xl transition-all group">
+<div class="flex items-center space-x-3.5">
+<div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform border border-amber-500/20">
 <i class="fa-solid fa-calculator"></i>
 </div>
 <div>
@@ -271,100 +271,100 @@
 </div>
 <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-amber-400 transition-colors"></i>
 </a>
-<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
+<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-xl">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
-<div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center text-xl shrink-0"> 🇦🇺 </div>
+<div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center text-xl shrink-0 border border-yellow-500/20"> 🇦🇺 </div>
 <div>
 <div class="font-bold text-base text-yellow-400">PASARAN SYDNEY</div>
 <div class="text-xs text-slate-400">Prediksi, Analisa & Line 2D SDY</div>
 </div>
 </div>
 <div class="grid grid-cols-1 gap-2 text-xs">
-<a href=https://tunggalpaito.online/prediksi/sdy class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-yellow-500/10 border border-slate-800 hover:border-yellow-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi/sdy class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-yellow-500/10 border border-slate-800 hover:border-yellow-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-yellow-400 font-medium"><i class="fa-solid fa-chart-pie mr-2 text-yellow-500"></i>Prediksi Sydney Hari Ini</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-yellow-400"></i>
 </a>
-<a href=https://tunggalpaito.online/prediksi-sdy/ class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-yellow-500/10 border border-slate-800 hover:border-yellow-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi-sdy/ class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-yellow-500/10 border border-slate-800 hover:border-yellow-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-yellow-400 font-medium"><i class="fa-solid fa-calculator mr-2 text-yellow-500"></i>Analisa Angka Sydney</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-yellow-400"></i>
 </a>
-<a href=https://tunggalpaito.online/prediksi/2dsdy class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-yellow-500/10 border border-slate-800 hover:border-yellow-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi/2dsdy class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-yellow-500/10 border border-slate-800 hover:border-yellow-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-yellow-400 font-medium"><i class="fa-solid fa-lines-leaning mr-2 text-yellow-500"></i>LINE 2D SDY</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-yellow-400"></i>
 </a>
 </div>
 </div>
-<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
+<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-xl">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
-<div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl shrink-0"> 🇸🇬 </div>
+<div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl shrink-0 border border-emerald-500/20"> 🇸🇬 </div>
 <div>
 <div class="font-bold text-base text-emerald-400">PASARAN SINGAPORE</div>
 <div class="text-xs text-slate-400">Prediksi, Analisa & Line 2D SGP</div>
 </div>
 </div>
 <div class="grid grid-cols-1 gap-2 text-xs">
-<a href=https://tunggalpaito.online/prediksi/sgp class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-emerald-500/10 border border-slate-800 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi/sgp class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-emerald-500/10 border border-slate-800 hover:border-emerald-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-emerald-400 font-medium"><i class="fa-solid fa-chart-pie mr-2 text-emerald-400"></i>Prediksi Singapore Hari Ini</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-emerald-400"></i>
 </a>
-<a href=https://tunggalpaito.online/prediksi-sgp/ class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-emerald-500/10 border border-slate-800 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi-sgp/ class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-emerald-500/10 border border-slate-800 hover:border-emerald-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-emerald-400 font-medium"><i class="fa-solid fa-calculator mr-2 text-emerald-400"></i>Analisa Angka Singapore</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-emerald-400"></i>
 </a>
-<a href=https://tunggalpaito.online/prediksi/2dsgp class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-emerald-500/10 border border-slate-800 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi/2dsgp class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-emerald-500/10 border border-slate-800 hover:border-emerald-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-emerald-400 font-medium"><i class="fa-solid fa-lines-leaning mr-2 text-emerald-400"></i>LINE 2D SGP</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-emerald-400"></i>
 </a>
 </div>
 </div>
-<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
+<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-xl">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
-<div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center text-xl shrink-0"> 🇭🇰 </div>
+<div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center text-xl shrink-0 border border-rose-500/20"> 🇭🇰 </div>
 <div>
 <div class="font-bold text-base text-rose-400">PASARAN HONGKONG</div>
 <div class="text-xs text-slate-400">Prediksi, Analisa & Line 2D HK</div>
 </div>
 </div>
 <div class="grid grid-cols-1 gap-2 text-xs">
-<a href=https://tunggalpaito.online/prediksi/hk class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi/hk class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-rose-400 font-medium"><i class="fa-solid fa-chart-pie mr-2 text-rose-400"></i>Prediksi Hongkong Hari Ini</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-rose-400"></i>
 </a>
-<a href=https://tunggalpaito.online/prediksi-hk/ class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi-hk/ class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-rose-400 font-medium"><i class="fa-solid fa-calculator mr-2 text-rose-400"></i>Analisa Angka Hongkong</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-rose-400"></i>
 </a>
-<a href=https://tunggalpaito.online/prediksi/2dhk class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi/2dhk class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-rose-400 font-medium"><i class="fa-solid fa-lines-leaning mr-2 text-rose-400"></i>LINE 2D HK</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-rose-400"></i>
 </a>
 </div>
 </div>
-<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
+<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-xl">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
-<div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-xl shrink-0"> 🇦🇺 </div>
+<div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-xl shrink-0 border border-orange-500/20"> 🇦🇺 </div>
 <div>
 <div class="font-bold text-base text-orange-400">PASARAN SDY LOTTO</div>
 <div class="text-xs text-slate-400">Prediksi Angka Main SDY Lotto</div>
 </div>
 </div>
 <div class="grid grid-cols-1 gap-2 text-xs">
-<a href=https://tunggalpaito.online/prediksi/sdylotto class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-orange-500/10 border border-slate-800 hover:border-orange-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi/sdylotto class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-orange-500/10 border border-slate-800 hover:border-orange-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-orange-400 font-medium"><i class="fa-solid fa-chart-pie mr-2 text-orange-400"></i>Prediksi Angka Main SDY Lotto hari ini</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-orange-400"></i>
 </a>
 </div>
 </div>
-<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-lg">
+<div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-xl">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
-<div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-xl shrink-0"> 🇭🇰 </div>
+<div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-xl shrink-0 border border-red-500/20"> 🇭🇰 </div>
 <div>
 <div class="font-bold text-base text-red-400">PASARAN HK LOTTO</div>
 <div class="text-xs text-slate-400">Prediksi Angka Main HK Lotto</div>
 </div>
 </div>
 <div class="grid grid-cols-1 gap-2 text-xs">
-<a href=https://tunggalpaito.online/prediksi/hklotto class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-red-500/10 border border-slate-800 hover:border-red-500/40 p-2.5 rounded-xl transition-all group">
+<a href=https://tunggalpaito.online/prediksi/hklotto class="ad-trigger flex items-center justify-between bg-slate-950/60 hover:bg-red-500/10 border border-slate-800 hover:border-red-500/40 p-3 rounded-xl transition-all group">
 <span class="text-slate-200 group-hover:text-red-400 font-medium"><i class="fa-solid fa-chart-pie mr-2 text-red-400"></i>Prediksi Angka Main HK Lotto hari ini</span>
 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-rose-400"></i>
 </a>
@@ -372,13 +372,13 @@
 </div>
 </div>
 </main>
-<div id=download-modal class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-<div class="bg-slate-900 border border-emerald-500/50 rounded-2xl w-full max-w-sm p-5 shadow-[0_0_30px_rgba(16,185,129,0.3)] relative animate-popup text-left">
-<button onclick=closeDownloadModal() class="absolute top-3 right-3 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700">
+<div id=download-modal class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+<div class="bg-slate-900 border border-emerald-500/50 rounded-3xl w-full max-w-sm p-6 shadow-[0_0_40px_rgba(16,185,129,0.35)] relative animate-popup text-left backdrop-blur-xl">
+<button onclick=closeDownloadModal() class="absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700">
 <i class="fa-solid fa-xmark"></i>
 </button>
-<div class="flex items-center space-x-2.5 mb-3 pb-3 border-b border-slate-800">
-<div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
+<div class="flex items-center space-x-3 mb-4 pb-3 border-b border-slate-800">
+<div class="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
 <i class="fa-solid fa-triangle-exclamation text-base"></i>
 </div>
 <div>
@@ -386,11 +386,11 @@
 <p class="text-[10px] text-amber-400 font-medium">Jika Kesulitan Download Apk Resmi TUNGGAL PAITO</p>
 </div>
 </div>
-<div class="text-xs text-slate-300 space-y-2 mb-4 max-h-[60vh] overflow-y-auto pr-1">
-<p class="font-semibold text-emerald-400 bg-emerald-500/10 p-2 rounded-lg border border-emerald-500/20"> 📌 Pertama wajib login/pakai akun Email-Gmail bahwa anda bukan robot. </p>
+<div class="text-xs text-slate-300 space-y-2.5 mb-5 max-h-[60vh] overflow-y-auto pr-1">
+<p class="font-semibold text-emerald-400 bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/20"> 📌 Pertama wajib login/pakai akun Email-Gmail bahwa anda bukan robot. </p>
 <div>
-<p class="font-bold text-slate-200 mb-1">Langkah Selanjutnya:</p>
-<ol class="list-decimal list-inside space-y-1 text-slate-400 pl-1 text-[11px]">
+<p class="font-bold text-slate-200 mb-1.5">Langkah Selanjutnya:</p>
+<ol class="list-decimal list-inside space-y-1.5 text-slate-400 pl-1 text-[11px]">
 <li>Buka aplikasi <strong class=text-slate-200>Google Play Store</strong> di HP Anda.</li>
 <li>Ketuk foto profil akun Anda di pojok kanan atas layar.</li>
 <li>Pilih menu <strong class=text-slate-200>Play Protect</strong> (ikon berbentuk tameng hijau).</li>
@@ -401,18 +401,16 @@
 </ol>
 </div>
 </div>
-<a href="https://drive.google.com/file/d/1XsGnOlSyOxUFpgokKiiy86Jte_Uiygr_/view?usp=drivesdk" target=_blank onclick=closeDownloadModal() class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs shadow-lg transition-all">
+<a href="https://drive.google.com/file/d/1XsGnOlSyOxUFpgokKiiy86Jte_Uiygr_/view?usp=drivesdk" target=_blank onclick=closeDownloadModal() class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-3 px-4 rounded-2xl text-xs shadow-lg transition-all active:scale-[0.98]">
 <i class="fa-solid fa-cloud-arrow-down"></i> <span>Lanjutkan Download APK</span>
 </a>
 </div>
 </div>
-<footer class="w-full max-w-md mx-auto px-4 py-6 text-center text-xs text-slate-500 border-t border-slate-900 mt-auto">
+<footer class="w-full max-w-md mx-auto px-4 py-6 text-center text-xs text-slate-500 border-t border-slate-900/80 mt-auto">
 <p>&copy; <span id=current-year></span> <strong class=text-slate-400>Tunggal Paito</strong>. All rights reserved.</p>
 </footer>
 <script>document.getElementById("current-year").textContent=(new Date).getFullYear()</script>
 <script>const downloadModal=document.getElementById("download-modal");function openDownloadModal(o){o&&o.stopPropagation(),downloadModal.classList.remove("hidden"),document.body.classList.add("modal-open")}function closeDownloadModal(){downloadModal.classList.add("hidden"),document.body.classList.remove("modal-open")}downloadModal.addEventListener("click",(function(o){o.target===downloadModal&&closeDownloadModal()}))</script>
 <script>const popup=document.getElementById("ads-popup");let startX,startY,initialX,initialY,isDragging=!1;function dragStart(t){if(t.target.closest("a")||t.target.closest("button"))return;isDragging=!0,startX="touchstart"===t.type?t.touches[0].clientX:t.clientX,startY="touchstart"===t.type?t.touches[0].clientY:t.clientY;const e=popup.getBoundingClientRect();initialX=e.left,initialY=e.top,popup.style.bottom="auto",popup.style.right="auto",popup.style.left=initialX+"px",popup.style.top=initialY+"px"}function drag(t){if(!isDragging)return;t.preventDefault();const e="touchmove"===t.type?t.touches[0].clientX:t.clientX,n="touchmove"===t.type?t.touches[0].clientY:t.clientY,i=e-startX,o=n-startY;popup.style.left=initialX+i+"px",popup.style.top=initialY+o+"px"}function dragEnd(){isDragging=!1}popup.addEventListener("mousedown",dragStart),document.addEventListener("mousemove",drag),document.addEventListener("mouseup",dragEnd),popup.addEventListener("touchstart",dragStart,{passive:!1}),document.addEventListener("touchmove",drag,{passive:!1}),document.addEventListener("touchend",dragEnd)</script>
 <script>const firstNames=["Budi","Eko","Agung","Rian","Joko","Dedi","Ahmad","Hendra","Rahmat","Doni","Fajar","Wahyu","Andi","Bayu","Yoga","Rizal","Iwan","Reza","Dimas","Gilang","Slamet","Heri","Teguh","Yudi","Roni","Ardi","Deny","Ferry","Hermawan","Kurniawan","Siti","Dewi","Sri","Ani","Rina","Fitri","Wahyudi","Supriyanto","Haryanto","Saputra"],lastNames=["Santoso","Prasetyo","Wibowo","Hidayat","Susilo","Kurniawan","Fauzi","Gunawan","Saputra","Nugraha","Setiawan","Pratama","Maulana","Pahlevi","Anggara","Ramadhan","Kusuma","Wijaya","Nugroho","Hartono","Subagio","Kusumo","Irawan","Utomo","Sanjaya"],apkTypes=["Membeli APK BBFS","Membeli APK LINE 2D","Membeli APK COLOK BEBAS"];function formatTimeAgo(t){let a=Math.floor(t/1e3),e=Math.floor(a/60),o=Math.floor(e/60),n=Math.floor(o/24),r=Math.floor(n/7),i=Math.floor(n/30);return e<1?"baru saja":e<60?`${e} menit lalu`:o<24?`${o} jam lalu`:n<7?`${n} hari lalu`:r<5?`${r} minggu lalu`:`${i} bulan lalu`}function getPersistentBuyers(){let t,a=localStorage.getItem("tp_persistent_buyers"),e=localStorage.getItem("tp_base_install_time"),o=Date.now();e?t=parseInt(e):(t=o-3888e6,localStorage.setItem("tp_base_install_time",t));let n=[];if(a)try{n=JSON.parse(a)}catch(t){}if(0===n.length){let a=t;for(let t=0;t<50;t++){let t=firstNames[Math.floor(Math.random()*firstNames.length)]+" "+lastNames[Math.floor(Math.random()*lastNames.length)],e=apkTypes[Math.floor(Math.random()*apkTypes.length)];a+=Math.floor(2592e5*Math.random())+432e5,a>o&&(a=o-Math.floor(72e5*Math.random())),n.push({name:t,apk:e,timestamp:a})}n.sort(((t,a)=>t.timestamp-a.timestamp)),localStorage.setItem("tp_persistent_buyers",JSON.stringify(n))}return n}function showRandomBuyer(){const t=document.getElementById("buyer-notification"),a=document.getElementById("buyer-name"),e=document.getElementById("buyer-apk"),o=document.getElementById("buyer-time");let n=getPersistentBuyers();if(0===n.length)return;let r=n.shift();localStorage.setItem("tp_persistent_buyers",JSON.stringify(n));let i=Date.now()-r.timestamp;i<0&&(i=0),a.textContent=r.name,e.textContent=r.apk,o.textContent=formatTimeAgo(i),t.classList.add("show"),setTimeout((()=>{t.classList.remove("show")}),4e3)}setTimeout(showRandomBuyer,3e3),setInterval(showRandomBuyer,1e4)</script>
-<script>const adUrl="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0},document.addEventListener("copy",(e=>{e.preventDefault(),window.location.href=adUrl})),history.pushState(null,null,location.href),window.addEventListener("popstate",(function(){window.location.href=adUrl})),document.addEventListener("click",(function(e){e.target.closest("a")||(window.location.href=adUrl)}))</script>
-</body>
-</html>
+<script>const adUrl="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0},document.addEventListener("copy",(e=>{e.preventDefault(),window.location.href=adUrl})),history.pushState(null,null,location.href),window.addEventListener("popstate",(function(){window.location.href=adUrl})),document.addEventListener("click",(function(e){e.target.closest("a")||(window.location.href=adUrl)}))</script> </body> </html>
