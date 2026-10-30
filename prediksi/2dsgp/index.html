@@ -23,15 +23,17 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 .btn-main-menu{display:block;width:100%;background:linear-gradient(135deg,#0f6,#00a843);color:#000;text-decoration:none;font-weight:800;font-size:15px;padding:12px 15px;border-radius:8px;margin-bottom:15px;box-shadow:0 4px 10px rgba(0,255,102,.3);text-transform:uppercase;letter-spacing:.5px;transition:all .2s ease-in-out}
 .btn-main-menu:hover{background:linear-gradient(135deg,#00a843,#0f6);transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,255,102,.5)}
 
-/* TOMBOL DAFTAR 6 LOBANG VIA WA ADMIN */
-.btn-daftar-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 15px;border-radius:8px;margin-bottom:15px;box-shadow:0 4px 12px rgba(37,211,102,.4);text-transform:uppercase;letter-spacing:.5px;border:1px solid #4ade80;transition:all .2s ease-in-out}
-.btn-daftar-wa:hover{background:linear-gradient(135deg,#128c7e,#25d366);transform:translateY(-2px);box-shadow:0 6px 16px rgba(37,211,102,.6)}
+/* KARTU HASIL & 24 LINE 2D FORMAT JEJER KE BAWAH PER 6 LINE */
+.results-container{display:flex;flex-direction:column;gap:15px;width:100%;margin-top:15px}
+.result-item-card{background:#051c0d;border:1px solid rgba(0,255,102,.4);border-radius:8px;padding:12px;text-align:left}
+.result-header{font-size:14px;color:#f59e0b;font-weight:bold;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.grid-24line{display:flex;flex-direction:column;gap:4px}
+.line-row{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.line-box{background:#002b0f;border:1px solid #0f6;border-radius:4px;padding:6px 2px;text-align:center;font-size:12px;font-weight:bold;color:#fff}
 
-/* WADAH KHUSUS 2 FOTO (STACKING ATAS-BAWAH) */
-.photo-container-wrapper{display:flex;flex-direction:column;gap:15px;width:100%;margin-bottom:15px}
-.photo-box{width:100%;display:none}
-.photo-box img{width:100%;height:auto;border-radius:8px;border:2px solid #0f6;box-shadow:0 4px 10px rgba(0,0,0,.5);display:block}
-.photo-label{font-size:11px;font-weight:bold;color:#0f6;margin-bottom:4px;text-transform:uppercase;text-align:left}
+/* GAYA KOTAK MERAH AMOLED UNTUK ANGKA MASUK/TEMBUS */
+.line-box.matched{background:#b91c1c;border:2px solid #ef4444;color:#ffffff;box-shadow:0 0 10px rgba(239,68,68,0.9);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 5px rgba(239,68,68,0.5)}50%{box-shadow:0 0 15px rgba(239,68,68,1)}100%{box-shadow:0 0 5px rgba(239,68,68,0.5)}}
 
 .keywords-section{width:100%;max-width:420px;background-color:rgba(0,0,0,.3);border-radius:8px;padding:15px;margin-bottom:20px;text-align:center;border:1px solid rgba(0,255,102,.1)}
 .keywords-section h3{font-size:14px;color:#0f6;margin-bottom:8px}
@@ -88,18 +90,9 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 KEMBALI KE MENU UTAMA
 </a>
 
-<!-- WADAH PENAMPIL 2 FOTO -->
-<div class="photo-container-wrapper">
-    <!-- FOTO TERBARU (ATAS) -->
-    <div class="photo-box" id="box-terbaru">
-        <div class="photo-label"></div>
-        <img id="img-terbaru" src="" alt="Prediksi Line 2D SGP Terbaru">
-    </div>
-    <!-- FOTO SEBELUMNYA (BAWAH) -->
-    <div class="photo-box" id="box-sebelumnya">
-        <div class="photo-label"></div>
-        <img id="img-sebelumnya" src="" alt="Prediksi Line 2D SGP Sebelumnya">
-    </div>
+<!-- WADAH 7X RESULT & PREDIKSI LINE 2D SGP -->
+<div class="results-container" id="results-container">
+    <!-- Konten dimuat otomatis via Firebase -->
 </div>
 
 </div>
@@ -124,53 +117,107 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       db=getDatabase(app),
       dbRef=ref(db);
 
-// FUNGSI MEMATIKAN TAMPILAN JIKA GAMBAR ERROR / GAGAL LOAD
-function handleImageError(imgEl, boxEl) {
-    imgEl.onerror = function() {
-        boxEl.style.display = "none";
-        console.warn("Gagal memuat gambar:", imgEl.src);
-    };
-}
+// AMBIL DATA LIVE/SINGAPORE SAJA (7 HARI TERAKHIR)
+get(child(dbRef, "live/singapore")).then((sgpSnap) => {
+    const container = document.getElementById("results-container");
+    container.innerHTML = "";
 
-// LOGIKA MENGAMBIL DAN MENAMPILKAN 2 FOTO DARI FIREBASE (live/line_2dsgp)
-get(child(dbRef,"live/line_2dsgp")).then((e=>{
-    if(e.exists() && e.val()){
-        const val = e.val().trim();
-        let linksArray = [];
+    if (!sgpSnap.exists()) return;
 
-        if (val !== "") {
-            linksArray = val.split(",").map(item => item.trim()).filter(item => item !== "");
+    const sgpData = sgpSnap.val();
+    
+    // Urutkan tanggal dari yang terbaru ke terlama
+    let entries = Object.keys(sgpData).map(date => {
+        return { date: date, result: sgpData[date] };
+    });
+
+    entries.sort((a, b) => {
+        const [d1, m1, y1] = a.date.split("-").map(Number);
+        const [d2, m2, y2] = b.date.split("-").map(Number);
+        return new Date(y2, m2 - 1, d2) - new Date(y1, m1 - 1, d1);
+    });
+
+    // Ambil 7 data terbaru lalu dibalik posisinya agar yang terbaru ada di paling bawah
+    const latest7 = entries.slice(0, 7).reverse();
+
+    // Render 7x result dan prediksinya berdasarkan rumus 24 line
+    latest7.forEach((item, index) => {
+        let card = document.createElement("div");
+        card.className = "result-item-card";
+
+        let header = document.createElement("div");
+        header.className = "result-header";
+        let cleanResult = item.result.toString().replace(/["']/g, "").trim();
+        header.innerHTML = `<span> ${item.date}</span> <span>Result: <b>${cleanResult}</b></span>`;
+        card.appendChild(header);
+
+        // Ambil target 2D dari hari berikutnya untuk mencocokkan angka yang masuk
+        let target2D = null;
+        let target2DRev = null;
+        if (index < latest7.length - 1) {
+            let nextResult = latest7[index + 1].result.toString().replace(/["']/g, "").trim();
+            target2D = nextResult.slice(-2).padStart(2, "0");
+            target2DRev = target2D.split('').reverse().join('');
         }
 
-        const imgTerbaru = document.getElementById("img-terbaru");
-        const boxTerbaru = document.getElementById("box-terbaru");
-        const imgSebelumnya = document.getElementById("img-sebelumnya");
-        const boxSebelumnya = document.getElementById("box-sebelumnya");
+let paddedResult = cleanResult.padStart(4, "0");
+let as = parseInt(paddedResult[0]) || 0;
+let ekor = parseInt(paddedResult[3]) || 0;
 
-        handleImageError(imgTerbaru, boxTerbaru);
-        handleImageError(imgSebelumnya, boxSebelumnya);
+let indeksAs = (as + 5) % 10;
+let indeksEkor = (ekor + 5) % 10;
+let selisih = Math.abs(as - ekor);
+let jumlah = (as + ekor) % 10;
 
-        if (linksArray.length >= 2) {
-            // FOTO TERBARU (Indeks Terakhir) -> DI ATAS
-            imgTerbaru.src = linksArray[linksArray.length - 1];
-            boxTerbaru.style.display = "block";
+let twentyFourLines = [];
+let usedLines = new Set();
+let baseDigits = [as, ekor, indeksAs, indeksEkor, selisih, jumlah, (indeksAs + 2) % 10, (indeksEkor + 3) % 10];
 
-            // FOTO SEBELUMNYA (Indeks Sebelum Terakhir) -> DI BAWAH
-            imgSebelumnya.src = linksArray[linksArray.length - 2];
-            boxSebelumnya.style.display = "block";
-        } else if (linksArray.length === 1) {
-            // JIKA HANYA ADA 1 FOTO
-            imgTerbaru.src = linksArray[0];
-            boxTerbaru.style.display = "block";
-            boxSebelumnya.style.display = "none";
-        } else {
-            boxTerbaru.style.display = "none";
-            boxSebelumnya.style.display = "none";
+for (let i = 0; i < baseDigits.length && twentyFourLines.length < 24; i++) {
+    for (let j = 0; j < 10 && twentyFourLines.length < 24; j++) {
+        let d1 = baseDigits[i];
+        let d2 = (j + i) % 10;
+        let line = `${d1}${d2}`;
+        if (!usedLines.has(line)) {
+            usedLines.add(line);
+            twentyFourLines.push(line);
         }
     }
-})).catch((e=>{
-    console.error("Gagal mengambil data foto SGP:", e);
-}));
+}
+
+
+        let grid = document.createElement("div");
+        grid.className = "grid-24line";
+
+        // Bagi 24 line menjadi 4 baris (masing-masing 6 line ke samping)
+        for (let i = 0; i < twentyFourLines.length; i += 6) {
+            let rowChunk = twentyFourLines.slice(i, i + 6);
+            let rowDiv = document.createElement("div");
+            rowDiv.className = "line-row";
+
+            rowChunk.forEach(line => {
+                let lineBox = document.createElement("div");
+                lineBox.className = "line-box";
+                
+                // Jika line cocok dengan result hari berikutnya (atau bolak-balik/BB), ubah jadi merah amoled
+                if (target2D && (line === target2D || line === target2DRev)) {
+                    lineBox.classList.add("matched");
+                }
+
+                lineBox.textContent = line;
+                rowDiv.appendChild(lineBox);
+            });
+
+            grid.appendChild(rowDiv);
+        }
+
+        card.appendChild(grid);
+        container.appendChild(card);
+    });
+
+}).catch((error) => {
+    console.error("Gagal mengambil data SGP dari Firebase:", error);
+});
 
 // EVENT ADS / KLIK
 let clickCount=0;
