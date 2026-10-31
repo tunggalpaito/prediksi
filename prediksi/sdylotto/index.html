@@ -4,67 +4,13 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Prediksi SDY Update Setiap Hari - Tunggal Paito</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background-color:#080c14;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}
-
-/* TOMBOL KEMBALI KE MENU UTAMA */
-.btn-back-main{width:100%;max-width:420px;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.5);color:#38bdf8;text-decoration:none;font-weight:700;font-size:13px;padding:10px 15px;border-radius:8px;border:1px solid #38bdf8;margin-bottom:15px;transition:all .2s ease;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
-.btn-back-main:hover{background:#38bdf8;color:#000;transform:translateY(-2px)}
-
-.ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
-.ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
-.generator-card{width:100%;max-width:420px;background-color:#0f172a;border:1px solid #38bdf8;border-radius:12px;padding:15px;margin-bottom:20px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2)}
-.generator-card h3{font-size:16px;color:#38bdf8;margin-bottom:8px}
-.generator-card .guide-text{font-size:11px;color:#cbd5e1;margin-bottom:12px;line-height:1.4;text-align:left}
-.generator-card input{width:100%;max-width:200px;padding:8px;font-size:16px;text-align:center;border-radius:6px;border:1px solid #38bdf8;background:#020617;color:#fff;margin-bottom:10px;outline:0}
-.generator-card button{background-color:#38bdf8;color:#000;border:none;padding:8px 20px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer}
-.generator-result{margin-top:15px;text-align:left;font-size:13px;display:none}
-.generator-result div{margin-bottom:8px;background:rgba(56,189,248,.1);padding:8px;border-radius:6px;border-left:3px solid #38bdf8}
-
-/* KARTU STATUS PENGUNJUNG ONLINE DINAMIS */
-.visitor-card{width:100%;max-width:420px;background:rgba(15,23,42,0.8);border:1px solid #38bdf8;border-radius:8px;padding:10px 15px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(56,189,248,.15)}
-.visitor-card .visitor-info{font-size:12px;color:#cbd5e1;display:flex;align-items:center;gap:6px}
-.visitor-card .online-dot{width:8px;height:8px;background-color:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e;animation:blink 1.5s infinite}
-.visitor-card .visitor-count{font-size:14px;font-weight:bold;color:#38bdf8;transition:all 0.5s ease}
-@keyframes blink{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
-
-/* Styling Khusus Kartu Saweran & Titip Pasang 3D SDY Blue-Cyan AMOLED */
-.sawer-card{width:100%;max-width:420px;background:linear-gradient(135deg,#020617,#0f172a);border:1px solid rgba(56,189,248,0.6);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
-.sawer-card h3{font-size:15px;color:#38bdf8;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-.sawer-card p{font-size:11px;color:#cbd5e1;margin-bottom:14px;line-height:1.4}
-.sawer-btn-group{display:flex;gap:10px;justify-content:center}
-.sawer-btn{flex:1;padding:10px 12px;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s ease}
-.btn-sawer-wa{background:linear-gradient(135deg,#10b981,#059669);color:#000;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
-.btn-sawer-qr{background:linear-gradient(135deg,#38bdf8,#0284c7);color:#000;box-shadow:0 4px 12px rgba(56,189,248,0.3)}
-
-.main-card{width:100%;max-width:420px;background-color:#0f172a;border:1px solid rgba(56,189,248,.4);border-radius:12px;padding:20px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.4);margin-bottom:25px}
-h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#38bdf8}
-
-/* WADAH TREK TABEL RESULT & PREDIKSI */
-.trek-container{display:flex;flex-direction:column;gap:10px;width:100%}
-.trek-row{background:rgba(2,6,23,0.9);border:1px solid rgba(56,189,248,0.4);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
-.trek-balls{display:flex;align-items:center;gap:5px}
-.ball{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;box-shadow:0 2px 5px rgba(0,0,0,0.5)}
-.ball-blue{background:linear-gradient(135deg,#38bdf8,#0284c7);color:#000;border:1px solid #7dd3fc}
-.ball-white{background:linear-gradient(135deg,#f8fafc,#cbd5e1);color:#000;border:1px solid #fff}
-.trek-colon{color:#38bdf8;font-weight:bold;margin:0 4px}
-.trek-badge{background:#020617;color:#38bdf8;border:1px solid #38bdf8;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:bold;text-transform:uppercase;min-width:55px;text-align:center}
-
-.keywords-section{width:100%;max-width:420px;background-color:rgba(0,0,0,.3);border-radius:8px;padding:15px;margin-bottom:20px;text-align:center;border:1px solid rgba(56,189,248,.1)}
-.keywords-section h3{font-size:14px;color:#38bdf8;margin-bottom:8px}
-.keywords-section p{font-size:11px;color:#e0e0e0;line-height:1.5}
-.footer{margin-top:auto;padding:10px 0;color:#38bdf8;font-size:13px;font-weight:700;text-align:center}
-</style>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}body{background-color:#080c14;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}.btn-back-main{width:100%;max-width:420px;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,.5);color:#38bdf8;text-decoration:none;font-weight:700;font-size:13px;padding:10px 15px;border-radius:8px;border:1px solid #38bdf8;margin-bottom:15px;transition:all .2s ease;box-shadow:0 2px 8px rgba(0,0,0,.4)}.btn-back-main:hover{background:#38bdf8;color:#000;transform:translateY(-2px)}.ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}.ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}.generator-card{width:100%;max-width:420px;background-color:#0f172a;border:1px solid #38bdf8;border-radius:12px;padding:15px;margin-bottom:20px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2)}.generator-card h3{font-size:16px;color:#38bdf8;margin-bottom:8px}.generator-card .guide-text{font-size:11px;color:#cbd5e1;margin-bottom:12px;line-height:1.4;text-align:left}.generator-card input{width:100%;max-width:200px;padding:8px;font-size:16px;text-align:center;border-radius:6px;border:1px solid #38bdf8;background:#020617;color:#fff;margin-bottom:10px;outline:0}.generator-card button{background-color:#38bdf8;color:#000;border:none;padding:8px 20px;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer}.generator-result{margin-top:15px;text-align:left;font-size:13px;display:none}.generator-result div{margin-bottom:8px;background:rgba(56,189,248,.1);padding:8px;border-radius:6px;border-left:3px solid #38bdf8}.visitor-card{width:100%;max-width:420px;background:rgba(15,23,42,.8);border:1px solid #38bdf8;border-radius:8px;padding:10px 15px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(56,189,248,.15)}.visitor-card .visitor-info{font-size:12px;color:#cbd5e1;display:flex;align-items:center;gap:6px}.visitor-card .online-dot{width:8px;height:8px;background-color:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e;animation:blink 1.5s infinite}.visitor-card .visitor-count{font-size:14px;font-weight:700;color:#38bdf8;transition:all .5s ease}@keyframes blink{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}.sawer-card{width:100%;max-width:420px;background:linear-gradient(135deg,#020617,#0f172a);border:1px solid rgba(56,189,248,.6);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.5)}.sawer-card h3{font-size:15px;color:#38bdf8;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}.sawer-card p{font-size:11px;color:#cbd5e1;margin-bottom:14px;line-height:1.4}.sawer-btn-group{display:flex;gap:10px;justify-content:center}.sawer-btn{flex:1;padding:10px 12px;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s ease}.btn-sawer-wa{background:linear-gradient(135deg,#10b981,#059669);color:#000;box-shadow:0 4px 12px rgba(16,185,129,.3)}.btn-sawer-qr{background:linear-gradient(135deg,#38bdf8,#0284c7);color:#000;box-shadow:0 4px 12px rgba(56,189,248,.3)}.main-card{width:100%;max-width:420px;background-color:#0f172a;border:1px solid rgba(56,189,248,.4);border-radius:12px;padding:20px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.4);margin-bottom:25px}h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#38bdf8}.trek-container{display:flex;flex-direction:column;gap:10px;width:100%}.trek-row{background:rgba(2,6,23,.9);border:1px solid rgba(56,189,248,.4);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,.3)}.trek-balls{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;overflow-x:auto}.ball{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;box-shadow:0 2px 5px rgba(0,0,0,.5);flex-shrink:0}.ball-blue{background:linear-gradient(135deg,#38bdf8,#0284c7);color:#000;border:1px solid #7dd3fc}.ball-white{background:linear-gradient(135deg,#f8fafc,#cbd5e1);color:#000;border:1px solid #fff}.ball-vs,.ball-white{background:linear-gradient(135deg,#f8fafc,#cbd5e1);color:#000;border:1px solid #fff}.trek-colon{color:#38bdf8;font-weight:700;margin:0 2px}.trek-badge{background:#020617;color:#38bdf8;border:1px solid #38bdf8;padding:4px 6px;border-radius:6px;font-size:10px;font-weight:700;text-transform:uppercase;min-width:50px;text-align:center;flex-shrink:0}.keywords-section{width:100%;max-width:420px;background-color:rgba(0,0,0,.3);border-radius:8px;padding:15px;margin-bottom:20px;text-align:center;border:1px solid rgba(56,189,248,.1)}.keywords-section h3{font-size:14px;color:#38bdf8;margin-bottom:8px}.keywords-section p{font-size:11px;color:#e0e0e0;line-height:1.5}.footer{margin-top:auto;padding:10px 0;color:#38bdf8;font-size:13px;font-weight:700;text-align:center}</style>
 </head>
 <body>
-
-<!-- TOMBOL KEMBALI KE MENU UTAMA -->
-<a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
-<svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+<a href=https://tunggalpaito.online/prediksi class=btn-back-main>
+<svg style=width:16px;height:16px;fill:currentColor viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
 <span>Kembali ke Menu Utama</span>
 </a>
-
 <div class=ads-container>
 <div class=ad-box>
 <div style=width:100%;text-align:center;overflow:hidden>
@@ -91,16 +37,13 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </div>
 </div>
 </div>
-
-<!-- KARTU STATUS PENGUNJUNG ONLINE -->
-<div class="visitor-card">
-<div class="visitor-info">
-<div class="online-dot"></div>
+<div class=visitor-card>
+<div class=visitor-info>
+<div class=online-dot></div>
 <span>Pengunjung Online :</span>
 </div>
-<div class="visitor-count" id="visitor-count-text"></div>
+<div class=visitor-count id=visitor-count-text></div>
 </div>
-
 <div class=generator-card>
 <h3>GENERATOR ANGKA SDY LOTTO</h3>
 <div class=guide-text>
@@ -114,8 +57,6 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <div><strong>Colok Bebas :</strong> <span id=res-cb></span></div>
 </div>
 </div>
-
-<!-- KARTU SISTEM SAWERAN & TITIP PASANG -->
 <div class=sawer-card>
 <h3>🎉 Salam HOKI Satu HATI</h3>
 <p>
@@ -123,255 +64,29 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </p>
 <div class=sawer-btn-group>
 <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20Titip%20Pasang%20Angka%20SDY%20hari%20ini" target=_blank class="sawer-btn btn-sawer-wa">
-<svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+<svg style=width:14px;height:14px;fill:currentColor viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 <span>Titip Pasang (Jastip)</span>
 </a>
-
-<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20angka%20SDY%20saya%20tembus%20JP%20hari%20ini,%20mau%20kirim%20sawer%20mahar%20sukarela" target=_blank id="btn-sawer-bebas" class="sawer-btn btn-sawer-qr">
-<svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20angka%20SDY%20saya%20tembus%20JP%20hari%20ini,%20mau%20kirim%20sawer%20mahar%20sukarela" target=_blank id=btn-sawer-bebas class="sawer-btn btn-sawer-qr">
+<svg style=width:14px;height:14px;fill:currentColor viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
 <span>Sawer</span>
 </a>
 </div>
 </div>
-
 <div class=main-card>
 <h1>PREDIKSI TOGEL HARI INI</h1>
-<!-- WADAH TREK TABEL RESULT & PREDIKSI -->
-<div class="trek-container" id="trek-container">
-    <!-- Data 7 result terakhir akan dimuat secara dinamis di sini -->
+<div class=trek-container id=trek-container>
 </div>
 </div>
-
 <div class=keywords-section>
 <h3>PREDIKSI TUNGGAL PAITO</h3>
 <p>
 Prediksi SDY Hari Ini, Bocoran Togel Sydney Jitu, Angka Main SDY Akurat, Paito Warna SDY, Tunggal Paito Sydney, Keluaran SDY Tercepat, Live Draw Sydney, Data SDY Pools, Angka Jitu 2D 3D 4D, Rumus Jitu SDY, Prediksi Jitu Togel Sydney Hari Ini.
 </p>
 </div>
-
 <div class=footer>
 &copy; <span id=auto-year></span> TUNGGAL PAITO All Rights Reserved.
 </div>
-
-<script type=module>
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-document.getElementById("auto-year").textContent=(new Date).getFullYear();
-
-const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
-      app=initializeApp(firebaseConfig),
-      db=getDatabase(app),
-      dbRef=ref(db);
-
-// AMBIL DATA 7 RESULT TERAKHIR DARI live/sdylotto
-get(child(dbRef,"live/data-sdylotto")).then((snapshot)=>{
-    if(snapshot.exists() && snapshot.val()){
-        const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
-        });
-
-        // Urutkan secara kronologis berdasarkan tanggal
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-
-        // Ambil 7 data terakhir
-        const last7 = entries.slice(-7);
-        const trekContainer = document.getElementById("trek-container");
-        trekContainer.innerHTML = "";
-
-        last7.forEach((item, index) => {
-            const result4d = item.val;
-            if (result4d.length < 4) return;
-
-            const digits = result4d.split("").map(Number);
-
-
-let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
-let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
-
-scores[(9 - kop + 10) % 10] += 4;
-scores[(9 - kepala + 10) % 10] += 4;
-scores[(kop * kepala) % 10] += 5;
-scores[Math.abs(kop - kepala)] += 3;
-scores[(kop + kepala) % 10] += 2;
-
-let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 3);
-
-            // Cari result hari berikutnya (untuk koreksi nilai fokus 2D)
-            const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
-            const nextItem = entries[globalIndex + 1]; 
-            
-            let status = "?";
-            let badgeClass = "trek-badge";
-
-            if (index === last7.length - 1 || !nextItem) {
-                status = "?";
-            } else {
-                const next4d = nextItem.val;
-                const nextKepala = Number(next4d[2]);
-                const nextEkor = Number(next4d[3]);
-                const isTwin = (nextKepala === nextEkor);
-
-                const hasKepala = predDigits.includes(nextKepala);
-                const hasEkor = predDigits.includes(nextEkor);
-
-                if (isTwin && (hasKepala || hasEkor)) {
-                    status = "TWIN";
-                } else if (hasKepala && hasEkor) {
-                    status = "2D";
-                } else if (hasEkor) {
-                    status = "EKOR";
-                } else if (hasKepala) {
-                    status = "KPLA";
-                } else {
-                    status = "ZONK";
-                }
-            }
-
-            // Buat elemen baris trek
-            let rowHtml = `<div class="trek-row"><div class="trek-balls">`;
-            
-            // 4 bola biru (result 4d)
-            digits.forEach(d => {
-                rowHtml += `<div class="ball ball-blue">${d}</div>`;
-            });
-
-            rowHtml += `<span class="trek-colon">:</span>`;
-
-            // 3 bola putih (prediksi)
-            predDigits.forEach(d => {
-                rowHtml += `<div class="ball ball-white">${d}</div>`;
-            });
-
-            rowHtml += `</div><div class="${badgeClass}">${status}</div></div>`;
-
-            trekContainer.insertAdjacentHTML('beforeend', rowHtml);
-        });
-    }
-}).catch((e)=>{
-    console.error("Gagal mengambil data SDYLOTTO dari Firebase:", e);
-});
-
-// GENERATOR ANGKA SDY
-document.getElementById("btn-generate").addEventListener("click",(function(){
-  const e=document.getElementById("input-angka").value.trim();
-  if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
-  
-  let t=e.split("").map(Number);
-  
-  let a={};
-  for(let i=0;i<=9;i++)a[i]=2;
-  a[t[2]]+=4; a[t[3]]+=5; a[t[1]]+=3; a[t[0]]+=2;
-
-  const n={0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6},
-        o={0:8,1:7,2:6,3:9,4:5,5:4,6:2,7:1,8:0,9:3},
-        c={0:5,1:4,2:3,3:2,4:1,5:0,6:9,7:8,8:7,9:6};
-
-  t.forEach((val=>{let idxO=o[val],idxC=c[val];a[n[val]]+=3;a[idxO]+=3;a[idxC]+=2}));
-  [Math.abs(t[0]-t[2]),Math.abs(t[1]-t[3]),(t[0]+t[1]+t[2]+t[3])%10,(t[2]+t[3])%10].forEach((val=>{a[val]+=4}));
-
-  let sortedDigits = Object.keys(a).sort(((x,y)=>a[y]-a[x])).map(Number);
-
-  let r = sortedDigits.slice(0,6).join(" ");
-  let ekorKuat = sortedDigits[0];
-  let ekorMati = sortedDigits[sortedDigits.length - 1];
-  let d = `${ekorKuat} & ${ekorMati}`;
-
-  document.getElementById("res-bbfs").textContent=r;
-  document.getElementById("res-cb").textContent=d;
-  document.getElementById("generator-result").style.display="block";
-}));
-
-// LOGIKA PENGUNJUNG CERDAS (1 SAMPAI 5000)
-let currentVisitors = 0;
-let hasStartedScroll = false;
-let updateTimer = null;
-let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-let lastScrollTime = Date.now();
-const visitorText = document.getElementById("visitor-count-text");
-
-function updateVisitorCount(isFastScroll = false) {
-    if (!hasStartedScroll) return;
-
-    if (isFastScroll) {
-        let boost = Math.floor(Math.random() * 25) + 10;
-        currentVisitors += boost;
-    } else {
-        let drop = Math.floor(Math.random() * 15) + 5;
-        currentVisitors -= drop;
-    }
-
-    if (currentVisitors > 5000) {
-        currentVisitors = 5000;
-    } else if (currentVisitors < 1) {
-        currentVisitors = 1;
-    }
-
-    visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
-    scheduleNextUpdate();
-}
-
-function scheduleNextUpdate() {
-    clearTimeout(updateTimer);
-    let randomDelay = Math.floor(Math.random() * (20000 - 5000 + 1)) + 5000;
-    updateTimer = setTimeout(() => {
-        updateVisitorCount(false);
-    }, randomDelay);
-}
-
-window.addEventListener("scroll", function() {
-    if (!hasStartedScroll) {
-        hasStartedScroll = true;
-        currentVisitors = Math.floor(Math.random() * 151) + 150;
-        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
-        scheduleNextUpdate();
-        return;
-    }
-
-    const now = Date.now();
-    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const distance = Math.abs(currentScrollTop - lastScrollTop);
-    const timeElapsed = now - lastScrollTime;
-
-    if (timeElapsed > 150) {
-        let speed = distance / timeElapsed;
-        if (speed > 1.2) {
-            updateVisitorCount(true);
-        }
-        lastScrollTop = currentScrollTop;
-        lastScrollTime = now;
-    }
-});
-
-// SKRIP IKLAN
-let clickCount=0;
-const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-document.addEventListener("click",(function(e){
-  const btnSawer = document.getElementById("btn-sawer-bebas");
-  if (btnSawer && (e.target === btnSawer || btnSawer.contains(e.target))) {
-    return;
-  }
-  if (e.target.closest('a[href*="wa.me"]')) {
-    return;
-  }
-  if (e.target.closest('.btn-back-main')) {
-    return;
-  }
-  clickCount++;
-  if (1 === clickCount || (clickCount - 1) % 3 === 0) {
-    window.open(adLink, "_blank");
-  }
-}), !0);
-
-document.addEventListener("contextmenu",(e=>e.preventDefault()));
-document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}
-</script>
+<script type=module>import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";document.getElementById("auto-year").textContent=(new Date).getFullYear();const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},app=initializeApp(firebaseConfig),db=getDatabase(app),dbRef=ref(db);get(child(dbRef,"live/data-sdylotto")).then((t=>{if(t.exists()&&t.val()){const e=t.val(),a=Object.keys(e).map((t=>{const a=t.split("-"),o=new Date(a[2],a[1]-1,a[0]);return{dateStr:t,val:String(e[t]).trim(),dateObj:o}}));a.sort(((t,e)=>t.dateObj-e.dateObj));const o=a.slice(-7),r=document.getElementById("trek-container");r.innerHTML="",o.forEach(((t,e)=>{const n=t.val;if(n.length<4)return;const s=n.split("").map(Number);let i=s[0],l=s[1],c=s[2],d=s[3],u={};for(let t=0;t<=9;t++)u[t]=1;u[(9-l+10)%10]+=4,u[(9-c+10)%10]+=4,u[l*c%10]+=5,u[Math.abs(l-c)]+=3,u[(l+c)%10]+=2;let m=Object.keys(u).sort(((t,e)=>u[e]-u[t])).map(Number).slice(0,3),b={};for(let t=0;t<=9;t++)b[t]=1;b[(9-i+10)%10]+=5,b[(9-d+10)%10]+=4,b[(i+l+d)%10]+=3;let f=Object.keys(b).sort(((t,e)=>b[e]-b[t])).map(Number).slice(0,3);const p=a.findIndex((e=>e.dateStr===t.dateStr)),h=a[p+1];let g="?";if(e!==o.length-1&&h){const t=h.val,e=Number(t[2]),a=Number(t[3]),o=[...m,...f],r=o.includes(e),n=o.includes(a);g=r&&n?"JP":"ZONK"}else g="?";let v='<div class="trek-row"><div class="trek-balls">';s.forEach((t=>{v+=`<div class="ball ball-blue">${t}</div>`})),v+='<span class="trek-colon">:</span>',m.forEach((t=>{v+=`<div class="ball ball-white">${t}</div>`})),v+='<span style="font-size:9px; color:#38bdf8; font-weight:bold; margin:0 2px;">VS</span>',f.forEach((t=>{v+=`<div class="ball ball-vs">${t}</div>`})),v+=`</div><div class="trek-badge">${g}</div></div>`,r.insertAdjacentHTML("beforeend",v)}))}})).catch((t=>{console.error("Gagal mengambil data SDYLOTTO dari Firebase:",t)})),document.getElementById("btn-generate").addEventListener("click",(function(){const t=document.getElementById("input-angka").value.trim();if(4!==t.length||isNaN(t))return void alert("Masukkan tepat 4 digit angka result terakhir!");let e=t.split("").map(Number),a={};for(let t=0;t<=9;t++)a[t]=2;a[e[2]]+=4,a[e[3]]+=5,a[e[1]]+=3,a[e[0]]+=2;const o={0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6},r={0:8,1:7,2:6,3:9,4:5,5:4,6:2,7:1,8:0,9:3},n={0:5,1:4,2:3,3:2,4:1,5:0,6:9,7:8,8:7,9:6};e.forEach((t=>{let e=r[t],s=n[t];a[o[t]]+=3,a[e]+=3,a[s]+=2})),[Math.abs(e[0]-e[2]),Math.abs(e[1]-e[3]),(e[0]+e[1]+e[2]+e[3])%10,(e[2]+e[3])%10].forEach((t=>{a[t]+=4}));let s=Object.keys(a).sort(((t,e)=>a[e]-a[t])).map(Number),i=s.slice(0,6).join(" "),l=`${s[0]} & ${s[s.length-1]}`;document.getElementById("res-bbfs").textContent=i,document.getElementById("res-cb").textContent=l,document.getElementById("generator-result").style.display="block"}));let currentVisitors=0,hasStartedScroll=!1,updateTimer=null,lastScrollTop=window.pageYOffset||document.documentElement.scrollTop,lastScrollTime=Date.now();const visitorText=document.getElementById("visitor-count-text");function updateVisitorCount(t=!1){if(hasStartedScroll){if(t){let t=Math.floor(25*Math.random())+10;currentVisitors+=t}else{let t=Math.floor(15*Math.random())+5;currentVisitors-=t}currentVisitors>5e3?currentVisitors=5e3:currentVisitors<1&&(currentVisitors=1),visitorText.textContent=currentVisitors.toLocaleString("id-ID")+" ",scheduleNextUpdate()}}function scheduleNextUpdate(){clearTimeout(updateTimer);let t=Math.floor(15001*Math.random())+5e3;updateTimer=setTimeout((()=>{updateVisitorCount(!1)}),t)}window.addEventListener("scroll",(function(){if(!hasStartedScroll)return hasStartedScroll=!0,currentVisitors=Math.floor(151*Math.random())+150,visitorText.textContent=currentVisitors.toLocaleString("id-ID")+" ",void scheduleNextUpdate();const t=Date.now(),e=window.pageYOffset||document.documentElement.scrollTop,a=Math.abs(e-lastScrollTop),o=t-lastScrollTime;if(o>150){a/o>1.2&&updateVisitorCount(!0),lastScrollTop=e,lastScrollTime=t}}));let clickCount=0;const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";document.addEventListener("click",(function(t){const e=document.getElementById("btn-sawer-bebas");e&&(t.target===e||e.contains(t.target))||t.target.closest('a[href*="wa.me"]')||t.target.closest(".btn-back-main")||(clickCount++,1!==clickCount&&(clickCount-1)%3!=0||window.open(adLink,"_blank"))}),!0),document.addEventListener("contextmenu",(t=>t.preventDefault())),document.onkeydown=function(t){return 123!=t.keyCode&&(!t.ctrlKey||!t.shiftKey||t.keyCode!="I".charCodeAt(0))&&(!t.ctrlKey||!t.shiftKey||t.keyCode!="C".charCodeAt(0))&&(!t.ctrlKey||!t.shiftKey||t.keyCode!="J".charCodeAt(0))&&(!t.ctrlKey||t.keyCode!="U".charCodeAt(0))&&void 0}</script>
 </body>
 </html>
