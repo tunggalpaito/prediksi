@@ -1,457 +1,114 @@
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html lang=id>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator BBFS Lengkap - Tunggal Paito</title>
-    <style>
-        body {
-            background-color: #000000;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-        .ads-container {
-            width: 100%;
-            max-width: 320px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .ad-box {
-            width: 100%;
-            text-align: center;
-            overflow: hidden;
-            background: #080808;
-            border: 1px solid #1c1c1c;
-            border-radius: 8px;
-            padding: 4px 0;
-        }
-        .container {
-            width: 100%;
-            max-width: 450px;
-            background: #080808;
-            border: 1px solid #1c1c1c;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-size: 1.15rem;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #00ffcc;
-            letter-spacing: 0.5px;
-        }
-        .input-group {
-            margin-bottom: 12px;
-            display: flex;
-            flex-direction: column;
-        }
-        textarea {
-            width: 100%;
-            height: 55px;
-            padding: 10px;
-            background: #111111;
-            color: #00ffcc;
-            border: 1px solid #2a2a2a;
-            border-radius: 8px;
-            font-size: 1.05rem;
-            font-family: 'Courier New', Courier, monospace;
-            outline: none;
-            box-sizing: border-box;
-            letter-spacing: 2px;
-            text-align: center;
-            resize: vertical;
-        }
-        textarea::placeholder {
-            color: #555555;
-            font-style: italic;
-            font-size: 0.85rem;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            letter-spacing: normal;
-        }
-        textarea:focus {
-            border-color: #00ffcc;
-        }
-        .btn-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            margin-bottom: 20px;
-        }
-        .btn {
-            flex: 1;
-            padding: 12px;
-            background: #00ffcc;
-            color: #000000;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-        }
-        .btn:hover {
-            background: #00ccb8;
-        }
-        .btn:active {
-            transform: scale(0.98);
-        }
-        .btn-copy {
-            background: #222222;
-            color: #00ffcc;
-            border: 1px solid #00ffcc;
-        }
-        .btn-copy:hover {
-            background: #2a2a2a;
-        }
-        .result-box {
-            background: #111111;
-            border: 1px solid #222222;
-            border-radius: 10px;
-            padding: 18px;
-            min-height: 120px;
-            max-height: 250px;
-            overflow-y: auto;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #00ffcc;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .row {
-            margin-bottom: 6px;
-            letter-spacing: 2px;
-        }
-        .placeholder {
-            color: #555555;
-            font-style: italic;
-            font-size: 0.9rem;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            letter-spacing: normal;
-        }
-        .info {
-            font-size: 0.8rem;
-            color: #888888;
-            text-align: center;
-            margin-top: 12px;
-        }
-        .footer {
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #666666;
-            margin-top: 10px;
-            padding: 10px;
-            line-height: 1.5;
-        }
-        .seo-keywords {
-            margin-bottom: 8px;
-            color: #555555;
-        }
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            background: #00ffcc;
-            color: #000000;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            display: none;
-            animation: fadeInOut 1.5s ease;
-        }
-    </style>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Generator BBFS Lengkap - Tunggal Paito</title>
+<style>body{background-color:#000;color:#fff;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:20px 10px;display:flex;flex-direction:column;align-items:center;min-height:100vh;box-sizing:border-box}.ads-container{width:100%;max-width:320px;display:flex;flex-direction:column;gap:10px;margin-bottom:20px}.ad-box{width:100%;text-align:center;overflow:hidden;background:#080808;border:1px solid #1c1c1c;border-radius:8px;padding:4px 0}.container{width:100%;max-width:480px;background:#080808;border:1px solid #1c1c1c;border-radius:16px;padding:24px;box-shadow:0 8px 32px rgba(0,0,0,.9);margin-bottom:20px}h1{font-size:1.15rem;text-align:center;margin-bottom:20px;color:#0fc;letter-spacing:.5px}.input-group{margin-bottom:12px;display:flex;flex-direction:column;position:relative}.input-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.input-label{font-size:.8rem;color:#888}.btn-reset-field{background:0 0;border:none;color:#f55;font-size:.75rem;cursor:pointer;padding:2px 6px;border-radius:4px;transition:background .2s}.btn-reset-field:hover{background:rgba(255,85,85,.15)}textarea{width:100%;height:50px;padding:10px;background:#111;color:#0fc;border:1px solid #2a2a2a;border-radius:8px;font-size:1.05rem;font-family:'Courier New',Courier,monospace;outline:0;box-sizing:border-box;letter-spacing:2px;text-align:center;resize:vertical}textarea::placeholder{color:#555;font-style:italic;font-size:.85rem;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;letter-spacing:normal}textarea:focus{border-color:#0fc}.btn-container{display:flex;gap:10px;margin-top:15px;margin-bottom:20px}.btn{flex:1;padding:12px;background:#0fc;color:#000;border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s,transform .1s}.btn:hover{background:#00ccb8}.btn:active{transform:scale(.98)}.result-section{margin-top:15px;background:#111;border:1px solid #222;border-radius:10px;padding:14px}.result-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid #222;padding-bottom:8px}.result-title{font-size:.9rem;font-weight:700;color:#0fc}.btn-copy-small{background:#222;color:#0fc;border:1px solid #0fc;padding:4px 10px;font-size:.75rem;border-radius:6px;cursor:pointer;font-weight:700;transition:background .2s}.btn-copy-small:hover{background:#2a2a2a}.result-box{max-height:180px;overflow-y:auto;font-family:'Courier New',Courier,monospace;font-size:1rem;line-height:1.6;color:#0fc;text-align:center;display:flex;flex-direction:column;align-items:center}.row{margin-bottom:4px;letter-spacing:2px}.placeholder{color:#555;font-style:italic;font-size:.85rem;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;letter-spacing:normal}.footer{width:100%;max-width:480px;text-align:center;font-size:.75rem;color:#666;margin-top:10px;padding:10px;line-height:1.5}.seo-keywords{margin-bottom:8px;color:#555}.toast{position:fixed;bottom:30px;background:#0fc;color:#000;padding:8px 16px;border-radius:8px;font-weight:700;font-size:.9rem;box-shadow:0 4px 12px rgba(0,0,0,.5);display:none;animation:fadeInOut 1.5s ease}</style>
 </head>
 <body>
-
-    <!-- 4 Kotak Iklan Berjajar ke Bawah di Atas -->
-    <div class="ads-container">
-        <!-- Iklan 1 -->
-        <div class="ad-box">
-            <script>
-                atOptions = {
-                    'key' : '119c8bb3217ed264a8fa223c3197bf69',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-        </div>
-
-        <!-- Iklan 2 -->
-        <div class="ad-box">
-            <script>
-                atOptions = {
-                    'key' : '119c8bb3217ed264a8fa223c3197bf69',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-        </div>
-
-        <!-- Iklan 3 -->
-        <div class="ad-box">
-            <script>
-                atOptions = {
-                    'key' : '119c8bb3217ed264a8fa223c3197bf69',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-        </div>
-
-        <!-- Iklan 4 -->
-        <div class="ad-box">
-            <script>
-                atOptions = {
-                    'key' : '119c8bb3217ed264a8fa223c3197bf69',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-        </div>
-    </div>
-
-    <!-- Container Utama Generator -->
-    <div class="container">
-        <h1>Generator Tunggal Paito</h1>
-        
-        <div class="input-group">
-            <textarea id="bbfsInput" placeholder="Angka BBFS
-            (Bisa format banyak pisah paragraf baru)"></textarea>
-        </div>
-
-        <div class="input-group">
-            <textarea id="kumatInput" placeholder="Pangkas Kumat 2D"></textarea>
-        </div>
-
-        <div class="input-group">
-            <textarea id="amInput" placeholder="Pangkas Angka Main"></textarea>
-        </div>
-
-        <div class="input-group">
-            <textarea id="offKepalaInput" placeholder="Pangkas Off Kepala"></textarea>
-        </div>
-
-        <div class="input-group">
-            <textarea id="offEkorInput" placeholder="Pangkas Off Ekor"></textarea>
-        </div>
-
-        <div class="input-group">
-            <textarea id="off2dInput" placeholder="Pangkas Off 2D / Angka Lemah"></textarea>
-        </div>
-
-        <div class="btn-container">
-            <button class="btn" onclick="generateBBFS()">Mulai</button>
-            <button class="btn btn-copy" onclick="copyResults()">Salin Hasil</button>
-        </div>
-        
-        <div class="result-box" id="resultBox">
-            <span class="placeholder">Masukkan angka lalu tekan mulai</span>
-        </div>
-        
-        <div class="info" id="totalInfo"></div>
-    </div>
-
-    <!-- Bagian Paling Bawah (Kata Kunci & Copyright Tunggal Paito) -->
-    <footer class="footer">
-        <div class="seo-keywords">
-            <strong>Kata Kunci:</strong> Generator BBFS 2D, Pangkas Kumat, Angka Main 2D, Bolak Balik Full Set, Tunggal Paito, Paito Warna, Rumus Jitu 2D, Generator Angka, Line 2D.
-        </div>
-        <div class="copyright">
-            &copy; <span id="currentYear"></span> Tunggal Paito. All rights reserved.
-        </div>
-    </footer>
-
-    <div class="toast" id="toastMsg">Berhasil Disalin!😎</div>
-
-    <script>
-        // Mengatur tahun otomatis pada footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        let rawGeneratedLines = [];
-
-        function generateBBFS() {
-            let bbfsRaw = document.getElementById('bbfsInput').value.trim();
-            let kumatRaw = document.getElementById('kumatInput').value.trim();
-            let amRaw = document.getElementById('amInput').value.trim();
-            let offKepalaRaw = document.getElementById('offKepalaInput').value.trim();
-            let offEkorRaw = document.getElementById('offEkorInput').value.trim();
-            let off2dRaw = document.getElementById('off2dInput').value.trim();
-            
-            let resultBox = document.getElementById('resultBox');
-            let totalInfo = document.getElementById('totalInfo');
-
-            if (!bbfsRaw) {
-                resultBox.innerHTML = '<span class="placeholder" style="color: #ff5555;">Harap masukkan angka BBFS!</span>';
-                totalInfo.textContent = '';
-                rawGeneratedLines = [];
-                return;
-            }
-
-            // Memisahkan input BBFS per baris (mendukung banyak format/prediksi sekaligus)
-            let bbfsLines = bbfsRaw.split('\n').map(line => line.replace(/\D/g, '')).filter(l => l.length >= 2);
-
-            if (bbfsLines.length === 0) {
-                resultBox.innerHTML = '<span class="placeholder" style="color: #ff5555;">Format BBFS tidak valid (minimal 2 digit)!</span>';
-                totalInfo.textContent = '';
-                rawGeneratedLines = [];
-                return;
-            }
-
-            // Logika "Harus Sama-Sama Ada" (Irisan/Intersection) di antara baris-baris BBFS
-            let commonDigits = bbfsLines[0].split('');
-            for (let i = 1; i < bbfsLines.length; i++) {
-                let currentDigits = bbfsLines[i].split('');
-                commonDigits = commonDigits.filter(d => currentDigits.includes(d));
-            }
-
-            if (commonDigits.length < 2) {
-                resultBox.innerHTML = '<span class="placeholder" style="color: #ffaa00;">Tidak ada angka yang sama-sama ada di semua baris BBFS (minimal butuh 2 digit sama)!</span>';
-                totalInfo.textContent = '';
-                rawGeneratedLines = [];
-                return;
-            }
-
-            // Membersihkan input pangkas lainnya dari simbol dan menggabungkan semua barisnya
-            let kumatDigits = kumatRaw.replace(/\D/g, '').split('');
-            let amDigits = amRaw.replace(/\D/g, '').split('');
-            let kepalaDigits = offKepalaRaw.replace(/\D/g, '').split('');
-            let ekorDigits = offEkorRaw.replace(/\D/g, '').split('');
-            let off2dDigits = off2dRaw.replace(/\D/g, '').split('');
-
-            let pairs = [];
-
-            // 1. Proses Kombinasi BBFS (Termasuk Angka Kembar / Twin)
-            for (let i = 0; i < commonDigits.length; i++) {
-                for (let j = 0; j < commonDigits.length; j++) {
-                    pairs.push(commonDigits[i] + commonDigits[j]); // Tanpa batasan i !== j agar angka kembar (misal 44, 55) ikut masuk
-                }
-            }
-
-            // 2. Pemangkasan Kumat (Buang jika kedua digit ada di kumat)
-            if (kumatRaw !== '') {
-                pairs = pairs.filter(pair => {
-                    let d1 = pair[0], d2 = pair[1];
-                    let bothExist = kumatDigits.includes(d1) && kumatDigits.includes(d2);
-                    return !bothExist;
-                });
-            }
-
-            // 3. Filter Angka Main / AI (Simpan jika ada minimal 1 digit yang cocok dengan AM)
-            if (amRaw !== '') {
-                pairs = pairs.filter(pair => {
-                    let d1 = pair[0], d2 = pair[1];
-                    let hasAm = amDigits.includes(d1) || amDigits.includes(d2);
-                    return hasAm;
-                });
-            }
-
-            // 4. Pangkas Off Kepala
-            if (offKepalaRaw !== '') {
-                pairs = pairs.filter(pair => {
-                    let d1 = pair[0];
-                    return !kepalaDigits.includes(d1);
-                });
-            }
-
-            // 5. Pangkas Off Ekor
-            if (offEkorRaw !== '') {
-                pairs = pairs.filter(pair => {
-                    let d2 = pair[1];
-                    return !ekorDigits.includes(d2);
-                });
-            }
-
-            // 6. Pangkas Off 2D / Angka Lemah
-            if (off2dRaw !== '') {
-                pairs = pairs.filter(pair => {
-                    let d1 = pair[0], d2 = pair[1];
-                    let bothExist = off2dDigits.includes(d1) && off2dDigits.includes(d2);
-                    return !bothExist;
-                });
-            }
-
-            rawGeneratedLines = pairs;
-            resultBox.innerHTML = '';
-            totalInfo.textContent = `Total Line Aktif (Irisan + Kembar): ${pairs.length}`;
-
-            if (pairs.length === 0) {
-                resultBox.innerHTML = '<span class="placeholder" style="color: #ffaa00;">Semua line terpemangkas habis!</span>';
-                return;
-            }
-
-            // Membagi hasil per 5 angka dipisah bintang (*) tanpa spasi
-            let rows = [];
-            for (let i = 0; i < pairs.length; i += 5) {
-                let chunk = pairs.slice(i, i + 5);
-                rows.push(chunk.join('*'));
-            }
-
-            // Tampilkan ke layar
-            rows.forEach(rowText => {
-                let div = document.createElement('div');
-                div.className = 'row';
-                div.textContent = rowText;
-                resultBox.appendChild(div);
-            });
-        }
-
-        function copyResults() {
-            if (rawGeneratedLines.length === 0) {
-                showToast("Tidak ada hasil untuk disalin!");
-                return;
-            }
-
-            let rows = [];
-            for (let i = 0; i < rawGeneratedLines.length; i += 5) {
-                let chunk = rawGeneratedLines.slice(i, i + 5);
-                rows.push(chunk.join('*'));
-            }
-            let textToCopy = rows.join('\n');
-
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                showToast("Berhasil Disalin!");
-            }).catch(err => {
-                showToast("Gagal menyalin!");
-            });
-        }
-
-        function showToast(message) {
-            let toast = document.getElementById('toastMsg');
-            toast.textContent = message;
-            toast.style.display = 'block';
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 1500);
-        }
-    </script>
-
+<div class=ads-container>
+<div class=ad-box>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+<div class=ad-box>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+<div class=ad-box>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+<div class=ad-box>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+<div class=container>
+<h1>GENERATOR TUNGGAL PAITO</h1>
+<div class=input-group>
+<div class=input-header>
+<span class=input-label>Angka BBFS</span>
+<button class=btn-reset-field onclick='clearField("bbfsInput")'>Reset ↺</button>
+</div>
+<textarea id=bbfsInput placeholder="Angka BBFS (Bisa format banyak pisah paragraf baru)"></textarea>
+</div>
+<div class=input-group>
+<div class=input-header>
+<span class=input-label>Pangkas Kumat 2D</span>
+<button class=btn-reset-field onclick='clearField("kumatInput")'>Reset ↺</button>
+</div>
+<textarea id=kumatInput placeholder="Pangkas Kumat 2D"></textarea>
+</div>
+<div class=input-group>
+<div class=input-header>
+<span class=input-label>Pangkas Angka Main</span>
+<button class=btn-reset-field onclick='clearField("amInput")'>Reset ↺</button>
+</div>
+<textarea id=amInput placeholder="Pangkas Angka Main"></textarea>
+</div>
+<div class=input-group>
+<div class=input-header>
+<span class=input-label>Pangkas Off Kepala</span>
+<button class=btn-reset-field onclick='clearField("offKepalaInput")'>Reset ↺</button>
+</div>
+<textarea id=offKepalaInput placeholder="Pangkas Off Kepala"></textarea>
+</div>
+<div class=input-group>
+<div class=input-header>
+<span class=input-label>Pangkas Off Ekor</span>
+<button class=btn-reset-field onclick='clearField("offEkorInput")'>Reset ↺</button>
+</div>
+<textarea id=offEkorInput placeholder="Pangkas Off Ekor"></textarea>
+</div>
+<div class=input-group>
+<div class=input-header>
+<span class=input-label>Pangkas Off 2D / Angka Lemah</span>
+<button class=btn-reset-field onclick='clearField("off2dInput")'>Reset ↺</button>
+</div>
+<textarea id=off2dInput placeholder="Pangkas Off 2D / Angka Lemah"></textarea>
+</div>
+<div class=btn-container>
+<button class=btn onclick=generateBBFS()>Mulai</button>
+</div>
+<div class=result-section>
+<div class=result-header>
+<span class=result-title id=title4d>Hasil 4D (Line: 0)</span>
+<button class=btn-copy-small onclick='copyResultType("4d")'>Salin 4D</button>
+</div>
+<div class=result-box id=resultBox4d>
+<span class=placeholder></span>
+</div>
+</div>
+<div class=result-section>
+<div class=result-header>
+<span class=result-title id=title3d>Hasil 3D (Line: 0)</span>
+<button class=btn-copy-small onclick='copyResultType("3d")'>Salin 3D</button>
+</div>
+<div class=result-box id=resultBox3d>
+<span class=placeholder></span>
+</div>
+</div>
+<div class=result-section>
+<div class=result-header>
+<span class=result-title id=title2d>Hasil 2D (Line: 0)</span>
+<button class=btn-copy-small onclick='copyResultType("2d")'>Salin 2D</button>
+</div>
+<div class=result-box id=resultBox2d>
+<span class=placeholder></span>
+</div>
+</div>
+</div>
+<footer class=footer>
+<div class=seo-keywords>
+<strong>Kata Kunci:</strong> Generator BBFS 4D 3D 2D, Pangkas Kumat, Angka Main 2D, Bolak Balik Full Set, Tunggal Paito, Paito Warna, Rumus Jitu, Generator Angka.
+</div>
+<div class=copyright>
+&copy; <span id=currentYear></span> Tunggal Paito. All rights reserved.
+</div>
+</footer>
+<div class=toast id=toastMsg>Berhasil Disalin!😎</div>
+<script>document.getElementById("currentYear").textContent=(new Date).getFullYear();let generatedData={"4d":[],"3d":[],"2d":[]};function clearField(e){document.getElementById(e).value=""}function generateBBFS(){let e=document.getElementById("bbfsInput").value.trim(),t=document.getElementById("kumatInput").value.trim(),l=document.getElementById("amInput").value.trim(),n=document.getElementById("offKepalaInput").value.trim(),a=document.getElementById("offEkorInput").value.trim(),r=document.getElementById("off2dInput").value.trim();if(!e)return void alert("Harap masukkan angka BBFS terlebih dahulu!");let i=e.split("\n").map((e=>e.replace(/\D/g,""))).filter((e=>e.length>=2));if(0===i.length)return void alert("Format BBFS tidak valid (minimal 2 digit)!");let d=i[0].split("");for(let e=1;e<i.length;e++){let t=i[e].split("");d=d.filter((e=>t.includes(e)))}if(d.length<2)return void alert("Tidak ada angka yang sama-sama ada di semua baris BBFS (minimal butuh 2 digit sama)!");let u=t.replace(/\D/g,"").split(""),s=l.replace(/\D/g,"").split(""),o=n.replace(/\D/g,"").split(""),g=a.replace(/\D/g,"").split(""),c=r.replace(/\D/g,"").split(""),m=[],p=r.split(/[\s,\-\*]+/);for(let e of p){let t=e.replace(/\D/g,"");2===t.length&&m.push(t)}let f=[];for(let e=0;e<d.length;e++)for(let t=0;t<d.length;t++)f.push(d[e]+d[t]);""!==t&&(f=f.filter((e=>{let t=e[0],l=e[1];return!(u.includes(t)&&u.includes(l))}))),""!==l&&(f=f.filter((e=>{let t=e[0],l=e[1];return s.includes(t)||s.includes(l)}))),""!==n&&(f=f.filter((e=>{let t=e[0];return!o.includes(t)}))),""!==a&&(f=f.filter((e=>{let t=e[1];return!g.includes(t)}))),""!==r&&(f=f.filter((e=>{if(m.includes(e))return!1;let t=e[0],l=e[1];return!(c.includes(t)||c.includes(l))}))),generatedData["2d"]=f;let h=[];for(let e=0;e<d.length;e++)for(let t=0;t<d.length;t++)for(let l=0;l<d.length;l++){let n=d[e]+d[t]+d[l],a=d[t]+d[l];f.includes(a)&&h.push(n)}generatedData["3d"]=h;let B=[];for(let e=0;e<d.length;e++)for(let t=0;t<d.length;t++)for(let l=0;l<d.length;l++)for(let n=0;n<d.length;n++){let a=d[e]+d[t]+d[l]+d[n],r=d[l]+d[n];f.includes(r)&&B.push(a)}generatedData["4d"]=B,renderResults("4d"),renderResults("3d"),renderResults("2d")}function renderResults(e){let t=document.getElementById("resultBox"+e),l=document.getElementById("title4d");"3d"===e&&(l=document.getElementById("title3d")),"2d"===e&&(l=document.getElementById("title2d"));let n=generatedData[e];if(l.textContent=`Hasil ${e.toUpperCase()} (Line: ${n.length})`,t.innerHTML="",0===n.length)return void(t.innerHTML='<span class="placeholder" style="color: #ffaa00;">Tidak ada line</span>');let a=[];for(let e=0;e<n.length;e+=5){let t=n.slice(e,e+5);a.push(t.join("*"))}a.forEach((e=>{let l=document.createElement("div");l.className="row",l.textContent=e,t.appendChild(l)}))}function copyResultType(e){let t=generatedData[e];if(!t||0===t.length)return void showToast(`Tidak ada hasil ${e.toUpperCase()} untuk disalin!`);let l=[];for(let e=0;e<t.length;e+=5){let n=t.slice(e,e+5);l.push(n.join("*"))}let n=l.join("\n");navigator.clipboard.writeText(n).then((()=>{showToast(`Berhasil Disalin (${e.toUpperCase()})! 😎`)})).catch((e=>{showToast("Gagal menyalin!")}))}function showToast(e){let t=document.getElementById("toastMsg");t.textContent=e,t.style.display="block",setTimeout((()=>{t.style.display="none"}),1500)}</script>
 </body>
-</html>
+    </html>
