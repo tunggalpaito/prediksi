@@ -328,29 +328,27 @@ document.getElementById("btn-download").addEventListener("click", function() {
     });
 });
 
-// LOGIKA PENGUNJUNG CERDAS (1 SAMPAI 5000)
-let currentVisitors = 0;
-let hasStartedScroll = false;
+// LOGIKA PENGUNJUNG ONLINE ALAMI (BERUBAH SETIAP 2 - 5 MENIT)
+let currentVisitors = Math.floor(Math.random() * 151) + 150; 
 let updateTimer = null;
-let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-let lastScrollTime = Date.now();
 const visitorText = document.getElementById("visitor-count-text");
 
-function updateVisitorCount(isFastScroll = false) {
-    if (!hasStartedScroll) return;
+visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
 
-    if (isFastScroll) {
-        let boost = Math.floor(Math.random() * 25) + 10;
-        currentVisitors += boost;
+function updateVisitorCount() {
+    let isIncrease = Math.random() > 0.4;
+    let change = Math.floor(Math.random() * 8) + 1;
+
+    if (isIncrease) {
+        currentVisitors += change;
     } else {
-        let drop = Math.floor(Math.random() * 15) + 5;
-        currentVisitors -= drop;
+        currentVisitors -= change;
     }
 
     if (currentVisitors > 5000) {
         currentVisitors = 5000;
-    } else if (currentVisitors < 1) {
-        currentVisitors = 1;
+    } else if (currentVisitors < 80) {
+        currentVisitors = 80;
     }
 
     visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
@@ -359,35 +357,13 @@ function updateVisitorCount(isFastScroll = false) {
 
 function scheduleNextUpdate() {
     clearTimeout(updateTimer);
-    let randomDelay = Math.floor(Math.random() * (20000 - 5000 + 1)) + 5000;
+    let randomDelay = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
     updateTimer = setTimeout(() => {
-        updateVisitorCount(false);
+        updateVisitorCount();
     }, randomDelay);
 }
 
-window.addEventListener("scroll", function() {
-    if (!hasStartedScroll) {
-        hasStartedScroll = true;
-        currentVisitors = Math.floor(Math.random() * 151) + 150;
-        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
-        scheduleNextUpdate();
-        return;
-    }
-
-    const now = Date.now();
-    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const distance = Math.abs(currentScrollTop - lastScrollTop);
-    const timeElapsed = now - lastScrollTime;
-
-    if (timeElapsed > 150) {
-        let speed = distance / timeElapsed;
-        if (speed > 1.2) {
-            updateVisitorCount(true);
-        }
-        lastScrollTop = currentScrollTop;
-        lastScrollTime = now;
-    }
-});
+scheduleNextUpdate();
 
 // SKRIP IKLAN
 let clickCount=0;
