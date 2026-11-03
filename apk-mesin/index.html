@@ -165,15 +165,26 @@ function renderAds(){
 async function fetchFirebaseData(){
     try{
         let cfg=marketConfig[currentMarket];
-        let e=await fetch(cfg.jsonUrl),
+        let cacheBuster = new Date().getTime();
+        
+        let e=await fetch(`${cfg.jsonUrl}?t=${cacheBuster}`),
             t=await e.json(),
-            a=await fetch(cfg.targetUrl),
+            a=await fetch(`${cfg.targetUrl}?t=${cacheBuster}`),
             n=await a.json();
+            
         n&&(firebaseTargetData=n);
         let r=document.getElementById("firebaseHistoryBody");
         if(r.innerHTML="",t&&"object"==typeof t){
-            let e=Object.keys(t).slice(-7).reverse();
-            e.forEach(((e)=>{
+            // Mengurutkan tanggal format DD-MM-YYYY secara akurat menggunakan objek Date agar tidak mentok
+            let keys = Object.keys(t).sort((x, y) => {
+                let partsX = x.split('-');
+                let partsY = y.split('-');
+                let dateX = new Date(partsX[2], partsX[1] - 1, partsX[0]);
+                let dateY = new Date(partsY[2], partsY[1] - 1, partsY[0]);
+                return dateX - dateY;
+            });
+
+            keys.slice(-7).reverse().forEach(((e)=>{
                 let i=t[e],o=document.createElement("tr");
                 o.className="history-row";
                 o.onclick=function(){
@@ -215,7 +226,7 @@ function prosesPrediksi(){
                 t=`${o} ${s} ${(s+1)%10}`;
                 const l=(parseInt(e[3])+r)%10,d=(l+1)%10;
                 a=`${l} ${d} ${(d+1)%10}`;
-            }else if(currentMarket="singapore"){
+            }else if(currentMarket==="singapore"){
                 const o=(i+r)%10,s=(o+1)%10;
                 t=`${o} ${s} ${(s+1)%10}`;
                 const l=(parseInt(e[3])+n)%10,d=(l+1)%10;
