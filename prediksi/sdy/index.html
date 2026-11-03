@@ -4,6 +4,8 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Prediksi TOP SDY Update Setiap Hari - Tunggal Paito</title>
+<!-- Library html2canvas untuk fitur download gambar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}
@@ -29,10 +31,6 @@ body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;alig
 .visitor-card .visitor-count{font-size:14px;font-weight:bold;color:#38bdf8;transition:all 0.5s ease}
 @keyframes blink{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
 
-/* TOMBOL ANGKA TUNGGAL JITU VIA WA ADMIN */
-.btn-daftar-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 15px;border-radius:8px;margin-top:12px;box-shadow:0 4px 12px rgba(37,211,102,.4);text-transform:uppercase;letter-spacing:.5px;border:1px solid #4ade80;transition:all .2s ease-in-out}
-.btn-daftar-wa:hover{background:linear-gradient(135deg,#128c7e,#25d366);transform:translateY(-2px);box-shadow:0 6px 16px rgba(37,211,102,.6)}
-
 /* Styling Khusus Kartu Saweran & Titip Pasang 3D AMOLED */
 .sawer-card{width:100%;max-width:420px;background:linear-gradient(135deg,#050b14,#10213d);border:1px solid rgba(245,158,11,0.5);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center;box-shadow:0 6px 20px rgba(245,158,11,0.25)}
 .sawer-card h3{font-size:15px;color:#f59e0b;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
@@ -42,11 +40,12 @@ body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;alig
 .btn-sawer-wa{background:linear-gradient(135deg,#10b981,#059669);color:#000;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
 .btn-sawer-qr{background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;box-shadow:0 4px 12px rgba(245,158,11,0.3)}
 
-.main-card{width:100%;max-width:420px;background-color:#163868;border:1px solid rgba(56,189,248,.4);border-radius:12px;padding:20px 15px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2);margin-bottom:25px}
+/* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
+.main-card{width:100%;max-width:420px;background-color:#163868;border:1px solid rgba(56,189,248,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2);margin-bottom:15px}
 h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#38bdf8}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI */
-.trek-container{display:flex;flex-direction:column;gap:10px;width:100%}
+.trek-container{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:10px}
 .trek-row{background:rgba(7,19,38,0.9);border:1px solid rgba(56,189,248,0.4);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
 .trek-balls{display:flex;align-items:center;gap:5px}
 .ball{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;box-shadow:0 2px 5px rgba(0,0,0,0.5)}
@@ -54,6 +53,23 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 .ball-white{background:linear-gradient(135deg,#f8fafc,#cbd5e1);color:#000;border:1px solid #fff}
 .trek-colon{color:#38bdf8;font-weight:bold;margin:0 4px}
 .trek-badge{background:#071326;color:#38bdf8;border:1px solid #38bdf8;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:bold;text-transform:uppercase;min-width:55px;text-align:center}
+
+/* WATERMARK / LINK HALAMAN OTOMATIS TEPAT DI BAWAH KARTU */
+.card-website-footer {
+    display: block;
+    font-size: 11px;
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* WADAH TOMBOL DOWNLOAD DI LUAR KARTU */
+.action-download-container{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;margin-bottom:25px}
+.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px;font-size:14px;font-weight:700;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(34,197,94,0.3);transition:all .2s ease}
+.btn-download-img:hover{opacity:0.9;transform:translateY(-2px)}
 
 .keywords-section{width:100%;max-width:420px;background-color:rgba(7,19,38,.5);border-radius:8px;padding:15px;margin-bottom:20px;text-align:center;border:1px solid rgba(56,189,248,.1)}
 .keywords-section h3{font-size:14px;color:#38bdf8;margin-bottom:8px}
@@ -108,13 +124,13 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <div class=generator-card>
 <h3>GENERATOR ANGKA SDY</h3>
 <div class=guide-text>
-<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Sistem paito cerdas akan membedah selisih matematis dan frekuensi angka untuk merumuskan prediksi berikutnya.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
+<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas SDY akan membedah indeks mistik, taysen, dan pola 2 digit angka paten secara presisi.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
 </div>
 <input id=input-angka maxlength=4 placeholder="Contoh: 9267">
 <br>
 <button id=btn-generate>GENERATE</button>
 <div class=generator-result id=generator-result>
-<div><strong>Angka Main :</strong> <span id=res-bbfs></span></div>
+<div><strong>Angka Main (2D) :</strong> <span id=res-bbfs></span></div>
 <div><strong>Colok Bebas :</strong> <span id=res-cb></span></div>
 </div>
 </div>
@@ -126,7 +142,7 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 "Posisi kami berada di pihak pemain, kami tidak promosi agen bo apapun, kami hanya fokus untuk memberikan racikan angka jitu Prediksi Tunggal Paito 100% Gratis & Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit uang seikhlasnya untuk mendukung operasional admin."
 </p>
 <div class=sawer-btn-group>
-<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20Titip%20Pasang%20Angka%20untuk%20pasaran%20SDY%20hari%20ini" target=_blank class="sawer-btn btn-sawer-wa">
+<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20Titip%20Pasang%20Angka%20SDY%20hari%20ini" target=_blank class="sawer-btn btn-sawer-wa">
 <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 <span>Titip Pasang (Jastip)</span>
 </a>
@@ -138,12 +154,23 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </div>
 </div>
 
-<div class=main-card>
+<!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
+<div class="main-card" id="capture-card">
 <h1>PREDIKSI TOGEL HARI INI</h1>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI -->
 <div class="trek-container" id="trek-container">
     <!-- Data 7 result terakhir akan dimuat secara dinamis di sini -->
 </div>
+<!-- LINK HALAMAN OTOMATIS DI DALAM KARTU -->
+<a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
+</div>
+
+<!-- TOMBOL DOWNLOAD GAMBAR DI LUAR KARTU -->
+<div class="action-download-container">
+<button class="btn-download-img" id="btn-download">
+<svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+<span>Download Gambar Prediksi</span>
+</button>
 </div>
 
 <div class=keywords-section>
@@ -163,12 +190,18 @@ import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
+// MENGAMBIL DAN MENAMPILKAN URL HALAMAN SECARA OTOMATIS
+const currentUrl = window.location.href;
+const linkElement = document.getElementById("dynamic-site-link");
+linkElement.href = currentUrl;
+linkElement.textContent = currentUrl;
+
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
       db=getDatabase(app),
       dbRef=ref(db);
 
-// AMBIL DATA 7 RESULT TERAKHIR DARI live/sydney & RUMUS ALTERNATIF BARU
+// AMBIL DATA 7 RESULT TERAKHIR DARI live/sydney & RUMUS PATEN 2 DIGIT
 get(child(dbRef,"live/sydney")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
@@ -196,20 +229,16 @@ get(child(dbRef,"live/sydney")).then((snapshot)=>{
 
             const digits = result4d.split("").map(Number);
 
-  let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
-let as = digits[0], ekor = digits[3];
-
-scores[as] += 5; 
-scores[ekor] += 5;
-scores[(as + 5) % 10] += 4; 
-scores[(ekor + 5) % 10] += 4;
-scores[(as + ekor) % 10] += 5;
-scores[Math.abs(as - ekor)] += 4;
-
-let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 3);
+            let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
+let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
+scores[(as * ekor + kop) % 10] += 6;
+scores[(kop * kepala + as) % 10] += 5;
+scores[Math.abs(as * 2 - ekor)] += 4;
+scores[(kop + kepala + ekor) % 10] += 3;
+let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
 
 
-            // 2. Cari result hari berikutnya (untuk koreksi nilai fokus 2D)
+            // Cari result hari berikutnya (untuk koreksi nilai fokus 2D)
             const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
             const nextItem = entries[globalIndex + 1]; 
             
@@ -220,14 +249,13 @@ let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(N
                 status = "?";
             } else {
                 const next4d = nextItem.val;
-                const kepala = Number(next4d[2]); // Digit ke-3 (Kepala)
-                const ekor = Number(next4d[3]);   // Digit ke-4 (Ekor)
-                const isTwin = (kepala === ekor);
+                const nKepala = Number(next4d[2]);
+                const nEkor = Number(next4d[3]);
+                const isTwin = (nKepala === nEkor);
 
-                const hasKepala = predDigits.includes(kepala);
-                const hasEkor = predDigits.includes(ekor);
+                const hasKepala = predDigits.includes(nKepala);
+                const hasEkor = predDigits.includes(nEkor);
 
-                // Evaluasi hierarki fokus 2D yang tepat
                 if (isTwin && (hasKepala || hasEkor)) {
                     status = "TWIN";
                 } else if (hasKepala && hasEkor) {
@@ -241,17 +269,15 @@ let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(N
                 }
             }
 
-            // Buat elemen baris trek
+            // Buat elemen baris trek (2 bola putih prediksi)
             let rowHtml = `<div class="trek-row"><div class="trek-balls">`;
             
-            // 4 bola merah (result 4d)
             digits.forEach(d => {
                 rowHtml += `<div class="ball ball-red">${d}</div>`;
             });
 
             rowHtml += `<span class="trek-colon">:</span>`;
 
-            // 3 bola putih (prediksi)
             predDigits.forEach(d => {
                 rowHtml += `<div class="ball ball-white">${d}</div>`;
             });
@@ -265,46 +291,84 @@ let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(N
     console.error("Gagal mengambil data Sydney dari Firebase:", e);
 });
 
-// GENERATOR ANGKA SDY
+// GENERATOR ANGKA SDY (LOGIKA PATEN 2 DIGIT)
 document.getElementById("btn-generate").addEventListener("click",(function(){
-const e=document.getElementById("input-angka").value.trim();
-if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
-let t=e.split("").map(Number),a={};
-for(let e=0;e<=9;e++)a[e]=1;
-t.forEach(((e,t)=>{a[e]+=5-t}));
-[Math.abs(t[0]-t[1]),Math.abs(t[1]-t[2]),Math.abs(t[2]-t[3]),(t[0]+t[1]+t[2]+t[3])%10].forEach((e=>{a[e]+=3}));
-t.forEach((e=>{let t=(e+4)%10;a[3*e%10]+=2,a[t]+=2}));
-let n=Object.keys(a).sort(((e,t)=>a[t]-a[e])).map(Number).slice(0,6),
-o=n.join(" "),
-c=`${n[0]} & ${n[2]}`;
-document.getElementById("res-bbfs").textContent=o;
-document.getElementById("res-cb").textContent=c;
-document.getElementById("generator-result").style.display="block"
+  const e=document.getElementById("input-angka").value.trim();
+  if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
+  
+  let t=e.split("").map(Number);
+  
+  let a={};
+  for(let i=0;i<=9;i++)a[i]=2;
+  
+  let as = t[0], kop = t[1], kepala = t[2], ekor = t[3];
+  
+  a[(as + ekor) % 10] += 6;
+  a[Math.abs(kop - kepala)] += 5;
+  a[(as * 2 + ekor) % 10] += 4;
+  a[(kepala + ekor) % 10] += 3;
+
+  let sortedDigits = Object.keys(a).sort(((x,y)=>a[y]-a[x])).map(Number);
+
+  let r = sortedDigits.slice(0,2).join(" ");
+  let d = `${sortedDigits[0]}`;
+
+  document.getElementById("res-bbfs").textContent=r;
+  document.getElementById("res-cb").textContent=d;
+  document.getElementById("generator-result").style.display="block";
 }));
 
-// LOGIKA PENGUNJUNG CERDAS (1 SAMPAI 5000)
-let currentVisitors = 0;
-let hasStartedScroll = false;
+// FITUR DOWNLOAD GAMBAR KARTU PREDIKSI
+document.getElementById("btn-download").addEventListener("click", function() {
+    const cardElement = document.getElementById("capture-card");
+    
+    const originalText = this.innerHTML;
+    this.innerHTML = "<span>Sedang Memproses Gambar...</span>";
+    this.disabled = true;
+
+    html2canvas(cardElement, {
+        backgroundColor: "#163868",
+        scale: 2 // Kualitas HD
+    }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "Prediksi-Togel-Sydney-Tunggal-Paito.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+        this.innerHTML = originalText;
+        this.disabled = false;
+    }).catch(err => {
+        console.error("Gagal mendownload gambar:", err);
+        alert("Terjadi kesalahan saat mengunduh gambar.");
+        this.innerHTML = originalText;
+        this.disabled = false;
+    });
+});
+
+// LOGIKA PENGUNJUNG ONLINE ALAMI (BERUBAH SETIAP 2 - 5 MENIT)
+let currentVisitors = Math.floor(Math.random() * 151) + 150; // Angka awal saat halaman dimuat
 let updateTimer = null;
-let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-let lastScrollTime = Date.now();
 const visitorText = document.getElementById("visitor-count-text");
 
-function updateVisitorCount(isFastScroll = false) {
-    if (!hasStartedScroll) return;
+// Tampilkan angka awal pengunjung secara langsung
+visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
 
-    if (isFastScroll) {
-        let boost = Math.floor(Math.random() * 25) + 10;
-        currentVisitors += boost;
+function updateVisitorCount() {
+    // Secara acak bisa naik atau turun secara halus (1 - 8 pengunjung)
+    let isIncrease = Math.random() > 0.4;
+    let change = Math.floor(Math.random() * 8) + 1;
+
+    if (isIncrease) {
+        currentVisitors += change;
     } else {
-        let drop = Math.floor(Math.random() * 15) + 5;
-        currentVisitors -= drop;
+        currentVisitors -= change;
     }
 
+    // Batas minimal & maksimal pengunjung
     if (currentVisitors > 5000) {
         currentVisitors = 5000;
-    } else if (currentVisitors < 1) {
-        currentVisitors = 1;
+    } else if (currentVisitors < 80) {
+        currentVisitors = 80;
     }
 
     visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
@@ -313,35 +377,15 @@ function updateVisitorCount(isFastScroll = false) {
 
 function scheduleNextUpdate() {
     clearTimeout(updateTimer);
-    let randomDelay = Math.floor(Math.random() * (20000 - 5000 + 1)) + 5000;
+    // Waktu jeda acak antara 2 menit (120000ms) hingga 5 menit (300000ms)
+    let randomDelay = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
     updateTimer = setTimeout(() => {
-        updateVisitorCount(false);
+        updateVisitorCount();
     }, randomDelay);
 }
 
-window.addEventListener("scroll", function() {
-    if (!hasStartedScroll) {
-        hasStartedScroll = true;
-        currentVisitors = Math.floor(Math.random() * 151) + 150;
-        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
-        scheduleNextUpdate();
-        return;
-    }
-
-    const now = Date.now();
-    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const distance = Math.abs(currentScrollTop - lastScrollTop);
-    const timeElapsed = now - lastScrollTime;
-
-    if (timeElapsed > 150) {
-        let speed = distance / timeElapsed;
-        if (speed > 1.2) {
-            updateVisitorCount(true);
-        }
-        lastScrollTop = currentScrollTop;
-        lastScrollTime = now;
-    }
-});
+// Jalankan timer untuk perubahan berikutnya
+scheduleNextUpdate();
 
 // SKRIP IKLAN
 let clickCount=0;
@@ -355,6 +399,12 @@ document.addEventListener("click",(function(e){
     return;
   }
   if (e.target.closest('.btn-back-main')) {
+    return;
+  }
+  if (e.target.closest('#btn-download')) {
+    return;
+  }
+  if (e.target.closest('.card-website-footer')) {
     return;
   }
   clickCount++;
