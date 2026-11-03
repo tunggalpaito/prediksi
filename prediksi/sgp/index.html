@@ -4,6 +4,8 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Prediksi SGP Update Angka Setiap Hari Hanya di Tunggal Paito</title>
+<!-- Library html2canvas untuk fitur download gambar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background-color:#051c0d;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}
@@ -38,11 +40,12 @@ body{background-color:#051c0d;color:#fff;display:flex;flex-direction:column;alig
 .btn-sawer-wa{background:linear-gradient(135deg,#10b981,#059669);color:#000;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
 .btn-sawer-qr{background:linear-gradient(135deg,#0f6,#00b341);color:#000;box-shadow:0 4px 12px rgba(0,255,102,0.3)}
 
-.main-card{width:100%;max-width:420px;background-color:#002b0f;border:1px solid rgba(0,255,102,.4);border-radius:12px;padding:20px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,255,102,.2);margin-bottom:25px}
+/* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
+.main-card{width:100%;max-width:420px;background-color:#002b0f;border:1px solid rgba(0,255,102,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,255,102,.2);margin-bottom:15px}
 h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#0f6}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI SGP */
-.trek-container{display:flex;flex-direction:column;gap:10px;width:100%}
+.trek-container{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:10px}
 .trek-row{background:rgba(0,26,9,0.9);border:1px solid rgba(0,255,102,0.4);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
 .trek-balls{display:flex;align-items:center;gap:5px}
 .ball{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;box-shadow:0 2px 5px rgba(0,0,0,0.5)}
@@ -50,6 +53,23 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 .ball-white{background:linear-gradient(135deg,#f8fafc,#cbd5e1);color:#000;border:1px solid #fff}
 .trek-colon{color:#0f6;font-weight:bold;margin:0 4px}
 .trek-badge{background:#001a09;color:#0f6;border:1px solid #0f6;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:bold;text-transform:uppercase;min-width:55px;text-align:center}
+
+/* WATERMARK / LINK HALAMAN OTOMATIS TEPAT DI BAWAH KARTU */
+.card-website-footer {
+    display: block;
+    font-size: 11px;
+    color: #0f6;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 255, 102, 0.3);
+}
+
+/* WADAH TOMBOL DOWNLOAD DI LUAR KARTU */
+.action-download-container{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;margin-bottom:25px}
+.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px;font-size:14px;font-weight:700;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(34,197,94,0.3);transition:all .2s ease}
+.btn-download-img:hover{opacity:0.9;transform:translateY(-2px)}
 
 .keywords-section{width:100%;max-width:420px;background-color:rgba(0,0,0,.3);border-radius:8px;padding:15px;margin-bottom:20px;text-align:center;border:1px solid rgba(0,255,102,.1)}
 .keywords-section h3{font-size:14px;color:#0f6;margin-bottom:8px}
@@ -104,13 +124,13 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <div class=generator-card>
 <h3>GENERATOR ANGKA SGP</h3>
 <div class=guide-text>
-<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas SGP akan membedah indeks mistik, taysen, dan pola frekuensi ekor-kepala secara presisi.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
+<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas SGP akan membedah indeks mistik, taysen, dan pola 2 digit angka paten secara presisi.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
 </div>
 <input id=input-angka maxlength=4 placeholder="Contoh: 4812">
 <br>
 <button id=btn-generate>GENERATE</button>
 <div class=generator-result id=generator-result>
-<div><strong>Angka Main :</strong> <span id=res-bbfs></span></div>
+<div><strong>Angka Main (2D) :</strong> <span id=res-bbfs></span></div>
 <div><strong>Colok Bebas :</strong> <span id=res-cb></span></div>
 </div>
 </div>
@@ -134,12 +154,23 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </div>
 </div>
 
-<div class=main-card>
+<!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
+<div class="main-card" id="capture-card">
 <h1>PREDIKSI TOGEL HARI INI</h1>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI SGP -->
 <div class="trek-container" id="trek-container">
     <!-- Data 7 result terakhir akan dimuat secara dinamis di sini -->
 </div>
+<!-- LINK HALAMAN OTOMATIS DI DALAM KARTU -->
+<a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
+</div>
+
+<!-- TOMBOL DOWNLOAD GAMBAR DI LUAR KARTU -->
+<div class="action-download-container">
+<button class="btn-download-img" id="btn-download">
+<svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+<span>Download Gambar Prediksi</span>
+</button>
 </div>
 
 <div class=keywords-section>
@@ -159,12 +190,18 @@ import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
+// MENGAMBIL DAN MENAMPILKAN URL HALAMAN SECARA OTOMATIS
+const currentUrl = window.location.href;
+const linkElement = document.getElementById("dynamic-site-link");
+linkElement.href = currentUrl;
+linkElement.textContent = currentUrl;
+
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
       db=getDatabase(app),
       dbRef=ref(db);
 
-// AMBIL DATA 7 RESULT TERAKHIR DARI live/singapore & RUMUS PREDIKSI SGP
+// AMBIL DATA 7 RESULT TERAKHIR DARI live/singapore & RUMUS PATEN 2 DIGIT
 get(child(dbRef,"live/singapore")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
@@ -191,19 +228,17 @@ get(child(dbRef,"live/singapore")).then((snapshot)=>{
             if (result4d.length < 4) return;
 
             const digits = result4d.split("").map(Number);
-
-let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
+            
+           
+            let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
 let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
+scores[Math.abs(as * 2 - ekor * 2)] += 6;
+scores[Math.abs(kop * 2 - kepala * 2)] += 5;
+scores[(as * ekor + kop * kepala) % 10] += 4;
+scores[(as + kop + kepala + ekor) % 10] += 3;
+let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
 
-let totalSum = (as + kop + kepala + ekor) % 10;
-scores[kop] += 4;
-scores[ekor] += 4;
-scores[totalSum] += 4;
-scores[Math.abs(kop - ekor)] += 4;
-scores[(kop + ekor + totalSum) % 10] += 3;
-
-let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 3);
-
+            
             // Cari result hari berikutnya (untuk koreksi nilai fokus 2D)
             const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
             const nextItem = entries[globalIndex + 1]; 
@@ -235,7 +270,7 @@ let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(N
                 }
             }
 
-            // Buat elemen baris trek
+            // Buat elemen baris trek (2 bola putih prediksi)
             let rowHtml = `<div class="trek-row"><div class="trek-balls">`;
             
             // 4 bola hijau (result 4d)
@@ -245,7 +280,7 @@ let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(N
 
             rowHtml += `<span class="trek-colon">:</span>`;
 
-            // 3 bola putih (prediksi)
+            // 2 bola putih (prediksi)
             predDigits.forEach(d => {
                 rowHtml += `<div class="ball ball-white">${d}</div>`;
             });
@@ -259,7 +294,7 @@ let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(N
     console.error("Gagal mengambil data Singapore dari Firebase:", e);
 });
 
-// GENERATOR ANGKA SGP
+// GENERATOR ANGKA SGP (LOGIKA PATEN 2 DIGIT)
 document.getElementById("btn-generate").addEventListener("click",(function(){
   const e=document.getElementById("input-angka").value.trim();
   if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
@@ -268,50 +303,75 @@ document.getElementById("btn-generate").addEventListener("click",(function(){
   
   let a={};
   for(let i=0;i<=9;i++)a[i]=2;
-  a[t[2]]+=4; a[t[3]]+=5; a[t[1]]+=3; a[t[0]]+=2;
-
-  const n={0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6},
-        o={0:8,1:7,2:6,3:9,4:5,5:4,6:2,7:1,8:0,9:3},
-        c={0:5,1:4,2:3,3:2,4:1,5:0,6:9,7:8,8:7,9:6};
-
-  t.forEach((val=>{let idxO=o[val],idxC=c[val];a[n[val]]+=3;a[idxO]+=3;a[idxC]+=2}));
-  [Math.abs(t[0]-t[2]),Math.abs(t[1]-t[3]),(t[0]+t[1]+t[2]+t[3])%10,(t[2]+t[3])%10].forEach((val=>{a[val]+=4}));
+  
+  let as = t[0], kop = t[1], kepala = t[2], ekor = t[3];
+  
+  a[(as + ekor) % 10] += 6;
+  a[Math.abs(kop - kepala)] += 5;
+  a[(as * 2 + ekor) % 10] += 4;
+  a[(kepala + ekor) % 10] += 3;
 
   let sortedDigits = Object.keys(a).sort(((x,y)=>a[y]-a[x])).map(Number);
 
-  let r = sortedDigits.slice(0,6).join(" ");
-  let ekorKuat = sortedDigits[0];
-  let ekorMati = sortedDigits[sortedDigits.length - 1];
-  let d = `${ekorKuat} & ${ekorMati}`;
+  let r = sortedDigits.slice(0,2).join(" ");
+  let d = `${sortedDigits[0]}`;
 
   document.getElementById("res-bbfs").textContent=r;
   document.getElementById("res-cb").textContent=d;
   document.getElementById("generator-result").style.display="block";
 }));
 
-// LOGIKA PENGUNJUNG CERDAS (1 SAMPAI 5000)
-let currentVisitors = 0;
-let hasStartedScroll = false;
+// FITUR DOWNLOAD GAMBAR KARTU PREDIKSI
+document.getElementById("btn-download").addEventListener("click", function() {
+    const cardElement = document.getElementById("capture-card");
+    
+    const originalText = this.innerHTML;
+    this.innerHTML = "<span>Sedang Memproses Gambar...</span>";
+    this.disabled = true;
+
+    html2canvas(cardElement, {
+        backgroundColor: "#002b0f",
+        scale: 2 // Kualitas HD
+    }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "Prediksi-Togel-Singapore-Tunggal-Paito.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+        this.innerHTML = originalText;
+        this.disabled = false;
+    }).catch(err => {
+        console.error("Gagal mendownload gambar:", err);
+        alert("Terjadi kesalahan saat mengunduh gambar.");
+        this.innerHTML = originalText;
+        this.disabled = false;
+    });
+});
+
+// LOGIKA PENGUNJUNG ONLINE ALAMI (BERUBAH SETIAP 2 - 5 MENIT)
+let currentVisitors = Math.floor(Math.random() * 151) + 150; // Angka awal saat halaman dimuat
 let updateTimer = null;
-let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-let lastScrollTime = Date.now();
 const visitorText = document.getElementById("visitor-count-text");
 
-function updateVisitorCount(isFastScroll = false) {
-    if (!hasStartedScroll) return;
+// Tampilkan angka awal pengunjung secara langsung
+visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
 
-    if (isFastScroll) {
-        let boost = Math.floor(Math.random() * 25) + 10;
-        currentVisitors += boost;
+function updateVisitorCount() {
+    // Secara acak bisa naik atau turun secara halus (1 - 8 pengunjung)
+    let isIncrease = Math.random() > 0.4;
+    let change = Math.floor(Math.random() * 8) + 1;
+
+    if (isIncrease) {
+        currentVisitors += change;
     } else {
-        let drop = Math.floor(Math.random() * 15) + 5;
-        currentVisitors -= drop;
+        currentVisitors -= change;
     }
 
+    // Batas minimal & maksimal pengunjung
     if (currentVisitors > 5000) {
         currentVisitors = 5000;
-    } else if (currentVisitors < 1) {
-        currentVisitors = 1;
+    } else if (currentVisitors < 80) {
+        currentVisitors = 80;
     }
 
     visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
@@ -320,35 +380,15 @@ function updateVisitorCount(isFastScroll = false) {
 
 function scheduleNextUpdate() {
     clearTimeout(updateTimer);
-    let randomDelay = Math.floor(Math.random() * (20000 - 5000 + 1)) + 5000;
+    // Waktu jeda acak antara 2 menit (120000ms) hingga 5 menit (300000ms)
+    let randomDelay = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
     updateTimer = setTimeout(() => {
-        updateVisitorCount(false);
+        updateVisitorCount();
     }, randomDelay);
 }
 
-window.addEventListener("scroll", function() {
-    if (!hasStartedScroll) {
-        hasStartedScroll = true;
-        currentVisitors = Math.floor(Math.random() * 151) + 150;
-        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
-        scheduleNextUpdate();
-        return;
-    }
-
-    const now = Date.now();
-    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const distance = Math.abs(currentScrollTop - lastScrollTop);
-    const timeElapsed = now - lastScrollTime;
-
-    if (timeElapsed > 150) {
-        let speed = distance / timeElapsed;
-        if (speed > 1.2) {
-            updateVisitorCount(true);
-        }
-        lastScrollTop = currentScrollTop;
-        lastScrollTime = now;
-    }
-});
+// Jalankan timer untuk perubahan berikutnya
+scheduleNextUpdate();
 
 // SKRIP IKLAN
 let clickCount=0;
@@ -362,6 +402,12 @@ document.addEventListener("click",(function(e){
     return;
   }
   if (e.target.closest('.btn-back-main')) {
+    return;
+  }
+  if (e.target.closest('#btn-download')) {
+    return;
+  }
+  if (e.target.closest('.card-website-footer')) {
     return;
   }
   clickCount++;
