@@ -4,6 +4,8 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Angka Lemah Ekor SGP sore ini - Tunggal Paito</title>
+<!-- Library html2canvas untuk fitur download gambar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background-color:#050d08;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}
@@ -38,11 +40,12 @@ body{background-color:#050d08;color:#fff;display:flex;flex-direction:column;alig
 .btn-sawer-wa{background:linear-gradient(135deg,#10b981,#059669);color:#000;box-shadow:0 4px 12px rgba(16,185,129,.3)}
 .btn-sawer-qr{background:linear-gradient(135deg,#22c55e,#15803d);color:#000;box-shadow:0 4px 12px rgba(34,197,94,.3)}
 
-.main-card{width:100%;max-width:420px;background-color:#081a0e;border:1px solid rgba(34,197,94,.4);border-radius:12px;padding:20px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.4);margin-bottom:25px}
+/* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
+.main-card{width:100%;max-width:420px;background-color:#081a0e;border:1px solid rgba(34,197,94,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.4);margin-bottom:15px}
 h1{font-size:20px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#22c55e}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI */
-.trek-container{display:flex;flex-direction:column;gap:10px;width:100%}
+.trek-container{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:10px}
 .trek-row{background:rgba(5,13,8,.9);border:1px solid rgba(34,197,94,.4);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 .trek-balls{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;overflow-x:auto}
 .ball{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;box-shadow:0 2px 5px rgba(0,0,0,.5);flex-shrink:0}
@@ -50,6 +53,23 @@ h1{font-size:20px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 .ball-white{background:linear-gradient(135deg,#f8fafc,#cbd5e1);color:#000;border:1px solid #fff}
 .trek-colon{color:#22c55e;font-weight:700;margin:0 2px}
 .trek-badge{background:#050d08;color:#22c55e;border:1px solid #22c55e;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;min-width:40px;text-align:center;flex-shrink:0}
+
+/* WATERMARK / LINK HALAMAN OTOMATIS TEPAT DI BAWAH KARTU */
+.card-website-footer {
+    display: block;
+    font-size: 11px;
+    color: #22c55e;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* WADAH TOMBOL DOWNLOAD DI LUAR KARTU */
+.action-download-container{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;margin-bottom:25px}
+.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#000;border:none;padding:12px;font-size:14px;font-weight:700;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(34,197,94,0.3);transition:all .2s ease}
+.btn-download-img:hover{opacity:0.9;transform:translateY(-2px)}
 
 .keywords-section{width:100%;max-width:420px;background-color:rgba(0,0,0,.3);border-radius:8px;padding:15px;margin-bottom:20px;text-align:center;border:1px solid rgba(34,197,94,.1)}
 .keywords-section h3{font-size:14px;color:#22c55e;margin-bottom:8px}
@@ -59,7 +79,7 @@ h1{font-size:20px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </head>
 <body>
 
-<!-- TOMBOL KEMBALI KE MENU UTAMA -->
+<!-- TOMBOL KE MENU UTAMA -->
 <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
 <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
 <span>Kembali ke Menu Utama</span>
@@ -134,12 +154,23 @@ h1{font-size:20px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </div>
 </div>
 
-<div class=main-card>
+<!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
+<div class="main-card" id="capture-card">
 <h1>LEMAH EKOR SGP HARI INI</h1>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI -->
 <div class="trek-container" id="trek-container">
     <!-- Data 7 result terakhir akan dimuat secara dinamis di sini -->
 </div>
+<!-- LINK HALAMAN OTOMATIS DI DALAM KARTU -->
+<a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
+</div>
+
+<!-- TOMBOL DOWNLOAD GAMBAR DI LUAR KARTU -->
+<div class="action-download-container">
+<button class="btn-download-img" id="btn-download">
+<svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+<span>Download Gambar Prediksi</span>
+</button>
 </div>
 
 <div class=keywords-section>
@@ -158,6 +189,12 @@ import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app
 import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
+
+// MENGAMBIL DAN MENAMPILKAN URL HALAMAN SECARA OTOMATIS
+const currentUrl = window.location.href;
+const linkElement = document.getElementById("dynamic-site-link");
+linkElement.href = currentUrl;
+linkElement.textContent = currentUrl;
 
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
@@ -192,7 +229,7 @@ get(child(dbRef,"live/singapore")).then((snapshot)=>{
 
             const digits = result4d.split("").map(Number);
         
-                        let r1 = (digits[0] + digits[3] * 6 + 1) % 10;
+            let r1 = (digits[0] + digits[3] * 6 + 1) % 10;
             let r2 = (digits[1] + digits[2] * 6 + 2) % 10;
             let r3 = (digits[0] + digits[1] + digits[2] + digits[3]) % 10;
             let predDigits = [r1, r2, r3];
@@ -261,29 +298,54 @@ document.getElementById("res-cb").textContent=c;
 document.getElementById("generator-result").style.display="block"
 }));
 
-// LOGIKA PENGUNJUNG CERDAS (1 SAMPAI 5000)
-let currentVisitors = 0;
-let hasStartedScroll = false;
+// FITUR DOWNLOAD GAMBAR KARTU PREDIKSI
+document.getElementById("btn-download").addEventListener("click", function() {
+    const cardElement = document.getElementById("capture-card");
+    
+    const originalText = this.innerHTML;
+    this.innerHTML = "<span>Sedang Memproses Gambar...</span>";
+    this.disabled = true;
+
+    html2canvas(cardElement, {
+        backgroundColor: "#081a0e",
+        scale: 2 // Kualitas HD
+    }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "Angka-Lemah-Ekor-SGP-Tunggal-Paito.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+        this.innerHTML = originalText;
+        this.disabled = false;
+    }).catch(err => {
+        console.error("Gagal mendownload gambar:", err);
+        alert("Terjadi kesalahan saat mengunduh gambar.");
+        this.innerHTML = originalText;
+        this.disabled = false;
+    });
+});
+
+// LOGIKA PENGUNJUNG ONLINE ALAMI (BERUBAH SETIAP 2 - 5 MENIT)
+let currentVisitors = Math.floor(Math.random() * 151) + 150; 
 let updateTimer = null;
-let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-let lastScrollTime = Date.now();
 const visitorText = document.getElementById("visitor-count-text");
 
-function updateVisitorCount(isFastScroll = false) {
-    if (!hasStartedScroll) return;
+visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
 
-    if (isFastScroll) {
-        let boost = Math.floor(Math.random() * 25) + 10;
-        currentVisitors += boost;
+function updateVisitorCount() {
+    let isIncrease = Math.random() > 0.4;
+    let change = Math.floor(Math.random() * 8) + 1;
+
+    if (isIncrease) {
+        currentVisitors += change;
     } else {
-        let drop = Math.floor(Math.random() * 15) + 5;
-        currentVisitors -= drop;
+        currentVisitors -= change;
     }
 
     if (currentVisitors > 5000) {
         currentVisitors = 5000;
-    } else if (currentVisitors < 1) {
-        currentVisitors = 1;
+    } else if (currentVisitors < 80) {
+        currentVisitors = 80;
     }
 
     visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
@@ -292,35 +354,13 @@ function updateVisitorCount(isFastScroll = false) {
 
 function scheduleNextUpdate() {
     clearTimeout(updateTimer);
-    let randomDelay = Math.floor(Math.random() * (20000 - 5000 + 1)) + 5000;
+    let randomDelay = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
     updateTimer = setTimeout(() => {
-        updateVisitorCount(false);
+        updateVisitorCount();
     }, randomDelay);
 }
 
-window.addEventListener("scroll", function() {
-    if (!hasStartedScroll) {
-        hasStartedScroll = true;
-        currentVisitors = Math.floor(Math.random() * 151) + 150;
-        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
-        scheduleNextUpdate();
-        return;
-    }
-
-    const now = Date.now();
-    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const distance = Math.abs(currentScrollTop - lastScrollTop);
-    const timeElapsed = now - lastScrollTime;
-
-    if (timeElapsed > 150) {
-        let speed = distance / timeElapsed;
-        if (speed > 1.2) {
-            updateVisitorCount(true);
-        }
-        lastScrollTop = currentScrollTop;
-        lastScrollTime = now;
-    }
-});
+scheduleNextUpdate();
 
 // SKRIP IKLAN
 let clickCount=0;
@@ -334,6 +374,9 @@ document.addEventListener("click",(function(e){
     return;
   }
   if (e.target.closest('.btn-back-main')) {
+    return;
+  }
+  if (e.target.closest('#btn-download')) {
     return;
   }
   clickCount++;
