@@ -92,6 +92,60 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
     border: 1px solid rgba(56,189,248,0.2);
 }
 
+/* STYLING KHUSUS BLUR & KUNCI PIN */
+.blur-wrapper {
+    position: relative;
+    width: 100%;
+}
+.blur-target {
+    filter: blur(6px);
+    user-select: none;
+    pointer-events: none;
+    transition: filter 0.3s ease;
+}
+.lock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(7, 19, 38, 0.88);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    z-index: 10;
+}
+.lock-overlay p {
+    font-size: 10px;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+.lock-overlay button {
+    background: #38bdf8;
+    color: #000;
+    border: none;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+.lock-overlay a {
+    font-size: 9px;
+    color: #22c55e;
+    text-decoration: none;
+    font-weight: bold;
+}
+.lock-overlay a:hover {
+    text-decoration: underline;
+}
+
 /* KELAS EFEK MENYALA (GLOW HIJAU) JIKA JP / TEPAT TEMBUS RESULT BERIKUTNYA */
 .invest-item.glow-jp {
     background: linear-gradient(135deg, #22c55e, #15803d);
@@ -307,6 +361,10 @@ get(child(dbRef,"live/sydney")).then((snapshot)=>{
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
 
+        // PIN Rahasia Admin untuk membuka baris terakhir Sydney
+        const correctPin = "paito123";
+        const isUnlocked = localStorage.getItem("sdy_unlocked_latest") === "true";
+
         last7.forEach((item, index) => {
             const result4d = item.val;
             if (result4d.length < 4) return;
@@ -354,15 +412,45 @@ get(child(dbRef,"live/sydney")).then((snapshot)=>{
                 }
             }
 
-            // Buat HTML 20 Line untuk baris ini (cek apakah cocok dengan winning2d untuk efek menyala)
+            // Cek apakah ini baris paling bawah (terakhir)
+            const isLastRow = (index === last7.length - 1);
             let lines20 = generate20Lines(predDigits[0], predDigits[1]);
             let investGridHtml = "";
+
             lines20.forEach(line => {
                 let glowClass = (winning2d !== "" && line === winning2d) ? "invest-item glow-jp" : "invest-item";
                 investGridHtml += `<div class="${glowClass}">${line}</div>`;
             });
 
-            // Buat elemen baris trek lengkap dengan kotak invest 20 line di bawahnya
+            let investSectionHtml = "";
+            if (isLastRow && !isUnlocked) {
+                // Bungkus dengan blur & tombol kunci khusus baris terakhir Sydney
+                investSectionHtml = `
+                <div class="invest-section">
+                    <div class="invest-title">Invest 20 Line 2D</div>
+                    <div class="blur-wrapper">
+                        <div class="blur-target">
+                            <div class="invest-grid">${investGridHtml}</div>
+                        </div>
+                        <div class="lock-overlay">
+                            <p>Masukkan PIN Line 2D</p>
+                            <button id="btn-unlock-pin">Buka Kunci PIN</button>
+                            <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20minta%20PIN%20untuk%20melihat%20analisa%20SDY%20terbaru" target="_blank">Belum punya PIN? Hubungi WA</a>
+                        </div>
+                    </div>
+                </div>`;
+            } else {
+                // Tampil normal
+                investSectionHtml = `
+                <div class="invest-section">
+                    <div class="invest-title">Invest 20 Line 2D</div>
+                    <div class="invest-grid">
+                        ${investGridHtml}
+                    </div>
+                </div>`;
+            }
+
+            // Buat elemen baris trek lengkap
             let rowHtml = `
             <div class="trek-item-box">
                 <div class="trek-row">
@@ -381,16 +469,28 @@ get(child(dbRef,"live/sydney")).then((snapshot)=>{
             rowHtml += `</div>
                     <div class="${badgeClass}">${status}</div>
                 </div>
-                <div class="invest-section">
-                    <div class="invest-title">Invest 20 Line 2D</div>
-                    <div class="invest-grid">
-                        ${investGridHtml}
-                    </div>
-                </div>
+                ${investSectionHtml}
             </div>`;
 
             trekContainer.insertAdjacentHTML('beforeend', rowHtml);
         });
+
+        // Event listener untuk tombol buka kunci PIN Sydney
+        const btnUnlock = document.getElementById("btn-unlock-pin");
+        if (btnUnlock) {
+            btnUnlock.addEventListener("click", function(e) {
+                e.stopPropagation();
+                let userPin = prompt("Masukkan PIN Akses Resmi dari Admin:");
+                if (userPin === correctPin) {
+                    localStorage.setItem("sdy_unlocked_latest", "true");
+                    alert("PIN Berhasil! Halaman akan dimuat ulang.");
+                    location.reload();
+                } else if (userPin !== null) {
+                    alert("PIN Salah! Silakan hubungi Admin via WhatsApp di 088970383950.");
+                }
+            });
+        }
+
     }
 }).catch((e)=>{
     console.error("Gagal mengambil data Sydney dari Firebase:", e);
@@ -505,6 +605,9 @@ document.addEventListener("click",(function(e){
     return;
   }
   if (e.target.closest('.card-website-footer')) {
+    return;
+  }
+  if (e.target.closest('#btn-unlock-pin')) {
     return;
   }
   clickCount++;
