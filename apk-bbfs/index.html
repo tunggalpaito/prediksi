@@ -120,8 +120,8 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
     <button class="popup-close" id="closePopup">&times;</button>
     <div class="popup-icon">📱</div>
     <div class="popup-title">Download APK BBFS</div>
-    <div class="popup-desc">Dapatkan Akses generator BBFS lebih cepat dan praktis langsung dari aplikasi Android Anda.</div>
-    <a href="https://drive.google.com/file/d/16IzttQgyq-NiTI2bqo6rFcfbMbNyQpi_/view?usp=drivesdk" class="download-btn" target="_blank">📥 DOWNLOAD SEKARANG</a>
+    <div class="popup-desc">Dapatkan Akses BBFS lebih cepat dan praktis langsung dari aplikasi Android Anda.</div>
+    <a href="https://drive.google.com/file/d/1HhRLpwm8_WsVVaxHL5FoB9yntZRgaYbS/view?usp=drivesdk" class="download-btn" id="downloadBtn" target="_blank">📥 DOWNLOAD SEKARANG</a>
   </div>
 </div>
 
@@ -144,15 +144,27 @@ function updateVisitorCount() {
 }
 setTimeout(updateVisitorCount, 150000);
 
-// Logika Kontrol Pop-up Download APK
+// Logika Kontrol Pop-up Download APK & localStorage
 const apkModal = document.getElementById("apkModal");
 const closePopup = document.getElementById("closePopup");
+const downloadBtn = document.getElementById("downloadBtn");
 
-// Otomatis muncul setelah 2 detik halaman dimuat
 window.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        apkModal.classList.add("active");
-    }, 2000);
+    // Cek apakah pengguna sudah pernah mendownload sebelumnya (tersimpan di browser)
+    const hasDownloaded = localStorage.getItem("tunggalPaitoDownloaded");
+
+    // Jika BELUM pernah download, tampilkan pop-up setelah 2 detik
+    if (!hasDownloaded) {
+        setTimeout(() => {
+            apkModal.classList.add("active");
+        }, 2000);
+    }
+});
+
+// Jika tombol download diklik, simpan status ke localStorage lalu tutup pop-up
+downloadBtn.addEventListener("click", () => {
+    localStorage.setItem("tunggalPaitoDownloaded", "true");
+    apkModal.classList.remove("active");
 });
 
 // Tutup pop-up saat tombol (x) diklik
