@@ -1,310 +1,95 @@
 <!doctype html>
-<html lang="id">
+<html lang=id>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
 <title>Live Draw Tercepat SGP, HK, SDY Hari Ini Tercepat - Tunggal Paito</title>
-<meta name="description" content="Update Live Draw SGP, HK, SDY tercepat dan akurat hari ini. Saksikan pemutaran result Singapore, Hongkong, dan Sydney pools resmi dari situs Tunggal Paito.">
-<meta name="keywords" content="live draw sgp, live draw hk, live draw sdy, result sgp, result hk, result sdy, tunggal paito, live result hongkong, live result singapore, live result sydney">
-<link rel="canonical" href="https://tunggalpaito.online/live-draw">
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background-color:#f4f7f6;color:#333;line-height:1.6}
-header{background:#00f;color:#fff;padding:15px;text-align:center}
-header h1{font-size:1.5rem;margin-bottom:5px}
-.container{max-width:800px;margin:0 auto;padding:10px}
-.ads-container{display:flex;flex-direction:column;gap:10px;margin:15px 0;align-items:center}
-.ad-box{width:100%;max-width:320px;min-height:50px;background:#e2e8f0;display:flex;align-items:center;justify-content:center;border-radius:4px;overflow:hidden}
-.table-responsive{width:100%;overflow-x:auto;background:#fff;border-radius:6px;box-shadow:0 2px 4px rgba(0,0,0,.05);margin-bottom:20px;max-height:600px;overflow-y:auto}
-table{width:100%;border-collapse:collapse;text-align:center;white-space:nowrap}
-td,th{padding:12px 10px;border-bottom:1px solid #e2e8f0;font-size:14px}
-th{background-color:red;color:#1b4332;font-weight:700;text-transform:uppercase;position:sticky;top:0;z-index:10}
-tr:nth-child(2n){background-color:#f8fafc}
-tr:hover{background-color:#f1f5f9}
-.seo-section{background:#fff;padding:15px;border-radius:6px;margin-bottom:20px;font-size:13px;color:#475569;box-shadow:0 2px 4px rgba(0,0,0,.05)}
-.seo-section h3{font-size:1rem;margin-bottom:8px;color:#1e293b}
-.seo-section p{margin-bottom:8px;text-align:justify}
-footer{text-align:center;padding:15px;background:#1e293b;color:#cbd5e1;font-size:13px}
-
-/* ================= POP-UP FLOATING APK CSS ================= */
-.apk-float-popup {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    color: #fff;
-    padding: 16px 20px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 102, 255, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    max-width: 340px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: popupSlideUp 0.5s ease-out forwards;
-}
-
-@keyframes popupSlideUp {
-    from { transform: translateY(100px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.apk-icon {
-    width: 48px;
-    height: 48px;
-    background: #0066ff;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(0, 102, 255, 0.5);
-}
-
-.apk-icon svg {
-    width: 26px;
-    height: 26px;
-    fill: #fff;
-}
-
-.apk-info {
-    flex-grow: 1;
-}
-
-.apk-info h4 {
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 2px;
-}
-
-.apk-info p {
-    font-size: 11px;
-    color: #94a3b8;
-    margin-bottom: 8px;
-}
-
-.btn-download-apk {
-    display: inline-block;
-    background: linear-gradient(90deg, #ff0055, #ff5000);
-    color: #fff !important;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 6px 14px;
-    border-radius: 20px;
-    box-shadow: 0 3px 8px rgba(255, 0, 85, 0.4);
-    transition: transform 0.2s;
-}
-
-.btn-download-apk:hover {
-    transform: scale(1.05);
-}
-
-.apk-close-btn {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #ef4444;
-    color: #fff;
-    border: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-/* Tombol Melayang Kecil saat Pop-up Ditutup */
-.apk-reopen-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9998;
-    background: #0066ff;
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    padding: 10px 16px;
-    font-weight: bold;
-    font-size: 13px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    display: none;
-    align-items: center;
-    gap: 8px;
-}
-
-@media (max-width: 480px) {
-    .apk-float-popup {
-        left: 10px;
-        right: 10px;
-        bottom: 15px;
-        max-width: none;
-    }
-}
-</style>
+<meta name=description content="Update Live Draw SGP, HK, SDY tercepat dan akurat hari ini. Saksikan pemutaran result Singapore, Hongkong, dan Sydney pools resmi dari situs Tunggal Paito.">
+<meta name=keywords content="live draw sgp, live draw hk, live draw sdy, result sgp, result hk, result sdy, tunggal paito, live result hongkong, live result singapore, live result sydney">
+<link rel=canonical href=https://tunggalpaito.online/live-draw>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel=stylesheet>
+<script src=https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js></script>
+<script src=https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js></script>
+<style>:root{--bg-primary:#05050a;--bg-secondary:#0d0f18;--bg-card:rgba(13, 17, 32, 0.75);--accent-cyan:#00f2fe;--accent-purple:#9d4edd;--accent-pink:#ff2a85;--accent-gradient:linear-gradient(135deg, #00f2fe 0%, #7928ca 50%, #ff2a85 100%);--neon-glow-cyan:0 0 20px rgba(0, 242, 254, 0.4);--neon-glow-pink:0 0 20px rgba(255, 42, 133, 0.4);--text-main:#ffffff;--text-muted:#8a99ad;--border-glass:rgba(255, 255, 255, 0.08);--border-glow:rgba(0, 242, 254, 0.3)}*{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif}body{background-color:var(--bg-primary);color:var(--text-main);line-height:1.6;background-image:radial-gradient(circle at 15% 10%,rgba(157,78,221,.15) 0,transparent 45%),radial-gradient(circle at 85% 90%,rgba(0,242,254,.1) 0,transparent 45%),radial-gradient(circle at 50% 50%,rgba(255,42,133,.07) 0,transparent 60%);background-attachment:fixed;min-height:100vh;overflow-x:hidden}header{background:rgba(13,15,24,.85);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border-bottom:1px solid var(--border-glass);padding:28px 15px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 15px 35px rgba(0,0,0,.5)}header h1{font-family:Outfit,sans-serif;font-size:2rem;font-weight:900;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;filter:drop-shadow(0 0 25px rgba(0, 242, 254, .4))}.live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,242,254,.08);padding:6px 18px;border-radius:30px;border:1px solid rgba(0,242,254,.3);font-size:.82rem;color:var(--accent-cyan);font-weight:700;letter-spacing:.5px;box-shadow:var(--neon-glow-cyan)}.live-badge span{width:8px;height:8px;background-color:#00f2fe;border-radius:50%;display:inline-block;box-shadow:0 0 10px #00f2fe;animation:pulse-dot 1.5s infinite}@keyframes pulse-dot{0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(0,242,254,.8)}70%{transform:scale(1);box-shadow:0 0 0 10px rgba(0,242,254,0)}100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(0,242,254,0)}}.container{max-width:850px;margin:0 auto;padding:24px 16px}.ads-container{display:flex;flex-direction:column;gap:12px;margin:20px 0;align-items:center}.ad-box{width:100%;max-width:320px;min-height:50px;background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;border-radius:14px;overflow:hidden;border:1px solid var(--border-glass);box-shadow:0 4px 15px rgba(0,0,0,.3)}.prediction-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}.pred-card{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:18px;padding:16px;text-align:center;text-decoration:none;color:#fff;transition:all .3s cubic-bezier(.16, 1, .3, 1);box-shadow:0 10px 30px rgba(0,0,0,.4)}.pred-card:hover{transform:translateY(-4px);border-color:var(--accent-cyan);box-shadow:var(--neon-glow-cyan);background:rgba(0,242,254,.05)}.pred-card h4{font-family:Outfit,sans-serif;font-size:15px;font-weight:800;margin-bottom:4px;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.pred-card p{font-size:11px;color:var(--text-muted)}.market-filters{display:flex;justify-content:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}.filter-btn{background:rgba(255,255,255,.04);border:1px solid var(--border-glass);color:var(--text-muted);padding:8px 18px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;transition:all .3s ease}.filter-btn.active,.filter-btn:hover{background:var(--accent-gradient);color:#fff;border-color:transparent;box-shadow:var(--neon-glow-cyan);transform:translateY(-2px)}.table-responsive{width:100%;overflow-x:auto;background:var(--bg-card);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border:1px solid var(--border-glass);border-radius:24px;box-shadow:0 25px 50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1);margin-bottom:24px;max-height:520px;overflow-y:auto}table{width:100%;border-collapse:collapse;text-align:center;white-space:nowrap}td,th{padding:18px 20px;font-size:13px}th{background:rgba(10,14,26,.95);color:var(--text-main);font-family:Outfit,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border-glass)}tr{border-bottom:1px solid rgba(255,255,255,.03);transition:all .2s ease}tr:hover{background:rgba(0,242,254,.03)!important}td{color:var(--text-muted);font-weight:500}td:nth-child(n+3){font-family:Outfit,sans-serif;font-weight:800;color:#ff2a85;text-shadow:0 0 15px rgba(255,42,133,.5);letter-spacing:2.5px}td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}.seo-section{background:var(--bg-card);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);padding:26px;border-radius:24px;border:1px solid var(--border-glass);margin-bottom:24px;font-size:13px;color:var(--text-muted);box-shadow:0 20px 40px rgba(0,0,0,.4)}.seo-section h3{font-family:Outfit,sans-serif;font-size:1.25rem;margin-bottom:12px;color:var(--text-main);font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.seo-section p{margin-bottom:12px;text-align:justify;line-height:1.8}footer{text-align:center;padding:28px;background:var(--bg-secondary);color:var(--text-muted);font-size:12px;border-top:1px solid var(--border-glass)}.apk-float-popup{position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(135deg,rgba(13,17,32,.95),rgba(5,5,10,.95));backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);color:#fff;padding:16px 20px;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.8),var(--neon-glow-cyan);display:flex;align-items:center;gap:16px;max-width:320px;border:1px solid rgba(0,242,254,.4);animation:popupSlideUp .6s cubic-bezier(.16,1,.3,1) forwards}@keyframes popupSlideUp{from{transform:translateY(120px) scale(.9);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}.apk-icon{width:46px;height:46px;background:var(--accent-gradient);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 20px rgba(0,242,254,.5)}.apk-icon svg{width:24px;height:24px;fill:#fff}.apk-info{flex-grow:1}.apk-info h4{font-family:Outfit,sans-serif;font-size:14px;font-weight:800;color:#fff;margin-bottom:2px}.apk-info p{font-size:11px;color:var(--text-muted);margin-bottom:10px}.btn-download-apk{display:inline-block;background:linear-gradient(135deg,#ff2a85 0,#ff70a6 100%);color:#fff!important;text-decoration:none;font-size:11px;font-weight:800;padding:7px 16px;border-radius:30px;box-shadow:0 4px 15px rgba(255,42,133,.5);transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px}.btn-download-apk:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 6px 25px rgba(255,42,133,.8)}.apk-close-btn{position:absolute;top:-8px;right:-8px;background:#ff2a85;color:#fff;border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.5);transition:transform .2s}.apk-close-btn:hover{transform:scale(1.15);background:#e0006b}.apk-reopen-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:var(--bg-secondary);color:#fff;border:1px solid rgba(0,242,254,.4);border-radius:30px;padding:10px 18px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.6);display:none;align-items:center;gap:8px;backdrop-filter:blur(15px);transition:transform .3s}.apk-reopen-btn:hover{transform:scale(1.08);background:var(--accent-gradient);border-color:transparent}</style>
 </head>
-<body onclick="redirectToAds(event)">
+<body onclick=redirectToAds(event)>
 <header>
-<h1>TUNGGAL PAITO - LIVE DRAW TERCEPAT</h1>
-<p>Live SGP | Live HK | Live SDY Resmi Hari Ini</p>
+<h1>TUNGGAL PAITO</h1>
+<div class=live-badge>
+<span></span> Live SGP | HK | SDY Resmi Tercepat
+</div>
 </header>
-<div class="container">
-<div class="ads-container">
-<div class="ad-box">
+<div class=container>
+<div class=ads-container>
+<div class=ad-box>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-<script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
 </div>
-<div class="ad-box">
+<div class=ad-box>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-<script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
 </div>
-<div class="ad-box">
+<div class=ad-box>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-<script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
 </div>
-<div class="ad-box">
+<div class=ad-box>
 <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-<script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
 </div>
 </div>
-<div class="table-responsive">
+<div class=prediction-main-grid>
+<a href=https://tunggalpaito.online/prediksi/hk/ target=_blank class=pred-card onclick=event.stopPropagation()>
+<h4>🎯 Prediksi HK</h4>
+</a>
+<a href=https://tunggalpaito.online/prediksi/sgp/ target=_blank class=pred-card onclick=event.stopPropagation()>
+<h4>🎯 Prediksi SGP</h4>
+</a>
+<a href=https://tunggalpaito.online/prediksi/sdy/ target=_blank class=pred-card onclick=event.stopPropagation()>
+<h4>🎯 Prediksi SDY</h4>
+</a>
+</div>
+<div class=table-responsive>
 <table>
 <thead>
-<tr>
+<tr id=table-headers>
 <th>TANGGAL</th>
 <th>HARI</th>
-<th>HK</th>
-<th>SGP</th>
-<th>SDY</th>
+<th data-market=hk>HK</th>
+<th data-market=sgp>SGP</th>
+<th data-market=sdy>SDY</th>
 </tr>
 </thead>
-<tbody id="live-draw-data">
+<tbody id=live-draw-data>
 </tbody>
 </table>
 </div>
-<div class="seo-section">
+<div class=seo-section>
 <h3>Pusat Live Draw Result SGP, HK, dan SDY Tercepat</h3>
 <p>Selamat datang di situs resmi <strong>Tunggal Paito</strong>, penyedia informasi live draw dan result pasaran togel terpopuler seperti Singapore (SGP), Hongkong (HK), dan Sydney (SDY). Halaman ini dirancang khusus dengan kecepatan akses optimal agar Anda dapat memantau angka keluaran secara real-time dan akurat setiap harinya tanpa hambatan.</p>
 <p>Gunakan data paito warna dan hasil live draw kami untuk menyusun strategi angka jitu. Seluruh data result disinkronkan langsung dari server resmi masing-masing pasaran dengan pembaruan otomatis setiap hari sesuai jadwal keluaran.</p>
 </div>
 </div>
-
-<!-- ================= ELEMENT POP-UP APK ================= -->
-<div class="apk-float-popup" id="apkPopup">
-    <button class="apk-close-btn" onclick="closeApkPopup(event)">&times;</button>
-    <div class="apk-icon">
-        <svg viewBox="0 0 24 24">
-            <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
-        </svg>
-    </div>
-    <div class="apk-info">
-        <h4>APK Live Draw Resmi</h4>
-        <p>Akses Live Result SGP, HK, SDY Lebih Cepat & Ringan!</p>
-        <a href="https://drive.google.com/file/d/1bl8pFCZRRDmW49xroXyxWcr7MCFkEYLy/view?usp=drivesdk" target="_blank" class="btn-download-apk" onclick="event.stopPropagation();">DOWNLOAD APK</a>
-    </div>
+<div class=apk-float-popup id=apkPopup>
+<button class=apk-close-btn onclick=closeApkPopup(event)>&times;</button>
+<div class=apk-icon>
+<svg viewBox="0 0 24 24">
+<path d=M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z />
+</svg>
 </div>
-
-<button class="apk-reopen-btn" id="apkReopenBtn" onclick="openApkPopup(event)">
-    📱 Download APK
+<div class=apk-info>
+<h4>APK Live Draw Resmi</h4>
+<p>Akses SGP, HK, SDY Lebih Cepat!</p>
+<a href="https://drive.google.com/file/d/1bl8pFCZRRDmW49xroXyxWcr7MCFkEYLy/view?usp=drivesdk" target=_blank class=btn-download-apk onclick=event.stopPropagation()>DOWNLOAD APK</a>
+</div>
+</div>
+<button class=apk-reopen-btn id=apkReopenBtn onclick=openApkPopup(event)>
+📱 APK Resmi
 </button>
-
 <footer>
-&copy; <span id="current-year"></span> Tunggal Paito. All Rights Reserved.
+&copy; <span id=current-year></span> Tunggal Paito. All Rights Reserved.
 </footer>
-
-<script>
-function closeApkPopup(e) {
-    if(e) e.stopPropagation();
-    document.getElementById('apkPopup').style.display = 'none';
-    document.getElementById('apkReopenBtn').style.display = 'flex';
-}
-
-function openApkPopup(e) {
-    if(e) e.stopPropagation();
-    document.getElementById('apkPopup').style.display = 'flex';
-    document.getElementById('apkReopenBtn').style.display = 'none';
-}
-
-function redirectToAds(t){
-    if (t.target.closest("#apkPopup") || t.target.closest("#apkReopenBtn")) {
-        return;
-    }
-    if("A"===t.target.tagName||"IFRAME"===t.target.tagName||t.target.closest("iframe")||t.target.closest(".ad-box")) return;
-    window.open("https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec","_blank");
-}
-
-document.getElementById("current-year").textContent=(new Date).getFullYear();
-const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};
-firebase.initializeApp(firebaseConfig);
-const db=firebase.database();
-
-function extractRightmostResult(t){
-    if(!t)return"-";
-    let e=String(t).trim();
-    if(e.includes(",")){
-        let t=e.split(",");
-        e=t[t.length-1].trim()
-    }
-    let a=e.replace(/\D/g,"");
-    return a.length>0?a:"-"
-}
-
-function initLiveDraw(){
-    const t=["MINGGU","SENIN","SELASA","RABU","KAMIS","JUMAT","SABTU"],e=document.getElementById("live-draw-data");
-    let a=JSON.parse(localStorage.getItem("tunggalpaito_persistent_backup"))||{},r=[];
-    for(let e=0;e<30;e++){
-        let a=new Date;
-        a.setDate(a.getDate()-e);
-        let n=`${String(a.getDate()).padStart(2,"0")}-${String(a.getMonth()+1).padStart(2,"0")}-${a.getFullYear()}`,d=t[a.getDay()];
-        r.push({dateStr:n,dayName:d})
-    }
-    e.innerHTML="";
-    r.forEach((t=>{
-        let r=a[t.dateStr]||{hk:"-",sgp:"-",sdy:"-"},n=r.hk&&""!==r.hk?r.hk:"-",d=r.sgp&&""!==r.sgp?r.sgp:"-",s=r.sdy&&""!==r.sdy?r.sdy:"-",
-        i=`<tr>\n <td>${t.dateStr}</td>\n <td>${t.dayName}</td>\n <td id="val-hk-${t.dateStr}">${n}</td>\n <td id="val-sgp-${t.dateStr}">${d}</td>\n <td id="val-sdy-${t.dateStr}">${s}</td>\n </tr>`;
-        e.innerHTML+=i
-    }));
-    const n={hk:"hongkong",sgp:"singapore",sdy:"sydney"};
-    r.forEach((t=>{
-        ["hk","sgp","sdy"].forEach((e=>{
-            let r=n[e];
-            db.ref(`live/${r}/${t.dateStr}`).on("value",(r=>{
-                let n=r.val(),d="-";
-                if(null!=n){
-                    let t=extractRightmostResult(n);
-                    "-"!==t&&(d=t)
-                }
-                a[t.dateStr]||(a[t.dateStr]={hk:"-",sgp:"-",sdy:"-"}),
-                a[t.dateStr][e]=d,
-                localStorage.setItem("tunggalpaito_persistent_backup",JSON.stringify(a));
-                let s=document.getElementById(`val-${e}-${t.dateStr}`);
-                s&&(s.innerText=d)
-            }))
-        }))
-    }))
-}
-initLiveDraw();
-</script>
-
-<script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-    }
-</script>
+<script>function closeApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopup").style.display="none",document.getElementById("apkReopenBtn").style.display="flex"}function openApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopup").style.display="flex",document.getElementById("apkReopenBtn").style.display="none"}function redirectToAds(t){t.target.closest("#apkPopup")||t.target.closest("#apkReopenBtn")||t.target.closest(".prediksi-float-container")||t.target.closest(".market-filters")||t.target.closest(".prediction-main-grid")||"A"===t.target.tagName||"IFRAME"===t.target.tagName||t.target.closest("iframe")||t.target.closest(".ad-box")||window.open("https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec","_blank")}document.getElementById("current-year").textContent=(new Date).getFullYear();const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};firebase.initializeApp(firebaseConfig);const db=firebase.database();function extractRightmostResult(t){if(!t)return"-";let e=String(t).trim();if(e.includes(",")){let t=e.split(",");e=t[t.length-1].trim()}let a=e.replace(/\D/g,"");return a.length>0?a:"-"}function initLiveDraw(){const t=["MINGGU","SENIN","SELASA","RABU","KAMIS","JUMAT","SABTU"],e=document.getElementById("live-draw-data");let a=JSON.parse(localStorage.getItem("tunggalpaito_persistent_backup"))||{},l=[];for(let e=0;e<30;e++){let a=new Date;a.setDate(a.getDate()-e);let s=`${String(a.getDate()).padStart(2,"0")}-${String(a.getMonth()+1).padStart(2,"0")}-${a.getFullYear()}`,n=t[a.getDay()];l.push({dateStr:s,dayName:n})}e.innerHTML="",l.forEach((t=>{let l=a[t.dateStr]||{hk:"-",sgp:"-",sdy:"-"},s=l.hk&&""!==l.hk?l.hk:"-",n=l.sgp&&""!==l.sgp?l.sgp:"-",r=l.sdy&&""!==l.sdy?l.sdy:"-",o=`<tr data-date="${t.dateStr}">\n            <td>${t.dateStr}</td>\n            <td>${t.dayName}</td>\n            <td class="col-hk" id="val-hk-${t.dateStr}">${s}</td>\n            <td class="col-sgp" id="val-sgp-${t.dateStr}">${n}</td>\n            <td class="col-sdy" id="val-sdy-${t.dateStr}">${r}</td>\n        </tr>`;e.innerHTML+=o}));const s={hk:"hongkong",sgp:"singapore",sdy:"sydney"};l.forEach((t=>{["hk","sgp","sdy"].forEach((e=>{let l=s[e];db.ref(`live/${l}/${t.dateStr}`).on("value",(l=>{let s=l.val(),n="-";if(null!=s){let t=extractRightmostResult(s);"-"!==t&&(n=t)}a[t.dateStr]||(a[t.dateStr]={hk:"-",sgp:"-",sdy:"-"}),a[t.dateStr][e]=n,localStorage.setItem("tunggalpaito_persistent_backup",JSON.stringify(a));let r=document.getElementById(`val-${e}-${t.dateStr}`);r&&(r.innerText=n)}))}))}))}function filterMarket(t,e){document.querySelectorAll(".filter-btn").forEach((t=>t.classList.remove("active"))),e.target.classList.add("active");const a=document.querySelectorAll("th[data-market]");document.querySelectorAll("#live-draw-data tr").forEach((e=>{const l=e.querySelector(".col-hk"),s=e.querySelector(".col-sgp"),n=e.querySelector(".col-sdy");"all"===t?(l&&(l.style.display=""),s&&(s.style.display=""),n&&(n.style.display=""),document.querySelectorAll("th").forEach((t=>t.style.display=""))):(l&&(l.style.display="hk"===t?"":"none"),s&&(s.style.display="sgp"===t?"":"none"),n&&(n.style.display="sdy"===t?"":"none"),a.forEach((e=>{e.getAttribute("data-market")===t?e.style.display="":e.style.display="none"})))}))}initLiveDraw()</script>
+<script>document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&((!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0))))}</script>
 </body>
 </html>
