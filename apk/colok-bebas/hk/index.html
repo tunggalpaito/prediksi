@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang=id>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Prediksi Colok Bebas HK Hari Ini - Tunggal Paito</title>
+<meta name="description" content="Pusat analisa colok bebas Hongkong pools hari ini paling akurat. Dapatkan bocoran angka jitu colok bebas HK gratis tanpa jamu dari Tunggal Paito.">
+<!-- Library html2canvas untuk fitur download gambar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}
+
+/* TOMBOL KEMBALI KE MENU UTAMA */
+.btn-back-main{width:100%;max-width:420px;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(7,19,38,0.8);color:#38bdf8;text-decoration:none;font-weight:700;font-size:13px;padding:10px 15px;border-radius:8px;border:1px solid #38bdf8;margin-bottom:15px;transition:all .2s ease;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
+.btn-back-main:hover{background:#38bdf8;color:#000;transform:translateY(-2px)}
+
+.ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
+.ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
+
+/* KARTU STATUS PENGUNJUNG ONLINE DINAMIS */
+.visitor-card{width:100%;max-width:420px;background:rgba(7,19,38,0.8);border:1px solid #38bdf8;border-radius:8px;padding:10px 15px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(56,189,248,.15)}
+.visitor-card .visitor-info{font-size:12px;color:#cbd5e1;display:flex;align-items:center;gap:6px}
+.visitor-card .online-dot{width:8px;height:8px;background-color:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e;animation:blink 1.5s infinite}
+.visitor-card .visitor-count{font-size:14px;font-weight:bold;color:#38bdf8;transition:all 0.5s ease}
+@keyframes blink{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+
+/* Styling Khusus Kartu Saweran & Titip Pasang 3D AMOLED */
+.sawer-card{width:100%;max-width:420px;background:linear-gradient(135deg,#050b14,#10213d);border:1px solid rgba(245,158,11,0.5);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center;box-shadow:0 6px 20px rgba(245,158,11,0.25)}
+.sawer-card h3{font-size:15px;color:#f59e0b;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.sawer-card p{font-size:11px;color:#cbd5e1;margin-bottom:14px;line-height:1.4}
+.sawer-btn-group{display:flex;gap:10px;justify-content:center}
+.sawer-btn{flex:1;padding:10px 12px;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s ease}
+.btn-sawer-wa{background:linear-gradient(135deg,#10b981,#059669);color:#000;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
+.btn-sawer-qr{background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;box-shadow:0 4px 12px rgba(245,158,11,0.3)}
+
+/* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
+.main-card{width:100%;max-width:420px;background-color:#163868;border:1px solid rgba(56,189,248,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2);margin-bottom:15px}
+h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#38bdf8}
+
+/* WADAH TREK TABEL RESULT & PREDIKSI */
+.trek-container{display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:10px}
+.trek-row{background:rgba(7,19,38,0.9);border:1px solid rgba(56,189,248,0.4);border-radius:8px;padding:6px 12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
+.trek-balls{display:flex;align-items:center;gap:5px}
+.ball{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;box-shadow:0 2px 5px rgba(0,0,0,0.5)}
+.ball-red{background:linear-gradient(135deg,#ef4444,#991b1b);color:#fff;border:1px solid #f87171}
+.ball-white{background:linear-gradient(135deg,#f8fafc,#cbd5e1);color:#000;border:1px solid #fff}
+.trek-colon{color:#38bdf8;font-weight:bold;margin:0 4px}
+
+/* DESAIN BADGE KUSTOM (BUKAN STIKER/EMOJI) */
+.trek-badge{width:36px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold}
+.badge-pending{background:#071326;color:#38bdf8;border:1px solid #38bdf8;}
+.badge-true {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: 1px solid #34d399;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+    position: relative;
+}
+/* Ikon Centang CSS Kustom yang Tajam dan Elegan */
+.badge-true::after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+
+.badge-false {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    color: #fff;
+    border: 1px solid #f87171;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    position: relative;
+}
+/* Ikon Silang CSS Kustom yang Presisi */
+.badge-false::after {
+    content: "✕";
+    font-size: 13px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+}
+
+/* STYLING KHUSUS BLUR & KUNCI PIN UNTUK 1 DIGIT TERBARU */
+.blur-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.blur-target {
+    filter: blur(6px);
+    user-select: none;
+    pointer-events: none;
+    transition: filter 0.3s ease;
+}
+.lock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(7, 19, 38, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    padding: 2px;
+    text-align: center;
+    z-index: 10;
+}
+.lock-overlay button {
+    background: #38bdf8;
+    color: #000;
+    border: none;
+    padding: 2px 6px;
+    font-size: 9px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* WATERMARK / LINK HALAMAN OTOMATIS TEPAT DI BAWAH KARTU */
+.card-website-footer {
+    display: block;
+    font-size: 11px;
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* WADAH TOMBOL DOWNLOAD DI LUAR KARTU */
+.action-download-container{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;margin-bottom:25px}
+.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px;font-size:14px;font-weight:700;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(34,197,94,0.3);transition:all .2s ease}
+.btn-download-img:hover{opacity:0.9;transform:translateY(-2px)}
+
+.keywords-section{width:100%;max-width:420px;background-color:rgba(7,19,38,.5);border-radius:8px;padding:15px;margin-bottom:20px;text-align:center;border:1px solid rgba(56,189,248,.1)}
+.keywords-section h3{font-size:14px;color:#38bdf8;margin-bottom:8px}
+.keywords-section p{font-size:11px;color:#e0e0e0;line-height:1.5}
+.footer{margin-top:auto;padding:10px 0;color:#38bdf8;font-size:13px;font-weight:700;text-align:center}
+</style>
+</head>
+<body>
+
+<!-- TOMBOL KEMBALI KE MENU UTAMA -->
+<a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
+<svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+<span>Kembali ke Menu Utama</span>
+</a>
+
+<div class=ads-container>
+<div class=ad-box>
+<div style=width:100%;text-align:center;overflow:hidden>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+<div class=ad-box>
+<div style=width:100%;text-align:center;overflow:hidden>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+<div class=ad-box>
+<div style=width:100%;text-align:center;overflow:hidden>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+<div class=ad-box>
+<div style=width:100%;text-align:center;overflow:hidden>
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+</div>
+</div>
+</div>
+
+<!-- KARTU STATUS PENGUNJUNG ONLINE -->
+<div class="visitor-card">
+<div class="visitor-info">
+<div class="online-dot"></div>
+<span>Pengunjung Online :</span>
+</div>
+<div class="visitor-count" id="visitor-count-text"></div>
+</div>
+
+<!-- KARTU SISTEM SAWERAN & TITIP PASANG -->
+<div class=sawer-card>
+<h3>🎉 Salam HOKI Satu HATI</h3>
+<p>
+"Posisi kami berada di pihak pemain, kami tidak promosi agen bo apapun, kami hanya fokus untuk memberikan racikan angka jitu Prediksi Tunggal Paito 100% Gratis & Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit uang seikhlasnya untuk mendukung operasional admin."
+</p>
+<div class=sawer-btn-group>
+<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20Titip%20Pasang%20Angka%20Colok%20Bebas%20HK%20hari%20ini" target=_blank class="sawer-btn btn-sawer-wa">
+<svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+<span>Titip Pasang (Jastip)</span>
+</a>
+
+<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20angka%20Colok%20Bebas%20HK%20saya%20tembus%20JP%20hari%20ini,%20mau%20kirim%20sawer%20mahar%20sukarela" target=_blank id="btn-sawer-bebas" class="sawer-btn btn-sawer-qr">
+<svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+<span>Sawer</span>
+</a>
+</div>
+</div>
+
+<!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
+<div class="main-card" id="capture-card">
+<h1>PREDIKSI COLOK BEBAS HK</h1>
+<!-- WADAH TREK TABEL RESULT & PREDIKSI (12x RESULT) -->
+<div class="trek-container" id="trek-container">
+    <!-- Data 12 result terakhir akan dimuat secara dinamis di sini -->
+</div>
+<!-- LINK HALAMAN OTOMATIS DI DALAM KARTU -->
+<a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
+</div>
+
+<!-- TOMBOL DOWNLOAD GAMBAR DI LUAR KARTU -->
+<div class="action-download-container">
+<button class="btn-download-img" id="btn-download">
+<svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+<span>Download Gambar Prediksi</span>
+</button>
+</div>
+
+<div class=keywords-section>
+<h3>PREDIKSI COLOK BEBAS HK TUNGGAL PAITO</h3>
+<p>
+Prediksi Colok Bebas Hongkong, Bocoran Colok Bebas HK Jitu, Angka Tunggal HK Akurat, Paito Colok Bebas Hongkong, Keluaran HK Tercepat, Live Draw Hongkong, Data HK Pools, Rumus Colok Bebas Hongkong Hari Ini.
+</p>
+</div>
+
+<div class=footer>
+&copy; <span id=auto-year></span> TUNGGAL PAITO All Rights Reserved.
+</div>
+
+<script type=module>
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+document.getElementById("auto-year").textContent=(new Date).getFullYear();
+
+// MENGAMBIL DAN MENAMPILKAN URL HALAMAN SECARA OTOMATIS
+const currentUrl = window.location.href;
+const linkElement = document.getElementById("dynamic-site-link");
+linkElement.href = currentUrl;
+linkElement.textContent = currentUrl;
+
+const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
+      app=initializeApp(firebaseConfig),
+      db=getDatabase(app),
+      dbRef=ref(db);
+
+// AMBIL DATA 12 RESULT TERAKHIR DARI live/hongkong & RUMUS PATEN 1 DIGIT (COLOK BEBAS)
+get(child(dbRef,"live/hongkong")).then((snapshot)=>{
+    if(snapshot.exists() && snapshot.val()){
+        const data = snapshot.val();
+        const entries = Object.keys(data).map(dateStr => {
+            const parts = dateStr.split('-');
+            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
+            return {
+                dateStr,
+                val: String(data[dateStr]).trim(),
+                dateObj
+            };
+        });
+
+        // Urutkan secara kronologis berdasarkan tanggal
+        entries.sort((a, b) => a.dateObj - b.dateObj);
+
+        // Ambil 12 data terakhir
+        const last12 = entries.slice(-9);
+        const trekContainer = document.getElementById("trek-container");
+        trekContainer.innerHTML = "";
+
+        const correctPin = "paito123";
+        const isUnlocked = localStorage.getItem("hk_cb_unlocked_latest") === "true";
+
+        last12.forEach((item, index) => {
+            const result4d = item.val;
+            if (result4d.length < 4) return;
+
+            const digits = result4d.split("").map(Number);
+
+            
+            let scores5 = {}; for(let i=0; i<=9; i++) scores5[i]=1;
+            let as5 = digits[0], kop5 = digits[1], kepala5 = digits[2], ekor5 = digits[3];
+            scores5[((as5 + kepala5) * 4 + (kop5 + ekor5) * 3 + 3) % 10] += 32;
+            scores5[Math.abs(as5 * ekor5 * 3 - kop5 * kepala5 * 3) % 10] += 16;
+            scores5[(as5 * 3 + ekor5 * 3) % 10] += 13;
+            scores5[(kop5 * 2 + kepala5 * 2) % 10] += 9;
+            let predDigit = Number(Object.keys(scores5).sort((x, y) => scores5[y] - scores5[x])[0]);
+
+            
+            // Cari result hari berikutnya (untuk koreksi nilai centang / silang)
+            const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
+            const nextItem = entries[globalIndex + 1]; 
+            
+            let status = "?";
+            let badgeClass = "badge-pending";
+            if (index === last12.length - 1 || !nextItem) {
+                status = "";
+                badgeClass = "badge-pending";
+            } else {
+                const next4d = nextItem.val;
+                const nextDigits = next4d.split("").map(Number);
+                const isMatched = nextDigits.includes(predDigit);
+                
+                status = "";
+                badgeClass = isMatched ? "badge-true" : "badge-false";
+            }
+
+            // Cek apakah ini baris paling bawah (terbaru)
+            const isLastRow = (index === last12.length - 1);
+            let ballHtml = "";
+
+            if (isLastRow && !isUnlocked) {
+                ballHtml = `
+                <div class="blur-wrapper">
+                    <div class="blur-target">
+                        <div class="ball ball-white">${predDigit}</div>
+                    </div>
+                    <div class="lock-overlay" id="lock-overlay-latest">
+                        <button id="btn-unlock-pin">🔒 PIN</button>
+                    </div>
+                </div>`;
+            } else {
+                ballHtml = `<div class="ball ball-white">${predDigit}</div>`;
+            }
+
+            // Buat elemen baris trek
+            let rowHtml = `<div class="trek-row"><div class="trek-balls">`;
+            
+            digits.forEach(d => {
+                rowHtml += `<div class="ball ball-red">${d}</div>`;
+            });
+
+            rowHtml += `<span class="trek-colon">:</span>`;
+            rowHtml += ballHtml;
+
+            rowHtml += `</div><div class="trek-badge ${badgeClass}">${status}</div></div>`;
+
+            trekContainer.insertAdjacentHTML('beforeend', rowHtml);
+        });
+
+        // Event listener untuk tombol buka kunci PIN
+        const btnUnlock = document.getElementById("btn-unlock-pin");
+        if (btnUnlock) {
+            btnUnlock.addEventListener("click", function(e) {
+                e.stopPropagation();
+                let userPin = prompt("Masukkan PIN Akses Resmi dari Admin:");
+                if (userPin === correctPin) {
+                    localStorage.setItem("hk_cb_unlocked_latest", "true");
+                    alert("PIN Berhasil! Halaman akan dimuat ulang.");
+                    location.reload();
+                } else if (userPin !== null) {
+                    alert("PIN Salah! Silakan hubungi Admin via WhatsApp di 088970383950.");
+                }
+            });
+        }
+    }
+}).catch((e)=>{
+    console.error("Gagal mengambil data Hongkong dari Firebase:", e);
+});
+
+// FITUR DOWNLOAD GAMBAR KARTU PREDIKSI
+document.getElementById("btn-download").addEventListener("click", function() {
+    const cardElement = document.getElementById("capture-card");
+    
+    // Buka blur sementara untuk tangkapan layar jika terkunci
+    const blurTarget = cardElement.querySelector(".blur-target");
+    const lockOverlay = cardElement.querySelector(".lock-overlay");
+    if (blurTarget) blurTarget.style.filter = "none";
+    if (lockOverlay) lockOverlay.style.display = "none";
+
+    const originalText = this.innerHTML;
+    this.innerHTML = "<span>Sedang Memproses Gambar...</span>";
+    this.disabled = true;
+
+    html2canvas(cardElement, {
+        backgroundColor: "#163868",
+        scale: 2 // Kualitas HD
+    }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "Prediksi-Colok-Bebas-Hongkong-Tunggal-Paito.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+        this.innerHTML = originalText;
+        this.disabled = false;
+
+        if (blurTarget) blurTarget.style.filter = "";
+        if (lockOverlay) lockOverlay.style.display = "";
+    }).catch(err => {
+        console.error("Gagal mendownload gambar:", err);
+        alert("Terjadi kesalahan saat mengunduh gambar.");
+        this.innerHTML = originalText;
+        this.disabled = false;
+
+        if (blurTarget) blurTarget.style.filter = "";
+        if (lockOverlay) lockOverlay.style.display = "";
+    });
+});
+
+// LOGIKA PENGUNJUNG ONLINE ALAMI (BERUBAH SETIAP 2 - 5 MENIT)
+let currentVisitors = Math.floor(Math.random() * 151) + 150;
+let updateTimer = null;
+const visitorText = document.getElementById("visitor-count-text");
+
+visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
+
+function updateVisitorCount() {
+    let isIncrease = Math.random() > 0.4;
+    let change = Math.floor(Math.random() * 8) + 1;
+
+    if (isIncrease) {
+        currentVisitors += change;
+    } else {
+        currentVisitors -= change;
+    }
+
+    if (currentVisitors > 5000) {
+        currentVisitors = 5000;
+    } else if (currentVisitors < 80) {
+        currentVisitors = 80;
+    }
+
+    visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
+    scheduleNextUpdate();
+}
+
+function scheduleNextUpdate() {
+    clearTimeout(updateTimer);
+    let randomDelay = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
+    updateTimer = setTimeout(() => {
+        updateVisitorCount();
+    }, randomDelay);
+}
+
+scheduleNextUpdate();
+
+// SKRIP IKLAN
+let clickCount=0;
+const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
+document.addEventListener("click",(function(e){
+  const btnSawer = document.getElementById("btn-sawer-bebas");
+  if (btnSawer && (e.target === btnSawer || btnSawer.contains(e.target))) {
+    return;
+  }
+  if (e.target.closest('a[href*="wa.me"]')) {
+    return;
+  }
+  if (e.target.closest('.btn-back-main')) {
+    return;
+  }
+  if (e.target.closest('#btn-download')) {
+    return;
+  }
+  if (e.target.closest('.card-website-footer')) {
+    return;
+  }
+  if (e.target.closest('#btn-unlock-pin')) {
+    return;
+  }
+  clickCount++;
+  if (1 === clickCount || (clickCount - 1) % 3 === 0) {
+    window.open(adLink, "_blank");
+  }
+}), !0);
+
+document.addEventListener("contextmenu",(e=>e.preventDefault()));
+document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}
+</script>
+</body>
+</html>
