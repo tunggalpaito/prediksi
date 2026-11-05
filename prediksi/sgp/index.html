@@ -3,24 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Prediksi SGP Update Setiap Hari - Tunggal Paito</title>
+<title>Prediksi SGP Update Angka Setiap Hari Hanya di Tunggal Paito</title>
 <!-- Google Fonts & Font Awesome Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<!-- Library html2canvas -->
+<!-- Library html2canvas untuk fitur download gambar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root {
-  --bg-main: #0d0b14;
-  --card-bg: rgba(22, 19, 34, 0.75);
-  --accent-gold: #ffe600;
-  --accent-glow: rgba(255, 230, 0, 0.35);
-  --accent-red: #ff3366;
-  --accent-green: #00ff88;
+  --bg-main: #051c0d;
+  --card-bg: rgba(0, 26, 9, 0.85);
+  --accent-green: #00ff66;
+  --accent-glow: rgba(0, 255, 102, 0.35);
+  --accent-light: #22c55e;
   --text-main: #f1f5f9;
   --text-sub: #94a3b8;
-  --border-card: rgba(255, 230, 0, 0.25);
+  --border-card: rgba(0, 255, 102, 0.3);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -28,8 +27,8 @@
 body {
   background: var(--bg-main);
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(255, 230, 0, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 51, 102, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 50% 0%, rgba(0, 255, 102, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.05) 0%, transparent 40%);
   color: var(--text-main);
   display: flex;
   flex-direction: column;
@@ -39,7 +38,7 @@ body {
   cursor: pointer;
 }
 
-/* TOMBOL KEMBALI */
+/* TOMBOL KEMBALI KE MENU UTAMA */
 .btn-back-main {
   width: 100%;
   max-width: 420px;
@@ -48,7 +47,7 @@ body {
   justify-content: center;
   gap: 8px;
   background: rgba(255, 255, 255, 0.04);
-  color: var(--accent-gold);
+  color: var(--accent-green);
   text-decoration: none;
   font-weight: 700;
   font-size: 13px;
@@ -60,13 +59,12 @@ body {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn-back-main:hover {
-  background: var(--accent-gold);
+  background: var(--accent-green);
   color: #000;
   box-shadow: 0 0 15px var(--accent-glow);
   transform: translateY(-2px);
 }
 
-/* ADS CONTAINER */
 .ads-container {
   width: 100%;
   max-width: 420px;
@@ -102,7 +100,7 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* VISITOR CARD */
+/* KARTU STATUS PENGUNJUNG ONLINE DINAMIS */
 .visitor-card {
   display: flex;
   align-items: center;
@@ -120,15 +118,15 @@ body {
 .online-dot {
   width: 9px;
   height: 9px;
-  background-color: var(--accent-green);
+  background-color: var(--accent-light);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-green);
+  box-shadow: 0 0 10px var(--accent-light);
   animation: blink 1.5s infinite;
 }
 .visitor-count {
   font-size: 15px;
   font-weight: 800;
-  color: var(--accent-gold);
+  color: var(--accent-green);
   letter-spacing: 0.5px;
 }
 @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
@@ -138,7 +136,7 @@ body {
 .generator-card h3 {
   font-size: 16px;
   font-weight: 800;
-  color: var(--accent-gold);
+  color: var(--accent-green);
   letter-spacing: 1px;
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -169,9 +167,9 @@ body {
   letter-spacing: 2px;
   transition: border-color 0.2s;
 }
-.generator-card input:focus { border-color: var(--accent-gold); box-shadow: 0 0 10px var(--accent-glow); }
+.generator-card input:focus { border-color: var(--accent-green); box-shadow: 0 0 10px var(--accent-glow); }
 .generator-card button {
-  background: linear-gradient(135deg, var(--accent-gold), #ffd000);
+  background: linear-gradient(135deg, var(--accent-green), #00b341);
   color: #000;
   border: none;
   padding: 10px 24px;
@@ -191,15 +189,15 @@ body {
 }
 .generator-result div {
   margin-bottom: 8px;
-  background: rgba(255, 230, 0, 0.08);
+  background: rgba(0, 255, 102, 0.08);
   padding: 10px 12px;
   border-radius: 8px;
-  border-left: 3px solid var(--accent-gold);
+  border-left: 3px solid var(--accent-green);
 }
 
-/* SAWER CARD */
+/* Styling Khusus Kartu Saweran & Titip Pasang */
 .sawer-card { text-align: center; }
-.sawer-card h3 { font-size: 16px; font-weight: 800; color: var(--accent-gold); margin-bottom: 8px; letter-spacing: 0.5px; }
+.sawer-card h3 { font-size: 16px; font-weight: 800; color: #f59e0b; margin-bottom: 8px; letter-spacing: 0.5px; }
 .sawer-card p { font-size: 12px; color: var(--text-sub); margin-bottom: 16px; line-height: 1.5; }
 .sawer-btn-group { display: flex; gap: 10px; justify-content: center; }
 .sawer-btn {
@@ -217,24 +215,24 @@ body {
 }
 .btn-sawer-wa { background: rgba(0, 255, 136, 0.15); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.4); }
 .btn-sawer-wa:hover { background: #00ff88; color: #000; box-shadow: 0 0 15px rgba(0, 255, 136, 0.4); }
-.btn-sawer-qr { background: rgba(255, 230, 0, 0.15); color: var(--accent-gold); border: 1px solid var(--border-card); }
-.btn-sawer-qr:hover { background: var(--accent-gold); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
+.btn-sawer-qr { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); }
+.btn-sawer-qr:hover { background: #f59e0b; color: #000; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
 
-/* MAIN PREDICTION CARD (CANVAS DOWNLOAD) */
+/* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
 .main-card {
   width: 100%;
   max-width: 420px;
-  background: linear-gradient(180deg, #181227 0%, #0d0a17 100%);
-  border: 1.5px solid var(--accent-gold);
+  background: linear-gradient(180deg, #022b0f 0%, #001708 100%);
+  border: 1.5px solid var(--accent-green);
   border-radius: 16px;
   padding: 20px 15px 15px 15px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 230, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 255, 102, 0.15);
   margin-bottom: 15px;
 }
-h1 { font-size: 20px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px; color: var(--accent-gold); text-shadow: 0 0 10px var(--accent-glow); }
+h1 { font-size: 20px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px; color: var(--accent-green); text-shadow: 0 0 10px var(--accent-glow); }
 
-/* TREK CONTAINER & ROW */
+/* WADAH TREK TABEL RESULT & PREDIKSI SGP */
 .trek-container { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-bottom: 12px; }
 .trek-row {
   background: rgba(255, 255, 255, 0.03);
@@ -246,8 +244,6 @@ h1 { font-size: 20px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
   justify-content: space-between;
 }
 .trek-balls { display: flex; align-items: center; gap: 6px; }
-
-/* BALLS DESIGN */
 .ball {
   width: 28px;
   height: 28px;
@@ -258,23 +254,20 @@ h1 { font-size: 20px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
   font-weight: 800;
   font-size: 13px;
 }
-.ball-red {
-  background: linear-gradient(135deg, #ff3366, #990026);
+.ball-green {
+  background: linear-gradient(135deg, #10b981, #047857);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(255, 51, 102, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 .ball-white {
   background: linear-gradient(135deg, #ffffff, #cbd5e1);
   color: #000;
-  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
   border: 1px solid #fff;
 }
-
-.trek-colon { color: var(--accent-gold); font-weight: bold; margin: 0 2px; }
+.trek-colon { color: var(--accent-green); font-weight: bold; margin: 0 2px; }
 .trek-badge {
-  background: rgba(255, 230, 0, 0.1);
-  color: var(--accent-gold);
+  background: rgba(0, 255, 102, 0.1);
+  color: var(--accent-green);
   border: 1px solid var(--border-card);
   padding: 4px 8px;
   border-radius: 6px;
@@ -285,24 +278,24 @@ h1 { font-size: 20px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
   text-align: center;
 }
 
-/* WEBSITE FOOTER INSIDE CARD */
+/* WATERMARK / LINK HALAMAN OTOMATIS TEPAT DI BAWAH KARTU */
 .card-website-footer {
   display: block;
   font-size: 11px;
-  color: var(--accent-gold);
+  color: var(--accent-green);
   text-decoration: none;
   font-weight: 700;
   letter-spacing: 0.5px;
   padding-top: 10px;
-  border-top: 1px dashed rgba(255, 230, 0, 0.2);
+  border-top: 1px dashed rgba(0, 255, 102, 0.2);
 }
 
-/* DOWNLOAD BUTTON CONTAINER */
+/* WADAH TOMBOL DOWNLOAD DI LUAR KARTU */
 .action-download-container { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; }
 .btn-download-img {
   width: 100%;
-  background: linear-gradient(135deg, #00ff88, #00b359);
-  color: #000;
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  color: #fff;
   border: none;
   padding: 14px;
   font-size: 14px;
@@ -313,7 +306,7 @@ h1 { font-size: 20px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
   transition: all 0.2s ease;
 }
 .btn-download-img:hover { opacity: 0.95; transform: translateY(-2px); }
@@ -328,113 +321,117 @@ h1 { font-size: 20px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
-.keywords-section h3 { font-size: 13px; color: var(--accent-gold); margin-bottom: 6px; font-weight: 700; }
+.keywords-section h3 { font-size: 13px; color: var(--accent-green); margin-bottom: 6px; font-weight: 700; }
 .keywords-section p { font-size: 11px; color: var(--text-sub); line-height: 1.6; }
 
-.footer { margin-top: auto; padding: 10px 0; color: var(--accent-gold); font-size: 12px; font-weight: 700; text-align: center; }
+.footer { margin-top: auto; padding: 10px 0; color: var(--accent-green); font-size: 12px; font-weight: 700; text-align: center; }
 </style>
 </head>
 <body>
 
 <!-- TOMBOL KEMBALI KE MENU UTAMA -->
 <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
-  <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-  <span>Kembali ke Menu Utama</span>
+<svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+<span>Kembali ke Menu Utama</span>
 </a>
 
 <div class="ads-container">
-  <div class="ad-box">
-    <div style="width:100%;text-align:center;overflow:hidden">
-      <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-      <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-    </div>
-  </div>
-  <div class="ad-box">
-    <div style="width:100%;text-align:center;overflow:hidden">
-      <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-      <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-    </div>
-  </div>
-  <div class="ad-box">
-    <div style="width:100%;text-align:center;overflow:hidden">
-      <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-      <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-    </div>
-  </div>
-  <div class="ad-box">
-    <div style="width:100%;text-align:center;overflow:hidden">
-      <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-      <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-    </div>
-  </div>
+<div class="ad-box">
+<div style="width:100%;text-align:center;overflow:hidden">
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+</div>
+</div>
+<div class="ad-box">
+<div style="width:100%;text-align:center;overflow:hidden">
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+</div>
+</div>
+<div class="ad-box">
+<div style="width:100%;text-align:center;overflow:hidden">
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+</div>
+</div>
+<div class="ad-box">
+<div style="width:100%;text-align:center;overflow:hidden">
+<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+<script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+</div>
+</div>
 </div>
 
 <!-- KARTU STATUS PENGUNJUNG ONLINE -->
 <div class="glass-card visitor-card">
-  <div class="visitor-info">
-    <div class="online-dot"></div>
-    <span>Pengunjung Online :</span>
-  </div>
-  <div class="visitor-count" id="visitor-count-text">0</div>
+<div class="visitor-info">
+<div class="online-dot"></div>
+<span>Pengunjung Online :</span>
+</div>
+<div class="visitor-count" id="visitor-count-text">0</div>
 </div>
 
-<!-- GENERATOR CARD -->
 <div class="glass-card generator-card">
-  <h3>GENERATOR ANGKA SGP</h3>
-  <div class="guide-text">
-    <strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas SGP akan membedah indeks mistik, taysen, dan pola angka paten secara presisi.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
-  </div>
-  <input id="input-angka" maxlength="4" placeholder="Contoh: 9267">
-  <br>
-  <button id="btn-generate">GENERATE</button>
-  <div class="generator-result" id="generator-result">
-    <div><strong>Angka Main :</strong> <span id="res-bbfs"></span></div>
-    <div><strong>Colok Bebas :</strong> <span id="res-cb"></span></div>
-  </div>
+<h3>GENERATOR ANGKA SGP</h3>
+<div class="guide-text">
+<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas SGP akan membedah indeks mistik, taysen, dan pola angka paten secara presisi.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
+</div>
+<input id="input-angka" maxlength="4" placeholder="Contoh: 4812">
+<br>
+<button id="btn-generate">GENERATE</button>
+<div class="generator-result" id="generator-result">
+<div><strong>Angka Main :</strong> <span id="res-bbfs"></span></div>
+<div><strong>Colok Bebas :</strong> <span id="res-cb"></span></div>
+</div>
 </div>
 
 <!-- KARTU SISTEM SAWERAN & TITIP PASANG -->
 <div class="glass-card sawer-card">
-  <h3>🎉 Salam HOKI Satu HATI</h3>
-  <p>
-    "Posisi kami berada di pihak pemain, kami tidak promosi agen bo apapun, kami hanya fokus untuk memberikan racikan angka jitu Prediksi Tunggal Paito 100% Gratis & Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit uang seikhlasnya untuk mendukung operasional admin."
-  </p>
-  <div class="sawer-btn-group">
-    <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20Titip%20Pasang%20Angka%20SGP%20hari%20ini" target="_blank" class="sawer-btn btn-sawer-wa">
-      <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-      <span>Titip Pasang</span>
-    </a>
-    <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20angka%20SGP%20saya%20tembus%20JP%20hari%20ini,%20mau%20kirim%20sawer%20mahar%20sukarela" target="_blank" id="btn-sawer-bebas" class="sawer-btn btn-sawer-qr">
-      <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      <span>Sawer</span>
-    </a>
-  </div>
+<h3>🎉 Salam HOKI Satu HATI</h3>
+<p>
+"Posisi kami berada di pihak pemain, kami tidak promosi agen bo apapun, kami hanya fokus untuk memberikan racikan angka jitu Prediksi Tunggal Paito 100% Gratis & Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit uang seikhlasnya untuk mendukung operasional admin."
+</p>
+<div class="sawer-btn-group">
+<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20Titip%20Pasang%20Angka%20SGP%20hari%20ini" target="_blank" class="sawer-btn btn-sawer-wa">
+<svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+<span>Titip Pasang (Jastip)</span>
+</a>
+
+<a href="https://wa.me/6288970383950?text=Halo%20Admin,%20angka%20SGP%20saya%20tembus%20JP%20hari%20ini,%20mau%20kirim%20sawer%20mahar%20sukarela" target="_blank" id="btn-sawer-bebas" class="sawer-btn btn-sawer-qr">
+<svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+<span>Sawer</span>
+</a>
+</div>
 </div>
 
-<!-- KARTU UTAMA PREDIKSI -->
+<!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
 <div class="main-card" id="capture-card">
-  <h1>PREDIKSI SGP HARI INI</h1>
-  <div class="trek-container" id="trek-container"></div>
-  <a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
+<h1>PREDIKSI SGP HARI INI</h1>
+<!-- WADAH TREK TABEL RESULT & PREDIKSI SGP -->
+<div class="trek-container" id="trek-container">
+    <!-- Data 7 result terakhir akan dimuat secara dinamis di sini -->
+</div>
+<!-- LINK HALAMAN OTOMATIS DI DALAM KARTU -->
+<a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
 </div>
 
-<!-- TOMBOL DOWNLOAD -->
+<!-- TOMBOL DOWNLOAD GAMBAR DI LUAR KARTU -->
 <div class="action-download-container">
-  <button class="btn-download-img" id="btn-download">
-    <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-    <span>Download Gambar Prediksi</span>
-  </button>
+<button class="btn-download-img" id="btn-download">
+<svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+<span>Download Gambar Prediksi</span>
+</button>
 </div>
 
 <div class="keywords-section">
-  <h3>PREDIKSI TUNGGAL PAITO SINGAPORE</h3>
-  <p>
-    Prediksi SGP Hari Ini, Bocoran Togel Singapore Jitu, Angka Main SGP Akurat, Paito Warna SGP, Tunggal Paito Singapore, Keluaran SGP Tercepat, Live Draw SGP Pools, Data SGP Pools, Angka Jitu 2D 3D 4D Sgp, Rumus Jitu SGP Hari Ini, Prediksi Jitu Togel Singapore Pools.
-  </p>
+<h3>PREDIKSI TUNGGAL PAITO SINGAPORE</h3>
+<p>
+Prediksi SGP Hari Ini, Bocoran Togel Singapore Jitu, Angka Main SGP Akurat, Paito Warna SGP, Tunggal Paito Singapore, Keluaran SGP Tercepat, Live Draw Singapore, Data SGP Pools, Angka Jitu 2D 3D 4D, Rumus Jitu SGP, Prediksi Jitu Togel Singapore Hari Ini.
+</p>
 </div>
 
 <div class="footer">
-  &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
+&copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
 </div>
 
 <script type="module">
@@ -477,16 +474,14 @@ get(child(dbRef,"live/singapore")).then((snapshot)=>{
             if (result4d.length < 4) return;
 
             const digits = result4d.split("").map(Number);
-
-            // RUMUS ASLI SGP
+            
+            // RUMUS ASLI SGP YANG ANDA KIRIMKAN
             let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
-
-            scores[(as + kepala) % 10] += 6;
-            scores[(kop * ekor) % 10] += 5;
-            scores[Math.abs(as - kop)] += 4;
-            scores[(kepala + ekor) % 10] += 3;
-
+            scores[Math.abs(as * 2 - ekor * 2)] += 6;
+            scores[Math.abs(kop * 2 - kepala * 2)] += 5;
+            scores[(as * ekor + kop * kepala) % 10] += 4;
+            scores[(as + kop + kepala + ekor) % 10] += 3;
             let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
 
             const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
@@ -499,12 +494,12 @@ get(child(dbRef,"live/singapore")).then((snapshot)=>{
                 status = "?";
             } else {
                 const next4d = nextItem.val;
-                const nKepala = Number(next4d[2]);
-                const nEkor = Number(next4d[3]);
-                const isTwin = (nKepala === nEkor);
+                const nextKepala = Number(next4d[2]);
+                const nextEkor = Number(next4d[3]);
+                const isTwin = (nextKepala === nextEkor);
 
-                const hasKepala = predDigits.includes(nKepala);
-                const hasEkor = predDigits.includes(nEkor);
+                const hasKepala = predDigits.includes(nextKepala);
+                const hasEkor = predDigits.includes(nextEkor);
 
                 if (isTwin && (hasKepala || hasEkor)) {
                     status = "TWIN";
@@ -520,17 +515,13 @@ get(child(dbRef,"live/singapore")).then((snapshot)=>{
             }
 
             let rowHtml = `<div class="trek-row"><div class="trek-balls">`;
-            
             digits.forEach(d => {
-                rowHtml += `<div class="ball ball-red">${d}</div>`;
+                rowHtml += `<div class="ball ball-green">${d}</div>`;
             });
-
             rowHtml += `<span class="trek-colon">:</span>`;
-
             predDigits.forEach(d => {
                 rowHtml += `<div class="ball ball-white">${d}</div>`;
             });
-
             rowHtml += `</div><div class="${badgeClass}">${status}</div></div>`;
 
             trekContainer.insertAdjacentHTML('beforeend', rowHtml);
@@ -540,20 +531,21 @@ get(child(dbRef,"live/singapore")).then((snapshot)=>{
     console.error("Gagal mengambil data Singapore dari Firebase:", e);
 });
 
-// GENERATOR ANGKA SGP (6 DIGIT & 2 DIGIT COLOK BEBAS)
+// GENERATOR ANGKA SGP (6 DIGIT ANGKA MAIN & 2 DIGIT COLOK BEBAS)
 document.getElementById("btn-generate").addEventListener("click",(function(){
   const e=document.getElementById("input-angka").value.trim();
   if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
   
   let t=e.split("").map(Number);
-  let a={}; for(let i=0;i<=9;i++)a[i]=2;
+  let a={}; for(let i=0;i<=9;i++)a[i]=1;
   let as = t[0], kop = t[1], kepala = t[2], ekor = t[3];
-  
-  a[(as + kepala) % 10] += 6;
-  a[(kop * ekor) % 10] += 5;
-  a[Math.abs(as - kop)] += 4;
-  a[(kepala + ekor) % 10] += 3;
-  a[(as + kop + kepala + ekor) % 10] += 3;
+
+  // RUMUS GENERATOR SGP SESUAI KIRIMAN ANDA
+  a[Math.abs(as * 2 - ekor * 2)] += 7;
+  a[Math.abs(kop * 2 - kepala * 2)] += 6;
+  a[(as * ekor + kop * kepala) % 10] += 5;
+  a[(as + kop + kepala + ekor) % 10] += 4;
+  a[(as + ekor) % 10] += 3;
 
   let sortedDigits = Object.keys(a).sort(((x,y)=>a[y]-a[x])).map(Number);
   let main6 = sortedDigits.slice(0, 6).join(" ");
@@ -571,7 +563,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
     this.disabled = true;
 
     html2canvas(cardElement, {
-        backgroundColor: "#181227",
+        backgroundColor: "#022b0f",
         scale: 2
     }).then(canvas => {
         const link = document.createElement("a");
