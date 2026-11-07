@@ -34,19 +34,6 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 
 /* FOOTER COPYRIGHT TUNGGAL PAITO */
 .footer{margin-top:auto;padding:15px 0;color:#ffe600;font-size:12px;font-weight:700;text-align:center;letter-spacing:.5px}
-
-/* STYLE POP-UP DOWNLOAD APK */
-.popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);display:flex;justify-content:center;align-items:center;z-index:9999;opacity:0;visibility:hidden;transition:all 0.3s ease;backdrop-filter:blur(3px)}
-.popup-overlay.active{opacity:1;visibility:visible}
-.popup-box{background:#161322;border:2px solid #ffe600;border-radius:16px;width:90%;max-width:380px;padding:24px 20px;text-align:center;position:relative;box-shadow:0 0 25px rgba(255,230,0,0.4);transform:scale(0.8);transition:transform 0.3s ease}
-.popup-overlay.active .popup-box{transform:scale(1)}
-.popup-close{position:absolute;top:10px;right:14px;background:none;border:none;color:#94a3b8;font-size:22px;font-weight:bold;cursor:pointer;transition:color 0.2s}
-.popup-close:hover{color:#fff}
-.popup-icon{font-size:42px;margin-bottom:10px}
-.popup-title{font-size:18px;font-weight:bold;color:#ffe600;margin-bottom:8px}
-.popup-desc{font-size:13px;color:#cbd5e1;margin-bottom:20px;line-height:1.4}
-.download-btn{display:inline-block;width:100%;background:linear-gradient(135deg,#00ff88,#16a34a);color:#000;text-decoration:none;padding:14px 0;border-radius:10px;font-weight:bold;font-size:15px;box-shadow:0 4px 15px rgba(0,255,136,0.4);transition:all 0.25s ease}
-.download-btn:hover{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,255,136,0.6)}
 </style>
 </head>
 <body>
@@ -117,20 +104,9 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 </div>
 </div>
 
-<!-- FOOTER COPYRIGHT TUNGGAL PAITO OTOMATIS -->
+<!-- FOOTER OPYRIGHT TUNGGAL PAITO OTOMATIS -->
 <div class="footer">
 &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
-</div>
-
-<!-- POP-UP MODAL DOWNLOAD APK -->
-<div class="popup-overlay" id="apkModal">
-  <div class="popup-box">
-    <button class="popup-close" id="closePopup">&times;</button>
-    <div class="popup-icon">🎯</div>
-    <div class="popup-title">Download APK Master Pembunuh Angka</div>
-    <div class="popup-desc">Dapatkan akses Nama Master Pembunuh Angka 2D lebih cepat dan praktis</div>
-    <a href="your_link" class="download-btn" id="downloadBtn" target="_blank">📥 DOWNLOAD SEKARANG</a>
-  </div>
 </div>
 
 <script>
@@ -151,41 +127,6 @@ function updateVisitorCount() {
     setTimeout(updateVisitorCount, Math.floor(Math.random() * 180000) + 120000);
 }
 setTimeout(updateVisitorCount, 150000);
-
-// Logika Kontrol Pop-up Download APK & localStorage
-const apkModal = document.getElementById("apkModal");
-const closePopup = document.getElementById("closePopup");
-const downloadBtn = document.getElementById("downloadBtn");
-
-window.addEventListener("DOMContentLoaded", () => {
-    // Cek apakah pengguna sudah pernah mendownload sebelumnya (tersimpan di browser)
-    const hasDownloaded = localStorage.getItem("tunggalPaitoPembunuhAngkaDownloaded");
-
-    // Jika BELUM pernah download, tampilkan pop-up setelah 2 detik
-    if (!hasDownloaded) {
-        setTimeout(() => {
-            apkModal.classList.add("active");
-        }, 2000);
-    }
-});
-
-// Jika tombol download diklik, simpan status ke localStorage lalu tutup pop-up
-downloadBtn.addEventListener("click", () => {
-    localStorage.setItem("tunggalPaitoPembunuhAngkaDownloaded", "true");
-    apkModal.classList.remove("active");
-});
-
-// Tutup pop-up saat tombol (x) diklik
-closePopup.addEventListener("click", () => {
-    apkModal.classList.remove("active");
-});
-
-// Tutup pop-up jika pengguna mengklik area luar modal
-apkModal.addEventListener("click", (e) => {
-    if (e.target === apkModal) {
-        apkModal.classList.remove("active");
-    }
-});
 </script>
 </body>
 </html>
