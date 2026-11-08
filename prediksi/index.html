@@ -15,11 +15,11 @@ body{font-family:Inter,sans-serif;background-color:#030712;background-image:radi
 .recommendation-card:hover{border-color:rgba(245,158,11,.7);transform:translateY(-2px);box-shadow:0 15px 30px -5px rgba(0,0,0,.4),0 0 20px rgba(245,158,11,.15)}
 .bottom-ad-container{width:100%;display:flex;justify-content:center;align-items:center;background:rgba(15,23,42,.5);border:1px solid rgba(51,65,85,.8);border-radius:.75rem;padding:.5rem;margin-bottom:12px;box-shadow:0 1px 2px 0 rgba(0,0,0,.05)}
 
-/* DIPERKEECIL: POP-UP IKLAN */
+/* POP-UP IKLAN DIPERKECIL */
 #ads-popup{position:fixed;bottom:20px;right:12px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 10px 15px rgba(0, 0, 0, .85));transition:transform .1s ease}
 #ads-popup:active{cursor:grabbing}
 
-/* DIPERKECIL: NOTIFIKASI PEMBELI APK */
+/* NOTIFIKASI PEMBELI APK DIPERKECIL */
 #buyer-notification{position:fixed;bottom:20px;left:12px;z-index:9998;max-width:220px;transform:translateY(100px);opacity:0;transition:all .5s cubic-bezier(.68, -.55, .27, 1.55);pointer-events:none}
 #buyer-notification.show{transform:translateY(0);opacity:1}
 
@@ -86,7 +86,7 @@ body.modal-open{overflow:hidden}
 </div>
 </div>
 
-<!-- NOTIFIKASI PEMBELI (DIPERKECIL) -->
+<!-- NOTIFIKASI PEMBELI -->
 <div id=buyer-notification>
 <div class="bg-slate-900/95 border border-emerald-500/50 rounded-xl p-2 shadow-[0_0_15px_rgba(16,185,129,0.25)] backdrop-blur-xl flex items-center space-x-2">
 <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
@@ -102,7 +102,7 @@ body.modal-open{overflow:hidden}
 </div>
 </div>
 
-<!-- POP-UP IKLAN BANNER (DIPERKECIL LEBAR & PADDINGSNYA) -->
+<!-- POP-UP IKLAN BANNER -->
 <div id=ads-popup>
 <div class="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black border border-amber-500/40 rounded-xl p-2 w-32 shadow-[0_0_15px_rgba(245,158,11,0.2)] backdrop-blur-xl">
 <button onclick='document.getElementById("ads-popup").style.display="none"' class="absolute -top-1.5 -right-1.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-4 h-4 rounded-full flex items-center justify-center text-[9px] border border-slate-700 transition-colors shadow">
@@ -650,7 +650,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!flyingPopup) return;
 
     function movePopupRandomly() {
-        The maxX = window.innerWidth - flyingPopup.offsetWidth - 20;
+        const maxX = window.innerWidth - flyingPopup.offsetWidth - 20;
         const maxY = window.innerHeight - flyingPopup.offsetHeight - 20;
         
         const randomX = Math.max(10, Math.floor(Math.random() * maxX));
