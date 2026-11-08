@@ -372,12 +372,12 @@ get(child(dbRef,"live/sydney")).then((snapshot)=>{
             const digits = result4d.split("").map(Number);
 
             let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
-            let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
-            scores[(as * ekor + kop) % 10] += 6;
-            scores[(kop * kepala + as) % 10] += 5;
-            scores[Math.abs(as * 2 - ekor)] += 4;
-            scores[(kop + kepala + ekor) % 10] += 3;
-            let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
+let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
+scores[(as * 2 + ekor * 5) % 10] += 8;
+scores[(kop * kepala + as) % 10] += 6;
+scores[Math.abs(kop * 3 - kepala) % 10] += 5;
+scores[(kepala + ekor) % 10] += 4;
+let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
 
             // Cari result hari berikutnya (untuk koreksi nilai fokus 2D & efek menyala)
             const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
