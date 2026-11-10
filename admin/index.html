@@ -299,7 +299,7 @@ function autoUpdateAndSendFotoOtomatis(){
   }))
 }
 
-// FUNGSI URL GENERATE YANG SUDAH DIPERBAIKI (DITAMBAHIKAN GARIS MIRING SEBELUM INDEX.HTML)
+// FUNGSI SAVE MASTER DATA DENGAN PENAMBAHAN OTOMATIS TEKS "MASTER" SEBELUM NAMA
 function saveMasterData(){
   const pasaran = document.getElementById("inputPasaranMaster").value.trim(); // sdy / sgp / hk
   const rawName = document.getElementById("inputNamaMaster").value.trim();
@@ -311,16 +311,19 @@ function saveMasterData(){
     return;
   }
 
-  // Format Nama Master menjadi huruf kecil dan spasi diganti strip (-)
-  const formattedNameSlug = rawName.toLowerCase().replace(/\s+/g, "-");
+  // Jika user mengetik "Abdi", secara otomatis diubah menjadi "MASTER ABDI"
+  const upperRaw = rawName.toUpperCase();
+  const displayName = upperRaw.startsWith("MASTER") ? upperRaw : "MASTER " + upperRaw;
+
+  // Format Nama Master untuk slug/URL (misal: "MASTER ABDI" -> "master-abdi")
+  const formattedNameSlug = displayName.toLowerCase().replace(/\s+/g, "-");
   
   // URL Otomatis dengan format: .../master-{nama}/index.html
-  const autoUrl = `https://tunggalpaito.online/apk/master-pembunuh-angka/${pasaran}/master-${formattedNameSlug}/index.html`;
-  const displayName = rawName.toUpperCase();
+  const autoUrl = `https://tunggalpaito.online/apk/master-pembunuh-angka/${pasaran}/${formattedNameSlug}/index.html`;
   const defaultBadge = "LIVE";
 
   statusEl.style.color = "#38bdf8";
-  statusEl.innerText = `Menyimpan master ${displayName} (${pasaran.toUpperCase()}) ke Firebase...`;
+  statusEl.innerText = `Menyimpan ${displayName} (${pasaran.toUpperCase()}) ke Firebase...`;
 
   database.ref(`live/masters/${pasaran}`).push({
     name: displayName,
@@ -329,7 +332,7 @@ function saveMasterData(){
     timestamp: Date.now()
   }).then(()=>{
     statusEl.style.color = "#34d399";
-    statusEl.innerText = `Sukses! Master ${displayName} berhasil disimpan.`;
+    statusEl.innerText = `Sukses! ${displayName} berhasil disimpan.`;
     document.getElementById("inputNamaMaster").value = "";
   }).catch((e)=>{
     statusEl.style.color = "#f87171";
