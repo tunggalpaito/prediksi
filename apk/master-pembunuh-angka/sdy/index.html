@@ -13,6 +13,14 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 .ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
 .ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
 
+/* KOTAK INFORMASI APRESIASI */
+.info-apresiasi{width:100%;max-width:420px;background:linear-gradient(135deg,rgba(20,20,35,0.95),rgba(40,25,60,0.95));border:1px solid #00ff88;border-radius:12px;padding:16px 18px;margin-bottom:20px;text-align:center;box-shadow:0 0 20px rgba(0,255,136,0.15)}
+.info-apresiasi .badge-support{font-size:10px;background:linear-gradient(135deg,#00ff88,#00b8ff);color:#030712;padding:3px 10px;border-radius:20px;font-weight:800;text-transform:uppercase;letter-spacing:1px;display:inline-block;margin-bottom:8px}
+.info-apresiasi p{font-size:12px;color:#cbd5e1;line-height:1.5;margin-bottom:12px}
+.info-apresiasi p strong{color:#ffe600}
+.info-apresiasi .dana-box{background:rgba(0,0,0,0.6);border:1px dashed #00ff88;border-radius:8px;padding:10px 14px;font-size:14px;font-weight:bold;color:#00ff88;letter-spacing:1px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all 0.2s ease}
+.info-apresiasi .dana-box:hover{background:rgba(0,255,136,0.1);transform:scale(1.02)}
+
 /* KARTU STATUS PENGUNJUNG ONLINE */
 .visitor-card{width:100%;max-width:420px;background:rgba(15,23,42,0.9);border:1px solid #ffe600;border-radius:10px;padding:12px 18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 15px rgba(0,0,0,0.5)}
 .visitor-card .visitor-info{font-size:12px;color:#cbd5e1;display:flex;align-items:center;gap:8px}
@@ -30,15 +38,48 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 .market-btn{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1f1a3a,#2e2557);color:#fff;text-decoration:none;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,230,0,0.4);font-weight:bold;font-size:15px;transition:all .25s ease;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
 .market-btn:hover{background:linear-gradient(135deg,#2e2557,#42357a);border-color:#ffe600;transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,230,0,0.25)}
 .market-btn span{display:flex;align-items:center;gap:10px}
-.badge-live{font-size:10px;background:#00ff88;color:#000;padding:3px 8px;border-radius:20px;font-weight:700;text-transform:uppercase;box-shadow:0 0 8px #00ff88}
+
+/* STYLES BADGE LIVE & OFFLINE (DIAMETER/LEBAR DISAMAKAN RATA & TEKS DI TENGAH) */
+.badge-live, .badge-offline{
+    font-size:10px;
+    padding:4px 0;
+    width:76px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border-radius:20px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+.badge-live{
+    background:#00ff88;
+    color:#000;
+    box-shadow:0 0 8px #00ff88;
+}
+.badge-offline{
+    background:#ff334b;
+    color:#fff;
+    box-shadow:0 0 8px #ff334b;
+}
+
+/* TOMBOL KETIKA OFFLINE */
+.market-btn.disabled{background:#1a1a24;border-color:rgba(255,255,255,0.1);color:#71717a;cursor:not-allowed;opacity:0.75}
+.market-btn.disabled:hover{transform:none;box-shadow:none;border-color:rgba(255,255,255,0.1)}
+
+/* LOADING STATE */
+.loading-text{font-size:13px;color:#94a3b8;font-style:italic;padding:10px}
 
 /* FOOTER COPYRIGHT TUNGGAL PAITO */
 .footer{margin-top:auto;padding:15px 0;color:#ffe600;font-size:12px;font-weight:700;text-align:center;letter-spacing:.5px}
 </style>
+
+<!-- Firebase App & Realtime Database SDK (v8) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
 <body>
 
-<!-- KOTAK IKLAN BANNER (4 BUAH) -->
 <div class="ads-container">
 <div class="ad-box">
 <div style="width:100%;text-align:center;overflow:hidden">
@@ -66,7 +107,15 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 </div>
 </div>
 
-<!-- KARTU STATUS PENGUNJUNG ONLINE -->
+<div class="info-apresiasi">
+<div class="badge-support">✨ INFO PENYALUR </div>
+<p>Jika angka dari <strong>Master Pembunuh</strong> sangat membantu, tolong sisihkan sedikit saldo sebagai apresiasi terhadap mereka agar selalu live/aktif</p>
+<div class="dana-box" onclick="navigator.clipboard.writeText('082152036787'); alert('Nomor DANA PENYALUR + WA berhasil disalin!');">
+<span>E-WALLET DANA : 082152036787</span>
+<span style="font-size:11px; background:rgba(0,255,136,0.2); padding:2px 6px; border-radius:4px;">Salin</span>
+</div>
+</div>
+
 <div class="visitor-card">
 <div class="visitor-info">
 <div class="online-dot"></div>
@@ -75,48 +124,155 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 <div class="visitor-count" id="visitor-count-text">348</div>
 </div>
 
-<!-- KARTU UTAMA MENU PASARAN MASTER SDY -->
 <div class="menu-card">
 <h1>MASTER PEMBUNUH ANGKA SDY</h1>
-<p>Pilih nama master pembunuh angka Sydney di bawah ini:</p>
+<p>Pilih nama master pembunuh angka Sydney di bawah ini :</p>
 
-<div class="market-list">
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-abdi/" class="market-btn">
-        <span>👑 MASTER ABDI</span>
-        <span class="badge-live">SDY</span>
-    </a>
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-toni/" class="market-btn">
-        <span>👑 MASTER TONI</span>
-        <span class="badge-live">SDY</span>
-    </a>
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-lela/" class="market-btn">
-        <span>👑 MASTER LELA</span>
-        <span class="badge-live">SDY</span>
-    </a>
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-evi/" class="market-btn">
-        <span>👑 MASTER EVI</span>
-        <span class="badge-live">SDY</span>
-    </a>
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-haikal/" class="market-btn">
-        <span>👑 MASTER HAIKAL</span>
-        <span class="badge-live">SDY</span>
-    </a>
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-ayu/" class="market-btn">
-        <span>👑 MASTER AYU</span>
-        <span class="badge-live">SDY</span>
-    </a>
+<div class="market-list" id="market-list-container">
+    <div class="loading-text">MENGHUBUNGKAN NAMA MASTER...</div>
 </div>
 </div>
 
-<!-- FOOTER COPYRIGHT TUNGGAL PAITO OTOMATIS -->
 <div class="footer">
 &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
 </div>
 
 <script>
+// Konfigurasi Firebase Realtime Database
+const firebaseConfig = {
+    apiKey: "AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",
+    authDomain: "komentar-web-f9e2e.firebaseapp.com",
+    databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "komentar-web-f9e2e",
+    storageBucket: "komentar-web-f9e2e.firebasestorage.app",
+    messagingSenderId: "126095632925",
+    appId: "1:126095632925:web:77383efdc2daea2e7034f4"
+};
+
+firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// Fungsi untuk mendapatkan waktu saat ini berdasarkan zona waktu Jakarta (WIB)
+function getJakartaDate() {
+    const now = new Date();
+    const jakartaStr = now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
+    return new Date(jakartaStr);
+}
+
+// Menentukan jam mulai acak antara 23:00 (1380 menit) hingga sebelum 12:00 siang hari berikutnya (719 menit)
+function getMasterStartTime(masterId) {
+    const nowJkt = getJakartaDate();
+    let year = nowJkt.getFullYear();
+    let month = String(nowJkt.getMonth() + 1).padStart(2, '0');
+    let day = String(nowJkt.getDate()).padStart(2, '0');
+    
+    const currentHour = nowJkt.getHours();
+    if (currentHour < 12) {
+        const yesterday = new Date(nowJkt.getTime() - (24 * 60 * 60 * 1000));
+        year = yesterday.getFullYear();
+        month = String(yesterday.getMonth() + 1).padStart(2, '0');
+        day = String(yesterday.getDate()).padStart(2, '0');
+    }
+
+    const storageKey = `sdy_start_time_${masterId}_${year}-${month}-${day}`;
+    let showMinute = localStorage.getItem(storageKey);
+
+    if (!showMinute) {
+        const randChoice = Math.floor(Math.random() * (1440 - 720)); 
+        if (randChoice < 60) {
+            showMinute = 1380 + randChoice;
+        } else {
+            showMinute = randChoice - 60;
+        }
+        localStorage.setItem(storageKey, showMinute);
+    } else {
+        showMinute = parseInt(showMinute, 10);
+    }
+    return showMinute;
+}
+
+// Memuat data Master SDY dari Firebase
+function loadMastersSdy() {
+    const container = document.getElementById("market-list-container");
+    const nowJkt = getJakartaDate();
+    const currentHour = nowJkt.getHours();
+    const currentMinute = nowJkt.getMinutes();
+
+    database.ref("live/masters/sdy").once("value").then((snapshot) => {
+        container.innerHTML = "";
+
+        if (!snapshot.exists()) {
+            container.innerHTML = `<div class="loading-text">BELUM ADA DATA MASTER PEMBUNUH ANGKA</div>`;
+            return;
+        }
+
+        const data = snapshot.val();
+
+        Object.keys(data).forEach((key) => {
+            const master = data[key];
+            const startMinute = getMasterStartTime(key);
+            
+            const a = document.createElement("a");
+            a.className = "market-btn";
+
+            let isOffline = false;
+            let timeMatches = false;
+            
+            if (currentHour >= 13 && (currentHour > 13 || currentMinute >= 50) && currentHour < 23) {
+                isOffline = true;
+            } else {
+                if (startMinute >= 1380) {
+                    if (currentHour >= 23 || currentHour < 12) {
+                        if (currentHour >= 23) {
+                            let mToday = currentHour * 60 + currentMinute;
+                            if (mToday >= startMinute) timeMatches = true;
+                        } else {
+                            timeMatches = true; 
+                        }
+                    }
+                } else {
+                    if (currentHour < 12) {
+                        let mToday = currentHour * 60 + currentMinute;
+                        if (mToday >= startMinute) timeMatches = true;
+                    }
+                }
+
+                if (!timeMatches) {
+                    isOffline = true;
+                } else {
+                    isOffline = false;
+                }
+            }
+
+            if (isOffline) {
+                a.className = "market-btn disabled";
+                a.removeAttribute("href");
+                a.style.pointerEvents = "none";
+                a.innerHTML = `<span>👑 ${master.name}</span><span class="badge-offline">OFFLINE</span>`;
+            } else {
+                a.href = master.url;
+                a.className = "market-btn";
+                a.style.pointerEvents = "auto";
+                a.innerHTML = `<span>👑 ${master.name}</span><span class="badge-live">${master.badge || "LIVE"}</span>`;
+            }
+            
+            container.appendChild(a);
+        });
+
+    }).catch((error) => {
+        console.error("Gagal memuat data master: ", error);
+        container.innerHTML = `<div class="loading-text" style="color:#ef4444;">GAGAL MEMUAT DATA MASTER PEMBUNUH ANGKA</div>`;
+    });
+}
+
+loadMastersSdy();
+
+setInterval(loadMastersSdy, 30000);
+</script>
+
+<script>
 document.getElementById("auto-year").textContent = new Date().getFullYear();
 
-// Logika Pengunjung Online Dinamis
 let currentVisitors = Math.floor(Math.random() * 151) + 200;
 const visitorText = document.getElementById("visitor-count-text");
 visitorText.textContent = currentVisitors.toLocaleString("id-ID");
