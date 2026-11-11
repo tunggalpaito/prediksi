@@ -159,7 +159,7 @@ function getJakartaDate() {
     return new Date(jakartaStr);
 }
 
-// Fungsi untuk menentukan slot giliran acak tiap master mulai pukul 13:51 sampai 13:00 keesokan harinya
+// Fungsi untuk menentukan jadwal kumulatif dengan urutan acak unik setiap hari
 function getMasterSdyScheduleSlot(masterKeys, currentKey) {
     const nowJkt = getJakartaDate();
     let year = nowJkt.getFullYear();
@@ -176,14 +176,21 @@ function getMasterSdyScheduleSlot(masterKeys, currentKey) {
         day = String(yesterday.getDate()).padStart(2, '0');
     }
 
-    const storageKey = `sdy_schedule_order_from_1351_${year}-${month}-${day}`;
+    const storageKey = `sdy_schedule_order_unique_shuffle_${year}-${month}-${day}`;
     let shuffledKeys = JSON.parse(localStorage.getItem(storageKey));
 
-    // Jika urutan acak hari ini belum ada, buat acak sekali sehari secara unik
+    // Jika urutan acak hari ini belum ada, buat acak menggunakan fungsi berbasis tanggal agar konsisten tapi unik tiap hari
     if (!shuffledKeys) {
         shuffledKeys = [...masterKeys];
+        
+        let seed = parseInt(year + month + day, 10);
+        function pseudoRandom() {
+            seed = (seed * 9301 + 49297) % 233280;
+            return seed / 233280;
+        }
+
         for (let i = shuffledKeys.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
+            const j = Math.floor(pseudoRandom() * (i + 1));
             [shuffledKeys[i], shuffledKeys[j]] = [shuffledKeys[j], shuffledKeys[i]];
         }
         localStorage.setItem(storageKey, JSON.stringify(shuffledKeys));
@@ -194,23 +201,23 @@ function getMasterSdyScheduleSlot(masterKeys, currentKey) {
 
     if (masterIndex === -1 || totalMasters === 0) return { start: 831, end: 780 };
 
-    // Sesi acak estafet dimulai jam 13:51 (menit ke-831) sampai pukul 13:00 (menit ke-780) keesokan harinya.
-    // Durasi total sesi acak = dari 13:51 siang s.d 13:00 siang berikutnya (23 jam 9 menit atau 1389 menit).
+    // Sesi kumulatif dimulai pukul 13:51 (menit ke-831) sampai pukul 13:00 (menit ke-780) besoknya
     const cycleStartMinute = 831; // Pukul 13:51
     const totalCycleMinutes = 1389; 
-    const durationPerMaster = Math.floor(totalCycleMinutes / totalMasters);
+    
+    const intervalPerMaster = Math.floor(totalCycleMinutes / totalMasters);
 
-    let startMinFromMidnight = (cycleStartMinute + (masterIndex * durationPerMaster)) % 1440;
-    let endMinFromMidnight = (startMinFromMidnight + durationPerMaster) % 1440;
+    let startMinFromMidnight = (cycleStartMinute + (masterIndex * intervalPerMaster)) % 1440;
+    let endMinFromMidnight = 780; 
 
     return { 
         start: startMinFromMidnight, 
         end: endMinFromMidnight, 
-        isCrossMidnight: startMinFromMidnight > endMinFromMidnight 
+        isCrossMidnight: true 
     };
 }
 
-// Memuat data Master SDY dari Firebase dengan sistem bergiliran & online serentak
+// Memuat data Master SDY dari Firebase dengan sistem kumulatif & online serentak
 function loadMastersSdy() {
     const container = document.getElementById("market-list-container");
     const nowJkt = getJakartaDate();
@@ -250,15 +257,11 @@ function loadMastersSdy() {
                 // Jam 13:00 s.d 13:30 -> SEMUA ONLINE SERENTAK
                 isOffline = false;
             } else {
-                // Sesi acak bergiliran estafet (13:51 siang sampai 13:00 siang berikutnya)
-                if (schedule.isCrossMidnight) {
-                    if (currentTotalMinutes >= schedule.start || currentTotalMinutes < schedule.end) {
-                        isOffline = false;
-                    }
+                // Sesi kumulatif: Mulai aktif sesuai jadwal urutannya, dan semuanya tetap ON sampai jam 13:00 besok
+                if (currentTotalMinutes >= schedule.start || currentTotalMinutes < schedule.end) {
+                    isOffline = false;
                 } else {
-                    if (currentTotalMinutes >= schedule.start && currentTotalMinutes < schedule.end) {
-                        isOffline = false;
-                    }
+                    isOffline = true;
                 }
             }
 
@@ -295,6 +298,7 @@ let currentVisitors = Math.floor(Math.random() * 151) + 200;
 const visitorText = document.getElementById("visitor-count-text");
 visitorText.textContent = currentVisitors.toLocaleString("id-ID");
 
+// Fitur visitor count acak berkala
 function updateVisitorCount() {
     let isIncrease = Math.random() > 0.4;
     let change = Math.floor(Math.random() * 6) + 1;
