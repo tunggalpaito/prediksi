@@ -159,44 +159,65 @@ function getJakartaDate() {
     return new Date(jakartaStr);
 }
 
-// Menentukan jam mulai acak antara 23:00 (1380 menit) hingga sebelum 12:00 siang hari berikutnya (719 menit)
-function getMasterStartTime(masterId) {
+// Fungsi untuk menentukan slot giliran acak tiap master mulai pukul 14:00 sampai 13:50 keesokan harinya
+function getMasterScheduleSlot(masterKeys, currentKey) {
     const nowJkt = getJakartaDate();
     let year = nowJkt.getFullYear();
     let month = String(nowJkt.getMonth() + 1).padStart(2, '0');
     let day = String(nowJkt.getDate()).padStart(2, '0');
     
-    const currentHour = nowJkt.getHours();
-    if (currentHour < 12) {
+    const currentTotalMinutes = nowJkt.getHours() * 60 + nowJkt.getMinutes();
+    
+    // Jika waktu masih antara jam 00:00 sampai 13:50, maka jadwal acak ini ikut siklus kemarin mulai jam 14:00
+    if (currentTotalMinutes < 830) { // 830 menit = 13:50
         const yesterday = new Date(nowJkt.getTime() - (24 * 60 * 60 * 1000));
         year = yesterday.getFullYear();
         month = String(yesterday.getMonth() + 1).padStart(2, '0');
         day = String(yesterday.getDate()).padStart(2, '0');
     }
 
-    const storageKey = `sdy_start_time_${masterId}_${year}-${month}-${day}`;
-    let showMinute = localStorage.getItem(storageKey);
+    const storageKey = `sdy_schedule_order_from_14_${year}-${month}-${day}`;
+    let shuffledKeys = JSON.parse(localStorage.getItem(storageKey));
 
-    if (!showMinute) {
-        const randChoice = Math.floor(Math.random() * (1440 - 720)); 
-        if (randChoice < 60) {
-            showMinute = 1380 + randChoice;
-        } else {
-            showMinute = randChoice - 60;
+    // Jika urutan acak hari ini belum ada, buat acak sekali sehari secara unik
+    if (!shuffledKeys) {
+        shuffledKeys = [...masterKeys];
+        for (let i = shuffledKeys.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledKeys[i], shuffledKeys[j]] = [shuffledKeys[j], shuffledKeys[i]];
         }
-        localStorage.setItem(storageKey, showMinute);
-    } else {
-        showMinute = parseInt(showMinute, 10);
+        localStorage.setItem(storageKey, JSON.stringify(shuffledKeys));
     }
-    return showMinute;
+
+    const masterIndex = shuffledKeys.indexOf(currentKey);
+    const totalMasters = masterKeys.length;
+
+    if (masterIndex === -1 || totalMasters === 0) return { start: 840, end: 830 };
+
+    // Siklus aktif bergiliran berdurasi 23 jam 50 menit (dari 14:00 [menit ke-840] sampai 13:50 [menit ke-830] besok)
+    // Total menit dalam siklus aktif = 1430 menit
+    const totalCycleMinutes = 1430;
+    const durationPerMaster = Math.floor(totalCycleMinutes / totalMasters);
+
+    const cycleStartMinute = 840; // Pukul 14:00
+    
+    let startMinFromMidnight = (cycleStartMinute + (masterIndex * durationPerMaster)) % 1440;
+    let endMinFromMidnight = (startMinFromMidnight + durationPerMaster) % 1440;
+
+    return { 
+        start: startMinFromMidnight, 
+        end: endMinFromMidnight, 
+        isCrossMidnight: startMinFromMidnight > endMinFromMidnight 
+    };
 }
 
-// Memuat data Master SDY dari Firebase
+// Memuat data Master SDY dari Firebase dengan sistem bergiliran mulai jam 14:00
 function loadMastersSdy() {
     const container = document.getElementById("market-list-container");
     const nowJkt = getJakartaDate();
     const currentHour = nowJkt.getHours();
     const currentMinute = nowJkt.getMinutes();
+    const currentTotalMinutes = currentHour * 60 + currentMinute;
 
     database.ref("live/masters/sdy").once("value").then((snapshot) => {
         container.innerHTML = "";
@@ -207,40 +228,30 @@ function loadMastersSdy() {
         }
 
         const data = snapshot.val();
+        const masterKeys = Object.keys(data);
 
-        Object.keys(data).forEach((key) => {
+        // Jeda Wajib Offline serentak: Tepat dari pukul 13:50 sampai sebelum 14:00 (menit ke-830 sampai 839)
+        const isForceOfflineWindow = (currentTotalMinutes >= 830 && currentTotalMinutes < 840);
+
+        masterKeys.forEach((key) => {
             const master = data[key];
-            const startMinute = getMasterStartTime(key);
+            const schedule = getMasterScheduleSlot(masterKeys, key);
             
             const a = document.createElement("a");
             a.className = "market-btn";
 
-            let isOffline = false;
-            let timeMatches = false;
-            
-            if (currentHour >= 13 && (currentHour > 13 || currentMinute >= 50) && currentHour < 23) {
-                isOffline = true;
-            } else {
-                if (startMinute >= 1380) {
-                    if (currentHour >= 23 || currentHour < 12) {
-                        if (currentHour >= 23) {
-                            let mToday = currentHour * 60 + currentMinute;
-                            if (mToday >= startMinute) timeMatches = true;
-                        } else {
-                            timeMatches = true; 
-                        }
-                    }
-                } else {
-                    if (currentHour < 12) {
-                        let mToday = currentHour * 60 + currentMinute;
-                        if (mToday >= startMinute) timeMatches = true;
-                    }
-                }
+            let isOffline = true;
 
-                if (!timeMatches) {
-                    isOffline = true;
+            if (!isForceOfflineWindow) {
+                // Cek apakah waktu saat ini masuk ke dalam jatah slot giliran master ini
+                if (schedule.isCrossMidnight) {
+                    if (currentTotalMinutes >= schedule.start || currentTotalMinutes < schedule.end) {
+                        isOffline = false;
+                    }
                 } else {
-                    isOffline = false;
+                    if (currentTotalMinutes >= schedule.start && currentTotalMinutes < schedule.end) {
+                        isOffline = false;
+                    }
                 }
             }
 
