@@ -159,7 +159,7 @@ function getJakartaDate() {
     return new Date(jakartaStr);
 }
 
-// Fungsi untuk menentukan slot giliran acak tiap master mulai pukul 23:30 sampai 22:00 keesokan harinya
+// Fungsi untuk menentukan jadwal kumulatif HK dengan urutan acak unik harian
 function getMasterHkScheduleSlot(masterKeys, currentKey) {
     const nowJkt = getJakartaDate();
     let year = nowJkt.getFullYear();
@@ -168,22 +168,29 @@ function getMasterHkScheduleSlot(masterKeys, currentKey) {
     
     const currentTotalMinutes = nowJkt.getHours() * 60 + nowJkt.getMinutes();
     
-    // Jika waktu masih antara 00:00 sampai 22:35, jadwal acaknya mengikuti siklus mulai kemarin malam jam 23:30
-    if (currentTotalMinutes < 1355) { // 1355 menit = 22:35
+    // Jika waktu masih antara 00:00 sampai 23:35, jadwal acaknya mengikuti siklus mulai kemarin malam jam 23:30
+    if (currentTotalMinutes < 1415) { // 1415 menit = 23:35
         const yesterday = new Date(nowJkt.getTime() - (24 * 60 * 60 * 1000));
         year = yesterday.getFullYear();
         month = String(yesterday.getMonth() + 1).padStart(2, '0');
         day = String(yesterday.getDate()).padStart(2, '0');
     }
 
-    const storageKey = `hk_schedule_order_from_2330_${year}-${month}-${day}`;
+    const storageKey = `hk_schedule_order_cumulative_shuffle_${year}-${month}-${day}`;
     let shuffledKeys = JSON.parse(localStorage.getItem(storageKey));
 
-    // Jika urutan acak hari ini belum ada, buat acak sekali sehari secara unik
+    // Jika urutan acak hari ini belum ada, buat acak unik menggunakan seed tanggal
     if (!shuffledKeys) {
         shuffledKeys = [...masterKeys];
+        
+        let seed = parseInt(year + month + day, 10);
+        function pseudoRandom() {
+            seed = (seed * 9301 + 49297) % 233280;
+            return seed / 233280;
+        }
+
         for (let i = shuffledKeys.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
+            const j = Math.floor(pseudoRandom() * (i + 1));
             [shuffledKeys[i], shuffledKeys[j]] = [shuffledKeys[j], shuffledKeys[i]];
         }
         localStorage.setItem(storageKey, JSON.stringify(shuffledKeys));
@@ -194,23 +201,23 @@ function getMasterHkScheduleSlot(masterKeys, currentKey) {
 
     if (masterIndex === -1 || totalMasters === 0) return { start: 1410, end: 1320 };
 
-    // Sesi acak estafet dimulai jam 23:30 (menit ke-1410) sampai pukul 22:00 (menit ke-1320) keesokan harinya.
-    // Durasi total sesi acak = dari 23:30 malam s.d 22:00 malam berikutnya (22.5 jam atau 1350 menit).
+    // Sesi kumulatif dimulai pukul 23:30 (menit ke-1410) sampai pukul 22:00 (menit ke-1320) keesokan harinya.
     const cycleStartMinute = 1410; // Pukul 23:30
     const totalCycleMinutes = 1350; 
-    const durationPerMaster = Math.floor(totalCycleMinutes / totalMasters);
+    
+    const intervalPerMaster = Math.floor(totalCycleMinutes / totalMasters);
 
-    let startMinFromMidnight = (cycleStartMinute + (masterIndex * durationPerMaster)) % 1440;
-    let endMinFromMidnight = (startMinFromMidnight + durationPerMaster) % 1440;
+    let startMinFromMidnight = (cycleStartMinute + (masterIndex * intervalPerMaster)) % 1440;
+    let endMinFromMidnight = 1320; // Pukul 22:00 malam
 
     return { 
         start: startMinFromMidnight, 
         end: endMinFromMidnight, 
-        isCrossMidnight: startMinFromMidnight > endMinFromMidnight 
+        isCrossMidnight: true 
     };
 }
 
-// Memuat data Master HK dari Firebase dengan sistem bergiliran & online serentak
+// Memuat data Master HK dari Firebase dengan sistem kumulatif & online serentak
 function loadMastersHk() {
     const container = document.getElementById("market-list-container");
     const nowJkt = getJakartaDate();
@@ -229,10 +236,10 @@ function loadMastersHk() {
         const data = snapshot.val();
         const masterKeys = Object.keys(data);
 
-        // Aturan 1: Jeda Offline serentak persis dari pukul 22:35 sampai 23:30 (menit ke-1355 sampai 1409)
+        // Aturan 1: Jeda Offline serentak dari pukul 22:35 sampai 23:30 (menit ke-1355 sampai 1409)
         const isForceOfflineWindow = (currentTotalMinutes >= 1355 && currentTotalMinutes < 1410);
 
-        // Aturan 2: Online serentak penuh mulai pukul 22:00 sampai 22:35 (menit ke-1320 sampai 1354)
+        // Aturan 2: Online serentak penuh dari pukul 22:00 sampai 22:35 (menit ke-1320 sampai 1354)
         const isFullOnlineWindow = (currentTotalMinutes >= 1320 && currentTotalMinutes < 1355);
 
         masterKeys.forEach((key) => {
@@ -250,15 +257,11 @@ function loadMastersHk() {
                 // Jam 22:00 s.d 22:35 -> SEMUA ONLINE SERENTAK
                 isOffline = false;
             } else {
-                // Sesi acak bergiliran estafet (23:30 malam sampai 22:00 malam berikutnya)
-                if (schedule.isCrossMidnight) {
-                    if (currentTotalMinutes >= schedule.start || currentTotalMinutes < schedule.end) {
-                        isOffline = false;
-                    }
+                // Sesi kumulatif: Mulai aktif bertahap, dan semuanya tetap ON sampai jam 22:00 malam berikutnya
+                if (currentTotalMinutes >= schedule.start || currentTotalMinutes < schedule.end) {
+                    isOffline = false;
                 } else {
-                    if (currentTotalMinutes >= schedule.start && currentTotalMinutes < schedule.end) {
-                        isOffline = false;
-                    }
+                    isOffline = true;
                 }
             }
 
