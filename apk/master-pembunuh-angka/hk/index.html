@@ -13,7 +13,7 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 .ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
 .ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
 
-/* KOTAK INFORMASI APRESIASI (VIBE ANAK MUDA / KEREN) */
+/* KOTAK INFORMASI APRESIASI */
 .info-apresiasi{width:100%;max-width:420px;background:linear-gradient(135deg,rgba(20,20,35,0.95),rgba(40,25,60,0.95));border:1px solid #00ff88;border-radius:12px;padding:16px 18px;margin-bottom:20px;text-align:center;box-shadow:0 0 20px rgba(0,255,136,0.15)}
 .info-apresiasi .badge-support{font-size:10px;background:linear-gradient(135deg,#00ff88,#00b8ff);color:#030712;padding:3px 10px;border-radius:20px;font-weight:800;text-transform:uppercase;letter-spacing:1px;display:inline-block;margin-bottom:8px}
 .info-apresiasi p{font-size:12px;color:#cbd5e1;line-height:1.5;margin-bottom:12px}
@@ -38,7 +38,14 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 .market-btn{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1f1a3a,#2e2557);color:#fff;text-decoration:none;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,230,0,0.4);font-weight:bold;font-size:15px;transition:all .25s ease;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
 .market-btn:hover{background:linear-gradient(135deg,#2e2557,#42357a);border-color:#ffe600;transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,230,0,0.25)}
 .market-btn span{display:flex;align-items:center;gap:10px}
+
+/* STYLES BADGE LIVE & OFFLINE */
 .badge-live{font-size:10px;background:#00ff88;color:#000;padding:3px 8px;border-radius:20px;font-weight:700;text-transform:uppercase;box-shadow:0 0 8px #00ff88}
+.badge-offline{font-size:10px;background:#ff334b;color:#fff;padding:3px 8px;border-radius:20px;font-weight:700;text-transform:uppercase;box-shadow:0 0 8px #ff334b}
+
+/* TOMBOL KETIKA OFFLINE */
+.market-btn.disabled{background:#1a1a24;border-color:rgba(255,255,255,0.1);color:#71717a;cursor:not-allowed;opacity:0.75}
+.market-btn.disabled:hover{transform:none;box-shadow:none;border-color:rgba(255,255,255,0.1)}
 
 /* LOADING STATE */
 .loading-text{font-size:13px;color:#94a3b8;font-style:italic;padding:10px}
@@ -53,7 +60,6 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 </head>
 <body>
 
-<!-- KOTAK IKLAN BANNER (4 BUAH) -->
 <div class="ads-container">
 <div class="ad-box">
 <div style="width:100%;text-align:center;overflow:hidden">
@@ -81,7 +87,6 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 </div>
 </div>
 
-<!-- KOTAK INFORMASI APRESIASI KEKINIAN -->
 <div class="info-apresiasi">
 <div class="badge-support">✨ INFO PENYALUR </div>
 <p>Jika angka dari <strong>Master Pembunuh</strong> sangat membantu, tolong sisihkan sedikit saldo sebagai apresiasi terhadap mereka agar selalu live/aktif</p>
@@ -91,7 +96,6 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 </div>
 </div>
 
-<!-- KARTU STATUS PENGUNJUNG ONLINE -->
 <div class="visitor-card">
 <div class="visitor-info">
 <div class="online-dot"></div>
@@ -100,18 +104,15 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 <div class="visitor-count" id="visitor-count-text">348</div>
 </div>
 
-<!-- KARTU UTAMA MENU PASARAN MASTER HK -->
 <div class="menu-card">
 <h1>MASTER PEMBUNUH ANGKA HK</h1>
 <p>Pilih nama master pembunuh angka Hongkong di bawah ini :</p>
 
-<!-- Daftar tombol akan ditarik otomatis dari Firebase -->
 <div class="market-list" id="market-list-container">
-    <div class="loading-text">Memuat daftar master yang live...</div>
+    <div class="loading-text">MENGHUBUNGKAN NAMA MASTER...</div>
 </div>
 </div>
 
-<!-- FOOTER COPYRIGHT TUNGGAL PAITO OTOMATIS -->
 <div class="footer">
 &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
 </div>
@@ -128,47 +129,97 @@ const firebaseConfig = {
     appId: "1:126095632925:web:77383efdc2daea2e7034f4"
 };
 
-// Inisialisasi Firebase
 firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// Fungsi untuk menarik data Master HK dari Realtime Database
+// Fungsi untuk mendapatkan waktu saat ini berdasarkan zona waktu Jakarta (WIB)
+function getJakartaDate() {
+    const now = new Date();
+    const jakartaStr = now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
+    return new Date(jakartaStr);
+}
+
+// Menentukan jam mulai acak antara 14:00 (840 menit) hingga sebelum 22:00 (1319 menit) setiap harinya
+function getMasterStartTime(masterId) {
+    const nowJkt = getJakartaDate();
+    const year = nowJkt.getFullYear();
+    const month = String(nowJkt.getMonth() + 1).padStart(2, '0');
+    const day = String(nowJkt.getDate()).padStart(2, '0');
+    const todayStr = `${year}-${month}-${day}`;
+
+    const storageKey = `hk_start_time_${masterId}_${todayStr}`;
+    let showMinute = localStorage.getItem(storageKey);
+
+    if (!showMinute) {
+        // Rentang acak jam 14:00 (840) s/d 21:59 (1319)
+        const startMin = 14 * 60; // 840
+        const endMin = 22 * 60 - 1; // 1319
+        showMinute = Math.floor(Math.random() * (endMin - startMin + 1)) + startMin;
+        localStorage.setItem(storageKey, showMinute);
+    } else {
+        showMinute = parseInt(showMinute, 10);
+    }
+    return showMinute;
+}
+
+// Memuat data Master HK dari Firebase
 function loadMastersHk() {
     const container = document.getElementById("market-list-container");
-    
-    // Ambil data dari path live/masters/hk
+    const nowJkt = getJakartaDate();
+    const currentMinuteInDay = nowJkt.getHours() * 60 + nowJkt.getMinutes();
+    const currentHour = nowJkt.getHours();
+
     database.ref("live/masters/hk").once("value").then((snapshot) => {
         container.innerHTML = "";
 
         if (!snapshot.exists()) {
-            container.innerHTML = `<div class="loading-text">Belum ada master tersedia.</div>`;
+            container.innerHTML = `<div class="loading-text">BELUM ADA DATA MASTER PEMBUNUH ANGKA</div>`;
             return;
         }
 
         const data = snapshot.val();
-        // Looping data objek dari Firebase
+
         Object.keys(data).forEach((key) => {
             const master = data[key];
+            const startMinute = getMasterStartTime(key);
+            
             const a = document.createElement("a");
-            a.href = master.url;
             a.className = "market-btn";
-            a.innerHTML = `<span>👑 ${master.name}</span><span class="badge-live">${master.badge || "LIVE"}</span>`;
+
+            // Aturan 1 & 2 & 3:
+            // - Jika sudah jam 23:00 ke atas ATAU belum mencapai jam mulai acaknya (misal masih pagi/pukul 10:00), 
+            //   nama tetap ada tapi berstatus OFFLINE (merah) dan tidak bisa diklik.
+            // - Jika sudah lewat/pas jam mulai acaknya dan sebelum jam 23:00, status LIVE (hijau) dan bisa diklik.
+            if (currentHour >= 23 || currentMinuteInDay < startMinute) {
+                a.className = "market-btn disabled";
+                a.removeAttribute("href");
+                a.style.pointerEvents = "none";
+                a.innerHTML = `<span>👑 ${master.name}</span><span class="badge-offline">OFFLINE</span>`;
+            } else {
+                a.href = master.url;
+                a.className = "market-btn";
+                a.style.pointerEvents = "auto";
+                a.innerHTML = `<span>👑 ${master.name}</span><span class="badge-live">${master.badge || "LIVE"}</span>`;
+            }
+            
             container.appendChild(a);
         });
+
     }).catch((error) => {
         console.error("Gagal memuat data master: ", error);
-        container.innerHTML = `<div class="loading-text" style="color:#ef4444;">Gagal memuat data master.</div>`;
+        container.innerHTML = `<div class="loading-text" style="color:#ef4444;">GAGAL MEMUAT DATA MASTER PEMBUNUH ANGKA</div>`;
     });
 }
 
 loadMastersHk();
+
+// Update status otomatis setiap 30 detik agar perubahan jam acak atau jam 23:00 langsung terdeteksi
+setInterval(loadMastersHk, 30000);
 </script>
 
 <script>
-// Tahun Otomatis di Footer
 document.getElementById("auto-year").textContent = new Date().getFullYear();
 
-// Logika Pengunjung Online Dinamis
 let currentVisitors = Math.floor(Math.random() * 151) + 200;
 const visitorText = document.getElementById("visitor-count-text");
 visitorText.textContent = currentVisitors.toLocaleString("id-ID");
