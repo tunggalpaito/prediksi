@@ -159,8 +159,8 @@ function getJakartaDate() {
     return new Date(jakartaStr);
 }
 
-// Fungsi untuk menentukan slot giliran acak tiap master mulai pukul 14:00 sampai 13:50 keesokan harinya
-function getMasterScheduleSlot(masterKeys, currentKey) {
+// Fungsi untuk menentukan slot giliran acak tiap master mulai pukul 13:51 sampai 13:00 keesokan harinya
+function getMasterSdyScheduleSlot(masterKeys, currentKey) {
     const nowJkt = getJakartaDate();
     let year = nowJkt.getFullYear();
     let month = String(nowJkt.getMonth() + 1).padStart(2, '0');
@@ -168,15 +168,15 @@ function getMasterScheduleSlot(masterKeys, currentKey) {
     
     const currentTotalMinutes = nowJkt.getHours() * 60 + nowJkt.getMinutes();
     
-    // Jika waktu masih antara jam 00:00 sampai 13:50, maka jadwal acak ini ikut siklus kemarin mulai jam 14:00
-    if (currentTotalMinutes < 830) { // 830 menit = 13:50
+    // Jika waktu masih antara 00:00 sampai 13:30, jadwal acaknya mengikuti siklus mulai kemarin jam 13:51
+    if (currentTotalMinutes < 810) { // 810 menit = 13:30
         const yesterday = new Date(nowJkt.getTime() - (24 * 60 * 60 * 1000));
         year = yesterday.getFullYear();
         month = String(yesterday.getMonth() + 1).padStart(2, '0');
         day = String(yesterday.getDate()).padStart(2, '0');
     }
 
-    const storageKey = `sdy_schedule_order_from_14_${year}-${month}-${day}`;
+    const storageKey = `sdy_schedule_order_from_1351_${year}-${month}-${day}`;
     let shuffledKeys = JSON.parse(localStorage.getItem(storageKey));
 
     // Jika urutan acak hari ini belum ada, buat acak sekali sehari secara unik
@@ -192,15 +192,14 @@ function getMasterScheduleSlot(masterKeys, currentKey) {
     const masterIndex = shuffledKeys.indexOf(currentKey);
     const totalMasters = masterKeys.length;
 
-    if (masterIndex === -1 || totalMasters === 0) return { start: 840, end: 830 };
+    if (masterIndex === -1 || totalMasters === 0) return { start: 831, end: 780 };
 
-    // Siklus aktif bergiliran berdurasi 23 jam 50 menit (dari 14:00 [menit ke-840] sampai 13:50 [menit ke-830] besok)
-    // Total menit dalam siklus aktif = 1430 menit
-    const totalCycleMinutes = 1430;
+    // Sesi acak estafet dimulai jam 13:51 (menit ke-831) sampai pukul 13:00 (menit ke-780) keesokan harinya.
+    // Durasi total sesi acak = dari 13:51 siang s.d 13:00 siang berikutnya (23 jam 9 menit atau 1389 menit).
+    const cycleStartMinute = 831; // Pukul 13:51
+    const totalCycleMinutes = 1389; 
     const durationPerMaster = Math.floor(totalCycleMinutes / totalMasters);
 
-    const cycleStartMinute = 840; // Pukul 14:00
-    
     let startMinFromMidnight = (cycleStartMinute + (masterIndex * durationPerMaster)) % 1440;
     let endMinFromMidnight = (startMinFromMidnight + durationPerMaster) % 1440;
 
@@ -211,7 +210,7 @@ function getMasterScheduleSlot(masterKeys, currentKey) {
     };
 }
 
-// Memuat data Master SDY dari Firebase dengan sistem bergiliran mulai jam 14:00
+// Memuat data Master SDY dari Firebase dengan sistem bergiliran & online serentak
 function loadMastersSdy() {
     const container = document.getElementById("market-list-container");
     const nowJkt = getJakartaDate();
@@ -230,20 +229,28 @@ function loadMastersSdy() {
         const data = snapshot.val();
         const masterKeys = Object.keys(data);
 
-        // Jeda Wajib Offline serentak: Tepat dari pukul 13:50 sampai sebelum 14:00 (menit ke-830 sampai 839)
-        const isForceOfflineWindow = (currentTotalMinutes >= 830 && currentTotalMinutes < 840);
+        // Aturan 1: Jeda Offline serentak persis dari pukul 13:30 sampai 13:51 (menit ke-810 sampai 830)
+        const isForceOfflineWindow = (currentTotalMinutes >= 810 && currentTotalMinutes < 831);
+
+        // Aturan 2: Online serentak penuh mulai pukul 13:00 sampai 13:30 (menit ke-780 sampai 809)
+        const isFullOnlineWindow = (currentTotalMinutes >= 780 && currentTotalMinutes < 810);
 
         masterKeys.forEach((key) => {
             const master = data[key];
-            const schedule = getMasterScheduleSlot(masterKeys, key);
+            const schedule = getMasterSdyScheduleSlot(masterKeys, key);
             
             const a = document.createElement("a");
             a.className = "market-btn";
 
             let isOffline = true;
 
-            if (!isForceOfflineWindow) {
-                // Cek apakah waktu saat ini masuk ke dalam jatah slot giliran master ini
+            if (isForceOfflineWindow) {
+                isOffline = true;
+            } else if (isFullOnlineWindow) {
+                // Jam 13:00 s.d 13:30 -> SEMUA ONLINE SERENTAK
+                isOffline = false;
+            } else {
+                // Sesi acak bergiliran estafet (13:51 siang sampai 13:00 siang berikutnya)
                 if (schedule.isCrossMidnight) {
                     if (currentTotalMinutes >= schedule.start || currentTotalMinutes < schedule.end) {
                         isOffline = false;
