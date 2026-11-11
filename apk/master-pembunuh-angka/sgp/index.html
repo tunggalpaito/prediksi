@@ -13,7 +13,7 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 .ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
 .ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
 
-/* KOTAK INFORMASI APRESIASI (VIBE ANAK MUDA / KEREN) */
+/* KOTAK INFORMASI APRESIASI */
 .info-apresiasi{width:100%;max-width:420px;background:linear-gradient(135deg,rgba(20,20,35,0.95),rgba(40,25,60,0.95));border:1px solid #00ff88;border-radius:12px;padding:16px 18px;margin-bottom:20px;text-align:center;box-shadow:0 0 20px rgba(0,255,136,0.15)}
 .info-apresiasi .badge-support{font-size:10px;background:linear-gradient(135deg,#00ff88,#00b8ff);color:#030712;padding:3px 10px;border-radius:20px;font-weight:800;text-transform:uppercase;letter-spacing:1px;display:inline-block;margin-bottom:8px}
 .info-apresiasi p{font-size:12px;color:#cbd5e1;line-height:1.5;margin-bottom:12px}
@@ -38,7 +38,34 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 .market-btn{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1f1a3a,#2e2557);color:#fff;text-decoration:none;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,230,0,0.4);font-weight:bold;font-size:15px;transition:all .25s ease;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
 .market-btn:hover{background:linear-gradient(135deg,#2e2557,#42357a);border-color:#ffe600;transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,230,0,0.25)}
 .market-btn span{display:flex;align-items:center;gap:10px}
-.badge-live{font-size:10px;background:#00ff88;color:#000;padding:3px 8px;border-radius:20px;font-weight:700;text-transform:uppercase;box-shadow:0 0 8px #00ff88}
+
+/* STYLES BADGE LIVE & OFFLINE (DIAMETER/LEBAR DISAMAKAN RATA & TEKS DI TENGAH) */
+.badge-live, .badge-offline{
+    font-size:10px;
+    padding:4px 0;
+    width:76px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border-radius:20px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+.badge-live{
+    background:#00ff88;
+    color:#000;
+    box-shadow:0 0 8px #00ff88;
+}
+.badge-offline{
+    background:#ff334b;
+    color:#fff;
+    box-shadow:0 0 8px #ff334b;
+}
+
+/* TOMBOL KETIKA OFFLINE */
+.market-btn.disabled{background:#1a1a24;border-color:rgba(255,255,255,0.1);color:#71717a;cursor:not-allowed;opacity:0.75}
+.market-btn.disabled:hover{transform:none;box-shadow:none;border-color:rgba(255,255,255,0.1)}
 
 /* LOADING STATE */
 .loading-text{font-size:13px;color:#94a3b8;font-style:italic;padding:10px}
@@ -53,7 +80,6 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 </head>
 <body>
 
-<!-- KOTAK IKLAN BANNER (4 BUAH) -->
 <div class="ads-container">
 <div class="ad-box">
 <div style="width:100%;text-align:center;overflow:hidden">
@@ -81,7 +107,6 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 </div>
 </div>
 
-<!-- KOTAK INFORMASI APRESIASI KEKINIAN -->
 <div class="info-apresiasi">
 <div class="badge-support">✨ INFO PENYALUR </div>
 <p>Jika angka dari <strong>Master Pembunuh</strong> sangat membantu, tolong sisihkan sedikit saldo sebagai apresiasi terhadap mereka agar selalu live/aktif</p>
@@ -91,7 +116,6 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 </div>
 </div>
 
-<!-- KARTU STATUS PENGUNJUNG ONLINE -->
 <div class="visitor-card">
 <div class="visitor-info">
 <div class="online-dot"></div>
@@ -100,24 +124,21 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 <div class="visitor-count" id="visitor-count-text">348</div>
 </div>
 
-<!-- KARTU UTAMA MENU PASARAN MASTER SGP -->
 <div class="menu-card">
 <h1>MASTER PEMBUNUH ANGKA SGP</h1>
 <p>Pilih nama master pembunuh angka Singapore di bawah ini :</p>
 
-<!-- Daftar tombol akan ditarik otomatis dari Firebase -->
 <div class="market-list" id="market-list-container">
-    <div class="loading-text">Memuat daftar master yang live...</div>
+    <div class="loading-text">MENGHUBUNGKAN NAMA MASTER...</div>
 </div>
 </div>
 
-<!-- FOOTER COPYRIGHT TUNGGAL PAITO OTOMATIS -->
 <div class="footer">
 &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
 </div>
 
 <script>
-// Konfigurasi Firebase Realtime Database (Sama persis seperti di Admin Panel)
+// Konfigurasi Firebase Realtime Database
 const firebaseConfig = {
     apiKey: "AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",
     authDomain: "komentar-web-f9e2e.firebaseapp.com",
@@ -128,47 +149,144 @@ const firebaseConfig = {
     appId: "1:126095632925:web:77383efdc2daea2e7034f4"
 };
 
-// Inisialisasi Firebase
 firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// Fungsi untuk menarik data Master SGP dari Realtime Database
+// Fungsi untuk mendapatkan waktu saat ini berdasarkan zona waktu Jakarta (WIB)
+function getJakartaDate() {
+    const now = new Date();
+    const jakartaStr = now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
+    return new Date(jakartaStr);
+}
+
+// Menentukan jam mulai acak antara 23:00 (1380 menit) hingga sebelum 15:00 sore (900 menit) hari berikutnya
+function getMasterStartTime(masterId) {
+    const nowJkt = getJakartaDate();
+    let year = nowJkt.getFullYear();
+    let month = String(nowJkt.getMonth() + 1).padStart(2, '0');
+    let day = String(nowJkt.getDate()).padStart(2, '0');
+    
+    // Jika jam sekarang di antara 00:00 sampai sebelum 15:00, kunci tanggal acaknya ke hari sebelumnya
+    const currentHour = nowJkt.getHours();
+    if (currentHour < 15) {
+        const yesterday = new Date(nowJkt.getTime() - (24 * 60 * 60 * 1000));
+        year = yesterday.getFullYear();
+        month = String(yesterday.getMonth() + 1).padStart(2, '0');
+        day = String(yesterday.getDate()).padStart(2, '0');
+    }
+
+    const storageKey = `sgp_start_time_${masterId}_${year}-${month}-${day}`;
+    let showMinute = localStorage.getItem(storageKey);
+
+    if (!showMinute) {
+        // Rentang waktu: 23:00 (1380) s.d 14:59 (899 hari berikutnya).
+        // Total menit kombinasi = 60 menit (23:00-23:59) + 900 menit (00:00-14:59) = 960 menit.
+        const randChoice = Math.floor(Math.random() * 960); 
+        if (randChoice < 60) {
+            showMinute = 1380 + randChoice; // 23:00 - 23:59
+        } else {
+            showMinute = randChoice - 60;   // 00:00 - 14:59
+        }
+        localStorage.setItem(storageKey, showMinute);
+    } else {
+        showMinute = parseInt(showMinute, 10);
+    }
+    return showMinute;
+}
+
+// Memuat data Master SGP dari Firebase
 function loadMastersSgp() {
     const container = document.getElementById("market-list-container");
-    
-    // Ambil data dari path live/masters/sgp (Ganti 'sgp' dengan 'sdy' atau 'hk' jika di halaman SDY/HK)
+    const nowJkt = getJakartaDate();
+    const currentDayOfWeek = nowJkt.getDay(); // 0 = Minggu, 1 = Senin, 2 = Selasa, 3 = Rabu, 4 = Kamis, 5 = Jumat, 6 = Sabtu
+    const currentHour = nowJkt.getHours();
+    const currentMinute = nowJkt.getMinutes();
+    const currentMinuteInDay = currentHour * 60 + currentMinute;
+
     database.ref("live/masters/sgp").once("value").then((snapshot) => {
         container.innerHTML = "";
 
         if (!snapshot.exists()) {
-            container.innerHTML = `<div class="loading-text">Belum ada master tersedia.</div>`;
+            container.innerHTML = `<div class="loading-text">BELUM ADA DATA MASTER PEMBUNUH ANGKA</div>`;
             return;
         }
 
         const data = snapshot.val();
-        // Looping data objek dari Firebase
+
         Object.keys(data).forEach((key) => {
             const master = data[key];
+            const startMinute = getMasterStartTime(key);
+            
             const a = document.createElement("a");
-            a.href = master.url;
             a.className = "market-btn";
-            a.innerHTML = `<span>👑 ${master.name}</span><span class="badge-live">${master.badge || "LIVE"}</span>`;
+
+            let isOffline = false;
+
+            // Aturan 1: Hari Selasa (2) dan Jumat (5) SGP libur / OFFLINE seharian
+            if (currentDayOfWeek === 2 || currentDayOfWeek === 5) {
+                isOffline = true;
+            } 
+            // Aturan 2: Offline mulai jam 17:30 (1050 menit) sampai sebelum jam 23:00
+            else if (currentHour >= 17 && currentHour < 23) {
+                if (currentHour > 17 || currentMinute >= 30) {
+                    isOffline = true;
+                }
+            } 
+            // Aturan 3: Pengecekan waktu mulai acak
+            else {
+                let timeMatches = false;
+                if (startMinute >= 1380) {
+                    // Mulai jam 23:00 - 23:59
+                    if (currentHour >= 23 || currentHour < 15) {
+                        if (currentHour >= 23) {
+                            let mToday = currentHour * 60 + currentMinute;
+                            if (mToday >= startMinute) timeMatches = true;
+                        } else {
+                            timeMatches = true; 
+                        }
+                    }
+                } else {
+                    // Mulai jam 00:00 - 14:59
+                    if (currentHour < 15) {
+                        let mToday = currentHour * 60 + currentMinute;
+                        if (mToday >= startMinute) timeMatches = true;
+                    }
+                }
+
+                if (!timeMatches) {
+                    isOffline = true;
+                }
+            }
+
+            if (isOffline) {
+                a.className = "market-btn disabled";
+                a.removeAttribute("href");
+                a.style.pointerEvents = "none";
+                a.innerHTML = `<span>👑 ${master.name}</span><span class="badge-offline">OFFLINE</span>`;
+            } else {
+                a.href = master.url;
+                a.className = "market-btn";
+                a.style.pointerEvents = "auto";
+                a.innerHTML = `<span>👑 ${master.name}</span><span class="badge-live">${master.badge || "LIVE"}</span>`;
+            }
+            
             container.appendChild(a);
         });
+
     }).catch((error) => {
         console.error("Gagal memuat data master: ", error);
-        container.innerHTML = `<div class="loading-text" style="color:#ef4444;">Gagal memuat data master.</div>`;
+        container.innerHTML = `<div class="loading-text" style="color:#ef4444;">GAGAL MEMUAT DATA MASTER PEMBUNUH ANGKA</div>`;
     });
 }
 
 loadMastersSgp();
+
+setInterval(loadMastersSgp, 30000);
 </script>
 
 <script>
-// Tahun Otomatis di Footer
 document.getElementById("auto-year").textContent = new Date().getFullYear();
 
-// Logika Pengunjung Online Dinamis
 let currentVisitors = Math.floor(Math.random() * 151) + 200;
 const visitorText = document.getElementById("visitor-count-text");
 visitorText.textContent = currentVisitors.toLocaleString("id-ID");
