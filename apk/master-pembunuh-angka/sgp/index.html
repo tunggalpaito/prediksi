@@ -159,49 +159,65 @@ function getJakartaDate() {
     return new Date(jakartaStr);
 }
 
-// Menentukan jam mulai acak antara 23:00 (1380 menit) hingga sebelum 15:00 sore (900 menit) hari berikutnya
-function getMasterStartTime(masterId) {
+// Fungsi untuk menentukan slot giliran acak tiap master mulai pukul 19:00 sampai 16:00 keesokan harinya
+function getMasterSgpScheduleSlot(masterKeys, currentKey) {
     const nowJkt = getJakartaDate();
     let year = nowJkt.getFullYear();
     let month = String(nowJkt.getMonth() + 1).padStart(2, '0');
     let day = String(nowJkt.getDate()).padStart(2, '0');
     
-    // Jika jam sekarang di antara 00:00 sampai sebelum 15:00, kunci tanggal acaknya ke hari sebelumnya
-    const currentHour = nowJkt.getHours();
-    if (currentHour < 15) {
+    const currentTotalMinutes = nowJkt.getHours() * 60 + nowJkt.getMinutes();
+    
+    // Jika waktu masih antara 00:00 sampai 17:30, jadwal acaknya mengikuti siklus mulai kemarin jam 19:00
+    if (currentTotalMinutes < 1050) { // 1050 menit = 17:30
         const yesterday = new Date(nowJkt.getTime() - (24 * 60 * 60 * 1000));
         year = yesterday.getFullYear();
         month = String(yesterday.getMonth() + 1).padStart(2, '0');
         day = String(yesterday.getDate()).padStart(2, '0');
     }
 
-    const storageKey = `sgp_start_time_${masterId}_${year}-${month}-${day}`;
-    let showMinute = localStorage.getItem(storageKey);
+    const storageKey = `sgp_schedule_order_from_19_${year}-${month}-${day}`;
+    let shuffledKeys = JSON.parse(localStorage.getItem(storageKey));
 
-    if (!showMinute) {
-        // Rentang waktu: 23:00 (1380) s.d 14:59 (899 hari berikutnya).
-        // Total menit kombinasi = 60 menit (23:00-23:59) + 900 menit (00:00-14:59) = 960 menit.
-        const randChoice = Math.floor(Math.random() * 960); 
-        if (randChoice < 60) {
-            showMinute = 1380 + randChoice; // 23:00 - 23:59
-        } else {
-            showMinute = randChoice - 60;   // 00:00 - 14:59
+    // Jika urutan acak hari ini belum ada, buat acak sekali sehari secara unik
+    if (!shuffledKeys) {
+        shuffledKeys = [...masterKeys];
+        for (let i = shuffledKeys.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledKeys[i], shuffledKeys[j]] = [shuffledKeys[j], shuffledKeys[i]];
         }
-        localStorage.setItem(storageKey, showMinute);
-    } else {
-        showMinute = parseInt(showMinute, 10);
+        localStorage.setItem(storageKey, JSON.stringify(shuffledKeys));
     }
-    return showMinute;
+
+    const masterIndex = shuffledKeys.indexOf(currentKey);
+    const totalMasters = masterKeys.length;
+
+    if (masterIndex === -1 || totalMasters === 0) return { start: 1140, end: 960 };
+
+    // Sesi acak estafet dimulai jam 19:00 (menit ke-1140) sampai pukul 16:00 (menit ke-960) keesokan harinya.
+    // Durasi total sesi acak = dari 19:00 s.d 16:00 (21 jam atau 1260 menit).
+    const cycleStartMinute = 1140; // Pukul 19:00
+    const totalCycleMinutes = 1260; 
+    const durationPerMaster = Math.floor(totalCycleMinutes / totalMasters);
+
+    let startMinFromMidnight = (cycleStartMinute + (masterIndex * durationPerMaster)) % 1440;
+    let endMinFromMidnight = (startMinFromMidnight + durationPerMaster) % 1440;
+
+    return { 
+        start: startMinFromMidnight, 
+        end: endMinFromMidnight, 
+        isCrossMidnight: startMinFromMidnight > endMinFromMidnight 
+    };
 }
 
-// Memuat data Master SGP dari Firebase
+// Memuat data Master SGP dari Firebase dengan sistem bergiliran & online serentak
 function loadMastersSgp() {
     const container = document.getElementById("market-list-container");
     const nowJkt = getJakartaDate();
     const currentDayOfWeek = nowJkt.getDay(); // 0 = Minggu, 1 = Senin, 2 = Selasa, 3 = Rabu, 4 = Kamis, 5 = Jumat, 6 = Sabtu
     const currentHour = nowJkt.getHours();
     const currentMinute = nowJkt.getMinutes();
-    const currentMinuteInDay = currentHour * 60 + currentMinute;
+    const currentTotalMinutes = currentHour * 60 + currentMinute;
 
     database.ref("live/masters/sgp").once("value").then((snapshot) => {
         container.innerHTML = "";
@@ -212,49 +228,43 @@ function loadMastersSgp() {
         }
 
         const data = snapshot.val();
+        const masterKeys = Object.keys(data);
 
-        Object.keys(data).forEach((key) => {
+        // Aturan 1: Hari Selasa (2) dan Jumat (5) SGP libur / OFFLINE seharian
+        const isHoliday = (currentDayOfWeek === 2 || currentDayOfWeek === 5);
+
+        // Aturan 2: Jeda Offline serentak persis dari pukul 17:30 sampai 19:00 (menit ke-1050 sampai 1139)
+        const isForceOfflineWindow = (currentTotalMinutes >= 1050 && currentTotalMinutes < 1140);
+
+        // Aturan 3: Online serentak penuh mulai pukul 16:00 sampai 17:30 (menit ke-960 sampai 1049)
+        const isFullOnlineWindow = (currentTotalMinutes >= 960 && currentTotalMinutes < 1050);
+
+        masterKeys.forEach((key) => {
             const master = data[key];
-            const startMinute = getMasterStartTime(key);
+            const schedule = getMasterSgpScheduleSlot(masterKeys, key);
             
             const a = document.createElement("a");
             a.className = "market-btn";
 
-            let isOffline = false;
+            let isOffline = true;
 
-            // Aturan 1: Hari Selasa (2) dan Jumat (5) SGP libur / OFFLINE seharian
-            if (currentDayOfWeek === 2 || currentDayOfWeek === 5) {
+            if (isHoliday) {
                 isOffline = true;
-            } 
-            // Aturan 2: Offline mulai jam 17:30 (1050 menit) sampai sebelum jam 23:00
-            else if (currentHour >= 17 && currentHour < 23) {
-                if (currentHour > 17 || currentMinute >= 30) {
-                    isOffline = true;
-                }
-            } 
-            // Aturan 3: Pengecekan waktu mulai acak
-            else {
-                let timeMatches = false;
-                if (startMinute >= 1380) {
-                    // Mulai jam 23:00 - 23:59
-                    if (currentHour >= 23 || currentHour < 15) {
-                        if (currentHour >= 23) {
-                            let mToday = currentHour * 60 + currentMinute;
-                            if (mToday >= startMinute) timeMatches = true;
-                        } else {
-                            timeMatches = true; 
-                        }
+            } else if (isForceOfflineWindow) {
+                isOffline = true;
+            } else if (isFullOnlineWindow) {
+                // Jam 16:00 s.d 17:30 -> SEMUA ONLINE SERENTAK
+                isOffline = false;
+            } else {
+                // Sesi acak bergiliran estafet (19:00 malam sampai 16:00 sore besoknya)
+                if (schedule.isCrossMidnight) {
+                    if (currentTotalMinutes >= schedule.start || currentTotalMinutes < schedule.end) {
+                        isOffline = false;
                     }
                 } else {
-                    // Mulai jam 00:00 - 14:59
-                    if (currentHour < 15) {
-                        let mToday = currentHour * 60 + currentMinute;
-                        if (mToday >= startMinute) timeMatches = true;
+                    if (currentTotalMinutes >= schedule.start && currentTotalMinutes < schedule.end) {
+                        isOffline = false;
                     }
-                }
-
-                if (!timeMatches) {
-                    isOffline = true;
                 }
             }
 
