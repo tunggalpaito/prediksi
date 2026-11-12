@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Tenang & Takdir Harian - Tunggal Paito</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Bayangan Angka di Latar Belakang (Sangat Halus & Tenang) */
+        .phantom-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 22rem;
+            font-weight: 300;
+            color: rgba(0, 242, 254, 0.025);
+            z-index: 0;
+            pointer-events: none;
+            transition: opacity 3s ease-in-out;
+            opacity: 0;
+        }
+
+        .phantom-number.visible {
+            opacity: 1;
+        }
+
+        /* Navigasi / Menu Utama */
+        .top-nav {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 2;
+        }
+
+        .btn-menu {
+            background: rgba(255, 255, 255, 0.1);
+            color: #00f2fe;
+            border: 1px solid rgba(0, 242, 254, 0.4);
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-menu:hover {
+            background: rgba(0, 242, 254, 0.2);
+            transform: scale(1.03);
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            padding: 20px 20px;
+            margin: auto;
+            z-index: 2;
+        }
+
+        /* Kotak Teks Sugesti */
+        .suggestion-box {
+            min-height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .suggestion-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #d1d8e0;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .suggestion-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Area Hasil Akhir */
+        .action-section {
+            opacity: 0;
+            transition: opacity 2s ease;
+            pointer-events: none;
+        }
+
+        .action-section.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Hasil Akhir */
+        .result-container {
+            margin-top: 10px;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            font-weight: bold;
+            color: #00f2fe;
+            min-height: 60px;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+        }
+
+        /* Rekomendasi Pasaran (Muncul setelah angka jadi) */
+        .market-recommendation {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 12px;
+            font-size: 1.05rem;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInMarket 1s ease forwards;
+        }
+
+        .market-recommendation strong {
+            color: #00f2fe;
+            font-size: 1.15rem;
+        }
+
+        @keyframes fadeInMarket {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .locked-notice {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #a4b0be;
+            font-style: italic;
+        }
+
+        /* Indikator Napas */
+        .breathe-circle {
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            margin: 0 auto 30px auto;
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.4; }
+            50% { transform: scale(1.3); opacity: 1; border-color: #00f2fe; }
+            100% { transform: scale(0.9); opacity: 0.4; }
+        }
+
+        /* Footer Copyright */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.85rem;
+            color: #8f9bba;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bayangan Angka di Latar Belakang -->
+    <div id="phantomNumber" class="phantom-number">-</div>
+
+    <!-- Menu Utama -->
+    <div class="top-nav">
+        <a href="https://tunggalpaito.online/prediksi" class="btn-menu" id="btnBack" onclick="stopRelaxAudio()">
+            ⬅ Menu Utama
+        </a>
+    </div>
+
+    <div class="container">
+        <!-- Lingkaran Animasi Pernapasan Pelan -->
+        <div class="breathe-circle"></div>
+
+        <!-- Tempat Teks Sugesti Berganti -->
+        <div class="suggestion-box">
+            <p id="suggestionText" class="suggestion-text">Tarik napas perlahan... hembuskan perlahan. Rasakan ketenangan mengalir di setiap otot tubuh Anda.</p>
+        </div>
+
+        <!-- Area Hasil Akhir & Rekomendasi Pasaran -->
+        <div id="actionSection" class="action-section">
+            <div id="resultContainer" class="result-container"></div>
+            <div id="marketRecommendation" class="market-recommendation"></div>
+            <div id="noticeContainer" class="locked-notice"></div>
+        </div>
+    </div>
+
+    <!-- Footer Copyright Otomatis -->
+    <footer>
+        &copy; <span id="currentYear"></span> <strong>Tunggal Paito</strong>. All Rights Reserved.
+    </footer>
+
+    <script>
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+        const sugestiList = [
+            "Tarik napas perlahan... hembuskan perlahan. Rasakan ketenangan mengalir di setiap otot tubuh Anda.",
+            "Pundak dan leher Anda mulai terasa semakin longgar, ringan, dan bebas dari segala beban pikiran.",
+            "Pikiran Anda perlahan menjadi sangat jernih, hening, damai, dan selaras dengan alam semesta.",
+            "Nikmati keheningan ini... biarkan tubuh dan jiwa Anda benar-benar santai dan pasrah.",
+            "Kini, biarkan ketenangan membimbing Anda menemukan angka hoki terbaik..."
+        ];
+
+        let currentIndex = 0;
+        const textElement = document.getElementById("suggestionText");
+        const actionSection = document.getElementById("actionSection");
+        const resultContainer = document.getElementById("resultContainer");
+        const marketRecommendation = document.getElementById("marketRecommendation");
+        const noticeContainer = document.getElementById("noticeContainer");
+        const phantomNumber = document.getElementById("phantomNumber");
+
+        let intervalBayangan = null;
+
+        // --- SISTEM AUDIO SYNTHESIZER ---
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let audioInterval = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSingingBowlTone() {
+            if (!isAudioPlaying) return; 
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+
+                // Frekuensi nada damai (174 Hz)
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(174, ctx.currentTime);
+
+                // Pengaturan volume dan efek pudar (fade out)
+                gainNode.gain.setValueAtTime(0.01, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.4);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 5.5);
+
+                osc.connect(gainNode);
+                gainNode.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + 6);
+            } catch (e) {
+                console.log("Audio error:", e);
+            }
+        }
+
+        function startRelaxAudio() {
+            const ctx = getAudioContext();
+            if (isAudioPlaying) return;
+            isAudioPlaying = true;
+
+            playSingingBowlTone(); 
+            
+            if (audioInterval) clearInterval(audioInterval);
+            
+            audioInterval = setInterval(() => {
+                if (isAudioPlaying) {
+                    playSingingBowlTone();
+                } else {
+                    clearInterval(audioInterval);
+                }
+            }, 5000);
+        }
+
+        function stopRelaxAudio() {
+            isAudioPlaying = false; 
+            if (audioInterval) {
+                clearInterval(audioInterval);
+                audioInterval = null;
+            }
+        }
+
+        // --- PENANGANAN INTERAKSI PERTAMA (OTOMATIS HIDUP SAAT LAYAR DISENTUH) ---
+        function handleFirstInteraction() {
+            const ctx = getAudioContext();
+            if (ctx && !isAudioPlaying) {
+                const dataSimpan = localStorage.getItem("tunggal_paito_harian_pilih_pasaran");
+                const tanggalHariIni = getTanggalHariIni();
+                
+                if (!(dataSimpan && JSON.parse(dataSimpan).tanggalAmbil === tanggalHariIni)) {
+                    startRelaxAudio();
+                }
+            }
+            window.removeEventListener('click', handleFirstInteraction);
+            window.removeEventListener('touchstart', handleFirstInteraction);
+            window.removeEventListener('keydown', handleFirstInteraction);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('click', handleFirstInteraction);
+            window.addEventListener('touchstart', handleFirstInteraction);
+            window.addEventListener('keydown', handleFirstInteraction);
+            CekStatusHarian();
+        });
+
+        document.addEventListener('visibilitychange', () => { 
+            if (document.hidden) stopRelaxAudio(); 
+        });
+        window.addEventListener('pagehide', () => { stopRelaxAudio(); });
+        window.addEventListener('beforeunload', () => { stopRelaxAudio(); });
+
+        function getTanggalHariIni() {
+            const sekarang = new Date();
+            const tahun = sekarang.getFullYear();
+            const bulan = String(sekarang.getMonth() + 1).padStart(2, '0');
+            const tanggal = String(sekarang.getDate()).padStart(2, '0');
+            return `${tahun}-${bulan}-${tanggal}`;
+        }
+
+        function CekStatusHarian() {
+            const dataSimpan = localStorage.getItem("tunggal_paito_harian_pilih_pasaran");
+            const tanggalHariIni = getTanggalHariIni();
+            
+            if (dataSimpan) {
+                const data = JSON.parse(dataSimpan);
+
+                if (data.tanggalAmbil === tanggalHariIni) {
+                    textElement.textContent = "";
+                    textElement.classList.add("visible");
+                    
+                    phantomNumber.textContent = data.angka;
+                    phantomNumber.classList.add("visible");
+
+                    actionSection.classList.add("active");
+                    resultContainer.textContent = "✨ " + data.angka + " ✨";
+                    marketRecommendation.innerHTML = `Silahkan Beli Angka Hoki Anda Di pasaran Berikut ini :<br><strong>${data.rekomendasiPasaran}</strong>`;
+                    noticeContainer.innerHTML = `Angka Hoki Anda sudah terkunci untuk hari ini. Dapatkan lagi esok hari setelah pukul 23:59.`;
+                    
+                    stopRelaxAudio(); 
+                    return;
+                }
+            }
+
+            mulaiSiklusRelaksasi();
+        }
+
+        function mulaiSiklusRelaksasi() {
+            phantomNumber.classList.add("visible");
+            gantiAngkaSamar();
+            intervalBayangan = setInterval(gantiAngkaSamar, 4000);
+
+            setTimeout(() => {
+                textElement.classList.add("visible");
+                setTimeout(tampilkanSugesti, 6000);
+            }, 1000);
+        }
+
+        function gantiAngkaSamar() {
+            phantomNumber.style.opacity = '0';
+            setTimeout(() => {
+                let angkaAcak = Math.floor(Math.random() * 10);
+                phantomNumber.textContent = angkaAcak;
+                phantomNumber.style.opacity = '1';
+            }, 1500);
+        }
+
+        function tampilkanSugesti() {
+            if (currentIndex < sugestiList.length) {
+                textElement.classList.remove("visible");
+                
+                setTimeout(() => {
+                    textElement.textContent = sugestiList[currentIndex];
+                    textElement.classList.add("visible");
+                    currentIndex++;
+                    
+                    setTimeout(tampilkanSugesti, 6000);
+                }, 1000);
+            } else {
+                clearInterval(intervalBayangan);
+                selesaikanSesi();
+            }
+        }
+
+        function pilihPasaranTerbaik() {
+            const hariIndex = new Date().getDay(); 
+            let daftarPilihan = [];
+            const isSingaporeBuka = [1, 3, 4, 6, 0].includes(hariIndex);
+
+            if (isSingaporeBuka) {
+                daftarPilihan = [
+                    "Singapore Pools", "Singapore Lotto",
+                    "Sydney Pools", "Sydney Lotto",
+                    "Hongkong Pools", "Hongkong Lotto"
+                ];
+            } else {
+                daftarPilihan = [
+                    "Sydney Pools", "Sydney Lotto",
+                    "Hongkong Pools", "Hongkong Lotto"
+                ];
+            }
+
+            return daftarPilihan[Math.floor(Math.random() * daftarPilihan.length)];
+        }
+
+        function selesaikanSesi() {
+            let angkaFinal = Math.floor(Math.random() * 10);
+            let rekomendasiPasaran = pilihPasaranTerbaik();
+            
+            const dataSimpan = {
+                angka: angkaFinal,
+                rekomendasiPasaran: rekomendasiPasaran,
+                tanggalAmbil: getTanggalHariIni()
+            };
+            localStorage.setItem("tunggal_paito_harian_pilih_pasaran", JSON.stringify(dataSimpan));
+
+            phantomNumber.style.opacity = '0';
+            setTimeout(() => {
+                phantomNumber.textContent = angkaFinal;
+                phantomNumber.style.opacity = '1';
+                phantomNumber.style.color = 'rgba(0, 242, 254, 0.05)';
+            }, 1000);
+
+            actionSection.classList.add("active");
+            resultContainer.textContent = "✨ " + angkaFinal + " ✨";
+            marketRecommendation.innerHTML = `Silahkan Beli Angka Hoki Anda Di pasaran Berikut ini :<br><strong>${rekomendasiPasaran}</strong>`;
+            noticeContainer.textContent = "Angka Keberuntungan Anda Hari Ini Sudah Tepat. Silakan kembali lagi besok.";
+            
+            stopRelaxAudio();
+        }
+    </script>
+
+</body>
+</html>
