@@ -10,6 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<!-- Library html2canvas untuk fitur download gambar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{--bg-primary:#05050a;--bg-secondary:#0d0f18;--bg-card:rgba(13, 17, 32, 0.75);--accent-cyan:#00f2fe;--accent-purple:#9d4edd;--accent-pink:#ff2a85;--accent-gradient:linear-gradient(135deg, #00f2fe 0%, #7928ca 50%, #ff2a85 100%);--neon-glow-cyan:0 0 20px rgba(0, 242, 254, 0.4);--neon-glow-pink:0 0 20px rgba(255, 42, 133, 0.4);--text-main:#ffffff;--text-muted:#8a99ad;--border-glass:rgba(255, 255, 255, 0.08);--border-glow:rgba(0, 242, 254, 0.3)}
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif}
@@ -33,7 +35,9 @@ header h1{font-family:Outfit,sans-serif;font-size:2rem;font-weight:900;backgroun
 .pred-card{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:18px;padding:16px;text-align:center;text-decoration:none;color:#fff;transition:all .3s cubic-bezier(.16, 1, .3, 1);box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .pred-card:hover{transform:translateY(-4px);border-color:var(--accent-cyan);box-shadow:var(--neon-glow-cyan);background:rgba(0,242,254,.05)}
 .pred-card h4{font-family:Outfit,sans-serif;font-size:15px;font-weight:800;margin-bottom:4px;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.table-responsive{width:100%;overflow-x:auto;background:var(--bg-card);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border:1px solid var(--border-glass);border-radius:24px;box-shadow:0 25px 50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1);margin-bottom:24px;max-height:520px;overflow-y:auto}
+
+/* TABEL UTAMA DI WEBSITE (30 HARI) */
+.table-responsive{width:100%;overflow-x:auto;background:var(--bg-card);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border-radius:24px;box-shadow:0 25px 50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1);margin-bottom:24px;max-height:520px;overflow-y:auto;border:1px solid var(--border-glass)}
 table{width:100%;border-collapse:collapse;text-align:center;white-space:nowrap}
 td,th{padding:18px 20px;font-size:13px}
 th{background:rgba(10,14,26,.95);color:var(--text-main);font-family:Outfit,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border-glass)}
@@ -42,6 +46,100 @@ tr:hover{background:rgba(0,242,254,.03)!important}
 td{color:var(--text-muted);font-weight:500}
 td:nth-child(n+3){font-family:Outfit,sans-serif;font-weight:800;color:#ff2a85;text-shadow:0 0 15px rgba(255,42,133,.5);letter-spacing:2.5px}
 td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
+
+/* ==========================================================
+   KARTU KHUSUS HASIL DOWNLOAD (KEREN, EKSKLUSIF, TANPA BINGKAI KAKU)
+   ========================================================== */
+.download-card-wrapper {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 520px;
+  background: linear-gradient(135deg, #05050a 0%, #0d0f18 50%, #120b24 100%);
+  border-radius: 28px;
+  padding: 32px 24px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+  border: 2px solid rgba(0, 242, 254, 0.4);
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.dl-card-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.dl-card-header h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+.dl-card-badge {
+  display: inline-block;
+  background: rgba(0,242,254,0.12);
+  border: 1px solid rgba(0,242,254,0.4);
+  color: #00f2fe;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(0,242,254,0.3);
+}
+.dl-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  background: rgba(13, 17, 32, 0.9);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.dl-table th {
+  background: rgba(10, 14, 26, 0.95);
+  color: #00f2fe;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 14px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.dl-table td {
+  padding: 16px 10px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-weight: 600;
+}
+.dl-table td:nth-child(n+3) {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  color: #ff2a85;
+  text-shadow: 0 0 12px rgba(255,42,133,0.5);
+  letter-spacing: 2px;
+}
+.dl-card-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 11px;
+  color: #8a99ad;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-top: 1px dashed rgba(255,255,255,0.1);
+  padding-top: 14px;
+}
+
+/* TOMBOL DOWNLOAD GAMBAR DI LUAR TABEL */
+.action-download-container{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:24px}
+.btn-download-img{width:100%;max-width:320px;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:800;border-radius:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(34,197,94,0.4);transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px}
+.btn-download-img:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 6px 25px rgba(34,197,94,0.7)}
+
 .seo-section{background:var(--bg-card);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);padding:26px;border-radius:24px;border:1px solid var(--border-glass);margin-bottom:24px;font-size:13px;color:var(--text-muted);box-shadow:0 20px 40px rgba(0,0,0,.4)}
 .seo-section h3{font-family:Outfit,sans-serif;font-size:1.25rem;margin-bottom:12px;color:var(--text-main);font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .seo-section p{margin-bottom:12px;text-align:justify;line-height:1.8}
@@ -108,6 +206,7 @@ footer{text-align:center;padding:28px;background:var(--bg-secondary);color:var(-
     </a>
   </div>
 
+  <!-- TABEL UTAMA DI WEBSITE (30 HARI) -->
   <div class="table-responsive">
     <table>
       <thead>
@@ -122,6 +221,39 @@ footer{text-align:center;padding:28px;background:var(--bg-secondary);color:var(-
       <tbody id="live-draw-data">
       </tbody>
     </table>
+  </div>
+
+  <!-- TOMBOL DOWNLOAD GAMBAR -->
+  <div class="action-download-container">
+    <button class="btn-download-img" id="btn-download">
+      <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      <span>Download Gambar Result</span>
+    </button>
+  </div>
+
+  <!-- KARTU EKSKLUSIF YANG DISEMBUNYIKAN UNTUK HASIL DOWNLOAD (3 HARI TERAKHIR) -->
+  <div class="download-card-wrapper" id="downloadCardTarget">
+    <div class="dl-card-header">
+      <h2>Tunggal Paito</h2>
+      <div class="dl-card-badge">✨ Live Result SGP | HK | SDY Tercepat</div>
+    </div>
+    <table class="dl-table">
+      <thead>
+        <tr>
+          <th>TANGGAL</th>
+          <th>HARI</th>
+          <th>HK</th>
+          <th>SGP</th>
+          <th>SDY</th>
+        </tr>
+      </thead>
+      <tbody id="dl-table-body">
+        <!-- Diisi otomatis 3 hari terakhir saat tombol download diklik -->
+      </tbody>
+    </table>
+    <div class="dl-card-footer">
+      &copy; <span class="current-year"></span> Tunggal Paito. All Rights Reserved.
+    </div>
   </div>
 
   <div class="seo-section">
@@ -145,8 +277,9 @@ footer{text-align:center;padding:28px;background:var(--bg-secondary);color:var(-
 
 <button class="apk-reopen-btn" id="apkReopenBtn" onclick="openApkPopup(event)">📱 APK Resmi</button>
 
+<!-- FOOTER UTAMA HALAMAN BAWAH -->
 <footer>
-  &copy; <span id="current-year"></span> Tunggal Paito. All Rights Reserved.
+  &copy; <span class="current-year"></span> Tunggal Paito. All Rights Reserved.
 </footer>
 
 <script>
@@ -157,28 +290,147 @@ function redirectToAds(t){
   t.target.closest("#apkReopenBtn")||
   t.target.closest(".prediction-main-grid")||
   t.target.closest(".market-filters")||
+  t.target.closest(".action-download-container")||
   "A"===t.target.tagName||
   "IFRAME"===t.target.tagName||
   t.target.closest("iframe")||
   t.target.closest(".ad-box")||
   window.open("https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec","_blank")
 }
-document.getElementById("current-year").textContent=(new Date).getFullYear();
+
+// Otomatis mengisi semua elemen dengan class "current-year" (termasuk footer utama & kartu download)
+const currentYear = new Date().getFullYear();
+document.querySelectorAll(".current-year").forEach(el => {
+  el.textContent = currentYear;
+});
+
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};
 firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 
 function extractRightmostResult(t){if(!t)return"-";let e=String(t).trim();if(e.includes(",")){let t=e.split(",");e=t[t.length-1].trim()}let a=e.replace(/\D/g,"");return a.length>0?a:"-"}
 
+let globalDaysList = [];
+let globalPersistBackup = {};
+
 function initLiveDraw(){
-  const t=["MINGGU","SENIN","SELASA","RABU","KAMIS","JUMAT","SABTU"],e=document.getElementById("live-draw-data");
-  let a=JSON.parse(localStorage.getItem("tunggalpaito_persistent_backup"))||{},l=[];
-  for(let e=0;e<30;e++){let a=new Date;a.setDate(a.getDate()-e);let s=`${String(a.getDate()).padStart(2,"0")}-${String(a.getMonth()+1).padStart(2,"0")}-${a.getFullYear()}`,n=t[a.getDay()];l.push({dateStr:s,dayName:n})}
-  e.innerHTML="",l.forEach((t=>{let l=a[t.dateStr]||{hk:"-",sgp:"-",sdy:"-"},s=l.hk&&""!==l.hk?l.hk:"-",n=l.sgp&&""!==l.sgp?l.sgp:"-",r=l.sdy&&""!==l.sdy?l.sdy:"-",o=`<tr data-date="${t.dateStr}"><td>${t.dateStr}</td><td>${t.dayName}</td><td class="col-hk" id="val-hk-${t.dateStr}">${s}</td><td class="col-sgp" id="val-sgp-${t.dateStr}">${n}</td><td class="col-sdy" id="val-sdy-${t.dateStr}">${r}</td></tr>`;e.innerHTML+=o}));
-  const s={hk:"hongkong",sgp:"singapore",sdy:"sydney"};
-  l.forEach((t=>{["hk","sgp","sdy"].forEach((e=>{let l=s[e];db.ref(`live/${l}/${t.dateStr}`).on("value",(l=>{let s=l.val(),n="-";if(null!=s){let t=extractRightmostResult(s);"-"!==t&&(n=t)}a[t.dateStr]||(a[t.dateStr]={hk:"-",sgp:"-",sdy:"-"}),a[t.dateStr][e]=n,localStorage.setItem("tunggalpaito_persistent_backup",JSON.stringify(a));let r=document.getElementById(`val-${e}-${t.dateStr}`);r&&(r.innerText=n)}))}))}))
+  const dayNames = ["MINGGU","SENIN","SELASA","RABU","KAMIS","JUMAT","SABTU"];
+  const tbodyElement = document.getElementById("live-draw-data");
+  let savedData = JSON.parse(localStorage.getItem("tunggalpaito_persistent_backup"))||{};
+  globalPersistBackup = savedData;
+  
+  let listDays = [];
+  for(let i = 0; i < 30; i++){
+    let d = new Date();
+    d.setDate(d.getDate() - i);
+    let dateStr = `${String(d.getDate()).padStart(2,"0")}-${String(d.getMonth()+1).padStart(2,"0")}-${d.getFullYear()}`;
+    let dayName = dayNames[d.getDay()];
+    listDays.push({dateStr: dateStr, dayName: dayName});
+  }
+  globalDaysList = listDays;
+
+  // Render 30 hari ke halaman web secara default
+  renderTableToDOM(listDays, savedData);
+
+  const marketMap = {hk:"hongkong", sgp:"singapore", sdy:"sydney"};
+  listDays.forEach((item)=>{
+    ["hk","sgp","sdy"].forEach((marketKey)=>{
+      let dbMarketName = marketMap[marketKey];
+      db.ref(`live/${dbMarketName}/${item.dateStr}`).on("value",(snapshot)=>{
+        let val = snapshot.val(), resVal = "-";
+        if(null != val){
+          let extracted = extractRightmostResult(val);
+          "-" !== extracted && (resVal = extracted);
+        }
+        savedData[item.dateStr] || (savedData[item.dateStr] = {hk:"-", sgp:"-", sdy:"-"});
+        savedData[item.dateStr][marketKey] = resVal;
+        localStorage.setItem("tunggalpaito_persistent_backup", JSON.stringify(savedData));
+        
+        // Update teks di tabel web secara real-time
+        let cellTarget = document.getElementById(`val-${marketKey}-${item.dateStr}`);
+        cellTarget && (cellTarget.innerText = resVal);
+      });
+    });
+  });
 }
+
+function renderTableToDOM(daysArray, dataBackup) {
+  const tbodyElement = document.getElementById("live-draw-data");
+  tbodyElement.innerHTML = "";
+  
+  daysArray.forEach((item)=>{
+    let dayRecord = dataBackup[item.dateStr] || {hk:"-", sgp:"-", sdy:"-"};
+    let hkVal = dayRecord.hk && "" !== dayRecord.hk ? dayRecord.hk : "-";
+    let sgpVal = dayRecord.sgp && "" !== dayRecord.sgp ? dayRecord.sgp : "-";
+    let sdyVal = dayRecord.sdy && "" !== dayRecord.sdy ? dayRecord.sdy : "-";
+    
+    let rowHtml = `<tr data-date="${item.dateStr}">
+      <td>${item.dateStr}</td>
+      <td>${item.dayName}</td>
+      <td class="col-hk" id="val-hk-${item.dateStr}">${hkVal}</td>
+      <td class="col-sgp" id="val-sgp-${item.dateStr}">${sgpVal}</td>
+      <td class="col-sdy" id="val-sdy-${item.dateStr}">${sdyVal}</td>
+    </tr>`;
+    tbodyElement.innerHTML += rowHtml;
+  });
+}
+
 initLiveDraw();
+
+// FITUR DOWNLOAD GAMBAR KARTU EKSKLUSIF (3 HARI TERAKHIR)
+document.getElementById("btn-download").addEventListener("click", function(e) {
+  e.stopPropagation();
+  if (globalDaysList.length === 0) {
+    alert("Data sedang dimuat, mohon tunggu sebentar.");
+    return;
+  }
+
+  const downloadCard = document.getElementById("downloadCardTarget");
+  const dlTableBody = document.getElementById("dl-table-body");
+  
+  const originalBtnText = this.innerHTML;
+  this.innerHTML = "<span>Sedang Mendownload Gambar HD...</span>";
+  this.disabled = true;
+
+  // Isi data 3 hari terakhir ke dalam kartu khusus download
+  dlTableBody.innerHTML = "";
+  const last3Days = globalDaysList.slice(0, 3);
+  
+  last3Days.forEach((item) => {
+    let dayRecord = globalPersistBackup[item.dateStr] || {hk:"-", sgp:"-", sdy:"-"};
+    let hkVal = dayRecord.hk && "" !== dayRecord.hk ? dayRecord.hk : "-";
+    let sgpVal = dayRecord.sgp && "" !== dayRecord.sgp ? dayRecord.sgp : "-";
+    let sdyVal = dayRecord.sdy && "" !== dayRecord.sdy ? dayRecord.sdy : "-";
+
+    dlTableBody.innerHTML += `<tr>
+      <td>${item.dateStr}</td>
+      <td>${item.dayName}</td>
+      <td>${hkVal}</td>
+      <td>${sgpVal}</td>
+      <td>${sdyVal}</td>
+    </tr>`;
+  });
+
+  setTimeout(() => {
+    html2canvas(downloadCard, {
+      backgroundColor: null,
+      scale: 2 // Kualitas High Definition (HD) tajam
+    }).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "Tunggal-Paito-Live-Result-Hari-ini.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+
+      this.innerHTML = originalBtnText;
+      this.disabled = false;
+    }).catch(err => {
+      console.error("Gagal mendownload gambar:", err);
+      alert("Terjadi kesalahan saat mengunduh gambar.");
+      this.innerHTML = originalBtnText;
+      this.disabled = false;
+    });
+  }, 200);
+});
 </script>
 <script>
 document.addEventListener("contextmenu",(e=>e.preventDefault()));
