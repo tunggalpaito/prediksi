@@ -3,7 +3,7 @@
 <head>
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>Prediksi Togel Hari Ini AM 2DB HK - Tunggal Paito</title>
+<title>Prediksi Togel Hari Ini AM 2DB HK POOLS - Tunggal Paito</title>
 <meta name="description" content="AM 2DB HK adalah angka main di 2d belakang dari tunggal paito sebanyak 4 digit. Dapatkan bocoran angka main, paito warna, dan update keluaran tercepat." />
 <meta name="keywords" content="prediksi togel hari ini hk, prediksi hongkong bbfs, tunggal paito hk, angka jitu hk hari ini, bocoran hk akurat, paito warna hk" />
 <meta name="author" content="Tunggal Paito Official" />
@@ -536,14 +536,18 @@ get(child(dbRef,"live/hongkong")).then((snapshot)=>{
         let countX = 0;
         let rowsHtml = "";
 
-        // Hitung statistik untuk 28 data penuh
+        // Hitung statistik untuk 28 data penuh (Status "?" diabaikan)
         last28.forEach((item) => {
             const gIdx = entries.findIndex(e => e.dateStr === item.dateStr);
             const res = hitungTrekItem(item, gIdx, entries);
             if (!res) return;
             rowsHtml += res.rowHtml;
-            if (res.status === "✔") countCentang++;
-            else countX++;
+            
+            if (res.status === "✔") {
+                countCentang++;
+            } else if (res.status === "X") {
+                countX++;
+            }
         });
 
         let totalCombinedHtml = `
@@ -592,7 +596,12 @@ document.getElementById("btn-download").addEventListener("click", function() {
             let res = hitungTrekItem(item, gIdx, entries);
             if(!res) return;
             rHtml += res.rowHtml;
-            if(res.status === "✔") cCentang++; else cX++;
+            
+            if (res.status === "✔") {
+                cCentang++;
+            } else if (res.status === "X") {
+                cX++;
+            }
         });
 
         let summary10Html = `
