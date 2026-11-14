@@ -8,7 +8,7 @@
 <meta name="keywords" content="prediksi togel hari ini sgp, prediksi singapore bbfs, tunggal paito sgp, angka jitu sgp hari ini, bocoran sgp akurat, paito warna sgp" />
 <meta name="author" content="Tunggal Paito Official" />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-<link rel="canonical" href="https://tunggalpaito.online/prediksi/angka-main/sgp" />
+<link rel="canonical" href="https://tunggalpaito.online/prediksi/angka-main/sgp/" />
 
 <!-- Library html2canvas untuk fitur download gambar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -455,7 +455,7 @@ function hitungTrekItem(item, globalIndex, entries) {
     let scores = {}; for(let i=0; i<=9; i++) scores[i]=2;
     let [as, kop, kepala, ekor] = digits;
     
-        scores[(as * 4 + ekor * 8) % 10] += 6;
+    scores[(as * 4 + ekor * 8) % 10] += 6;
     scores[Math.abs(kop * 6 - kepala * 7) % 10] += 6;
     scores[(as + kop * 7 + ekor * 3) % 10] += 6;
     scores[(kepala * 6 + ekor * 4) % 10] += 6;
@@ -484,7 +484,6 @@ function hitungTrekItem(item, globalIndex, entries) {
     scores[(kop * 3 + ekor * 6) % 10] += 6;
     scores[(as + kepala * 3 + ekor * 7) % 10] += 6;
 
-    
     let allRankedDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number);
     let angkaMain4 = allRankedDigits.slice(0, 4);
 
@@ -546,14 +545,18 @@ get(child(dbRef,"live/singapore")).then((snapshot)=>{
         let countX = 0;
         let rowsHtml = "";
 
-        // Hitung statistik untuk 28 data penuh
+        // Hitung statistik untuk 28 data penuh (Status "?" diabaikan)
         last28.forEach((item) => {
             const gIdx = entries.findIndex(e => e.dateStr === item.dateStr);
             const res = hitungTrekItem(item, gIdx, entries);
             if (!res) return;
             rowsHtml += res.rowHtml;
-            if (res.status === "✔") countCentang++;
-            else countX++;
+            
+            if (res.status === "✔") {
+                countCentang++;
+            } else if (res.status === "X") {
+                countX++;
+            }
         });
 
         let totalCombinedHtml = `
@@ -602,7 +605,12 @@ document.getElementById("btn-download").addEventListener("click", function() {
             let res = hitungTrekItem(item, gIdx, entries);
             if(!res) return;
             rHtml += res.rowHtml;
-            if(res.status === "✔") cCentang++; else cX++;
+            
+            if (res.status === "✔") {
+                cCentang++;
+            } else if (res.status === "X") {
+                cX++;
+            }
         });
 
         let summary10Html = `
