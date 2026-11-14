@@ -491,7 +491,6 @@ function hitungTrekItem(item, globalIndex, entries) {
     scores[(as * kop + kepala * ekor + kop * kepala + ekor * as + 5) % 10] += 8;
     scores[(as + kop + kepala + ekor + 2026) % 10] += 9;
 
-    
     let allRankedDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number);
     let angkaMain4 = allRankedDigits.slice(0, 4);
 
@@ -528,7 +527,7 @@ function hitungTrekItem(item, globalIndex, entries) {
     return { rowHtml, status };
 }
 
-// AMBIL DATA RESULT DARI FIREBASE live/hongkong
+// AMBIL DATA RESULT DARI FIREBASE live/data-hklotto
 get(child(dbRef,"live/data-hklotto")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
@@ -553,14 +552,18 @@ get(child(dbRef,"live/data-hklotto")).then((snapshot)=>{
         let countX = 0;
         let rowsHtml = "";
 
-        // Hitung statistik untuk 28 data penuh
+        // Hitung statistik untuk 28 data penuh (Status "?" diabaikan)
         last28.forEach((item) => {
             const gIdx = entries.findIndex(e => e.dateStr === item.dateStr);
             const res = hitungTrekItem(item, gIdx, entries);
             if (!res) return;
             rowsHtml += res.rowHtml;
-            if (res.status === "✔") countCentang++;
-            else countX++;
+            
+            if (res.status === "✔") {
+                countCentang++;
+            } else if (res.status === "X") {
+                countX++;
+            }
         });
 
         let totalCombinedHtml = `
@@ -590,7 +593,7 @@ get(child(dbRef,"live/data-hklotto")).then((snapshot)=>{
 
 // FITUR DOWNLOAD GAMBAR HANYA 10 TREK TERAKHIR
 document.getElementById("btn-download").addEventListener("click", function() {
-    get(child(dbRef,"live/hongkong")).then((snapshot)=>{
+    get(child(dbRef,"live/data-hklotto")).then((snapshot)=>{
         if(!snapshot.exists()) return;
         const data = snapshot.val();
         const entries = Object.keys(data).map(dateStr => {
@@ -609,7 +612,12 @@ document.getElementById("btn-download").addEventListener("click", function() {
             let res = hitungTrekItem(item, gIdx, entries);
             if(!res) return;
             rHtml += res.rowHtml;
-            if(res.status === "✔") cCentang++; else cX++;
+            
+            if(res.status === "✔") {
+                cCentang++;
+            } else if(res.status === "X") {
+                cX++;
+            }
         });
 
         let summary10Html = `
