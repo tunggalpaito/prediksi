@@ -215,7 +215,7 @@
 
     <header> 
         <div class=header-top> 
-            <h1>KOMANDO</h1> 
+            <h1>KOMANDO SIAP SIAGA</h1> 
             <div> 
                 <span id=badge-role-user class=badge-status>TIM LAPANGAN</span> 
                 <button onclick=logoutAplikasi() style="background:0 0;border:none;color:var(--danger);font-size:.75rem;cursor:pointer;margin-left:8px;font-weight:700">[Keluar]</button> 
@@ -244,7 +244,7 @@
                 <div class=card-title><span>Laporan Lapangan & Patroli</span></div> 
                 <div class=gps-box> 
                     <div style="flex:1; margin-right:8px;"> 
-                        <strong style=font-size:.75rem;color:var(--primary);text-transform:uppercase>Koordinat GPS Real-Time:</strong> 
+                        <strong style=font-size:.75rem;color:var(--primary);text-transform:uppercase>Koordinat GPS :</strong> 
                         <div id=gps-text style=font-size:.78rem;font-weight:600;margin-top:2px;">Mendeteksi posisi GPS...</div> 
                     </div> 
                     <button class="btn btn-primary btn-sm" onclick="ambilLokasiGPSRealtime()" style="margin-top:0; white-space:nowrap;">📍 Refresh GPS</button>
@@ -265,29 +265,43 @@
                         <input id=petugas readonly style=background:var(--bg-deep);color:var(--text-muted)> 
                     </div> 
                     <div class=form-group> 
-                        <label>Pos Jaga</label> 
-                        <input id=pos-petugas-aktif readonly style=background:var(--bg-deep);color:var(--primary);font-weight:700> 
-                    </div> 
-                </div> 
-                <div class=grid-2> 
-                    <div class=form-group> 
-                        <label>Blok / Area</label> 
-                        <input id=blok placeholder="Blok D-14"> 
-                    </div> 
-                    <div class=form-group> 
-                        <label>Kondisi</label> 
-                        <select id=jenis-laporan> 
-                            <option value="Patroli Aman">Patroli Rutin (Aman)</option> 
-                            <option value="Pencurian TBS">DARURAT: Pencurian TBS</option> 
-                            <option value="Kebakaran Lahan">DARURAT: Titik Api / Karhutla</option> 
-                            <option value="Orang Mencurigakan">Orang / Kendaraan Asing</option> 
-                            <option value="Kerusakan Infrastruktur">Kerusakan Fasilitas</option> 
+                        <label>Pos Jaga Anda</label> 
+                        <select id=pos-petugas-aktif onchange="simpanPosLokal(this.value)" style="font-weight:700; color:var(--primary);">
+                            <!-- Pilihan pos dimuat otomatis dari daftar pos Komandan -->
                         </select> 
                     </div> 
                 </div> 
+                
+                <div class=grid-2> 
+                    <div class=form-group> 
+                        <label>Blok / Area</label> 
+                        <input id=blok placeholder="Blok D-14 atau Lokasi"> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Kondisi / Status Laporan</label> 
+                        <input id=jenis-laporan placeholder="Ketik atau pilih cepat..."> 
+                    </div> 
+                </div> 
+
+                <!-- PILIHAN KONDISI CEPAT -->
+                <div class="form-group" style="position:relative; margin-bottom:14px;">
+                    <button type="button" onclick="toggleMenuKondisi()" class="btn btn-outline" style="display:flex; justify-content:space-between; align-items:center; margin-top:0; font-size:0.8rem; font-weight:700; background:var(--bg-deep);">
+                        <span>📌 Pilih dari Kondisi Sering Dipakai</span>
+                        <span id="ikon-panah-kondisi">▼</span>
+                    </button>
+                    
+                    <div id="dropdown-kondisi-cepat" style="display:none; position:absolute; top:100%; left:0; right:0; background:var(--surface-card); border:1px solid var(--border); border-radius:12px; margin-top:4px; max-height:190px; overflow-y:auto; z-index:50; box-shadow:0 10px 25px rgba(0,0,0,0.5); padding:8px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding:4px 8px; margin-bottom:4px; border-bottom:1px solid var(--border);">
+                            <span style="font-size:0.7rem; font-weight:700; color:var(--text-muted);">PILIH ATAU SIMPAN</span>
+                            <button type="button" onclick="simpanKondisiFavorit()" style="background:0 0; border:none; color:var(--primary); font-size:0.7rem; cursor:pointer; font-weight:700;">💾 Simpan Input Ini</button>
+                        </div>
+                        <div id="list-kondisi-items" style="display:flex; flex-direction:column; gap:4px;"></div>
+                    </div>
+                </div>
+
                 <div class=form-group> 
                     <label>Catatan Detail</label> 
-                    <textarea id=keterangan rows=3 placeholder="Tulis Laporan"></textarea> 
+                    <textarea id=keterangan rows=3 placeholder="Tulis Laporan / Keterangan lengkap..."></textarea> 
                 </div> 
                 <div class=form-group> 
                     <label>Foto Bukti</label> 
@@ -365,7 +379,7 @@
         <!-- TAB CHECKPOINT / POS -->
         <section id=tab-darurat class=tab-section> 
             <div class=card> 
-                <div class=card-title><span>Pilih Pos Jaga Anda</span></div> 
+                <div class=card-title><span>Check-in Pos Jaga Shift Anda</span></div> 
                 <p style=font-size:.82rem;color:var(--text-muted);margin-bottom:12px> Ketuk tombol pos di bawah untuk mencatat posisi shift aktif Anda saat ini. </p> 
                 <div id=container-tombol-pos class=grid-2></div> 
             </div> 
@@ -405,11 +419,12 @@
 
                 <div class=card style="border:1px solid var(--accent);background:rgba(245,158,11,.05)"> 
                     <div class=card-title style=color:var(--accent)><span>⚙️ Kelola Daftar Pos / Tempat Jaga</span></div> 
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Komandan membuat dan menentukan daftar pos di sini:</p>
                     <div class=form-group> 
                         <label>Nama Pos / Tempat Baru</label> 
                         <input id=input-nama-pos-baru placeholder="Contoh: Pos Baru / Blok C"> 
                     </div> 
-                    <button class="btn btn-accent" onclick=tambahPosBaru()>Tambah Pos Jaga</button> 
+                    <button class="btn btn-accent" onclick=tambahPosBaru()>Tambah Pos Jaga Baru</button> 
                     <div id=list-pengaturan-pos style="margin-top:14px;">Memuat daftar pos...</div> 
                 </div> 
 
@@ -447,7 +462,6 @@
                     </div>
                 </div> 
 
-                <!-- PANEL PENGHAPUSAN ARSIP SKALA BESAR (BULK DELETE) -->
                 <div class=card style="border:1px solid var(--danger);background:rgba(244,63,94,.05)"> 
                     <div class=card-title style=color:var(--danger)><span>🗑️ Pembersihan Arsip Skala Besar</span></div> 
                     <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Hapus seluruh arsip laporan atau log kendaraan untuk mengosongkan penyimpanan database:</p>
@@ -551,7 +565,6 @@
                     </select> 
                 </div>
 
-                <!-- KOREKSI: Label Nama Pemain yang Sedang di Meja Ini -->
                 <div style="background:var(--bg-deep); padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-bottom:12px; font-size:0.82rem; display:flex; justify-content:space-between; align-items:center;">
                     <span>👥 Pemain di Meja Ini:</span>
                     <strong id="label-pemain-meja" style="color:var(--primary);">Menghubungkan...</strong>
@@ -600,13 +613,14 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
         let imgBase64="", pubImgBase64="", myDeviceSessionId = localStorage.getItem("siap_sawit_device_id");
-        let currentGpsString = "Area Perkebunan (GPS Belum Aktif)";
+        let currentGpsString = "Area (GPS Belum Aktif)";
         
         if(!myDeviceSessionId){
             myDeviceSessionId="dev_"+Date.now()+Math.random().toString(36).substring(2,7);
             localStorage.setItem("siap_sawit_device_id", myDeviceSessionId);
         }
 
+        // Perbaikan GPS: Penanganan error lengkap & timeout 20 detik
         function ambilLokasiGPSRealtime() {
             const gpsTextElement = document.getElementById("gps-text");
             if (navigator.geolocation) {
@@ -620,13 +634,25 @@
                         gpsTextElement.innerText = currentGpsString;
                     },
                     (error) => {
-                        currentGpsString = "Area Perkebunan (GPS Ditolak/Gagal)";
+                        let pesanError = "Gagal mendeteksi GPS";
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                pesanError = "Izin GPS ditolak";
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                pesanError = "Lokasi tidak tersedia (Aktifkan GPS HP).";
+                                break;
+                            case error.TIMEOUT:
+                                pesanError = "Waktu habis. Coba di area terbuka.";
+                                break;
+                        }
+                        currentGpsString = `Area (${pesanError})`;
                         gpsTextElement.innerText = currentGpsString;
                     },
-                    { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+                    { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
                 );
             } else {
-                currentGpsString = "Area Perkebunan (GPS Tidak Didukung)";
+                currentGpsString = "Area (GPS Tidak Didukung)";
                 gpsTextElement.innerText = currentGpsString;
             }
         }
@@ -692,7 +718,7 @@
                 if(sandiInput !== sandiBenar) return alert("Sandi Tim Salah!");
 
                 if(window.namaOtomatisStaf){
-                    berhasilLoginTim(window.namaOtomatisStaf, window.hpOtomatisStaf || "-", "Pos Utama");
+                    berhasilLoginTim(window.namaOtomatisStaf, window.hpOtomatisStaf || "-", "Pos Utama Gerbang 1");
                 } else {
                     const namaPetugas = document.getElementById("input-nama-tim").value.trim();
                     let hpVal = document.getElementById("input-hp-tim").value.trim();
@@ -770,12 +796,23 @@
         
         function terapkanHakAkses(e,t,a){
             document.getElementById("petugas").value=t;
-            document.getElementById("pos-petugas-aktif").value=a||"Pos Utama";
+            const selectPos = document.getElementById("pos-petugas-aktif");
+            if(selectPos && a) selectPos.value = a;
+            
             const n=document.getElementById("badge-role-user"),o=document.getElementById("panel-khusus-admin");
             "komandan"===e?(n.innerText="KOMANDAN / ADMIN",n.style.backgroundColor="rgba(245, 158, 11, 0.2)",n.style.color="#fbbf24",o.style.display="block"):(n.innerText="TIM LAPANGAN",n.style.backgroundColor="var(--primary-glow)",n.style.color="var(--primary)",o.style.display="none");
             
             muatArsipLaporan();
             muatPetugasPos();
+        }
+
+        function simpanPosLokal(posBaru){
+            localStorage.setItem("siap_sawit_pos", posBaru);
+            const namaPetugas = document.getElementById("petugas").value || "Petugas";
+            const role = localStorage.getItem("siap_sawit_role");
+            if(role === "tim"){
+                db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).update({ pos: posBaru });
+            }
         }
         
         function logoutAplikasi(){
@@ -817,14 +854,19 @@
                 }
 
                 const containerTombol = document.getElementById("container-tombol-pos");
+                const selectPosForm = document.getElementById("pos-petugas-aktif");
                 const selectTujuan = document.getElementById("select-pos-tujuan");
                 const listPengaturan = document.getElementById("list-pengaturan-pos");
 
-                let htmlTombol = "", htmlTujuan = "", htmlPengaturan = "";
+                let htmlTombol = "", htmlSelectForm = "", htmlTujuan = "", htmlPengaturan = "";
+                let savedPos = localStorage.getItem("siap_sawit_pos") || "Pos Utama Gerbang 1";
 
                 Object.keys(dataPos).forEach(key => {
                     let namaPos = dataPos[key];
+                    let isSelected = (namaPos === savedPos) ? "selected" : "";
+                    
                     htmlTombol += `<button class="btn btn-outline" onclick='catatCheckpoint("${namaPos}")'>${namaPos}</button>`;
+                    htmlSelectForm += `<option value="${namaPos}" ${isSelected}>${namaPos}</option>`;
                     htmlTujuan += `<option value="${namaPos}">${namaPos}</option>`;
                     htmlPengaturan += `<div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-deep); padding:8px 12px; border-radius:8px; margin-bottom:6px; border:1px solid var(--border);">
                         <span style="font-size:0.85rem; font-weight:600;">📍 ${namaPos}</span>
@@ -833,6 +875,7 @@
                 });
 
                 if(containerTombol) containerTombol.innerHTML = htmlTombol;
+                if(selectPosForm) selectPosForm.innerHTML = htmlSelectForm;
                 if(selectTujuan) selectTujuan.innerHTML = htmlTujuan;
                 if(listPengaturan) listPengaturan.innerHTML = htmlPengaturan;
             });
@@ -1162,12 +1205,71 @@
             const o=new Date,i=o.getFullYear(),s=String(o.getMonth()+1).padStart(2,"0"),l={id:Date.now(),waktu:o.toLocaleString("id-ID"),petugas:`[PUBLIK/TAMU] ${e} (${t||"-"})`,blok:"Gerbang / Area Luar",jenis:`LAPORAN TAMU: ${a}`,keterangan:n,gps:currentGpsString,maps:"-",foto:pubImgBase64||""};
             db.ref(`siap_sawit/arsip_laporan/${i}/${s}`).push(l,(e=>{e?alert("Gagal: "+e.message):(alert("Laporan publik berhasil dikirim!"),document.getElementById("pub-nama").value="",document.getElementById("pub-kontak").value="",document.getElementById("pub-keterangan").value="",document.getElementById("public-photo-preview").style.display="none",pubImgBase64="",tutupFormPublik())}))
         }
+
+        // PILIHAN KONDISI CEPAT & PENYIMPANAN LOKAL
+        function toggleMenuKondisi(){
+            const dropdown = document.getElementById("dropdown-kondisi-cepat");
+            const ikon = document.getElementById("ikon-panah-kondisi");
+            if(dropdown.style.display === "none" || dropdown.style.display === ""){
+                dropdown.style.display = "block";
+                ikon.innerText = "▲";
+                muatDaftarKondisiDropdown();
+            } else {
+                dropdown.style.display = "none";
+                ikon.innerText = "▼";
+            }
+        }
+
+        function muatDaftarKondisiDropdown(){
+            const container = document.getElementById("list-kondisi-items");
+            let defaultFavorit = [
+                "Patroli Aman", 
+                "DARURAT: Pencurian TBS", 
+                "DARURAT: Kebakaran Lahan", 
+                "Orang / Kendaraan Asing", 
+                "Kerusakan Fasilitas",
+                "Pintu Gerbang Terbuka",
+                "Aktivitas Bongkar Muat"
+            ];
+            let saved = JSON.parse(localStorage.getItem("siap_sawit_kondisi_favorit") || JSON.stringify(defaultFavorit));
+            
+            let html = "";
+            saved.forEach(item => {
+                html += `<button type="button" onclick="pilihKondisi('${item}')" style="background:var(--bg-deep); border:1px solid var(--border); color:var(--text-main); font-size:0.8rem; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600; text-align:left; transition:background 0.2s;">📌 ${item}</button>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function pilihKondisi(teks){
+            document.getElementById("jenis-laporan").value = teks;
+            document.getElementById("dropdown-kondisi-cepat").style.display = "none";
+            document.getElementById("ikon-panah-kondisi").innerText = "▼";
+        }
+
+        function simpanKondisiFavorit(){
+            let val = document.getElementById("jenis-laporan").value.trim();
+            if(!val) return alert("Ketik kondisi terlebih dahulu pada kolom kondisi sebelum disimpan!");
+            
+            let defaultFavorit = ["Patroli Aman", "DARURAT: Pencurian TBS", "DARURAT: Kebakaran Lahan", "Orang / Kendaraan Asing", "Kerusakan Fasilitas"];
+            let saved = JSON.parse(localStorage.getItem("siap_sawit_kondisi_favorit") || JSON.stringify(defaultFavorit));
+            
+            if(!saved.includes(val)){
+                saved.push(val);
+                localStorage.setItem("siap_sawit_kondisi_favorit", JSON.stringify(saved));
+                muatDaftarKondisiDropdown();
+                alert(`Kondisi "${val}" berhasil disimpan ke daftar cepat!`);
+            } else {
+                alert("Kondisi ini sudah ada di daftar.");
+            }
+        }
+
         function simpanLaporan(){
-            const e=document.getElementById("petugas").value.trim(),t=document.getElementById("pos-petugas-aktif").value.trim(),a=document.getElementById("blok").value.trim(),n=document.getElementById("jenis-laporan").value,o=document.getElementById("keterangan").value.trim(),shiftVal=document.getElementById("pilih-shift").value;
-            if(!e||!a)return void alert("Harap isi Nama Petugas dan Blok lokasi!");
+            const e=document.getElementById("petugas").value.trim(),t=document.getElementById("pos-petugas-aktif").value.trim(),a=document.getElementById("blok").value.trim(),n=document.getElementById("jenis-laporan").value.trim(),o=document.getElementById("keterangan").value.trim(),shiftVal=document.getElementById("pilih-shift").value;
+            if(!e||!a||!n)return void alert("Harap isi Nama Petugas, Blok lokasi, dan Kondisi Laporan!");
             const i=new Date,s=i.getFullYear(),l=String(i.getMonth()+1).padStart(2,"0"),r={id:Date.now(),waktu:i.toLocaleString("id-ID"),petugas:`${e} (${t})`,blok:a,jenis:n,keterangan:o||"Tanpa catatan.",gps:`${currentGpsString} | ${shiftVal}`,maps:"-",foto:imgBase64||""};
             db.ref(`siap_sawit/arsip_laporan/${s}/${l}`).push(r,(e=>{e?alert("Gagal: "+e.message):(alert("Laporan berhasil dikirim!"),document.getElementById("keterangan").value="",document.getElementById("photo-preview").style.display="none",imgBase64="",muatArsipLaporan())}))
         }
+        
         function muatArsipLaporan(){
             const e=document.getElementById("filter-tahun").value,t=document.getElementById("filter-bulan").value,a=document.getElementById("list-laporan"),role=localStorage.getItem("siap_sawit_role");
             const keyword = (document.getElementById("input-pencarian-arsip").value || "").toLowerCase();
@@ -1185,7 +1287,7 @@
                     if(keyword && !textCheck.includes(keyword)) return;
                     
                     count++;
-                    n+=`<div class="log-item ${item.jenis.includes("DARURAT")||item.jenis.includes("TAMU")?"urgent":""}">
+                    n+=`<div class="log-item ${item.jenis.toUpperCase().includes("DARURAT")||item.jenis.toUpperCase().includes("TAMU")||item.jenis.toUpperCase().includes("PENCURIAN")||item.jenis.toUpperCase().includes("KEBAKARAN")?"urgent":""}">
                         ${(role === "komandan") ? `<button onclick="hapusLaporan('${document.getElementById("filter-tahun").value}', '${document.getElementById("filter-bulan").value}', '${keyId}')" style="position:absolute; top:10px; right:10px; background:var(--danger); border:none; color:#fff; font-size:0.7rem; padding:3px 8px; border-radius:6px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
                         <div class="log-header"><span>🕒 ${item.waktu}</span><strong>📍 ${item.blok}</strong></div>
                         <div class="log-title">${item.jenis}</div>
@@ -1199,7 +1301,7 @@
             }))
         }
         function kirimWhatsApp(){
-            const e=document.getElementById("petugas").value.trim()||"Petugas",t=document.getElementById("pos-petugas-aktif").value.trim()||"Pos",a=document.getElementById("blok").value.trim()||"-",n=document.getElementById("jenis-laporan").value,o=document.getElementById("keterangan").value.trim()||"-",i=(new Date).toLocaleString("id-ID"),shiftVal=document.getElementById("pilih-shift").value,s=`https://wa.me/6281234567890?text=${encodeURIComponent(`*LAPORAN KOMANDO*\n*Waktu:* ${i}\n*Petugas:* ${e}\n*Pos:* ${t}\n*Shift:* ${shiftVal}\n*GPS:* ${currentGpsString}\n*Kondisi:* ${n}\n*Blok:* ${a}\n*Catatan:* ${o}`)}`;
+            const e=document.getElementById("petugas").value.trim()||"Petugas",t=document.getElementById("pos-petugas-aktif").value.trim()||"Pos",a=document.getElementById("blok").value.trim()||"-",n=document.getElementById("jenis-laporan").value.trim()||"Patroli",o=document.getElementById("keterangan").value.trim()||"-",i=(new Date).toLocaleString("id-ID"),shiftVal=document.getElementById("pilih-shift").value,s=`https://wa.me/6281234567890?text=${encodeURIComponent(`*LAPORAN KOMANDO*\n*Waktu:* ${i}\n*Petugas:* ${e}\n*Pos:* ${t}\n*Shift:* ${shiftVal}\n*GPS:* ${currentGpsString}\n*Kondisi:* ${n}\n*Blok:* ${a}\n*Catatan:* ${o}`)}`;
             window.open(s,"_blank")
         }
         function simpanKendaraan(){
@@ -1225,7 +1327,12 @@
             const tanggalHariIni = (new Date).toISOString().slice(0,10);
             db.ref(`siap_sawit/petugas_pos/${safeKey}`).set({lokasi:posTujuan,nama:namaPetugas,hp:localStorage.getItem("siap_sawit_hp")||"-",waktuUpdate:waktuStr,tanggal:tanggalHariIni});
             db.ref(`siap_sawit/laporan_piket`).push({id:Date.now(),waktu:waktuStr,tanggal:tanggalHariIni,petugas:namaPetugas,lokasi:posTujuan,keterangan:"Check-in Shift"},(err=>{
-                if(!err){ localStorage.setItem("siap_sawit_pos", posTujuan); document.getElementById("pos-petugas-aktif").value = posTujuan; alert(`Berhasil tercatat di ${posTujuan}.`); }
+                if(!err){ 
+                    localStorage.setItem("siap_sawit_pos", posTujuan); 
+                    document.getElementById("pos-petugas-aktif").value = posTujuan; 
+                    simpanPosLokal(posTujuan);
+                    alert(`Berhasil tercatat di ${posTujuan}.`); 
+                }
             }));
         }
         function muatPetugasPos(){
@@ -1357,13 +1464,22 @@
                 } catch(err){}
                 window.cameraStreamTrack = null;
             }
+            if(window.globalCameraStream){
+                window.globalCameraStream.getTracks().forEach(track => track.stop());
+                window.globalCameraStream = null;
+            }
         }
 
-        async function nyalakanSenterKamera(){
+        // Perbaikan Senter Kamera Belakang yang Stabil
+        async function nyalakanSenterKamera() {
             try {
                 if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
                     nyalakanSenterLayar();
                     return;
+                }
+
+                if(window.globalCameraStream){
+                    window.globalCameraStream.getTracks().forEach(track => track.stop());
                 }
 
                 const stream = await navigator.mediaDevices.getUserMedia({
@@ -1372,6 +1488,7 @@
                     return await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
                 });
 
+                window.globalCameraStream = stream;
                 const track = stream.getVideoTracks()[0];
                 window.cameraStreamTrack = track;
                 
@@ -1388,6 +1505,7 @@
                     alert("⚡ Senter LED Kamera Belakang Berhasil Dinyalakan!");
                 } else {
                     track.stop();
+                    window.globalCameraStream = null;
                     window.cameraStreamTrack = null;
                     nyalakanSenterLayar();
                 }
@@ -1828,6 +1946,7 @@
         window.onload=function(){
             muatTemaTersimpan();
             ambilLokasiGPSRealtime();
+            muatDaftarPos();
             
             const e=localStorage.getItem("siap_sawit_role"),t=localStorage.getItem("siap_sawit_petugas"),a=localStorage.getItem("siap_sawit_pos"),hpStored=localStorage.getItem("siap_sawit_hp")||"-";
             if(e){
@@ -1844,7 +1963,7 @@
             db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).on("value", (snap) => {
                 const dataStaf = snap.val();
                 if(dataStaf && dataStaf.nama && document.getElementById("login-overlay").style.display !== "none"){
-                    berhasilLoginTim(dataStaf.nama, dataStaf.hp || "-", "Pos Utama");
+                    berhasilLoginTim(dataStaf.nama, dataStaf.hp || "-", "Pos Utama Gerbang 1");
                 }
             });
 
@@ -1854,7 +1973,7 @@
             const n=document.getElementById("filter-tahun"),o=(new Date).getFullYear(); let i="";
             for(let e=o;e>=o-3;e--)i+=`<option value="${e}">${e}</option>`; n.innerHTML=i;
             document.getElementById("filter-bulan").value=String((new Date).getMonth()+1).padStart(2,"0");
-            muatDaftarPos(); muatArsipLaporan(); muatPetugasPos(); muatKontakDarurat(); muatTimOnlineKomandan(); muatPermintaanIzin();
+            muatArsipLaporan(); muatPetugasPos(); muatKontakDarurat(); muatTimOnlineKomandan(); muatPermintaanIzin();
             
             inisialisasiListenerCatur();
         };
