@@ -1,0 +1,1886 @@
+<!doctype html> 
+<html lang=id> 
+<head> 
+    <meta charset=UTF-8> 
+    <meta name=viewport content="width=device-width,initial-scale=1"> 
+    <title>KOMANDO | Next-Gen Security Hub</title> 
+    <script src=https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js></script> 
+    <script src=https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js></script> 
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel=stylesheet> 
+    <style>
+        body.theme-emerald {
+            --bg-deep:#090d16; --surface:#131c2e; --surface-card:#1a263d; --primary:#10b981; --primary-glow:rgba(16, 185, 129, 0.25); --accent:#f59e0b; --danger:#f43f5e; --text-main:#f8fafc; --text-muted:#94a3b8; --border:#2a3954; --radius:20px;
+        }
+        body.theme-cyberpunk {
+            --bg-deep:#030712; --surface:#111827; --surface-card:#1f2937; --primary:#06b6d4; --primary-glow:rgba(6, 182, 212, 0.3); --accent:#ec4899; --danger:#ef4444; --text-main:#f3f4f6; --text-muted:#9ca3af; --border:#374151; --radius:16px;
+        }
+        body.theme-navy {
+            --bg-deep:#0f172a; --surface:#1e293b; --surface-card:#334155; --primary:#3b82f6; --primary-glow:rgba(59, 130, 246, 0.3); --accent:#fbbf24; --danger:#ef4444; --text-main:#f8fafc; --text-muted:#94a3b8; --border:#475569; --radius:20px;
+        }
+        body.theme-sunset {
+            --bg-deep:#18181b; --surface:#27272a; --surface-card:#3f3f46; --primary:#f97316; --primary-glow:rgba(249, 115, 22, 0.3); --accent:#eab308; --danger:#f43f5e; --text-main:#fafafa; --text-muted:#a1a1aa; --border:#52525b; --radius:20px;
+        }
+
+        *{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif}
+        body{background-color:var(--bg-deep);color:var(--text-main);padding-bottom:100px;transition:background 0.3s ease;}
+        
+        #login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,15,.9);backdrop-filter:blur(16px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px}
+        .login-card{background:var(--surface);border:1px solid var(--border);width:100%;max-width:400px;padding:32px 24px;border-radius:var(--radius);box-shadow:0 25px 50px -12px rgba(0,0,0,.5);text-align:center;max-height:90vh;overflow-y:auto}
+        .login-card h2{color:var(--text-main);margin-bottom:6px;font-size:1.75rem;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,var(--primary) 0,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .login-card p{font-size:.85rem;color:var(--text-muted);margin-bottom:24px}
+        
+        header{background:var(--surface);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);color:var(--text-main);padding:16px 20px;position:sticky;top:0;z-index:100}
+        .header-top{display:flex;justify-content:space-between;align-items:center}
+        .header-top h1{font-size:1.25rem;font-weight:800;letter-spacing:.5px;color:var(--primary)}
+        .badge-status{background-color:var(--primary-glow);color:var(--primary);font-weight:700;font-size:.7rem;padding:6px 10px;border-radius:30px;border:1px solid var(--primary)}
+        #live-clock{font-size:.75rem;color:var(--text-muted);margin-top:4px;font-weight:500}
+        
+        .container{max-width:540px;margin:0 auto;padding:16px}
+        .tab-section{display:none;animation:fadeIn .25s ease-in-out}
+        .tab-section.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+        
+        .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:0 10px 25px -5px rgba(0,0,0,.2)}
+        .card-title{font-size:1rem;font-weight:700;color:var(--text-main);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+        
+        .form-group{margin-bottom:14px;text-align:left}
+        label{display:block;font-size:.75rem;font-weight:700;margin-bottom:6px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+        input,select,textarea{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font-size:.9rem;background:var(--bg-deep);color:var(--text-main);transition:all .2s}
+        input:focus,select:focus,textarea:focus{outline:0;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-glow)}
+        
+        .btn{display:block;width:100%;padding:12px 16px;border:none;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;text-align:center;margin-top:8px;transition:transform .1s ease,opacity .2s}
+        .btn:active{transform:scale(.98)}
+        .btn-primary{background:var(--primary);color:#000;box-shadow:0 4px 14px var(--primary-glow)}
+        .btn-wa{background:#059669;color:#fff}
+        .btn-call{background:#2563eb;color:#fff}
+        .btn-accent{background:var(--accent);color:#000}
+        .btn-danger{background:var(--danger);color:#fff}
+        .btn-outline{background-color:transparent;color:var(--text-main);border:1px solid var(--border)}
+        .btn-outline:hover{background-color:rgba(255,255,255,.05)}
+        .btn-sm{padding:6px 12px;font-size:.78rem;width:auto;border-radius:8px}
+        
+        .gps-box{background:var(--surface-card);border:1px solid var(--border);padding:12px 14px;border-radius:12px;font-size:.82rem;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+        #photo-preview,#public-photo-preview{max-width:100%;max-height:160px;margin-top:8px;border-radius:10px;display:none;border:1px solid var(--border);object-fit:cover}
+        
+        .log-item{background:var(--surface-card);border:1px solid var(--border);padding:14px;margin-bottom:10px;border-radius:12px;position:relative}
+        .log-item.urgent{border-left:4px solid var(--danger);background:rgba(244,63,94,.08)}
+        .log-header{display:flex;justify-content:space-between;font-size:.72rem;color:var(--text-muted);margin-bottom:6px;font-weight:600;padding-right:60px}
+        .log-title{font-weight:700;font-size:.92rem;margin-bottom:4px;color:var(--text-main)}
+        .log-desc{font-size:.85rem;color:var(--text-muted);line-height:1.4}
+        
+        nav.bottom-nav{position:fixed;bottom:12px;left:16px;right:16px;max-width:540px;margin:0 auto;background:var(--surface);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:18px;display:flex;justify-content:space-around;padding:6px;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+        .nav-btn{flex:1;padding:8px 4px;border:none;background:0 0;font-size:.68rem;font-weight:700;color:var(--text-muted);cursor:pointer;border-radius:12px;transition:all .2s;text-align:center}
+        .nav-btn.active{color:var(--primary);background-color:var(--primary-glow)}
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            width: 100%;
+            max-width: min(92vw, 480px);
+            margin: 12px auto;
+            border: 4px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            flex-shrink: 0;
+        }
+        .square {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: calc(4.5vw + 0.5rem);
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.15s;
+        }
+        .square.light { background-color: #e2e8f0; color: #334155; }
+        .square.dark { background-color: #0f766e; color: #f8fafc; }
+        .square.selected { background-color: var(--accent) !important; box-shadow: inset 0 0 12px rgba(0,0,0,0.6); }
+        .piece-white { color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.7); }
+        .piece-red { color: #f43f5e; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+        .calc-btn { padding: 14px; font-size: 1rem; font-weight: 700; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-card); color: var(--text-main); cursor: pointer; transition: background 0.1s; }
+        .calc-btn:active { background: var(--border); }
+        .calc-btn.op { background: var(--primary-glow); color: var(--primary); }
+        .calc-btn.eq { background: var(--primary); color: #000; }
+        .calc-btn.clear { background: rgba(244, 63, 94, 0.15); color: var(--danger); }
+    </style> 
+</head> 
+<body class="theme-emerald"> 
+    <div id=login-overlay> 
+        <div class=login-card id=card-login-utama> 
+            <h2>KOMANDO</h2> 
+            <p>Next-Gen Security & Monitoring System</p> 
+            <div class=form-group> 
+                <label>Pilih Akses Masuk</label> 
+                <select id=pilih-role onchange=gantiFormLogin() style=font-weight:700> 
+                    <option value=tim>👤 Staf / Tim Lapangan</option> 
+                    <option value=komandan>🛡️ Komandan / Admin Posko</option> 
+                </select> 
+            </div> 
+            
+            <div id=wrapper-login-tim> 
+                <div id="wrapper-pendaftaran-baru" style="display:none;">
+                    <div class=form-group> 
+                        <label>Nama Petugas / Regu</label> 
+                        <input id=input-nama-tim placeholder="Bpk. Hendra (Regu A)"> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Nomor WhatsApp HP Anda</label> 
+                        <input id=input-hp-tim placeholder="08123456789"> 
+                    </div>
+                </div>
+
+                <div id="wrapper-sapaan-tim" style="margin-bottom:14px; text-align:left; display:none;">
+                    <label id="label-sapaan-otomatis" style="color:var(--primary); font-size:0.85rem; text-transform:none; font-weight:700; line-height:1.4;"></label>
+                </div>
+
+                <div class=form-group> 
+                    <label>Sandi Tim</label> 
+                    <input type=password id=input-sandi-tim placeholder=•••••••• style=text-align:center> 
+                </div> 
+                <button class="btn btn-primary" onclick=prosesLoginTim()>Login / Minta Izin</button> 
+            </div> 
+
+            <div id=wrapper-login-komandan style=display:none> 
+                <div class=form-group> 
+                    <label>Sandi Komando</label> 
+                    <input type=password id=input-sandi-komandan placeholder=•••••••• style=text-align:center> 
+                </div> 
+                <button class="btn btn-accent" onclick=prosesLoginKomandan()>Login</button> 
+            </div> 
+
+            <hr style="margin:20px 0;border:0;border-top:1px solid var(--border)"> 
+            <p style=font-size:.8rem;margin-bottom:8px>Tamu atau Publik Ingin Melapor?</p> 
+            <button class="btn btn-outline" onclick=bukaFormPublik()>Portal Laporan Publik</button> 
+        </div> 
+        
+        <div class=login-card id=card-form-publik style=display:none> 
+            <h2>LAPORAN PUBLIK</h2> 
+            <p>Kirim info cepat & darurat ke pos pengamanan</p> 
+            <div class=form-group> 
+                <label>Nama Lengkap</label> 
+                <input id=pub-nama placeholder="Masukkan nama kamu..."> 
+            </div> 
+            <div class=form-group> 
+                <label>WhatsApp / HP Aktif</label> 
+                <input id=pub-kontak placeholder="08123456789"> 
+            </div> 
+            <div class=form-group> 
+                <label>Kategori Laporan</label> 
+                <select id=pub-jenis> 
+                    <option value="Info Umum / Tamu">Tamu / Vendor Masuk Area</option> 
+                    <option value="Temuan Mencurigakan">DARURAT: Aktivitas Mencurigakan</option> 
+                    <option value="Kerusakan / Kendala">Kendala Fasilitas / Jalan</option> 
+                </select> 
+            </div> 
+            <div class=form-group> 
+                <label>Detail Kejadian</label> 
+                <textarea id=pub-keterangan rows=3 placeholder="Ceritakan detail kejadian secara jelas..."></textarea> 
+            </div> 
+            <div class=form-group> 
+                <label>Foto Bukti (Opsional)</label> 
+                <input type=file id=pub-foto-input accept=image/* capture=environment onchange=previewPubFoto(event)> 
+                <img id=public-photo-preview alt="Preview Foto"> 
+            </div> 
+            <button class="btn btn-primary" onclick=kirimLaporanPublik()>Kirim Laporan</button> 
+            <button class="btn btn-outline" style=margin-top:8px onclick=tutupFormPublik()>← Kembali</button> 
+        </div> 
+    </div> 
+
+    <!-- MODAL KEDISIPLINAN -->
+    <div id=modal-kedisiplinan style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,15,.95);z-index:99999;display:none;justify-content:center;align-items:center;padding:20px">
+        <div style="background:var(--surface);border:1px solid var(--border);width:100%;max-width:440px;padding:32px 24px;border-radius:var(--radius);box-shadow:0 25px 50px -12px rgba(0,0,0,.7);text-align:center;">
+            <div style="font-size:2.5rem; margin-bottom:10px;">🛡️</div>
+            <h2 style="color:var(--primary); margin-bottom:12px; font-size:1.5rem; font-weight:800;">AMBANG BATAS TUGAS</h2>
+            <div style="font-size:0.9rem; color:var(--text-main); line-height:1.6; text-align:left; background:var(--bg-deep); padding:16px; border-radius:12px; border:1px solid var(--border); margin-bottom:20px;">
+                <p style="margin-bottom:10px;">⚡ <strong>Disiplin:</strong> Patuhi SOP, jaga waktu shift, dan laporkan setiap kejanggalan tanpa keraguan.</p>
+                <p style="margin-bottom:10px;">🔥 <strong>Berani:</strong> Hadapi ancaman dan gangguan keamanan dengan kepala dingin, tegas, dan penuh tanggung jawab.</p>
+                <p>🦅 <strong>Kesatria:</strong> Lindungi aset dan sesama rekan kerja dengan kehormatan tertinggi sebagai penjaga garda terdepan.</p>
+            </div>
+            <button class="btn btn-primary" onclick="tutupModalKedisiplinan()">SIAP, JALANKAN TUGAS! 🚀</button>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN SENTER OVERLAY -->
+    <div id="flashlight-overlay" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#ffffff; z-index:999999; display:none; flex-direction:column; justify-content:center; align-items:center; padding:20px;">
+        <div style="font-size:3rem; margin-bottom:10px;">🔦</div>
+        <h2 style="color:#000; font-size:1.5rem; margin-bottom:20px; font-weight:800;">SENTER LAYAR AKTIF (MAKSIMAL)</h2>
+        <button class="btn btn-danger" onclick="matikanSenter()" style="max-width:240px; padding:16px; font-size:1rem;">MATIKAN SENTER</button>
+    </div>
+
+    <header> 
+        <div class=header-top> 
+            <h1>KOMANDO</h1> 
+            <div> 
+                <span id=badge-role-user class=badge-status>TIM LAPANGAN</span> 
+                <button onclick=logoutAplikasi() style="background:0 0;border:none;color:var(--danger);font-size:.75rem;cursor:pointer;margin-left:8px;font-weight:700">[Keluar]</button> 
+            </div> 
+        </div> 
+        <div id=live-clock>Sinkronisasi waktu...</div> 
+    </header> 
+
+    <div class=container> 
+        <!-- TAB PATROLI -->
+        <section id=tab-patroli class="tab-section active"> 
+            <div class=card style="border: 1px dashed var(--primary);"> 
+                <div class=card-title><span>🎨 Tema</span></div> 
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">Pilih variasi tema warna latar belakang sesuai selera</p>
+                <div class=form-group style="margin-bottom:0;">
+                    <select id="pilih-tema-hp" onchange="ubahTemaAplikasi(this.value)" style="font-weight:700; color:var(--primary);">
+                        <option value="theme-emerald">🌿 Emerald Deep Forest (Standar)</option>
+                        <option value="theme-cyberpunk">⚡ Cyberpunk Neon Tactical</option>
+                        <option value="theme-navy">⚓ Midnight Navy Steel</option>
+                        <option value="theme-sunset">🔥 Sunset Tactical Amber</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class=card> 
+                <div class=card-title><span>Laporan Lapangan & Patroli</span></div> 
+                <div class=gps-box> 
+                    <div style="flex:1; margin-right:8px;"> 
+                        <strong style=font-size:.75rem;color:var(--primary);text-transform:uppercase>Koordinat GPS Real-Time:</strong> 
+                        <div id=gps-text style=font-size:.78rem;font-weight:600;margin-top:2px;">Mendeteksi posisi GPS...</div> 
+                    </div> 
+                    <button class="btn btn-primary btn-sm" onclick="ambilLokasiGPSRealtime()" style="margin-top:0; white-space:nowrap;">📍 Refresh GPS</button>
+                </div> 
+
+                <div class=form-group style="margin-bottom:14px;">
+                    <label>Shift Petugas</label>
+                    <select id=pilih-shift style="font-weight:700; color:var(--primary);">
+                        <option value="Shift Pagi (06:00 - 14:00)">Shift Pagi</option>
+                        <option value="Shift Siang (14:00 - 22:00)">Shift Siang</option>
+                        <option value="Shift Malam (22:00 - 06:00)">Shift Malam</option>
+                    </select>
+                </div>
+
+                <div class=grid-2> 
+                    <div class=form-group> 
+                        <label>Petugas</label> 
+                        <input id=petugas readonly style=background:var(--bg-deep);color:var(--text-muted)> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Pos Jaga</label> 
+                        <input id=pos-petugas-aktif readonly style=background:var(--bg-deep);color:var(--primary);font-weight:700> 
+                    </div> 
+                </div> 
+                <div class=grid-2> 
+                    <div class=form-group> 
+                        <label>Blok / Area</label> 
+                        <input id=blok placeholder="Blok D-14"> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Kondisi</label> 
+                        <select id=jenis-laporan> 
+                            <option value="Patroli Aman">Patroli Rutin (Aman)</option> 
+                            <option value="Pencurian TBS">DARURAT: Pencurian TBS</option> 
+                            <option value="Kebakaran Lahan">DARURAT: Titik Api / Karhutla</option> 
+                            <option value="Orang Mencurigakan">Orang / Kendaraan Asing</option> 
+                            <option value="Kerusakan Infrastruktur">Kerusakan Fasilitas</option> 
+                        </select> 
+                    </div> 
+                </div> 
+                <div class=form-group> 
+                    <label>Catatan Detail</label> 
+                    <textarea id=keterangan rows=3 placeholder="Tulis Laporan"></textarea> 
+                </div> 
+                <div class=form-group> 
+                    <label>Foto Bukti</label> 
+                    <input type=file id=foto-input accept=image/* capture=environment onchange=previewFoto(event)> 
+                    <img id=photo-preview alt="Preview Foto"> 
+                </div> 
+                <button type=button class="btn btn-primary" onclick=simpanLaporan()>Kirim Laporan</button> 
+                <button type=button class="btn btn-wa" onclick=kirimWhatsApp() style=margin-top:8px>Kirim Ke Komandan</button> 
+            </div> 
+
+            <div class=card> 
+                <div class=card-title style=flex-wrap:wrap;gap:8px> 
+                    <span>Arsip Laporan</span> 
+                    <div style=display:flex;gap:6px> 
+                        <select id=filter-tahun onchange=muatArsipLaporan() style="padding:4px 8px;font-size:.75rem;width:auto"></select> 
+                        <select id=filter-bulan onchange=muatArsipLaporan() style="padding:4px 8px;font-size:.75rem;width:auto"> 
+                            <option value=01>Jan</option><option value=02>Feb</option><option value=03>Mar</option> 
+                            <option value=04>Apr</option><option value=05>Mei</option><option value=06>Jun</option> 
+                            <option value=07>Jul</option><option value=08>Ags</option><option value=09>Sep</option> 
+                            <option value=10>Okt</option><option value=11>Nov</option><option value=12>Des</option> 
+                        </select> 
+                    </div> 
+                </div> 
+                
+                <div class=form-group style="margin-bottom:12px;">
+                    <input type="text" id="input-pencarian-arsip" oninput="muatArsipLaporan()" placeholder="🔍 Cari berdasarkan petugas, blok, atau jenis laporan..." style="font-size:0.85rem; padding:10px 12px;">
+                </div>
+
+                <div id=list-laporan style=font-size:.85rem;color:var(--text-muted)>Memuat arsip...</div> 
+            </div> 
+        </section> 
+
+        <!-- TAB GATE -->
+        <section id=tab-gate class=tab-section> 
+            <div class=card> 
+                <div class=card-title><span>Log Tamu & Kendaraan</span></div> 
+                <div class=grid-2> 
+                    <div class=form-group> 
+                        <label>Nomor Polisi</label> 
+                        <input id=nopol placeholder="BG 8412 XY" style=text-transform:uppercase> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Nama Supir / Tamu</label> 
+                        <input id=supir placeholder="Nama lengkap"> 
+                    </div> 
+                </div> 
+                <div class=grid-2> 
+                    <div class=form-group> 
+                        <label>Status Arah</label> 
+                        <select id=status-kendaraan> 
+                            <option value="MASUK - Kosong">MASUK - Truk Kosong</option> 
+                            <option value="MASUK - Bawa Pupuk/Material">MASUK - Bawa Pupuk/Alat</option> 
+                            <option value="KELUAR - Muatan TBS">KELUAR - Muatan TBS</option> 
+                            <option value="KELUAR - Kosong">KELUAR - Kosong</option> 
+                            <option value="TAMU / VENDOR">TAMU / Kontraktor</option> 
+                        </select> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>No. Surat Jalan / Tujuan</label> 
+                        <input id=surat-jalan placeholder="No. SPB / Keterangan"> 
+                    </div> 
+                </div> 
+                <button type=button class="btn btn-primary" onclick=simpanKendaraan()>Rekam Log Kendaraan</button> 
+            </div> 
+
+            <div class=card> 
+                <div class=card-title style=display:flex;justify-content:space-between;align-items:center> 
+                    <span>Log Hari Ini</span> 
+                    <button class="btn btn-accent btn-sm" onclick=exportCSV()>Download Excel</button> 
+                </div> 
+                <div id=list-kendaraan style=font-size:.85rem;color:var(--text-muted)>Memuat data...</div> 
+            </div> 
+        </section> 
+
+        <!-- TAB CHECKPOINT / POS -->
+        <section id=tab-darurat class=tab-section> 
+            <div class=card> 
+                <div class=card-title><span>Pilih Pos Jaga Anda</span></div> 
+                <p style=font-size:.82rem;color:var(--text-muted);margin-bottom:12px> Ketuk tombol pos di bawah untuk mencatat posisi shift aktif Anda saat ini. </p> 
+                <div id=container-tombol-pos class=grid-2></div> 
+            </div> 
+
+            <div class=card> 
+                <div class=card-title><span>Personil Piket Shift Aktif Hari Ini</span></div> 
+                <div id=list-petugas-pos>Memuat personil shift aktif...</div> 
+            </div> 
+
+            <div class=card style="padding:16px;"> 
+                <button class="btn btn-outline" onclick="toggleArsipPiket()" style="display:flex; justify-content:space-between; align-items:center; margin-top:0; font-weight:700;">
+                    <span>📜 Lihat Arsip Histori Petugas Sebelumnya</span>
+                    <span id="ikon-panah">▼</span>
+                </button>
+                <div id="container-arsip-piket" style="display:none; margin-top:12px; max-height:250px; overflow-y:auto; font-size:.85rem; color:var(--text-muted);">
+                    <div id=list-laporan-piket>Memuat arsip histori piket...</div>
+                </div>
+            </div> 
+
+            <div class=card> 
+                <div class=card-title><span>Kontak Darurat & Eskalasi</span></div> 
+                <div id=list-kontak-darurat>Memuat kontak...</div> 
+            </div> 
+
+            <div id=panel-khusus-admin style=display:none> 
+                <div class=card style="border:1px solid #3b82f6;background:rgba(59,130,246,.05)"> 
+                    <div class=card-title style=color:#60a5fa><span>🛡️ Permintaan Izin Masuk Staf Baru</span></div> 
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Daftar staf baru yang menunggu persetujuan/izin masuk dari Komandan:</p>
+                    <div id=list-persetujuan-staf>Memuat daftar izin...</div> 
+                </div>
+
+                <div class=card style="border:1px solid var(--primary);background:var(--primary-glow)"> 
+                    <div class=card-title style=color:var(--primary)><span>🟢 Staf/Tim Sedang Online</span></div> 
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Ketuk nama petugas untuk mengirim pesan WhatsApp, melihat detail profil/pos, atau mengeluarkan sesi mereka kapan saja.</p>
+                    <div id=list-tim-online-komandan>Memuat daftar online...</div> 
+                </div> 
+
+                <div class=card style="border:1px solid var(--accent);background:rgba(245,158,11,.05)"> 
+                    <div class=card-title style=color:var(--accent)><span>⚙️ Kelola Daftar Pos / Tempat Jaga</span></div> 
+                    <div class=form-group> 
+                        <label>Nama Pos / Tempat Baru</label> 
+                        <input id=input-nama-pos-baru placeholder="Contoh: Pos Baru / Blok C"> 
+                    </div> 
+                    <button class="btn btn-accent" onclick=tambahPosBaru()>Tambah Pos Jaga</button> 
+                    <div id=list-pengaturan-pos style="margin-top:14px;">Memuat daftar pos...</div> 
+                </div> 
+
+                <div class=card style="border:1px solid var(--primary);background:var(--primary-glow)"> 
+                    <div class=card-title style=color:var(--primary)><span>🎯 Tugaskan Petugas ke Pos</span></div> 
+                    <div class=form-group> 
+                        <label>Pilih Petugas Online</label> 
+                        <select id=select-petugas-online></select> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Tugaskan ke Pos / Tempat</label> 
+                        <select id=select-pos-tujuan></select> 
+                    </div> 
+                    <button class="btn btn-primary" onclick=komandanTugaskanPetugas()>Tugaskan Sekarang</button> 
+                </div> 
+
+                <div class=card style="border:1px solid #2563eb;background:rgba(37,99,235,.05)"> 
+                    <div class=card-title style=color:#60a5fa><span>📞 Kelola Kontak Darurat & Eskalasi</span></div> 
+                    <input type="hidden" id="edit-kontak-id" value="">
+                    <div class=form-group> 
+                        <label>Nama / Jabatan Kontak</label> 
+                        <input id=kontak-nama placeholder="Manajer Kebun / Askep / Polsek"> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Nomor Telepon (Panggilan Biasa)</label> 
+                        <input id=kontak-telp placeholder="081234567890 atau 110"> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Nomor WhatsApp</label> 
+                        <input id=kontak-wa placeholder="081234567890"> 
+                    </div> 
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn btn-call" onclick="simpanKontakManual()" style="flex:1;" id="btn-submit-kontak">Simpan / Tambah Kontak</button> 
+                        <button class="btn btn-outline" onclick="resetFormKontak()" id="btn-batal-edit" style="display:none; width:auto;">Batal</button>
+                    </div>
+                </div> 
+
+                <!-- PANEL PENGHAPUSAN ARSIP SKALA BESAR (BULK DELETE) -->
+                <div class=card style="border:1px solid var(--danger);background:rgba(244,63,94,.05)"> 
+                    <div class=card-title style=color:var(--danger)><span>🗑️ Pembersihan Arsip Skala Besar</span></div> 
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Hapus seluruh arsip laporan atau log kendaraan untuk mengosongkan penyimpanan database:</p>
+                    
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <button class="btn btn-danger" onclick="hapusSemuaArsipLaporan()">Hapus Semua Arsip Laporan Patroli</button>
+                        <button class="btn btn-danger" onclick="hapusSemuaLogKendaraan()">Hapus Semua Log Gate / Kendaraan</button>
+                        <button class="btn btn-danger" onclick="hapusSemuaHistoriPiket()">Hapus Semua Histori Piket</button>
+                    </div>
+                </div> 
+
+                <div class=card style="border:1px solid var(--danger);background:rgba(244,63,94,.05)"> 
+                    <div class=card-title style=color:var(--danger)><span>Pengaturan Sandi Aplikasi</span></div> 
+                    <div class=form-group> 
+                        <label>Sandi Komando Baru</label> 
+                        <input type=password id=input-sandi-komando-baru placeholder="Sandi baru"> 
+                    </div> 
+                    <div class=form-group> 
+                        <label>Sandi Tim Baru</label> 
+                        <input type=password id=input-sandi-tim-baru placeholder="Sandi baru"> 
+                    </div> 
+                    <button class="btn btn-danger" onclick=gantiSandiAplikasi()>Perbarui Sandi</button> 
+                </div> 
+            </div> 
+        </section> 
+
+        <!-- TAB MEDIA & HIBURAN -->
+        <section id=tab-hiburan class=tab-section> 
+            <div class=card style="border:1px solid var(--primary); background:var(--primary-glow);"> 
+                <div class=card-title style="color:var(--primary)"><span>🎵 Pemutar Musik</span></div> 
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;"></p>
+                
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                    <button class="btn btn-primary" onclick="document.getElementById('local-audio-input').click()" style="margin-top:0; flex:1;">📂 Pilih Banyak Lagu</button>
+                    <button class="btn btn-accent" onclick="putarLaguBerikutnya()" style="margin-top:0; width:auto;" title="Lagu Berikutnya">⏭️</button>
+                </div>
+                
+                <input type="file" id="local-audio-input" accept="audio/*" multiple onchange="muatDaftarMusikLokal(event)" style="display:none;">
+
+                <div style="background:var(--bg-deep); padding:12px; border-radius:12px; border:1px solid var(--border); text-align:center;">
+                    <div id="now-playing-label" style="font-size:0.85rem; font-weight:700; color:var(--primary); margin-bottom:8px;">🎵 Belum ada musik diputar</div>
+                    <audio id="local-audio-player" controls style="width:100%;" onended="putarLaguBerikutnya()" onerror="handleAudioError()"></audio>
+                </div>
+
+                <div style="margin-top:10px; max-height:150px; overflow-y:auto;" id="playlist-container"></div>
+            </div>
+
+            <div class=card style="border:1px solid #3b82f6; background:rgba(59,130,246,0.03);"> 
+                <div class=card-title style=color:#60a5fa><span>🔢 Kalkulator</span></div> 
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;"></p>
+                
+                <input type="text" id="calc-display" readonly value="0" style="font-size:1.5rem; text-align:right; font-weight:800; background:var(--bg-deep); color:var(--primary); margin-bottom:4px; padding:16px;">
+                
+                <div class="calc-grid">
+                    <button class="calc-btn clear" onclick="calcClear()">C</button>
+                    <button class="calc-btn op" onclick="calcAppend('/')">÷</button>
+                    <button class="calc-btn op" onclick="calcAppend('*')">×</button>
+                    <button class="calc-btn op" onclick="calcDelete()">⌫</button>
+                    
+                    <button class="calc-btn" onclick="calcAppend('7')">7</button>
+                    <button class="calc-btn" onclick="calcAppend('8')">8</button>
+                    <button class="calc-btn" onclick="calcAppend('9')">9</button>
+                    <button class="calc-btn op" onclick="calcAppend('-')">-</button>
+                    
+                    <button class="calc-btn" onclick="calcAppend('4')">4</button>
+                    <button class="calc-btn" onclick="calcAppend('5')">5</button>
+                    <button class="calc-btn" onclick="calcAppend('6')">6</button>
+                    <button class="calc-btn op" onclick="calcAppend('+')">+</button>
+                    
+                    <button class="calc-btn" onclick="calcAppend('1')">1</button>
+                    <button class="calc-btn" onclick="calcAppend('2')">2</button>
+                    <button class="calc-btn" onclick="calcAppend('3')">3</button>
+                    <button class="calc-btn eq" onclick="calcCompute()" style="grid-row: span 2; height: 100%;">=</button>
+                    
+                    <button class="calc-btn" onclick="calcAppend('0')" style="grid-column: span 2;">0</button>
+                    <button class="calc-btn" onclick="calcAppend('.')">.</button>
+                </div>
+            </div> 
+
+            <div class=card style="border:1px solid var(--accent); background:rgba(245,158,11,0.03);"> 
+                <div class=card-title style=color:var(--accent)><span>🔦 Senter / Lampu Darurat</span></div> 
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;"></p>
+                
+                <div style="display:flex; gap:8px;">
+                    <button class="btn btn-accent" onclick="nyalakanSenterKamera()" style="flex:1; margin-top:0;">⚡ Senter LED Kamera</button>
+                    <button class="btn btn-primary" onclick="nyalakanSenterLayar()" style="flex:1; margin-top:0;">💡 Senter Layar Putih</button>
+                </div>
+            </div>
+
+            <div class=card style="border:1px solid var(--primary); background:var(--primary-glow);"> 
+                <div class=card-title style="color:var(--primary)"><span>♟️ Arena Catur Multiplayer & Suara Online</span></div> 
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">Pilih meja tanding, aktifkan Suara</p>
+                
+                <div class=form-group> 
+                    <label>Pilih Teman Bermain</label> 
+                    <select id="pilih-meja-catur" onchange="gantiMejaCatur(this.value)" style="font-weight:700; color:var(--primary);">
+                        <option value="meja_1">🏁 Meja 1 (Pos Utama / Regu A)</option>
+                        <option value="meja_2">🏁 Meja 2 (Pos Timbangan / Regu B)</option>
+                        <option value="meja_3">🏁 Meja 3 (Pusat Komando / Bebas)</option>
+                        <option value="meja_4">🏁 Meja 4 (Area Blok Perkebunan)</option>
+                    </select> 
+                </div>
+
+                <!-- KOREKSI: Label Nama Pemain yang Sedang di Meja Ini -->
+                <div style="background:var(--bg-deep); padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-bottom:12px; font-size:0.82rem; display:flex; justify-content:space-between; align-items:center;">
+                    <span>👥 Pemain di Meja Ini:</span>
+                    <strong id="label-pemain-meja" style="color:var(--primary);">Menghubungkan...</strong>
+                </div>
+
+                <div style="background:var(--bg-deep); padding:12px; border-radius:12px; border:1px solid var(--border); margin-bottom:12px; text-align:center;">
+                    <div id="voice-status" style="font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:8px;">🎤 Suara: Terputus</div>
+                    <div style="display:flex; gap:8px;">
+                        <button id="btn-toggle-voice" class="btn btn-primary" onclick="toggleVoiceChat()" style="margin-top:0; flex:1;">🎙️ Nyalakan Suara</button>
+                        <button class="btn btn-danger" onclick="muteVoiceChat()" style="margin-top:0; width:auto;" title="Matikan Mic">🔇 Mute</button>
+                    </div>
+                    <audio id="remote-audio" autoplay></audio>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <p style="font-size:0.82rem; color:var(--text-main); font-weight:700; margin:0;" id="chess-status">Memuat status meja...</p>
+                </div>
+                
+                <div style="min-height: 36px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+                    <div id="chess-notif-banner" style="display:none; width: 100%; background:rgba(244,63,94,0.15); border:1px solid var(--danger); color:var(--danger); padding:6px 10px; border-radius:8px; text-align:center; font-size:0.8rem; font-weight:bold;"></div>
+                </div>
+
+                <div class="chessboard" id="chessboard-grid"></div>
+                
+                <div style="display:flex; gap:8px; margin-top:12px;">
+                    <button class="btn btn-primary" onclick="resetChessGameOnline()" style="flex:1;">Reset Meja Ini</button>
+                    <button class="btn btn-outline" onclick="alert('Info: Buah catur Merah melangkah dari bawah, buah Putih dari atas sesuai aturan catur standar!')" style="width:auto;">Info</button>
+                </div>
+            </div> 
+        </section> 
+    </div> 
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class=bottom-nav> 
+        <button class="nav-btn active" onclick='bukaTab("tab-patroli",this)'>🛡️<br>Patroli</button> 
+        <button class=nav-btn onclick='bukaTab("tab-gate",this)'>🚚<br>Log Gate</button> 
+        <button class=nav-btn onclick='bukaTab("tab-darurat",this)'>⚡<br>Checkpoint</button> 
+        <button class=nav-btn onclick='bukaTab("tab-hiburan",this)'>♟️<br>Media / Utilitas</button> 
+    </nav> 
+
+    <script>
+        const firebaseConfig = {
+            databaseURL: "https://komando-a084e-default-rtdb.asia-southeast1.firebasedatabase.app/"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        let imgBase64="", pubImgBase64="", myDeviceSessionId = localStorage.getItem("siap_sawit_device_id");
+        let currentGpsString = "Area Perkebunan (GPS Belum Aktif)";
+        
+        if(!myDeviceSessionId){
+            myDeviceSessionId="dev_"+Date.now()+Math.random().toString(36).substring(2,7);
+            localStorage.setItem("siap_sawit_device_id", myDeviceSessionId);
+        }
+
+        function ambilLokasiGPSRealtime() {
+            const gpsTextElement = document.getElementById("gps-text");
+            if (navigator.geolocation) {
+                gpsTextElement.innerText = "⏳ Mendeteksi sinyal GPS presisi...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude.toFixed(5);
+                        const lon = position.coords.longitude.toFixed(5);
+                        const akurasi = Math.round(position.coords.accuracy);
+                        currentGpsString = `Lat: ${lat}, Lon: ${lon} (Akurasi ±${akurasi}m)`;
+                        gpsTextElement.innerText = currentGpsString;
+                    },
+                    (error) => {
+                        currentGpsString = "Area Perkebunan (GPS Ditolak/Gagal)";
+                        gpsTextElement.innerText = currentGpsString;
+                    },
+                    { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+                );
+            } else {
+                currentGpsString = "Area Perkebunan (GPS Tidak Didukung)";
+                gpsTextElement.innerText = currentGpsString;
+            }
+        }
+
+        function ubahTemaAplikasi(namaTema){
+            document.body.className = namaTema;
+            localStorage.setItem("siap_sawit_tema", namaTema);
+            const selectTema = document.getElementById("pilih-tema-hp");
+            if(selectTema) selectTema.value = namaTema;
+        }
+
+        function muatTemaTersimpan(){
+            const savedTema = localStorage.getItem("siap_sawit_tema") || "theme-emerald";
+            ubahTemaAplikasi(savedTema);
+        }
+
+        function gantiFormLogin(){
+            "tim"===document.getElementById("pilih-role").value?(document.getElementById("wrapper-login-tim").style.display="block",document.getElementById("wrapper-login-komandan").style.display="none"):(document.getElementById("wrapper-login-tim").style.display="none",document.getElementById("wrapper-login-komandan").style.display="block")
+        }
+        
+        function tampilkanModalKedisiplinan(){
+            document.getElementById("modal-kedisiplinan").style.display = "flex";
+        }
+
+        function tutupModalKedisiplinan(){
+            document.getElementById("modal-kedisiplinan").style.display = "none";
+        }
+
+        function getSapaanWaktu(){
+            const jam = new Date().getHours();
+            if(jam >= 3 && jam < 11) return "Selamat Pagi";
+            if(jam >= 11 && jam < 15) return "Selamat Siang";
+            if(jam >= 15 && jam < 18) return "Selamat Sore";
+            return "Selamat Malam";
+        }
+
+        function cekOtomatisPerangkat(){
+            db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).once("value", snap => {
+                const dataStaf = snap.val();
+                const wrapperPendaftaran = document.getElementById("wrapper-pendaftaran-baru");
+                const wrapperSapaan = document.getElementById("wrapper-sapaan-tim");
+                const labelSapaan = document.getElementById("label-sapaan-otomatis");
+
+                if(dataStaf && dataStaf.nama){
+                    wrapperPendaftaran.style.display = "none";
+                    wrapperSapaan.style.display = "block";
+                    labelSapaan.innerText = `${getSapaanWaktu()} ${dataStaf.nama}, silahkan masukkan sandi untuk login`;
+                    window.namaOtomatisStaf = dataStaf.nama;
+                    window.hpOtomatisStaf = dataStaf.hp;
+                } else {
+                    wrapperPendaftaran.style.display = "block";
+                    wrapperSapaan.style.display = "none";
+                    window.namaOtomatisStaf = null;
+                }
+            });
+        }
+
+        function prosesLoginTim(){
+            const sandiInput = document.getElementById("input-sandi-tim").value;
+
+            db.ref("siap_sawit/sandi_tim").once("value").then((snapSandi) => {
+                const sandiBenar = snapSandi.val() || "tim123";
+                if(sandiInput !== sandiBenar) return alert("Sandi Tim Salah!");
+
+                if(window.namaOtomatisStaf){
+                    berhasilLoginTim(window.namaOtomatisStaf, window.hpOtomatisStaf || "-", "Pos Utama");
+                } else {
+                    const namaPetugas = document.getElementById("input-nama-tim").value.trim();
+                    let hpVal = document.getElementById("input-hp-tim").value.trim();
+
+                    if(!namaPetugas || !hpVal) return alert("Harap isi Nama Petugas dan Nomor WhatsApp Anda untuk pendaftaran awal!");
+                    if(hpVal.startsWith("0")) hpVal = "62" + hpVal.substring(1);
+
+                    db.ref(`siap_sawit/permintaan_izin/${myDeviceSessionId}`).set({
+                        nama: namaPetugas,
+                        hp: hpVal,
+                        waktu: new Date().toLocaleString("id-ID")
+                    });
+
+                    alert("⏳ Permintaan izin masuk telah dikirim ke Komandan.\nMohon tunggu sebentar hingga Komandan menyetujui akses Anda.");
+                }
+            }).catch(err => alert("Terjadi kesalahan koneksi: " + err.message));
+        }
+
+        function berhasilLoginTim(nama, hp, posDefault){
+            localStorage.setItem("siap_sawit_role", "tim");
+            localStorage.setItem("siap_sawit_petugas", nama);
+            localStorage.setItem("siap_sawit_pos", posDefault);
+            localStorage.setItem("siap_sawit_hp", hp);
+
+            db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).set({
+                nama: nama,
+                hp: hp,
+                waktuDaftar: new Date().toLocaleString("id-ID")
+            });
+
+            db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).set({
+                nama: nama,
+                pos: posDefault,
+                hp: hp || "-",
+                waktuLogin: (new Date).toLocaleTimeString("id-ID")
+            });
+            db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).onDisconnect().remove();
+
+            document.getElementById("login-overlay").style.display = "none";
+            terapkanHakAkses("tim", nama, posDefault);
+            tampilkanModalKedisiplinan();
+        }
+        
+        function prosesLoginKomandan(){
+            const e = document.getElementById("input-sandi-komandan").value;
+            if(!e) return alert("Harap masukkan Sandi Komandan!");
+
+            db.ref("siap_sawit/sandi_komando").once("value").then(t => {
+                const a = t.val() || "komando123";
+                if(e === a){
+                    localStorage.setItem("siap_sawit_role", "komandan");
+                    localStorage.setItem("siap_sawit_petugas", "Komandan Posko");
+                    localStorage.setItem("siap_sawit_pos", "Pusat Komando");
+                    
+                    document.getElementById("login-overlay").style.display = "none";
+                    terapkanHakAkses("komandan", "Komandan Posko", "Pusat Komando");
+                    tampilkanModalKedisiplinan();
+                } else {
+                    alert("Sandi Komando Salah!");
+                }
+            }).catch(() => {
+                if("komando123" === e){
+                    localStorage.setItem("siap_sawit_role", "komandan");
+                    localStorage.setItem("siap_sawit_petugas", "Komandan Posko");
+                    localStorage.setItem("siap_sawit_pos", "Pusat Komando");
+                    
+                    document.getElementById("login-overlay").style.display = "none";
+                    terapkanHakAkses("komandan", "Komandan Posko", "Pusat Komando");
+                    tampilkanModalKedisiplinan();
+                } else {
+                    alert("Sandi Komando Salah!");
+                }
+            });
+        }
+        
+        function terapkanHakAkses(e,t,a){
+            document.getElementById("petugas").value=t;
+            document.getElementById("pos-petugas-aktif").value=a||"Pos Utama";
+            const n=document.getElementById("badge-role-user"),o=document.getElementById("panel-khusus-admin");
+            "komandan"===e?(n.innerText="KOMANDAN / ADMIN",n.style.backgroundColor="rgba(245, 158, 11, 0.2)",n.style.color="#fbbf24",o.style.display="block"):(n.innerText="TIM LAPANGAN",n.style.backgroundColor="var(--primary-glow)",n.style.color="var(--primary)",o.style.display="none");
+            
+            muatArsipLaporan();
+            muatPetugasPos();
+        }
+        
+        function logoutAplikasi(){
+            tutupVoiceChat();
+            if("tim"===localStorage.getItem("siap_sawit_role")){
+                db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).remove();
+            }
+            localStorage.removeItem("siap_sawit_role");
+            localStorage.removeItem("siap_sawit_petugas");
+            localStorage.removeItem("siap_sawit_pos");
+            localStorage.removeItem("siap_sawit_hp");
+            
+            document.getElementById("login-overlay").style.display="flex";
+            document.getElementById("card-login-utama").style.display="block";
+            document.getElementById("card-form-publik").style.display="none";
+            document.getElementById("input-sandi-komandan").value="";
+            document.getElementById("input-sandi-tim").value="";
+            cekOtomatisPerangkat();
+        }
+        
+        const defaultPos = [
+            "Pos Utama Gerbang 1",
+            "Pos Timbangan & Ram",
+            "Perbatasan Blok A - B",
+            "Gudang Pupuk & BBM"
+        ];
+
+        function muatDaftarPos(){
+            db.ref("siap_sawit/daftar_pos").on("value", snap => {
+                let dataPos = snap.val();
+                if(!dataPos){
+                    let initObj = {};
+                    defaultPos.forEach(p => {
+                        let k = p.replace(/[^a-zA-Z0-9]/g, "_");
+                        initObj[k] = p;
+                    });
+                    db.ref("siap_sawit/daftar_pos").set(initObj);
+                    dataPos = initObj;
+                }
+
+                const containerTombol = document.getElementById("container-tombol-pos");
+                const selectTujuan = document.getElementById("select-pos-tujuan");
+                const listPengaturan = document.getElementById("list-pengaturan-pos");
+
+                let htmlTombol = "", htmlTujuan = "", htmlPengaturan = "";
+
+                Object.keys(dataPos).forEach(key => {
+                    let namaPos = dataPos[key];
+                    htmlTombol += `<button class="btn btn-outline" onclick='catatCheckpoint("${namaPos}")'>${namaPos}</button>`;
+                    htmlTujuan += `<option value="${namaPos}">${namaPos}</option>`;
+                    htmlPengaturan += `<div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-deep); padding:8px 12px; border-radius:8px; margin-bottom:6px; border:1px solid var(--border);">
+                        <span style="font-size:0.85rem; font-weight:600;">📍 ${namaPos}</span>
+                        <button onclick="hapusPosJaga('${key}')" class="btn btn-danger btn-sm" style="padding:2px 8px; font-size:0.7rem;">Hapus</button>
+                    </div>`;
+                });
+
+                if(containerTombol) containerTombol.innerHTML = htmlTombol;
+                if(selectTujuan) selectTujuan.innerHTML = htmlTujuan;
+                if(listPengaturan) listPengaturan.innerHTML = htmlPengaturan;
+            });
+        }
+
+        function tambahPosBaru(){
+            const input = document.getElementById("input-nama-pos-baru");
+            const val = input.value.trim();
+            if(!val) return alert("Masukkan nama pos baru!");
+            let key = val.replace(/[^a-zA-Z0-9]/g, "_");
+            db.ref(`siap_sawit/daftar_pos/${key}`).set(val, err => {
+                if(err) alert("Gagal: " + err.message);
+                else { alert("Pos jaga berhasil ditambahkan!"); input.value = ""; }
+            });
+        }
+
+        function hapusPosJaga(key){
+            if(confirm("Hapus pos jaga ini dari daftar?")){
+                db.ref(`siap_sawit/daftar_pos/${key}`).remove().then(() => alert("Pos berhasil dihapus."));
+            }
+        }
+
+        function setujuiIzinStaf(deviceKey, namaStaf, hpStaf){
+            db.ref(`siap_sawit/perangkat_terdaftar/${deviceKey}`).set({
+                nama: namaStaf,
+                hp: hpStaf,
+                waktuSetuju: new Date().toLocaleString("id-ID")
+            }, (err) => {
+                if(!err){
+                    db.ref(`siap_sawit/permintaan_izin/${deviceKey}`).remove();
+                    alert(`Izin diberikan untuk ${namaStaf}!`);
+                }
+            });
+        }
+
+        function tolakIzinStaf(deviceKey){
+            if(confirm("Tolak permintaan izin masuk staf ini?")){
+                db.ref(`siap_sawit/permintaan_izin/${deviceKey}`).remove().then(() => alert("Permintaan ditolak."));
+            }
+        }
+
+        function muatPermintaanIzin(){
+            db.ref("siap_sawit/permintaan_izin").on("value", (snap) => {
+                const container = document.getElementById("list-persetujuan-staf");
+                const data = snap.val();
+                if(!data){
+                    if(container) container.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Tidak ada permintaan izin baru.</p>';
+                    return;
+                }
+                let html = "";
+                Object.keys(data).forEach((deviceKey) => {
+                    const req = data[deviceKey];
+                    html += `<div style="background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
+                        <div style="font-weight:700; font-size:0.9rem; color:var(--text-main);">👤 ${req.nama}</div>
+                        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">No HP/WA: ${req.hp} | Waktu: ${req.waktu}</div>
+                        <div style="display:flex; gap:6px; margin-top:8px;">
+                            <button onclick="setujuiIzinStaf('${deviceKey}', '${req.nama}', '${req.hp}')" class="btn btn-primary btn-sm" style="flex:1;">Setujui Izin ✔️</button>
+                            <button onclick="tolakIzinStaf('${deviceKey}')" class="btn btn-danger btn-sm" style="flex:1;">Tolak ❌</button>
+                        </div>
+                    </div>`;
+                });
+                if(container) container.innerHTML = html;
+            });
+        }
+
+        function komandanTugaskanPetugas(){
+            const selectPetugas = document.getElementById("select-petugas-online");
+            const selectPos = document.getElementById("select-pos-tujuan");
+            
+            if(!selectPetugas.value) return alert("Tidak ada petugas online yang dipilih!");
+            
+            const petugasNama = selectPetugas.options[selectPetugas.selectedIndex].getAttribute("data-nama");
+            const petugasHp = selectPetugas.options[selectPetugas.selectedIndex].getAttribute("data-hp");
+            const posTujuan = selectPos.value;
+
+            const safeKey = posTujuan.replace(/[^a-zA-Z0-9]/g, "_");
+            const waktuSekarang = new Date();
+            const waktuStr = waktuSekarang.toLocaleString("id-ID");
+            const tanggalHariIni = waktuSekarang.toISOString().slice(0,10);
+
+            db.ref(`siap_sawit/petugas_pos/${safeKey}`).set({
+                lokasi: posTujuan,
+                nama: petugasNama,
+                hp: petugasHp || "-",
+                waktuUpdate: waktuStr,
+                tanggal: tanggalHariIni
+            }, (err) => {
+                if(err) alert("Gagal menugaskan: " + err.message);
+                else {
+                    db.ref(`siap_sawit/laporan_piket`).push({
+                        id: Date.now(),
+                        waktu: waktuStr,
+                        tanggal: tanggalHariIni,
+                        petugas: petugasNama,
+                        lokasi: posTujuan,
+                        keterangan: "Penugasan oleh Komandan"
+                    });
+                    alert(`Berhasil! ${petugasNama} ditugaskan di ${posTujuan}.`);
+                }
+            });
+        }
+
+        function hapusLaporan(tahun, bulan, keyId){
+            if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
+            if(confirm("Hapus laporan patroli ini dari arsip?")){
+                db.ref(`siap_sawit/arsip_laporan/${tahun}/${bulan}/${keyId}`).remove().then(() => alert("Laporan berhasil dihapus."));
+            }
+        }
+
+        function hapusArsipPiket(keyId){
+            if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
+            if(confirm("Hapus histori piket ini?")){
+                db.ref(`siap_sawit/laporan_piket/${keyId}`).remove().then(() => alert("Histori berhasil dihapus."));
+            }
+        }
+
+        function hapusPetugasPos(safeKey){
+            if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
+            if(confirm("Hapus penugasan petugas piket aktif di pos ini?")){
+                db.ref(`siap_sawit/petugas_pos/${safeKey}`).remove().then(() => alert("Petugas pos berhasil dihapus."));
+            }
+        }
+
+        function hapusKontakDarurat(keyId){
+            if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
+            if(confirm("Hapus kontak darurat ini?")){
+                db.ref(`siap_sawit/kontak_darurat/${keyId}`).remove().then(() => alert("Kontak berhasil dihapus."));
+            }
+        }
+
+        function editKontakDarurat(keyId, nama, telp, wa){
+            document.getElementById("edit-kontak-id").value = keyId;
+            document.getElementById("kontak-nama").value = nama;
+            document.getElementById("kontak-telp").value = telp !== "-" ? telp : "";
+            document.getElementById("kontak-wa").value = wa !== "-" ? (wa.startsWith("62") ? "0" + wa.substring(2) : wa) : "";
+            document.getElementById("btn-submit-kontak").innerText = "Simpan Perubahan Kontak";
+            document.getElementById("btn-batal-edit").style.display = "block";
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function resetFormKontak(){
+            document.getElementById("edit-kontak-id").value = "";
+            document.getElementById("kontak-nama").value = "";
+            document.getElementById("kontak-telp").value = "";
+            document.getElementById("kontak-wa").value = "";
+            document.getElementById("btn-submit-kontak").innerText = "Simpan / Tambah Kontak";
+            document.getElementById("btn-batal-edit").style.display = "none";
+        }
+
+        function hapusLogKendaraan(keyId){
+            if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
+            if(confirm("Hapus log tamu / kendaraan ini?")){
+                db.ref(`siap_sawit/kendaraan/${keyId}`).remove().then(() => alert("Log berhasil dihapus."));
+            }
+        }
+
+        function hapusSemuaArsipLaporan(){
+            if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
+            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH ARSIP LAPORAN PATROLI dari database.\nTindakan ini tidak dapat dibatalkan. Lanjutkan?")){
+                db.ref("siap_sawit/arsip_laporan").remove().then(() => alert("Semua arsip laporan patroli berhasil dikosongkan!"));
+            }
+        }
+
+        function hapusSemuaLogKendaraan(){
+            if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
+            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH LOG GATE / KENDARAAN.\nLanjutkan?")){
+                db.ref("siap_sawit/kendaraan").remove().then(() => alert("Semua log kendaraan berhasil dikosongkan!"));
+            }
+        }
+
+        function hapusSemuaHistoriPiket(){
+            if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
+            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH HISTORI PIKET POS.\nLanjutkan?")){
+                db.ref("siap_sawit/laporan_piket").remove().then(() => alert("Semua histori piket berhasil dikosongkan!"));
+            }
+        }
+
+        function simpanKontakManual(){
+            const editId = document.getElementById("edit-kontak-id").value;
+            const nama = document.getElementById("kontak-nama").value.trim();
+            const telp = document.getElementById("kontak-telp").value.trim();
+            const waInput = document.getElementById("kontak-wa").value.trim();
+            
+            if(!nama || (!telp && !waInput)) return void alert("Harap isi Nama dan minimal salah satu nomor (Telepon atau WhatsApp)!");
+            
+            let wa = waInput;
+            if(wa && wa.startsWith("0")) wa = "62" + wa.substring(1);
+            
+            const dataKontak = {
+                nama: nama,
+                telp: telp || "-",
+                wa: wa || "-",
+                update: new Date().toLocaleString("id-ID")
+            };
+
+            if(editId){
+                db.ref(`siap_sawit/kontak_darurat/${editId}`).set(dataKontak, (err) => {
+                    if(err) alert("Gagal memperbarui: " + err.message);
+                    else { alert("Kontak darurat berhasil diperbarui!"); resetFormKontak(); }
+                });
+            } else {
+                db.ref(`siap_sawit/kontak_darurat`).push(dataKontak, (err) => {
+                    if(err) alert("Gagal menyimpan: " + err.message);
+                    else { alert("Kontak darurat baru berhasil ditambahkan!"); resetFormKontak(); }
+                });
+            }
+        }
+        
+        function muatKontakDarurat(){
+            const role = localStorage.getItem("siap_sawit_role");
+            db.ref("siap_sawit/kontak_darurat").on("value",(e=>{
+                const t=document.getElementById("list-kontak-darurat"), data = e.val();
+                if(!data){
+                    t.innerHTML = `
+                        <div class="log-item" style="border-left: 4px solid #2563eb; margin-bottom:8px;">
+                            <div class="log-title">Manajer Kebun / Askep</div>
+                            <div class="log-desc" style="margin-bottom:6px;">No HP/Telp: 081200000002</div>
+                            <div style="display: flex; gap: 6px;"><a href="tel:081200000002" class="btn btn-call btn-sm" style="text-decoration:none; flex:1; text-align:center;">Telepon</a><a href="https://wa.me/6281200000002?text=${encodeURIComponent("Halo Manajer Kebun / Askep, koordinasi darurat perkebunan.")}" target="_blank" class="btn btn-wa btn-sm" style="text-decoration:none; flex:1; text-align:center;">WhatsApp</a></div>
+                        </div>`;
+                    return;
+                }
+                
+                let html = "";
+                Object.keys(data).forEach((keyId) => {
+                    const k = data[keyId];
+                    let btnAction = "";
+                    if(k.telp && k.telp !== "-"){
+                        btnAction += `<a href="tel:${k.telp}" class="btn btn-call btn-sm" style="text-decoration:none; flex:1; text-align:center;">Telepon</a>`;
+                    }
+                    if(k.wa && k.wa !== "-"){
+                        btnAction += `<a href="https://wa.me/${k.wa}?text=${encodeURIComponent("Halo "+k.nama+", koordinasi darurat perkebunan.")}" target="_blank" class="btn btn-wa btn-sm" style="text-decoration:none; flex:1; text-align:center;">WhatsApp</a>`;
+                    }
+                    
+                    let adminButtons = "";
+                    if(role === "komandan"){
+                        adminButtons = `
+                            <div style="position:absolute; top:8px; right:8px; display:flex; gap:4px; z-index:5;">
+                                <button onclick="editKontakDarurat('${keyId}', '${k.nama}', '${k.telp}', '${k.wa}')" style="background:var(--accent); border:none; color:#000; font-size:0.68rem; padding:3px 6px; border-radius:4px; cursor:pointer; font-weight:700;">Edit</button>
+                                <button onclick="hapusKontakDarurat('${keyId}')" style="background:var(--danger); border:none; color:#fff; font-size:0.68rem; padding:3px 6px; border-radius:4px; cursor:pointer; font-weight:700;">Hapus</button>
+                            </div>`;
+                    }
+
+                    html += `
+                        <div class="log-item" style="margin-bottom:8px; ${role === 'komandan' ? 'padding-right:90px;' : ''}">
+                            ${adminButtons}
+                            <div class="log-title">${k.nama}</div>
+                            <div class="log-desc" style="margin-bottom:6px;">No HP/Telp: ${k.telp !== "-" ? k.telp : k.wa}</div>
+                            ${btnAction ? `<div style="display: flex; gap: 6px;">${btnAction}</div>` : ""}
+                        </div>`;
+                });
+                t.innerHTML = html;
+            }));
+        }
+
+        function aksiKomandanKeTim(sessionId, namaPetugas, posPetugas, hpPetugas){
+            let pilihan = prompt(`Menu Aksi untuk "${namaPetugas}" (${posPetugas}):\n1. Kirim Pesan WhatsApp\n2. Hapus / Paksa Keluar Sesi\n\nKetik angka pilihan (1 atau 2):`, "1");
+            if(pilihan === "1"){
+                if(hpPetugas && hpPetugas !== "-"){
+                    window.open(`https://wa.me/${hpPetugas}?text=${encodeURIComponent("Halo " + namaPetugas + ", arahan dari Komandan Posko:")}`, "_blank");
+                } else alert("Nomor WhatsApp tidak terdaftar.");
+            } else if(pilihan === "2"){
+                if(confirm(`Yakin ingin mengeluarkan "${namaPetugas}" dari sesi aktif?`)){
+                    db.ref(`siap_sawit/tim_online/${sessionId}`).remove().then(() => alert("Sesi diakhiri."));
+                }
+            }
+        }
+
+        function muatTimOnlineKomandan(){
+            db.ref("siap_sawit/tim_online").on("value",(e=>{
+                const t=document.getElementById("list-tim-online-komandan"), selectOnline = document.getElementById("select-petugas-online"), a=e.val();
+                if(!a){
+                    if(t) t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Tidak ada tim yang sedang online.</p>';
+                    if(selectOnline) selectOnline.innerHTML='<option value="">Tidak ada petugas online</option>';
+                    return;
+                }
+                let n="", selectHtml="";
+                Object.keys(a).forEach((sessionId=>{
+                    const data = a[sessionId];
+                    n+=`<div onclick="aksiKomandanKeTim('${sessionId}', '${data.nama}', '${data.pos}', '${data.hp}')" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <span style="width:8px; height:8px; background:var(--primary); border-radius:50%; display:inline-block;"></span>
+                                <strong style="font-size:0.88rem;">${data.nama}</strong>
+                            </div>
+                            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:3px;">📍 ${data.pos}</div>
+                        </div>
+                        <span style="font-size:0.72rem; background:var(--primary-glow); color:var(--primary); padding:4px 8px; border-radius:6px; font-weight:700;">Kelola ⚙️</span>
+                    </div>`;
+                    selectHtml += `<option value="${sessionId}" data-nama="${data.nama}" data-hp="${data.hp}">${data.nama} (Pos: ${data.pos})</option>`;
+                }));
+                if(t) t.innerHTML=n;
+                if(selectOnline) selectOnline.innerHTML = selectHtml;
+            }));
+        }
+
+        function gantiSandiAplikasi(){
+            const e=document.getElementById("input-sandi-komando-baru").value.trim(),t=document.getElementById("input-sandi-tim-baru").value.trim();
+            if(e||t){
+                if(confirm("Perbarui sandi akses aplikasi?")){
+                    let a={};
+                    e&&(a["siap_sawit/sandi_komando"]=e),t&&(a["siap_sawit/sandi_tim"]=t),db.ref().update(a,(e=>{e?alert("Gagal: "+e.message):(alert("Sandi berhasil diperbarui!"),document.getElementById("input-sandi-komando-baru").value="",document.getElementById("input-sandi-tim-baru").value="")}))
+                }
+            }else alert("Harap isi sandi baru!")
+        }
+
+        function bukaFormPublik(){ document.getElementById("card-login-utama").style.display="none",document.getElementById("card-form-publik").style.display="block" }
+        function tutupFormPublik(){ document.getElementById("card-form-publik").style.display="none",document.getElementById("card-login-utama").style.display="block" }
+        function updateClock(){ const e=new Date; document.getElementById("live-clock").innerText="🕒 "+e.toLocaleDateString("id-ID",{weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",second:"2-digit"})+" WIB" }
+        function bukaTab(e,t){ document.querySelectorAll(".tab-section").forEach((e=>e.classList.remove("active"))),document.querySelectorAll(".nav-btn").forEach((e=>e.classList.remove("active"))),document.getElementById(e).classList.add("active"),t.classList.add("active") }
+        function toggleArsipPiket(){
+            const kontainer = document.getElementById("container-arsip-piket");
+            const ikon = document.getElementById("ikon-panah");
+            if(kontainer.style.display === "none"){ kontainer.style.display = "block"; ikon.innerText = "▲"; }
+            else { kontainer.style.display = "none"; ikon.innerText = "▼"; }
+        }
+        function previewFoto(e){
+            const t=e.target.files[0];
+            if(t){ const e=new FileReader; e.onload=function(e){imgBase64=e.target.result;const t=document.getElementById("photo-preview");t.src=imgBase64,t.style.display="block"},e.readAsDataURL(t) }
+        }
+        function previewPubFoto(e){
+            const t=e.target.files[0];
+            if(t){ const e=new FileReader; e.onload=function(e){pubImgBase64=e.target.result;const t=document.getElementById("public-photo-preview");t.src=pubImgBase64,t.style.display="block"},e.readAsDataURL(t) }
+        }
+        function kirimLaporanPublik(){
+            const e=document.getElementById("pub-nama").value.trim(),t=document.getElementById("pub-kontak").value.trim(),a=document.getElementById("pub-jenis").value,n=document.getElementById("pub-keterangan").value.trim();
+            if(!e||!n)return void alert("Harap lengkapi Nama dan Detail Laporan!");
+            const o=new Date,i=o.getFullYear(),s=String(o.getMonth()+1).padStart(2,"0"),l={id:Date.now(),waktu:o.toLocaleString("id-ID"),petugas:`[PUBLIK/TAMU] ${e} (${t||"-"})`,blok:"Gerbang / Area Luar",jenis:`LAPORAN TAMU: ${a}`,keterangan:n,gps:currentGpsString,maps:"-",foto:pubImgBase64||""};
+            db.ref(`siap_sawit/arsip_laporan/${i}/${s}`).push(l,(e=>{e?alert("Gagal: "+e.message):(alert("Laporan publik berhasil dikirim!"),document.getElementById("pub-nama").value="",document.getElementById("pub-kontak").value="",document.getElementById("pub-keterangan").value="",document.getElementById("public-photo-preview").style.display="none",pubImgBase64="",tutupFormPublik())}))
+        }
+        function simpanLaporan(){
+            const e=document.getElementById("petugas").value.trim(),t=document.getElementById("pos-petugas-aktif").value.trim(),a=document.getElementById("blok").value.trim(),n=document.getElementById("jenis-laporan").value,o=document.getElementById("keterangan").value.trim(),shiftVal=document.getElementById("pilih-shift").value;
+            if(!e||!a)return void alert("Harap isi Nama Petugas dan Blok lokasi!");
+            const i=new Date,s=i.getFullYear(),l=String(i.getMonth()+1).padStart(2,"0"),r={id:Date.now(),waktu:i.toLocaleString("id-ID"),petugas:`${e} (${t})`,blok:a,jenis:n,keterangan:o||"Tanpa catatan.",gps:`${currentGpsString} | ${shiftVal}`,maps:"-",foto:imgBase64||""};
+            db.ref(`siap_sawit/arsip_laporan/${s}/${l}`).push(r,(e=>{e?alert("Gagal: "+e.message):(alert("Laporan berhasil dikirim!"),document.getElementById("keterangan").value="",document.getElementById("photo-preview").style.display="none",imgBase64="",muatArsipLaporan())}))
+        }
+        function muatArsipLaporan(){
+            const e=document.getElementById("filter-tahun").value,t=document.getElementById("filter-bulan").value,a=document.getElementById("list-laporan"),role=localStorage.getItem("siap_sawit_role");
+            const keyword = (document.getElementById("input-pencarian-arsip").value || "").toLowerCase();
+            
+            a.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Memuat arsip...</p>',db.ref(`siap_sawit/arsip_laporan/${e}/${t}`).on("value",(snap=>{
+                const t=snap.val();
+                if(!t)return void(a.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada laporan.</p>');
+                let n="";
+                let keys = Object.keys(t).reverse();
+                let count = 0;
+                
+                keys.forEach((keyId=>{
+                    const item = t[keyId];
+                    let textCheck = `${item.petugas} ${item.blok} ${item.jenis} ${item.keterangan}`.toLowerCase();
+                    if(keyword && !textCheck.includes(keyword)) return;
+                    
+                    count++;
+                    n+=`<div class="log-item ${item.jenis.includes("DARURAT")||item.jenis.includes("TAMU")?"urgent":""}">
+                        ${(role === "komandan") ? `<button onclick="hapusLaporan('${document.getElementById("filter-tahun").value}', '${document.getElementById("filter-bulan").value}', '${keyId}')" style="position:absolute; top:10px; right:10px; background:var(--danger); border:none; color:#fff; font-size:0.7rem; padding:3px 8px; border-radius:6px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
+                        <div class="log-header"><span>🕒 ${item.waktu}</span><strong>📍 ${item.blok}</strong></div>
+                        <div class="log-title">${item.jenis}</div>
+                        <div style="font-size:0.78rem; font-weight:600; color:var(--primary); margin-bottom:4px;">👤 ${item.petugas}</div>
+                        <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">🌐 ${item.gps || "-"}</div>
+                        <div class="log-desc">${item.keterangan}</div>
+                        ${item.foto?`<img src="${item.foto}" style="max-width:100%; max-height:150px; margin-top:6px; border-radius:8px;" alt="Bukti">`:""}
+                    </div>`;
+                }));
+                a.innerHTML = count > 0 ? n : '<p style="font-size:0.82rem; color:var(--text-muted);">Tidak ada laporan yang cocok dengan kata kunci.</p>';
+            }))
+        }
+        function kirimWhatsApp(){
+            const e=document.getElementById("petugas").value.trim()||"Petugas",t=document.getElementById("pos-petugas-aktif").value.trim()||"Pos",a=document.getElementById("blok").value.trim()||"-",n=document.getElementById("jenis-laporan").value,o=document.getElementById("keterangan").value.trim()||"-",i=(new Date).toLocaleString("id-ID"),shiftVal=document.getElementById("pilih-shift").value,s=`https://wa.me/6281234567890?text=${encodeURIComponent(`*LAPORAN KOMANDO*\n*Waktu:* ${i}\n*Petugas:* ${e}\n*Pos:* ${t}\n*Shift:* ${shiftVal}\n*GPS:* ${currentGpsString}\n*Kondisi:* ${n}\n*Blok:* ${a}\n*Catatan:* ${o}`)}`;
+            window.open(s,"_blank")
+        }
+        function simpanKendaraan(){
+            const e=document.getElementById("nopol").value.trim().toUpperCase(),t=document.getElementById("supir").value.trim(),a=document.getElementById("status-kendaraan").value,n=document.getElementById("surat-jalan").value.trim()||"-";
+            if(!e||!t)return void alert("Nomor Polisi dan Nama Supir wajib diisi!");
+            db.ref("siap_sawit/kendaraan").push({waktu:(new Date).toLocaleString("id-ID"),nopol:e,supir:t,status:a,surat:n},(e=>{e||(document.getElementById("nopol").value="",document.getElementById("supir").value="",document.getElementById("surat-jalan").value="",alert("Log kendaraan terekam!"))}))
+        }
+        function exportCSV(){
+            db.ref("siap_sawit/kendaraan").once("value",(e=>{
+                const t=e.val();
+                if(!t)return void alert("Tidak ada data.");
+                let a=Object.values(t),n="Waktu,Nomor Polisi,Nama Supir,Status,Surat Jalan\n";
+                a.forEach((e=>{n+=`"${e.waktu}","${e.nopol}","${e.supir}","${e.status}","${e.surat}"\n`}));
+                const o=new Blob([n],{type:"text/csv;charset=utf-8;"}),i=document.createElement("a");
+                i.href=URL.createObjectURL(o),i.download=`Log_Kendaraan_${(new Date).toISOString().slice(0,10)}.csv`,i.click()
+            }))
+        }
+        function catatCheckpoint(posTujuan){
+            const namaPetugas = document.getElementById("petugas").value.trim() || localStorage.getItem("siap_sawit_petugas") || "Petugas";
+            if(!confirm(`Konfirmasi bertugas di ${posTujuan}?`)) return;
+            const safeKey = posTujuan.replace(/[^a-zA-Z0-9]/g, "_");
+            const waktuStr = (new Date).toLocaleString("id-ID");
+            const tanggalHariIni = (new Date).toISOString().slice(0,10);
+            db.ref(`siap_sawit/petugas_pos/${safeKey}`).set({lokasi:posTujuan,nama:namaPetugas,hp:localStorage.getItem("siap_sawit_hp")||"-",waktuUpdate:waktuStr,tanggal:tanggalHariIni});
+            db.ref(`siap_sawit/laporan_piket`).push({id:Date.now(),waktu:waktuStr,tanggal:tanggalHariIni,petugas:namaPetugas,lokasi:posTujuan,keterangan:"Check-in Shift"},(err=>{
+                if(!err){ localStorage.setItem("siap_sawit_pos", posTujuan); document.getElementById("pos-petugas-aktif").value = posTujuan; alert(`Berhasil tercatat di ${posTujuan}.`); }
+            }));
+        }
+        function muatPetugasPos(){
+            const tanggalHariIni = (new Date).toISOString().slice(0,10);
+            const role = localStorage.getItem("siap_sawit_role");
+            db.ref("siap_sawit/petugas_pos").on("value",(e=>{
+                const t=document.getElementById("list-petugas-pos"), a=e.val();
+                if(!a){ if(t) t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada penugasan pos.</p>'; return; }
+                let n="";
+                Object.keys(a).forEach((safeKey=>{
+                    const e = a[safeKey];
+                    if(e.tanggal && e.tanggal !== tanggalHariIni) return;
+                    let phone=e.hp; phone&&phone.startsWith("62")&&(phone="0"+phone.substring(2));
+                    n+=`<div class="log-item" style="border-left: 4px solid var(--accent); margin-bottom:8px;">
+                        ${(role === "komandan") ? `<button onclick="hapusPetugasPos('${safeKey}')" style="position:absolute; top:8px; right:8px; background:var(--danger); border:none; color:#fff; font-size:0.68rem; padding:3px 8px; border-radius:4px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
+                        <div class="log-header"><span>🕒 ${e.waktuUpdate}</span><strong style="color:var(--accent);">📍 ${e.lokasi}</strong></div>
+                        <div class="log-title">👤 ${e.nama}</div>
+                        ${"-"!==e.hp?`<div style="display: flex; gap: 6px; margin-top:6px;"><a href="tel:${phone}" class="btn btn-call btn-sm" style="text-decoration:none; flex:1; text-align:center;">Telepon</a><a href="https://wa.me/${e.hp}?text=${encodeURIComponent("Halo "+e.nama)}" target="_blank" class="btn btn-wa btn-sm" style="text-decoration:none; flex:1; text-align:center;">WhatsApp</a></div>`:""}
+                    </div>`;
+                }));
+                if(t) t.innerHTML = n || '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada petugas.</p>';
+            }));
+            db.ref("siap_sawit/laporan_piket").on("value",(e=>{
+                const t=document.getElementById("list-laporan-piket"),a=e.val();
+                if(!a)return void(t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada arsip.</p>');
+                let n=""; Object.keys(a).reverse().slice(0,15).forEach((keyId=>{
+                    const e = a[keyId];
+                    n+=`<div class="log-item" style="border-left: 4px solid var(--primary); margin-bottom:6px; position:relative;">
+                        ${(role === "komandan") ? `<button onclick="hapusArsipPiket('${keyId}')" style="position:absolute; top:8px; right:8px; background:var(--danger); border:none; color:#fff; font-size:0.68rem; padding:3px 8px; border-radius:4px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
+                        <div class="log-header"><span>🕒 ${e.waktu}</span><strong style="color:var(--primary);">📍 ${e.lokasi}</strong></div>
+                        <div class="log-title" style="font-size:0.85rem;">👤 ${e.petugas}</div>
+                    </div>`;
+                }));
+                t.innerHTML=n;
+            }));
+        }
+
+        let daftarPlaylistLokal = [];
+        let indexLaguAktif = 0;
+
+        function muatDaftarMusikLokal(event) {
+            const files = event.target.files;
+            if(files && files.length > 0){
+                daftarPlaylistLokal = Array.from(files);
+                indexLaguAktif = 0;
+                renderPlaylist();
+                putarkanLaguIndex(0);
+            }
+        }
+
+        function renderPlaylist(){
+            const container = document.getElementById("playlist-container");
+            if(!container) return;
+            let html = "";
+            daftarPlaylistLokal.forEach((file, index) => {
+                let aktifClass = (index === indexLaguAktif) ? "color:var(--primary); font-weight:bold; background:var(--primary-glow);" : "color:var(--text-main);";
+                html += `<div onclick="putarkanLaguIndex(${index})" style="padding:8px 10px; border-bottom:1px solid var(--border); cursor:pointer; font-size:0.82rem; ${aktifClass} display:flex; justify-content:space-between; align-items:center; border-radius:6px; margin-bottom:4px;">
+                    <span>🎵 ${index+1}. ${file.name}</span>
+                    <span style="font-size:0.7rem; background:var(--surface); padding:2px 6px; border-radius:4px; color:var(--primary);">Putar</span>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function putarkanLaguIndex(index){
+            if(index < 0 || index >= daftarPlaylistLokal.length) return;
+            indexLaguAktif = index;
+            const file = daftarPlaylistLokal[index];
+            const fileURL = URL.createObjectURL(file);
+            const audioPlayer = document.getElementById("local-audio-player");
+            const nowPlaying = document.getElementById("now-playing-label");
+            
+            audioPlayer.src = fileURL;
+            audioPlayer.play().catch(e => console.log("Auto-play blocked:", e));
+            nowPlaying.innerText = `🎵 Memutar: ${file.name}`;
+            renderPlaylist();
+        }
+
+        function putarLaguBerikutnya(){
+            if(daftarPlaylistLokal.length > 0){
+                indexLaguAktif = (indexLaguAktif + 1) % daftarPlaylistLokal.length;
+                putarkanLaguIndex(indexLaguAktif);
+            } else {
+                document.getElementById('local-audio-input').click();
+            }
+        }
+
+        function handleAudioError(){
+            const nowPlaying = document.getElementById("now-playing-label");
+            if(nowPlaying) nowPlaying.innerText = "⚠️ Gagal memutar file audio, melewati lagu...";
+            setTimeout(() => { putarLaguBerikutnya(); }, 1500);
+        }
+
+        let calcVal = "0";
+        function calcAppend(char){
+            if(calcVal === "0" && !isNaN(char)) calcVal = char;
+            else calcVal += char;
+            document.getElementById("calc-display").value = calcVal;
+        }
+        function calcClear(){
+            calcVal = "0";
+            document.getElementById("calc-display").value = calcVal;
+        }
+        function calcDelete(){
+            calcVal = calcVal.length > 1 ? calcVal.slice(0, -1) : "0";
+            document.getElementById("calc-display").value = calcVal;
+        }
+        function calcCompute(){
+            try {
+                let res = eval(calcVal.replace(/×/g, '*').replace(/÷/g, '/'));
+                calcVal = String(res);
+                document.getElementById("calc-display").value = calcVal;
+            } catch(e) {
+                alert("Format perhitungan salah!");
+                calcClear();
+            }
+        }
+
+        function nyalakanSenterLayar(){
+            document.getElementById("flashlight-overlay").style.display = "flex";
+        }
+
+        function matikanSenter(){
+            document.getElementById("flashlight-overlay").style.display = "none";
+            if(window.cameraStreamTrack){
+                try {
+                    window.cameraStreamTrack.applyConstraints({ advanced: [{ torch: false }] }).catch(() => {});
+                    window.cameraStreamTrack.stop();
+                } catch(err){}
+                window.cameraStreamTrack = null;
+            }
+        }
+
+        async function nyalakanSenterKamera(){
+            try {
+                if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+                    nyalakanSenterLayar();
+                    return;
+                }
+
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: { exact: "environment" } }
+                }).catch(async () => {
+                    return await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                });
+
+                const track = stream.getVideoTracks()[0];
+                window.cameraStreamTrack = track;
+                
+                let torchApplied = false;
+                if (track && typeof track.getCapabilities === "function") {
+                    const caps = track.getCapabilities();
+                    if (caps && caps.torch) {
+                        await track.applyConstraints({ advanced: [{ torch: true }] });
+                        torchApplied = true;
+                    }
+                }
+
+                if (torchApplied) {
+                    alert("⚡ Senter LED Kamera Belakang Berhasil Dinyalakan!");
+                } else {
+                    track.stop();
+                    window.cameraStreamTrack = null;
+                    nyalakanSenterLayar();
+                }
+            } catch (err) {
+                nyalakanSenterLayar();
+            }
+        }
+
+        function ucapkanNotifikasiCatur(pesan, isSkak = false){
+            const banner = document.getElementById("chess-notif-banner");
+            if(banner){
+                banner.innerText = pesan;
+                banner.style.display = "block";
+                if(isSkak){
+                    banner.style.background = "rgba(244,63,94,0.25)";
+                    banner.style.borderColor = "var(--danger)";
+                    banner.style.color = "var(--danger)";
+                } else {
+                    banner.style.background = "var(--primary-glow)";
+                    banner.style.borderColor = "var(--primary)";
+                    banner.style.color = "var(--primary)";
+                }
+                setTimeout(() => { 
+                    banner.style.display = "none"; 
+                }, 5000);
+            }
+
+            if('speechSynthesis' in window){
+                window.speechSynthesis.cancel();
+                let utterance = new SpeechSynthesisUtterance(pesan);
+                utterance.lang = 'id-ID';
+                utterance.rate = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function cekKondisiSkak(board, turnColor){
+            let kingChar = turnColor === 'white' ? 'K' : 'k';
+            let kingR = -1, kingC = -1;
+            
+            for(let r=0; r<8; r++){
+                for(let c=0; c<8; c++){
+                    if(board[r][c] === kingChar){
+                        kingR = r;
+                        kingC = c;
+                        break;
+                    }
+                }
+            }
+            if(kingR === -1) return false;
+
+            for(let r=0; r<8; r++){
+                for(let c=0; c<8; c++){
+                    let p = board[r][c];
+                    if(p !== ""){
+                        let isPWhite = p === p.toUpperCase();
+                        let isTurnWhite = turnColor === 'white';
+                        if(isPWhite !== isTurnWhite){
+                            if(isValidMove(board, r, c, kingR, kingC, p)){
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        function hasAnyLegalMove(board, turnColor){
+            for(let sr=0; sr<8; sr++){
+                for(let sc=0; sc<8; sc++){
+                    let p = board[sr][sc];
+                    if(p !== "" && ((turnColor === 'white' && p === p.toUpperCase()) || (turnColor === 'black' && p === p.toLowerCase()))){
+                        for(let tr=0; tr<8; tr++){
+                            for(let tc=0; tc<8; tc++){
+                                if(isValidMove(board, sr, sc, tr, tc, p)){
+                                    let tempBoard = board.map(row => [...row]);
+                                    tempBoard[tr][tc] = p;
+                                    tempBoard[sr][sc] = "";
+                                    if(!cekKondisiSkak(tempBoard, turnColor)){
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        const pieceSymbols = {
+            "r": "♜", "n": "♞", "b": "♝", "q": "♛", "k": "♚", "p": "♟",
+            "R": "♖", "N": "♘", "B": "♗", "Q": "♕", "K": "♔", "P": "♙", "": ""
+        };
+        let selectedSquare = null;
+        let globalChessState = null;
+        let currentRoomId = "meja_1";
+
+        let localStream = null;
+        let peerConnection = null;
+        let isVoiceActive = false;
+        const rtcConfig = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+
+        function gantiMejaCatur(roomId){
+            tutupVoiceChat();
+            currentRoomId = roomId;
+            selectedSquare = null;
+            updateKehadiranMejaCatur();
+            inisialisasiListenerCatur();
+            inisialisasiVoiceChat();
+        }
+
+        function updateKehadiranMejaCatur(){
+            const namaUserAktif = localStorage.getItem("siap_sawit_petugas") || "Petugas";
+            db.ref(`siap_sawit/game_catur/${currentRoomId}/pemain_online/${myDeviceSessionId}`).set({
+                nama: namaUserAktif,
+                waktu: new Date().toLocaleTimeString("id-ID")
+            });
+            db.ref(`siap_sawit/game_catur/${currentRoomId}/pemain_online/${myDeviceSessionId}`).onDisconnect().remove();
+        }
+
+        function inisialisasiListenerCatur(){
+            updateKehadiranMejaCatur();
+
+            db.ref(`siap_sawit/game_catur/${currentRoomId}`).off();
+            db.ref(`siap_sawit/game_catur/${currentRoomId}`).on("value", snap => {
+                let data = snap.val();
+                if(!data){
+                    let defaultBoard = [
+                        ["r","n","b","q","k","b","n","r"],
+                        ["p","p","p","p","p","p","p","p"],
+                        ["","","","","","","",""],
+                        ["","","","","","","",""],
+                        ["","","","","","","",""],
+                        ["","","","","","","",""],
+                        ["P","P","P","P","P","P","P","P"],
+                        ["R","N","B","Q","K","B","N","R"]
+                    ];
+                    db.ref(`siap_sawit/game_catur/${currentRoomId}`).set({ board: defaultBoard, turn: "white", lastMove: "Meja Siap" });
+                    return;
+                }
+                globalChessState = data;
+                renderChessboard(data.board);
+                document.getElementById("chess-status").innerText = `Giliran: ${data.turn === 'white' ? 'Putih (Bawah)' : 'Merah (Atas)'} (${data.lastMove})`;
+            });
+
+            db.ref(`siap_sawit/game_catur/${currentRoomId}/pemain_online`).on("value", (pemainSnap) => {
+                let listPemain = pemainSnap.val();
+                let labelPemain = document.getElementById("label-pemain-meja");
+                if(listPemain && labelPemain){
+                    let namaArr = Object.values(listPemain).map(p => p.nama);
+                    labelPemain.innerText = namaArr.join(" vs ") || "Belum ada pemain";
+                } else if(labelPemain) {
+                    labelPemain.innerText = "Sendirian di Meja Ini";
+                }
+            });
+        }
+
+        function renderChessboard(board){
+            const grid = document.getElementById("chessboard-grid");
+            if(!grid) return;
+            grid.innerHTML = "";
+            for(let r=0; r<8; r++){
+                for(let c=0; c<8; c++){
+                    const square = document.createElement("div");
+                    square.className = `square ${(r+c)%2===0 ? 'light' : 'dark'}`;
+                    if(selectedSquare && selectedSquare.r === r && selectedSquare.c === c){
+                        square.classList.add("selected");
+                    }
+                    const piece = board[r][c];
+                    if(piece !== ""){
+                        const span = document.createElement("span");
+                        span.className = piece === piece.toUpperCase() ? "piece-white" : "piece-red";
+                        span.innerText = pieceSymbols[piece] || "";
+                        square.appendChild(span);
+                    }
+                    square.onclick = () => handleSquareClick(r, c, board);
+                    grid.appendChild(square);
+                }
+            }
+        }
+
+        function isValidMove(board, sr, sc, tr, tc, piece) {
+            if (sr === tr && sc === tc) return false;
+            let target = board[tr][tc];
+            let isWhite = piece === piece.toUpperCase();
+            
+            if (target !== "" && (isWhite ? target === target.toUpperCase() : target === target.toLowerCase())) {
+                return false;
+            }
+
+            let dr = tr - sr;
+            let dc = tc - sc;
+            let absDr = Math.abs(dr);
+            let absDc = Math.abs(dc);
+            let type = piece.toLowerCase();
+
+            if (type === 'p') { 
+                let direction = isWhite ? -1 : 1; 
+                let startRow = isWhite ? 6 : 1;
+                
+                if (dc === 0 && dr === direction && target === "") return true;
+                if (dc === 0 && sr === startRow && dr === 2 * direction && target === "" && board[sr + direction][sc] === "") return true;
+                if (absDc === 1 && dr === direction && target !== "") return true;
+                return false;
+            } 
+            else if (type === 'r') { 
+                if (sr !== tr && sc !== tc) return false;
+                return isPathClear(board, sr, sc, tr, tc);
+            } 
+            else if (type === 'n') { 
+                return (absDr === 2 && absDc === 1) || (absDr === 1 && absDc === 2);
+            } 
+            else if (type === 'b') { 
+                if (absDr !== absDc) return false;
+                return isPathClear(board, sr, sc, tr, tc);
+            } 
+            else if (type === 'q') { 
+                if (sr !== tr && sc !== tc && absDr !== absDc) return false;
+                return isPathClear(board, sr, sc, tr, tc);
+            } 
+            else if (type === 'k') { 
+                return absDr <= 1 && absDc <= 1;
+            }
+            return true;
+        }
+
+        function isPathClear(board, sr, sc, tr, tc) {
+            let rStep = tr > sr ? 1 : (tr < sr ? -1 : 0);
+            let cStep = tc > sc ? 1 : (tc < sc ? -1 : 0);
+            let currR = sr + rStep;
+            let currC = sc + cStep;
+            while (currR !== tr || currC !== tc) {
+                if (board[currR][currC] !== "") return false;
+                currR += rStep;
+                currC += cStep;
+            }
+            return true;
+        }
+
+        function handleSquareClick(r, c, board){
+            if(!globalChessState) return;
+            const piece = board[r][c];
+            let isWhiteTurn = globalChessState.turn === "white";
+
+            if(!selectedSquare){
+                if(piece !== "" && ((isWhiteTurn && piece === piece.toUpperCase()) || (!isWhiteTurn && piece === piece.toLowerCase()))){
+                    selectedSquare = {r, c};
+                    renderChessboard(board);
+                }
+            } else {
+                if(selectedSquare.r === r && selectedSquare.c === c){
+                    selectedSquare = null;
+                    renderChessboard(board);
+                } else {
+                    let movingPiece = board[selectedSquare.r][selectedSquare.c];
+                    
+                    if(isValidMove(board, selectedSquare.r, selectedSquare.c, r, c, movingPiece)){
+                        let tempBoard = board.map(row => [...row]);
+                        tempBoard[r][c] = movingPiece;
+                        tempBoard[selectedSquare.r][selectedSquare.c] = "";
+
+                        let turnColor = isWhiteTurn ? "white" : "black";
+                        if(cekKondisiSkak(tempBoard, turnColor)){
+                            alert("⚠️ Langkah tidak sah! Raja Anda sedang terkena skak.");
+                            selectedSquare = null;
+                            renderChessboard(board);
+                            return;
+                        }
+
+                        board[r][c] = movingPiece;
+                        board[selectedSquare.r][selectedSquare.c] = "";
+
+                        let nextTurn = isWhiteTurn ? "black" : "white";
+                        let playerName = localStorage.getItem("siap_sawit_petugas") || (isWhiteTurn ? "Pemain Putih" : "Pemain Merah");
+                        let moveDesc = `${playerName} melangkah`;
+
+                        let isNextSkak = cekKondisiSkak(board, nextTurn);
+                        if(isNextSkak){
+                            let hasMoves = hasAnyLegalMove(board, nextTurn);
+                            if(!hasMoves){
+                                moveDesc = `SKAKMAT! Pemenang: ${playerName}`;
+                                ucapkanNotifikasiCatur(`SKAKMAT! Permainan Berakhir. Pemenang adalah ${playerName}!`, true);
+                            } else {
+                                moveDesc += " - SKAK!";
+                                ucapkanNotifikasiCatur(`Perhatian! Terjadi Skak pada giliran ${nextTurn === 'white' ? 'Putih' : 'Merah'}!`, true);
+                            }
+                        } else {
+                            let hasMoves = hasAnyLegalMove(board, nextTurn);
+                            if(!hasMoves){
+                                moveDesc = "Remis / Stalemate (Seri)";
+                                ucapkanNotifikasiCatur("Permainan Seri atau Remis.", false);
+                            }
+                        }
+
+                        selectedSquare = null;
+
+                        db.ref(`siap_sawit/game_catur/${currentRoomId}`).update({
+                            board: board,
+                            turn: nextTurn,
+                            lastMove: moveDesc
+                        });
+                    } else {
+                        alert("⚠️ Langkah buah catur tidak valid sesuai aturan standar!");
+                    }
+                }
+            }
+        }
+
+        function resetChessGameOnline(){
+            if(confirm("Reset papan catur di meja ini?")){
+                let defaultBoard = [
+                    ["r","n","b","q","k","b","n","r"],
+                    ["p","p","p","p","p","p","p","p"],
+                    ["","","","","","","",""],
+                    ["","","","","","","",""],
+                    ["","","","","","","",""],
+                    ["","","","","","","",""],
+                    ["P","P","P","P","P","P","P","P"],
+                    ["R","N","B","Q","K","B","N","R"]
+                ];
+                db.ref(`siap_sawit/game_catur/${currentRoomId}`).update({ board: defaultBoard, turn: "white", lastMove: "Meja Direset" });
+            }
+        }
+
+        async function toggleVoiceChat(){
+            const btn = document.getElementById("btn-toggle-voice");
+            const statusLabel = document.getElementById("voice-status");
+
+            if(!isVoiceActive){
+                try {
+                    statusLabel.innerText = "🎤 Mengakses Mikrofon...";
+                    localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+                    
+                    isVoiceActive = true;
+                    btn.innerText = "🔴 Matikan Suara";
+                    btn.style.backgroundColor = "var(--danger)";
+                    statusLabel.innerText = "🟢 Suara Aktif (Menghubungkan...)";
+
+                    inisialisasiVoiceChat();
+                } catch(err) {
+                    alert("Gagal mengakses mikrofon: " + err.message);
+                    statusLabel.innerText = "🎤 Suara: Gagal (Izin ditolak)";
+                }
+            } else {
+                tutupVoiceChat();
+                statusLabel.innerText = "🎤 Suara: Terputus";
+                btn.innerText = "🎙️ Nyalakan Suara";
+                btn.style.backgroundColor = "var(--primary)";
+            }
+        }
+
+        function inisialisasiVoiceChat(){
+            const roomVoiceRef = db.ref(`siap_sawit/voice_chat/${currentRoomId}`);
+            roomVoiceRef.on("value", async () => {
+                if(!isVoiceActive || !localStream) return;
+                if(!peerConnection){
+                    setupPeerConnection();
+                }
+            });
+        }
+
+        function setupPeerConnection(){
+            peerConnection = new RTCPeerConnection(rtcConfig);
+
+            localStream.getTracks().forEach(track => {
+                peerConnection.addTrack(track, localStream);
+            });
+
+            peerConnection.ontrack = (event) => {
+                const remoteAudio = document.getElementById("remote-audio");
+                remoteAudio.srcObject = event.streams[0];
+                document.getElementById("voice-status").innerText = "🟢 Terhubung! Sedang Berbicara (Voice Game)";
+            };
+
+            peerConnection.onicecandidate = (event) => {
+                if(event.candidate){
+                    db.ref(`siap_sawit/voice_chat/${currentRoomId}/candidates/${myDeviceSessionId}`).push(event.candidate.toJSON());
+                }
+            };
+
+            peerConnection.createOffer().then(offer => {
+                peerConnection.setLocalDescription(offer);
+                db.ref(`siap_sawit/voice_chat/${currentRoomId}/offer`).set(offer);
+            }).catch(err => console.log("Offer error:", err));
+
+            db.ref(`siap_sawit/voice_chat/${currentRoomId}/offer`).on("value", async (snap) => {
+                const offer = snap.val();
+                if(offer && peerConnection && !peerConnection.currentRemoteDescription && isVoiceActive){
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+                    const answer = await peerConnection.createAnswer();
+                    await peerConnection.setLocalDescription(answer);
+                    db.ref(`siap_sawit/voice_chat/${currentRoomId}/answer`).set(answer);
+                }
+            });
+
+            db.ref(`siap_sawit/voice_chat/${currentRoomId}/answer`).on("value", async (snap) => {
+                const answer = snap.val();
+                if(answer && peerConnection && !peerConnection.currentRemoteDescription && isVoiceActive){
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+                }
+            });
+
+            db.ref(`siap_sawit/voice_chat/${currentRoomId}/candidates`).on("child_added", (snap) => {
+                const candidateData = snap.val();
+                if(candidateData && peerConnection){
+                    Object.values(candidateData).forEach(cand => {
+                        if(cand) peerConnection.addIceCandidate(new RTCIceCandidate(cand)).catch(() => {});
+                    });
+                }
+            });
+        }
+
+        function muteVoiceChat(){
+            if(localStream){
+                const audioTrack = localStream.getAudioTracks()[0];
+                audioTrack.enabled = !audioTrack.enabled;
+                alert(audioTrack.enabled ? "Mikrofon diaktifkan kembali." : "Mikrofon dimatikan (Muted).");
+            } else {
+                alert("Voice chat belum dinyalakan.");
+            }
+        }
+
+        function tutupVoiceChat(){
+            isVoiceActive = false;
+            if(localStream){
+                localStream.getTracks().forEach(track => track.stop());
+                localStream = null;
+            }
+            if(peerConnection){
+                peerConnection.close();
+                peerConnection = null;
+            }
+            db.ref(`siap_sawit/voice_chat/${currentRoomId}`).remove();
+        }
+
+        window.onload=function(){
+            muatTemaTersimpan();
+            ambilLokasiGPSRealtime();
+            
+            const e=localStorage.getItem("siap_sawit_role"),t=localStorage.getItem("siap_sawit_petugas"),a=localStorage.getItem("siap_sawit_pos"),hpStored=localStorage.getItem("siap_sawit_hp")||"-";
+            if(e){
+                document.getElementById("login-overlay").style.display="none";
+                terapkanHakAkses(e,t,a);
+                if("tim"===e){
+                    db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).set({nama:t,pos:a,hp:hpStored,waktuLogin:(new Date).toLocaleTimeString("id-ID")});
+                    db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).onDisconnect().remove();
+                }
+            } else {
+                cekOtomatisPerangkat();
+            }
+
+            db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).on("value", (snap) => {
+                const dataStaf = snap.val();
+                if(dataStaf && dataStaf.nama && document.getElementById("login-overlay").style.display !== "none"){
+                    berhasilLoginTim(dataStaf.nama, dataStaf.hp || "-", "Pos Utama");
+                }
+            });
+
+            db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).on("value",(e=>{
+                if(!e.exists() && "tim" === localStorage.getItem("siap_sawit_role")){ alert("Anda Telah Logout."); logoutAplikasi(); }
+            }));
+            const n=document.getElementById("filter-tahun"),o=(new Date).getFullYear(); let i="";
+            for(let e=o;e>=o-3;e--)i+=`<option value="${e}">${e}</option>`; n.innerHTML=i;
+            document.getElementById("filter-bulan").value=String((new Date).getMonth()+1).padStart(2,"0");
+            muatDaftarPos(); muatArsipLaporan(); muatPetugasPos(); muatKontakDarurat(); muatTimOnlineKomandan(); muatPermintaanIzin();
+            
+            inisialisasiListenerCatur();
+        };
+
+        window.addEventListener("beforeunload", () => {
+            if(currentRoomId){
+                db.ref(`siap_sawit/game_catur/${currentRoomId}/pemain_online/${myDeviceSessionId}`).remove();
+            }
+        });
+
+        setInterval(updateClock,1e3); updateClock();
+
+        db.ref("siap_sawit/kendaraan").on("value",(e=>{
+            const t=document.getElementById("list-kendaraan"), a=e.val(), role=localStorage.getItem("siap_sawit_role");
+            if(!a)return void(t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada kendaraan.</p>');
+            let n=""; Object.keys(a).reverse().forEach((keyId=>{
+                const item = a[keyId];
+                n+=`<div class="log-item">
+                    ${(role === "komandan") ? `<button onclick="hapusLogKendaraan('${keyId}')" style="position:absolute; top:8px; right:8px; background:var(--danger); border:none; color:#fff; font-size:0.68rem; padding:3px 8px; border-radius:4px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
+                    <div class="log-header"><span>🕒 ${item.waktu}</span><strong style="color:var(--primary);">${item.status}</strong></div>
+                    <div class="log-title">🚗 ${item.nopol} — Supir: ${item.supir}</div>
+                    <div class="log-desc">Surat Jalan: ${item.surat}</div>
+                </div>`;
+            }));
+            t.innerHTML=n;
+        }));
+    </script> 
+</body> 
+</html>
