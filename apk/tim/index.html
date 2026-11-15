@@ -1,12 +1,12 @@
-<!doctype html> 
-<html lang=id> 
-<head> 
-    <meta charset=UTF-8> 
-    <meta name=viewport content="width=device-width,initial-scale=1"> 
-    <title>KOMANDO | Next-Gen Security Hub</title> 
-    <script src=https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js></script> 
-    <script src=https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js></script> 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel=stylesheet> 
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KOMANDO | Next-Gen Security Hub</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body.theme-emerald {
             --bg-deep:#090d16; --surface:#131c2e; --surface-card:#1a263d; --primary:#10b981; --primary-glow:rgba(16, 185, 129, 0.25); --accent:#f59e0b; --danger:#f43f5e; --text-main:#f8fafc; --text-muted:#94a3b8; --border:#2a3954; --radius:20px;
@@ -129,27 +129,27 @@
         </div>
     </div>
 
-    <div id=login-overlay> 
-        <div class=login-card id=card-login-utama> 
+    <div id="login-overlay"> 
+        <div class="login-card" id="card-login-utama"> 
             <h2>KOMANDO</h2> 
             <p>Next-Gen Security & Monitoring System</p> 
-            <div class=form-group> 
+            <div class="form-group"> 
                 <label>Pilih Akses Masuk</label> 
-                <select id=pilih-role onchange=gantiFormLogin() style=font-weight:700> 
-                    <option value=tim>👤 Staf / Tim Lapangan</option> 
-                    <option value=komandan>🛡️ Komandan / Admin Posko</option> 
+                <select id="pilih-role" onchange="gantiFormLogin()" style="font-weight:700"> 
+                    <option value="tim">👤 Staf / Tim Lapangan</option> 
+                    <option value="komandan">🛡️ Komandan / Admin Posko</option> 
                 </select> 
             </div> 
             
-            <div id=wrapper-login-tim> 
+            <div id="wrapper-login-tim"> 
                 <div id="wrapper-pendaftaran-baru" style="display:none;">
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Nama Petugas / Regu</label> 
-                        <input id=input-nama-tim placeholder="Bpk. Hendra (Regu A)"> 
+                        <input id="input-nama-tim" placeholder="Bpk. Hendra (Regu A)"> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Nomor WhatsApp HP Anda</label> 
-                        <input id=input-hp-tim placeholder="08123456789"> 
+                        <input id="input-hp-tim" placeholder="08123456789"> 
                     </div>
                 </div>
 
@@ -157,61 +157,61 @@
                     <label id="label-sapaan-otomatis" style="color:var(--primary); font-size:0.85rem; text-transform:none; font-weight:700; line-height:1.4;"></label>
                 </div>
 
-                <div class=form-group> 
+                <div class="form-group"> 
                     <label>Sandi Tim</label> 
-                    <input type=password id=input-sandi-tim placeholder=•••••••• style=text-align:center> 
+                    <input type="password" id="input-sandi-tim" placeholder="••••••••" style="text-align:center"> 
                 </div> 
-                <button class="btn btn-primary" onclick=prosesLoginTim()>Login / Minta Izin</button> 
+                <button class="btn btn-primary" onclick="prosesLoginTim()">Login / Minta Izin</button> 
             </div> 
 
-            <div id=wrapper-login-komandan style=display:none> 
-                <div class=form-group> 
+            <div id="wrapper-login-komandan" style="display:none"> 
+                <div class="form-group"> 
                     <label>Sandi Komando</label> 
-                    <input type=password id=input-sandi-komandan placeholder=•••••••• style=text-align:center> 
+                    <input type="password" id="input-sandi-komandan" placeholder="••••••••" style="text-align:center"> 
                 </div> 
-                <button class="btn btn-accent" onclick=prosesLoginKomandan()>Login</button> 
+                <button class="btn btn-accent" onclick="prosesLoginKomandan()">Login</button> 
             </div> 
 
             <hr style="margin:20px 0;border:0;border-top:1px solid var(--border)"> 
-            <p style=font-size:.8rem;margin-bottom:8px>Tamu atau Publik Ingin Melapor?</p> 
-            <button class="btn btn-outline" onclick=bukaFormPublik()>Portal Laporan Publik</button> 
+            <p style="font-size:.8rem;margin-bottom:8px">Tamu atau Publik Ingin Melapor?</p> 
+            <button class="btn btn-outline" onclick="bukaFormPublik()">Portal Laporan Publik</button> 
         </div> 
         
-        <div class=login-card id=card-form-publik style=display:none> 
+        <div class="login-card" id="card-form-publik" style="display:none"> 
             <h2>LAPORAN PUBLIK</h2> 
             <p>Kirim info cepat & darurat ke pos pengamanan</p> 
-            <div class=form-group> 
+            <div class="form-group"> 
                 <label>Nama Lengkap</label> 
-                <input id=pub-nama placeholder="Masukkan nama kamu..."> 
+                <input id="pub-nama" placeholder="Masukkan nama kamu..."> 
             </div> 
-            <div class=form-group> 
+            <div class="form-group"> 
                 <label>WhatsApp / HP Aktif</label> 
-                <input id=pub-kontak placeholder="08123456789"> 
+                <input id="pub-kontak" placeholder="08123456789"> 
             </div> 
-            <div class=form-group> 
+            <div class="form-group"> 
                 <label>Kategori Laporan</label> 
-                <select id=pub-jenis> 
+                <select id="pub-jenis"> 
                     <option value="Info Umum / Tamu">Tamu / Vendor Masuk Area</option> 
                     <option value="Temuan Mencurigakan">DARURAT: Aktivitas Mencurigakan</option> 
                     <option value="Kerusakan / Kendala">Kendala Fasilitas / Jalan</option> 
                 </select> 
             </div> 
-            <div class=form-group> 
+            <div class="form-group"> 
                 <label>Detail Kejadian</label> 
-                <textarea id=pub-keterangan rows=3 placeholder="Ceritakan detail kejadian secara jelas..."></textarea> 
+                <textarea id="pub-keterangan" rows="3" placeholder="Ceritakan detail kejadian secara jelas..."></textarea> 
             </div> 
-            <div class=form-group> 
+            <div class="form-group"> 
                 <label>Foto Bukti (Opsional)</label> 
-                <input type=file id=pub-foto-input accept=image/* capture=environment onchange=previewPubFoto(event)> 
-                <img id=public-photo-preview alt="Preview Foto"> 
+                <input type="file" id="pub-foto-input" accept="image/*" capture="environment" onchange="previewPubFoto(event)"> 
+                <img id="public-photo-preview" alt="Preview Foto"> 
             </div> 
-            <button class="btn btn-primary" onclick=kirimLaporanPublik()>Kirim Laporan</button> 
-            <button class="btn btn-outline" style=margin-top:8px onclick=tutupFormPublik()>← Kembali</button> 
+            <button class="btn btn-primary" onclick="kirimLaporanPublik()">Kirim Laporan</button> 
+            <button class="btn btn-outline" style="margin-top:8px" onclick="tutupFormPublik()">← Kembali</button> 
         </div> 
     </div> 
 
     <!-- MODAL KEDISIPLINAN -->
-    <div id=modal-kedisiplinan style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,15,.95);z-index:99999;display:none;justify-content:center;align-items:center;padding:20px">
+    <div id="modal-kedisiplinan" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,15,.95);z-index:99999;display:none;justify-content:center;align-items:center;padding:20px">
         <div style="background:var(--surface);border:1px solid var(--border);width:100%;max-width:440px;padding:32px 24px;border-radius:var(--radius);box-shadow:0 25px 50px -12px rgba(0,0,0,.7);text-align:center;">
             <div style="font-size:2.5rem; margin-bottom:10px;">🛡️</div>
             <h2 style="color:var(--primary); margin-bottom:12px; font-size:1.5rem; font-weight:800;">AMBANG BATAS TUGAS</h2>
@@ -232,23 +232,23 @@
     </div>
 
     <header> 
-        <div class=header-top> 
+        <div class="header-top"> 
             <h1>KOMANDO SIAP SIAGA</h1> 
             <div> 
-                <span id=badge-role-user class=badge-status>TIM LAPANGAN</span> 
-                <button onclick=logoutAplikasi() style="background:0 0;border:none;color:var(--danger);font-size:.75rem;cursor:pointer;margin-left:8px;font-weight:700">[Keluar]</button> 
+                <span id="badge-role-user" class="badge-status">TIM LAPANGAN</span> 
+                <button onclick="logoutAplikasi()" style="background:0 0;border:none;color:var(--danger);font-size:.75rem;cursor:pointer;margin-left:8px;font-weight:700">[Keluar]</button> 
             </div> 
         </div> 
-        <div id=live-clock>Sinkronisasi waktu...</div> 
+        <div id="live-clock">Sinkronisasi waktu...</div> 
     </header> 
 
-    <div class=container> 
+    <div class="container"> 
         <!-- TAB PATROLI -->
-        <section id=tab-patroli class="tab-section active"> 
-            <div class=card style="border: 1px dashed var(--primary);"> 
-                <div class=card-title><span>🎨 Tema</span></div> 
+        <section id="tab-patroli" class="tab-section active"> 
+            <div class="card" style="border: 1px dashed var(--primary);"> 
+                <div class="card-title"><span>🎨 Tema</span></div> 
                 <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">Pilih variasi tema warna latar belakang sesuai selera</p>
-                <div class=form-group style="margin-bottom:0;">
+                <div class="form-group" style="margin-bottom:0;">
                     <select id="pilih-tema-hp" onchange="ubahTemaAplikasi(this.value)" style="font-weight:700; color:var(--primary);">
                         <option value="theme-emerald">🌿 Emerald Deep Forest (Standar)</option>
                         <option value="theme-cyberpunk">⚡ Cyberpunk Neon Tactical</option>
@@ -258,46 +258,46 @@
                 </div>
             </div>
 
-            <div class=card> 
-                <div class=card-title><span>Laporan Lapangan & Patroli</span></div> 
-                <div class=gps-box> 
+            <div class="card"> 
+                <div class="card-title"><span>Laporan Lapangan & Patroli</span></div> 
+                <div class="gps-box"> 
                     <div style="flex:1; margin-right:8px;"> 
-                        <strong style=font-size:.75rem;color:var(--primary);text-transform:uppercase>Koordinat GPS :</strong> 
-                        <div id=gps-text style=font-size:.78rem;font-weight:600;margin-top:2px;">Mendeteksi posisi GPS...</div> 
+                        <strong style="font-size:.75rem;color:var(--primary);text-transform:uppercase">Koordinat GPS :</strong> 
+                        <div id="gps-text" style="font-size:.78rem;font-weight:600;margin-top:2px;">Mendeteksi posisi GPS...</div> 
                     </div> 
                     <button class="btn btn-primary btn-sm" onclick="ambilLokasiGPSRealtime()" style="margin-top:0; white-space:nowrap;">📍 Refresh GPS</button>
                 </div> 
 
-                <div class=form-group style="margin-bottom:14px;">
+                <div class="form-group" style="margin-bottom:14px;">
                     <label>Shift Petugas</label>
-                    <select id=pilih-shift style="font-weight:700; color:var(--primary);">
+                    <select id="pilih-shift" style="font-weight:700; color:var(--primary);">
                         <option value="Shift Pagi (06:00 - 14:00)">Shift Pagi</option>
                         <option value="Shift Siang (14:00 - 22:00)">Shift Siang</option>
                         <option value="Shift Malam (22:00 - 06:00)">Shift Malam</option>
                     </select>
                 </div>
 
-                <div class=grid-2> 
-                    <div class=form-group> 
+                <div class="grid-2"> 
+                    <div class="form-group"> 
                         <label>Petugas</label> 
-                        <input id=petugas readonly style=background:var(--bg-deep);color:var(--text-muted)> 
+                        <input id="petugas" readonly style="background:var(--bg-deep);color:var(--text-muted)"> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Pos Jaga Anda</label> 
-                        <select id=pos-petugas-aktif onchange="simpanPosLokal(this.value)" style="font-weight:700; color:var(--primary);">
+                        <select id="pos-petugas-aktif" onchange="simpanPosLokal(this.value)" style="font-weight:700; color:var(--primary);">
                             <!-- Pilihan pos dimuat otomatis dari daftar pos Komandan -->
                         </select> 
                     </div> 
                 </div> 
                 
-                <div class=grid-2> 
-                    <div class=form-group> 
+                <div class="grid-2"> 
+                    <div class="form-group"> 
                         <label>Blok / Area</label> 
-                        <input id=blok placeholder="Blok D-14 atau Lokasi"> 
+                        <input id="blok" placeholder="Blok D-14 atau Lokasi"> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Kondisi / Status Laporan</label> 
-                        <input id=jenis-laporan placeholder="Ketik atau pilih cepat..."> 
+                        <input id="jenis-laporan" placeholder="Ketik atau pilih cepat..."> 
                     </div> 
                 </div> 
 
@@ -317,59 +317,59 @@
                     </div>
                 </div>
 
-                <div class=form-group> 
+                <div class="form-group"> 
                     <label>Catatan Detail</label> 
-                    <textarea id=keterangan rows=3 placeholder="Tulis Laporan / Keterangan lengkap..."></textarea> 
+                    <textarea id="keterangan" rows="3" placeholder="Tulis Laporan / Keterangan lengkap..."></textarea> 
                 </div> 
-                <div class=form-group> 
+                <div class="form-group"> 
                     <label>Foto Bukti</label> 
-                    <input type=file id=foto-input accept=image/* capture=environment onchange=previewFoto(event)> 
-                    <img id=photo-preview alt="Preview Foto"> 
+                    <input type="file" id="foto-input" accept="image/*" capture="environment" onchange="previewFoto(event)"> 
+                    <img id="photo-preview" alt="Preview Foto"> 
                 </div> 
-                <button type=button class="btn btn-primary" onclick=simpanLaporan()>Kirim Laporan</button> 
-                <button type=button class="btn btn-wa" onclick=kirimWhatsApp() style=margin-top:8px>Kirim Ke Komandan</button> 
+                <button type="button" class="btn btn-primary" onclick="simpanLaporan()">Kirim Laporan</button> 
+                <button type="button" class="btn btn-wa" onclick="kirimWhatsApp()" style="margin-top:8px">Kirim Ke Komandan</button> 
             </div> 
 
-            <div class=card> 
-                <div class=card-title style=flex-wrap:wrap;gap:8px> 
+            <div class="card"> 
+                <div class="card-title" style="flex-wrap:wrap;gap:8px"> 
                     <span>Arsip Laporan</span> 
-                    <div style=display:flex;gap:6px> 
-                        <select id=filter-tahun onchange=muatArsipLaporan() style="padding:4px 8px;font-size:.75rem;width:auto"></select> 
-                        <select id=filter-bulan onchange=muatArsipLaporan() style="padding:4px 8px;font-size:.75rem;width:auto"> 
-                            <option value=01>Jan</option><option value=02>Feb</option><option value=03>Mar</option> 
-                            <option value=04>Apr</option><option value=05>Mei</option><option value=06>Jun</option> 
-                            <option value=07>Jul</option><option value=08>Ags</option><option value=09>Sep</option> 
-                            <option value=10>Okt</option><option value=11>Nov</option><option value=12>Des</option> 
+                    <div style="display:flex;gap:6px"> 
+                        <select id="filter-tahun" onchange="muatArsipLaporan()" style="padding:4px 8px;font-size:.75rem;width:auto"></select> 
+                        <select id="filter-bulan" onchange="muatArsipLaporan()" style="padding:4px 8px;font-size:.75rem;width:auto"> 
+                            <option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option> 
+                            <option value="04">Apr</option><option value="05">Mei</option><option value="06">Jun</option> 
+                            <option value="07">Jul</option><option value="08">Ags</option><option value="09">Sep</option> 
+                            <option value="10">Okt</option><option value="11">Nov</option><option value="12">Des</option> 
                         </select> 
                     </div> 
                 </div> 
                 
-                <div class=form-group style="margin-bottom:12px;">
+                <div class="form-group" style="margin-bottom:12px;">
                     <input type="text" id="input-pencarian-arsip" oninput="muatArsipLaporan()" placeholder="🔍 Cari berdasarkan petugas, blok, atau jenis laporan..." style="font-size:0.85rem; padding:10px 12px;">
                 </div>
 
-                <div id=list-laporan style=font-size:.85rem;color:var(--text-muted)>Memuat arsip...</div> 
+                <div id="list-laporan" style="font-size:.85rem;color:var(--text-muted)">Memuat arsip...</div> 
             </div> 
         </section> 
 
         <!-- TAB GATE -->
-        <section id=tab-gate class=tab-section> 
-            <div class=card> 
-                <div class=card-title><span>Log Tamu & Kendaraan</span></div> 
-                <div class=grid-2> 
-                    <div class=form-group> 
+        <section id="tab-gate" class="tab-section"> 
+            <div class="card"> 
+                <div class="card-title"><span>Log Tamu & Kendaraan</span></div> 
+                <div class="grid-2"> 
+                    <div class="form-group"> 
                         <label>Nomor Polisi</label> 
-                        <input id=nopol placeholder="BG 8412 XY" style=text-transform:uppercase> 
+                        <input id="nopol" placeholder="BG 8412 XY" style="text-transform:uppercase"> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Nama Supir / Tamu</label> 
-                        <input id=supir placeholder="Nama lengkap"> 
+                        <input id="supir" placeholder="Nama lengkap"> 
                     </div> 
                 </div> 
-                <div class=grid-2> 
-                    <div class=form-group> 
+                <div class="grid-2"> 
+                    <div class="form-group"> 
                         <label>Status Arah</label> 
-                        <select id=status-kendaraan> 
+                        <select id="status-kendaraan"> 
                             <option value="MASUK - Kosong">MASUK - Truk Kosong</option> 
                             <option value="MASUK - Bawa Pupuk/Material">MASUK - Bawa Pupuk/Alat</option> 
                             <option value="KELUAR - Muatan TBS">KELUAR - Muatan TBS</option> 
@@ -377,102 +377,109 @@
                             <option value="TAMU / VENDOR">TAMU / Kontraktor</option> 
                         </select> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>No. Surat Jalan / Tujuan</label> 
-                        <input id=surat-jalan placeholder="No. SPB / Keterangan"> 
+                        <input id="surat-jalan" placeholder="No. SPB / Keterangan"> 
                     </div> 
                 </div> 
-                <button type=button class="btn btn-primary" onclick=simpanKendaraan()>Rekam Log Kendaraan</button> 
+                <button type="button" class="btn btn-primary" onclick="simpanKendaraan()">Rekam Log Kendaraan</button> 
             </div> 
 
-            <div class=card> 
-                <div class=card-title style=display:flex;justify-content:space-between;align-items:center> 
+            <div class="card"> 
+                <div class="card-title" style="display:flex;justify-content:space-between;align-items:center"> 
                     <span>Log Hari Ini</span> 
-                    <button class="btn btn-accent btn-sm" onclick=exportCSV()>Download Excel</button> 
+                    <button class="btn btn-accent btn-sm" onclick="exportCSV()">Download Excel</button> 
                 </div> 
-                <div id=list-kendaraan style=font-size:.85rem;color:var(--text-muted)>Memuat data...</div> 
+                <div id="list-kendaraan" style="font-size:.85rem;color:var(--text-muted)">Memuat data...</div> 
             </div> 
         </section> 
 
         <!-- TAB CHECKPOINT / POS -->
-        <section id=tab-darurat class=tab-section> 
-            <div class=card> 
-                <div class=card-title><span>Check-in Pos Jaga Shift Anda</span></div> 
-                <p style=font-size:.82rem;color:var(--text-muted);margin-bottom:12px> Ketuk tombol pos di bawah untuk mencatat posisi shift aktif Anda saat ini. </p> 
-                <div id=container-tombol-pos class=grid-2></div> 
+        <section id="tab-darurat" class="tab-section"> 
+            <div class="card"> 
+                <div class="card-title"><span>Check-in Pos Jaga Shift Anda</span></div> 
+                <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px"> Ketuk tombol pos di bawah untuk mencatat posisi shift aktif Anda saat ini. </p> 
+                <div id="container-tombol-pos" class="grid-2"></div> 
             </div> 
 
-            <div class=card> 
-                <div class=card-title><span>Personil Piket Shift Aktif Hari Ini</span></div> 
-                <div id=list-petugas-pos>Memuat personil shift aktif...</div> 
+            <div class="card"> 
+                <div class="card-title"><span>Personil Piket Shift Aktif Hari Ini</span></div> 
+                <div id="list-petugas-pos">Memuat personil shift aktif...</div> 
             </div> 
 
-            <div class=card style="padding:16px;"> 
+            <div class="card" style="padding:16px;"> 
                 <button class="btn btn-outline" onclick="toggleArsipPiket()" style="display:flex; justify-content:space-between; align-items:center; margin-top:0; font-weight:700;">
                     <span>📜 Lihat Arsip Histori Petugas Sebelumnya</span>
                     <span id="ikon-panah">▼</span>
                 </button>
                 <div id="container-arsip-piket" style="display:none; margin-top:12px; max-height:250px; overflow-y:auto; font-size:.85rem; color:var(--text-muted);">
-                    <div id=list-laporan-piket>Memuat arsip histori piket...</div>
+                    <div id="list-laporan-piket">Memuat arsip histori piket...</div>
                 </div>
             </div> 
 
-            <div class=card> 
-                <div class=card-title><span>Kontak Darurat & Eskalasi</span></div> 
-                <div id=list-kontak-darurat>Memuat kontak...</div> 
+            <div class="card"> 
+                <div class="card-title"><span>Kontak Darurat & Eskalasi</span></div> 
+                <div id="list-kontak-darurat">Memuat kontak...</div> 
             </div> 
 
-            <div id=panel-khusus-admin style=display:none> 
-                <div class=card style="border:1px solid #3b82f6;background:rgba(59,130,246,.05)"> 
-                    <div class=card-title style=color:#60a5fa><span>🛡️ Permintaan Izin Masuk Staf Baru</span></div> 
+            <div id="panel-khusus-admin" style="display:none"> 
+                <div class="card" style="border:1px solid #3b82f6;background:rgba(59,130,246,.05)"> 
+                    <div class="card-title" style="color:#60a5fa"><span>🛡️ Permintaan Izin Masuk Staf Baru</span></div> 
                     <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Daftar staf baru yang menunggu persetujuan/izin masuk dari Komandan:</p>
-                    <div id=list-persetujuan-staf>Memuat daftar izin...</div> 
+                    <div id="list-persetujuan-staf">Memuat daftar izin...</div> 
                 </div>
 
-                <div class=card style="border:1px solid var(--primary);background:var(--primary-glow)"> 
-                    <div class=card-title style=color:var(--primary)><span>🟢 Staf/Tim Sedang Online</span></div> 
-                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Ketuk nama petugas untuk mengirim pesan WhatsApp, melihat detail profil/pos, atau mengeluarkan sesi mereka kapan saja.</p>
-                    <div id=list-tim-online-komandan>Memuat daftar online...</div> 
+                <div class="card" style="border:1px solid var(--primary);background:var(--primary-glow)"> 
+                    <div class="card-title" style="color:var(--primary)"><span>🟢 Staf/Tim Sedang Online</span></div> 
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Ketuk tombol WA untuk chat atau tombol Hapus untuk mengeluarkan sesi staf.</p>
+                    <div id="list-tim-online-komandan">Memuat daftar online...</div> 
                 </div> 
 
-                <div class=card style="border:1px solid var(--accent);background:rgba(245,158,11,.05)"> 
-                    <div class=card-title style=color:var(--accent)><span>⚙️ Kelola Daftar Pos / Tempat Jaga</span></div> 
+                <!-- LOG RIWAYAT PERANGKAT & USER YANG PERNAH LOGIN -->
+                <div class="card" style="border:1px solid var(--accent);background:rgba(245,158,11,.05)"> 
+                    <div class="card-title" style="color:var(--accent)"><span>📋 Log Riwayat Perangkat & User Terdaftar</span></div> 
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Daftar seluruh perangkat dan user yang pernah login ke sistem. Komandan dapat menghapus atau memblokir akses perangkat secara permanen.</p>
+                    <div id="list-log-riwayat-perangkat">Memuat log riwayat perangkat...</div> 
+                </div> 
+
+                <div class="card" style="border:1px solid var(--accent);background:rgba(245,158,11,.05)"> 
+                    <div class="card-title" style="color:var(--accent)"><span>⚙️ Kelola Daftar Pos / Tempat Jaga</span></div> 
                     <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Komandan membuat dan menentukan daftar pos di sini:</p>
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Nama Pos / Tempat Baru</label> 
-                        <input id=input-nama-pos-baru placeholder="Contoh: Pos Baru / Blok C"> 
+                        <input id="input-nama-pos-baru" placeholder="Contoh: Pos Baru / Blok C"> 
                     </div> 
-                    <button class="btn btn-accent" onclick=tambahPosBaru()>Tambah Pos Jaga Baru</button> 
-                    <div id=list-pengaturan-pos style="margin-top:14px;">Memuat daftar pos...</div> 
+                    <button class="btn btn-accent" onclick="tambahPosBaru()">Tambah Pos Jaga Baru</button> 
+                    <div id="list-pengaturan-pos" style="margin-top:14px;">Memuat daftar pos...</div> 
                 </div> 
 
-                <div class=card style="border:1px solid var(--primary);background:var(--primary-glow)"> 
-                    <div class=card-title style=color:var(--primary)><span>🎯 Tugaskan Petugas ke Pos</span></div> 
-                    <div class=form-group> 
+                <div class="card" style="border:1px solid var(--primary);background:var(--primary-glow)"> 
+                    <div class="card-title" style="color:var(--primary)"><span>🎯 Tugaskan Petugas ke Pos</span></div> 
+                    <div class="form-group"> 
                         <label>Pilih Petugas Online</label> 
-                        <select id=select-petugas-online></select> 
+                        <select id="select-petugas-online"></select> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Tugaskan ke Pos / Tempat</label> 
-                        <select id=select-pos-tujuan></select> 
+                        <select id="select-pos-tujuan"></select> 
                     </div> 
-                    <button class="btn btn-primary" onclick=komandanTugaskanPetugas()>Tugaskan Sekarang</button> 
+                    <button class="btn btn-primary" onclick="komandanTugaskanPetugas()">Tugaskan Sekarang</button> 
                 </div> 
 
-                <div class=card style="border:1px solid #2563eb;background:rgba(37,99,235,.05)"> 
-                    <div class=card-title style=color:#60a5fa><span>📞 Kelola Kontak Darurat & Eskalasi</span></div> 
+                <div class="card" style="border:1px solid #2563eb;background:rgba(37,99,235,.05)"> 
+                    <div class="card-title" style="color:#60a5fa"><span>📞 Kelola Kontak Darurat & Eskalasi</span></div> 
                     <input type="hidden" id="edit-kontak-id" value="">
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Nama / Jabatan Kontak</label> 
-                        <input id=kontak-nama placeholder="Manajer Kebun / Askep / Polsek"> 
+                        <input id="kontak-nama" placeholder="Manajer Kebun / Askep / Polsek"> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Nomor Telepon (Panggilan Biasa)</label> 
-                        <input id=kontak-telp placeholder="081234567890 atau 110"> 
+                        <input id="kontak-telp" placeholder="081234567890 atau 110"> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Nomor WhatsApp</label> 
-                        <input id=kontak-wa placeholder="081234567890"> 
+                        <input id="kontak-wa" placeholder="081234567890"> 
                     </div> 
                     <div style="display:flex; gap:8px;">
                         <button class="btn btn-call" onclick="simpanKontakManual()" style="flex:1;" id="btn-submit-kontak">Simpan / Tambah Kontak</button> 
@@ -480,8 +487,8 @@
                     </div>
                 </div> 
 
-                <div class=card style="border:1px solid var(--danger);background:rgba(244,63,94,.05)"> 
-                    <div class=card-title style=color:var(--danger)><span>🗑️ Pembersihan Arsip Skala Besar</span></div> 
+                <div class="card" style="border:1px solid var(--danger);background:rgba(244,63,94,.05)"> 
+                    <div class="card-title" style="color:var(--danger)"><span>🗑️ Pembersihan Arsip Skala Besar</span></div> 
                     <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Hapus seluruh arsip laporan atau log kendaraan untuk mengosongkan penyimpanan database:</p>
                     
                     <div style="display:flex; flex-direction:column; gap:8px;">
@@ -491,25 +498,25 @@
                     </div>
                 </div> 
 
-                <div class=card style="border:1px solid var(--danger);background:rgba(244,63,94,.05)"> 
-                    <div class=card-title style=color:var(--danger)><span>Pengaturan Sandi Aplikasi</span></div> 
-                    <div class=form-group> 
+                <div class="card" style="border:1px solid var(--danger);background:rgba(244,63,94,.05)"> 
+                    <div class="card-title" style="color:var(--danger)"><span>Pengaturan Sandi Aplikasi</span></div> 
+                    <div class="form-group"> 
                         <label>Sandi Komando Baru</label> 
-                        <input type=password id=input-sandi-komando-baru placeholder="Sandi baru"> 
+                        <input type="password" id="input-sandi-komando-baru" placeholder="Sandi baru"> 
                     </div> 
-                    <div class=form-group> 
+                    <div class="form-group"> 
                         <label>Sandi Tim Baru</label> 
-                        <input type=password id=input-sandi-tim-baru placeholder="Sandi baru"> 
+                        <input type="password" id="input-sandi-tim-baru" placeholder="Sandi baru"> 
                     </div> 
-                    <button class="btn btn-danger" onclick=gantiSandiAplikasi()>Perbarui Sandi</button> 
+                    <button class="btn btn-danger" onclick="gantiSandiAplikasi()">Perbarui Sandi</button> 
                 </div> 
             </div> 
         </section> 
 
         <!-- TAB MEDIA & HIBURAN -->
-        <section id=tab-hiburan class=tab-section> 
-            <div class=card style="border:1px solid var(--primary); background:var(--primary-glow);"> 
-                <div class=card-title style="color:var(--primary)"><span>🎵 Pemutar Musik</span></div> 
+        <section id="tab-hiburan" class="tab-section"> 
+            <div class="card" style="border:1px solid var(--primary); background:var(--primary-glow);"> 
+                <div class="card-title" style="color:var(--primary)"><span>🎵 Pemutar Musik</span></div> 
                 <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;"></p>
                 
                 <div style="display: flex; gap: 8px; margin-bottom: 12px;">
@@ -527,8 +534,8 @@
                 <div style="margin-top:10px; max-height:150px; overflow-y:auto;" id="playlist-container"></div>
             </div>
 
-            <div class=card style="border:1px solid #3b82f6; background:rgba(59,130,246,0.03);"> 
-                <div class=card-title style=color:#60a5fa><span>🔢 Kalkulator</span></div> 
+            <div class="card" style="border:1px solid #3b82f6; background:rgba(59,130,246,0.03);"> 
+                <div class="card-title" style="color:#60a5fa"><span>🔢 Kalkulator</span></div> 
                 <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;"></p>
                 
                 <input type="text" id="calc-display" readonly value="0" style="font-size:1.5rem; text-align:right; font-weight:800; background:var(--bg-deep); color:var(--primary); margin-bottom:4px; padding:16px;">
@@ -559,8 +566,8 @@
                 </div>
             </div> 
 
-            <div class=card style="border:1px solid var(--accent); background:rgba(245,158,11,0.03);"> 
-                <div class=card-title style=color:var(--accent)><span>🔦 Senter / Lampu Darurat</span></div> 
+            <div class="card" style="border:1px solid var(--accent); background:rgba(245,158,11,0.03);"> 
+                <div class="card-title" style="color:var(--accent)"><span>🔦 Senter / Lampu Darurat</span></div> 
                 <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;"></p>
                 
                 <div style="display:flex; gap:8px;">
@@ -569,11 +576,11 @@
                 </div>
             </div>
 
-            <div class=card style="border:1px solid var(--primary); background:var(--primary-glow);"> 
-                <div class=card-title style="color:var(--primary)"><span>♟️ Arena Catur Multiplayer & Suara Online</span></div> 
+            <div class="card" style="border:1px solid var(--primary); background:var(--primary-glow);"> 
+                <div class="card-title" style="color:var(--primary)"><span>♟️ Arena Catur Multiplayer & Suara Online</span></div> 
                 <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">Pilih meja tanding, aktifkan Suara</p>
                 
-                <div class=form-group> 
+                <div class="form-group"> 
                     <label>Pilih Teman Bermain</label> 
                     <select id="pilih-meja-catur" onchange="gantiMejaCatur(this.value)" style="font-weight:700; color:var(--primary);">
                         <option value="meja_1">🏁 Meja 1 (Pos Utama / Regu A)</option>
@@ -616,11 +623,11 @@
     </div> 
 
     <!-- NAVIGASI BAWAH -->
-    <nav class=bottom-nav> 
-        <button class="nav-btn active" onclick='bukaTab("tab-patroli",this)'>🛡️<br>Patroli</button> 
-        <button class=nav-btn onclick='bukaTab("tab-gate",this)'>🚚<br>Log Gate</button> 
-        <button class=nav-btn onclick='bukaTab("tab-darurat",this)'>⚡<br>Checkpoint</button> 
-        <button class=nav-btn onclick='bukaTab("tab-hiburan",this)'>♟️<br>Media / Utilitas</button> 
+    <nav class="bottom-nav"> 
+        <button class="nav-btn active" onclick="bukaTab('tab-patroli',this)">🛡️<br>Patroli</button> 
+        <button class="nav-btn" onclick="bukaTab('tab-gate',this)">🚚<br>Log Gate</button> 
+        <button class="nav-btn" onclick="bukaTab('tab-darurat',this)">⚡<br>Checkpoint</button> 
+        <button class="nav-btn" onclick="bukaTab('tab-hiburan',this)">♟️<br>Media / Utilitas</button> 
     </nav> 
 
     <script>
@@ -634,7 +641,7 @@
         let currentGpsString = "Area (GPS Belum Aktif)";
 
         // --- SISTEM CEK VERSI & UPDATE OTOMATIS ---
-        const CURRENT_APP_VERSION = "1.0.0"; // Ubah nomor versi ini jika Anda merilis kode/fitur baru
+        const CURRENT_APP_VERSION = "1.0.0";
         const DEFAULT_DRIVE_URL = "https://drive.google.com/file/d/1uP--lQq2SJ7i0Nxr8PnOUjHExVDqRCLD/view?usp=drivesdk";
 
         function cekPembaruanAplikasi(){
@@ -649,7 +656,6 @@
                     latestVersion = serverData.version || "1.0.0";
                     downloadUrl = serverData.url || DEFAULT_DRIVE_URL;
                 } else {
-                    // Inisialisasi data versi pertama kali di Firebase jika belum ada
                     db.ref("siap_sawit/app_version").set({
                         version: CURRENT_APP_VERSION,
                         url: DEFAULT_DRIVE_URL,
@@ -660,9 +666,7 @@
                 document.getElementById("txt-versi-server").innerText = latestVersion;
                 document.getElementById("btn-link-download").href = downloadUrl;
 
-                // Bandingkan versi (jika versi server berbeda / lebih baru)
                 if(latestVersion !== CURRENT_APP_VERSION){
-                    // Cek apakah user baru saja mengabaikannya pada sesi ini
                     const ignoredVersion = sessionStorage.getItem("ignored_version");
                     if(ignoredVersion !== latestVersion){
                         document.getElementById("modal-update-apk").style.display = "flex";
@@ -678,14 +682,12 @@
                 document.getElementById("modal-update-apk").style.display = "none";
             });
         }
-        // ------------------------------------------
         
         if(!myDeviceSessionId){
             myDeviceSessionId="dev_"+Date.now()+Math.random().toString(36).substring(2,7);
             localStorage.setItem("siap_sawit_device_id", myDeviceSessionId);
         }
 
-        // Perbaikan GPS: Penanganan error lengkap & timeout 20 detik
         function ambilLokasiGPSRealtime() {
             const gpsTextElement = document.getElementById("gps-text");
             if (navigator.geolocation) {
@@ -755,51 +757,86 @@
         }
 
         function cekOtomatisPerangkat(){
-            db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).once("value", snap => {
-                const dataStaf = snap.val();
-                const wrapperPendaftaran = document.getElementById("wrapper-pendaftaran-baru");
-                const wrapperSapaan = document.getElementById("wrapper-sapaan-tim");
-                const labelSapaan = document.getElementById("label-sapaan-otomatis");
-
-                if(dataStaf && dataStaf.nama){
-                    wrapperPendaftaran.style.display = "none";
-                    wrapperSapaan.style.display = "block";
-                    labelSapaan.innerText = `${getSapaanWaktu()} ${dataStaf.nama}, silahkan masukkan sandi untuk login`;
-                    window.namaOtomatisStaf = dataStaf.nama;
-                    window.hpOtomatisStaf = dataStaf.hp;
-                } else {
-                    wrapperPendaftaran.style.display = "block";
-                    wrapperSapaan.style.display = "none";
-                    window.namaOtomatisStaf = null;
+            db.ref(`siap_sawit/blocked_devices/${myDeviceSessionId}`).once("value", snapBlok => {
+                if(snapBlok.exists()){
+                    alert("❌ AKSES DITOLAK!\nPerangkat ini telah diblokir secara permanen oleh Komandan.");
+                    document.getElementById("login-overlay").innerHTML = `
+                        <div class="login-card">
+                            <div style="font-size:3rem; margin-bottom:10px;">🚫</div>
+                            <h2 style="color:var(--danger); margin-bottom:10px;">PERANGKAT DIBLOKIR</h2>
+                            <p style="color:var(--text-muted); font-size:0.9rem;">Akses dari perangkat ini ke sistem KOMANDO telah dihentikan oleh Komandan Posko.</p>
+                        </div>
+                    `;
+                    return;
                 }
+
+                db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).once("value", snap => {
+                    const dataStaf = snap.val();
+                    const wrapperPendaftaran = document.getElementById("wrapper-pendaftaran-baru");
+                    const wrapperSapaan = document.getElementById("wrapper-sapaan-tim");
+                    const labelSapaan = document.getElementById("label-sapaan-otomatis");
+
+                    if(dataStaf && dataStaf.nama){
+                        wrapperPendaftaran.style.display = "none";
+                        wrapperSapaan.style.display = "block";
+                        labelSapaan.innerText = `${getSapaanWaktu()} ${dataStaf.nama} (Perangkat Terikat). Silakan masukkan sandi untuk login.`;
+                        window.namaOtomatisStaf = dataStaf.nama;
+                        window.hpOtomatisStaf = dataStaf.hp;
+                    } else {
+                        wrapperPendaftaran.style.display = "block";
+                        wrapperSapaan.style.display = "none";
+                        window.namaOtomatisStaf = null;
+                    }
+                });
             });
         }
 
         function prosesLoginTim(){
-            const sandiInput = document.getElementById("input-sandi-tim").value;
-
-            db.ref("siap_sawit/sandi_tim").once("value").then((snapSandi) => {
-                const sandiBenar = snapSandi.val() || "tim123";
-                if(sandiInput !== sandiBenar) return alert("Sandi Tim Salah!");
-
-                if(window.namaOtomatisStaf){
-                    berhasilLoginTim(window.namaOtomatisStaf, window.hpOtomatisStaf || "-", "Pos Utama Gerbang 1");
-                } else {
-                    const namaPetugas = document.getElementById("input-nama-tim").value.trim();
-                    let hpVal = document.getElementById("input-hp-tim").value.trim();
-
-                    if(!namaPetugas || !hpVal) return alert("Harap isi Nama Petugas dan Nomor WhatsApp Anda untuk pendaftaran awal!");
-                    if(hpVal.startsWith("0")) hpVal = "62" + hpVal.substring(1);
-
-                    db.ref(`siap_sawit/permintaan_izin/${myDeviceSessionId}`).set({
-                        nama: namaPetugas,
-                        hp: hpVal,
-                        waktu: new Date().toLocaleString("id-ID")
-                    });
-
-                    alert("⏳ Permintaan izin masuk telah dikirim ke Komandan.\nMohon tunggu sebentar hingga Komandan menyetujui akses Anda.");
+            db.ref(`siap_sawit/blocked_devices/${myDeviceSessionId}`).once("value", snapBlok => {
+                if(snapBlok.exists()){
+                    alert("❌ Akses ditolak! Perangkat ini diblokir.");
+                    return;
                 }
-            }).catch(err => alert("Terjadi kesalahan koneksi: " + err.message));
+
+                const sandiInput = document.getElementById("input-sandi-tim").value;
+
+                db.ref("siap_sawit/sandi_tim").once("value").then((snapSandi) => {
+                    const sandiBenar = snapSandi.val() || "tim123";
+                    if(sandiInput !== sandiBenar) return alert("Sandi Tim Salah!");
+
+                    if(window.namaOtomatisStaf){
+                        berhasilLoginTim(window.namaOtomatisStaf, window.hpOtomatisStaf || "-", "Pos Utama Gerbang 1");
+                    } else {
+                        const namaPetugas = document.getElementById("input-nama-tim").value.trim();
+                        let hpVal = document.getElementById("input-hp-tim").value.trim();
+
+                        if(!namaPetugas || !hpVal) return alert("Harap isi Nama Petugas dan Nomor WhatsApp Anda untuk pendaftaran awal!");
+                        if(hpVal.startsWith("0")) hpVal = "62" + hpVal.substring(1);
+
+                        db.ref("siap_sawit/perangkat_terdaftar").orderByChild("nama").equalTo(namaPetugas).once("value", (existingSnap) => {
+                            if(existingSnap.exists()){
+                                alert(`❌ Gagal! Nama "${namaPetugas}" sudah terikat dan terdaftar di perangkat lain.`);
+                                return;
+                            }
+
+                            db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).set({
+                                nama: namaPetugas,
+                                hp: hpVal,
+                                waktuDaftar: new Date().toLocaleString("id-ID")
+                            });
+
+                            db.ref(`siap_sawit/permintaan_izin/${myDeviceSessionId}`).set({
+                                nama: namaPetugas,
+                                hp: hpVal,
+                                waktu: new Date().toLocaleString("id-ID")
+                            });
+
+                            alert("⏳ ID Perangkat berhasil dikunci untuk Anda. Permintaan izin masuk dikirim ke Komandan.");
+                            cekOtomatisPerangkat();
+                        });
+                    }
+                }).catch(err => alert("Terjadi kesalahan koneksi: " + err.message));
+            });
         }
 
         function berhasilLoginTim(nama, hp, posDefault){
@@ -808,10 +845,10 @@
             localStorage.setItem("siap_sawit_pos", posDefault);
             localStorage.setItem("siap_sawit_hp", hp);
 
-            db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).set({
+            db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).update({
                 nama: nama,
                 hp: hp,
-                waktuDaftar: new Date().toLocaleString("id-ID")
+                lastLogin: new Date().toLocaleString("id-ID")
             });
 
             db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).set({
@@ -873,7 +910,6 @@
 
         function simpanPosLokal(posBaru){
             localStorage.setItem("siap_sawit_pos", posBaru);
-            const namaPetugas = document.getElementById("petugas").value || "Petugas";
             const role = localStorage.getItem("siap_sawit_role");
             if(role === "tim"){
                 db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).update({ pos: posBaru });
@@ -906,6 +942,7 @@
         ];
 
         function muatDaftarPos(){
+            db.ref("siap_sawit/daftar_pos").off();
             db.ref("siap_sawit/daftar_pos").on("value", snap => {
                 let dataPos = snap.val();
                 if(!dataPos){
@@ -978,11 +1015,13 @@
 
         function tolakIzinStaf(deviceKey){
             if(confirm("Tolak permintaan izin masuk staf ini?")){
-                db.ref(`siap_sawit/permintaan_izin/${deviceKey}`).remove().then(() => alert("Permintaan ditolak."));
+                db.ref(`siap_sawit/permintaan_izin/${deviceKey}`).remove();
+                db.ref(`siap_sawit/perangkat_terdaftar/${deviceKey}`).remove().then(() => alert("Permintaan ditolak dan ikatan perangkat direset."));
             }
         }
 
         function muatPermintaanIzin(){
+            db.ref("siap_sawit/permintaan_izin").off();
             db.ref("siap_sawit/permintaan_izin").on("value", (snap) => {
                 const container = document.getElementById("list-persetujuan-staf");
                 const data = snap.val();
@@ -995,10 +1034,10 @@
                     const req = data[deviceKey];
                     html += `<div style="background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
                         <div style="font-weight:700; font-size:0.9rem; color:var(--text-main);">👤 ${req.nama}</div>
-                        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">No HP/WA: ${req.hp} | Waktu: ${req.waktu}</div>
+                        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">No HP/WA: ${req.hp} | ID Perangkat: ${deviceKey.substring(0,10)}...</div>
                         <div style="display:flex; gap:6px; margin-top:8px;">
                             <button onclick="setujuiIzinStaf('${deviceKey}', '${req.nama}', '${req.hp}')" class="btn btn-primary btn-sm" style="flex:1;">Setujui Izin ✔️</button>
-                            <button onclick="tolakIzinStaf('${deviceKey}')" class="btn btn-danger btn-sm" style="flex:1;">Tolak ❌</button>
+                            <button onclick="tolakIzinStaf('${deviceKey}')" class="btn btn-danger btn-sm" style="flex:1;">Tolak & Reset ❌</button>
                         </div>
                     </div>`;
                 });
@@ -1099,21 +1138,21 @@
 
         function hapusSemuaArsipLaporan(){
             if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
-            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH ARSIP LAPORAN PATROLI dari database.\nTindakan ini tidak dapat dibatalkan. Lanjutkan?")){
+            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH ARSIP LAPORAN PATROLI dari database.")){
                 db.ref("siap_sawit/arsip_laporan").remove().then(() => alert("Semua arsip laporan patroli berhasil dikosongkan!"));
             }
         }
 
         function hapusSemuaLogKendaraan(){
             if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
-            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH LOG GATE / KENDARAAN.\nLanjutkan?")){
+            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH LOG GATE / KENDARAAN.")){
                 db.ref("siap_sawit/kendaraan").remove().then(() => alert("Semua log kendaraan berhasil dikosongkan!"));
             }
         }
 
         function hapusSemuaHistoriPiket(){
             if(localStorage.getItem("siap_sawit_role") !== "komandan") return alert("Akses ditolak!");
-            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH HISTORI PIKET POS.\nLanjutkan?")){
+            if(confirm("⚠️ PERINGATAN KERAS!\nAnda akan menghapus SELURUH HISTORI PIKET POS.")){
                 db.ref("siap_sawit/laporan_piket").remove().then(() => alert("Semua histori piket berhasil dikosongkan!"));
             }
         }
@@ -1151,6 +1190,7 @@
         
         function muatKontakDarurat(){
             const role = localStorage.getItem("siap_sawit_role");
+            db.ref("siap_sawit/kontak_darurat").off();
             db.ref("siap_sawit/kontak_darurat").on("value",(e=>{
                 const t=document.getElementById("list-kontak-darurat"), data = e.val();
                 if(!data){
@@ -1195,20 +1235,73 @@
             }));
         }
 
-        function aksiKomandanKeTim(sessionId, namaPetugas, posPetugas, hpPetugas){
-            let pilihan = prompt(`Menu Aksi untuk "${namaPetugas}" (${posPetugas}):\n1. Kirim Pesan WhatsApp\n2. Hapus / Paksa Keluar Sesi\n\nKetik angka pilihan (1 atau 2):`, "1");
-            if(pilihan === "1"){
-                if(hpPetugas && hpPetugas !== "-"){
-                    window.open(`https://wa.me/${hpPetugas}?text=${encodeURIComponent("Halo " + namaPetugas + ", Arahan Dari Komandan:")}`, "_blank");
-                } else alert("Nomor WhatsApp tidak terdaftar.");
-            } else if(pilihan === "2"){
-                if(confirm(`Yakin ingin mengeluarkan "${namaPetugas}" dari sesi aktif?`)){
-                    db.ref(`siap_sawit/tim_online/${sessionId}`).remove().then(() => alert("Sesi diakhiri."));
-                }
+        function hapusTotalUserTim(sessionId, namaPetugas){
+            if(confirm(`⚠️ Hapus total "${namaPetugas}"?\n\nSesi online DAN ikatan ID perangkat di database akan otomatis terhapus permanen.`)){
+                let updates = {};
+                updates[`siap_sawit/tim_online/${sessionId}`] = null;
+                updates[`siap_sawit/perangkat_terdaftar/${sessionId}`] = null;
+                updates[`siap_sawit/permintaan_izin/${sessionId}`] = null;
+
+                db.ref().update(updates, (err) => {
+                    if(err) alert("Gagal menghapus: " + err.message);
+                    else alert(`✅ "${namaPetugas}" & ID perangkatnya berhasil dihapus permanen.`);
+                });
             }
         }
 
+        function blokirPerangkatPermanen(sessionId, namaPetugas){
+            if(confirm(`🚫 BLOKIR PERMANEN "${namaPetugas}"?\n\nPerangkat ini akan masuk daftar hitam (blacklist).`)){
+                let updates = {};
+                updates[`siap_sawit/blocked_devices/${sessionId}`] = true;
+                updates[`siap_sawit/tim_online/${sessionId}`] = null;
+                updates[`siap_sawit/perangkat_terdaftar/${sessionId}`] = null;
+                updates[`siap_sawit/permintaan_izin/${sessionId}`] = null;
+
+                db.ref().update(updates, (err) => {
+                    if(err) alert("Gagal memblokir: " + err.message);
+                    else alert(`🚫 Perangkat milik "${namaPetugas}" berhasil diblokir permanen!`);
+                });
+            }
+        }
+
+        function muatLogRiwayatPerangkat(){
+            db.ref("siap_sawit/perangkat_terdaftar").off();
+            db.ref("siap_sawit/perangkat_terdaftar").on("value", snap => {
+                const container = document.getElementById("list-log-riwayat-perangkat");
+                const data = snap.val();
+                if(!data){
+                    if(container) container.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada riwayat perangkat terdaftar.</p>';
+                    return;
+                }
+                let html = "";
+                Object.keys(data).forEach(sessionId => {
+                    const dev = data[sessionId];
+                    let btnWa = (dev.hp && dev.hp !== "-") 
+                        ? `<a href="https://wa.me/${dev.hp}?text=${encodeURIComponent("Halo " + dev.nama + ", Pesan dari Komandan:")}" target="_blank" class="btn btn-wa btn-sm" style="padding:4px 8px; font-size:0.7rem; margin:0; text-decoration:none;">WA</a>` 
+                        : "";
+
+                    html += `<div style="background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                            <div>
+                                <strong style="font-size:0.88rem; color:var(--text-main);">👤 ${dev.nama || "Tanpa Nama"}</strong>
+                                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">📱 No HP/WA: ${dev.hp || "-"}</div>
+                                <div style="font-size:0.72rem; color:var(--text-muted);">🕒 Terdaftar: ${dev.waktuDaftar || dev.lastLogin || "-"}</div>
+                                <div style="font-size:0.68rem; color:var(--border); margin-top:2px; font-family:monospace;">ID: ${sessionId}</div>
+                            </div>
+                            <div style="display:flex; gap:4px; align-items:center;">
+                                ${btnWa}
+                                <button onclick="hapusTotalUserTim('${sessionId}', '${dev.nama}')" class="btn btn-danger btn-sm" style="padding:4px 8px; font-size:0.7rem; margin:0;">Reset</button>
+                                <button onclick="blokirPerangkatPermanen('${sessionId}', '${dev.nama}')" class="btn btn-danger btn-sm" style="padding:4px 8px; font-size:0.7rem; margin:0; background:#7f1d1d;" title="Blokir Permanen">Blokir</button>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                if(container) container.innerHTML = html;
+            });
+        }
+
         function muatTimOnlineKomandan(){
+            db.ref("siap_sawit/tim_online").off();
             db.ref("siap_sawit/tim_online").on("value",(e=>{
                 const t=document.getElementById("list-tim-online-komandan"), selectOnline = document.getElementById("select-petugas-online"), a=e.val();
                 if(!a){
@@ -1219,7 +1312,11 @@
                 let n="", selectHtml="";
                 Object.keys(a).forEach((sessionId=>{
                     const data = a[sessionId];
-                    n+=`<div onclick="aksiKomandanKeTim('${sessionId}', '${data.nama}', '${data.pos}', '${data.hp}')" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
+                    let btnWa = (data.hp && data.hp !== "-") 
+                        ? `<a href="https://wa.me/${data.hp}?text=${encodeURIComponent("Halo " + data.nama + ", Arahan Dari Komandan:")}" target="_blank" class="btn btn-wa btn-sm" style="text-decoration:none; padding:5px 10px; margin:0;">WA</a>` 
+                        : "";
+
+                    n+=`<div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
                         <div>
                             <div style="display:flex; align-items:center; gap:6px;">
                                 <span style="width:8px; height:8px; background:var(--primary); border-radius:50%; display:inline-block;"></span>
@@ -1227,7 +1324,10 @@
                             </div>
                             <div style="font-size:0.75rem; color:var(--text-muted); margin-top:3px;">📍 ${data.pos}</div>
                         </div>
-                        <span style="font-size:0.72rem; background:var(--primary-glow); color:var(--primary); padding:4px 8px; border-radius:6px; font-weight:700;">Kelola ⚙️</span>
+                        <div style="display:flex; gap:6px; align-items:center;">
+                            ${btnWa}
+                            <button onclick="hapusTotalUserTim('${sessionId}', '${data.nama}')" class="btn btn-danger btn-sm" style="padding:5px 10px; margin:0;">Hapus</button>
+                        </div>
                     </div>`;
                     selectHtml += `<option value="${sessionId}" data-nama="${data.nama}" data-hp="${data.hp}">${data.nama} (Pos: ${data.pos})</option>`;
                 }));
@@ -1271,7 +1371,6 @@
             db.ref(`siap_sawit/arsip_laporan/${i}/${s}`).push(l,(e=>{e?alert("Gagal: "+e.message):(alert("Laporan publik berhasil dikirim!"),document.getElementById("pub-nama").value="",document.getElementById("pub-kontak").value="",document.getElementById("pub-keterangan").value="",document.getElementById("public-photo-preview").style.display="none",pubImgBase64="",tutupFormPublik())}))
         }
 
-        // PILIHAN KONDISI CEPAT & PENYIMPANAN LOKAL
         function toggleMenuKondisi(){
             const dropdown = document.getElementById("dropdown-kondisi-cepat");
             const ikon = document.getElementById("ikon-panah-kondisi");
@@ -1328,18 +1427,40 @@
             }
         }
 
+        // KOREKSI: Menambahkan validasi pos jaga (!t) agar tidak terkirim kosong
         function simpanLaporan(){
-            const e=document.getElementById("petugas").value.trim(),t=document.getElementById("pos-petugas-aktif").value.trim(),a=document.getElementById("blok").value.trim(),n=document.getElementById("jenis-laporan").value.trim(),o=document.getElementById("keterangan").value.trim(),shiftVal=document.getElementById("pilih-shift").value;
-            if(!e||!a||!n)return void alert("Harap isi Nama Petugas, Blok lokasi, dan Kondisi Laporan!");
-            const i=new Date,s=i.getFullYear(),l=String(i.getMonth()+1).padStart(2,"0"),r={id:Date.now(),waktu:i.toLocaleString("id-ID"),petugas:`${e} (${t})`,blok:a,jenis:n,keterangan:o||"Tanpa catatan.",gps:`${currentGpsString} | ${shiftVal}`,maps:"-",foto:imgBase64||""};
-            db.ref(`siap_sawit/arsip_laporan/${s}/${l}`).push(r,(e=>{e?alert("Gagal: "+e.message):(alert("Laporan berhasil dikirim!"),document.getElementById("keterangan").value="",document.getElementById("photo-preview").style.display="none",imgBase64="",muatArsipLaporan())}))
+            const e=document.getElementById("petugas").value.trim();
+            const t=document.getElementById("pos-petugas-aktif").value.trim();
+            const a=document.getElementById("blok").value.trim();
+            const n=document.getElementById("jenis-laporan").value.trim();
+            const o=document.getElementById("keterangan").value.trim();
+            const shiftVal=document.getElementById("pilih-shift").value;
+            
+            if(!e || !t || !a || !n) return void alert("Harap isi Nama Petugas, Pos Jaga, Blok Lokasi, dan Kondisi Laporan dengan lengkap!");
+            
+            const i=new Date,s=i.getFullYear(),l=String(i.getMonth()+1).padStart(2,"0");
+            const r={id:Date.now(),waktu:i.toLocaleString("id-ID"),petugas:`${e} (${t})`,blok:a,jenis:n,keterangan:o||"Tanpa catatan.",gps:`${currentGpsString} | ${shiftVal}`,maps:"-",foto:imgBase64||""};
+            
+            db.ref(`siap_sawit/arsip_laporan/${s}/${l}`).push(r,(err=>{
+                if(err) alert("Gagal: "+err.message);
+                else {
+                    alert("Laporan berhasil dikirim!");
+                    document.getElementById("keterangan").value="";
+                    document.getElementById("photo-preview").style.display="none";
+                    imgBase64="";
+                    muatArsipLaporan();
+                }
+            }));
         }
         
         function muatArsipLaporan(){
             const e=document.getElementById("filter-tahun").value,t=document.getElementById("filter-bulan").value,a=document.getElementById("list-laporan"),role=localStorage.getItem("siap_sawit_role");
             const keyword = (document.getElementById("input-pencarian-arsip").value || "").toLowerCase();
             
-            a.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Memuat arsip...</p>',db.ref(`siap_sawit/arsip_laporan/${e}/${t}`).on("value",(snap=>{
+            db.ref(`siap_sawit/arsip_laporan/${e}/${t}`).off();
+            a.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Memuat arsip...</p>';
+            
+            db.ref(`siap_sawit/arsip_laporan/${e}/${t}`).on("value",(snap=>{
                 const t=snap.val();
                 if(!t)return void(a.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada laporan.</p>');
                 let n="";
@@ -1363,17 +1484,20 @@
                     </div>`;
                 }));
                 a.innerHTML = count > 0 ? n : '<p style="font-size:0.82rem; color:var(--text-muted);">Tidak ada laporan yang cocok dengan kata kunci.</p>';
-            }))
+            }));
         }
+
         function kirimWhatsApp(){
             const e=document.getElementById("petugas").value.trim()||"Petugas",t=document.getElementById("pos-petugas-aktif").value.trim()||"Pos",a=document.getElementById("blok").value.trim()||"-",n=document.getElementById("jenis-laporan").value.trim()||"Patroli",o=document.getElementById("keterangan").value.trim()||"-",i=(new Date).toLocaleString("id-ID"),shiftVal=document.getElementById("pilih-shift").value,s=`https://wa.me/6281234567890?text=${encodeURIComponent(`*LAPORAN KOMANDO*\n*Waktu:* ${i}\n*Petugas:* ${e}\n*Pos:* ${t}\n*Shift:* ${shiftVal}\n*GPS:* ${currentGpsString}\n*Kondisi:* ${n}\n*Blok:* ${a}\n*Catatan:* ${o}`)}`;
             window.open(s,"_blank")
         }
+
         function simpanKendaraan(){
             const e=document.getElementById("nopol").value.trim().toUpperCase(),t=document.getElementById("supir").value.trim(),a=document.getElementById("status-kendaraan").value,n=document.getElementById("surat-jalan").value.trim()||"-";
             if(!e||!t)return void alert("Nomor Polisi dan Nama Supir wajib diisi!");
-            db.ref("siap_sawit/kendaraan").push({waktu:(new Date).toLocaleString("id-ID"),nopol:e,supir:t,status:a,surat:n},(e=>{e||(document.getElementById("nopol").value="",document.getElementById("supir").value="",document.getElementById("surat-jalan").value="",alert("Log kendaraan terekam!"))}))
+            db.ref("siap_sawit/kendaraan").push({waktu:(new Date).toLocaleString("id-ID"),nopol:e,supir:t,status:a,surat:n},(err=>{err||(document.getElementById("nopol").value="",document.getElementById("supir").value="",document.getElementById("surat-jalan").value="",alert("Log kendaraan terekam!"))}))
         }
+
         function exportCSV(){
             db.ref("siap_sawit/kendaraan").once("value",(e=>{
                 const t=e.val();
@@ -1384,6 +1508,7 @@
                 i.href=URL.createObjectURL(o),i.download=`Log_Kendaraan_${(new Date).toISOString().slice(0,10)}.csv`,i.click()
             }))
         }
+
         function catatCheckpoint(posTujuan){
             const namaPetugas = document.getElementById("petugas").value.trim() || localStorage.getItem("siap_sawit_petugas") || "Petugas";
             if(!confirm(`Konfirmasi bertugas di ${posTujuan}?`)) return;
@@ -1400,9 +1525,12 @@
                 }
             }));
         }
+
         function muatPetugasPos(){
             const tanggalHariIni = (new Date).toISOString().slice(0,10);
             const role = localStorage.getItem("siap_sawit_role");
+            
+            db.ref("siap_sawit/petugas_pos").off();
             db.ref("siap_sawit/petugas_pos").on("value",(e=>{
                 const t=document.getElementById("list-petugas-pos"), a=e.val();
                 if(!a){ if(t) t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada penugasan pos.</p>'; return; }
@@ -1420,6 +1548,8 @@
                 }));
                 if(t) t.innerHTML = n || '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada petugas.</p>';
             }));
+
+            db.ref("siap_sawit/laporan_piket").off();
             db.ref("siap_sawit/laporan_piket").on("value",(e=>{
                 const t=document.getElementById("list-laporan-piket"),a=e.val();
                 if(!a)return void(t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada arsip.</p>');
@@ -1535,7 +1665,7 @@
             }
         }
 
-        // Perbaikan Senter Kamera Belakang yang Stabil
+        // KOREKSI: Pengamanan penutupan stream kamera agar lampu indikator tidak menyala terus
         async function nyalakanSenterKamera() {
             try {
                 if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
@@ -1575,6 +1705,10 @@
                     nyalakanSenterLayar();
                 }
             } catch (err) {
+                if(window.cameraStreamTrack) window.cameraStreamTrack.stop();
+                if(window.globalCameraStream) window.globalCameraStream.getTracks().forEach(t => t.stop());
+                window.globalCameraStream = null;
+                window.cameraStreamTrack = null;
                 nyalakanSenterLayar();
             }
         }
@@ -1721,6 +1855,7 @@
                 document.getElementById("chess-status").innerText = `Giliran: ${data.turn === 'white' ? 'Putih' : 'Merah'}${roleInfo} — ${data.lastMove}`;
             });
 
+            db.ref(`siap_sawit/game_catur/${currentRoomId}/pemain_online`).off();
             db.ref(`siap_sawit/game_catur/${currentRoomId}/pemain_online`).on("value", (pemainSnap) => {
                 let listPemain = pemainSnap.val();
                 let labelPemain = document.getElementById("label-pemain-meja");
@@ -1957,6 +2092,7 @@
 
         function inisialisasiVoiceChat(){
             const roomVoiceRef = db.ref(`siap_sawit/voice_chat/${currentRoomId}`);
+            roomVoiceRef.off();
             roomVoiceRef.on("value", async () => {
                 if(!isVoiceActive || !localStream) return;
                 if(!peerConnection){
@@ -1989,6 +2125,7 @@
                 db.ref(`siap_sawit/voice_chat/${currentRoomId}/offer`).set(offer);
             }).catch(err => console.log("Offer error:", err));
 
+            db.ref(`siap_sawit/voice_chat/${currentRoomId}/offer`).off();
             db.ref(`siap_sawit/voice_chat/${currentRoomId}/offer`).on("value", async (snap) => {
                 const offer = snap.val();
                 if(offer && peerConnection && !peerConnection.currentRemoteDescription && isVoiceActive){
@@ -1999,6 +2136,7 @@
                 }
             });
 
+            db.ref(`siap_sawit/voice_chat/${currentRoomId}/answer`).off();
             db.ref(`siap_sawit/voice_chat/${currentRoomId}/answer`).on("value", async (snap) => {
                 const answer = snap.val();
                 if(answer && peerConnection && !peerConnection.currentRemoteDescription && isVoiceActive){
@@ -2006,6 +2144,7 @@
                 }
             });
 
+            db.ref(`siap_sawit/voice_chat/${currentRoomId}/candidates`).off();
             db.ref(`siap_sawit/voice_chat/${currentRoomId}/candidates`).on("child_added", (snap) => {
                 const candidateData = snap.val();
                 if(candidateData && peerConnection){
@@ -2040,7 +2179,6 @@
         }
 
         window.onload=function(){
-            // Jalankan cek pembaruan aplikasi saat halaman pertama kali terbuka
             cekPembaruanAplikasi();
 
             muatTemaTersimpan();
@@ -2067,12 +2205,12 @@
             });
 
             db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).on("value",(e=>{
-                if(!e.exists() && "tim" === localStorage.getItem("siap_sawit_role")){ alert("Anda Telah Logout."); logoutAplikasi(); }
+                if(!e.exists() && "tim" === localStorage.getItem("siap_sawit_role")){ alert("Anda Telah Logout / Sesi Diakhiri."); logoutAplikasi(); }
             }));
             const n=document.getElementById("filter-tahun"),o=(new Date).getFullYear(); let i="";
             for(let e=o;e>=o-3;e--)i+=`<option value="${e}">${e}</option>`; n.innerHTML=i;
             document.getElementById("filter-bulan").value=String((new Date).getMonth()+1).padStart(2,"0");
-            muatArsipLaporan(); muatPetugasPos(); muatKontakDarurat(); muatTimOnlineKomandan(); muatPermintaanIzin();
+            muatArsipLaporan(); muatPetugasPos(); muatKontakDarurat(); muatTimOnlineKomandan(); muatPermintaanIzin(); muatLogRiwayatPerangkat();
             
             inisialisasiListenerCatur();
         };
@@ -2085,6 +2223,7 @@
 
         setInterval(updateClock,1e3); updateClock();
 
+        db.ref("siap_sawit/kendaraan").off();
         db.ref("siap_sawit/kendaraan").on("value",(e=>{
             const t=document.getElementById("list-kendaraan"), a=e.val(), role=localStorage.getItem("siap_sawit_role");
             if(!a)return void(t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada kendaraan.</p>');
