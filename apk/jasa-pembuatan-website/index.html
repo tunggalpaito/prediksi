@@ -9,13 +9,13 @@
 
     <!-- Meta SEO -->
     <title>NEXCODE STUDIO | Jasa Pembuatan Aplikasi & Website Modern - Harga Bersahabat</title>
-    <meta name="description" content="Jasa pembuatan aplikasi dan website profesional untuk keamanan/security, perangkat desa/kelurahan, UMKM, pendidikan, perkebunan, dan pengelolaan aset. Mudah diakses via HP, cepat, dan harga bersahabat. Segera chat via WhatsApp!">
-    <meta name="keywords" content="jasa pembuatan aplikasi, jasa pembuatan website, buat aplikasi web murah, aplikasi pos keamanan, website perangkat desa, kasir digital umkm, aplikasi perkebunan sawit, software rt rw, nexcode studio">
+    <meta name="description" content="Jasa pembuatan aplikasi dan website profesional untuk keamanan/security, perangkat desa/kelurahan, UMKM, cafe/resto, undangan digital, kos-kosan, dan bisnis modern. Mudah diakses via HP, cepat, dan harga bersahabat.">
+    <meta name="keywords" content="jasa pembuatan aplikasi, jasa pembuatan website, buat aplikasi web murah, aplikasi pos keamanan, website perangkat desa, kasir digital umkm, qr menu cafe, undangan digital, aplikasi kos, nexcode studio">
     <meta name="author" content="Nexcode Studio">
 
     <!-- Open Graph -->
     <meta property="og:title" content="NEXCODE STUDIO | Jasa Pembuatan Aplikasi & Website Modern">
-    <meta property="og:description" content="Solusi digital kilat untuk instansi, UMKM, perkebunan, dan komunitas. Mudah diakses lewat HP, fitur real-time, dan harga bersahabat!">
+    <meta property="og:description" content="Solusi digital kilat untuk instansi, UMKM, F&B, properti, dan komunitas. Mudah diakses lewat HP, fitur real-time, dan harga bersahabat!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tunggalpaito.online/apk/jasa-pembuatan-website/">
 
@@ -26,8 +26,8 @@
         :root {
             --bg-deep: #07080c;
             --bg-gradient: linear-gradient(135deg, #07080c 0%, #0d111a 100%);
-            --card-surface: rgba(18, 24, 38, 0.6);
-            --card-hover: rgba(26, 34, 54, 0.85);
+            --card-surface: rgba(18, 24, 38, 0.7);
+            --card-hover: rgba(26, 34, 54, 0.9);
             --border-glass: rgba(255, 255, 255, 0.08);
             --border-glow: rgba(99, 102, 241, 0.45);
             --neon-indigo: #6366f1;
@@ -48,28 +48,24 @@
             min-height: 100vh;
             overflow-x: hidden;
             padding-bottom: 120px;
+            -webkit-overflow-scrolling: touch; /* Scroll mulus di perangkat iOS/Android */
         }
 
-        /* Ambient Background Modern & Nyaman di Mata */
+        /* Ambient Background Dioptimalkan (Aman dari Lag & Pusing) */
         .ambient-mesh {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;
             background: 
-                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.07) 0%, transparent 55%);
-            filter: blur(90px);
-            animation: meshFloat 12s ease-in-out infinite alternate;
-        }
-
-        @keyframes meshFloat {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.06); }
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            filter: blur(50px); /* Diturunkan blurnya agar kerja GPU ringan */
         }
 
         header {
             text-align: center; padding: 65px 20px 45px 20px;
-            background: linear-gradient(to bottom, rgba(7, 8, 12, 0.9), rgba(13, 17, 26, 0.4));
-            border-bottom: 1px solid var(--border-glass); backdrop-filter: blur(20px);
+            background: rgba(7, 8, 12, 0.88);
+            border-bottom: 1px solid var(--border-glass); 
+            backdrop-filter: blur(10px); /* Dioptimalkan agar tidak berat */
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .status-badge {
@@ -77,12 +73,12 @@
             background: rgba(16, 185, 129, 0.1); color: var(--neon-emerald);
             font-size: 0.72rem; font-weight: 700; padding: 6px 16px; border-radius: 50px;
             border: 1px solid rgba(16, 185, 129, 0.3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 18px;
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.12);
         }
 
         .ping-dot {
             width: 7px; height: 7px; background-color: var(--neon-emerald); border-radius: 50%;
-            box-shadow: 0 0 12px var(--neon-emerald); animation: pulse-ring 2s infinite;
+            box-shadow: 0 0 10px var(--neon-emerald); animation: pulse-ring 2s infinite;
         }
 
         @keyframes pulse-ring {
@@ -108,10 +104,11 @@
         }
         .stat-box {
             background: var(--card-surface); border: 1px solid var(--border-glass); padding: 20px 14px;
-            border-radius: 18px; text-align: center; backdrop-filter: blur(12px);
-            transition: all 0.3s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            border-radius: 18px; text-align: center;
+            transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
-        .stat-box:hover { border-color: rgba(99, 102, 241, 0.4); transform: translateY(-4px); background: var(--card-hover); }
+        .stat-box:hover { border-color: rgba(99, 102, 241, 0.4); transform: translateY(-3px); background: var(--card-hover); }
         .stat-val { font-size: 1.25rem; font-weight: 800; color: var(--neon-cyan); margin-bottom: 4px; }
         .stat-lbl { font-size: 0.68rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.9px; }
 
@@ -126,59 +123,72 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px;
         }
 
-        /* Service Cards */
+        /* Service Cards (Dioptimalkan dengan will-change untuk anti-lag saat scroll) */
         .service-card {
             background: var(--card-surface); border: 1px solid var(--border-glass); border-radius: var(--radius-xl);
             padding: 28px; display: flex; flex-direction: column; justify-content: space-between;
-            position: relative; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(16px); box-shadow: 0 15px 40px -15px rgba(0,0,0,0.7);
+            position: relative; 
+            transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
+            will-change: transform;
         }
         .service-card:hover { 
             border-color: var(--border-glow); 
-            transform: translateY(-6px); 
+            transform: translateY(-4px); 
             background: var(--card-hover);
-            box-shadow: 0 25px 50px -15px rgba(99, 102, 241, 0.22);
+        }
+
+        /* Badge Paling Laris / Trending */
+        .hot-badge {
+            position: absolute; top: 18px; right: 18px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(56, 189, 248, 0.18));
+            color: var(--neon-emerald); border: 1px solid rgba(16, 185, 129, 0.35);
+            font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 50px;
+            text-transform: uppercase; letter-spacing: 0.8px;
         }
         
         .service-header { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 16px; }
         .service-icon {
             width: 58px; height: 58px; border-radius: 18px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(56, 189, 248, 0.18));
             border: 1px solid rgba(99, 102, 241, 0.35); display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; flex-shrink: 0; box-shadow: inset 0 2px 8px rgba(255,255,255,0.08);
+            font-size: 1.6rem; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(255,255,255,0.06);
         }
-        .service-title { font-size: 1.15rem; font-weight: 750; color: var(--text-main); margin-bottom: 6px; letter-spacing: -0.2px; }
+        .service-title { font-size: 1.15rem; font-weight: 750; color: var(--text-main); margin-bottom: 6px; letter-spacing: -0.2px; padding-right: 65px; }
         .service-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
 
         .tag-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
         .tag-item { font-size: 0.72rem; font-weight: 600; padding: 5px 12px; border-radius: 8px; background: rgba(99, 102, 241, 0.1); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.25); }
 
-        /* Tombol WhatsApp Bersih */
+        /* Tombol WhatsApp */
         .btn-wa-action {
             display: flex; align-items: center; justify-content: center; width: 100%; 
             padding: 14px 18px; background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: #fff;
             border: none; border-radius: 14px; font-size: 0.88rem; font-weight: 750;
-            cursor: pointer; text-decoration: none; transition: all 0.25s ease;
-            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35); letter-spacing: 0.3px;
+            cursor: pointer; text-decoration: none; transition: background 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); letter-spacing: 0.3px;
         }
         .btn-wa-action:active { transform: scale(0.98); }
-        .btn-wa-action:hover { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.55); }
+        .btn-wa-action:hover { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
 
         /* Floating Dock Bawah */
         .floating-dock {
-            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(7, 8, 12, 0.94);
-            backdrop-filter: blur(25px); border-top: 1px solid var(--border-glass); padding: 16px 24px;
+            position: fixed; bottom: 0; left: 0; right: 0; 
+            background: rgba(7, 8, 12, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-glass); padding: 16px 24px;
             z-index: 1000; display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto;
-            box-shadow: 0 -15px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
         }
         .dock-text span { display: block; font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.9px; }
         .dock-text strong { font-size: 0.95rem; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .btn-dock-wa { 
             background: linear-gradient(135deg, #4f46e5, #6366f1); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 14px; font-size: 0.88rem; font-weight: 750; display: flex; align-items: center; 
-            box-shadow: 0 6px 22px rgba(79, 70, 229, 0.45); transition: transform 0.2s;
+            box-shadow: 0 4px 18px rgba(79, 70, 229, 0.4); transition: transform 0.2s;
             letter-spacing: 0.3px;
         }
-        .btn-dock-wa:hover { transform: scale(1.04); }
+        .btn-dock-wa:hover { transform: scale(1.03); }
 
         footer { text-align: center; padding: 40px 20px 110px 20px; font-size: 0.76rem; color: var(--text-muted); line-height: 1.6; }
     </style>
@@ -263,17 +273,18 @@
 
             <!-- LAYANAN 3 -->
             <div class="service-card">
+                <span class="hot-badge">Paling Laris</span>
                 <div>
                     <div class="service-header">
                         <div class="service-icon">💼</div>
                         <div>
                             <div class="service-title">3. Sektor UMKM & Bisnis Lokal</div>
-                            <div class="service-desc">Solusi digital paling cepat dimonetisasi! Aplikasi kasir digital, manajemen stok warung/toko, katalog produk online, hingga sistem pencatatan piutang otomatis.</div>
+                            <div class="service-desc">Solusi digital paling cepat dimonetisasi! Aplikasi kasir digital, manajemen stok warung/toko, katalog produk online, hingga kirim nota via WhatsApp otomatis.</div>
                         </div>
                     </div>
                     <div class="tag-wrap">
                         <span class="tag-item">Kasir Digital</span>
-                        <span class="tag-item">Manajemen Stok</span>
+                        <span class="tag-item">Nota WhatsApp</span>
                         <span class="tag-item">Laba-Rugi Otomatis</span>
                     </div>
                 </div>
@@ -284,32 +295,140 @@
 
             <!-- LAYANAN 4 -->
             <div class="service-card">
+                <span class="hot-badge">Trending</span>
                 <div>
                     <div class="service-header">
-                        <div class="service-icon">🎓</div>
+                        <div class="service-icon">☕</div>
                         <div>
-                            <div class="service-title">4. Sektor Pendidikan & Keagamaan</div>
-                            <div class="service-desc">Platform digital untuk Pondok Pesantren, TPQ, Madrasah, atau DKM Masjid. Kelola absensi santri, laporan infak/kas masjid, dan tabungan secara transparan.</div>
+                            <div class="service-title">4. Cafe, Resto & Kuliner (QR Menu)</div>
+                            <div class="service-desc">Pelanggan scan QR di meja langsung pilih menu, pesan, dan bayar tanpa antre. Terintegrasi dengan dapur serta laporan stok bahan baku harian.</div>
                         </div>
                     </div>
                     <div class="tag-wrap">
-                        <span class="tag-item">Absensi & Tahfidz</span>
-                        <span class="tag-item">Kas Masjid Transparan</span>
-                        <span class="tag-item">Portal Komunitas</span>
+                        <span class="tag-item">Scan QR Meja</span>
+                        <span class="tag-item">Self-Order</span>
+                        <span class="tag-item">Manajemen Bahan</span>
                     </div>
                 </div>
-                <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20tertarik%20pembuatan%20sistem%20Pendidikan%20&%20Keagamaan." target="_blank" class="btn-wa-action">
+                <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20tertarik%20pembuatan%20aplikasi%20QR%20Menu%20Cafe%20&%20Resto." target="_blank" class="btn-wa-action">
                     Konsultasi via WhatsApp
                 </a>
             </div>
 
             <!-- LAYANAN 5 -->
             <div class="service-card">
+                <span class="hot-badge">Paling Laris</span>
+                <div>
+                    <div class="service-header">
+                        <div class="service-icon">💌</div>
+                        <div>
+                            <div class="service-title">5. Undangan Digital & Event Interaktif</div>
+                            <div class="service-desc">Website undangan pernikahan, khitanan, atau acara eksklusif. Dilengkapi navigasi Google Maps, konfirmasi kehadiran (RSVP), ucapan live, & amplop digital.</div>
+                        </div>
+                    </div>
+                    <div class="tag-wrap">
+                        <span class="tag-item">RSVP Kehadiran</span>
+                        <span class="tag-item">Amplop Digital</span>
+                        <span class="tag-item">Galeri & Musik</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20tertarik%20pembuatan%20Website%20Undangan%20Digital." target="_blank" class="btn-wa-action">
+                    Konsultasi via WhatsApp
+                </a>
+            </div>
+
+            <!-- LAYANAN 6 -->
+            <div class="service-card">
+                <div>
+                    <div class="service-header">
+                        <div class="service-icon">📅</div>
+                        <div>
+                            <div class="service-title">6. Sistem Booking & Reservasi Online</div>
+                            <div class="service-desc">Cocok untuk lapangan futsal/badminton, barbershop, klinik kecantikan, studio foto, hingga rental kendaraan agar jadwal tidak bentrok dan DP otomatis tercatat.</div>
+                        </div>
+                    </div>
+                    <div class="tag-wrap">
+                        <span class="tag-item">Kalender Jadwal</span>
+                        <span class="tag-item">Anti Bentrok</span>
+                        <span class="tag-item">Konfirmasi WA</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20tertarik%20pembuatan%20Sistem%20Booking%20&%20Reservasi%20Online." target="_blank" class="btn-wa-action">
+                    Konsultasi via WhatsApp
+                </a>
+            </div>
+
+            <!-- LAYANAN 7 -->
+            <div class="service-card">
+                <div>
+                    <div class="service-header">
+                        <div class="service-icon">🔑</div>
+                        <div>
+                            <div class="service-title">7. Manajemen Kos, Kontrakan & Properti</div>
+                            <div class="service-desc">Pantau kamar kosong/terisi secara real-time, pencatatan tanggal jatuh tempo sewa, riwayat pembayaran penyewa, hingga pengingat tagihan via WhatsApp.</div>
+                        </div>
+                    </div>
+                    <div class="tag-wrap">
+                        <span class="tag-item">Status Kamar</span>
+                        <span class="tag-item">Pengingat Tagihan</span>
+                        <span class="tag-item">Laporan Pemasukan</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20tertarik%20pembuatan%20Aplikasi%20Manajemen%20Kos%20&%20Kontrakan." target="_blank" class="btn-wa-action">
+                    Konsultasi via WhatsApp
+                </a>
+            </div>
+
+            <!-- LAYANAN 8 -->
+            <div class="service-card">
+                <span class="hot-badge">Trending</span>
+                <div>
+                    <div class="service-header">
+                        <div class="service-icon">🚀</div>
+                        <div>
+                            <div class="service-title">8. Landing Page Bisnis & Personal Branding</div>
+                            <div class="service-desc">Halaman web khusus untuk promosi iklan (Meta/TikTok Ads), portofolio kreator, profil perusahaan (Company Profile), hingga halaman bio-link premium.</div>
+                        </div>
+                    </div>
+                    <div class="tag-wrap">
+                        <span class="tag-item">Siap Iklan Ads</span>
+                        <span class="tag-item">SEO Friendly</span>
+                        <span class="tag-item">Desain Eksklusif</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20tertarik%20pembuatan%20Landing%20Page%20/%20Company%20Profile." target="_blank" class="btn-wa-action">
+                    Konsultasi via WhatsApp
+                </a>
+            </div>
+
+            <!-- LAYANAN 9 -->
+            <div class="service-card">
+                <div>
+                    <div class="service-header">
+                        <div class="service-icon">🎓</div>
+                        <div>
+                            <div class="service-title">9. Sektor Pendidikan, Kursus & Keagamaan</div>
+                            <div class="service-desc">Platform PPDB online, e-learning kursus privat, hingga sistem Pondok Pesantren & DKM Masjid (absensi santri, hafalan tahfidz, dan laporan kas transparan).</div>
+                        </div>
+                    </div>
+                    <div class="tag-wrap">
+                        <span class="tag-item">PPDB Online</span>
+                        <span class="tag-item">Absensi & Tahfidz</span>
+                        <span class="tag-item">Kas Masjid Transparan</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20tertarik%20pembuatan%20sistem%20Pendidikan,%20Kursus%20&%20Keagamaan." target="_blank" class="btn-wa-action">
+                    Konsultasi via WhatsApp
+                </a>
+            </div>
+
+            <!-- LAYANAN 10 -->
+            <div class="service-card">
                 <div>
                     <div class="service-header">
                         <div class="service-icon">🌴</div>
                         <div>
-                            <div class="service-title">5. Pertanian, Peternakan & Perkebunan</div>
+                            <div class="service-title">10. Pertanian, Peternakan & Perkebunan</div>
                             <div class="service-desc">Pencatatan tonase hasil panen harian per blok kebun, kalkulasi biaya pupuk vs hasil jual, manajemen buruh harian lepas, hingga monitoring pakan ternak.</div>
                         </div>
                     </div>
@@ -324,13 +443,13 @@
                 </a>
             </div>
 
-            <!-- LAYANAN 6 -->
+            <!-- LAYANAN 11 -->
             <div class="service-card">
                 <div>
                     <div class="service-header">
                         <div class="service-icon">🏘️</div>
                         <div>
-                            <div class="service-title">6. Pengelolaan Aset & Komunitas Khusus</div>
+                            <div class="service-title">11. Pengelolaan Aset & Komunitas Khusus</div>
                             <div class="service-desc">Sistem iuran bulanan warga RT/RW, pencatatan inventaris aset kantor/desa, hingga sistem tiket retribusi digital untuk BUMDes dan pasar tradisional.</div>
                         </div>
                     </div>
@@ -342,6 +461,27 @@
                 </div>
                 <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20tertarik%20pembuatan%20sistem%20Pengelolaan%20Aset%20&%20Komunitas." target="_blank" class="btn-wa-action">
                     Konsultasi via WhatsApp
+                </a>
+            </div>
+
+            <!-- LAYANAN 12 -->
+            <div class="service-card">
+                <div>
+                    <div class="service-header">
+                        <div class="service-icon">⚡</div>
+                        <div>
+                            <div class="service-title">12. Custom Aplikasi Sesuai Ide Anda</div>
+                            <div class="service-desc">Punya alur kerja unik atau ide startup/bisnis sendiri? Kami siap merancang sistem aplikasi berbasis web maupun Android sesuai kebutuhan spesifik Anda.</div>
+                        </div>
+                    </div>
+                    <div class="tag-wrap">
+                        <span class="tag-item">Fitur Bebas Request</span>
+                        <span class="tag-item">Web & APK</span>
+                        <span class="tag-item">Gratis Konsultasi</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/6282152036787?text=Halo%20Nexcode%20Studio,%20saya%20punya%20ide%20aplikasi%20custom%20dan%20ingin%20konsultasi." target="_blank" class="btn-wa-action">
+                    Diskusikan Ide Anda
                 </a>
             </div>
 
