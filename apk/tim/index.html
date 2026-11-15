@@ -111,6 +111,24 @@
     </style> 
 </head> 
 <body class="theme-emerald"> 
+    
+    <!-- MODAL UPDATE OTOMATIS -->
+    <div id="modal-update-apk" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(5,8,15,.96); z-index:999999; display:none; justify-content:center; align-items:center; padding:20px;">
+        <div style="background:var(--surface); border:1px solid var(--border); width:100%; max-width:420px; padding:32px 24px; border-radius:var(--radius); box-shadow:0 25px 50px -12px rgba(0,0,0,.8); text-align:center;">
+            <div style="font-size:3rem; margin-bottom:12px;">🚀</div>
+            <h2 style="color:var(--primary); margin-bottom:10px; font-size:1.5rem; font-weight:800;">UPDATE VERSI TERBARU!</h2>
+            <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:20px; line-height:1.5;">
+                Pembaruan sistem & perbaikan kode baru telah dirilis. Silakan unduh versi terbaru agar aplikasi berjalan optimal dan lancar.
+            </p>
+            <div style="background:var(--bg-deep); padding:12px; border-radius:10px; border:1px solid var(--border); margin-bottom:20px; font-size:0.8rem; display:flex; justify-content:space-between; align-items:center;">
+                <span style="color:var(--text-muted);">Versi Terpasang: <strong id="txt-versi-lokal" style="color:var(--text-main);">1.0.0</strong></span>
+                <span style="color:var(--primary);">Versi Terbaru: <strong id="txt-versi-server">1.0.1</strong></span>
+            </div>
+            <a id="btn-link-download" href="https://drive.google.com/file/d/1uP--lQq2SJ7i0Nxr8PnOUjHExVDqRCLD/view?usp=drivesdk" target="_blank" class="btn btn-primary" style="text-decoration:none; display:block; padding:14px; font-size:1rem; margin-bottom:8px;">📥 DOWNLOAD UPDATE APK</a>
+            <button class="btn btn-outline" onclick="abaikanUpdateSementara()" style="font-size:0.8rem; padding:10px;">Abaikan / Nanti Saja</button>
+        </div>
+    </div>
+
     <div id=login-overlay> 
         <div class=login-card id=card-login-utama> 
             <h2>KOMANDO</h2> 
@@ -614,6 +632,53 @@
         const db = firebase.database();
         let imgBase64="", pubImgBase64="", myDeviceSessionId = localStorage.getItem("siap_sawit_device_id");
         let currentGpsString = "Area (GPS Belum Aktif)";
+
+        // --- SISTEM CEK VERSI & UPDATE OTOMATIS ---
+        const CURRENT_APP_VERSION = "1.0.0"; // Ubah nomor versi ini jika Anda merilis kode/fitur baru
+        const DEFAULT_DRIVE_URL = "https://drive.google.com/file/d/1uP--lQq2SJ7i0Nxr8PnOUjHExVDqRCLD/view?usp=drivesdk";
+
+        function cekPembaruanAplikasi(){
+            document.getElementById("txt-versi-lokal").innerText = CURRENT_APP_VERSION;
+
+            db.ref("siap_sawit/app_version").once("value", snap => {
+                const serverData = snap.val();
+                let latestVersion = "1.0.0";
+                let downloadUrl = DEFAULT_DRIVE_URL;
+
+                if(serverData){
+                    latestVersion = serverData.version || "1.0.0";
+                    downloadUrl = serverData.url || DEFAULT_DRIVE_URL;
+                } else {
+                    // Inisialisasi data versi pertama kali di Firebase jika belum ada
+                    db.ref("siap_sawit/app_version").set({
+                        version: CURRENT_APP_VERSION,
+                        url: DEFAULT_DRIVE_URL,
+                        changelog: "Rilis pembaruan sistem stabil."
+                    });
+                }
+
+                document.getElementById("txt-versi-server").innerText = latestVersion;
+                document.getElementById("btn-link-download").href = downloadUrl;
+
+                // Bandingkan versi (jika versi server berbeda / lebih baru)
+                if(latestVersion !== CURRENT_APP_VERSION){
+                    // Cek apakah user baru saja mengabaikannya pada sesi ini
+                    const ignoredVersion = sessionStorage.getItem("ignored_version");
+                    if(ignoredVersion !== latestVersion){
+                        document.getElementById("modal-update-apk").style.display = "flex";
+                    }
+                }
+            });
+        }
+
+        function abaikanUpdateSementara(){
+            db.ref("siap_sawit/app_version/version").once("value", snap => {
+                let ver = snap.val() || "1.0.1";
+                sessionStorage.setItem("ignored_version", ver);
+                document.getElementById("modal-update-apk").style.display = "none";
+            });
+        }
+        // ------------------------------------------
         
         if(!myDeviceSessionId){
             myDeviceSessionId="dev_"+Date.now()+Math.random().toString(36).substring(2,7);
@@ -1754,9 +1819,9 @@
             if(!globalChessState || !globalChessState.pemain_online) return "white";
             let keys = Object.keys(globalChessState.pemain_online);
             let index = keys.indexOf(myDeviceSessionId);
-            if(index === 0) return "white"; // Pemain pertama di meja memegang buah Putih
-            if(index === 1) return "black"; // Pemain kedua memegang buah Merah
-            return "viewer"; // Penonton jika lebih dari 2 perangkat
+            if(index === 0) return "white"; 
+            if(index === 1) return "black"; 
+            return "viewer"; 
         }
 
         function handleSquareClick(r, c, board){
@@ -1765,13 +1830,11 @@
             let isWhiteTurn = globalChessState.turn === "white";
             let myColor = getMyAssignedColor();
 
-            // Pengecekan 1: Apakah user hanya sebagai penonton?
             if(myColor === "viewer") {
                 alert("👀 Anda bertindak sebagai penonton di meja ini.");
                 return;
             }
 
-            // Pengecekan 2: Apakah sesuai giliran warna user?
             let expectedTurnColor = isWhiteTurn ? "white" : "black";
             if(myColor !== expectedTurnColor) {
                 alert(`⏳ Bukan giliran Anda! Sekarang giliran pemain buah ${expectedTurnColor === 'white' ? 'Putih' : 'Merah'}.`);
@@ -1782,7 +1845,6 @@
                 if(piece !== ""){
                     let isPieceWhite = piece === piece.toUpperCase();
                     
-                    // Pengecekan 3: Pastikan tidak memilih/menggerakkan buah milik lawan
                     if((isWhiteTurn && !isPieceWhite) || (!isWhiteTurn && isPieceWhite)){
                         alert("⚠️ Anda tidak bisa menggerakkan buah catur milik lawan!");
                         return;
@@ -1978,6 +2040,9 @@
         }
 
         window.onload=function(){
+            // Jalankan cek pembaruan aplikasi saat halaman pertama kali terbuka
+            cekPembaruanAplikasi();
+
             muatTemaTersimpan();
             ambilLokasiGPSRealtime();
             muatDaftarPos();
