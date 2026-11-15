@@ -584,7 +584,7 @@
                 </div>
                 
                 <div style="min-height: 36px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
-                    <div id="chess-notif-banner" style="display:none; width: 100%; background:rgba(244,63,94,0.15); border:1px solid var(--danger); color:var(--danger); padding:6px 10px; border-radius:8px; text-align:center; font-size:0.8rem; font-weight:bold;"></div>
+                    <div id="chess-notif-banner" style="display:none; width: 100%; background:rgba(244,63,94,0.15); border:1px solid var(--danger); color:var(--danger); padding:6px 10px; border-radius:8px; text-align:center; font-size:0.80rem; font-weight:bold;"></div>
                 </div>
 
                 <div class="chessboard" id="chessboard-grid"></div>
@@ -770,11 +770,11 @@
                 const a = t.val() || "komando123";
                 if(e === a){
                     localStorage.setItem("siap_sawit_role", "komandan");
-                    localStorage.setItem("siap_sawit_petugas", "Komandan Posko");
+                    localStorage.setItem("siap_sawit_petugas", "Komandan");
                     localStorage.setItem("siap_sawit_pos", "Pusat Komando");
                     
                     document.getElementById("login-overlay").style.display = "none";
-                    terapkanHakAkses("komandan", "Komandan Posko", "Pusat Komando");
+                    terapkanHakAkses("komandan", "Komandan", "Pusat Komando");
                     tampilkanModalKedisiplinan();
                 } else {
                     alert("Sandi Komando Salah!");
@@ -782,11 +782,11 @@
             }).catch(() => {
                 if("komando123" === e){
                     localStorage.setItem("siap_sawit_role", "komandan");
-                    localStorage.setItem("siap_sawit_petugas", "Komandan Posko");
+                    localStorage.setItem("siap_sawit_petugas", "Komandan");
                     localStorage.setItem("siap_sawit_pos", "Pusat Komando");
                     
                     document.getElementById("login-overlay").style.display = "none";
-                    terapkanHakAkses("komandan", "Komandan Posko", "Pusat Komando");
+                    terapkanHakAkses("komandan", "Komandan", "Pusat Komando");
                     tampilkanModalKedisiplinan();
                 } else {
                     alert("Sandi Komando Salah!");
@@ -1134,7 +1134,7 @@
             let pilihan = prompt(`Menu Aksi untuk "${namaPetugas}" (${posPetugas}):\n1. Kirim Pesan WhatsApp\n2. Hapus / Paksa Keluar Sesi\n\nKetik angka pilihan (1 atau 2):`, "1");
             if(pilihan === "1"){
                 if(hpPetugas && hpPetugas !== "-"){
-                    window.open(`https://wa.me/${hpPetugas}?text=${encodeURIComponent("Halo " + namaPetugas + ", arahan dari Komandan Posko:")}`, "_blank");
+                    window.open(`https://wa.me/${hpPetugas}?text=${encodeURIComponent("Halo " + namaPetugas + ", Arahan Dari Komandan:")}`, "_blank");
                 } else alert("Nomor WhatsApp tidak terdaftar.");
             } else if(pilihan === "2"){
                 if(confirm(`Yakin ingin mengeluarkan "${namaPetugas}" dari sesi aktif?`)){
@@ -1650,7 +1650,10 @@
                 }
                 globalChessState = data;
                 renderChessboard(data.board);
-                document.getElementById("chess-status").innerText = `Giliran: ${data.turn === 'white' ? 'Putih (Bawah)' : 'Merah (Atas)'} (${data.lastMove})`;
+                
+                let myColor = getMyAssignedColor();
+                let roleInfo = myColor === 'white' ? ' (Anda: Putih)' : (myColor === 'black' ? ' (Anda: Merah)' : ' (Anda: Penonton)');
+                document.getElementById("chess-status").innerText = `Giliran: ${data.turn === 'white' ? 'Putih' : 'Merah'}${roleInfo} — ${data.lastMove}`;
             });
 
             db.ref(`siap_sawit/game_catur/${currentRoomId}/pemain_online`).on("value", (pemainSnap) => {
@@ -1747,13 +1750,44 @@
             return true;
         }
 
+        function getMyAssignedColor() {
+            if(!globalChessState || !globalChessState.pemain_online) return "white";
+            let keys = Object.keys(globalChessState.pemain_online);
+            let index = keys.indexOf(myDeviceSessionId);
+            if(index === 0) return "white"; // Pemain pertama di meja memegang buah Putih
+            if(index === 1) return "black"; // Pemain kedua memegang buah Merah
+            return "viewer"; // Penonton jika lebih dari 2 perangkat
+        }
+
         function handleSquareClick(r, c, board){
             if(!globalChessState) return;
             const piece = board[r][c];
             let isWhiteTurn = globalChessState.turn === "white";
+            let myColor = getMyAssignedColor();
+
+            // Pengecekan 1: Apakah user hanya sebagai penonton?
+            if(myColor === "viewer") {
+                alert("👀 Anda bertindak sebagai penonton di meja ini.");
+                return;
+            }
+
+            // Pengecekan 2: Apakah sesuai giliran warna user?
+            let expectedTurnColor = isWhiteTurn ? "white" : "black";
+            if(myColor !== expectedTurnColor) {
+                alert(`⏳ Bukan giliran Anda! Sekarang giliran pemain buah ${expectedTurnColor === 'white' ? 'Putih' : 'Merah'}.`);
+                return;
+            }
 
             if(!selectedSquare){
-                if(piece !== "" && ((isWhiteTurn && piece === piece.toUpperCase()) || (!isWhiteTurn && piece === piece.toLowerCase()))){
+                if(piece !== ""){
+                    let isPieceWhite = piece === piece.toUpperCase();
+                    
+                    // Pengecekan 3: Pastikan tidak memilih/menggerakkan buah milik lawan
+                    if((isWhiteTurn && !isPieceWhite) || (!isWhiteTurn && isPieceWhite)){
+                        alert("⚠️ Anda tidak bisa menggerakkan buah catur milik lawan!");
+                        return;
+                    }
+
                     selectedSquare = {r, c};
                     renderChessboard(board);
                 }
