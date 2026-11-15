@@ -24,7 +24,7 @@
         *{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif}
         body{background-color:var(--bg-deep);color:var(--text-main);padding-bottom:100px;transition:background 0.3s ease;}
         
-        #login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,15,.9);backdrop-filter:blur(16px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px}
+        #login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,15,.95);backdrop-filter:blur(16px);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px}
         .login-card{background:var(--surface);border:1px solid var(--border);width:100%;max-width:400px;padding:32px 24px;border-radius:var(--radius);box-shadow:0 25px 50px -12px rgba(0,0,0,.5);text-align:center;max-height:90vh;overflow-y:auto}
         .login-card h2{color:var(--text-main);margin-bottom:6px;font-size:1.75rem;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,var(--primary) 0,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .login-card p{font-size:.85rem;color:var(--text-muted);margin-bottom:24px}
@@ -126,6 +126,18 @@
             </div>
             <a id="btn-link-download" href="https://drive.google.com/file/d/1uP--lQq2SJ7i0Nxr8PnOUjHExVDqRCLD/view?usp=drivesdk" target="_blank" class="btn btn-primary" style="text-decoration:none; display:block; padding:14px; font-size:1rem; margin-bottom:8px;">📥 DOWNLOAD UPDATE APK</a>
             <button class="btn btn-outline" onclick="abaikanUpdateSementara()" style="font-size:0.8rem; padding:10px;">Abaikan / Nanti Saja</button>
+        </div>
+    </div>
+
+    <!-- MODAL PENDING / MENUNGGU IZIN -->
+    <div id="modal-pending-approval" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(5,8,15,.96); z-index:99999; display:none; justify-content:center; align-items:center; padding:20px;">
+        <div style="background:var(--surface); border:1px solid var(--border); width:100%; max-width:400px; padding:32px 24px; border-radius:var(--radius); box-shadow:0 25px 50px -12px rgba(0,0,0,.8); text-align:center;">
+            <div style="font-size:3rem; margin-bottom:12px;">⏳</div>
+            <h2 style="color:var(--accent); margin-bottom:10px; font-size:1.4rem; font-weight:800;">MENUNGGU IZIN KOMANDAN</h2>
+            <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:20px; line-height:1.5;">
+                Pendaftaran perangkat Anda berhasil tercatat. Sesuai SOP, Anda hanya dapat membuka halaman ini tetapi belum diizinkan melakukan tindakan apa pun sebelum Komandan menyetujuinya.
+            </p>
+            <button class="btn btn-outline" onclick="logoutAplikasi()">Keluar / Ganti Akun</button>
         </div>
     </div>
 
@@ -640,12 +652,12 @@
         let imgBase64="", pubImgBase64="", myDeviceSessionId = localStorage.getItem("siap_sawit_device_id");
         let currentGpsString = "Area (GPS Belum Aktif)";
 
-        // --- SISTEM CEK VERSI & UPDATE OTOMATIS ---
         const CURRENT_APP_VERSION = "1.0.0";
         const DEFAULT_DRIVE_URL = "https://drive.google.com/file/d/1uP--lQq2SJ7i0Nxr8PnOUjHExVDqRCLD/view?usp=drivesdk";
 
         function cekPembaruanAplikasi(){
-            document.getElementById("txt-versi-lokal").innerText = CURRENT_APP_VERSION;
+            const elLokal = document.getElementById("txt-versi-lokal");
+            if(elLokal) elLokal.innerText = CURRENT_APP_VERSION;
 
             db.ref("siap_sawit/app_version").once("value", snap => {
                 const serverData = snap.val();
@@ -663,13 +675,16 @@
                     });
                 }
 
-                document.getElementById("txt-versi-server").innerText = latestVersion;
-                document.getElementById("btn-link-download").href = downloadUrl;
+                const elServer = document.getElementById("txt-versi-server");
+                const elBtnDown = document.getElementById("btn-link-download");
+                if(elServer) elServer.innerText = latestVersion;
+                if(elBtnDown) elBtnDown.href = downloadUrl;
 
                 if(latestVersion !== CURRENT_APP_VERSION){
                     const ignoredVersion = sessionStorage.getItem("ignored_version");
                     if(ignoredVersion !== latestVersion){
-                        document.getElementById("modal-update-apk").style.display = "flex";
+                        const modalUpd = document.getElementById("modal-update-apk");
+                        if(modalUpd) modalUpd.style.display = "flex";
                     }
                 }
             });
@@ -679,48 +694,43 @@
             db.ref("siap_sawit/app_version/version").once("value", snap => {
                 let ver = snap.val() || "1.0.1";
                 sessionStorage.setItem("ignored_version", ver);
-                document.getElementById("modal-update-apk").style.display = "none";
+                const modalUpd = document.getElementById("modal-update-apk");
+                if(modalUpd) modalUpd.style.display = "none";
             });
         }
         
         if(!myDeviceSessionId){
-            myDeviceSessionId="dev_"+Date.now()+Math.random().toString(36).substring(2,7);
+            myDeviceSessionId = "dev_" + Date.now() + Math.random().toString(36).substring(2,7);
             localStorage.setItem("siap_sawit_device_id", myDeviceSessionId);
         }
 
         function ambilLokasiGPSRealtime() {
             const gpsTextElement = document.getElementById("gps-text");
             if (navigator.geolocation) {
-                gpsTextElement.innerText = "⏳ Mendeteksi sinyal GPS presisi...";
+                if(gpsTextElement) gpsTextElement.innerText = "⏳ Mendeteksi sinyal GPS presisi...";
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         const lat = position.coords.latitude.toFixed(5);
                         const lon = position.coords.longitude.toFixed(5);
                         const akurasi = Math.round(position.coords.accuracy);
                         currentGpsString = `Lat: ${lat}, Lon: ${lon} (Akurasi ±${akurasi}m)`;
-                        gpsTextElement.innerText = currentGpsString;
+                        if(gpsTextElement) gpsTextElement.innerText = currentGpsString;
                     },
                     (error) => {
                         let pesanError = "Gagal mendeteksi GPS";
                         switch(error.code) {
-                            case error.PERMISSION_DENIED:
-                                pesanError = "Izin GPS ditolak";
-                                break;
-                            case error.POSITION_UNAVAILABLE:
-                                pesanError = "Lokasi tidak tersedia (Aktifkan GPS HP).";
-                                break;
-                            case error.TIMEOUT:
-                                pesanError = "Waktu habis. Coba di area terbuka.";
-                                break;
+                            case error.PERMISSION_DENIED: pesanError = "Izin GPS ditolak"; break;
+                            case error.POSITION_UNAVAILABLE: pesanError = "Lokasi tidak tersedia."; break;
+                            case error.TIMEOUT: pesanError = "Waktu habis."; break;
                         }
                         currentGpsString = `Area (${pesanError})`;
-                        gpsTextElement.innerText = currentGpsString;
+                        if(gpsTextElement) gpsTextElement.innerText = currentGpsString;
                     },
                     { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
                 );
             } else {
                 currentGpsString = "Area (GPS Tidak Didukung)";
-                gpsTextElement.innerText = currentGpsString;
+                if(gpsTextElement) gpsTextElement.innerText = currentGpsString;
             }
         }
 
@@ -737,15 +747,28 @@
         }
 
         function gantiFormLogin(){
-            "tim"===document.getElementById("pilih-role").value?(document.getElementById("wrapper-login-tim").style.display="block",document.getElementById("wrapper-login-komandan").style.display="none"):(document.getElementById("wrapper-login-tim").style.display="none",document.getElementById("wrapper-login-komandan").style.display="block")
+            const roleSel = document.getElementById("pilih-role");
+            const wrapTim = document.getElementById("wrapper-login-tim");
+            const wrapKom = document.getElementById("wrapper-login-komandan");
+            if(roleSel && wrapTim && wrapKom){
+                if(roleSel.value === "tim"){
+                    wrapTim.style.display = "block";
+                    wrapKom.style.display = "none";
+                } else {
+                    wrapTim.style.display = "none";
+                    wrapKom.style.display = "block";
+                }
+            }
         }
         
         function tampilkanModalKedisiplinan(){
-            document.getElementById("modal-kedisiplinan").style.display = "flex";
+            const m = document.getElementById("modal-kedisiplinan");
+            if(m) m.style.display = "flex";
         }
 
         function tutupModalKedisiplinan(){
-            document.getElementById("modal-kedisiplinan").style.display = "none";
+            const m = document.getElementById("modal-kedisiplinan");
+            if(m) m.style.display = "none";
         }
 
         function getSapaanWaktu(){
@@ -760,7 +783,8 @@
             db.ref(`siap_sawit/blocked_devices/${myDeviceSessionId}`).once("value", snapBlok => {
                 if(snapBlok.exists()){
                     alert("❌ AKSES DITOLAK!\nPerangkat ini telah diblokir secara permanen oleh Komandan.");
-                    document.getElementById("login-overlay").innerHTML = `
+                    const overlay = document.getElementById("login-overlay");
+                    if(overlay) overlay.innerHTML = `
                         <div class="login-card">
                             <div style="font-size:3rem; margin-bottom:10px;">🚫</div>
                             <h2 style="color:var(--danger); margin-bottom:10px;">PERANGKAT DIBLOKIR</h2>
@@ -777,14 +801,14 @@
                     const labelSapaan = document.getElementById("label-sapaan-otomatis");
 
                     if(dataStaf && dataStaf.nama){
-                        wrapperPendaftaran.style.display = "none";
-                        wrapperSapaan.style.display = "block";
-                        labelSapaan.innerText = `${getSapaanWaktu()} ${dataStaf.nama} (Perangkat Terikat). Silakan masukkan sandi untuk login.`;
+                        if(wrapperPendaftaran) wrapperPendaftaran.style.display = "none";
+                        if(wrapperSapaan) wrapperSapaan.style.display = "block";
+                        if(labelSapaan) labelSapaan.innerText = `${getSapaanWaktu()} ${dataStaf.nama} (Perangkat Terikat). Silakan masukkan sandi untuk login.`;
                         window.namaOtomatisStaf = dataStaf.nama;
                         window.hpOtomatisStaf = dataStaf.hp;
                     } else {
-                        wrapperPendaftaran.style.display = "block";
-                        wrapperSapaan.style.display = "none";
+                        if(wrapperPendaftaran) wrapperPendaftaran.style.display = "block";
+                        if(wrapperSapaan) wrapperSapaan.style.display = "none";
                         window.namaOtomatisStaf = null;
                     }
                 });
@@ -798,17 +822,29 @@
                     return;
                 }
 
-                const sandiInput = document.getElementById("input-sandi-tim").value;
+                const inpSandi = document.getElementById("input-sandi-tim");
+                const sandiInput = inpSandi ? inpSandi.value : "";
 
                 db.ref("siap_sawit/sandi_tim").once("value").then((snapSandi) => {
                     const sandiBenar = snapSandi.val() || "tim123";
                     if(sandiInput !== sandiBenar) return alert("Sandi Tim Salah!");
 
                     if(window.namaOtomatisStaf){
-                        berhasilLoginTim(window.namaOtomatisStaf, window.hpOtomatisStaf || "-", "Pos Utama Gerbang 1");
+                        db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}/approved`).once("value", snapApp => {
+                            if(snapApp.val() === true){
+                                berhasilLoginTim(window.namaOtomatisStaf, window.hpOtomatisStaf || "-", "Pos Utama Gerbang 1");
+                            } else {
+                                const overlay = document.getElementById("login-overlay");
+                                const modalPend = document.getElementById("modal-pending-approval");
+                                if(overlay) overlay.style.display = "flex";
+                                if(modalPend) modalPend.style.display = "flex";
+                            }
+                        });
                     } else {
-                        const namaPetugas = document.getElementById("input-nama-tim").value.trim();
-                        let hpVal = document.getElementById("input-hp-tim").value.trim();
+                        const inpNama = document.getElementById("input-nama-tim");
+                        const inpHp = document.getElementById("input-hp-tim");
+                        const namaPetugas = inpNama ? inpNama.value.trim() : "";
+                        let hpVal = inpHp ? inpHp.value.trim() : "";
 
                         if(!namaPetugas || !hpVal) return alert("Harap isi Nama Petugas dan Nomor WhatsApp Anda untuk pendaftaran awal!");
                         if(hpVal.startsWith("0")) hpVal = "62" + hpVal.substring(1);
@@ -822,6 +858,7 @@
                             db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).set({
                                 nama: namaPetugas,
                                 hp: hpVal,
+                                approved: false,
                                 waktuDaftar: new Date().toLocaleString("id-ID")
                             });
 
@@ -831,7 +868,10 @@
                                 waktu: new Date().toLocaleString("id-ID")
                             });
 
-                            alert("⏳ ID Perangkat berhasil dikunci untuk Anda. Permintaan izin masuk dikirim ke Komandan.");
+                            const overlay = document.getElementById("login-overlay");
+                            const modalPend = document.getElementById("modal-pending-approval");
+                            if(overlay) overlay.style.display = "flex";
+                            if(modalPend) modalPend.style.display = "flex";
                             cekOtomatisPerangkat();
                         });
                     }
@@ -855,17 +895,21 @@
                 nama: nama,
                 pos: posDefault,
                 hp: hp || "-",
-                waktuLogin: (new Date).toLocaleTimeString("id-ID")
+                waktuLogin: new Date().toLocaleTimeString("id-ID")
             });
             db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).onDisconnect().remove();
 
-            document.getElementById("login-overlay").style.display = "none";
+            const overlay = document.getElementById("login-overlay");
+            const modalPend = document.getElementById("modal-pending-approval");
+            if(overlay) overlay.style.display = "none";
+            if(modalPend) modalPend.style.display = "none";
             terapkanHakAkses("tim", nama, posDefault);
             tampilkanModalKedisiplinan();
         }
         
         function prosesLoginKomandan(){
-            const e = document.getElementById("input-sandi-komandan").value;
+            const inpKom = document.getElementById("input-sandi-komandan");
+            const e = inpKom ? inpKom.value : "";
             if(!e) return alert("Harap masukkan Sandi Komandan!");
 
             db.ref("siap_sawit/sandi_komando").once("value").then(t => {
@@ -875,7 +919,10 @@
                     localStorage.setItem("siap_sawit_petugas", "Komandan");
                     localStorage.setItem("siap_sawit_pos", "Pusat Komando");
                     
-                    document.getElementById("login-overlay").style.display = "none";
+                    const overlay = document.getElementById("login-overlay");
+                    const modalPend = document.getElementById("modal-pending-approval");
+                    if(overlay) overlay.style.display = "none";
+                    if(modalPend) modalPend.style.display = "none";
                     terapkanHakAkses("komandan", "Komandan", "Pusat Komando");
                     tampilkanModalKedisiplinan();
                 } else {
@@ -887,7 +934,10 @@
                     localStorage.setItem("siap_sawit_petugas", "Komandan");
                     localStorage.setItem("siap_sawit_pos", "Pusat Komando");
                     
-                    document.getElementById("login-overlay").style.display = "none";
+                    const overlay = document.getElementById("login-overlay");
+                    const modalPend = document.getElementById("modal-pending-approval");
+                    if(overlay) overlay.style.display = "none";
+                    if(modalPend) modalPend.style.display = "none";
                     terapkanHakAkses("komandan", "Komandan", "Pusat Komando");
                     tampilkanModalKedisiplinan();
                 } else {
@@ -897,12 +947,25 @@
         }
         
         function terapkanHakAkses(e,t,a){
-            document.getElementById("petugas").value=t;
+            const inpPetugas = document.getElementById("petugas");
+            if(inpPetugas) inpPetugas.value = t;
             const selectPos = document.getElementById("pos-petugas-aktif");
             if(selectPos && a) selectPos.value = a;
             
-            const n=document.getElementById("badge-role-user"),o=document.getElementById("panel-khusus-admin");
-            "komandan"===e?(n.innerText="KOMANDAN / ADMIN",n.style.backgroundColor="rgba(245, 158, 11, 0.2)",n.style.color="#fbbf24",o.style.display="block"):(n.innerText="TIM LAPANGAN",n.style.backgroundColor="var(--primary-glow)",n.style.color="var(--primary)",o.style.display="none");
+            const n = document.getElementById("badge-role-user"), o = document.getElementById("panel-khusus-admin");
+            if(n && o){
+                if("komandan" === e){
+                    n.innerText = "KOMANDAN / ADMIN";
+                    n.style.backgroundColor = "rgba(245, 158, 11, 0.2)";
+                    n.style.color = "#fbbf24";
+                    o.style.display = "block";
+                } else {
+                    n.innerText = "TIM LAPANGAN";
+                    n.style.backgroundColor = "var(--primary-glow)";
+                    n.style.color = "var(--primary)";
+                    o.style.display = "none";
+                }
+            }
             
             muatArsipLaporan();
             muatPetugasPos();
@@ -918,7 +981,7 @@
         
         function logoutAplikasi(){
             tutupVoiceChat();
-            if("tim"===localStorage.getItem("siap_sawit_role")){
+            if("tim" === localStorage.getItem("siap_sawit_role")){
                 db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).remove();
             }
             localStorage.removeItem("siap_sawit_role");
@@ -926,11 +989,19 @@
             localStorage.removeItem("siap_sawit_pos");
             localStorage.removeItem("siap_sawit_hp");
             
-            document.getElementById("login-overlay").style.display="flex";
-            document.getElementById("card-login-utama").style.display="block";
-            document.getElementById("card-form-publik").style.display="none";
-            document.getElementById("input-sandi-komandan").value="";
-            document.getElementById("input-sandi-tim").value="";
+            const overlay = document.getElementById("login-overlay");
+            const modalPend = document.getElementById("modal-pending-approval");
+            const cardUtama = document.getElementById("card-login-utama");
+            const cardPub = document.getElementById("card-form-publik");
+            const inpKom = document.getElementById("input-sandi-komandan");
+            const inpTim = document.getElementById("input-sandi-tim");
+
+            if(overlay) overlay.style.display = "flex";
+            if(modalPend) modalPend.style.display = "none";
+            if(cardUtama) cardUtama.style.display = "block";
+            if(cardPub) cardPub.style.display = "none";
+            if(inpKom) inpKom.value = "";
+            if(inpTim) inpTim.value = "";
             cekOtomatisPerangkat();
         }
         
@@ -985,12 +1056,12 @@
 
         function tambahPosBaru(){
             const input = document.getElementById("input-nama-pos-baru");
-            const val = input.value.trim();
+            const val = input ? input.value.trim() : "";
             if(!val) return alert("Masukkan nama pos baru!");
             let key = val.replace(/[^a-zA-Z0-9]/g, "_");
             db.ref(`siap_sawit/daftar_pos/${key}`).set(val, err => {
                 if(err) alert("Gagal: " + err.message);
-                else { alert("Pos jaga berhasil ditambahkan!"); input.value = ""; }
+                else { alert("Pos jaga berhasil ditambahkan!"); if(input) input.value = ""; }
             });
         }
 
@@ -1001,14 +1072,13 @@
         }
 
         function setujuiIzinStaf(deviceKey, namaStaf, hpStaf){
-            db.ref(`siap_sawit/perangkat_terdaftar/${deviceKey}`).set({
-                nama: namaStaf,
-                hp: hpStaf,
+            db.ref(`siap_sawit/perangkat_terdaftar/${deviceKey}`).update({
+                approved: true,
                 waktuSetuju: new Date().toLocaleString("id-ID")
             }, (err) => {
                 if(!err){
                     db.ref(`siap_sawit/permintaan_izin/${deviceKey}`).remove();
-                    alert(`Izin diberikan untuk ${namaStaf}!`);
+                    alert(`Izin disetujui untuk ${namaStaf}! User kini dapat bertindak di sistem.`);
                 }
             });
         }
@@ -1049,7 +1119,7 @@
             const selectPetugas = document.getElementById("select-petugas-online");
             const selectPos = document.getElementById("select-pos-tujuan");
             
-            if(!selectPetugas.value) return alert("Tidak ada petugas online yang dipilih!");
+            if(!selectPetugas || !selectPetugas.value) return alert("Tidak ada petugas online yang dipilih!");
             
             const petugasNama = selectPetugas.options[selectPetugas.selectedIndex].getAttribute("data-nama");
             const petugasHp = selectPetugas.options[selectPetugas.selectedIndex].getAttribute("data-hp");
@@ -1111,22 +1181,36 @@
         }
 
         function editKontakDarurat(keyId, nama, telp, wa){
-            document.getElementById("edit-kontak-id").value = keyId;
-            document.getElementById("kontak-nama").value = nama;
-            document.getElementById("kontak-telp").value = telp !== "-" ? telp : "";
-            document.getElementById("kontak-wa").value = wa !== "-" ? (wa.startsWith("62") ? "0" + wa.substring(2) : wa) : "";
-            document.getElementById("btn-submit-kontak").innerText = "Simpan Perubahan Kontak";
-            document.getElementById("btn-batal-edit").style.display = "block";
+            const elId = document.getElementById("edit-kontak-id");
+            const elNama = document.getElementById("kontak-nama");
+            const elTelp = document.getElementById("kontak-telp");
+            const elWa = document.getElementById("kontak-wa");
+            const elBtn = document.getElementById("btn-submit-kontak");
+            const elBatal = document.getElementById("btn-batal-edit");
+
+            if(elId) elId.value = keyId;
+            if(elNama) elNama.value = nama;
+            if(elTelp) elTelp.value = telp !== "-" ? telp : "";
+            if(elWa) elWa.value = wa !== "-" ? (wa.startsWith("62") ? "0" + wa.substring(2) : wa) : "";
+            if(elBtn) elBtn.innerText = "Simpan Perubahan Kontak";
+            if(elBatal) elBatal.style.display = "block";
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
         function resetFormKontak(){
-            document.getElementById("edit-kontak-id").value = "";
-            document.getElementById("kontak-nama").value = "";
-            document.getElementById("kontak-telp").value = "";
-            document.getElementById("kontak-wa").value = "";
-            document.getElementById("btn-submit-kontak").innerText = "Simpan / Tambah Kontak";
-            document.getElementById("btn-batal-edit").style.display = "none";
+            const elId = document.getElementById("edit-kontak-id");
+            const elNama = document.getElementById("kontak-nama");
+            const elTelp = document.getElementById("kontak-telp");
+            const elWa = document.getElementById("kontak-wa");
+            const elBtn = document.getElementById("btn-submit-kontak");
+            const elBatal = document.getElementById("btn-batal-edit");
+
+            if(elId) elId.value = "";
+            if(elNama) elNama.value = "";
+            if(elTelp) elTelp.value = "";
+            if(elWa) elWa.value = "";
+            if(elBtn) elBtn.innerText = "Simpan / Tambah Kontak";
+            if(elBatal) elBatal.style.display = "none";
         }
 
         function hapusLogKendaraan(keyId){
@@ -1158,10 +1242,15 @@
         }
 
         function simpanKontakManual(){
-            const editId = document.getElementById("edit-kontak-id").value;
-            const nama = document.getElementById("kontak-nama").value.trim();
-            const telp = document.getElementById("kontak-telp").value.trim();
-            const waInput = document.getElementById("kontak-wa").value.trim();
+            const elId = document.getElementById("edit-kontak-id");
+            const elNama = document.getElementById("kontak-nama");
+            const elTelp = document.getElementById("kontak-telp");
+            const elWa = document.getElementById("kontak-wa");
+
+            const editId = elId ? elId.value : "";
+            const nama = elNama ? elNama.value.trim() : "";
+            const telp = elTelp ? elTelp.value.trim() : "";
+            const waInput = elWa ? elWa.value.trim() : "";
             
             if(!nama || (!telp && !waInput)) return void alert("Harap isi Nama dan minimal salah satu nomor (Telepon atau WhatsApp)!");
             
@@ -1191,8 +1280,9 @@
         function muatKontakDarurat(){
             const role = localStorage.getItem("siap_sawit_role");
             db.ref("siap_sawit/kontak_darurat").off();
-            db.ref("siap_sawit/kontak_darurat").on("value",(e=>{
-                const t=document.getElementById("list-kontak-darurat"), data = e.val();
+            db.ref("siap_sawit/kontak_darurat").on("value", e => {
+                const t = document.getElementById("list-kontak-darurat"), data = e.val();
+                if(!t) return;
                 if(!data){
                     t.innerHTML = `
                         <div class="log-item" style="border-left: 4px solid #2563eb; margin-bottom:8px;">
@@ -1232,7 +1322,7 @@
                         </div>`;
                 });
                 t.innerHTML = html;
-            }));
+            });
         }
 
         function hapusTotalUserTim(sessionId, namaPetugas){
@@ -1269,13 +1359,15 @@
             db.ref("siap_sawit/perangkat_terdaftar").on("value", snap => {
                 const container = document.getElementById("list-log-riwayat-perangkat");
                 const data = snap.val();
+                if(!container) return;
                 if(!data){
-                    if(container) container.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada riwayat perangkat terdaftar.</p>';
+                    container.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada riwayat perangkat terdaftar.</p>';
                     return;
                 }
                 let html = "";
                 Object.keys(data).forEach(sessionId => {
                     const dev = data[sessionId];
+                    let statusLabel = dev.approved ? '<span style="color:var(--primary);">✔ Disetujui</span>' : '<span style="color:var(--accent);">⏳ Menunggu Izin</span>';
                     let btnWa = (dev.hp && dev.hp !== "-") 
                         ? `<a href="https://wa.me/${dev.hp}?text=${encodeURIComponent("Halo " + dev.nama + ", Pesan dari Komandan:")}" target="_blank" class="btn btn-wa btn-sm" style="padding:4px 8px; font-size:0.7rem; margin:0; text-decoration:none;">WA</a>` 
                         : "";
@@ -1283,7 +1375,7 @@
                     html += `<div style="background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
                         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                             <div>
-                                <strong style="font-size:0.88rem; color:var(--text-main);">👤 ${dev.nama || "Tanpa Nama"}</strong>
+                                <strong style="font-size:0.88rem; color:var(--text-main);">👤 ${dev.nama || "Tanpa Nama"}</strong> ${statusLabel}
                                 <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">📱 No HP/WA: ${dev.hp || "-"}</div>
                                 <div style="font-size:0.72rem; color:var(--text-muted);">🕒 Terdaftar: ${dev.waktuDaftar || dev.lastLogin || "-"}</div>
                                 <div style="font-size:0.68rem; color:var(--border); margin-top:2px; font-family:monospace;">ID: ${sessionId}</div>
@@ -1296,27 +1388,27 @@
                         </div>
                     </div>`;
                 });
-                if(container) container.innerHTML = html;
+                container.innerHTML = html;
             });
         }
 
         function muatTimOnlineKomandan(){
             db.ref("siap_sawit/tim_online").off();
-            db.ref("siap_sawit/tim_online").on("value",(e=>{
-                const t=document.getElementById("list-tim-online-komandan"), selectOnline = document.getElementById("select-petugas-online"), a=e.val();
+            db.ref("siap_sawit/tim_online").on("value", e => {
+                const t = document.getElementById("list-tim-online-komandan"), selectOnline = document.getElementById("select-petugas-online"), a = e.val();
                 if(!a){
-                    if(t) t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Tidak ada tim yang sedang online.</p>';
-                    if(selectOnline) selectOnline.innerHTML='<option value="">Tidak ada petugas online</option>';
+                    if(t) t.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Tidak ada tim yang sedang online.</p>';
+                    if(selectOnline) selectOnline.innerHTML = '<option value="">Tidak ada petugas online</option>';
                     return;
                 }
-                let n="", selectHtml="";
-                Object.keys(a).forEach((sessionId=>{
+                let n = "", selectHtml = "";
+                Object.keys(a).forEach(sessionId => {
                     const data = a[sessionId];
                     let btnWa = (data.hp && data.hp !== "-") 
                         ? `<a href="https://wa.me/${data.hp}?text=${encodeURIComponent("Halo " + data.nama + ", Arahan Dari Komandan:")}" target="_blank" class="btn btn-wa btn-sm" style="text-decoration:none; padding:5px 10px; margin:0;">WA</a>` 
                         : "";
 
-                    n+=`<div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
+                    n += `<div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-deep); padding:10px 12px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border);">
                         <div>
                             <div style="display:flex; align-items:center; gap:6px;">
                                 <span style="width:8px; height:8px; background:var(--primary); border-radius:50%; display:inline-block;"></span>
@@ -1330,62 +1422,140 @@
                         </div>
                     </div>`;
                     selectHtml += `<option value="${sessionId}" data-nama="${data.nama}" data-hp="${data.hp}">${data.nama} (Pos: ${data.pos})</option>`;
-                }));
-                if(t) t.innerHTML=n;
+                });
+                if(t) t.innerHTML = n;
                 if(selectOnline) selectOnline.innerHTML = selectHtml;
-            }));
+            });
         }
 
         function gantiSandiAplikasi(){
-            const e=document.getElementById("input-sandi-komando-baru").value.trim(),t=document.getElementById("input-sandi-tim-baru").value.trim();
-            if(e||t){
+            const inpKom = document.getElementById("input-sandi-komando-baru");
+            const inpTim = document.getElementById("input-sandi-tim-baru");
+            const e = inpKom ? inpKom.value.trim() : "";
+            const t = inpTim ? inpTim.value.trim() : "";
+
+            if(e || t){
                 if(confirm("Perbarui sandi akses aplikasi?")){
-                    let a={};
-                    e&&(a["siap_sawit/sandi_komando"]=e),t&&(a["siap_sawit/sandi_tim"]=t),db.ref().update(a,(e=>{e?alert("Gagal: "+e.message):(alert("Sandi berhasil diperbarui!"),document.getElementById("input-sandi-komando-baru").value="",document.getElementById("input-sandi-tim-baru").value="")}))
+                    let a = {};
+                    e && (a["siap_sawit/sandi_komando"] = e);
+                    t && (a["siap_sawit/sandi_tim"] = t);
+                    db.ref().update(a, (err => {
+                        if(err) alert("Gagal: " + err.message);
+                        else {
+                            alert("Sandi berhasil diperbarui!");
+                            if(inpKom) inpKom.value = "";
+                            if(inpTim) inpTim.value = "";
+                        }
+                    }));
                 }
-            }else alert("Harap isi sandi baru!")
+            } else {
+                alert("Harap isi sandi baru!");
+            }
         }
 
-        function bukaFormPublik(){ document.getElementById("card-login-utama").style.display="none",document.getElementById("card-form-publik").style.display="block" }
-        function tutupFormPublik(){ document.getElementById("card-form-publik").style.display="none",document.getElementById("card-login-utama").style.display="block" }
-        function updateClock(){ const e=new Date; document.getElementById("live-clock").innerText="🕒 "+e.toLocaleDateString("id-ID",{weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",second:"2-digit"})+" WIB" }
-        function bukaTab(e,t){ document.querySelectorAll(".tab-section").forEach((e=>e.classList.remove("active"))),document.querySelectorAll(".nav-btn").forEach((e=>e.classList.remove("active"))),document.getElementById(e).classList.add("active"),t.classList.add("active") }
+        function bukaFormPublik(){ 
+            const cardUtama = document.getElementById("card-login-utama");
+            const cardPub = document.getElementById("card-form-publik");
+            if(cardUtama) cardUtama.style.display = "none"; 
+            if(cardPub) cardPub.style.display = "block"; 
+        }
+        function tutupFormPublik(){ 
+            const cardUtama = document.getElementById("card-login-utama");
+            const cardPub = document.getElementById("card-form-publik");
+            if(cardPub) cardPub.style.display = "none"; 
+            if(cardUtama) cardUtama.style.display = "block"; 
+        }
+        function updateClock(){ 
+            const e = new Date; 
+            const elClock = document.getElementById("live-clock");
+            if(elClock) elClock.innerText = "🕒 " + e.toLocaleDateString("id-ID",{weekday:"long",year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",second:"2-digit"}) + " WIB"; 
+        }
+        function bukaTab(e, t){ 
+            document.querySelectorAll(".tab-section").forEach(el => el.classList.remove("active")); 
+            document.querySelectorAll(".nav-btn").forEach(el => el.classList.remove("active")); 
+            const targetTab = document.getElementById(e);
+            if(targetTab) targetTab.classList.add("active"); 
+            if(t) t.classList.add("active"); 
+        }
         function toggleArsipPiket(){
             const kontainer = document.getElementById("container-arsip-piket");
             const ikon = document.getElementById("ikon-panah");
-            if(kontainer.style.display === "none"){ kontainer.style.display = "block"; ikon.innerText = "▲"; }
-            else { kontainer.style.display = "none"; ikon.innerText = "▼"; }
+            if(kontainer && ikon){
+                if(kontainer.style.display === "none"){ kontainer.style.display = "block"; ikon.innerText = "▲"; }
+                else { kontainer.style.display = "none"; ikon.innerText = "▼"; }
+            }
         }
         function previewFoto(e){
-            const t=e.target.files[0];
-            if(t){ const e=new FileReader; e.onload=function(e){imgBase64=e.target.result;const t=document.getElementById("photo-preview");t.src=imgBase64,t.style.display="block"},e.readAsDataURL(t) }
+            const t = e.target.files[0];
+            if(t){ 
+                const reader = new FileReader; 
+                reader.onload = function(evt){ 
+                    imgBase64 = evt.target.result; 
+                    const preview = document.getElementById("photo-preview"); 
+                    if(preview){ preview.src = imgBase64; preview.style.display = "block"; }
+                }; 
+                reader.readAsDataURL(t); 
+            }
         }
         function previewPubFoto(e){
-            const t=e.target.files[0];
-            if(t){ const e=new FileReader; e.onload=function(e){pubImgBase64=e.target.result;const t=document.getElementById("public-photo-preview");t.src=pubImgBase64,t.style.display="block"},e.readAsDataURL(t) }
+            const t = e.target.files[0];
+            if(t){ 
+                const reader = new FileReader; 
+                reader.onload = function(evt){ 
+                    pubImgBase64 = evt.target.result; 
+                    const preview = document.getElementById("public-photo-preview"); 
+                    if(preview){ preview.src = pubImgBase64; preview.style.display = "block"; }
+                }; 
+                reader.readAsDataURL(t); 
+            }
         }
         function kirimLaporanPublik(){
-            const e=document.getElementById("pub-nama").value.trim(),t=document.getElementById("pub-kontak").value.trim(),a=document.getElementById("pub-jenis").value,n=document.getElementById("pub-keterangan").value.trim();
-            if(!e||!n)return void alert("Harap lengkapi Nama dan Detail Laporan!");
-            const o=new Date,i=o.getFullYear(),s=String(o.getMonth()+1).padStart(2,"0"),l={id:Date.now(),waktu:o.toLocaleString("id-ID"),petugas:`[PUBLIK/TAMU] ${e} (${t||"-"})`,blok:"Gerbang / Area Luar",jenis:`LAPORAN TAMU: ${a}`,keterangan:n,gps:currentGpsString,maps:"-",foto:pubImgBase64||""};
-            db.ref(`siap_sawit/arsip_laporan/${i}/${s}`).push(l,(e=>{e?alert("Gagal: "+e.message):(alert("Laporan publik berhasil dikirim!"),document.getElementById("pub-nama").value="",document.getElementById("pub-kontak").value="",document.getElementById("pub-keterangan").value="",document.getElementById("public-photo-preview").style.display="none",pubImgBase64="",tutupFormPublik())}))
+            const inpNama = document.getElementById("pub-nama");
+            const inpKontak = document.getElementById("pub-kontak");
+            const selJenis = document.getElementById("pub-jenis");
+            const txtKet = document.getElementById("pub-keterangan");
+
+            const e = inpNama ? inpNama.value.trim() : "";
+            const t = inpKontak ? inpKontak.value.trim() : "";
+            const a = selJenis ? selJenis.value : "";
+            const n = txtKet ? txtKet.value.trim() : "";
+
+            if(!e || !n) return void alert("Harap lengkapi Nama dan Detail Laporan!");
+            const o = new Date, i = o.getFullYear(), s = String(o.getMonth()+1).padStart(2,"0");
+            const l = {id: Date.now(), waktu: o.toLocaleString("id-ID"), petugas: `[PUBLIK/TAMU] ${e} (${t||"-"})`, blok: "Gerbang / Area Luar", jenis: `LAPORAN TAMU: ${a}`, keterangan: n, gps: currentGpsString, maps: "-", foto: pubImgBase64 || ""};
+            db.ref(`siap_sawit/arsip_laporan/${i}/${s}`).push(l, (err => {
+                if(err) alert("Gagal: " + err.message);
+                else {
+                    alert("Laporan publik berhasil dikirim!");
+                    if(inpNama) inpNama.value = "";
+                    if(inpKontak) inpKontak.value = "";
+                    if(txtKet) txtKet.value = "";
+                    const prevPub = document.getElementById("public-photo-preview");
+                    if(prevPub) prevPub.style.display = "none";
+                    pubImgBase64 = "";
+                    tutupFormPublik();
+                }
+            }));
         }
 
         function toggleMenuKondisi(){
             const dropdown = document.getElementById("dropdown-kondisi-cepat");
             const ikon = document.getElementById("ikon-panah-kondisi");
-            if(dropdown.style.display === "none" || dropdown.style.display === ""){
-                dropdown.style.display = "block";
-                ikon.innerText = "▲";
-                muatDaftarKondisiDropdown();
-            } else {
-                dropdown.style.display = "none";
-                ikon.innerText = "▼";
+            if(dropdown && ikon){
+                if(dropdown.style.display === "none" || dropdown.style.display === ""){
+                    dropdown.style.display = "block";
+                    ikon.innerText = "▲";
+                    muatDaftarKondisiDropdown();
+                } else {
+                    dropdown.style.display = "none";
+                    ikon.innerText = "▼";
+                }
             }
         }
 
         function muatDaftarKondisiDropdown(){
             const container = document.getElementById("list-kondisi-items");
+            if(!container) return;
             let defaultFavorit = [
                 "Patroli Aman", 
                 "DARURAT: Pencurian TBS", 
@@ -1405,13 +1575,18 @@
         }
 
         function pilihKondisi(teks){
-            document.getElementById("jenis-laporan").value = teks;
-            document.getElementById("dropdown-kondisi-cepat").style.display = "none";
-            document.getElementById("ikon-panah-kondisi").innerText = "▼";
+            const inpJenis = document.getElementById("jenis-laporan");
+            const dropdown = document.getElementById("dropdown-kondisi-cepat");
+            const ikon = document.getElementById("ikon-panah-kondisi");
+
+            if(inpJenis) inpJenis.value = teks;
+            if(dropdown) dropdown.style.display = "none";
+            if(ikon) ikon.innerText = "▼";
         }
 
         function simpanKondisiFavorit(){
-            let val = document.getElementById("jenis-laporan").value.trim();
+            const inpJenis = document.getElementById("jenis-laporan");
+            let val = inpJenis ? inpJenis.value.trim() : "";
             if(!val) return alert("Ketik kondisi terlebih dahulu pada kolom kondisi sebelum disimpan!");
             
             let defaultFavorit = ["Patroli Aman", "DARURAT: Pencurian TBS", "DARURAT: Kebakaran Lahan", "Orang / Kendaraan Asing", "Kerusakan Fasilitas"];
@@ -1427,60 +1602,89 @@
             }
         }
 
-        // KOREKSI: Menambahkan validasi pos jaga (!t) agar tidak terkirim kosong
         function simpanLaporan(){
-            const e=document.getElementById("petugas").value.trim();
-            const t=document.getElementById("pos-petugas-aktif").value.trim();
-            const a=document.getElementById("blok").value.trim();
-            const n=document.getElementById("jenis-laporan").value.trim();
-            const o=document.getElementById("keterangan").value.trim();
-            const shiftVal=document.getElementById("pilih-shift").value;
+            const role = localStorage.getItem("siap_sawit_role");
+            if(role === "tim"){
+                db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}/approved`).once("value", snap => {
+                    if(snap.val() !== true){
+                        alert("❌ Akses Ditolak!\nAnda belum diizinkan oleh Komandan untuk mengirim laporan.");
+                        return;
+                    }
+                    eksekusiSimpanLaporan();
+                });
+            } else {
+                eksekusiSimpanLaporan();
+            }
+        }
+
+        function eksekusiSimpanLaporan(){
+            const inpPetugas = document.getElementById("petugas");
+            const selPos = document.getElementById("pos-petugas-aktif");
+            const inpBlok = document.getElementById("blok");
+            const inpJenis = document.getElementById("jenis-laporan");
+            const txtKet = document.getElementById("keterangan");
+            const selShift = document.getElementById("pilih-shift");
+
+            const e = inpPetugas ? inpPetugas.value.trim() : "";
+            const t = selPos ? selPos.value.trim() : "";
+            const a = inpBlok ? inpBlok.value.trim() : "";
+            const n = inpJenis ? inpJenis.value.trim() : "";
+            const o = txtKet ? txtKet.value.trim() : "";
+            const shiftVal = selShift ? selShift.value : "";
             
             if(!e || !t || !a || !n) return void alert("Harap isi Nama Petugas, Pos Jaga, Blok Lokasi, dan Kondisi Laporan dengan lengkap!");
             
-            const i=new Date,s=i.getFullYear(),l=String(i.getMonth()+1).padStart(2,"0");
-            const r={id:Date.now(),waktu:i.toLocaleString("id-ID"),petugas:`${e} (${t})`,blok:a,jenis:n,keterangan:o||"Tanpa catatan.",gps:`${currentGpsString} | ${shiftVal}`,maps:"-",foto:imgBase64||""};
+            const i = new Date, s = i.getFullYear(), l = String(i.getMonth()+1).padStart(2,"0");
+            const r = {id: Date.now(), waktu: i.toLocaleString("id-ID"), petugas: `${e} (${t})`, blok: a, jenis: n, keterangan: o || "Tanpa catatan.", gps: `${currentGpsString} | ${shiftVal}`, maps: "-", foto: imgBase64 || ""};
             
-            db.ref(`siap_sawit/arsip_laporan/${s}/${l}`).push(r,(err=>{
-                if(err) alert("Gagal: "+err.message);
+            db.ref(`siap_sawit/arsip_laporan/${s}/${l}`).push(r, (err => {
+                if(err) alert("Gagal: " + err.message);
                 else {
                     alert("Laporan berhasil dikirim!");
-                    document.getElementById("keterangan").value="";
-                    document.getElementById("photo-preview").style.display="none";
-                    imgBase64="";
+                    if(txtKet) txtKet.value = "";
+                    const prev = document.getElementById("photo-preview");
+                    if(prev) prev.style.display = "none";
+                    imgBase64 = "";
                     muatArsipLaporan();
                 }
             }));
         }
         
         function muatArsipLaporan(){
-            const e=document.getElementById("filter-tahun").value,t=document.getElementById("filter-bulan").value,a=document.getElementById("list-laporan"),role=localStorage.getItem("siap_sawit_role");
-            const keyword = (document.getElementById("input-pencarian-arsip").value || "").toLowerCase();
+            const selThn = document.getElementById("filter-tahun");
+            const selBln = document.getElementById("filter-bulan");
+            const a = document.getElementById("list-laporan");
+            const role = localStorage.getItem("siap_sawit_role");
+            const inpCari = document.getElementById("input-pencarian-arsip");
+
+            if(!selThn || !selBln || !a) return;
+            const e = selThn.value, t = selBln.value;
+            const keyword = inpCari ? inpCari.value.toLowerCase() : "";
             
             db.ref(`siap_sawit/arsip_laporan/${e}/${t}`).off();
-            a.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Memuat arsip...</p>';
+            a.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Memuat arsip...</p>';
             
-            db.ref(`siap_sawit/arsip_laporan/${e}/${t}`).on("value",(snap=>{
-                const t=snap.val();
-                if(!t)return void(a.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada laporan.</p>');
-                let n="";
-                let keys = Object.keys(t).reverse();
+            db.ref(`siap_sawit/arsip_laporan/${e}/${t}`).on("value", (snap => {
+                const dataSnap = snap.val();
+                if(!dataSnap) return void(a.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada laporan.</p>');
+                let n = "";
+                let keys = Object.keys(dataSnap).reverse();
                 let count = 0;
                 
-                keys.forEach((keyId=>{
-                    const item = t[keyId];
+                keys.forEach((keyId => {
+                    const item = dataSnap[keyId];
                     let textCheck = `${item.petugas} ${item.blok} ${item.jenis} ${item.keterangan}`.toLowerCase();
                     if(keyword && !textCheck.includes(keyword)) return;
                     
                     count++;
-                    n+=`<div class="log-item ${item.jenis.toUpperCase().includes("DARURAT")||item.jenis.toUpperCase().includes("TAMU")||item.jenis.toUpperCase().includes("PENCURIAN")||item.jenis.toUpperCase().includes("KEBAKARAN")?"urgent":""}">
-                        ${(role === "komandan") ? `<button onclick="hapusLaporan('${document.getElementById("filter-tahun").value}', '${document.getElementById("filter-bulan").value}', '${keyId}')" style="position:absolute; top:10px; right:10px; background:var(--danger); border:none; color:#fff; font-size:0.7rem; padding:3px 8px; border-radius:6px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
+                    n += `<div class="log-item ${item.jenis.toUpperCase().includes("DARURAT")||item.jenis.toUpperCase().includes("TAMU")||item.jenis.toUpperCase().includes("PENCURIAN")||item.jenis.toUpperCase().includes("KEBAKARAN")?"urgent":""}">
+                        ${(role === "komandan") ? `<button onclick="hapusLaporan('${selThn.value}', '${selBln.value}', '${keyId}')" style="position:absolute; top:10px; right:10px; background:var(--danger); border:none; color:#fff; font-size:0.7rem; padding:3px 8px; border-radius:6px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
                         <div class="log-header"><span>🕒 ${item.waktu}</span><strong>📍 ${item.blok}</strong></div>
                         <div class="log-title">${item.jenis}</div>
                         <div style="font-size:0.78rem; font-weight:600; color:var(--primary); margin-bottom:4px;">👤 ${item.petugas}</div>
                         <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">🌐 ${item.gps || "-"}</div>
                         <div class="log-desc">${item.keterangan}</div>
-                        ${item.foto?`<img src="${item.foto}" style="max-width:100%; max-height:150px; margin-top:6px; border-radius:8px;" alt="Bukti">`:""}
+                        ${item.foto ? `<img src="${item.foto}" style="max-width:100%; max-height:150px; margin-top:6px; border-radius:8px;" alt="Bukti">` : ""}
                     </div>`;
                 }));
                 a.innerHTML = count > 0 ? n : '<p style="font-size:0.82rem; color:var(--text-muted);">Tidak ada laporan yang cocok dengan kata kunci.</p>';
@@ -1488,38 +1692,120 @@
         }
 
         function kirimWhatsApp(){
-            const e=document.getElementById("petugas").value.trim()||"Petugas",t=document.getElementById("pos-petugas-aktif").value.trim()||"Pos",a=document.getElementById("blok").value.trim()||"-",n=document.getElementById("jenis-laporan").value.trim()||"Patroli",o=document.getElementById("keterangan").value.trim()||"-",i=(new Date).toLocaleString("id-ID"),shiftVal=document.getElementById("pilih-shift").value,s=`https://wa.me/6281234567890?text=${encodeURIComponent(`*LAPORAN KOMANDO*\n*Waktu:* ${i}\n*Petugas:* ${e}\n*Pos:* ${t}\n*Shift:* ${shiftVal}\n*GPS:* ${currentGpsString}\n*Kondisi:* ${n}\n*Blok:* ${a}\n*Catatan:* ${o}`)}`;
-            window.open(s,"_blank")
+            const role = localStorage.getItem("siap_sawit_role");
+            if(role === "tim"){
+                db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}/approved`).once("value", snap => {
+                    if(snap.val() !== true){
+                        alert("❌ Akses Ditolak!\nAnda belum diizinkan oleh Komandan untuk mengirim pesan.");
+                        return;
+                    }
+                    eksekusiKirimWhatsApp();
+                });
+            } else {
+                eksekusiKirimWhatsApp();
+            }
+        }
+
+        function eksekusiKirimWhatsApp(){
+            const inpPetugas = document.getElementById("petugas");
+            const selPos = document.getElementById("pos-petugas-aktif");
+            const inpBlok = document.getElementById("blok");
+            const inpJenis = document.getElementById("jenis-laporan");
+            const txtKet = document.getElementById("keterangan");
+            const selShift = document.getElementById("pilih-shift");
+
+            const e = inpPetugas ? inpPetugas.value.trim() : "Petugas";
+            const t = selPos ? selPos.value.trim() : "Pos";
+            const a = inpBlok ? inpBlok.value.trim() : "-";
+            const n = inpJenis ? inpJenis.value.trim() : "Patroli";
+            const o = txtKet ? txtKet.value.trim() : "-";
+            const shiftVal = selShift ? selShift.value : "";
+            const i = (new Date).toLocaleString("id-ID");
+            
+            const s = `https://wa.me/6281234567890?text=${encodeURIComponent(`*LAPORAN KOMANDO*\n*Waktu:* ${i}\n*Petugas:* ${e}\n*Pos:* ${t}\n*Shift:* ${shiftVal}\n*GPS:* ${currentGpsString}\n*Kondisi:* ${n}\n*Blok:* ${a}\n*Catatan:* ${o}`)}`;
+            window.open(s, "_blank");
         }
 
         function simpanKendaraan(){
-            const e=document.getElementById("nopol").value.trim().toUpperCase(),t=document.getElementById("supir").value.trim(),a=document.getElementById("status-kendaraan").value,n=document.getElementById("surat-jalan").value.trim()||"-";
-            if(!e||!t)return void alert("Nomor Polisi dan Nama Supir wajib diisi!");
-            db.ref("siap_sawit/kendaraan").push({waktu:(new Date).toLocaleString("id-ID"),nopol:e,supir:t,status:a,surat:n},(err=>{err||(document.getElementById("nopol").value="",document.getElementById("supir").value="",document.getElementById("surat-jalan").value="",alert("Log kendaraan terekam!"))}))
+            const role = localStorage.getItem("siap_sawit_role");
+            if(role === "tim"){
+                db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}/approved`).once("value", snap => {
+                    if(snap.val() !== true){
+                        alert("❌ Akses Ditolak!\nAnda belum diizinkan oleh Komandan untuk merekam log kendaraan.");
+                        return;
+                    }
+                    eksekusiSimpanKendaraan();
+                });
+            } else {
+                eksekusiSimpanKendaraan();
+            }
+        }
+
+        function eksekusiSimpanKendaraan(){
+            const inpNopol = document.getElementById("nopol");
+            const inpSupir = document.getElementById("supir");
+            const selStatus = document.getElementById("status-kendaraan");
+            const inpSurat = document.getElementById("surat-jalan");
+
+            const e = inpNopol ? inpNopol.value.trim().toUpperCase() : "";
+            const t = inpSupir ? inpSupir.value.trim() : "";
+            const a = selStatus ? selStatus.value : "";
+            const n = inpSurat ? inpSurat.value.trim() || "-" : "-";
+
+            if(!e || !t) return void alert("Nomor Polisi dan Nama Supir wajib diisi!");
+            db.ref("siap_sawit/kendaraan").push({waktu: (new Date).toLocaleString("id-ID"), nopol: e, supir: t, status: a, surat: n}, (err => {
+                if(!err){
+                    if(inpNopol) inpNopol.value = "";
+                    if(inpSupir) inpSupir.value = "";
+                    if(inpSurat) inpSurat.value = "";
+                    alert("Log kendaraan terekam!");
+                }
+            }));
         }
 
         function exportCSV(){
-            db.ref("siap_sawit/kendaraan").once("value",(e=>{
-                const t=e.val();
-                if(!t)return void alert("Tidak ada data.");
-                let a=Object.values(t),n="Waktu,Nomor Polisi,Nama Supir,Status,Surat Jalan\n";
-                a.forEach((e=>{n+=`"${e.waktu}","${e.nopol}","${e.supir}","${e.status}","${e.surat}"\n`}));
-                const o=new Blob([n],{type:"text/csv;charset=utf-8;"}),i=document.createElement("a");
-                i.href=URL.createObjectURL(o),i.download=`Log_Kendaraan_${(new Date).toISOString().slice(0,10)}.csv`,i.click()
-            }))
+            db.ref("siap_sawit/kendaraan").once("value", (e => {
+                const t = e.val();
+                if(!t) return void alert("Tidak ada data.");
+                let a = Object.values(t), n = "Waktu,Nomor Polisi,Nama Supir,Status,Surat Jalan\n";
+                a.forEach((item => { n += `"${item.waktu}","${item.nopol}","${item.supir}","${item.status}","${item.surat}"\n`; }));
+                const o = new Blob([n], {type: "text/csv;charset=utf-8;"}), i = document.createElement("a");
+                i.href = URL.createObjectURL(o);
+                i.download = `Log_Kendaraan_${(new Date).toISOString().slice(0,10)}.csv`;
+                i.click();
+            }));
         }
 
         function catatCheckpoint(posTujuan){
-            const namaPetugas = document.getElementById("petugas").value.trim() || localStorage.getItem("siap_sawit_petugas") || "Petugas";
+            const role = localStorage.getItem("siap_sawit_role");
+            if(role === "tim"){
+                db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}/approved`).once("value", snap => {
+                    if(snap.val() !== true){
+                        alert("❌ Akses Ditolak!\nAnda belum diizinkan oleh Komandan untuk melakukan check-in pos.");
+                        return;
+                    }
+                    eksekusiCatatCheckpoint(posTujuan);
+                });
+            } else {
+                eksekusiCatatCheckpoint(posTujuan);
+            }
+        }
+
+        function eksekusiCatatCheckpoint(posTujuan){
+            const inpPetugas = document.getElementById("petugas");
+            const selPosForm = document.getElementById("pos-petugas-aktif");
+
+            const namaPetugas = (inpPetugas ? inpPetugas.value.trim() : "") || localStorage.getItem("siap_sawit_petugas") || "Petugas";
             if(!confirm(`Konfirmasi bertugas di ${posTujuan}?`)) return;
             const safeKey = posTujuan.replace(/[^a-zA-Z0-9]/g, "_");
             const waktuStr = (new Date).toLocaleString("id-ID");
             const tanggalHariIni = (new Date).toISOString().slice(0,10);
-            db.ref(`siap_sawit/petugas_pos/${safeKey}`).set({lokasi:posTujuan,nama:namaPetugas,hp:localStorage.getItem("siap_sawit_hp")||"-",waktuUpdate:waktuStr,tanggal:tanggalHariIni});
-            db.ref(`siap_sawit/laporan_piket`).push({id:Date.now(),waktu:waktuStr,tanggal:tanggalHariIni,petugas:namaPetugas,lokasi:posTujuan,keterangan:"Check-in Shift"},(err=>{
+            
+            db.ref(`siap_sawit/petugas_pos/${safeKey}`).set({lokasi: posTujuan, nama: namaPetugas, hp: localStorage.getItem("siap_sawit_hp") || "-", waktuUpdate: waktuStr, tanggal: tanggalHariIni});
+            db.ref(`siap_sawit/laporan_piket`).push({id: Date.now(), waktu: waktuStr, tanggal: tanggalHariIni, petugas: namaPetugas, lokasi: posTujuan, keterangan: "Check-in Shift"}, (err => {
                 if(!err){ 
                     localStorage.setItem("siap_sawit_pos", posTujuan); 
-                    document.getElementById("pos-petugas-aktif").value = posTujuan; 
+                    if(selPosForm) selPosForm.value = posTujuan; 
                     simpanPosLokal(posTujuan);
                     alert(`Berhasil tercatat di ${posTujuan}.`); 
                 }
@@ -1531,37 +1817,39 @@
             const role = localStorage.getItem("siap_sawit_role");
             
             db.ref("siap_sawit/petugas_pos").off();
-            db.ref("siap_sawit/petugas_pos").on("value",(e=>{
-                const t=document.getElementById("list-petugas-pos"), a=e.val();
-                if(!a){ if(t) t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada penugasan pos.</p>'; return; }
-                let n="";
-                Object.keys(a).forEach((safeKey=>{
-                    const e = a[safeKey];
-                    if(e.tanggal && e.tanggal !== tanggalHariIni) return;
-                    let phone=e.hp; phone&&phone.startsWith("62")&&(phone="0"+phone.substring(2));
-                    n+=`<div class="log-item" style="border-left: 4px solid var(--accent); margin-bottom:8px;">
+            db.ref("siap_sawit/petugas_pos").on("value", (e => {
+                const t = document.getElementById("list-petugas-pos"), a = e.val();
+                if(!t) return;
+                if(!a){ t.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada penugasan pos.</p>'; return; }
+                let n = "";
+                Object.keys(a).forEach((safeKey => {
+                    const item = a[safeKey];
+                    if(item.tanggal && item.tanggal !== tanggalHariIni) return;
+                    let phone = item.hp; phone && phone.startsWith("62") && (phone = "0" + phone.substring(2));
+                    n += `<div class="log-item" style="border-left: 4px solid var(--accent); margin-bottom:8px;">
                         ${(role === "komandan") ? `<button onclick="hapusPetugasPos('${safeKey}')" style="position:absolute; top:8px; right:8px; background:var(--danger); border:none; color:#fff; font-size:0.68rem; padding:3px 8px; border-radius:4px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
-                        <div class="log-header"><span>🕒 ${e.waktuUpdate}</span><strong style="color:var(--accent);">📍 ${e.lokasi}</strong></div>
-                        <div class="log-title">👤 ${e.nama}</div>
-                        ${"-"!==e.hp?`<div style="display: flex; gap: 6px; margin-top:6px;"><a href="tel:${phone}" class="btn btn-call btn-sm" style="text-decoration:none; flex:1; text-align:center;">Telepon</a><a href="https://wa.me/${e.hp}?text=${encodeURIComponent("Halo "+e.nama)}" target="_blank" class="btn btn-wa btn-sm" style="text-decoration:none; flex:1; text-align:center;">WhatsApp</a></div>`:""}
+                        <div class="log-header"><span>🕒 ${item.waktuUpdate}</span><strong style="color:var(--accent);">📍 ${item.lokasi}</strong></div>
+                        <div class="log-title">👤 ${item.nama}</div>
+                        ${"-" !== item.hp ? `<div style="display: flex; gap: 6px; margin-top:6px;"><a href="tel:${phone}" class="btn btn-call btn-sm" style="text-decoration:none; flex:1; text-align:center;">Telepon</a><a href="https://wa.me/${item.hp}?text=${encodeURIComponent("Halo "+item.nama)}" target="_blank" class="btn btn-wa btn-sm" style="text-decoration:none; flex:1; text-align:center;">WhatsApp</a></div>` : ""}
                     </div>`;
                 }));
-                if(t) t.innerHTML = n || '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada petugas.</p>';
+                t.innerHTML = n || '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada petugas.</p>';
             }));
 
             db.ref("siap_sawit/laporan_piket").off();
-            db.ref("siap_sawit/laporan_piket").on("value",(e=>{
-                const t=document.getElementById("list-laporan-piket"),a=e.val();
-                if(!a)return void(t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada arsip.</p>');
-                let n=""; Object.keys(a).reverse().slice(0,15).forEach((keyId=>{
-                    const e = a[keyId];
-                    n+=`<div class="log-item" style="border-left: 4px solid var(--primary); margin-bottom:6px; position:relative;">
+            db.ref("siap_sawit/laporan_piket").on("value", (e => {
+                const t = document.getElementById("list-laporan-piket"), a = e.val();
+                if(!t) return;
+                if(!a) return void(t.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada arsip.</p>');
+                let n = ""; Object.keys(a).reverse().slice(0,15).forEach((keyId => {
+                    const item = a[keyId];
+                    n += `<div class="log-item" style="border-left: 4px solid var(--primary); margin-bottom:6px; position:relative;">
                         ${(role === "komandan") ? `<button onclick="hapusArsipPiket('${keyId}')" style="position:absolute; top:8px; right:8px; background:var(--danger); border:none; color:#fff; font-size:0.68rem; padding:3px 8px; border-radius:4px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
-                        <div class="log-header"><span>🕒 ${e.waktu}</span><strong style="color:var(--primary);">📍 ${e.lokasi}</strong></div>
-                        <div class="log-title" style="font-size:0.85rem;">👤 ${e.petugas}</div>
+                        <div class="log-header"><span>🕒 ${item.waktu}</span><strong style="color:var(--primary);">📍 ${item.lokasi}</strong></div>
+                        <div class="log-title" style="font-size:0.85rem;">👤 ${item.petugas}</div>
                     </div>`;
                 }));
-                t.innerHTML=n;
+                t.innerHTML = n;
             }));
         }
 
@@ -1600,9 +1888,11 @@
             const audioPlayer = document.getElementById("local-audio-player");
             const nowPlaying = document.getElementById("now-playing-label");
             
-            audioPlayer.src = fileURL;
-            audioPlayer.play().catch(e => console.log("Auto-play blocked:", e));
-            nowPlaying.innerText = `🎵 Memutar: ${file.name}`;
+            if(audioPlayer){
+                audioPlayer.src = fileURL;
+                audioPlayer.play().catch(err => console.log("Auto-play blocked:", err));
+            }
+            if(nowPlaying) nowPlaying.innerText = `🎵 Memutar: ${file.name}`;
             renderPlaylist();
         }
 
@@ -1611,7 +1901,8 @@
                 indexLaguAktif = (indexLaguAktif + 1) % daftarPlaylistLokal.length;
                 putarkanLaguIndex(indexLaguAktif);
             } else {
-                document.getElementById('local-audio-input').click();
+                const inpAudio = document.getElementById('local-audio-input');
+                if(inpAudio) inpAudio.click();
             }
         }
 
@@ -1625,33 +1916,39 @@
         function calcAppend(char){
             if(calcVal === "0" && !isNaN(char)) calcVal = char;
             else calcVal += char;
-            document.getElementById("calc-display").value = calcVal;
+            const disp = document.getElementById("calc-display");
+            if(disp) disp.value = calcVal;
         }
         function calcClear(){
             calcVal = "0";
-            document.getElementById("calc-display").value = calcVal;
+            const disp = document.getElementById("calc-display");
+            if(disp) disp.value = calcVal;
         }
         function calcDelete(){
             calcVal = calcVal.length > 1 ? calcVal.slice(0, -1) : "0";
-            document.getElementById("calc-display").value = calcVal;
+            const disp = document.getElementById("calc-display");
+            if(disp) disp.value = calcVal;
         }
         function calcCompute(){
             try {
                 let res = eval(calcVal.replace(/×/g, '*').replace(/÷/g, '/'));
                 calcVal = String(res);
-                document.getElementById("calc-display").value = calcVal;
-            } catch(e) {
+                const disp = document.getElementById("calc-display");
+                if(disp) disp.value = calcVal;
+            } catch(err) {
                 alert("Format perhitungan salah!");
                 calcClear();
             }
         }
 
         function nyalakanSenterLayar(){
-            document.getElementById("flashlight-overlay").style.display = "flex";
+            const f = document.getElementById("flashlight-overlay");
+            if(f) f.style.display = "flex";
         }
 
         function matikanSenter(){
-            document.getElementById("flashlight-overlay").style.display = "none";
+            const f = document.getElementById("flashlight-overlay");
+            if(f) f.style.display = "none";
             if(window.cameraStreamTrack){
                 try {
                     window.cameraStreamTrack.applyConstraints({ advanced: [{ torch: false }] }).catch(() => {});
@@ -1665,7 +1962,6 @@
             }
         }
 
-        // KOREKSI: Pengamanan penutupan stream kamera agar lampu indikator tidak menyala terus
         async function nyalakanSenterKamera() {
             try {
                 if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
@@ -1727,9 +2023,7 @@
                     banner.style.borderColor = "var(--primary)";
                     banner.style.color = "var(--primary)";
                 }
-                setTimeout(() => { 
-                    banner.style.display = "none"; 
-                }, 5000);
+                setTimeout(() => { if(banner) banner.style.display = "none"; }, 5000);
             }
 
             if('speechSynthesis' in window){
@@ -1852,7 +2146,8 @@
                 
                 let myColor = getMyAssignedColor();
                 let roleInfo = myColor === 'white' ? ' (Anda: Putih)' : (myColor === 'black' ? ' (Anda: Merah)' : ' (Anda: Penonton)');
-                document.getElementById("chess-status").innerText = `Giliran: ${data.turn === 'white' ? 'Putih' : 'Merah'}${roleInfo} — ${data.lastMove}`;
+                const elStatus = document.getElementById("chess-status");
+                if(elStatus) elStatus.innerText = `Giliran: ${data.turn === 'white' ? 'Putih' : 'Merah'}${roleInfo} — ${data.lastMove}`;
             });
 
             db.ref(`siap_sawit/game_catur/${currentRoomId}/pemain_online`).off();
@@ -1960,6 +2255,21 @@
         }
 
         function handleSquareClick(r, c, board){
+            const role = localStorage.getItem("siap_sawit_role");
+            if(role === "tim"){
+                db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}/approved`).once("value", snap => {
+                    if(snap.val() !== true){
+                        alert("❌ Akses Ditolak!\nAnda belum diizinkan oleh Komandan untuk bermain catur.");
+                        return;
+                    }
+                    eksekusiHandleSquareClick(r, c, board);
+                });
+            } else {
+                eksekusiHandleSquareClick(r, c, board);
+            }
+        }
+
+        function eksekusiHandleSquareClick(r, c, board){
             if(!globalChessState) return;
             const piece = board[r][c];
             let isWhiteTurn = globalChessState.turn === "white";
@@ -2069,24 +2379,28 @@
 
             if(!isVoiceActive){
                 try {
-                    statusLabel.innerText = "🎤 Mengakses Mikrofon...";
+                    if(statusLabel) statusLabel.innerText = "🎤 Mengakses Mikrofon...";
                     localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
                     
                     isVoiceActive = true;
-                    btn.innerText = "🔴 Matikan Suara";
-                    btn.style.backgroundColor = "var(--danger)";
-                    statusLabel.innerText = "🟢 Suara Aktif (Menghubungkan...)";
+                    if(btn){
+                        btn.innerText = "🔴 Matikan Suara";
+                        btn.style.backgroundColor = "var(--danger)";
+                    }
+                    if(statusLabel) statusLabel.innerText = "🟢 Suara Aktif (Menghubungkan...)";
 
                     inisialisasiVoiceChat();
                 } catch(err) {
                     alert("Gagal mengakses mikrofon: " + err.message);
-                    statusLabel.innerText = "🎤 Suara: Gagal (Izin ditolak)";
+                    if(statusLabel) statusLabel.innerText = "🎤 Suara: Gagal (Izin ditolak)";
                 }
             } else {
                 tutupVoiceChat();
-                statusLabel.innerText = "🎤 Suara: Terputus";
-                btn.innerText = "🎙️ Nyalakan Suara";
-                btn.style.backgroundColor = "var(--primary)";
+                if(statusLabel) statusLabel.innerText = "🎤 Suara: Terputus";
+                if(btn){
+                    btn.innerText = "🎙️ Nyalakan Suara";
+                    btn.style.backgroundColor = "var(--primary)";
+                }
             }
         }
 
@@ -2110,8 +2424,9 @@
 
             peerConnection.ontrack = (event) => {
                 const remoteAudio = document.getElementById("remote-audio");
-                remoteAudio.srcObject = event.streams[0];
-                document.getElementById("voice-status").innerText = "🟢 Terhubung! Sedang Berbicara (Voice Game)";
+                if(remoteAudio) remoteAudio.srcObject = event.streams[0];
+                const st = document.getElementById("voice-status");
+                if(st) st.innerText = "🟢 Terhubung! Sedang Berbicara (Voice Game)";
             };
 
             peerConnection.onicecandidate = (event) => {
@@ -2178,20 +2493,33 @@
             db.ref(`siap_sawit/voice_chat/${currentRoomId}`).remove();
         }
 
-        window.onload=function(){
+        window.onload = function(){
             cekPembaruanAplikasi();
-
             muatTemaTersimpan();
             ambilLokasiGPSRealtime();
             muatDaftarPos();
             
-            const e=localStorage.getItem("siap_sawit_role"),t=localStorage.getItem("siap_sawit_petugas"),a=localStorage.getItem("siap_sawit_pos"),hpStored=localStorage.getItem("siap_sawit_hp")||"-";
+            const e = localStorage.getItem("siap_sawit_role"), t = localStorage.getItem("siap_sawit_petugas"), a = localStorage.getItem("siap_sawit_pos"), hpStored = localStorage.getItem("siap_sawit_hp") || "-";
+            
             if(e){
-                document.getElementById("login-overlay").style.display="none";
-                terapkanHakAkses(e,t,a);
-                if("tim"===e){
-                    db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).set({nama:t,pos:a,hp:hpStored,waktuLogin:(new Date).toLocaleTimeString("id-ID")});
-                    db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).onDisconnect().remove();
+                if(e === "tim"){
+                    db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}/approved`).once("value", snap => {
+                        const overlay = document.getElementById("login-overlay");
+                        const modalPend = document.getElementById("modal-pending-approval");
+                        if(snap.val() !== true){
+                            if(overlay) overlay.style.display = "flex";
+                            if(modalPend) modalPend.style.display = "flex";
+                        } else {
+                            if(overlay) overlay.style.display = "none";
+                            terapkanHakAkses(e, t, a);
+                            db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).set({nama: t, pos: a, hp: hpStored, waktuLogin: new Date().toLocaleTimeString("id-ID")});
+                            db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).onDisconnect().remove();
+                        }
+                    });
+                } else {
+                    const overlay = document.getElementById("login-overlay");
+                    if(overlay) overlay.style.display = "none";
+                    terapkanHakAkses(e, t, a);
                 }
             } else {
                 cekOtomatisPerangkat();
@@ -2199,19 +2527,28 @@
 
             db.ref(`siap_sawit/perangkat_terdaftar/${myDeviceSessionId}`).on("value", (snap) => {
                 const dataStaf = snap.val();
-                if(dataStaf && dataStaf.nama && document.getElementById("login-overlay").style.display !== "none"){
-                    berhasilLoginTim(dataStaf.nama, dataStaf.hp || "-", "Pos Utama Gerbang 1");
+                const overlay = document.getElementById("login-overlay");
+                if(dataStaf && dataStaf.nama){
+                    if(dataStaf.approved === true && overlay && overlay.style.display !== "none" && localStorage.getItem("siap_sawit_role") === "tim"){
+                        berhasilLoginTim(dataStaf.nama, dataStaf.hp || "-", "Pos Utama Gerbang 1");
+                    }
                 }
             });
 
-            db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).on("value",(e=>{
+            db.ref(`siap_sawit/tim_online/${myDeviceSessionId}`).on("value", (e => {
                 if(!e.exists() && "tim" === localStorage.getItem("siap_sawit_role")){ alert("Anda Telah Logout / Sesi Diakhiri."); logoutAplikasi(); }
             }));
-            const n=document.getElementById("filter-tahun"),o=(new Date).getFullYear(); let i="";
-            for(let e=o;e>=o-3;e--)i+=`<option value="${e}">${e}</option>`; n.innerHTML=i;
-            document.getElementById("filter-bulan").value=String((new Date).getMonth()+1).padStart(2,"0");
-            muatArsipLaporan(); muatPetugasPos(); muatKontakDarurat(); muatTimOnlineKomandan(); muatPermintaanIzin(); muatLogRiwayatPerangkat();
+
+            const n = document.getElementById("filter-tahun"), o = (new Date).getFullYear(); 
+            if(n){
+                let i = "";
+                for(let yr = o; yr >= o-3; yr--) i += `<option value="${yr}">${yr}</option>`; 
+                n.innerHTML = i;
+            }
+            const elBulan = document.getElementById("filter-bulan");
+            if(elBulan) elBulan.value = String((new Date).getMonth()+1).padStart(2,"0");
             
+            muatArsipLaporan(); muatPetugasPos(); muatKontakDarurat(); muatTimOnlineKomandan(); muatPermintaanIzin(); muatLogRiwayatPerangkat();
             inisialisasiListenerCatur();
         };
 
@@ -2221,22 +2558,23 @@
             }
         });
 
-        setInterval(updateClock,1e3); updateClock();
+        setInterval(updateClock, 1e3); updateClock();
 
         db.ref("siap_sawit/kendaraan").off();
-        db.ref("siap_sawit/kendaraan").on("value",(e=>{
-            const t=document.getElementById("list-kendaraan"), a=e.val(), role=localStorage.getItem("siap_sawit_role");
-            if(!a)return void(t.innerHTML='<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada kendaraan.</p>');
-            let n=""; Object.keys(a).reverse().forEach((keyId=>{
+        db.ref("siap_sawit/kendaraan").on("value", (e => {
+            const t = document.getElementById("list-kendaraan"), a = e.val(), role = localStorage.getItem("siap_sawit_role");
+            if(!t) return;
+            if(!a) return void(t.innerHTML = '<p style="font-size:0.82rem; color:var(--text-muted);">Belum ada kendaraan.</p>');
+            let n = ""; Object.keys(a).reverse().forEach((keyId => {
                 const item = a[keyId];
-                n+=`<div class="log-item">
+                n += `<div class="log-item">
                     ${(role === "komandan") ? `<button onclick="hapusLogKendaraan('${keyId}')" style="position:absolute; top:8px; right:8px; background:var(--danger); border:none; color:#fff; font-size:0.68rem; padding:3px 8px; border-radius:4px; cursor:pointer; font-weight:700; z-index:5;">Hapus</button>` : ''}
                     <div class="log-header"><span>🕒 ${item.waktu}</span><strong style="color:var(--primary);">${item.status}</strong></div>
                     <div class="log-title">🚗 ${item.nopol} — Supir: ${item.supir}</div>
                     <div class="log-desc">Surat Jalan: ${item.surat}</div>
                 </div>`;
             }));
-            t.innerHTML=n;
+            t.innerHTML = n;
         }));
     </script> 
 </body> 
