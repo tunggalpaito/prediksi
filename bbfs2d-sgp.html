@@ -4,6 +4,7 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Prediksi Target 2D BBFS SGP 8 Digit Singapore Jitu Hari Ini - Tunggal Paito</title>
+<link rel="canonical" href="https://tunggalpaito.online/bbfs2d-sgp">
 <meta name=keywords content="target 2d singapore, bbfs 8 digit singapore, prediksi singapore, live draw singapore, paito singapore, rumus singapore jitu, bocoran singapore hari ini">
 <meta name=description content="Prediksi dan analisa Target Angka 2D BBFS 8 Digit pasaran Singapore (SGP) terlengkap berdasarkan data result terbaru secara otomatis.">
 <script src=https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js></script>
@@ -19,7 +20,7 @@ li,p{font-size:12px;color:#f3f4f6;line-height:1.5;margin-bottom:6px}
 ul{padding-left:18px}
 .highlight-box{background-color:#06140a;border:1px solid #00ff66;border-radius:8px;padding:12px;margin:12px 0;text-align:center}
 .highlight-box span{color:#00ff66;font-weight:700;font-size:14px;text-shadow:0 0 5px rgba(0,255,102,.4)}
-.capture-box{background-color:#0b1a10;padding:10px;border-radius:8px}
+.capture-box{background-color:#0b1a10;padding:5px;border-radius:8px}
 .download-btn-container{text-align:center;margin:20px 0 15px 0}
 .btn-download{background:linear-gradient(135deg,#00ff66,#00b34d);color:#050d08;border:none;padding:10px 18px;font-size:13px;font-weight:700;border-radius:8px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3);transition:all .2s ease;display:inline-flex;align-items:center;gap:6px}
 .btn-download:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,255,102,.4)}
@@ -44,11 +45,12 @@ ul{padding-left:18px}
 </div>
 </div>
 
-<div class=capture-box id=capture-area>
 <div style="font-size:13px;font-weight:700;color:#00ff66;margin-bottom:8px;text-align:center;border-bottom:1px solid rgba(0,255,102,.3);padding-bottom:4px">TABEL 7 PUTARAN & BBFS 8D</div>
-<div id=result-7rows-container style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
-  <div style="font-size:12px;color:#ddd;text-align:center;">Memuat data...</div>
-</div>
+
+<div class=capture-box id=capture-area>
+  <div id=result-7rows-container style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+    <div style="font-size:12px;color:#ddd;text-align:center;">Memuat data...</div>
+  </div>
 </div>
 
 <div class=download-btn-container>
@@ -98,10 +100,8 @@ async function loadSingaporeAnalysis(){
 
       let as=parseInt(resNum[0]),kop=parseInt(resNum[1]),kep=parseInt(resNum[2]),ek=parseInt(resNum[3]);
       
-      // Angka 4D diambil langsung dari data live/singapore (resNum)
       let target4D = resNum;
 
-      // Angka 8D di sebelah kanannya adalah prediksi BBFS
       let t4d_1 = (as + kop) % 10;
       let t4d_2 = (kop + kep) % 10;
       let t4d_3 = (kep + ek) % 10;
@@ -115,8 +115,7 @@ async function loadSingaporeAnalysis(){
       let bbfsStr=uniqueBbfs.slice(0,8).join("");
 
       htmlRows+=`
-        <div style="display:flex;justify-content:space-between;align-items:center;background:#06140a;padding:6px 10px;border-radius:6px;border:1px solid rgba(0,255,102,0.2);font-size:12px;">
-          <span style="color:#ddd;font-size:11px;">${dateKey}</span>
+        <div style="display:flex;justify-content:center;align-items:center;background:#06140a;padding:8px 12px;border-radius:6px;border:1px solid rgba(0,255,102,0.2);font-size:14px;">
           <span style="font-weight:bold;color:#fff;letter-spacing:1px;">${target4D} : <span style="color:#00ff66;">${bbfsStr}</span></span>
         </div>
       `;
