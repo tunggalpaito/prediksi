@@ -25,6 +25,25 @@ ul{padding-left:18px}
 .btn-download{background:linear-gradient(135deg,#00bfff,#0077b6);color:#050b14;border:none;padding:10px 18px;font-size:13px;font-weight:700;border-radius:8px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3);transition:all .2s ease;display:inline-flex;align-items:center;gap:6px}
 .btn-download:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,191,255,.4)}
 .footer{margin-top:auto;padding:10px 0;color:#00bfff;font-size:13px;font-weight:700;text-align:center;text-shadow:0 0 5px rgba(0,191,255,.3)}
+
+/* Styling khusus untuk baris hasil */
+.result-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #060f1c;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,191,255,0.2);
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.result-row span.bbfs-num {
+  color: #00bfff;
+  margin-left: 8px;
+}
 </style>
 </head>
 <body>
@@ -119,8 +138,8 @@ async function loadSydneyAnalysis(){
       let bbfsStr=uniqueBbfs.slice(0,8).join("");
 
       htmlRows+=`
-        <div style="display:flex;justify-content:center;align-items:center;background:#060f1c;padding:8px 12px;border-radius:6px;border:1px solid rgba(0,191,255,0.2);font-size:14px;">
-          <span style="font-weight:bold;color:#fff;letter-spacing:1px;">${target4D} : <span style="color:#00bfff;">${bbfsStr}</span></span>
+        <div class="result-row">
+          <span>${target4D} :</span><span class="bbfs-num">${bbfsStr}</span>
         </div>
       `;
     });
@@ -132,16 +151,78 @@ async function loadSydneyAnalysis(){
 
 loadSydneyAnalysis();
 
-document.getElementById("btn-download-img").addEventListener("click",(function(){
-  this.textContent="Memproses Gambar...";
-  html2canvas(document.getElementById("capture-area"),{scale:2,useCORS:!0,backgroundColor:"#0b1422"}).then((t=>{
-    const e=document.createElement("a");
-    e.download="Analisis-Target-4D-Sydney-"+(new Date).toISOString().slice(0,10)+".jpg";
-    e.href=t.toDataURL("image/jpeg",.95);
-    e.click();
-    this.innerHTML="Download Hasil Analisis (JPG)";
-  }));
-}));
+// FUNGSI DOWNLOAD GAMBAR RASIO 9:16 BESAR (1080x1920)
+document.getElementById("btn-download-img").addEventListener("click", function() {
+  const btn = this;
+  const originalBtnHTML = btn.innerHTML;
+  btn.textContent = "Memproses Gambar 9:16...";
+
+  // 1. Buat kontainer tersembunyi berukuran 1080x1920 (Rasio 9:16 HD)
+  const cloneWrapper = document.createElement("div");
+  cloneWrapper.style.position = "fixed";
+  cloneWrapper.style.left = "-9999px";
+  cloneWrapper.style.top = "0";
+  cloneWrapper.style.width = "1080px";
+  cloneWrapper.style.height = "1920px";
+  cloneWrapper.style.backgroundColor = "#050b14";
+  cloneWrapper.style.display = "flex";
+  cloneWrapper.style.flexDirection = "column";
+  cloneWrapper.style.justifyContent = "space-between";
+  cloneWrapper.style.padding = "70px 45px";
+  cloneWrapper.style.boxSizing = "border-box";
+
+  // 2. Kloning isi dari result-7rows-container
+  const sourceRows = document.getElementById("result-7rows-container").cloneNode(true);
+  sourceRows.style.display = "flex";
+  sourceRows.style.flexDirection = "column";
+  sourceRows.style.justifyContent = "space-between";
+  sourceRows.style.height = "100%";
+  sourceRows.style.gap = "28px";
+  sourceRows.style.margin = "0";
+
+  // 3. Perbesar tampilan setiap baris agar penuh dan proporsional
+  const rows = sourceRows.querySelectorAll(".result-row");
+  rows.forEach(row => {
+    row.style.flex = "1";
+    row.style.fontSize = "68px";
+    row.style.letterSpacing = "6px";
+    row.style.borderRadius = "20px";
+    row.style.border = "3px solid rgba(0, 191, 255, 0.25)";
+    row.style.backgroundColor = "#060f1c";
+    row.style.padding = "0 30px";
+    row.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
+  });
+
+  const bbfsSpans = sourceRows.querySelectorAll(".bbfs-num");
+  bbfsSpans.forEach(sp => {
+    sp.style.marginLeft = "24px";
+  });
+
+  cloneWrapper.appendChild(sourceRows);
+  document.body.appendChild(cloneWrapper);
+
+  // 4. Tangkap gambar dari kontainer 9:16 tersebut
+  html2canvas(cloneWrapper, {
+    width: 1080,
+    height: 1920,
+    scale: 1,
+    useCORS: true,
+    backgroundColor: "#050b14"
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "Analisis-Target-4D-Sydney-9x16-" + (new Date()).toISOString().slice(0, 10) + ".jpg";
+    link.href = canvas.toDataURL("image/jpeg", 0.95);
+    link.click();
+
+    // Hapus elemen sementara & kembalikan tombol
+    document.body.removeChild(cloneWrapper);
+    btn.innerHTML = originalBtnHTML;
+  }).catch(err => {
+    console.error(err);
+    document.body.removeChild(cloneWrapper);
+    btn.innerHTML = originalBtnHTML;
+  });
+});
 
 let clickCount=0;
 const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
