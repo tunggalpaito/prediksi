@@ -575,7 +575,7 @@ get(child(dbRef,"live/hongkong")).then((snapshot)=>{
     console.error("Gagal mengambil data HK dari Firebase:", e);
 });
 
-// FITUR DOWNLOAD GAMBAR HANYA 10 TREK TERAKHIR
+// FITUR DOWNLOAD GAMBAR 12 TREK TERAKHIR
 document.getElementById("btn-download").addEventListener("click", function() {
     get(child(dbRef,"live/hongkong")).then((snapshot)=>{
         if(!snapshot.exists()) return;
@@ -587,11 +587,11 @@ document.getElementById("btn-download").addEventListener("click", function() {
         });
         entries.sort((a, b) => a.dateObj - b.dateObj);
 
-        // Ambil hanya 10 trek terakhir khusus untuk gambar
-        const last10 = entries.slice(-10);
+        // Ambil 12 trek terakhir khusus untuk gambar
+        const last12 = entries.slice(-12);
         let cCentang = 0, cX = 0, rHtml = "";
 
-        last10.forEach((item) => {
+        last12.forEach((item) => {
             let gIdx = entries.findIndex(e => e.dateStr === item.dateStr);
             let res = hitungTrekItem(item, gIdx, entries);
             if(!res) return;
@@ -604,7 +604,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
             }
         });
 
-        let summary10Html = `
+        let summary12Html = `
             <div class="total-combined-card">
                 <div class="total-header">
                     <span>REKAP TREK HONGKONG</span>
@@ -632,7 +632,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
         tempContainer.innerHTML = `
             <div class="main-card" style="margin:0; width:100%;">
                 <h1>PREDIKSI TOGEL HARI INI <br>RESULT 4D & ANGKA MAIN HK</h1>
-                <div class="trek-container">${summary10Html + rHtml}</div>
+                <div class="trek-container">${summary12Html + rHtml}</div>
             </div>
         `;
         document.body.appendChild(tempContainer);
@@ -647,7 +647,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
             scale: 2
         }).then(canvas => {
             const link = document.createElement("a");
-            link.download = "Prediksi-HK-Tunggal-Paito-10Trek.png";
+            link.download = "Prediksi-HK-Tunggal-Paito-12Trek.png";
             link.href = canvas.toDataURL("image/png");
             link.click();
 
