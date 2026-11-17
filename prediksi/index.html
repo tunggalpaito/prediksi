@@ -632,7 +632,7 @@ Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia j
 </ol>
 </div>
 </div>
-<a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target=_blank onclick="closeDownloadModal()" class="w-full flex items-center justify-center space-x-2.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black py-4 px-4 rounded-2xl text-sm shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98] uppercase tracking-wider cursor-pointer">
+<a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target=_blank onclick="markAsDownloaded()" class="w-full flex items-center justify-center space-x-2.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black py-4 px-4 rounded-2xl text-sm shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98] uppercase tracking-wider cursor-pointer">
 <i class="fa-solid fa-cloud-arrow-down text-base"></i> <span>KLIK LANJUTKAN DOWNLOAD</span>
 </a>
 </div>
@@ -656,13 +656,11 @@ Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia j
 <script>
 const downloadModal=document.getElementById("download-modal");
 
-// Otomatis buka pop-up saat halaman pertama kali dibuka
+// Hanya munculkan otomatis jika pengunjung BELUM pernah download / menutup pop-up
 window.addEventListener("DOMContentLoaded", function() {
-    // Jika ingin hanya muncul sekali per sesi/kunjungan, bisa aktifkan baris bawah ini:
-    // if (!sessionStorage.getItem('apk_popup_shown')) {
+    if (!localStorage.getItem('tunggalpaito_apk_downloaded')) {
         openDownloadModal();
-    //     sessionStorage.setItem('apk_popup_shown', 'true');
-    // }
+    }
 });
 
 function openDownloadModal(o){
@@ -674,6 +672,14 @@ function openDownloadModal(o){
 function closeDownloadModal(){
     downloadModal.classList.add("hidden");
     document.body.classList.remove("modal-open");
+    // Simpan status agar tidak muncul otomatis lagi jika ditutup
+    localStorage.setItem('tunggalpaito_apk_downloaded', 'true');
+}
+
+// Fungsi khusus saat tombol download diklik
+function markAsDownloaded() {
+    localStorage.setItem('tunggalpaito_apk_downloaded', 'true');
+    closeDownloadModal();
 }
 
 downloadModal.addEventListener("click",function(o){
@@ -736,7 +742,10 @@ setTimeout(showRandomBuyer,3e3);
 setInterval(showRandomBuyer,1e4);
 </script>
 
-<script>const adUrl="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0},document.addEventListener("copy",(e=>{e.preventDefault(),window.location.href=adUrl})),history.pushState(null,null,location.href),window.addEventListener("popstate",(function(){window.location.href=adUrl})),document.addEventListener("click",(function(e){e.target.closest("a")||(window.location.href=adUrl)}))</script>
+<script>
+    // Keamanan klik dan anti-copy telah dinonaktifkan/dibersihkan dari redirect paksa iklan layar penuh
+    document.addEventListener("contextmenu", (e => e.preventDefault()));
+</script>
 
 <!-- SCRIPT EFEK TERBANG ACAK UNTUK TOP 10 LINE -->
 <script>
