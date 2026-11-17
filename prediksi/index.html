@@ -601,37 +601,39 @@ Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia j
 </div>
 </main>
 
-<div id=download-modal class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-<div class="bg-slate-900 border border-emerald-500/50 rounded-3xl w-full max-w-sm p-6 shadow-[0_0_40px_rgba(16,185,129,0.35)] relative animate-popup text-left backdrop-blur-xl">
-<button onclick=closeDownloadModal() class="absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700">
+<div id=download-modal class="fixed inset-0 z-[99999] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+<div class="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border border-emerald-500/60 rounded-3xl w-full max-w-sm p-6 shadow-[0_0_50px_rgba(16,185,129,0.4)] relative animate-popup text-left backdrop-blur-xl">
+<button onclick="closeDownloadModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-8 h-8 rounded-full flex items-center justify-center text-sm transition-colors border border-slate-700 cursor-pointer shadow-lg">
 <i class="fa-solid fa-xmark"></i>
 </button>
 <div class="flex items-center space-x-3 mb-4 pb-3 border-b border-slate-800">
-<div class="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
-<i class="fa-solid fa-triangle-exclamation text-base"></i>
+<div class="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
+<i class="fa-solid fa-cloud-arrow-down text-lg animate-bounce"></i>
 </div>
 <div>
-<h3 class="text-xs font-bold text-white uppercase tracking-wider">Himbauan Penting</h3>
-<p class="text-[10px] text-amber-400 font-medium">Jika Kesulitan Download Apk Resmi TUNGGAL PAITO</p>
+<h3 class="text-sm font-black text-white uppercase tracking-wider">🚀 DOWNLOAD APK RESMI</h3>
+<p class="text-xs text-emerald-400 font-semibold">TUNGGAL PAITO TERBARU</p>
 </div>
 </div>
-<div class="text-xs text-slate-300 space-y-2.5 mb-5 max-h-[60vh] overflow-y-auto pr-1">
-<p class="font-semibold text-emerald-400 bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/20"> 📌 Pertama wajib login/pakai akun Email-Gmail bahwa anda bukan robot. </p>
+<div class="text-xs text-slate-300 space-y-3 mb-6 max-h-[60vh] overflow-y-auto pr-1">
+<div class="font-extrabold text-emerald-300 bg-emerald-500/15 p-3 rounded-2xl border border-emerald-500/30 text-xs leading-snug"> 
+🔥 Wajib login / pakai akun Gmail Anda agar proses unduh lancar & aman tanpa hambatan! 
+</div>
 <div>
-<p class="font-bold text-slate-200 mb-1.5">Langkah Selanjutnya:</p>
-<ol class="list-decimal list-inside space-y-1.5 text-slate-400 pl-1 text-[11px]">
-<li>Buka aplikasi <strong class=text-slate-200>Google Play Store</strong> di HP Anda.</li>
-<li>Ketuk foto profil akun Anda di pojok kanan atas layar.</li>
-<li>Pilih menu <strong class=text-slate-200>Play Protect</strong> (ikon berbentuk tameng hijau).</li>
-<li>Ketuk ikon <strong class=text-slate-200>Roda Gigi / Setelan (Gear)</strong> di pojok kanan atas halaman Play Protect.</li>
-<li>Matikan tombol pada pilihan <strong class=text-slate-200>Pindai aplikasi dengan Play Protect</strong> (Scan apps with Play Protect).</li>
-<li>Akan muncul kotak konfirmasi, ketuk <strong class=text-slate-200>Nonaktifkan / Turn Off</strong>.</li>
-<li><span class=text-amber-400>(Opsional)</span> Matikan juga tombol <strong class=text-slate-200>Tingkatkan deteksi aplikasi</strong> tepat di bawahnya.</li>
+<p class="font-bold text-slate-100 mb-2 text-xs tracking-wide">💡 Cara Mudah Mengatasi Blokir Play Protect:</p>
+<ol class="list-decimal list-inside space-y-2 text-slate-300 pl-1 text-xs leading-relaxed">
+<li>Buka aplikasi <strong class=text-white>Google Play Store</strong> di HP Anda.</li>
+<li>Ketuk <strong class=text-white>Foto Profil</strong> di pojok kanan atas layar.</li>
+<li>Pilih menu <strong class=text-white>Play Protect</strong> (ikon tameng hijau).</li>
+<li>Ketuk ikon <strong class=text-white>Roda Gigi / Setelan (Gear)</strong> di pojok kanan atas.</li>
+<li>Matikan tombol <strong class=text-white>Pindai aplikasi dengan Play Protect</strong>.</li>
+<li>Ketuk <strong class=text-white>Nonaktifkan / Turn Off</strong> pada kotak konfirmasi.</li>
+<li><span class=text-amber-400 font-bold>(Opsional)</span> Matikan juga <strong class=text-white>Tingkatkan deteksi aplikasi</strong> di bawahnya.</li>
 </ol>
 </div>
 </div>
-<a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target=_blank onclick=closeDownloadModal() class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-3 px-4 rounded-2xl text-xs shadow-lg transition-all active:scale-[0.98]">
-<i class="fa-solid fa-cloud-arrow-down"></i> <span>Lanjutkan Download APK</span>
+<a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target=_blank onclick="closeDownloadModal()" class="w-full flex items-center justify-center space-x-2.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black py-4 px-4 rounded-2xl text-sm shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98] uppercase tracking-wider cursor-pointer">
+<i class="fa-solid fa-cloud-arrow-down text-base"></i> <span>KLIK LANJUTKAN DOWNLOAD</span>
 </a>
 </div>
 </div>
@@ -651,7 +653,38 @@ Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia j
         console.log("Auth init check:", e);
     }
 </script>
-<script>const downloadModal=document.getElementById("download-modal");function openDownloadModal(o){o&&o.stopPropagation(),downloadModal.classList.remove("hidden"),document.body.classList.add("modal-open")}function closeDownloadModal(){downloadModal.classList.add("hidden"),document.body.classList.remove("modal-open")}downloadModal.addEventListener("click",(function(o){o.target===downloadModal&&closeDownloadModal()}));const webdevModal=document.getElementById("webdev-popup");function openWebDevModal(o){o&&o.stopPropagation(),webdevModal.classList.remove("hidden"),document.body.classList.add("modal-open")}function closeWebDevModal(){webdevModal.classList.add("hidden"),document.body.classList.remove("modal-open")}webdevModal.addEventListener("click",(function(o){o.target===webdevModal&&closeWebDevModal()}))</script>
+<script>
+const downloadModal=document.getElementById("download-modal");
+
+// Otomatis buka pop-up saat halaman pertama kali dibuka
+window.addEventListener("DOMContentLoaded", function() {
+    // Jika ingin hanya muncul sekali per sesi/kunjungan, bisa aktifkan baris bawah ini:
+    // if (!sessionStorage.getItem('apk_popup_shown')) {
+        openDownloadModal();
+    //     sessionStorage.setItem('apk_popup_shown', 'true');
+    // }
+});
+
+function openDownloadModal(o){
+    o&&o.stopPropagation();
+    downloadModal.classList.remove("hidden");
+    document.body.classList.add("modal-open");
+}
+
+function closeDownloadModal(){
+    downloadModal.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+}
+
+downloadModal.addEventListener("click",function(o){
+    if(o.target === downloadModal) {
+        closeDownloadModal();
+    }
+});
+
+const webdevModal=document.getElementById("webdev-popup");
+function openWebDevModal(o){o&&o.stopPropagation(),webdevModal.classList.remove("hidden"),document.body.classList.add("modal-open")}function closeWebDevModal(){webdevModal.classList.add("hidden"),document.body.classList.remove("modal-open")}webdevModal.addEventListener("click",(function(o){o.target===webdevModal&&closeWebDevModal()}))
+</script>
 <script>const popup=document.getElementById("ads-popup");let startX,startY,initialX,initialY,isDragging=!1;function dragStart(t){if(t.target.closest("a")||t.target.closest("button"))return;isDragging=!0,startX="touchstart"===t.type?t.touches[0].clientX:t.clientX,startY="touchstart"===t.type?t.touches[0].clientY:t.clientY;const e=popup.getBoundingClientRect();initialX=e.left,initialY=e.top,popup.style.bottom="auto",popup.style.right="auto",popup.style.left=initialX+"px",popup.style.top=initialY+"px"}function drag(t){if(!isDragging)return;t.preventDefault();const e="touchmove"===t.type?t.touches[0].clientX:t.clientX,n="touchmove"===t.type?t.touches[0].clientY:t.clientY,i=e-startX,o=n-startY;popup.style.left=initialX+i+"px",popup.style.top=initialY+o+"px"}function dragEnd(){isDragging=!1}popup.addEventListener("mousedown",dragStart),document.addEventListener("mousemove",drag),document.addEventListener("mouseup",dragEnd),popup.addEventListener("touchstart",dragStart,{passive:!1}),document.addEventListener("touchmove",drag,{passive:!1}),document.addEventListener("touchend",dragEnd)</script>
 
 <!-- SCRIPT NOTIFIKASI PEMBELI -->
