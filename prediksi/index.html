@@ -39,14 +39,20 @@ body.modal-open{overflow:hidden}
 <body class="min-h-screen flex flex-col justify-between selection:bg-yellow-500 selection:text-slate-950">
 
 <!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: IKLAN TERPUSAT (SEMUA DIKUNCI DALAM IFRAME)   -->
+<!-- KONTEN PALING ATAS: IKLAN TERPUSAT (AMAN & TERKONTROL)           -->
 <!-- ================================================================= -->
 <div class="w-full max-w-md mx-auto px-4 pt-4">
-  <div class="w-full flex flex-col items-center gap-2.5 bg-slate-900/90 border border-amber-500/30 rounded-2xl p-2.5 shadow-xl backdrop-blur-md">
+  <div class="w-full flex flex-col items-center gap-2.5 bg-slate-900/90 border border-amber-500/30 rounded-2xl p-3 shadow-xl backdrop-blur-md">
     
+    <!-- Label Petunjuk Iklan -->
+    <div class="w-full flex items-center justify-between px-1 text-[9px] text-slate-400 border-b border-slate-800 pb-1">
+      <span class="uppercase tracking-wider font-semibold text-amber-400/80">Sponsor / Iklan</span>
+      <span>Aman & Nyaman</span>
+    </div>
+
     <!-- Iklan Banner 468x60 -->
-    <div class="w-full flex justify-center overflow-hidden">
-      <iframe sandbox="allow-scripts allow-popups" style="width:468px; height:60px; border:none; overflow:hidden; background:transparent;" srcdoc='
+    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
+      <iframe sandbox="allow-scripts allow-same-origin" style="width:468px; height:60px; border:none; overflow:hidden; background:transparent;" srcdoc='
         <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
           <script>
             atOptions = {
@@ -62,9 +68,9 @@ body.modal-open{overflow:hidden}
       '></iframe>
     </div>
 
-    <!-- Iklan Script + Container ID (Dikunci Sandbox) -->
-    <div class="w-full flex justify-center overflow-hidden">
-      <iframe sandbox="allow-scripts allow-popups" style="width:100%; min-height:60px; border:none; overflow:hidden; background:transparent;" srcdoc='
+    <!-- Iklan Script + Container ID -->
+    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
+      <iframe sandbox="allow-scripts allow-same-origin" style="width:100%; min-height:60px; border:none; overflow:hidden; background:transparent;" srcdoc='
         <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
           <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
           <div id="container-3f09897b852339f736b82a3190a40259"></div>
@@ -72,20 +78,11 @@ body.modal-open{overflow:hidden}
       '></iframe>
     </div>
 
-    <!-- Iklan Script 2 (Dikunci Sandbox) -->
-    <div class="w-full flex justify-center overflow-hidden">
-      <iframe sandbox="allow-scripts allow-popups" style="width:100%; min-height:50px; border:none; overflow:hidden; background:transparent;" srcdoc='
+    <!-- Iklan Script 2 -->
+    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
+      <iframe sandbox="allow-scripts allow-same-origin" style="width:100%; min-height:50px; border:none; overflow:hidden; background:transparent;" srcdoc='
         <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
           <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-        </body>
-      '></iframe>
-    </div>
-
-    <!-- Iklan Script 4 (Dikunci Sandbox) -->
-    <div class="w-full flex justify-center overflow-hidden">
-      <iframe sandbox="allow-scripts allow-popups" style="width:100%; min-height:50px; border:none; overflow:hidden; background:transparent;" srcdoc='
-        <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
-          <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
         </body>
       '></iframe>
     </div>
@@ -377,7 +374,7 @@ Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia j
 <!-- ========================================================================= -->
 <div class=bottom-ad-container>
   <div style=width:100%;min-height:50px;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden>
-    <iframe sandbox="allow-scripts allow-popups" style="width:320px; height:50px; border:none; overflow:hidden; background:transparent;" srcdoc='
+    <iframe sandbox="allow-scripts allow-same-origin" style="width:320px; height:50px; border:none; overflow:hidden; background:transparent;" srcdoc='
       <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
         <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
         <script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
