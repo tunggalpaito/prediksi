@@ -624,11 +624,11 @@ Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia j
 </div>
 </main>
 
-<!-- POP-UP MODAL DOWNLOAD APK (BEBAS REDIRECT IKLAN) -->
+<!-- POP-UP MODAL DOWNLOAD APK (BEBAS REDIRECT IKLAN & TOMBOL X DIPERBAIKI) -->
 <div id=download-modal class="fixed inset-0 z-[99999] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
 <div id="download-modal-box" class="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border border-emerald-500/60 rounded-3xl w-full max-w-sm p-6 shadow-[0_0_50px_rgba(16,185,129,0.4)] relative animate-popup text-left backdrop-blur-xl">
-<button type="button" id="btn-close-download-modal" class="absolute top-4 right-4 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-8 h-8 rounded-full flex items-center justify-center text-sm transition-colors border border-slate-700 cursor-pointer shadow-lg">
-<i class="fa-solid fa-xmark"></i>
+<button type="button" id="btn-close-download-modal" onclick="closeDownloadModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-8 h-8 rounded-full flex items-center justify-center text-sm transition-colors border border-slate-700 cursor-pointer shadow-lg z-50">
+<i class="fa-solid fa-xmark pointer-events-none"></i>
 </button>
 <div class="flex items-center space-x-3 mb-4 pb-3 border-b border-slate-800">
 <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
@@ -657,7 +657,7 @@ Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia j
 </div>
 </div>
 <!-- TOMBOL DOWNLOAD LANGSUNG KE GOOGLE DRIVE TANPA INTERVENSI IKLAN -->
-<a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" id="btn-download-apk" class="w-full flex items-center justify-center space-x-2.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black py-4 px-4 rounded-2xl text-sm shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98] uppercase tracking-wider cursor-pointer">
+<a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" id="btn-download-apk" onclick="closeDownloadModal()" class="w-full flex items-center justify-center space-x-2.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black py-4 px-4 rounded-2xl text-sm shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98] uppercase tracking-wider cursor-pointer">
 <i class="fa-solid fa-cloud-arrow-down text-base"></i> <span>KLIK LANJUTKAN DOWNLOAD</span>
 </a>
 </div>
@@ -699,16 +699,13 @@ function openDownloadModal(e) {
     document.body.classList.add("modal-open");
 }
 
-function closeDownloadModal(e) {
-    if (e) {
-        e.stopImmediatePropagation();
-    }
+function closeDownloadModal() {
     downloadModal.classList.add("hidden");
     document.body.classList.remove("modal-open");
     localStorage.setItem('tunggalpaito_apk_downloaded', 'true');
 }
 
-// PENGAMANAN FULL (CAPTURE PHASE) UNTUK TOMBOL DOWNLOAD, POP-UP APK, & LINK MENU
+// PENGAMANAN FULL (CAPTURE PHASE) UNTUK TOMBOL DOWNLOAD & LINK MENU
 document.addEventListener("DOMContentLoaded", function() {
     // 1. Tombol "Download APK Tunggal Paito" di halaman utama
     const openBtn = document.getElementById("btn-open-download-modal");
@@ -720,44 +717,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }, true);
     }
 
-    // 2. Seluruh area di dalam pop-up download (termasuk tombol tutup X dan area teks) bebas dari click-hijack iklan
-    const modalBox = document.getElementById("download-modal-box");
-    if (modalBox) {
-        modalBox.addEventListener("click", function(e) {
-            e.stopImmediatePropagation();
-        }, true);
-    }
-
-    // 3. Tombol tutup (X) di dalam pop-up download
-    const closeBtn = document.getElementById("btn-close-download-modal");
-    if (closeBtn) {
-        closeBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            closeDownloadModal();
-        }, true);
-    }
-
-    // 4. Tombol "KLIK LANJUTKAN DOWNLOAD" langsung membuka Google Drive tanpa pengalihan iklan
-    const downloadBtn = document.getElementById("btn-download-apk");
-    if (downloadBtn) {
-        downloadBtn.addEventListener("click", function(e) {
-            e.stopImmediatePropagation();
-            localStorage.setItem('tunggalpaito_apk_downloaded', 'true');
-            setTimeout(function() {
-                closeDownloadModal();
-            }, 150);
-        }, true);
-    }
-
-    // 5. Semua menu/teks beriklan (.ad-trigger): langsung menuju link tujuan di tab baru (bukan kembali ke halaman utama)
+    // 2. Semua menu/teks beriklan (.ad-trigger): langsung menuju link tujuan di tab baru (bukan kembali ke halaman utama)
     const adTriggers = document.querySelectorAll("a.ad-trigger");
     adTriggers.forEach(function(link) {
         link.setAttribute("target", "_blank");
         link.setAttribute("rel", "noopener noreferrer");
 
         link.addEventListener("click", function(e) {
-            // Putus skrip iklan pihak ketiga yang membajak klik atau me-reload halaman utama
             e.stopImmediatePropagation();
         }, true);
     });
@@ -765,11 +731,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Tutup modal jika klik area gelap di luar kotak modal
 downloadModal.addEventListener("click", function(e) {
-    e.stopImmediatePropagation();
     if (e.target === downloadModal) {
         closeDownloadModal();
     }
-}, true);
+});
 
 const webdevModal=document.getElementById("webdev-popup");
 function openWebDevModal(o){o&&o.stopPropagation(),webdevModal.classList.remove("hidden"),document.body.classList.add("modal-open")}
