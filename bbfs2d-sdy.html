@@ -11,6 +11,13 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background-color:#050b14;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh}
+
+/* Styling Tombol Navigasi Atas */
+.nav-top-container{width:100%;max-width:480px;display:flex;gap:10px;margin-bottom:15px}
+.nav-btn{flex:1;background:linear-gradient(135deg,#00bfff,#0077b6);color:#050b14;text-decoration:none;padding:10px 12px;font-size:12px;font-weight:700;border-radius:8px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.3);transition:all .2s ease;display:flex;align-items:center;justify-content:center;gap:6px}
+.nav-btn.apk{background:linear-gradient(135deg,#00ff88,#00bfff);color:#050b14}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,191,255,.4)}
+
 .ads-container{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
 .ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
 .main-card{width:100%;max-width:480px;background-color:#0b1422;border:1px solid rgba(0,191,255,.4);border-radius:12px;padding:20px 15px;text-align:left;box-shadow:0 4px 15px rgba(0,191,255,.2);margin-bottom:25px}
@@ -25,6 +32,24 @@ ul{padding-left:18px}
 .btn-download{background:linear-gradient(135deg,#00bfff,#0077b6);color:#050b14;border:none;padding:10px 18px;font-size:13px;font-weight:700;border-radius:8px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3);transition:all .2s ease;display:inline-flex;align-items:center;gap:6px}
 .btn-download:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,191,255,.4)}
 .footer{margin-top:auto;padding:10px 0;color:#00bfff;font-size:13px;font-weight:700;text-align:center;text-shadow:0 0 5px rgba(0,191,255,.3)}
+
+/* Statistik Total Masuk & Zonk */
+.stats-summary {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.stat-item.masuk {
+  color: #00ff88;
+  text-shadow: 0 0 5px rgba(0,255,136,0.4);
+}
+.stat-item.zonk {
+  color: #ff4d4d;
+  text-shadow: 0 0 5px rgba(255,77,77,0.4);
+}
 
 /* Styling khusus untuk baris hasil */
 .result-row {
@@ -47,6 +72,13 @@ ul{padding-left:18px}
 </style>
 </head>
 <body>
+
+<!-- Tombol Navigasi Atas -->
+<div class="nav-top-container">
+  <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
+  <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
+</div>
+
 <div class=ads-container>
 <div class=ad-box><div style=width:100%;text-align:center;overflow:hidden><script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script><script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script></div></div>
 <div class=ad-box><div style=width:100%;text-align:center;overflow:hidden><script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script><script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script></div></div>
@@ -66,6 +98,12 @@ ul{padding-left:18px}
 
 <div style="font-size:13px;font-weight:700;color:#00bfff;margin-bottom:8px;text-align:center;border-bottom:1px solid rgba(0,191,255,.3);padding-bottom:4px">TABEL 7 PUTARAN & BBFS 8D</div>
 
+<!-- Widget Statistik Total Masuk dan Zonk (Dikembalikan) -->
+<div id="stats-summary-container" class="stats-summary">
+  <div class="stat-item masuk">Total Masuk : <span id="total-masuk">0</span></div>
+  <div class="stat-item zonk">Total Zonk : <span id="total-zonk">0</span></div>
+</div>
+
 <div class=capture-box id=capture-area>
   <div id=result-7rows-container style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
     <div style="font-size:12px;color:#ddd;text-align:center;">Memuat data...</div>
@@ -75,7 +113,7 @@ ul{padding-left:18px}
 <div class=download-btn-container>
 <button class=btn-download id=btn-download-img>
 <svg xmlns=http://www.w3.org/2000/svg width=16 height=16 fill=currentColor viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-Download Hasil Analisis (JPG)
+Download Gambar Prediksi
 </button>
 </div>
 
@@ -107,43 +145,80 @@ async function loadSydneyAnalysis(){
     let n=Object.keys(e);
     if(n.sort(((t,e)=>{const[n,a,o]=t.split("-").map(Number),[r,s,l]=e.split("-").map(Number);return new Date(o,a-1,n)-new Date(l,s-1,r)})),n.length<7)return;
     
-    let a=t=>{if(Array.isArray(t)&&t.length>0)return String(t[t.length-1]);if("object"==typeof t&&null!==t){const e=Object.keys(t);return String(t[e[e.length-1]])}return String(t)};
+    let getResultVal = val => {
+      if(Array.isArray(val) && val.length > 0) return String(val[val.length - 1]);
+      if(typeof val === 'object' && val !== null) {
+        const keys = Object.keys(val);
+        return String(val[keys[keys.length - 1]]);
+      }
+      return String(val);
+    };
 
-    let last7Keys=n.slice(-7);
-    let htmlRows="";
+    let lastKeys=n.slice(-30);
+    
+    let parsedData = lastKeys.map(dateKey => {
+      let rawVal = getResultVal(e[dateKey]);
+      let resNum = rawVal.split(":")[0].trim();
+      resNum = resNum.length === 4 ? resNum : "0123";
 
-    last7Keys.forEach(dateKey=>{
-      let rawVal=a(e[dateKey]);
-      let resNum=rawVal.split(":")[0].trim();
-      resNum=4===resNum.length?resNum:"0123";
-
-      let as=parseInt(resNum[0]),kop=parseInt(resNum[1]),kep=parseInt(resNum[2]),ek=parseInt(resNum[3]);
+      let as = parseInt(resNum[0]), kop = parseInt(resNum[1]), kep = parseInt(resNum[2]), ek = parseInt(resNum[3]);
+      let s1 = ((9 - as) * 7 + kop * 3) % 10;
+      let s2 = ((9 - kop) * 3 + kep * 7) % 10;
+      let s3 = ((9 - kep) * 9 + ek * 3) % 10;
+      let s4 = ((9 - ek) * 7 + as * 9) % 10;
+      let s5 = ((9 - as) * (9 - ek) + kop) % 10;
+      let s6 = ((9 - kop) * (9 - kep) + ek) % 10;
+      let s7 = Math.abs((9 - as) - kep + ek * 3 + 20) % 10;
+      let s8 = Math.abs((9 - ek) - kop + as * 7 + 20) % 10;
       
-      let target4D = resNum;
-
-      let s1 = (as + kep + 1) % 10;
-      let s2 = (kop + ek + 2) % 10;
-      let s3 = Math.abs(as - kop + 5) % 10;
-      let s4 = Math.abs(kep - ek + 5) % 10;
-      let s5 = (as * kop) % 10;
-      let s6 = (kep * ek) % 10;
-      let s7 = (as + kop + kep + ek + 4) % 10;
-      let s8 = Math.abs(as - ek + 3) % 10;
-
       let bbfsArr = [as, kop, kep, ek, s1, s2, s3, s4, s5, s6, s7, s8];
       let uniqueBbfs=[...new Set(bbfsArr)];
-      for(let i=0; i<=9 && uniqueBbfs.length<8; i++){
-        if(!uniqueBbfs.includes(i)) uniqueBbfs.push(i);
+      for(let j=0; j<=9 && uniqueBbfs.length<8; j++){
+        if(!uniqueBbfs.includes(j)) uniqueBbfs.push(j);
       }
       let bbfsStr=uniqueBbfs.slice(0,8).join("");
 
-      htmlRows+=`
-        <div class="result-row">
-          <span>${target4D} :</span><span class="bbfs-num">${bbfsStr}</span>
-        </div>
-      `;
+      return {
+        target4D: resNum,
+        bbfsStr: bbfsStr
+      };
     });
 
+    let htmlRows="";
+    let totalMasuk = 0;
+    let totalZonk = 0;
+
+    for(let i = 0; i < parsedData.length; i++){
+      let current = parsedData[i];
+      
+      // Hitung logika Masuk/Zonk di belakang layar untuk mengisi angka Total
+      if(i < parsedData.length - 1) {
+        let nextResult = parsedData[i+1].target4D;
+        let currentBbfs = current.bbfsStr;
+        
+        let kepalaBawah = nextResult[2];
+        let ekorBawah = nextResult[3];
+
+        let kepalaMasuk = currentBbfs.includes(kepalaBawah);
+        let ekorMasuk = currentBbfs.includes(ekorBawah);
+
+        if(kepalaMasuk && ekorMasuk) {
+          totalMasuk++;
+        } else {
+          totalZonk++;
+        }
+      }
+
+      // Baris HTML dibuat bersih tanpa simbol centang/silang
+      htmlRows+=`
+        <div class="result-row" data-index="${i}">
+          <span>${current.target4D} :</span><span class="bbfs-num">${current.bbfsStr}</span>
+        </div>
+      `;
+    }
+
+    document.getElementById("total-masuk").textContent = totalMasuk;
+    document.getElementById("total-zonk").textContent = totalZonk;
     document.getElementById("result-7rows-container").innerHTML=htmlRows;
 
   }catch(t){console.error(t);}
@@ -151,13 +226,12 @@ async function loadSydneyAnalysis(){
 
 loadSydneyAnalysis();
 
-// FUNGSI DOWNLOAD GAMBAR RASIO 9:16 BESAR (1080x1920)
+// FUNGSI DOWNLOAD GAMBAR RASIO 9:16 (Hanya mengambil 16 trek terakhir)
 document.getElementById("btn-download-img").addEventListener("click", function() {
   const btn = this;
   const originalBtnHTML = btn.innerHTML;
   btn.textContent = "Memproses Gambar 9:16...";
 
-  // 1. Buat kontainer tersembunyi berukuran 1080x1920 (Rasio 9:16 HD)
   const cloneWrapper = document.createElement("div");
   cloneWrapper.style.position = "fixed";
   cloneWrapper.style.left = "-9999px";
@@ -171,37 +245,44 @@ document.getElementById("btn-download-img").addEventListener("click", function()
   cloneWrapper.style.padding = "70px 45px";
   cloneWrapper.style.boxSizing = "border-box";
 
-  // 2. Kloning isi dari result-7rows-container
-  const sourceRows = document.getElementById("result-7rows-container").cloneNode(true);
-  sourceRows.style.display = "flex";
-  sourceRows.style.flexDirection = "column";
-  sourceRows.style.justifyContent = "space-between";
-  sourceRows.style.height = "100%";
-  sourceRows.style.gap = "28px";
-  sourceRows.style.margin = "0";
+  // Ambil elemen kontainer trek di halaman utama
+  const container = document.getElementById("result-7rows-container");
+  const allRows = container.querySelectorAll(".result-row");
 
-  // 3. Perbesar tampilan setiap baris agar penuh dan proporsional
-  const rows = sourceRows.querySelectorAll(".result-row");
-  rows.forEach(row => {
-    row.style.flex = "1";
-    row.style.fontSize = "68px";
-    row.style.letterSpacing = "6px";
-    row.style.borderRadius = "20px";
-    row.style.border = "3px solid rgba(0, 191, 255, 0.25)";
-    row.style.backgroundColor = "#060f1c";
-    row.style.padding = "0 30px";
-    row.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
+  // Filter dan ambil hanya 16 trek terakhir saja
+  const last16Rows = Array.from(allRows).slice(-16);
+
+  // Buat pembungkus hasil kloning untuk 16 trek
+  const rowsWrapper = document.createElement("div");
+  rowsWrapper.style.display = "flex";
+  rowsWrapper.style.flexDirection = "column";
+  rowsWrapper.style.justifyContent = "space-between";
+  rowsWrapper.style.height = "100%";
+  rowsWrapper.style.gap = "16px";
+  rowsWrapper.style.margin = "0";
+
+  last16Rows.forEach(rowEl => {
+    const clonedRow = rowEl.cloneNode(true);
+    clonedRow.style.flex = "1";
+    clonedRow.style.fontSize = "52px";
+    clonedRow.style.letterSpacing = "6px";
+    clonedRow.style.borderRadius = "16px";
+    clonedRow.style.border = "3px solid rgba(0, 191, 255, 0.25)";
+    clonedRow.style.backgroundColor = "#060f1c";
+    clonedRow.style.padding = "0 30px";
+    clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
+
+    const bbfsNum = clonedRow.querySelector(".bbfs-num");
+    if(bbfsNum) {
+      bbfsNum.style.marginLeft = "24px";
+    }
+
+    rowsWrapper.appendChild(clonedRow);
   });
 
-  const bbfsSpans = sourceRows.querySelectorAll(".bbfs-num");
-  bbfsSpans.forEach(sp => {
-    sp.style.marginLeft = "24px";
-  });
-
-  cloneWrapper.appendChild(sourceRows);
+  cloneWrapper.appendChild(rowsWrapper);
   document.body.appendChild(cloneWrapper);
 
-  // 4. Tangkap gambar dari kontainer 9:16 tersebut
   html2canvas(cloneWrapper, {
     width: 1080,
     height: 1920,
@@ -210,11 +291,10 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     backgroundColor: "#050b14"
   }).then(canvas => {
     const link = document.createElement("a");
-    link.download = "Analisis-Target-4D-Sydney-9x16-" + (new Date()).toISOString().slice(0, 10) + ".jpg";
+    link.download = "Analisis-Target-4D-Sydney-16Trek-" + (new Date()).toISOString().slice(0, 10) + ".jpg";
     link.href = canvas.toDataURL("image/jpeg", 0.95);
     link.click();
 
-    // Hapus elemen sementara & kembalikan tombol
     document.body.removeChild(cloneWrapper);
     btn.innerHTML = originalBtnHTML;
   }).catch(err => {
