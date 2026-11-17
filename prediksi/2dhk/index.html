@@ -14,8 +14,9 @@ body{background-color:#8b0000;color:#fff;display:flex;flex-direction:column;alig
 .btn-back-main{width:100%;max-width:420px;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.5);color:#fc0;text-decoration:none;font-weight:700;font-size:13px;padding:10px 15px;border-radius:8px;border:1px solid #fc0;margin-bottom:15px;transition:all .2s ease;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
 .btn-back-main:hover{background:#fc0;color:#000;transform:translateY(-2px)}
 
-.ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
-.ad-box{width:320px;height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
+/* STYLING AREA IKLAN UTAMA DI ATAS */
+.top-ads-wrapper{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:15px;background-color:#5c0000;border:1px solid rgba(255,204,0,0.4);border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+
 .generator-card{width:100%;max-width:420px;background-color:#5c0000;border:1px solid #fc0;border-radius:12px;padding:15px;margin-bottom:20px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.4)}
 .generator-card h3{font-size:16px;color:#fc0;margin-bottom:8px}
 .generator-card .guide-text{font-size:11px;color:#cbd5e1;margin-bottom:12px;line-height:1.4;text-align:left}
@@ -31,7 +32,7 @@ body{background-color:#8b0000;color:#fff;display:flex;flex-direction:column;alig
 .visitor-card .visitor-count{font-size:14px;font-weight:bold;color:#fc0;transition:all 0.5s ease}
 @keyframes blink{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
 
-/* Styling Khusus Kartu Saweran & Titip Pasang 3D HK Red-Gold AMOLED */
+/* STYLING KHUSUS KARTU SAWERAN & TITIP PASANG 3D HK */
 .sawer-card{width:100%;max-width:420px;background:linear-gradient(135deg,#300000,#5c0000);border:1px solid rgba(255,204,0,0.6);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
 .sawer-card h3{font-size:15px;color:#fc0;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
 .sawer-card p{font-size:11px;color:#cbd5e1;margin-bottom:14px;line-height:1.4}
@@ -40,7 +41,7 @@ body{background-color:#8b0000;color:#fff;display:flex;flex-direction:column;alig
 .btn-sawer-wa{background:linear-gradient(135deg,#10b981,#059669);color:#000;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
 .btn-sawer-qr{background:linear-gradient(135deg,#fc0,#e6b800);color:#000;box-shadow:0 4px 12px rgba(255,204,0,0.3)}
 
-/* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
+/* KARTU UTAMA PREDIKSI */
 .main-card{width:100%;max-width:420px;background-color:#600;border:1px solid rgba(255,204,0,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.4);margin-bottom:15px}
 h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#fc0}
 
@@ -144,7 +145,7 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
     text-decoration: underline;
 }
 
-/* KELAS EFEK MENYALA (GLOW HIJAU NEON) JIKA TEPAT TEMBUS RESULT BERIKUTNYA */
+/* KELAS EFEK MENYALA (GLOW HIJAU NEON) */
 .invest-item.glow-jp {
     background: linear-gradient(135deg, #00ff66, #15803d);
     color: #000;
@@ -188,32 +189,41 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <span>Kembali ke Menu Utama</span>
 </a>
 
-<div class=ads-container>
-<div class=ad-box>
-<div style=width:100%;text-align:center;overflow:hidden>
-<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
+<!-- ================================================================= -->
+<!-- KONTEN PALING ATAS: WRAPPER 4 IKLAN BANNER UTAMA                  -->
+<!-- ================================================================= -->
+<div class="top-ads-wrapper">
+  <!-- Iklan 3: Banner 468x60 (Brijmohan) -->
+  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <script>
+      atOptions = {
+        'key' : '9a986a45c62dcea8d8216b9210f159cb',
+        'format' : 'iframe',
+        'height' : 60,
+        'width' : 468,
+        'params' : {}
+      };
+    </script>
+    <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+  </div>
+
+  <!-- Iklan 1: Script + Container ID -->
+  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
+    <div id="container-3f09897b852339f736b82a3190a40259"></div>
+  </div>
+
+  <!-- Iklan 2: Script data-cfasync -->
+  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
+  </div>
+
+  <!-- Iklan 4: Ahuramazda Script -->
+  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
+  </div>
 </div>
-</div>
-<div class=ad-box>
-<div style=width:100%;text-align:center;overflow:hidden>
-<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
-</div>
-</div>
-<div class=ad-box>
-<div style=width:100%;text-align:center;overflow:hidden>
-<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
-</div>
-</div>
-<div class=ad-box>
-<div style=width:100%;text-align:center;overflow:hidden>
-<script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-<script src=https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js></script>
-</div>
-</div>
-</div>
+<!-- ================================================================= -->
 
 <!-- KARTU STATUS PENGUNJUNG ONLINE -->
 <div class="visitor-card">
@@ -227,7 +237,9 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <div class=generator-card>
 <h3>GENERATOR ANGKA HK</h3>
 <div class=guide-text>
-<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas HK akan membedah indeks mistik, taysen, dan pola 2 digit angka paten secara presisi.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
+<strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas HK akan membedah indeks mistik, taysen, dan pola 2 digit angka paten secara presisi.<br><br>
+<em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!<br><br>
+<strong style="color: #fc0;">Himbauan Penting:</strong> Segala bentuk iklan Bandar Online (BO) atau promosi pihak ketiga yang tampil di halaman ini murni dari jaringan penyedia layanan iklan luar. **Tunggal Paito tidak pernah bekerja sama, merekomendasikan, atau menjadi bagian dari pihak BO manapun.** Harap bijak dalam bernavigasi.
 </div>
 <input id=input-angka maxlength=4 placeholder="Contoh: 9267">
 <br>
@@ -257,7 +269,7 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </div>
 </div>
 
-<!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
+<!-- KARTU UTAMA PREDIKSI -->
 <div class="main-card" id="capture-card">
 <h1>PREDIKSI TOGEL HARI INI</h1>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI -->
@@ -274,6 +286,22 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
 <span>Download Gambar Prediksi</span>
 </button>
+</div>
+
+<!-- IKLAN TAMBAHAN TEPAT DI BAWAH TOMBOL DOWNLOAD -->
+<div style="width:100%;max-width:420px; display:flex; justify-content:center; margin-bottom:20px;">
+  <div style="width:320px; height:50px; background-color:#5c0000; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:4px; border:1px solid rgba(255,204,0,0.4);">
+    <script>
+      atOptions = {
+        'key' : '119c8bb3217ed264a8fa223c3197bf69',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
+  </div>
 </div>
 
 <div class=keywords-section>
@@ -340,7 +368,7 @@ get(child(dbRef,"live/hongkong")).then((snapshot)=>{
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
 
-        // PIN Rahasia Admin untuk membuka baris terakhir (Bisa diganti PIN nya sesuai keinginan)
+        // PIN Rahasia Admin untuk membuka baris terakhir
         const correctPin = "paito123";
         const isUnlocked = localStorage.getItem("paito_unlocked_latest") === "true";
 
@@ -373,7 +401,7 @@ get(child(dbRef,"live/hongkong")).then((snapshot)=>{
                 status = "?";
             } else {
                 const next4d = nextItem.val;
-                winning2d = next4d.slice(-2); // Ambil 2D belakang result berikutnya (Kepala + Ekor)
+                winning2d = next4d.slice(-2); // Ambil 2D belakang result berikutnya
                 const nKepala = Number(next4d[2]);
                 const nEkor = Number(next4d[3]);
                 const isTwin = (nKepala === nEkor);
@@ -406,7 +434,6 @@ get(child(dbRef,"live/hongkong")).then((snapshot)=>{
 
             let investSectionHtml = "";
             if (isLastRow && !isUnlocked) {
-                // Bungkus dengan blur & tombol kunci khusus baris terakhir
                 investSectionHtml = `
                 <div class="invest-section">
                     <div class="invest-title">Invest 20 Line 2D</div>
@@ -422,7 +449,6 @@ get(child(dbRef,"live/hongkong")).then((snapshot)=>{
                     </div>
                 </div>`;
             } else {
-                // Tampil normal
                 investSectionHtml = `
                 <div class="invest-section">
                     <div class="invest-title">Invest 20 Line 2D</div>
@@ -478,7 +504,7 @@ get(child(dbRef,"live/hongkong")).then((snapshot)=>{
     console.error("Gagal mengambil data Hongkong dari Firebase:", e);
 });
 
-// GENERATOR ANGKA HK (LOGIKA PATEN 2 DIGIT)
+// GENERATOR ANGKA HK
 document.getElementById("btn-generate").addEventListener("click",(function(){
   const e=document.getElementById("input-angka").value.trim();
   if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
@@ -532,7 +558,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
     });
 });
 
-// LOGIKA PENGUNJUNG ONLINE ALAMI (BERUBAH SETIAP 2 - 5 MENIT)
+// LOGIKA PENGUNJUNG ONLINE ALAMI
 let currentVisitors = Math.floor(Math.random() * 151) + 150; 
 let updateTimer = null;
 const visitorText = document.getElementById("visitor-count-text");
@@ -569,7 +595,7 @@ function scheduleNextUpdate() {
 
 scheduleNextUpdate();
 
-// SKRIP IKLAN
+// SKRIP IKLAN BANNER & POP-UNDER
 let clickCount=0;
 const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 document.addEventListener("click",(function(e){
