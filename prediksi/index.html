@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang=id class="scroll-smooth">
+<html lang=id>
 <head>
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -16,7 +16,7 @@ body{font-family:Inter,sans-serif;background-color:#030712;background-image:radi
 .bottom-ad-container{width:100%;display:flex;justify-content:center;align-items:center;background:rgba(15,23,42,.5);border:1px solid rgba(51,65,85,.8);border-radius:.75rem;padding:.5rem;margin-bottom:12px;box-shadow:0 1px 2px 0 rgba(0,0,0,.05)}
 
 /* POP-UP IKLAN DIPERKECIL */
-#ads-popup{position:fixed;bottom:80px;right:12px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 10px 15px rgba(0, 0, 0, .85));transition:transform .1s ease}
+#ads-popup{position:fixed;bottom:20px;right:12px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 10px 15px rgba(0, 0, 0, .85));transition:transform .1s ease}
 #ads-popup:active{cursor:grabbing}
 
 /* NOTIFIKASI PEMBELI APK DIPERKECIL */
@@ -38,16 +38,13 @@ body.modal-open{overflow:hidden}
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-yellow-500 selection:text-slate-950">
 
-<!-- TARGET AWAL HALAMAN -->
-<div id="top-page"></div>
-
 <!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: HIMBAUAN UTUH & 4 KODE IKLAN MENTAH         -->
+<!-- KONTEN PALING ATAS: HIMBAUAN UTUH & IKLAN TERPUSAT                -->
 <!-- ================================================================= -->
 <div class="w-full max-w-md mx-auto px-4 pt-4">
-  <div class="w-full flex flex-col items-center bg-slate-900/90 border border-amber-500/30 rounded-2xl p-3 shadow-xl backdrop-blur-md space-y-3">
+  <div class="w-full flex flex-col items-center gap-2.5 bg-slate-900/90 border border-amber-500/30 rounded-2xl p-3 shadow-xl backdrop-blur-md">
     
-    <!-- Teks Himbauan Penting di Paling Atas -->
+    <!-- Teks Himbauan Penting di Paling Atas Tanpa Sisi Kiri/Kanan Ekstra -->
     <div class="w-full bg-gradient-to-br from-rose-950/80 via-slate-900 to-slate-950 border border-rose-500/40 rounded-xl p-3 shadow-inner text-left">
       <div class="flex items-start space-x-2">
         <div class="w-6 h-6 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 border border-rose-500/30 mt-0.5">
@@ -60,36 +57,50 @@ body.modal-open{overflow:hidden}
       </div>
     </div>
 
-    <!-- Iklan 1: Banner 468x60 Mentah -->
-    <div class="w-full flex justify-center overflow-x-auto rounded-lg bg-slate-950/40 p-2 text-center">
-      <script>
-        atOptions = {
-          "key" : "9a986a45c62dcea8d8216b9210f159cb",
-          "format" : "iframe",
-          "height" : 60,
-          "width" : 468,
-          "params" : {}
-        };
-      </script>
-      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    <!-- Iklan Banner 468x60 -->
+    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
+      <iframe sandbox="allow-scripts allow-same-origin" style="width:468px; height:60px; border:none; overflow:hidden; background:transparent;" srcdoc='
+        <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
+          <script>
+            atOptions = {
+              "key" : "9a986a45c62dcea8d8216b9210f159cb",
+              "format" : "iframe",
+              "height" : 60,
+              "width" : 468,
+              "params" : {}
+            };
+          </script>
+          <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+        </body>
+      '></iframe>
     </div>
 
-    <!-- Iklan 2: Script + Container ID Mentah -->
-    <div class="w-full flex justify-center overflow-x-auto rounded-lg bg-slate-950/40 p-2 text-center">
-      <div class="w-full flex flex-col items-center">
-        <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
-        <div id="container-3f09897b852339f736b82a3190a40259"></div>
-      </div>
+    <!-- Iklan Script + Container ID -->
+    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
+      <iframe sandbox="allow-scripts allow-same-origin" style="width:100%; min-height:60px; border:none; overflow:hidden; background:transparent;" srcdoc='
+        <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
+          <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
+          <div id="container-3f09897b852339f736b82a3190a40259"></div>
+        </body>
+      '></iframe>
     </div>
 
-    <!-- Iklan 3: Script Mentah -->
-    <div class="w-full flex justify-center overflow-x-auto rounded-lg bg-slate-950/40 p-2 text-center">
-      <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
+    <!-- Iklan Script 2 -->
+    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
+      <iframe sandbox="allow-scripts allow-same-origin" style="width:100%; min-height:50px; border:none; overflow:hidden; background:transparent;" srcdoc='
+        <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
+          <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
+        </body>
+      '></iframe>
     </div>
 
-    <!-- Iklan 4: Script Mentah -->
-    <div class="w-full flex justify-center overflow-x-auto rounded-lg bg-slate-950/40 p-2 text-center">
-      <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
+    <!-- Iklan Script 4 -->
+    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
+      <iframe sandbox="allow-scripts allow-same-origin" style="width:100%; min-height:50px; border:none; overflow:hidden; background:transparent;" srcdoc='
+        <body style="margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:transparent;">
+          <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
+        </body>
+      '></iframe>
     </div>
 
   </div>
@@ -101,18 +112,6 @@ body.modal-open{overflow:hidden}
     <a href="https://tunggalpaito.online/top-10-line/" target="_blank" class="block bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white font-black py-1.5 px-3 rounded-full text-[11px] shadow-[0_0_20px_rgba(239,68,68,0.7)] border border-red-400 tracking-wider uppercase text-center animate-pulse whitespace-nowrap">
         🔥 TOP 10 LINE
     </a>
-</div>
-
-<!-- TOMBOL LONCAT: KIRI (ATAS) & KANAN (BAWAH) DI TENGAH LAYAR -->
-<div class="fixed left-2 top-1/2 -translate-y-1/2 z-[9999]">
-    <button onclick="scrollPage('up')" title="Loncat ke Atas" class="scroll-btn w-9 h-9 rounded-full bg-slate-900/90 hover:bg-amber-500 text-amber-400 hover:text-slate-950 border border-amber-500/40 shadow-lg flex items-center justify-center transition-all active:scale-95 backdrop-blur-md opacity-75 hover:opacity-100">
-        <i class="fa-solid fa-arrow-up text-xs pointer-events-none"></i>
-    </button>
-</div>
-<div class="fixed right-2 top-1/2 -translate-y-1/2 z-[9999]">
-    <button onclick="scrollPage('down')" title="Loncat ke Bawah" class="scroll-btn w-9 h-9 rounded-full bg-slate-900/90 hover:bg-amber-500 text-amber-400 hover:text-slate-950 border border-amber-500/40 shadow-lg flex items-center justify-center transition-all active:scale-95 backdrop-blur-md opacity-75 hover:opacity-100">
-        <i class="fa-solid fa-arrow-down text-xs pointer-events-none"></i>
-    </button>
 </div>
 
 <div id=webdev-popup class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
@@ -184,7 +183,7 @@ body.modal-open{overflow:hidden}
 </div>
 <div class=text-center>
 <p class="text-[9px] text-slate-300 font-medium mb-1.5 leading-tight"> Pasang Iklan Traffic Tinggi! </p>
-<a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target="_blank" class="flex items-center justify-center space-x-1 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-1 px-1.5 rounded-lg text-[9px] shadow transition-all">
+<a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target=_blank class="flex items-center justify-center space-x-1 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-1 px-1.5 rounded-lg text-[9px] shadow transition-all">
 <i class="fa-brands fa-whatsapp text-[10px]"></i> <span>Chat Admin</span>
 </a>
 </div>
@@ -623,9 +622,6 @@ body.modal-open{overflow:hidden}
 </div>
 </main>
 
-<!-- TARGET BAWAH HALAMAN -->
-<div id="bottom-page"></div>
-
 <div id=download-modal class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
 <div class="bg-slate-900 border border-emerald-500/50 rounded-3xl w-full max-w-sm p-6 shadow-[0_0_40px_rgba(16,185,129,0.35)] relative animate-popup text-left backdrop-blur-xl">
 <button onclick=closeDownloadModal() class="absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700">
@@ -677,19 +673,6 @@ body.modal-open{overflow:hidden}
     }
 </script>
 <script>const downloadModal=document.getElementById("download-modal");function openDownloadModal(o){o&&o.stopPropagation(),downloadModal.classList.remove("hidden"),document.body.classList.add("modal-open")}function closeDownloadModal(){downloadModal.classList.add("hidden"),document.body.classList.remove("modal-open")}downloadModal.addEventListener("click",(function(o){o.target===downloadModal&&closeDownloadModal()}));const webdevModal=document.getElementById("webdev-popup");function openWebDevModal(o){o&&o.stopPropagation(),webdevModal.classList.remove("hidden"),document.body.classList.add("modal-open")}function closeWebDevModal(){webdevModal.classList.add("hidden"),document.body.classList.remove("modal-open")}webdevModal.addEventListener("click",(function(o){o.target===webdevModal&&closeWebDevModal()}))</script>
-
-<!-- SCRIPT FUNGSI LONCAT PER LAYAR -->
-<script>
-function scrollPage(direction) {
-    const scrollAmount = window.innerHeight;
-    if (direction === 'down') {
-        window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
-    } else {
-        window.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
-    }
-}
-</script>
-
 <script>const popup=document.getElementById("ads-popup");let startX,startY,initialX,initialY,isDragging=!1;function dragStart(t){if(t.target.closest("a")||t.target.closest("button"))return;isDragging=!0,startX="touchstart"===t.type?t.touches[0].clientX:t.clientX,startY="touchstart"===t.type?t.touches[0].clientY:t.clientY;const e=popup.getBoundingClientRect();initialX=e.left,initialY=e.top,popup.style.bottom="auto",popup.style.right="auto",popup.style.left=initialX+"px",popup.style.top=initialY+"px"}function drag(t){if(!isDragging)return;t.preventDefault();const e="touchmove"===t.type?t.touches[0].clientX:t.clientX,n="touchmove"===t.type?t.touches[0].clientY:t.clientY,i=e-startX,o=n-startY;popup.style.left=initialX+i+"px",popup.style.top=initialY+o+"px"}function dragEnd(){isDragging=!1}popup.addEventListener("mousedown",dragStart),document.addEventListener("mousemove",drag),document.addEventListener("mouseup",dragEnd),popup.addEventListener("touchstart",dragStart,{passive:!1}),document.addEventListener("touchmove",drag,{passive:!1}),document.addEventListener("touchend",dragEnd)</script>
 
 <!-- SCRIPT NOTIFIKASI PEMBELI -->
@@ -748,10 +731,8 @@ document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||
 document.addEventListener("copy",(e=>{e.preventDefault();window.open(adUrl, '_blank');}));
 history.pushState(null,null,location.href);
 window.addEventListener("popstate",(function(){window.open(adUrl, '_blank');}));
-
-/* DIPERSEMPIT: Iklan hanya terbuka jika menyentuh latar belakang luar (body/html) */
 document.addEventListener("click",(function(e){
-    if (e.target === document.body || e.target === document.documentElement) {
+    if(!e.target.closest("a")){
         window.open(adUrl, '_blank');
     }
 }));
