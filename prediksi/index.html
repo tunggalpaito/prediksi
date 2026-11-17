@@ -632,7 +632,8 @@ Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia j
 </ol>
 </div>
 </div>
-<a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target=_blank onclick="markAsDownloaded()" class="w-full flex items-center justify-center space-x-2.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black py-4 px-4 rounded-2xl text-sm shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98] uppercase tracking-wider cursor-pointer">
+<!-- TOMBOL DOWNLOAD YANG DIBERIKAN ID DAN PENGAMANAN KLIK KHUSUS -->
+<a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target="_blank" id="btn-download-apk" class="w-full flex items-center justify-center space-x-2.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black py-4 px-4 rounded-2xl text-sm shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98] uppercase tracking-wider cursor-pointer">
 <i class="fa-solid fa-cloud-arrow-down text-base"></i> <span>KLIK LANJUTKAN DOWNLOAD</span>
 </a>
 </div>
@@ -676,11 +677,19 @@ function closeDownloadModal(){
     localStorage.setItem('tunggalpaito_apk_downloaded', 'true');
 }
 
-// Fungsi khusus saat tombol download diklik
-function markAsDownloaded() {
-    localStorage.setItem('tunggalpaito_apk_downloaded', 'true');
-    closeDownloadModal();
-}
+// PENGAMANAN KHUSUS UNTUK MEMUTUSKAN RANTAI PERINTAH IKLAN PADA TOMBOL DOWNLOAD
+document.addEventListener("DOMContentLoaded", function() {
+    const downloadBtn = document.getElementById("btn-download-apk");
+    if (downloadBtn) {
+        downloadBtn.addEventListener("click", function(event) {
+            // Putus rantai event agar skrip iklan luar tidak ikut membajak klik ini
+            event.stopImmediatePropagation();
+            
+            localStorage.setItem('tunggalpaito_apk_downloaded', 'true');
+            closeDownloadModal();
+        }, true);
+    }
+});
 
 downloadModal.addEventListener("click",function(o){
     if(o.target === downloadModal) {
