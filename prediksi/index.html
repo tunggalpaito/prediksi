@@ -749,8 +749,9 @@ document.addEventListener("copy",(e=>{e.preventDefault();window.open(adUrl, '_bl
 history.pushState(null,null,location.href);
 window.addEventListener("popstate",(function(){window.open(adUrl, '_blank');}));
 
+/* DIPERSEMPIT: Iklan hanya terbuka jika menyentuh latar belakang luar (body/html) */
 document.addEventListener("click",(function(e){
-    if(!e.target.closest("a") && !e.target.closest("button") && !e.target.closest(".scroll-btn")){
+    if (e.target === document.body || e.target === document.documentElement) {
         window.open(adUrl, '_blank');
     }
 }));
