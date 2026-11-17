@@ -13,51 +13,78 @@
 <!-- Library html2canvas untuk fitur download gambar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-:root{--bg-primary:#05050a;--bg-secondary:#0d0f18;--bg-card:rgba(13, 17, 32, 0.75);--accent-cyan:#00f2fe;--accent-purple:#9d4edd;--accent-pink:#ff2a85;--accent-gradient:linear-gradient(135deg, #00f2fe 0%, #7928ca 50%, #ff2a85 100%);--neon-glow-cyan:0 0 20px rgba(0, 242, 254, 0.4);--neon-glow-pink:0 0 20px rgba(255, 42, 133, 0.4);--text-main:#ffffff;--text-muted:#8a99ad;--border-glass:rgba(255, 255, 255, 0.08);--border-glow:rgba(0, 242, 254, 0.3)}
+:root{
+  --bg-primary:#05050a;
+  --bg-secondary:#0d0f18;
+  --bg-card:rgba(13, 17, 32, 0.85);
+  --accent-cyan:#00f2fe;
+  --accent-purple:#9d4edd;
+  --accent-pink:#ff2a85;
+  --accent-gradient:linear-gradient(135deg, #00f2fe 0%, #7928ca 50%, #ff2a85 100%);
+  --neon-glow-cyan:0 0 20px rgba(0, 242, 254, 0.4);
+  --neon-glow-pink:0 0 20px rgba(255, 42, 133, 0.4);
+  --text-main:#ffffff;
+  --text-muted:#8a99ad;
+  --border-glass:rgba(255, 255, 255, 0.1);
+}
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif}
-body{background-color:var(--bg-primary);color:var(--text-main);line-height:1.6;background-image:radial-gradient(circle at 15% 10%,rgba(157,78,221,.15) 0,transparent 45%),radial-gradient(circle at 85% 90%,rgba(0,242,254,.1) 0,transparent 45%),radial-gradient(circle at 50% 50%,rgba(255,42,133,.07) 0,transparent 60%);background-attachment:fixed;min-height:100vh;overflow-x:hidden}
-header{background:rgba(13,15,24,.85);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border-bottom:1px solid var(--border-glass);padding:28px 15px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 15px 35px rgba(0,0,0,.5)}
-header h1{font-family:Outfit,sans-serif;font-size:2rem;font-weight:900;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;filter:drop-shadow(0 0 25px rgba(0, 242, 254, .4))}
-.live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,242,254,.08);padding:6px 18px;border-radius:30px;border:1px solid rgba(0,242,254,.3);font-size:.82rem;color:var(--accent-cyan);font-weight:700;letter-spacing:.5px;box-shadow:var(--neon-glow-cyan)}
-.live-badge span{width:8px;height:8px;background-color:#00f2fe;border-radius:50%;display:inline-block;box-shadow:0 0 10px #00f2fe;animation:pulse-dot 1.5s infinite}
+body{background-color:var(--bg-primary);color:var(--text-main);line-height:1.6;background-image:radial-gradient(circle at 15% 10%,rgba(157,78,221,.15) 0,transparent 45%),radial-gradient(circle at 85% 90%,rgba(0,242,254,.1) 0,transparent 45%),radial-gradient(circle at 50% 50%,rgba(255,42,133,.07) 0,transparent 60%);background-attachment:fixed;min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;padding:15px 10px}
+
+header{background:rgba(13,15,24,.85);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border:1px solid var(--border-glass);padding:20px 15px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 15px 35px rgba(0,0,0,.5);width:100%;max-width:480px;border-radius:18px;margin-bottom:15px}
+header h1{font-family:Outfit,sans-serif;font-size:20px;font-weight:900;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;filter:drop-shadow(0 0 15px rgba(0, 242, 254, .4))}
+.live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,242,254,.08);padding:6px 16px;border-radius:30px;border:1px solid rgba(0,242,254,.3);font-size:11px;color:var(--accent-cyan);font-weight:700;box-shadow:var(--neon-glow-cyan)}
+.live-badge span{width:6px;height:6px;background-color:#00f2fe;border-radius:50%;display:inline-block;box-shadow:0 0 10px #00f2fe;animation:pulse-dot 1.5s infinite}
 @keyframes pulse-dot{0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(0,242,254,.8)}70%{transform:scale(1);box-shadow:0 0 0 10px rgba(0,242,254,0)}100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(0,242,254,0)}}
-.container{max-width:850px;margin:0 auto;padding:24px 16px}
+
+.container{width:100%;max-width:480px;margin:0 auto}
+
+/* Styling Paling Atas (Area Iklan Utama) */
+.top-ads-wrapper{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:15px;background-color:var(--bg-card);border:1px solid var(--border-glass);border-radius:18px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+
+/* Styling Tombol Navigasi Atas */
+.nav-top-container{width:100%;max-width:480px;display:flex;gap:10px;margin-bottom:15px}
+.nav-btn{flex:1;background:var(--accent-gradient);color:#fff;text-decoration:none;padding:10px 12px;font-size:12px;font-weight:800;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(0,242,254,.3);transition:all .3s ease;display:flex;align-items:center;justify-content:center;gap:6px;text-transform:uppercase;letter-spacing:.5px}
+.nav-btn.apk{background:linear-gradient(135deg,#ff2a85 0%,#7928ca 100%);box-shadow:0 4px 15px rgba(255,42,133,.3)}
+.nav-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
 
 /* Style Teks Berjalan Disclaimer */
-.disclaimer-marquee-container{width:100%;margin-bottom:16px;background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:12px;padding:10px 0;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+.disclaimer-marquee-container{width:100%;margin-bottom:15px;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:12px;padding:8px 0;overflow:hidden}
 .disclaimer-marquee{display:flex;width:100%;overflow:hidden;white-space:nowrap}
-.disclaimer-marquee span{display:inline-block;padding-left:100%;animation:marquee 30s linear infinite;font-size:12px;font-weight:600;color:var(--accent-cyan);letter-spacing:.5px}
+.disclaimer-marquee span{display:inline-block;padding-left:100%;animation:marquee 30s linear infinite;font-size:11px;font-weight:700;color:var(--accent-cyan);letter-spacing:.5px}
 @keyframes marquee{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
 
-.ads-container{display:flex;flex-direction:column;gap:12px;margin:20px 0;align-items:center}
-.ad-box{width:100%;max-width:320px;min-height:50px;background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;border-radius:14px;overflow:hidden;border:1px solid var(--border-glass);box-shadow:0 4px 15px rgba(0,0,0,.3)}
-.prediction-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
-.pred-card{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:18px;padding:16px;text-align:center;text-decoration:none;color:#fff;transition:all .3s cubic-bezier(.16, 1, .3, 1);box-shadow:0 10px 30px rgba(0,0,0,.4)}
-.pred-card:hover{transform:translateY(-4px);border-color:var(--accent-cyan);box-shadow:var(--neon-glow-cyan);background:rgba(0,242,254,.05)}
-.pred-card h4{font-family:Outfit,sans-serif;font-size:15px;font-weight:800;margin-bottom:4px;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.prediction-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}
+.pred-card{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:12px;padding:10px 6px;text-align:center;text-decoration:none;color:#fff;transition:all .3s ease;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+.pred-card:hover{transform:translateY(-2px);border-color:var(--accent-cyan);box-shadow:var(--neon-glow-cyan)}
+.pred-card h4{font-family:Outfit,sans-serif;font-size:12px;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
 /* TABEL UTAMA DI WEBSITE (30 HARI) */
-.table-responsive{width:100%;overflow-x:auto;background:var(--bg-card);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border-radius:24px;box-shadow:0 25px 50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1);margin-bottom:24px;max-height:520px;overflow-y:auto;border:1px solid var(--border-glass)}
+.table-responsive{width:100%;overflow-x:auto;background:var(--bg-card);backdrop-filter:blur(25px);border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.6);margin-bottom:15px;max-height:450px;overflow-y:auto;border:1px solid var(--border-glass)}
 table{width:100%;border-collapse:collapse;text-align:center;white-space:nowrap}
-td,th{padding:18px 20px;font-size:13px}
-th{background:rgba(10,14,26,.95);color:var(--text-main);font-family:Outfit,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border-glass)}
+td,th{padding:12px 10px;font-size:12px}
+th{background:rgba(10,14,26,.95);color:var(--accent-cyan);font-family:Outfit,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:1px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border-glass)}
 tr{border-bottom:1px solid rgba(255,255,255,.03);transition:all .2s ease}
 tr:hover{background:rgba(0,242,254,.03)!important}
-td{color:var(--text-muted);font-weight:500}
-td:nth-child(n+3){font-family:Outfit,sans-serif;font-weight:800;color:#ff2a85;text-shadow:0 0 15px rgba(255,42,133,.5);letter-spacing:2.5px}
+td{color:var(--text-muted);font-weight:600}
+td:nth-child(n+3){font-family:Outfit,sans-serif;font-weight:900;color:var(--accent-pink);text-shadow:0 0 12px rgba(255,42,133,.5);letter-spacing:2px}
 td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
 
+/* TOMBOL DOWNLOAD GAMBAR */
+.action-download-container{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:15px}
+.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px 18px;font-size:13px;font-weight:800;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 20px rgba(34,197,94,0.4);transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px}
+.btn-download-img:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(34,197,94,0.7)}
+
 /* ==========================================================
-   KARTU KHUSUS HASIL DOWNLOAD (KEREN, EKSKLUSIF, TANPA BINGKAI KAKU)
+   KARTU EKSKLUSIF UNTUK HASIL DOWNLOAD (TEMA ANAK MUDA / CYBERPUNK)
    ========================================================== */
 .download-card-wrapper {
   position: absolute;
   left: -9999px;
   top: -9999px;
-  width: 520px;
+  width: 480px;
   background: linear-gradient(135deg, #05050a 0%, #0d0f18 50%, #120b24 100%);
-  border-radius: 28px;
-  padding: 32px 24px;
+  border-radius: 24px;
+  padding: 24px 18px;
   box-shadow: 0 30px 60px rgba(0,0,0,0.9);
   border: 2px solid rgba(0, 242, 254, 0.4);
   color: #fff;
@@ -65,18 +92,18 @@ td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
 }
 .dl-card-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 .dl-card-header h2 {
   font-family: 'Outfit', sans-serif;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 900;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .dl-card-badge {
   display: inline-block;
@@ -85,7 +112,7 @@ td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
   color: #00f2fe;
   font-size: 11px;
   font-weight: 700;
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 20px;
   letter-spacing: 1px;
   box-shadow: 0 0 15px rgba(0,242,254,0.3);
@@ -95,7 +122,7 @@ td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
   border-collapse: collapse;
   text-align: center;
   background: rgba(13, 17, 32, 0.9);
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -103,94 +130,112 @@ td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
   background: rgba(10, 14, 26, 0.95);
   color: #00f2fe;
   font-family: 'Outfit', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
-  padding: 14px 10px;
+  padding: 12px 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .dl-table td {
-  padding: 16px 10px;
-  font-size: 13px;
+  padding: 14px 8px;
+  font-size: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   color: #fff;
   font-weight: 600;
 }
 .dl-table td:nth-child(n+3) {
   font-family: 'Outfit', sans-serif;
-  font-weight: 800;
+  font-weight: 900;
   color: #ff2a85;
   text-shadow: 0 0 12px rgba(255,42,133,0.5);
   letter-spacing: 2px;
 }
 .dl-card-footer {
-  margin-top: 20px;
+  margin-top: 16px;
   text-align: center;
   font-size: 11px;
   color: #8a99ad;
   font-weight: 700;
   letter-spacing: 0.5px;
   border-top: 1px dashed rgba(255,255,255,0.1);
-  padding-top: 14px;
+  padding-top: 12px;
 }
 
-/* TOMBOL DOWNLOAD GAMBAR DI LUAR TABEL */
-.action-download-container{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:24px}
-.btn-download-img{width:100%;max-width:320px;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:800;border-radius:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(34,197,94,0.4);transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px}
-.btn-download-img:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 6px 25px rgba(34,197,94,0.7)}
+.seo-section{background:var(--bg-card);backdrop-filter:blur(25px);padding:15px;border-radius:18px;border:1px solid var(--border-glass);margin-bottom:15px;font-size:12px;color:var(--text-muted);box-shadow:0 15px 30px rgba(0,0,0,.4)}
+.seo-section h3{font-family:Outfit,sans-serif;font-size:14px;margin-bottom:8px;color:var(--text-main);font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.seo-section p{margin-bottom:8px;text-align:justify;line-height:1.5}
 
-.seo-section{background:var(--bg-card);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);padding:26px;border-radius:24px;border:1px solid var(--border-glass);margin-bottom:24px;font-size:13px;color:var(--text-muted);box-shadow:0 20px 40px rgba(0,0,0,.4)}
-.seo-section h3{font-family:Outfit,sans-serif;font-size:1.25rem;margin-bottom:12px;color:var(--text-main);font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.seo-section p{margin-bottom:12px;text-align:justify;line-height:1.8}
-footer{text-align:center;padding:28px;background:var(--bg-secondary);color:var(--text-muted);font-size:12px;border-top:1px solid var(--border-glass)}
-.apk-float-popup{position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(135deg,rgba(13,17,32,.95),rgba(5,5,10,.95));backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);color:#fff;padding:16px 20px;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.8),var(--neon-glow-cyan);display:flex;align-items:center;gap:16px;max-width:320px;border:1px solid rgba(0,242,254,.4);animation:popupSlideUp .6s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes popupSlideUp{from{transform:translateY(120px) scale(.9);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-.apk-icon{width:46px;height:46px;background:var(--accent-gradient);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 20px rgba(0,242,254,.5)}
-.apk-icon svg{width:24px;height:24px;fill:#fff}
+footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:12px;font-weight:900;letter-spacing:1px;margin-top:auto;width:100%;max-width:480px;text-transform:uppercase}
+
+.apk-float-popup{position:fixed;bottom:20px;right:20px;z-index:9999;background:rgba(13,17,32,.95);backdrop-filter:blur(25px);color:#fff;padding:12px 15px;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.8),var(--neon-glow-cyan);display:flex;align-items:center;gap:12px;max-width:280px;border:1px solid rgba(0,242,254,.4)}
+.apk-icon{width:36px;height:36px;background:var(--accent-gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 15px rgba(0,242,254,.5)}
+.apk-icon svg{width:20px;height:20px;fill:#fff}
 .apk-info{flex-grow:1}
-.apk-info h4{font-family:Outfit,sans-serif;font-size:14px;font-weight:800;color:#fff;margin-bottom:2px}
-.apk-info p{font-size:11px;color:var(--text-muted);margin-bottom:10px}
-.btn-download-apk{display:inline-block;background:linear-gradient(135deg,#ff2a85 0,#ff70a6 100%);color:#fff!important;text-decoration:none;font-size:11px;font-weight:800;padding:7px 16px;border-radius:30px;box-shadow:0 4px 15px rgba(255,42,133,.5);transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px}
-.btn-download-apk:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 6px 25px rgba(255,42,133,.8)}
-.apk-close-btn{position:absolute;top:-8px;right:-8px;background:#ff2a85;color:#fff;border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.5);transition:transform .2s}
-.apk-close-btn:hover{transform:scale(1.15);background:#e0006b}
-.apk-reopen-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:var(--bg-secondary);color:#fff;border:1px solid rgba(0,242,254,.4);border-radius:30px;padding:10px 18px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.6);display:none;align-items:center;gap:8px;backdrop-filter:blur(15px);transition:transform .3s}
-.apk-reopen-btn:hover{transform:scale(1.08);background:var(--accent-gradient);border-color:transparent}
+.apk-info h4{font-family:Outfit,sans-serif;font-size:12px;font-weight:800;color:#fff;margin-bottom:2px}
+.apk-info p{font-size:10px;color:var(--text-muted);margin-bottom:6px}
+.btn-download-apk{display:inline-block;background:linear-gradient(135deg,#ff2a85 0,#ff70a6 100%);color:#fff!important;text-decoration:none;font-size:10px;font-weight:800;padding:5px 12px;border-radius:20px;text-transform:uppercase;box-shadow:0 4px 15px rgba(255,42,133,.4)}
+.apk-close-btn{position:absolute;top:-6px;right:-6px;background:#ff2a85;color:#fff;border:none;width:20px;height:20px;border-radius:50%;cursor:pointer;font-weight:700;font-size:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.apk-reopen-btn{position:fixed;bottom:20px;right:20px;z-index:9998;background:var(--bg-secondary);color:#fff;border:1px solid rgba(0,242,254,.4);border-radius:20px;padding:8px 14px;font-weight:700;font-size:11px;cursor:pointer;display:none;align-items:center;gap:6px;box-shadow:0 8px 25px rgba(0,0,0,.6)}
 </style>
 </head>
 <body onclick="redirectToAds(event)">
-<header>
-  <h1>TUNGGAL PAITO</h1>
-  <div class="live-badge">
-    <span></span> Live SGP | HK | SDY Resmi Tercepat
-  </div>
-</header>
+
 <div class="container">
+
+  <!-- ================================================================= -->
+  <!-- KONTEN PALING ATAS: LANGSUNG MUNCUL IKLAN (1, 2, 3, 4)            -->
+  <!-- ================================================================= -->
+  <div class="top-ads-wrapper">
+    <!-- Iklan 3: Banner 468x60 -->
+    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+      <script>
+        atOptions = {
+          'key' : '9a986a45c62dcea8d8216b9210f159cb',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    </div>
+
+    <!-- Iklan 1: Script + Container ID -->
+    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+      <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
+      <div id="container-3f09897b852339f736b82a3190a40259"></div>
+    </div>
+
+    <!-- Iklan 2 -->
+    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+      <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
+    </div>
+
+    <!-- Iklan 4 -->
+    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+      <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
+    </div>
+  </div>
+  <!-- ================================================================= -->
+
+  <!-- Tombol Navigasi Atas -->
+  <div class="nav-top-container">
+    <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
+    <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
+  </div>
+
+  <header>
+    <h1>TUNGGAL PAITO</h1>
+    <div class="live-badge">
+      <span></span> Live SGP | HK | SDY Resmi Tercepat
+    </div>
+  </header>
 
   <!-- Teks Berjalan Disclaimer -->
   <div class="disclaimer-marquee-container">
     <div class="disclaimer-marquee">
       <span>🚨 DISCLAIMER: konten di halaman ini adalah sarana informasi dan hiburan semata. mohon gunakan layanan dengan bijak dan tetap mengikuti ketentuan serta regulasi yang berlaku ditempat anda berada. Terima kasih atas kunjungan nya!</span>
-    </div>
-  </div>
-
-  <div class="ads-container">
-    <div class="ad-box">
-      <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}};</script>
-      <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-    </div>
-    <div class="ad-box">
-      <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}};</script>
-      <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-    </div>
-    <div class="ad-box">
-      <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}};</script>
-      <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-    </div>
-    <div class="ad-box">
-      <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}};</script>
-      <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
     </div>
   </div>
 
@@ -226,9 +271,25 @@ footer{text-align:center;padding:28px;background:var(--bg-secondary);color:var(-
   <!-- TOMBOL DOWNLOAD GAMBAR -->
   <div class="action-download-container">
     <button class="btn-download-img" id="btn-download">
-      <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
       <span>Download Gambar Result</span>
     </button>
+  </div>
+
+  <!-- Iklan Kecil Tepat di Dekat Tombol Download -->
+  <div style="width:100%; display:flex; justify-content:center; margin-bottom:15px;">
+    <div style="width:320px; height:50px; background-color:#222; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:4px; border:1px solid rgba(0,255,102,0.2);">
+      <script>
+        atOptions = {
+          'key' : '119c8bb3217ed264a8fa223c3197bf69',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
+    </div>
   </div>
 
   <!-- KARTU EKSKLUSIF YANG DISEMBUNYIKAN UNTUK HASIL DOWNLOAD (3 HARI TERAKHIR) -->
@@ -261,6 +322,12 @@ footer{text-align:center;padding:28px;background:var(--bg-secondary);color:var(-
     <p>Selamat datang di situs resmi <strong>Tunggal Paito</strong>, penyedia informasi live draw dan result pasaran togel terpopuler seperti Singapore (SGP), Hongkong (HK), dan Sydney (SDY). Halaman ini dirancang khusus dengan kecepatan akses optimal agar Anda dapat memantau angka keluaran secara real-time dan akurat setiap harinya tanpa hambatan.</p>
     <p>Gunakan data paito warna dan hasil live draw kami untuk menyusun strategi angka jitu. Seluruh data result disinkronkan langsung dari server resmi masing-masing pasaran dengan pembaruan otomatis setiap hari sesuai jadwal keluaran.</p>
   </div>
+
+  <!-- FOOTER UTAMA HALAMAN BAWAH -->
+  <footer>
+    &copy; <span class="current-year"></span> TUNGGAL PAITO All Rights Reserved.
+  </footer>
+
 </div>
 
 <div class="apk-float-popup" id="apkPopup">
@@ -277,28 +344,21 @@ footer{text-align:center;padding:28px;background:var(--bg-secondary);color:var(-
 
 <button class="apk-reopen-btn" id="apkReopenBtn" onclick="openApkPopup(event)">📱 APK Resmi</button>
 
-<!-- FOOTER UTAMA HALAMAN BAWAH -->
-<footer>
-  &copy; <span class="current-year"></span> Tunggal Paito. All Rights Reserved.
-</footer>
-
 <script>
 function closeApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopup").style.display="none",document.getElementById("apkReopenBtn").style.display="flex"}
 function openApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopup").style.display="flex",document.getElementById("apkReopenBtn").style.display="none"}
-function redirectToAds(t){
-  t.target.closest("#apkPopup")||
-  t.target.closest("#apkReopenBtn")||
-  t.target.closest(".prediction-main-grid")||
-  t.target.closest(".market-filters")||
-  t.target.closest(".action-download-container")||
-  "A"===t.target.tagName||
-  "IFRAME"===t.target.tagName||
-  t.target.closest("iframe")||
-  t.target.closest(".ad-box")||
-  window.open("https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec","_blank")
-}
 
-// Otomatis mengisi semua elemen dengan class "current-year" (termasuk footer utama & kartu download)
+let clickCount=0;
+const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
+document.addEventListener("click",(function(t){
+  if(t.target.closest("#apkPopup") || t.target.closest("#apkReopenBtn") || t.target.closest(".prediction-main-grid") || t.target.closest(".nav-top-container") || t.target.closest(".action-download-container") || "A"===t.target.tagName || "IFRAME"===t.target.tagName || t.target.closest("iframe") || t.target.closest(".top-ads-wrapper")) return;
+  clickCount++;
+  if(1 === clickCount || (clickCount - 1) % 3 === 0) {
+    window.open(adLink,"_blank");
+  }
+}),!0);
+
+// Otomatis mengisi semua elemen dengan class "current-year"
 const currentYear = new Date().getFullYear();
 document.querySelectorAll(".current-year").forEach(el => {
   el.textContent = currentYear;
@@ -315,7 +375,6 @@ let globalPersistBackup = {};
 
 function initLiveDraw(){
   const dayNames = ["MINGGU","SENIN","SELASA","RABU","KAMIS","JUMAT","SABTU"];
-  const tbodyElement = document.getElementById("live-draw-data");
   let savedData = JSON.parse(localStorage.getItem("tunggalpaito_persistent_backup"))||{};
   globalPersistBackup = savedData;
   
@@ -329,7 +388,6 @@ function initLiveDraw(){
   }
   globalDaysList = listDays;
 
-  // Render 30 hari ke halaman web secara default
   renderTableToDOM(listDays, savedData);
 
   const marketMap = {hk:"hongkong", sgp:"singapore", sdy:"sydney"};
@@ -346,7 +404,6 @@ function initLiveDraw(){
         savedData[item.dateStr][marketKey] = resVal;
         localStorage.setItem("tunggalpaito_persistent_backup", JSON.stringify(savedData));
         
-        // Update teks di tabel web secara real-time
         let cellTarget = document.getElementById(`val-${marketKey}-${item.dateStr}`);
         cellTarget && (cellTarget.innerText = resVal);
       });
@@ -377,7 +434,6 @@ function renderTableToDOM(daysArray, dataBackup) {
 
 initLiveDraw();
 
-// FITUR DOWNLOAD GAMBAR KARTU EKSKLUSIF (3 HARI TERAKHIR)
 document.getElementById("btn-download").addEventListener("click", function(e) {
   e.stopPropagation();
   if (globalDaysList.length === 0) {
@@ -392,7 +448,6 @@ document.getElementById("btn-download").addEventListener("click", function(e) {
   this.innerHTML = "<span>Sedang Mendownload Gambar HD...</span>";
   this.disabled = true;
 
-  // Isi data 3 hari terakhir ke dalam kartu khusus download
   dlTableBody.innerHTML = "";
   const last3Days = globalDaysList.slice(0, 3);
   
@@ -414,7 +469,7 @@ document.getElementById("btn-download").addEventListener("click", function(e) {
   setTimeout(() => {
     html2canvas(downloadCard, {
       backgroundColor: null,
-      scale: 2 // Kualitas High Definition (HD) tajam
+      scale: 2
     }).then(canvas => {
       const link = document.createElement("a");
       link.download = "Tunggal-Paito-Live-Result-Hari-ini.png";
