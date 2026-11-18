@@ -3,12 +3,15 @@
 <head>
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>Prediksi Line 2D HK Update Setiap Hari - Tunggal Paito</title>
+<title id="page-title">Prediksi Line 2D HK Update Setiap Hari - Tunggal Paito</title>
+<link rel="canonical" href="https://tunggalpaito.online/prediksi/2dhk">
+<meta name="description" content="Pusat analisa line 2D belakang Hongkong pools hari ini paling akurat. Dapatkan bocoran angka main HK jitu, paito warna, dan invest 20 line 2D belakang gratis tanpa jamu dari Tunggal Paito.">
+<meta name="keywords" content="analisa line 2d belakang hk, prediksi 2d belakang hongkong pools, angka main hk jitu hari ini, invest 20 line hk 2d, paito warna hongkong, bocoran hk akurat, keluaran hongkong tercepat, live draw hongkong pools, rumus 2d belakang hk">
 <!-- Library html2canvas untuk fitur download gambar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background-color:#8b0000;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}
+body{background-color:#8b0000;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh}
 
 /* TOMBOL KEMBALI KE MENU UTAMA */
 .btn-back-main{width:100%;max-width:420px;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.5);color:#fc0;text-decoration:none;font-weight:700;font-size:13px;padding:10px 15px;border-radius:8px;border:1px solid #fc0;margin-bottom:15px;transition:all .2s ease;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
@@ -346,7 +349,7 @@ function generate20Lines(d1, d2) {
     return Array.from(lines).slice(0, 20);
 }
 
-// AMBIL DATA 7 RESULT TERAKHIR DARI live/hongkong & RUMUS PATEN 2 DIGIT
+// AMBIL DATA 7 RESULT TERAKHIR DARI live/data-hk & RUMUS PATEN 2 DIGIT
 get(child(dbRef,"live/data-hk")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
