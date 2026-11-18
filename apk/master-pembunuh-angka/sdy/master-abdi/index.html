@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PREDIKSI ANGKA Lemah 2D Master Abdi - Tunggal Paito</title>
-<link rel="canonical" href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-abdi/">
+<link rel="canonical" href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-abdi">
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -335,7 +335,7 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       db=getDatabase(app),
       dbRef=ref(db);
 
-get(child(dbRef,"live/sydney")).then((snapshot)=>{
+get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
         const entries = Object.keys(data).map(dateStr => {
