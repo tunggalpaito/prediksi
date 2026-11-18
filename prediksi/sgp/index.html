@@ -490,7 +490,7 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       db=getDatabase(app),
       dbRef=ref(db);
 
-get(child(dbRef,"live/singapore")).then((snapshot)=>{
+get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
         const entries = Object.keys(data).map(dateStr => {
