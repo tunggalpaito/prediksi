@@ -658,7 +658,7 @@ body.modal-open{overflow:hidden}
 <p>&copy; <span id=current-year></span> <strong class=text-slate-400>Tunggal Paito</strong>. All rights reserved.</p>
 </footer>
 
-<!-- SEMUA SCRIPT BERSIH DIKELOMPOKKAN DI BAGIAN BAWAH SEBELUM PENUTUP BODY -->
+<!-- SCRIPT AMAN (Hanya proteksi anti-inspect, tanpa script pop-under klik kosong) -->
 <script>document.getElementById("current-year").textContent=(new Date).getFullYear()</script>
 <script>
     try {
@@ -724,17 +724,9 @@ setInterval(showRandomBuyer,1e4);
 </script>
 
 <script>
-const adUrl="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 document.addEventListener("contextmenu",(e=>e.preventDefault()));
 document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0};
-document.addEventListener("copy",(e=>{e.preventDefault();window.open(adUrl, '_blank');}));
-history.pushState(null,null,location.href);
-window.addEventListener("popstate",(function(){window.open(adUrl, '_blank');}));
-document.addEventListener("click",(function(e){
-    if(!e.target.closest("a")){
-        window.open(adUrl, '_blank');
-    }
-}));
+document.addEventListener("copy",(e=>{e.preventDefault();}));
 </script>
 
 <!-- SCRIPT EFEK TERBANG ACAK UNTUK TOP 10 LINE -->
