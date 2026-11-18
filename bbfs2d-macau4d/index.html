@@ -163,8 +163,11 @@ function setDynamicTitle() {
 
   let targetHourText = "13:00";
 
-  if (timeValue >= 23*60 + 30 || timeValue < 1*60 + 30) {
-    targetHourText = "00:00";
+  // Perbaikan rentang waktu jadwal:
+  if (timeValue >= 22*60 + 30 && timeValue < 23*60 + 30) {
+    targetHourText = "22:00";
+  } else if (timeValue >= 23*60 + 30 || timeValue < 1*60 + 30) {
+    targetHourText = "23:00";
   } else if (timeValue >= 1*60 + 30 && timeValue < 13*60 + 30) {
     targetHourText = "13:00";
   } else if (timeValue >= 13*60 + 30 && timeValue < 16*60 + 30) {
@@ -172,9 +175,7 @@ function setDynamicTitle() {
   } else if (timeValue >= 16*60 + 30 && timeValue < 19*60 + 30) {
     targetHourText = "19:00";
   } else if (timeValue >= 19*60 + 30 && timeValue < 22*60 + 30) {
-    targetHourText = "22:00";
-  } else if (timeValue >= 22*60 + 30 && timeValue < 23*60 + 30) {
-    targetHourText = "23:00";
+    targetHourText = "22:00"; // Cadangan pengaman
   }
 
   const generatedTitle = `TARGET 2D BBFS 8 DIGIT MACAU 4D JAM ${targetHourText}`;
@@ -214,7 +215,6 @@ async function loadMacau4DAnalysis(){
       return String(val);
     };
 
-    // Gabungkan seluruh result lintas tanggal agar otomatis mencukupi 30 trek (diambil dari kanan ke kiri / terbaru ke terlama)
     let allFourDigitArrays = [];
     for(let i = n.length - 1; i >= 0; i--){
       let rawVal = extractVal(e[n[i]]);
@@ -231,7 +231,6 @@ async function loadMacau4DAnalysis(){
 
     if(allFourDigitArrays.length === 0) return;
 
-    // Ambil tepat 30 data terbaru
     let last30Entries = allFourDigitArrays.slice(0, 30).reverse();
 
     let parsedData = last30Entries.map(resNum => {
