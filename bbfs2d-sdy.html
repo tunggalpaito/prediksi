@@ -185,7 +185,7 @@ app=initializeApp(firebaseConfig),db=getDatabase(app);
 
 async function loadSydneyAnalysis(){
   try{
-    const t=await get(ref(db,"live/sydney"));
+    const t=await get(ref(db,"live/data-sdy"));
     if(!t.exists())return;
     const e=t.val();
     let n=Object.keys(e);
