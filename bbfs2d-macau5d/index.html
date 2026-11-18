@@ -120,7 +120,7 @@ ul{padding-left:18px}
 
 <div class="capture-box" id="capture-area">
   <div id="result-7rows-container" style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
-    <div style="font-size:12px;color:#ddd;text-align:center;">Memuat data...</div>
+    <div style="font-size:12px;color:#ddd;text-align:center;">Pembaharuan...</div>
   </div>
 </div>
 
@@ -158,7 +158,6 @@ async function loadMacau5DAnalysis(){
     const e=t.val();
     let n=Object.keys(e);
     
-    // Urutkan tanggal DD-MM-YYYY secara kronologis
     n.sort((t,e)=>{
       const[n,a,o]=t.split("-").map(Number);
       const[r,s,l]=e.split("-").map(Number);
@@ -172,62 +171,54 @@ async function loadMacau5DAnalysis(){
     
     if(typeof rawStringData !== "string") return;
 
-    // --- LOGIKA CERDAS PENYESUAIAN JUDUL BERDASARKAN PEMBARUAN (UPDATE) ---
-    // Membaca jumlah pembaruan dalam 24 jam terakhir berdasarkan key/data firebase
     const now = new Date();
     const todayStr = `${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()}`;
     
-    // Hitung jumlah update hari ini (jika tanggal di database sama dengan hari ini)
     let updateCountToday = 0;
     if (latestDateKey === todayStr) {
-      // Pecah string data berdasarkan koma atau panjangnya untuk menghitung frekuensi update hari ini
       let entriesToday = rawStringData.split(",").map(item => item.trim()).filter(item => item.length === 5);
       updateCountToday = entriesToday.length;
     } else {
-      // Jika key tanggal adalah hari baru, anggap ini update pertama (ke-1) hari ini
       updateCountToday = 1;
     }
 
     let dynamicTitleText = "";
-    if (updateCountToday <= 1) {
-      // Update pertama kali dalam 24 jam / hari ini
+    // Jika update hari ini <= 2 kali, tampilkan Jam 21:00 (sesuai permintaan update 1x)
+    if (updateCountToday <= 2) {
       dynamicTitleText = "TARGET 2D BBFS 8 DIGIT MACAU 5D JAM 21:00";
     } else {
-      // Update ke-2 atau lebih di hari yang sama
       dynamicTitleText = "TARGET 2D BBFS 8 DIGIT MACAU 5D JAM 15:00";
     }
 
-    // Terapkan judul baru ke elemen h1 dan tag title browser secara otomatis
     document.getElementById("dynamic-main-title").textContent = dynamicTitleText;
     document.getElementById("page-title").textContent = dynamicTitleText + " - Tunggal Paito";
-    // --------------------------------------------------------------------
 
-    let fiveDigitArray = rawStringData.split(",").map(item => item.trim()).filter(item => item.length === 5);
-    let last30Entries = fiveDigitArray.slice(-30);
+    // 1. KUMPULKAN SELURUH DATA DARI SEMUA TANGGAL SECARA ABSOLUT
+    let masterFiveDigitArray = [];
+    n.forEach(dateKey => {
+      let val = e[dateKey];
+      if(typeof val === "string") {
+        let arr = val.split(",").map(item => item.trim()).filter(item => item.length === 5);
+        masterFiveDigitArray.push(...arr);
+      }
+    });
 
-    let parsedData = last30Entries.map((resNum, index) => {
-      let sourceNum = (index > 0) ? last30Entries[index - 1] : resNum;
+    if(masterFiveDigitArray.length === 0) return;
 
-      let as  = parseInt(sourceNum[0]);
-      let kop = parseInt(sourceNum[1]);
-      let kep = parseInt(sourceNum[2]);
-      let ek  = parseInt(sourceNum[3]);
-      let cb  = parseInt(sourceNum[4]);
+    // 2. RUMUS STATIS MUTLAK: Tidak bergeser dan terkunci permanen
+    let calculatedMasterData = masterFiveDigitArray.map((resNum, masterIndex) => {
+      let as  = parseInt(resNum[0]);
+      let kop = parseInt(resNum[1]);
+      let kep = parseInt(resNum[2]);
+      let ek  = parseInt(resNum[3]);
+      let cb  = parseInt(resNum[4]);
       
-      let s1 = ((9 - as) * 9 + kop * 1 + kep) % 10;
-      let s2 = ((9 - kop) * 7 + kep * 3 + ek) % 10;
-      let s3 = ((9 - kep) * 3 + ek * 7 + as) % 10;
-      let s4 = ((9 - ek) * 5 + as * 5 + kop) % 10;
-      let s5 = Math.abs((9 - as) * (9 - kop) + ek * 3) % 10;
-      let s6 = Math.abs((9 - kep) * (9 - ek) + kop * 7) % 10;
-      let s7 = Math.abs((9 - as) - kop + kep * 7 + 11) % 10;
-      let s8 = Math.abs((9 - kop) - kep + ek * 3 + 19) % 10;
-
-      let bbfsArr = [s1, s2, s3, s4, s5, s6, s7, s8];
+      
+      let bbfsArr = [as, kop, kep, ek, cb, s1, s2, s3, s4, s5, s6, s7, s8];
       let uniqueBbfs = [...new Set(bbfsArr)];
       
       for(let i=0; i<=9 && uniqueBbfs.length<8; i++){
-        let altNum = (s1 + i * 3 + index) % 10;
+        let altNum = (s1 + i * 3 + masterIndex) % 10;
         if(!uniqueBbfs.includes(altNum)) uniqueBbfs.push(altNum);
       }
       
@@ -239,15 +230,18 @@ async function loadMacau5DAnalysis(){
       };
     });
 
+    // 3. AMBIL 30 DATA TERAKHIR DARI DATA YANG SUDAH DIKUNCI STATIS
+    let last30Entries = calculatedMasterData.slice(-30);
+
     let htmlRows="";
     let totalMasuk = 0;
     let totalZonk = 0;
 
-    for(let i = 0; i < parsedData.length; i++){
-      let current = parsedData[i];
+    for(let i = 0; i < last30Entries.length; i++){
+      let current = last30Entries[i];
       
-      if(i < parsedData.length - 1) {
-        let nextResult = parsedData[i+1].target5D;
+      if(i < last30Entries.length - 1) {
+        let nextResult = last30Entries[i+1].target5D;
         let currentBbfs = current.bbfsStr;
         
         let kepalaBawah = nextResult[2];
@@ -275,6 +269,15 @@ async function loadMacau5DAnalysis(){
     document.getElementById("result-7rows-container").innerHTML=htmlRows;
 
   }catch(t){console.error(t);}
+}
+
+// RESET CACHE OTOMATIS: Membersihkan Cache Browser setiap halaman dimuat ulang
+if ('caches' in window) {
+  caches.keys().then((names) => {
+    names.forEach((name) => {
+      caches.delete(name);
+    });
+  });
 }
 
 loadMacau5DAnalysis();
