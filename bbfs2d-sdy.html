@@ -3,7 +3,7 @@
 <head>
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>Prediksi Target 2D BBFS SDY 8 Digit Sydney Jitu Hari Ini - Tunggal Paito</title>
+<title id="page-title">Prediksi Target 2D BBFS SDY 8 Digit Sydney Jitu Hari Ini - Tunggal Paito</title>
 <link rel="canonical" href="https://tunggalpaito.online/bbfs2d-sdy">
 <meta name=keywords content="target 2d sydney, bbfs 8 digit sydney, prediksi sydney, live draw sydney, paito sydney, rumus sydney jitu, bocoran sydney hari ini">
 <meta name=description content="Prediksi dan analisa Target Angka 2D BBFS 8 Digit pasaran Sydney (SDY) terlengkap berdasarkan data result terbaru secara otomatis dengan rumus variasi baru.">
@@ -22,7 +22,11 @@ body{background-color:#050b14;color:#fff;display:flex;flex-direction:column;alig
 .nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,191,255,.4)}
 
 .main-card{width:100%;max-width:480px;background-color:#0b1422;border:1px solid rgba(0,191,255,.4);border-radius:12px;padding:20px 15px;text-align:left;box-shadow:0 4px 15px rgba(0,191,255,.2);margin-bottom:25px}
-h1{font-size:18px;font-weight:700;margin-bottom:12px;color:#00bfff;text-align:center;letter-spacing:.5px;text-shadow:0 0 8px rgba(0,191,255,.5)}
+
+/* Styling Judul dan Tanggal Terpisah */
+h1{font-size:18px;font-weight:700;margin-bottom:6px;color:#00bfff;text-align:center;letter-spacing:.5px;text-shadow:0 0 8px rgba(0,191,255,.5);line-height:1.4}
+.h1-date{font-size:14px;font-weight:700;color:#fff;text-align:center;margin-bottom:12px;text-shadow:0 0 5px rgba(0,191,255,.4)}
+
 h3{font-size:14px;color:#00bfff;margin:15px 0 6px 0;border-bottom:1px solid rgba(0,191,255,.3);padding-bottom:4px}
 li,p{font-size:12px;color:#f3f4f6;line-height:1.5;margin-bottom:6px}
 ul{padding-left:18px}
@@ -118,10 +122,11 @@ ul{padding-left:18px}
 
 <div class=main-card>
 <h1>TARGET 2D BBFS 8 DIGIT SYDNEY</h1>
+<div id="dynamic-h1-date" class="h1-date">Memuat Tanggal...</div>
 
 <div class=highlight-box>
 <div><span>Bocoran 2D SDY - BBFS 8D Sydney</span></div>
-<div style=margin-top:6px;font-size:11px;color:#f3f4f6;line-height:1.4>
+<div id="dynamic-subtitle-date" style=margin-top:6px;font-size:11px;color:#f3f4f6;line-height:1.4>
   Pusat Analisa Tarikan Paito, Target Angka 2D, & Pola BBFS 8 Digit Sydney Pools Terjitu & Akurat.
 </div>
 </div>
@@ -183,13 +188,44 @@ document.getElementById("auto-year").textContent=(new Date).getFullYear();
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
 app=initializeApp(firebaseConfig),db=getDatabase(app);
 
+let activeDownloadDateStr = new Date().toISOString().slice(0, 10);
+
 async function loadSydneyAnalysis(){
   try{
     const t=await get(ref(db,"live/data-sdy"));
     if(!t.exists())return;
     const e=t.val();
     let n=Object.keys(e);
-    if(n.sort(((t,e)=>{const[n,a,o]=t.split("-").map(Number),[r,s,l]=e.split("-").map(Number);return new Date(o,a-1,n)-new Date(l,s-1,r)})),n.length<7)return;
+    n.sort(((t,e)=>{const[n,a,o]=t.split("-").map(Number),[r,s,l]=e.split("-").map(Number);return new Date(o,a-1,n)-new Date(l,s-1,r)}));
+    if(n.length<7)return;
+
+    const todayObj = new Date();
+    const dd = String(todayObj.getDate()).padStart(2, '0');
+    const mm = String(todayObj.getMonth() + 1).padStart(2, '0');
+    const yyyy = todayObj.getFullYear();
+    const todayKeyStr = `${dd}-${mm}-${yyyy}`;
+
+    let latestDateKey = n[n.length - 1];
+    
+    // Logika 1x update: Jika data hari ini sudah masuk, geser tanggal display ke besok (H+1)
+    let targetDisplayDate = new Date();
+    if(latestDateKey === todayKeyStr) {
+      targetDisplayDate.setDate(targetDisplayDate.getDate() + 1);
+    }
+
+    const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+    let formattedTargetDate = targetDisplayDate.toLocaleDateString('id-ID', options);
+
+    // Terapkan ke elemen H1 (baris tanggal terpisah tanpa tanda kurung) dan Title Browser
+    document.getElementById("dynamic-h1-date").textContent = formattedTargetDate;
+    document.getElementById("page-title").textContent = `Prediksi Target 2D BBFS SDY 8 Digit Sydney ${formattedTargetDate} - Tunggal Paito`;
+    
+    document.getElementById("dynamic-subtitle-date").innerHTML = `
+      Pusat Analisa Tarikan Paito, Target Angka 2D, & Pola BBFS 8 Digit Sydney Pools Terjitu & Akurat.<br>
+      <strong style="color:#00bfff;">Prediksi Periode: ${formattedTargetDate}</strong>
+    `;
+
+    activeDownloadDateStr = targetDisplayDate.toISOString().slice(0, 10);
     
     let getResultVal = val => {
       if(Array.isArray(val) && val.length > 0) return String(val[val.length - 1]);
@@ -331,7 +367,7 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     backgroundColor: "#050b14"
   }).then(canvas => {
     const link = document.createElement("a");
-    link.download = "Analisis-Target-4D-Sydney-16Trek-" + (new Date()).toISOString().slice(0, 10) + ".jpg";
+    link.download = "Analisis-Target-4D-Sydney-16Trek-" + activeDownloadDateStr + ".jpg";
     link.href = canvas.toDataURL("image/jpeg", 0.95);
     link.click();
 
