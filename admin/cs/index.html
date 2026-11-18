@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang=id>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Staff / Admin CS - Tunggal Paito</title>
+<script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js></script>
+<script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js></script>
+<script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js></script>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}.admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:10px;border-radius:8px;border:1px dashed #262626;min-height:40px}#histats_counter{display:flex;justify-content:center;align-items:center;width:100%}.header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}.auth-status-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:15px}.status-logged-in{background:rgba(16,185,129,.2);color:#34d399;border:1px solid #10b981}.status-logged-out{background:rgba(239,68,68,.2);color:#f87171;border:1px solid #ef4444}.main-nav{display:flex;gap:12px;justify-content:center;width:100%}.btn-utama{flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 15px;border-radius:8px;font-weight:700;font-size:13px;color:#fff;transition:.2s;text-transform:uppercase;box-shadow:0 4px 10px rgba(0,0,0,.4)}.btn-menu-awal{background:#00b894;border:1px solid #00e6ac}.btn-menu-awal:hover{background:#009473;transform:translateY(-2px);box-shadow:0 0 12px rgba(0,184,148,.5)}.section-title{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;text-align:left;margin:25px 0 12px 5px;display:flex;align-items:center}.section-title::after{content:"";flex:1;height:1px;background:#1a1a1a;margin-left:10px}.input-result-box{background:#0f172a;border:1px solid #1e293b;padding:15px;border-radius:8px;margin-bottom:15px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}.input-result-box label{font-size:11px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.5px}.input-result-box input,.input-result-box select,.input-result-box textarea{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:10px 12px;border-radius:6px;font-size:14px;outline:0;transition:.2s;font-weight:700}.input-result-box input[type=date]{text-align:center!important;color:#facc15!important;background:#0f172a!important;border:1px solid #38bdf8!important;font-size:15px!important;font-weight:800!important;color-scheme:dark}.input-result-box textarea{resize:vertical;height:120px;font-family:monospace;text-align:left;font-weight:400}.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{border-color:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.4)}.btn-kirim{background:linear-gradient(135deg, #ff6b81, #ff4757);border:1px solid #ff7979;color:#fff;padding:12px;border-radius:8px;font-weight:800;font-size:13px;cursor:pointer;text-transform:uppercase;transition:all 0.3s ease;box-shadow:0 0 15px rgba(255, 71, 87, 0.6), inset 0 1px 1px rgba(255,255,255,0.4);letter-spacing:0.5px}.btn-kirim:hover{background:linear-gradient(135deg, #ff4757, #ff3838);box-shadow:0 0 22px rgba(255, 71, 87, 0.9), 0 0 35px rgba(255, 107, 129, 0.5);transform:translateY(-1px)}.status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700;line-height:1.4}footer{text-align:center;font-size:12px;color:#475569;margin-top:10px;margin-bottom:20px}footer span{color:#38bdf8;font-weight:700}.btn-logout-admin{background:#dc2626;color:#fff;border:none;padding:6px 12px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;margin-top:8px;text-transform:uppercase}.btn-logout-admin:hover{background:#b91c1c}.login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px}.login-box{background:#080808;border:1px solid #334155;padding:25px;border-radius:12px;width:100%;max-width:380px;box-shadow:0 10px 25px rgba(0,0,0,.8)}.login-box h3{color:#38bdf8;text-align:center;margin-bottom:15px;font-size:16px;text-transform:uppercase}.login-box input{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:12px;border-radius:6px;margin-bottom:12px;font-size:14px;outline:0}.login-box button{width:100%;background:#10b981;color:#fff;border:none;padding:12px;border-radius:6px;font-weight:700;cursor:pointer;text-transform:uppercase}.login-error{color:#ef4444;font-size:12px;text-align:center;margin-top:8px}</style>
+</head>
+<body>
+<div id=adminLoginOverlay class=login-overlay style=display:flex>
+<div class=login-box>
+<h3>Login Staff / Admin CS</h3>
+<input type=email id=adminEmail value="admintunggalpaito@gmail.com" placeholder="Email Staff">
+<input type=password id=adminPassword placeholder="Kata Sandi Staff">
+<button type=button onclick=loginAdmin()>MASUK PANEL CS</button>
+<div id=loginErrorMsg class=login-error></div>
+</div>
+</div>
+<div class=admin-container>
+<div class=top-tracker>
+<div id=histats_counter></div>
+</div>
+<div class=header>
+<h2>PANEL ADMIN CS</h2>
+<div id=authStatusIndicator class="auth-status-badge status-logged-out">Memeriksa Status Login...</div>
+<div>
+<button type=button id=btnLogout class=btn-logout-admin style=display:none onclick=logoutAdmin()>🚪 LOGOUT AKUN</button>
+</div>
+<div class=main-nav style=margin-top:15px>
+<a href=https://tunggalpaito.online/prediksi class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
+</div>
+</div>
+
+<div class=section-title>📡 Update Data Paito Warna</div>
+<div class=input-result-box>
+<label for=marketSelect>Pilih Pasaran</label>
+<select id=marketSelect>
+<option value=data-sdy>SDY</option>
+<option value=data-sgp>SGP</option>
+<option value=data-hk>HK</option>
+<option value=data-sdylotto>SDY LOTTO</option>
+<option value=data-hklotto>HK LOTTO</option>
+<option value=data-cambodia>CAMBODIA</option>
+<option value=data-china>CHINA</option>
+<option value=data-japan>JAPAN</option>
+<option value=data-taiwan>TAIWAN</option>
+<option value=data-macau4d>MACAU 4D</option>
+<option value=data-macau5d>MACAU 5D</option>
+</select>
+<label for=inputDate>Pilih Tanggal Pengeluaran</label>
+<input type=date id=inputDate>
+<label for=inputNumbers>Masukkan Angka Mingguan<br>Pisahkan dengan koma</label>
+<textarea id=inputNumbers placeholder="Contoh: 1234, 5678, 9012, 3456, 7890"></textarea>
+<button type=button class=btn-kirim onclick=saveDataPaito()>Update</button>
+<div id=message class=status-firebase></div>
+</div>
+
+</div>
+<footer>
+<p>&copy; 2026 <span>TUNGGAL PAITO</span>. All Rights Reserved.</p>
+</footer>
+<script>
+const firebaseConfig={apiKey:"AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",authDomain:"komentar-web-f9e2e.firebaseapp.com",databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"komentar-web-f9e2e",storageBucket:"komentar-web-f9e2e.firebasestorage.app",messagingSenderId:"126095632925",appId:"1:126095632925:web:77383efdc2daea2e7034f4",measurementId:"G-C3CVJPFTMN"};
+
+firebase.apps.length?firebase.app():firebase.initializeApp(firebaseConfig);
+const database=firebase.database();
+
+function getTodayString(){
+  const e=new Date;
+  return`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,"0")}-${String(e.getDate()).padStart(2,"0")}`
+}
+
+function autoSetDates(){
+  const e=getTodayString();
+  const a=document.getElementById("inputDate");
+  a&&(a.value=e);
+}
+
+function autoSelectMarketByTime(){
+  const e = new Date(), totalMnit = e.getHours() * 60 + e.getMinutes();
+  let o = "data-hk";
+
+  // Pengaturan jadwal otomatis berdasarkan jam rilis pasaran yang Anda berikan:
+  if (totalMnit >= 705 && totalMnit < 830) {        // Cambodia (11:48) -> Sekitar 11:45 - 13:50
+    o = "data-cambodia";
+  } else if (totalMnit >= 830 && totalMnit < 840) {   // Sydney Pools (13:50) -> 13:50 - 14:00
+    o = "data-sdy";
+  } else if (totalMnit >= 840 && totalMnit < 925) {   // Sydney Lotto (14:00) -> 14:00 - 15:25
+    o = "data-sdylotto";
+  } else if (totalMnit >= 925 && totalMnit < 1035) {  // China (15:25) -> 15:25 - 17:15
+    o = "data-china";
+  } else if (totalMnit >= 1035 && totalMnit < 1065) { // Japan (17:15) -> 17:15 - 17:45
+    o = "data-japan";
+  } else if (totalMnit >= 1065 && totalMnit < 1248) { // SGP (17:45) -> 17:45 - 20:48
+    o = "data-sgp";
+  } else if (totalMnit >= 1248 && totalMnit < 1380) { // Taiwan (20:48) -> 20:48 - 23:00
+    o = "data-taiwan";
+  } else if (totalMnit >= 1380 && totalMnit < 1390) { // HK Pools (23:00) -> 23:00 - 23:10
+    o = "data-hk";
+  } else if (totalMnit >= 1390 && totalMnit <= 1439 || totalMnit < 705) { // HK Lotto (23:10) & Jam malam sampai pagi
+    o = "data-hklotto";
+  }
+
+  const s = document.getElementById("marketSelect");
+  s && (s.value = o);
+}
+
+function getLatestEntryFromObject(e){
+  if(!e)return{date:"",data:""};
+  if("object"!=typeof e)return{date:"",data:String(e)};
+  let t=Object.keys(e);
+  if(0===t.length)return{date:"",data:""};
+  t.sort(((e,t)=>{
+    let a=e.split("-"),n=t.split("-");
+    if(3===a.length&&3===n.length){
+      let e=new Date(`${a[2]}-${a[1]}-${a[0]}`).getTime(),
+          t=new Date(`${n[2]}-${n[1]}-${n[0]}`).getTime();
+      if(!isNaN(e)&&!isNaN(t))return e-t
+    }
+    return e.localeCompare(t)
+  }));
+  let a=t[t.length-1];
+  return{date:a,data:String(e[a])}
+}
+
+function showLatestDataPaito(e){
+  const t=document.getElementById("message");
+  t&&(t.style.color="#38bdf8",t.innerText="⏳ Memuat data paito terakhir...",database.ref(`live/${e}`).once("value").then((a=>{
+    if(a.exists()){
+      let e=getLatestEntryFromObject(a.val()),
+          n=e.data.split(",").map((e=>e.trim())).filter(Boolean),
+          o=n.length>0?n[n.length-1]:e.data;
+      t.style.color="#94a3b8",t.innerHTML=`📌 <b>Data Terakhir${e.date?" ("+e.date+")":""}:</b> <span style="color:#facc15; font-size:14px; font-weight:bold;">${o}</span>`
+    }else t.style.color="#64748b",t.innerText=`Belum ada data paito ${e.toUpperCase()}`
+  })).catch((()=>{t.innerText=""})))
+}
+
+function refreshAllFormPreviews(){
+  const e=document.getElementById("marketSelect")?.value;
+  e&&showLatestDataPaito(e);
+}
+
+function loginAdmin(){
+  const e=document.getElementById("adminEmail").value.trim(),
+        t=document.getElementById("adminPassword").value.trim(),
+        a=document.getElementById("loginErrorMsg");
+  if(!e||!t)return a.style.color="#ef4444",void(a.innerText="⚠️ Email dan Password wajib diisi!");
+  a.style.color="#38bdf8",a.innerText="⏳ Memverifikasi...";
+  firebase.auth().signInWithEmailAndPassword(e,t).then((()=>{
+    document.getElementById("adminLoginOverlay").style.display="none"
+  })).catch((e=>{
+    a.style.color="#ef4444",
+    "auth/wrong-password"===e.code||"auth/invalid-credential"===e.code||"auth/invalid-email"===e.code?a.innerText="❌ Kata sandi atau email salah!":
+    "auth/user-not-found"===e.code?a.innerText="❌ Akun staff tidak ditemukan!":
+    a.innerText="❌ Gagal: "+e.message
+  }))
+}
+
+function logoutAdmin(){
+  firebase.auth().signOut().then((()=>{
+    alert("Berhasil Logout dari Panel CS.")
+  })).catch((e=>{
+    alert("Gagal logout: "+e.message)
+  }))
+}
+
+function saveDataPaito(){
+  const e=document.getElementById("marketSelect").value;
+  let t=document.getElementById("inputDate").value||getTodayString();
+  const a=document.getElementById("inputNumbers").value.trim(),
+        n=document.getElementById("message");
+  if(!a)return n.style.color="#f87171",void(n.textContent="Angka tidak boleh kosong!");
+  const o=t.split("-"),
+        l=`${o[2]}-${o[1]}-${o[0]}`,
+        i=database.ref("live/"+e);
+  n.style.color="#38bdf8",n.textContent=`Menyimpan data ${e.toUpperCase()}...`;
+  i.once("value").then((e=>{
+    let t=e.val(),n=a;
+    if(t&&"object"==typeof t&&t[l]){
+      let e=t[l];
+      "string"==typeof e&&""!==e.trim()&&(n=e+","+a)
+    }
+    return i.update({[l]:n})
+  })).then((()=>{
+    n.style.color="#34d399",
+    n.textContent=`Berhasil menyimpan data ${e.toUpperCase()} untuk tanggal ${l}!`,
+    document.getElementById("inputNumbers").value="",
+    setTimeout((()=>{showLatestDataPaito(e)}),2500)
+  })).catch((e=>{
+    n.style.color="#f87171",
+    n.textContent="Gagal menyimpan: "+e.message
+  }))
+}
+
+document.addEventListener("DOMContentLoaded",(()=>{
+  autoSetDates();
+  autoSelectMarketByTime();
+  refreshAllFormPreviews();
+  
+  document.getElementById("marketSelect")?.addEventListener("change",(e=>{
+    showLatestDataPaito(e.target.value)
+  }));
+}));
+
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then((()=>{
+  firebase.auth().onAuthStateChanged((e=>{
+    const t=document.getElementById("adminLoginOverlay"),
+          a=document.getElementById("authStatusIndicator"),
+          n=document.getElementById("btnLogout");
+    e?(
+      t&&(t.style.display="none"),
+      a&&(a.className="auth-status-badge status-logged-in",a.innerHTML=`🟢 Status: <b>SUDAH LOGIN</b> (${e.email})`),
+      n&&(n.style.display="inline-block")
+    ):(
+      t&&(t.style.display="flex"),
+      a&&(a.className="auth-status-badge status-logged-out",a.innerHTML="🔴 Status: <b>BELUM LOGIN / LOGOUT</b>"),
+      n&&(n.style.display="none")
+    )
+  }))
+}));
+</script>
+<script>var _Hasync=_Hasync||[];_Hasync.push(["Histats.start","1,5037448,4,600,110,30,00001001"]),_Hasync.push(["Histats.fasi","1"]),_Hasync.push(["Histats.track_hits",""]),function(){var s=document.createElement("script");s.type="text/javascript",s.async=!0,s.src="//s10.histats.com/js15_as.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(s)}()</script>
+<noscript><a href=/ target=_blank><img src=//sstatic1.histats.com/0.gif?5037448&101 alt="" border=0></a></noscript>
+</body>
+</html>
