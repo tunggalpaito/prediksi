@@ -369,7 +369,7 @@ function generate20Lines(d1, d2) {
 }
 
 // AMBIL DATA 7 RESULT TERAKHIR DARI live/singapore & RUMUS PATEN 2 DIGIT
-get(child(dbRef,"live/singapore")).then((snapshot)=>{
+get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
         const entries = Object.keys(data).map(dateStr => {
