@@ -631,7 +631,7 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
 
 // FITUR DOWNLOAD GAMBAR 12 TREK TERAKHIR
 document.getElementById("btn-download").addEventListener("click", function() {
-    get(child(dbRef,"live/sydney")).then((snapshot)=>{
+    get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
         if(!snapshot.exists()) return;
         const data = snapshot.val();
         const entries = Object.keys(data).map(dateStr => {
