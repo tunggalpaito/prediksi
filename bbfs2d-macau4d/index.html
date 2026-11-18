@@ -74,7 +74,15 @@ ul{padding-left:18px}
 </head>
 <body>
 
-<!-- Konten Iklan Atas -->
+<!-- Tombol Navigasi Atas -->
+<div class="nav-top-container">
+  <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
+  <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
+</div>
+
+<!-- ================================================================= -->
+<!-- KONTEN PALING ATAS: IKLAN UTAMA DI ATAS                           -->
+<!-- ================================================================= -->
 <div class="top-ads-wrapper">
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script>
@@ -93,12 +101,7 @@ ul{padding-left:18px}
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
 </div>
-
-<!-- Tombol Navigasi Atas -->
-<div class="nav-top-container">
-  <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
-  <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
-</div>
+<!-- ================================================================= -->
 
 <div class="main-card">
 <h1 id="dynamic-main-title">TARGET 2D BBFS 8 DIGIT MACAU 4D</h1>
@@ -150,30 +153,22 @@ import{getDatabase,ref,get}from"https://www.gstatic.com/firebasejs/10.7.1/fireba
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
 // ==========================================
-// KECERDASAN OTOMATIS: JADWAL 6x UPDATE (UPDATE KE-2 MENJADI JAM 16:00)
+// KECERDASAN OTOMATIS: JADWAL 6x UPDATE
 // ==========================================
 function setDynamicTitle() {
   const now = new Date();
   const currentHour = now.getHours();
   const currentMinute = now.getMinutes();
-  const timeValue = currentHour * 60 + currentMinute; // Total menit dari jam 00:00
+  const timeValue = currentHour * 60 + currentMinute;
 
-  // Rentang Waktu Update Baru (6x Sehari):
-  // 1. Jam 13:00 (01:30 - 13:29)
-  // 2. Jam 16:00 (13:30 - 16:29) -> Update ke-2
-  // 3. Jam 19:00 (16:30 - 19:29)
-  // 4. Jam 22:00 (19:30 - 22:29)
-  // 5. Jam 23:00 (22:30 - 23:29)
-  // 6. Jam 00:00 (23:30 - 01:29 hari berikutnya)
-
-  let targetHourText = "13:00"; // Default
+  let targetHourText = "13:00";
 
   if (timeValue >= 23*60 + 30 || timeValue < 1*60 + 30) {
     targetHourText = "00:00";
   } else if (timeValue >= 1*60 + 30 && timeValue < 13*60 + 30) {
     targetHourText = "13:00";
   } else if (timeValue >= 13*60 + 30 && timeValue < 16*60 + 30) {
-    targetHourText = "16:00"; // Update ke-2
+    targetHourText = "16:00";
   } else if (timeValue >= 16*60 + 30 && timeValue < 19*60 + 30) {
     targetHourText = "19:00";
   } else if (timeValue >= 19*60 + 30 && timeValue < 22*60 + 30) {
@@ -184,14 +179,12 @@ function setDynamicTitle() {
 
   const generatedTitle = `TARGET 2D BBFS 8 DIGIT MACAU 4D JAM ${targetHourText}`;
   
-  // Terapkan ke elemen H1 dan Title Browser
   document.getElementById("dynamic-main-title").textContent = generatedTitle;
   document.getElementById("page-title").textContent = generatedTitle + " - Tunggal Paito";
   
   return generatedTitle;
 }
 
-// Jalankan fungsi judul dinamis
 const activeTitleText = setDynamicTitle();
 
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
@@ -204,7 +197,6 @@ async function loadMacau4DAnalysis(){
     const e=t.val();
     let n=Object.keys(e);
     
-    // Urutkan tanggal DD-MM-YYYY secara kronologis
     n.sort((t,e)=>{
       const[n,a,o]=t.split("-").map(Number);
       const[r,s,l]=e.split("-").map(Number);
@@ -213,16 +205,34 @@ async function loadMacau4DAnalysis(){
 
     if(n.length === 0) return;
 
-    // Ambil data string koma per 4 digit dari tanggal terbaru yang aktif
-    let latestDateKey = n[n.length - 1];
-    let rawStringData = e[latestDateKey];
-    
-    if(typeof rawStringData !== "string") return;
+    let extractVal = val => {
+      if(Array.isArray(val) && val.length > 0) return String(val[val.length - 1]);
+      if(typeof val === 'object' && val !== null) {
+        const keys = Object.keys(val);
+        return String(val[keys[keys.length - 1]]);
+      }
+      return String(val);
+    };
 
-    let fourDigitArray = rawStringData.split(",").map(item => item.trim()).filter(item => item.length === 4);
-    
-    // Ambil 30 data terakhir dari array 4 digit tersebut
-    let last30Entries = fourDigitArray.slice(-30);
+    // Gabungkan seluruh result lintas tanggal agar otomatis mencukupi 30 trek (diambil dari kanan ke kiri / terbaru ke terlama)
+    let allFourDigitArrays = [];
+    for(let i = n.length - 1; i >= 0; i--){
+      let rawVal = extractVal(e[n[i]]);
+      let parts = rawVal.split(",").map(item => item.trim()).filter(item => item.length >= 4);
+      if(parts.length > 0) {
+        for(let j = parts.length - 1; j >= 0; j--){
+          let cleanNum = parts[j].split(":")[0].trim();
+          if(cleanNum.length === 4) {
+            allFourDigitArrays.push(cleanNum);
+          }
+        }
+      }
+    }
+
+    if(allFourDigitArrays.length === 0) return;
+
+    // Ambil tepat 30 data terbaru
+    let last30Entries = allFourDigitArrays.slice(0, 30).reverse();
 
     let parsedData = last30Entries.map(resNum => {
       let as=parseInt(resNum[0]),kop=parseInt(resNum[1]),kep=parseInt(resNum[2]),ek=parseInt(resNum[3]);
@@ -362,24 +372,6 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     btn.innerHTML = originalBtnHTML;
   });
 });
-
-let clickCount=0;
-const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-document.addEventListener("click",(function(t){
-  clickCount++;
-  1!==clickCount&&(clickCount-1)%3!=0||window.open(adLink,"_blank");
-}),!0);
-document.addEventListener("contextmenu",(t=>t.preventDefault()));
-</script>
-<script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-    }
 </script>
 </body>
 </html>
