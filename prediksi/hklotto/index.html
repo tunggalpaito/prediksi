@@ -226,17 +226,53 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
 get(child(dbRef,"live/data-hklotto")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
+        let entries = [];
+
+        // Parsing data agar mendukung format koma, spasi, atau digabung
+        Object.keys(data).forEach(dateStr => {
             const parts = dateStr.split('-');
             const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
+            
+            let rawVal = String(data[dateStr]).trim();
+            
+            // Pisahkan berdasarkan koma atau spasi (termasuk spasi ganda/tab)
+            let splitted = rawVal.split(/[\s,]+/);
+            
+            // Jika dipisah menghasilkan banyak potongan/token
+            if (splitted.length > 1) {
+                splitted.forEach((valItem, idx) => {
+                    let cleaned = valItem.replace(/\D/g, "");
+                    // Jika token berupa 4 digit atau lebih, ambil per 4 digit jika berderet panjang
+                    if (cleaned.length >= 4) {
+                        for (let i = 0; i <= cleaned.length - 4; i += 4) {
+                            let chunk = cleaned.substr(i, 4);
+                            if (chunk.length === 4) {
+                                entries.push({
+                                    dateStr: `${dateStr}-${idx}-${i}`,
+                                    val: chunk,
+                                    dateObj: new Date(dateObj.getTime() + (entries.length * 1000))
+                                });
+                            }
+                        }
+                    }
+                });
+            } else {
+                // Jika formatnya berderet panjang tanpa spasi/koma
+                let cleaned = rawVal.replace(/\D/g, "");
+                for (let i = 0; i <= cleaned.length - 4; i += 4) {
+                    let chunk = cleaned.substr(i, 4);
+                    if (chunk.length === 4) {
+                        entries.push({
+                            dateStr: `${dateStr}-${i}`,
+                            val: chunk,
+                            dateObj: new Date(dateObj.getTime() + (entries.length * 1000))
+                        });
+                    }
+                }
+            }
         });
 
-        // Urutkan secara kronologis berdasarkan tanggal
+        // Urutkan secara kronologis berdasarkan tanggal/waktu
         entries.sort((a, b) => a.dateObj - b.dateObj);
 
         // Ambil 25 data terakhir
