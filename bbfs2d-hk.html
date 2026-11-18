@@ -185,7 +185,7 @@ app=initializeApp(firebaseConfig),db=getDatabase(app);
 
 async function loadHongkongAnalysis(){
   try{
-    const t=await get(ref(db,"live/hongkong"));
+    const t=await get(ref(db,"live/data-hk"));
     if(!t.exists())return;
     const e=t.val();
     let n=Object.keys(e);
