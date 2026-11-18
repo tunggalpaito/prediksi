@@ -5,6 +5,7 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Prediksi Angka Colok Bebas SGP Hari Ini - Tunggal Paito</title>
 <meta name="description" content="Pusat analisa colok bebas Singapore pools hari ini paling akurat. Dapatkan bocoran angka jitu colok bebas SGP gratis tanpa jamu dari Tunggal Paito.">
+<link rel="canonical" href="https://tunggalpaito.online/apk/colok-bebas/sgp">
 <!-- Library html2canvas untuk fitur download gambar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -319,7 +320,7 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       dbRef=ref(db);
 
 // AMBIL DATA 12 RESULT TERAKHIR DARI live/singapore & RUMUS PATEN 1 DIGIT (COLOK BEBAS)
-get(child(dbRef,"live/singapore")).then((snapshot)=>{
+get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
         const entries = Object.keys(data).map(dateStr => {
