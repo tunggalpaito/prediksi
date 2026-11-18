@@ -574,7 +574,7 @@ function hitungTrekItem(item, globalIndex, entries) {
 }
 
 // AMBIL DATA RESULT DARI FIREBASE live/hongkong
-get(child(dbRef,"live/hongkong")).then((snapshot)=>{
+get(child(dbRef,"live/data-hk")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
         const entries = Object.keys(data).map(dateStr => {
