@@ -3,14 +3,15 @@
 <head>
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>Analisa Line 2D Belakang Singapore Pools Hari Ini - Tunggal Paito</title>
+<title id="page-title">Analisa Line 2D Belakang Singapore Pools Hari Ini - Tunggal Paito</title>
+<link rel="canonical" href="https://tunggalpaito.online/bbfs2d-singapore">
 <meta name="description" content="Pusat analisa line 2D belakang Singapore pools hari ini paling akurat. Dapatkan bocoran angka main SGP jitu, paito warna, dan invest 20 line 2D belakang gratis tanpa jamu dari Tunggal Paito.">
 <meta name="keywords" content="analisa line 2d belakang sgp, prediksi 2d belakang singapore pools, angka main sgp jitu hari ini, invest 20 line sgp 2d, paito warna sgp, bocoran sgp akurat, keluaran singapore tercepat, live draw singapore pools, rumus 2d belakang sgp">
 <!-- Library html2canvas untuk fitur download gambar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background-color:#051c0d;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh;cursor:pointer}
+body{background-color:#051c0d;color:#fff;display:flex;flex-direction:column;align-items:center;padding:15px 10px;min-height:100vh}
 
 /* TOMBOL KEMBALI KE MENU UTAMA */
 .btn-back-main{width:100%;max-width:420px;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.5);color:#0f6;text-decoration:none;font-weight:700;font-size:13px;padding:10px 15px;border-radius:8px;border:1px solid #0f6;margin-bottom:15px;transition:all .2s ease;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
@@ -368,7 +369,7 @@ function generate20Lines(d1, d2) {
     return lines.slice(0, 20);
 }
 
-// AMBIL DATA 7 RESULT TERAKHIR DARI live/singapore & RUMUS PATEN 2 DIGIT
+// AMBIL DATA 7 RESULT TERAKHIR DARI live/data-sgp & RUMUS PATEN 2 DIGIT
 get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
@@ -402,8 +403,8 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
             
             let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
-            scores[Math.abs(as * 2 - ekor * 2)] += 6;
-            scores[Math.abs(kop * 2 - kepala * 2)] += 5;
+            scores[Math.abs(as * 2 - ekor * 2) % 10] += 6;
+            scores[Math.abs(kop * 2 - kepala * 2) % 10] += 5;
             scores[(as * ekor + kop * kepala) % 10] += 4;
             scores[(as + kop + kepala + ekor) % 10] += 3;
             let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
