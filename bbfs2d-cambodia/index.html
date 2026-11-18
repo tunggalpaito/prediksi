@@ -78,7 +78,13 @@ ul{padding-left:18px}
 </head>
 <body>
 
-<!-- Konten Iklan Atas -->
+<!-- Tombol Navigasi Atas -->
+<div class="nav-top-container">
+  <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
+  <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
+</div>
+
+<!-- Konten Iklan Atas (Diposisikan di atas agar terlihat pengunjung) -->
 <div class="top-ads-wrapper">
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script>
@@ -96,12 +102,6 @@ ul{padding-left:18px}
     <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
-</div>
-
-<!-- Tombol Navigasi Atas -->
-<div class="nav-top-container">
-  <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
-  <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
 </div>
 
 <div class="main-card">
@@ -189,7 +189,6 @@ async function loadCambodiaAnalysis(){
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
     let formattedTargetDate = targetDisplayDate.toLocaleDateString('id-ID', options);
 
-    // Update Judul Utama dan Baris Tanggal Terpisah (Tanpa Tanda Kurung)
     document.getElementById("dynamic-h1-date").textContent = formattedTargetDate;
     document.getElementById("page-title").textContent = `TARGET 2D BBFS 8 DIGIT KAMBOJA ${formattedTargetDate} - Tunggal Paito`;
     
@@ -200,12 +199,22 @@ async function loadCambodiaAnalysis(){
 
     activeDownloadDateStr = targetDisplayDate.toISOString().slice(0, 10);
 
-    let rawStringData = e[latestDateKey];
-    
-    if(typeof rawStringData !== "string") return;
+    // Gabungkan seluruh result lintas tanggal agar otomatis mencukupi 30 trek (diambil dari kanan ke kiri / terbaru ke terlama)
+    let allFourDigitArrays = [];
+    for(let i = n.length - 1; i >= 0; i--){
+      let dayData = e[n[i]];
+      if(typeof dayData === "string") {
+        let splitItems = dayData.split(",").map(item => item.trim()).filter(item => item.length === 4);
+        for(let j = splitItems.length - 1; j >= 0; j--){
+          allFourDigitArrays.push(splitItems[j]);
+        }
+      }
+    }
 
-    let fourDigitArray = rawStringData.split(",").map(item => item.trim()).filter(item => item.length === 4);
-    let last30Entries = fourDigitArray.slice(-30);
+    if(allFourDigitArrays.length === 0) return;
+
+    // Ambil tepat 30 data terbaru
+    let last30Entries = allFourDigitArrays.slice(0, 30).reverse();
 
     let parsedData = last30Entries.map(resNum => {
       let as=parseInt(resNum[0]),kop=parseInt(resNum[1]),kep=parseInt(resNum[2]),ek=parseInt(resNum[3]);
@@ -345,24 +354,6 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     btn.innerHTML = originalBtnHTML;
   });
 });
-
-let clickCount=0;
-const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-document.addEventListener("click",(function(t){
-  clickCount++;
-  1!==clickCount&&(clickCount-1)%3!=0||window.open(adLink,"_blank");
-}),!0);
-document.addEventListener("contextmenu",(t=>t.preventDefault()));
-</script>
-<script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-    }
 </script>
 </body>
 </html>
