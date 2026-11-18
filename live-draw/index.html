@@ -390,7 +390,7 @@ function initLiveDraw(){
 
   renderTableToDOM(listDays, savedData);
 
-  const marketMap = {hk:"hongkong", sgp:"singapore", sdy:"sydney"};
+  const marketMap = {hk:"data-hk", sgp:"data-sgp", sdy:"data-sdy"};
   listDays.forEach((item)=>{
     ["hk","sgp","sdy"].forEach((marketKey)=>{
       let dbMarketName = marketMap[marketKey];
