@@ -78,7 +78,15 @@ ul{padding-left:18px}
 </head>
 <body>
 
-<!-- Konten Iklan Atas -->
+<!-- Tombol Navigasi Atas -->
+<div class="nav-top-container">
+  <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
+  <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
+</div>
+
+<!-- ================================================================= -->
+<!-- KONTEN PALING ATAS: IKLAN UTAMA DI ATAS                           -->
+<!-- ================================================================= -->
 <div class="top-ads-wrapper">
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script>
@@ -97,12 +105,7 @@ ul{padding-left:18px}
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
 </div>
-
-<!-- Tombol Navigasi Atas -->
-<div class="nav-top-container">
-  <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
-  <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
-</div>
+<!-- ================================================================= -->
 
 <div class="main-card">
 <h1>TARGET 2D BBFS 8 DIGIT JAPAN</h1>
@@ -165,7 +168,6 @@ async function loadJapanAnalysis(){
     const e=t.val();
     let n=Object.keys(e);
     
-    // Urutkan tanggal DD-MM-YYYY secara kronologis
     n.sort((t,e)=>{
       const[n,a,o]=t.split("-").map(Number);
       const[r,s,l]=e.split("-").map(Number);
@@ -182,7 +184,6 @@ async function loadJapanAnalysis(){
 
     let latestDateKey = n[n.length - 1];
     
-    // Logika 1x update: Jika data hari ini sudah masuk, geser tanggal display ke besok (H+1)
     let targetDisplayDate = new Date();
     if(latestDateKey === todayKeyStr) {
       targetDisplayDate.setDate(targetDisplayDate.getDate() + 1);
@@ -191,7 +192,6 @@ async function loadJapanAnalysis(){
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
     let formattedTargetDate = targetDisplayDate.toLocaleDateString('id-ID', options);
 
-    // Terapkan ke elemen H1 (baris tanggal terpisah tanpa tanda kurung) dan Title Browser
     document.getElementById("dynamic-h1-date").textContent = formattedTargetDate;
     document.getElementById("page-title").textContent = `TARGET 2D BBFS 8 DIGIT JAPAN ${formattedTargetDate} - Tunggal Paito`;
     
@@ -202,15 +202,34 @@ async function loadJapanAnalysis(){
 
     activeDownloadDateStr = targetDisplayDate.toISOString().slice(0, 10);
 
-    // Ambil data string koma per 4 digit dari tanggal terbaru yang aktif
-    let rawStringData = e[latestDateKey];
-    
-    if(typeof rawStringData !== "string") return;
+    let extractVal = val => {
+      if(Array.isArray(val) && val.length > 0) return String(val[val.length - 1]);
+      if(typeof val === 'object' && val !== null) {
+        const keys = Object.keys(val);
+        return String(val[keys[keys.length - 1]]);
+      }
+      return String(val);
+    };
 
-    let fourDigitArray = rawStringData.split(",").map(item => item.trim()).filter(item => item.length === 4);
-    
-    // Ambil 30 data terakhir dari array 4 digit tersebut
-    let last30Entries = fourDigitArray.slice(-30);
+    // Gabungkan seluruh result lintas tanggal agar otomatis mencukupi 30 trek (diambil dari kanan ke kiri / terbaru ke terlama)
+    let allFourDigitArrays = [];
+    for(let i = n.length - 1; i >= 0; i--){
+      let rawVal = extractVal(e[n[i]]);
+      let parts = rawVal.split(",").map(item => item.trim()).filter(item => item.length >= 4);
+      if(parts.length > 0) {
+        for(let j = parts.length - 1; j >= 0; j--){
+          let cleanNum = parts[j].split(":")[0].trim();
+          if(cleanNum.length === 4) {
+            allFourDigitArrays.push(cleanNum);
+          }
+        }
+      }
+    }
+
+    if(allFourDigitArrays.length === 0) return;
+
+    // Ambil tepat 30 data terbaru
+    let last30Entries = allFourDigitArrays.slice(0, 30).reverse();
 
     let parsedData = last30Entries.map(resNum => {
       let as=parseInt(resNum[0]),kop=parseInt(resNum[1]),kep=parseInt(resNum[2]),ek=parseInt(resNum[3]);
@@ -350,24 +369,6 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     btn.innerHTML = originalBtnHTML;
   });
 });
-
-let clickCount=0;
-const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-document.addEventListener("click",(function(t){
-  clickCount++;
-  1!==clickCount&&(clickCount-1)%3!=0||window.open(adLink,"_blank");
-}),!0);
-document.addEventListener("contextmenu",(t=>t.preventDefault()));
-</script>
-<script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-    }
 </script>
 </body>
 </html>
