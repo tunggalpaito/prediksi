@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Prediksi Togel Hari Ini AM 2DB SGP - Tunggal Paito</title>
+<title id="page-title">Prediksi Togel Hari Ini AM 2DB SGP - Tunggal Paito</title>
 <meta name="description" content="AM 2DB SGP adalah angka main di 2d belakang dari tunggal paito sebanyak 4 digit. Dapatkan bocoran angka main, paito warna, dan update keluaran tercepat." />
 <meta name="keywords" content="prediksi togel hari ini sgp, prediksi singapore bbfs, tunggal paito sgp, angka jitu sgp hari ini, bocoran sgp akurat, paito warna sgp" />
 <meta name="author" content="Tunggal Paito Official" />
@@ -195,7 +195,8 @@ body{
     box-shadow:0 8px 30px rgba(0,0,0,0.5);
     margin-bottom:15px;
 }
-h1{font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:0.5px;color:#38bdf8;line-height:1.4}
+h1{font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:0.5px;color:#38bdf8;line-height:1.4}
+.h1-date{font-size:13px;font-weight:700;color:#ffffff;margin-bottom:12px;letter-spacing:0.3px}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI */
 .trek-container{display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:10px}
@@ -451,6 +452,7 @@ h1{font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:0.5px;color:
 
 <div class="main-card" id="capture-card">
 <h1>PREDIKSI TOGEL HARI INI <br>RESULT 4D & ANGKA MAIN SGP</h1>
+<div id="dynamic-h1-date" class="h1-date">Memuat Hari & Tanggal...</div>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI -->
 <div class="trek-container" id="trek-container">
     <!-- Data result SGP dimuat dinamis -->
@@ -493,6 +495,8 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       db=getDatabase(app),
       dbRef=ref(db);
 
+let formattedTargetDateText = "";
+
 // HELPER FLEKSIBEL: PARSE KEY TANGGAL (DD-MM-YYYY, YYYY-MM-DD, DD/MM/YYYY)
 function parseFlexibleDate(dateStr) {
     if (!dateStr) return null;
@@ -503,6 +507,37 @@ function parseFlexibleDate(dateStr) {
     if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
     const fallback = new Date(s);
     return Number.isNaN(fallback.getTime()) ? null : fallback;
+}
+
+// HITUNG HARI & TANGGAL PERIODE BERIKUTNYA DARI UPDATE RESULT TERBARU (LIBUR SELASA & JUMAT)
+function getTargetScheduleDate(entries) {
+    const datedEntries = entries.filter(e => e.dateObj instanceof Date && !Number.isNaN(e.dateObj.getTime()));
+    let baseDate = datedEntries.length > 0 ? new Date(datedEntries[datedEntries.length - 1].dateObj) : new Date();
+    const dayOfWeek = baseDate.getDay(); // 0=Min, 1=Sen, 2=Sel, 3=Rab, 4=Kam, 5=Jum, 6=Sab
+
+    // SGP libur Selasa & Jumat:
+    // Update Senin (1) -> Rabu (+2 hari)
+    // Update Kamis (4) -> Sabtu (+2 hari)
+    // Hari buka lainnya -> maju 1 hari (+1 hari)
+    if (dayOfWeek === 1 || dayOfWeek === 4) {
+        baseDate.setDate(baseDate.getDate() + 2);
+    } else {
+        baseDate.setDate(baseDate.getDate() + 1);
+    }
+
+    return baseDate.toLocaleDateString("id-ID", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+}
+
+function applyScheduleHeader(formattedDate) {
+    formattedTargetDateText = formattedDate;
+    const h1DateEl = document.getElementById("dynamic-h1-date");
+    if (h1DateEl) h1DateEl.textContent = formattedDate;
+    document.getElementById("page-title").textContent = `Prediksi Togel Hari Ini (${formattedDate}) AM 2DB SGP - Tunggal Paito`;
 }
 
 // HELPER FLEKSIBEL: EKSTRAK SEMUA ANGKA 4 DIGIT DARI FORMAT VALUE BEBAS
@@ -647,6 +682,8 @@ function hitungTrekItem(item, globalIndex, entries) {
 get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const entries = buildEntriesFromFirebase(snapshot.val());
+        applyScheduleHeader(getTargetScheduleDate(entries));
+
         const last28 = entries.slice(-28);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
@@ -698,6 +735,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
     get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
         if(!snapshot.exists()) return;
         const entries = buildEntriesFromFirebase(snapshot.val());
+        const targetDateLabel = getTargetScheduleDate(entries) || formattedTargetDateText;
 
         const last12 = entries.slice(-12);
         let cCentang = 0, cX = 0, rHtml = "";
@@ -742,6 +780,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
         tempContainer.innerHTML = `
             <div class="main-card" style="margin:0; width:100%;">
                 <h1>PREDIKSI TOGEL HARI INI <br>RESULT 4D & ANGKA MAIN SGP</h1>
+                <div class="h1-date">${targetDateLabel}</div>
                 <div class="trek-container">${summary12Html + rHtml}</div>
                 <a href="${currentUrl}" class="card-website-footer">${currentUrl}</a>
             </div>
