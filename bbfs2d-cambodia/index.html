@@ -119,7 +119,7 @@ ul{padding-left:18px}
   user-select: auto;
 }
 .fb-close-btn {
-  margin-top: 12px;
+  margin-top: 10px;
   width: 100%;
   background: linear-gradient(135deg, #cc0000, #990000);
   color: #fff;
@@ -205,8 +205,11 @@ dan jangan pakai angka dari orang jika terus-terusan tidak setangan denganmu
 <!-- Modal Preview Khusus Browser Facebook -->
 <div id="fb-image-modal" class="fb-modal-overlay">
   <div class="fb-modal-card">
-    <p class="fb-modal-tip">Tekan &amp; tahan gambar di bawah ini, lalu pilih "Simpan gambar" / "Download image".</p>
+    <p class="fb-modal-tip">Tekan &amp; tahan gambar untuk simpan, atau pakai tombol Bagikan di bawah.</p>
     <img id="fb-preview-img" class="fb-preview-img" alt="Preview Gambar Prediksi Kamboja">
+    <button type="button" id="fb-share-img-btn" style="margin-top:10px;width:100%;background:linear-gradient(135deg,#0055a5,#003366);color:#fff;border:1px solid #ffcc00;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">
+      Bagikan / Simpan Gambar
+    </button>
     <button type="button" id="fb-close-modal" class="fb-close-btn">Tutup Preview</button>
   </div>
 </div>
@@ -231,16 +234,59 @@ function isFacebookInAppBrowser() {
 const fbModal = document.getElementById("fb-image-modal");
 const fbPreviewImg = document.getElementById("fb-preview-img");
 const fbCloseBtn = document.getElementById("fb-close-modal");
+const fbShareImgBtn = document.getElementById("fb-share-img-btn");
+let activeBlobUrl = null;
+let activeShareFile = null;
+let activeFileName = "Analisis-Target-4D-Cambodia-16Trek.jpg";
 
-function openFbImageModal(imgSrc) {
-  fbPreviewImg.src = imgSrc;
+function revokeActiveBlobUrl() {
+  if (activeBlobUrl) {
+    URL.revokeObjectURL(activeBlobUrl);
+    activeBlobUrl = null;
+  }
+  activeShareFile = null;
+}
+
+function openFbImageModal(imgUrl, blobObj = null, fileName = "prediksi.jpg") {
+  revokeActiveBlobUrl();
+  activeFileName = fileName;
+  if (imgUrl.startsWith("blob:")) {
+    activeBlobUrl = imgUrl;
+  }
+  if (blobObj && typeof File !== "undefined") {
+    try {
+      activeShareFile = new File([blobObj], fileName, { type: "image/jpeg" });
+    } catch (e) {
+      activeShareFile = null;
+    }
+  }
+  fbPreviewImg.src = imgUrl;
   fbModal.classList.add("active");
 }
 
 function closeFbImageModal() {
   fbModal.classList.remove("active");
-  fbPreviewImg.src = "";
+  fbPreviewImg.removeAttribute("src");
+  revokeActiveBlobUrl();
 }
+
+fbShareImgBtn.addEventListener("click", async function() {
+  try {
+    if (activeShareFile && navigator.canShare && navigator.canShare({ files: [activeShareFile] })) {
+      await navigator.share({
+        files: [activeShareFile],
+        title: activeFileName
+      });
+      return;
+    }
+  } catch (err) {
+    // Jika dibatalkan atau tidak didukung, biarkan tetap di preview tekan-tahan
+  }
+  fbShareImgBtn.textContent = "Tekan & Tahan Gambar di Atas";
+  setTimeout(() => {
+    fbShareImgBtn.textContent = "Bagikan / Simpan Gambar";
+  }, 2000);
+});
 
 fbCloseBtn.addEventListener("click", closeFbImageModal);
 fbModal.addEventListener("click", function(e) {
@@ -428,19 +474,31 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     useCORS: true,
     backgroundColor: "#070b14"
   }).then(canvas => {
-    const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+    const fileName = "Analisis-Target-4D-Cambodia-16Trek-" + activeDownloadDateStr + ".jpg";
 
-    if (isFacebookInAppBrowser()) {
-      openFbImageModal(dataUrl);
-    } else {
-      const link = document.createElement("a");
-      link.download = "Analisis-Target-4D-Cambodia-16Trek-" + activeDownloadDateStr + ".jpg";
-      link.href = dataUrl;
-      link.click();
-    }
-
-    document.body.removeChild(cloneWrapper);
-    btn.innerHTML = originalBtnHTML;
+    canvas.toBlob(blob => {
+      if (isFacebookInAppBrowser()) {
+        if (blob) {
+          const blobUrl = URL.createObjectURL(blob);
+          openFbImageModal(blobUrl, blob, fileName);
+        } else {
+          openFbImageModal(canvas.toDataURL("image/jpeg", 0.95), null, fileName);
+        }
+      } else {
+        const url = blob ? URL.createObjectURL(blob) : canvas.toDataURL("image/jpeg", 0.95);
+        const link = document.createElement("a");
+        link.download = fileName;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        if (blob) {
+          setTimeout(() => URL.revokeObjectURL(url), 1500);
+        }
+      }
+      document.body.removeChild(cloneWrapper);
+      btn.innerHTML = originalBtnHTML;
+    }, "image/jpeg", 0.95);
   }).catch(err => {
     console.error(err);
     document.body.removeChild(cloneWrapper);
