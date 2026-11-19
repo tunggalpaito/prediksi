@@ -19,6 +19,7 @@ body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;alig
 
 /* STYLING AREA IKLAN UTAMA DI ATAS */
 .top-ads-wrapper{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:15px;background-color:#102a52;border:1px solid rgba(56,189,248,0.4);border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+.ad-slot{width:100%;display:flex;justify-content:center;align-items:center;min-height:50px;overflow:hidden;border-radius:6px}
 
 .generator-card{width:100%;max-width:420px;background-color:#102a52;border:1px solid #38bdf8;border-radius:12px;padding:15px;margin-bottom:20px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2)}
 .generator-card h3{font-size:16px;color:#38bdf8;margin-bottom:8px}
@@ -46,7 +47,8 @@ body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;alig
 
 /* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
 .main-card{width:100%;max-width:420px;background-color:#163868;border:1px solid rgba(56,189,248,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2);margin-bottom:15px}
-h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#38bdf8}
+h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#38bdf8;line-height:1.35}
+.pred-date-sub{display:block;font-size:12px;font-weight:700;color:#e2e8f0;letter-spacing:0.3px;margin-top:4px}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI */
 .trek-container{display:flex;flex-direction:column;gap:12px;width:100%;margin-bottom:10px}
@@ -197,33 +199,35 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <!-- KONTEN PALING ATAS: IKLAN UTAMA DI ATAS                           -->
 <!-- ================================================================= -->
 <div class="top-ads-wrapper">
-  <!-- 1. Banner 468x60 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script>
-      atOptions = {
-        'key' : '9a986a45c62dcea8d8216b9210f159cb',
-        'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
-        'params' : {}
-      };
-    </script>
-    <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+  <!-- 1. Banner 468x60 (Di-scale otomatis agar pas di layar mobile) -->
+  <div class="ad-slot" style="min-height:60px">
+    <div style="transform:scale(0.82);transform-origin:center center">
+      <script>
+        atOptions = {
+          'key' : '9a986a45c62dcea8d8216b9210f159cb',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    </div>
   </div>
 
   <!-- 2. Script + Container ID -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <div class="ad-slot">
     <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
 
   <!-- 3. Script 14 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <div class="ad-slot">
     <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
   </div>
 
   <!-- 4. Banner 320x50 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <div class="ad-slot" style="min-height:50px">
     <script>
       atOptions = {
         'key' : '119c8bb3217ed264a8fa223c3197bf69',
@@ -234,11 +238,6 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
       };
     </script>
     <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
-  </div>
-
-  <!-- 5. Script Ahuramazda -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
   </div>
 </div>
 <!-- ================================================================= -->
@@ -257,7 +256,7 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <div class=guide-text>
 <strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas SDY akan membedah indeks mistik, taysen, dan pola 2 digit angka paten beserta 20 line invest pilihan secara presisi.<br><br>
 <em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!<br><br>
-<strong style="color: #38bdf8;">Himbauan Penting:</strong> Segala bentuk iklan Bandar Online (BO) atau promosi pihak ketiga yang tampil di halaman ini murni dari jaringan penyedia layanan iklan luar. **Tunggal Paito tidak pernah bekerja sama, merekomendasikan, atau menjadi bagian dari pihak BO manapun.** Harap bijak dalam bernavigasi.
+<strong style="color: #38bdf8;">Himbauan Penting:</strong> Segala bentuk iklan Bandar Online (BO) atau promosi pihak ketiga yang tampil di halaman ini murni dari jaringan penyedia layanan iklan luar. <strong>Tunggal Paito tidak pernah bekerja sama, merekomendasikan, atau menjadi bagian dari pihak BO manapun.</strong> Harap bijak dalam bernavigasi.
 </div>
 <input id=input-angka maxlength=4 placeholder="Contoh: 9267">
 <br>
@@ -289,7 +288,7 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 
 <!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
 <div class="main-card" id="capture-card">
-<h1>ANALISA LINE 2D BELAKANG SYDNEY POOLS HARI INI</h1>
+<h1 id="main-title">ANALISA LINE 2D BELAKANG SDY</h1>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI -->
 <div class="trek-container" id="trek-container">
     <!-- Data 7 result terakhir beserta 20 line invest masing-masing akan dimuat secara dinamis di sini -->
@@ -319,7 +318,7 @@ Analisa Line 2D Belakang Sdy, Prediksi 2D Belakang Sydney Pools, Angka Main Sdy 
 
 <script type=module>
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
@@ -331,8 +330,71 @@ linkElement.textContent = currentUrl;
 
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
-      db=getDatabase(app),
-      dbRef=ref(db);
+      db=getDatabase(app);
+
+const PASARAN_LABEL = "ANALISA LINE 2D BELAKANG SDY";
+const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_ID = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
+
+function parseDateKey(dateStr) {
+  const parts = String(dateStr).trim().split("-");
+  if (parts.length === 3) {
+    const d = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const y = Number(parts[2]);
+    const dt = new Date(y, m, d, 12, 0, 0);
+    if (!isNaN(dt.getTime())) return dt;
+  }
+  return null;
+}
+
+function formatTanggalTanpaKurung(dateObj) {
+  const hari = HARI_ID[dateObj.getDay()];
+  const tgl = String(dateObj.getDate()).padStart(2, "0");
+  const bulan = BULAN_ID[dateObj.getMonth()];
+  const tahun = dateObj.getFullYear();
+  return `${hari}, ${tgl} ${bulan} ${tahun}`;
+}
+
+function updateJudulPrediksiBesok(latestDateObj) {
+  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+    ? latestDateObj
+    : new Date();
+
+  const nextDayDate = new Date(baseDate.getTime());
+  nextDayDate.setDate(nextDayDate.getDate() + 1);
+
+  const labelBesok = formatTanggalTanpaKurung(nextDayDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
+  }
+  document.getElementById("page-title").textContent = `Analisa Line 2D Belakang SDY ${labelBesok} - Tunggal Paito`;
+}
+
+function extract4DResults(rawValue) {
+  if (rawValue === null || rawValue === undefined) return [];
+  const str = String(rawValue).trim();
+  if (!str) return [];
+
+  if (str.includes(",")) {
+    return str
+      .split(",")
+      .map(s => s.trim())
+      .filter(s => /^\d{4,}$/.test(s))
+      .map(s => s.slice(-4));
+  }
+
+  const digitsOnly = str.replace(/\D/g, "");
+  if (digitsOnly.length >= 4) {
+    return [digitsOnly.slice(-4)];
+  }
+
+  return [];
+}
 
 function generate20Lines(d1, d2) {
     let lines = [];
@@ -366,24 +428,37 @@ function generate20Lines(d1, d2) {
     return lines.slice(0, 20);
 }
 
-// AMBIL DATA 7 RESULT TERAKHIR DARI live/sydney & RUMUS PATEN 2 DIGIT
-get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
+// AMBIL DATA 7 RESULT TERAKHIR DARI live/data-sdy & RUMUS PATEN 2 DIGIT
+const dataRef = ref(db, "live/data-sdy");
+onValue(dataRef, (snapshot) => {
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
+        const validKeyItems = Object.keys(data)
+            .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
+            .filter(entry => entry.dateObj !== null)
+            .sort((a, b) => a.dateObj - b.dateObj);
+
+        let latestDateObj = null;
+        for (let i = validKeyItems.length - 1; i >= 0; i--) {
+            if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
+                latestDateObj = validKeyItems[i].dateObj;
+                break;
+            }
+        }
+        updateJudulPrediksiBesok(latestDateObj);
+
+        const entries = [];
+        validKeyItems.forEach(({ dateStr, dateObj }) => {
+            const list4d = extract4DResults(data[dateStr]);
+            list4d.forEach((val4d, idx) => {
+                entries.push({
+                    dateStr: `${dateStr}-${idx}`,
+                    val: val4d,
+                    dateObj
+                });
+            });
         });
 
-        // Urutkan secara kronologis berdasarkan tanggal
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-
-        // Ambil 7 data terakhir
         const last7 = entries.slice(-7);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
@@ -396,7 +471,7 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
             const result4d = item.val;
             if (result4d.length < 4) return;
 
-            const digits = result4d.split("").map(Number);
+            const digits = result4d.slice(-4).split("").map(Number);
 
             let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
@@ -406,9 +481,8 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
             scores[(kepala + ekor) % 10] += 4;
             let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
 
-            // Cari result hari berikutnya (untuk koreksi nilai fokus 2D & efek menyala)
-            const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
-            const nextItem = entries[globalIndex + 1]; 
+            const globalPos = entries.length - last7.length + index;
+            const nextItem = globalPos + 1 < entries.length ? entries[globalPos + 1] : null;
             
             let status = "?";
             let badgeClass = "trek-badge";
@@ -418,7 +492,7 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
                 status = "?";
             } else {
                 const next4d = nextItem.val;
-                winning2d = next4d.slice(-2); // Ambil 2D belakang result berikutnya (Kepala + Ekor)
+                winning2d = next4d.slice(-2);
                 const nKepala = Number(next4d[2]);
                 const nEkor = Number(next4d[3]);
                 const isTwin = (nKepala === nEkor);
@@ -439,7 +513,6 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
                 }
             }
 
-            // Cek apakah ini baris paling bawah (terakhir)
             const isLastRow = (index === last7.length - 1);
             let lines20 = generate20Lines(predDigits[0], predDigits[1]);
             let investGridHtml = "";
@@ -475,7 +548,6 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
                 </div>`;
             }
 
-            // Buat elemen baris trek lengkap
             let rowHtml = `
             <div class="trek-item-box">
                 <div class="trek-row">
@@ -500,7 +572,6 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
             trekContainer.insertAdjacentHTML('beforeend', rowHtml);
         });
 
-        // Event listener untuk tombol buka kunci PIN Sydney
         const btnUnlock = document.getElementById("btn-unlock-pin");
         if (btnUnlock) {
             btnUnlock.addEventListener("click", function(e) {
@@ -515,9 +586,10 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
                 }
             });
         }
-
+    } else {
+        updateJudulPrediksiBesok(null);
     }
-}).catch((e)=>{
+}, (e)=>{
     console.error("Gagal mengambil data Sydney dari Firebase:", e);
 });
 
@@ -558,7 +630,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
 
     html2canvas(cardElement, {
         backgroundColor: "#163868",
-        scale: 2 // Kualitas HD
+        scale: 2
     }).then(canvas => {
         const link = document.createElement("a");
         link.download = "Analisa-Line-2D-Belakang-Sydney-Pools.png";
@@ -644,5 +716,8 @@ document.addEventListener("click",(function(e){
 document.addEventListener("contextmenu",(e=>e.preventDefault()));
 document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}
 </script>
+
+<!-- POPUNDER SCRIPT (Ditempatkan di bawah agar tidak mengganggu tata letak konten) -->
+<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 </body>
 </html>
