@@ -46,7 +46,8 @@ body{background-color:#051c0d;color:#fff;display:flex;flex-direction:column;alig
 
 /* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
 .main-card{width:100%;max-width:420px;background-color:#002b0f;border:1px solid rgba(0,255,102,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,255,102,.2);margin-bottom:15px}
-h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#0f6}
+h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#0f6;line-height:1.35}
+.pred-date-sub{display:block;font-size:12px;font-weight:700;color:#dcfce7;margin-top:4px;letter-spacing:0.2px}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI SGP */
 .trek-container{display:flex;flex-direction:column;gap:12px;width:100%;margin-bottom:10px}
@@ -59,7 +60,7 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 .trek-colon{color:#0f6;font-weight:bold;margin:0 4px}
 .trek-badge{background:#001a09;color:#0f6;border:1px solid #0f6;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:bold;text-transform:uppercase;min-width:55px;text-align:center}
 
-/* KOTAK 10 LINE INVEST PER BARIS (Grid 5 kolom agar rapi 2 baris) */
+/* KOTAK 10 LINE INVEST PER BARIS */
 .invest-section {
     background: rgba(0,26,9,0.6);
     border: 1px solid rgba(0,255,102,0.3);
@@ -270,7 +271,7 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 
 <!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
 <div class="main-card" id="capture-card">
-<h1>ANALISA LINE 2D BELAKANG SINGAPORE POOLS HARI INI</h1>
+<h1 id="main-title">ANALISA LINE 2D BELAKANG SINGAPORE POOLS HARI INI</h1>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI SGP -->
 <div class="trek-container" id="trek-container">
     <!-- Data 7 result terakhir beserta 10 line invest masing-masing akan dimuat secara dinamis di sini -->
@@ -316,11 +317,10 @@ Analisa Line 2D Belakang Sgp, Prediksi 2D Belakang Singapore Pools, Angka Main S
 
 <script type=module>
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
-// MENGAMBIL DAN MENAMPILKAN URL HALAMAN SECARA OTOMATIS
 const currentUrl = window.location.href;
 const linkElement = document.getElementById("dynamic-site-link");
 linkElement.href = currentUrl;
@@ -328,10 +328,83 @@ linkElement.textContent = currentUrl;
 
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
-      db=getDatabase(app),
-      dbRef=ref(db);
+      db=getDatabase(app);
 
-// FUNGSI 10 LINE INVEST BERDASARKAN TARGET INDEX: 4, 5, 6, 13, 15, 24, 25, 26, 33, 35
+const PASARAN_LABEL = "LINE 2D BELAKANG SGP";
+const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_ID = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
+// SGP libur setiap Selasa (2) dan Jumat (5)
+const HARI_LIBUR_SGP = new Set([2, 5]);
+
+function parseDateKey(dateStr) {
+  const parts = String(dateStr).trim().split("-");
+  if (parts.length === 3) {
+    const d = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const y = Number(parts[2]);
+    const dt = new Date(y, m, d, 12, 0, 0);
+    if (!isNaN(dt.getTime())) return dt;
+  }
+  return null;
+}
+
+function formatTanggalTanpaKurung(dateObj) {
+  const hari = HARI_ID[dateObj.getDay()];
+  const tgl = String(dateObj.getDate()).padStart(2, "0");
+  const bulan = BULAN_ID[dateObj.getMonth()];
+  const tahun = dateObj.getFullYear();
+  return `${hari}, ${tgl} ${bulan} ${tahun}`;
+}
+
+function getNextSgpDrawDate(latestDateObj) {
+  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+    ? latestDateObj
+    : new Date();
+
+  const nextDraw = new Date(baseDate.getTime());
+  nextDraw.setDate(nextDraw.getDate() + 1);
+
+  while (HARI_LIBUR_SGP.has(nextDraw.getDay())) {
+    nextDraw.setDate(nextDraw.getDate() + 1);
+  }
+
+  return nextDraw;
+}
+
+function updateJudulPrediksiSgp(latestDateObj) {
+  const nextDrawDate = getNextSgpDrawDate(latestDateObj);
+  const labelJadwal = formatTanggalTanpaKurung(nextDrawDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `ANALISA ${PASARAN_LABEL}<span class="pred-date-sub">${labelJadwal}</span>`;
+  }
+  document.title = `Angka Top 10 ${PASARAN_LABEL} ${labelJadwal} - Tunggal Paito`;
+}
+
+function extract4DResults(rawValue) {
+  if (rawValue === null || rawValue === undefined) return [];
+  const str = String(rawValue).trim();
+  if (!str) return [];
+
+  if (str.includes(",")) {
+    return str
+      .split(",")
+      .map(s => s.trim())
+      .filter(s => /^\d{4,}$/.test(s))
+      .map(s => s.slice(-4));
+  }
+
+  const digitsOnly = str.replace(/\D/g, "");
+  if (digitsOnly.length >= 4) {
+    return [digitsOnly.slice(-4)];
+  }
+
+  return [];
+}
+
 function generate10Lines(d1, d2) {
     let rawLines = [];
     let primary = [`${d1}${d2}`, `${d2}${d1}`, `${d1}${d1}`, `${d2}${d2}`];
@@ -373,29 +446,42 @@ function generate10Lines(d1, d2) {
     return selectedLines;
 }
 
-// AMBIL DATA 7 RESULT TERAKHIR DARI live/data-sgp & RUMUS PATEN 2 DIGIT
-get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
-    if(snapshot.exists() && snapshot.val()){
+const dataRef = ref(db, "live/data-sgp");
+onValue(dataRef, (snapshot) => {
+    if (snapshot.exists() && snapshot.val()) {
         const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
+
+        const validKeyItems = Object.keys(data)
+            .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
+            .filter(entry => entry.dateObj !== null)
+            .sort((a, b) => a.dateObj - b.dateObj);
+
+        let latestDateObj = null;
+        for (let i = validKeyItems.length - 1; i >= 0; i--) {
+            if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
+                latestDateObj = validKeyItems[i].dateObj;
+                break;
+            }
+        }
+        updateJudulPrediksiSgp(latestDateObj);
+
+        const allResults = [];
+        validKeyItems.forEach(({ dateStr, dateObj }) => {
+            const list4d = extract4DResults(data[dateStr]);
+            list4d.forEach((val4d, idx) => {
+                allResults.push({
+                    dateStr,
+                    dateObj,
+                    idx,
+                    val: val4d
+                });
+            });
         });
 
-        // Urutkan secara kronologis berdasarkan tanggal
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-
-        // Ambil 7 data terakhir
-        const last7 = entries.slice(-7);
+        const last7 = allResults.slice(-7);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
 
-        // PIN Rahasia Admin untuk membuka baris terakhir Singapore
         const correctPin = "paito123";
         const isUnlocked = localStorage.getItem("sgp_unlocked_latest") === "true";
 
@@ -403,7 +489,7 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
             const result4d = item.val;
             if (result4d.length < 4) return;
 
-            const digits = result4d.split("").map(Number);
+            const digits = result4d.slice(-4).split("").map(Number);
             
             let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
@@ -413,9 +499,8 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
             scores[(as + kop + kepala + ekor) % 10] += 3;
             let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
 
-            // Cari result hari berikutnya
-            const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
-            const nextItem = entries[globalIndex + 1]; 
+            const globalPos = allResults.length - last7.length + index;
+            const nextItem = allResults[globalIndex + 1]; 
             
             let status = "?";
             let badgeClass = "trek-badge";
@@ -536,13 +621,13 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
                 }
             });
         }
-
+    } else {
+        updateJudulPrediksiSgp(null);
     }
-}).catch((e)=>{
+}, (e)=>{
     console.error("Gagal mengambil data Singapore dari Firebase:", e);
 });
 
-// GENERATOR ANGKA SGP
 document.getElementById("btn-generate").addEventListener("click",(function(){
   const e=document.getElementById("input-angka").value.trim();
   if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
@@ -569,7 +654,6 @@ document.getElementById("btn-generate").addEventListener("click",(function(){
   document.getElementById("generator-result").style.display="block";
 }));
 
-// FITUR DOWNLOAD GAMBAR KARTU PREDIKSI
 document.getElementById("btn-download").addEventListener("click", function() {
     const cardElement = document.getElementById("capture-card");
     
@@ -579,7 +663,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
 
     html2canvas(cardElement, {
         backgroundColor: "#002b0f",
-        scale: 2 // Kualitas HD
+        scale: 2
     }).then(canvas => {
         const link = document.createElement("a");
         link.download = "Analisa-Line-2D-Belakang-Singapore-Pools.png";
@@ -596,7 +680,6 @@ document.getElementById("btn-download").addEventListener("click", function() {
     });
 });
 
-// LOGIKA PENGUNJUNG ONLINE ALAMI
 let currentVisitors = Math.floor(Math.random() * 151) + 150; 
 let updateTimer = null;
 const visitorText = document.getElementById("visitor-count-text");
@@ -633,7 +716,6 @@ function scheduleNextUpdate() {
 
 scheduleNextUpdate();
 
-// SKRIP IKLAN
 let clickCount=0;
 const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 document.addEventListener("click",(function(e){
