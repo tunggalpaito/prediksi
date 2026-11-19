@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Prediksi Togel Hari Ini AM 2DB SDY POOLS - Tunggal Paito</title>
+<title id="page-title">Prediksi Togel Hari Ini AM 2DB SDY POOLS - Tunggal Paito</title>
 <meta name="description" content="AM 2DB SDY adalah angka main di 2d belakang dari tunggal paito sebanyak 4 digit. Dapatkan bocoran angka main, paito warna, dan update keluaran tercepat." />
 <meta name="keywords" content="prediksi togel hari ini sdy, prediksi sydney bbfs, tunggal paito sdy, angka jitu sdy hari ini, bocoran sdy akurat, paito warna sdy" />
 <meta name="author" content="Tunggal Paito Official" />
@@ -195,7 +195,8 @@ body{
     box-shadow:0 8px 30px rgba(0,0,0,0.5);
     margin-bottom:15px;
 }
-h1{font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:0.5px;color:#38bdf8;line-height:1.4}
+h1{font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:0.5px;color:#38bdf8;line-height:1.4}
+.h1-date{font-size:13px;font-weight:700;color:#ffffff;margin-bottom:12px;letter-spacing:0.3px}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI */
 .trek-container{display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:10px}
@@ -451,6 +452,7 @@ h1{font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:0.5px;color:
 
 <div class="main-card" id="capture-card">
 <h1>PREDIKSI TOGEL HARI INI <br>RESULT 4D & ANGKA MAIN SDY</h1>
+<div id="dynamic-h1-date" class="h1-date">Memuat Hari & Tanggal...</div>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI -->
 <div class="trek-container" id="trek-container">
     <!-- Data result SDY dimuat dinamis -->
@@ -492,6 +494,105 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       app=initializeApp(firebaseConfig),
       db=getDatabase(app),
       dbRef=ref(db);
+
+let formattedTargetDateText = "";
+
+// HELPER FLEKSIBEL: PARSE KEY TANGGAL (DD-MM-YYYY, YYYY-MM-DD, DD/MM/YYYY)
+function parseFlexibleDate(dateStr) {
+    if (!dateStr) return null;
+    const s = String(dateStr).trim();
+    let m = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+    if (m) return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+    m = s.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);
+    if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    const fallback = new Date(s);
+    return Number.isNaN(fallback.getTime()) ? null : fallback;
+}
+
+// HITUNG HARI & TANGGAL PERIODE BERIKUTNYA DARI UPDATE RESULT TERBARU (SDY BUKA SETIAP HARI)
+function getTargetScheduleDate(entries) {
+    const datedEntries = entries.filter(e => e.dateObj instanceof Date && !Number.isNaN(e.dateObj.getTime()));
+    let baseDate = datedEntries.length > 0 ? new Date(datedEntries[datedEntries.length - 1].dateObj) : new Date();
+    baseDate.setDate(baseDate.getDate() + 1);
+
+    return baseDate.toLocaleDateString("id-ID", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+}
+
+function applyScheduleHeader(formattedDate) {
+    formattedTargetDateText = formattedDate;
+    const h1DateEl = document.getElementById("dynamic-h1-date");
+    if (h1DateEl) h1DateEl.textContent = formattedDate;
+    document.getElementById("page-title").textContent = `Prediksi Togel Hari Ini (${formattedDate}) AM 2DB SDY POOLS - Tunggal Paito`;
+}
+
+// HELPER FLEKSIBEL: EKSTRAK SEMUA ANGKA 4 DIGIT DARI FORMAT VALUE BEBAS
+function extract4DigitList(rawVal) {
+    if (rawVal === null || rawVal === undefined) return [];
+    let chunks = [];
+
+    if (Array.isArray(rawVal)) {
+        rawVal.forEach(v => chunks.push(...extract4DigitList(v)));
+        return chunks;
+    }
+
+    if (typeof rawVal === "object") {
+        Object.keys(rawVal).forEach(k => chunks.push(...extract4DigitList(rawVal[k])));
+        return chunks;
+    }
+
+    String(rawVal)
+        .split(/[,\n;|]+/)
+        .forEach(part => {
+            const clean = part.split(":")[0].trim();
+            if (/^\d{4}$/.test(clean)) {
+                chunks.push(clean);
+            }
+        });
+
+    return chunks;
+}
+
+// HELPER FLEKSIBEL: BENTUK URUTAN ENTRY RESULT DARI NODE FIREBASE BEBAS
+function buildEntriesFromFirebase(data) {
+    if (!data || typeof data !== "object") return [];
+
+    const keysWithMeta = Object.keys(data).map((key, idx) => ({
+        key,
+        idx,
+        dateObj: parseFlexibleDate(key),
+        rawVal: data[key]
+    }));
+
+    const hasValidDates = keysWithMeta.some(k => k.dateObj !== null);
+    if (hasValidDates) {
+        keysWithMeta.sort((a, b) => {
+            if (a.dateObj && b.dateObj) return a.dateObj - b.dateObj;
+            if (a.dateObj) return -1;
+            if (b.dateObj) return 1;
+            return a.idx - b.idx;
+        });
+    }
+
+    const entries = [];
+    keysWithMeta.forEach((item, kIdx) => {
+        const nums = extract4DigitList(item.rawVal);
+        nums.forEach((val, nIdx) => {
+            entries.push({
+                id: `${item.key}-${kIdx}-${nIdx}`,
+                dateStr: item.key,
+                val,
+                dateObj: item.dateObj
+            });
+        });
+    });
+
+    return entries;
+}
 
 // FUNGSI UTAMA RUMUS 20 POIN SDY
 function hitungTrekItem(item, globalIndex, entries) {
@@ -567,22 +668,12 @@ function hitungTrekItem(item, globalIndex, entries) {
     return { rowHtml, status };
 }
 
-// AMBIL DATA RESULT DARI FIREBASE live/sydney
+// AMBIL DATA RESULT DARI FIREBASE live/data-sdy
 get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
-        const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
-        });
+        const entries = buildEntriesFromFirebase(snapshot.val());
+        applyScheduleHeader(getTargetScheduleDate(entries));
 
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-        
         const last28 = entries.slice(-28);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
@@ -592,7 +683,7 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
         let rowsHtml = "";
 
         last28.forEach((item) => {
-            const gIdx = entries.findIndex(e => e.dateStr === item.dateStr);
+            const gIdx = entries.findIndex(e => e.id === item.id);
             const res = hitungTrekItem(item, gIdx, entries);
             if (!res) return;
             rowsHtml += res.rowHtml;
@@ -633,19 +724,14 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
 document.getElementById("btn-download").addEventListener("click", function() {
     get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
         if(!snapshot.exists()) return;
-        const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return { dateStr, val: String(data[dateStr]).trim(), dateObj };
-        });
-        entries.sort((a, b) => a.dateObj - b.dateObj);
+        const entries = buildEntriesFromFirebase(snapshot.val());
+        const targetDateLabel = getTargetScheduleDate(entries) || formattedTargetDateText;
 
         const last12 = entries.slice(-12);
         let cCentang = 0, cX = 0, rHtml = "";
 
         last12.forEach((item) => {
-            let gIdx = entries.findIndex(e => e.dateStr === item.dateStr);
+            let gIdx = entries.findIndex(e => e.id === item.id);
             let res = hitungTrekItem(item, gIdx, entries);
             if(!res) return;
             rHtml += res.rowHtml;
@@ -684,6 +770,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
         tempContainer.innerHTML = `
             <div class="main-card" style="margin:0; width:100%;">
                 <h1>PREDIKSI TOGEL HARI INI <br>RESULT 4D & ANGKA MAIN SDY</h1>
+                <div class="h1-date">${targetDateLabel}</div>
                 <div class="trek-container">${summary12Html + rHtml}</div>
                 <a href="${currentUrl}" class="card-website-footer">${currentUrl}</a>
             </div>
