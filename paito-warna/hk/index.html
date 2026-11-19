@@ -44,7 +44,7 @@ p.subtitle{color:var(--text-muted);font-size:11px;font-weight:600}
 .section-title{font-size:13px;color:#00ff66;margin-bottom:12px;border-bottom:1px solid rgba(0,255,102,.3);padding-bottom:4px;display:block;text-align:center;font-weight:700;font-family:Outfit,sans-serif}
 .table-responsive{width:100%;overflow-x:auto;margin-bottom:15px;border:1px solid rgba(0,255,102,.3);border-radius:8px;position:relative;background:#06140a}
 .paito-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11px;position:relative;z-index:1}
-.paito-table td,.paito-table th{border:1px solid rgba(0,255,102,.2);padding:6px 2px;text-align:center;vertical-align:middle}
+.paito-table td,.paito-table th{border:1px solid rgba(0,255,102,.2);padding:6px 2px;text-align:center;vertical-align:top}
 .paito-table th{background-color:#06140a;color:#00ff66;font-weight:700;font-size:11px;font-family:Outfit,sans-serif}
 .paito-table tr:nth-child(2n){background-color:rgba(0,255,102,.02)}
 .number-group{display:inline-block;padding:1px 3px;background:#0b1a10;border-radius:4px;border:1px solid rgba(0,255,102,.2);margin:1px 0;font-family:monospace;letter-spacing:.5px;white-space:nowrap}
@@ -245,9 +245,53 @@ function toggleDigitColor(t){let e = !1;for(let s = 0; s <= 9; s++)if(t.classLis
 function selectPosition(t,e){selectedPosIndex = t,document.querySelectorAll(".pos-btn").forEach((t=>t.classList.remove("active"))),e.classList.add("active")}
 function autoColorByPosition(t){document.querySelectorAll(".number-group").forEach((e=>{let s = e.querySelectorAll(".digit");if(s.length > selectedPosIndex){let e = s[selectedPosIndex];if(parseInt(e.textContent.trim()) === t){for(let t = 0; t <= 9; t++)e.classList.remove("c-"+t);e.classList.add(activeColorClass)}}})),updateSvgLines()}
 function searchPattern(t){const e = document.getElementById("patternInput").value.trim();if(!e || isNaN(e))return void alert("Masukkan angka yang valid (contoh: 1234 atau 56)!");const s = e.split("");document.querySelectorAll(".number-group").forEach((a=>{const l = a.querySelectorAll(".digit");if(0 === l.length)return;let n = "";l.forEach((t=>n += t.textContent.trim()));let i = !1;if(t)n.includes(e) && (i = !0);else{let t = n;i = !0;for(let e of s){let s = t.indexOf(e);if(-1 === s){i = !1;break}t = t.substring(0,s)+t.substring(s+1)}}i && l.forEach((t=>{for(let e = 0; e <= 9; e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}))})),updateSvgLines()}
-function updateSvgLines(){const t = document.getElementById("paitoSvg"),e = document.getElementById("paitoTable"),s = document.getElementById("tableResponsive");if(!t || !e)return;if(t.innerHTML="", "none" === e.style.display)return;t.setAttribute("width",e.offsetWidth),t.setAttribute("height",e.offsetHeight);const a = {};for(let t = 0; t <= 9; t++){a["c-"+t] = [];const e = ["#ffadad","#ffd6a5","#fdffb6","#caffbf","#9bf6ff","#a0c4ff","#bdb2ff","#ffc6ff","#fffffc","#ffb703"];a["c-"+t].hex = e[t]}document.querySelectorAll(".digit").forEach((t=>{for(let e = 0; e <= 9; e++)if(t.classList.contains("c-"+e)){const l = t.getBoundingClientRect(),n = s.getBoundingClientRect(),i = l.left - n.left + s.scrollLeft + l.width/2,o = l.top - n.top + s.scrollTop + l.height/2;a["c-"+e].push({x:i,y:o});break}}));for(let e = 0; e <= 9; e++){const s = a["c-"+e];if(s.length > 1)for(let l = 0; l < s.length - 1; l++){const n = document.createElementNS("http://www.w3.org/2000/svg","line");n.setAttribute("x1",s[l].x),n.setAttribute("y1",s[l].y),n.setAttribute("x2",s[l+1].x),n.setAttribute("y2",s[l+1].y),n.setAttribute("stroke",a["c-"+e].hex),n.setAttribute("stroke-width","2.5"),n.setAttribute("stroke-opacity","0.8"),t.appendChild(n)}}}
+function updateSvgLines(){const t = document.getElementById("paitoSvg"),e = document.getElementById("paitoTable"),s = document.getElementById("tableResponsive");if(!t || !e)return;if(t.innerHTML="", "none" === e.style.display)return;t.setAttribute("width",e.offsetWidth),t.setAttribute("height",e.offsetHeight);const a = {};for(let t = 0; t <= 9; t++){a["c-"+t] = [];const e = ["#ffadad","#ffd6a5","#fdffb6","#caffbf","#9bf6ff","#a0c4ff","#bdb2ff","#ffc6ff","#fffffc","#ffb703"];a["c-"+t].hex = e[t]}document.querySelectorAll(".digit").forEach((t=>{for(let e = 0; e <= 9; e++)if(t.classList.contains("c-"+e)){const l = t.getBoundingClientRect(),n = s.getBoundingClientRect(),i = l.left - n.left + s.scrollLeft + l.width/2,o = l.top - n.top + s.scrollTop + l.height/2;a["c-"+e].push({x:i,y:o});break}}));for(let e = 0; e <= 9; e++){const s = a["c-"+e];if(s.length > 1)for(let l = 0; l < s.length - 1; l++){const n = document.createElementNS("http://www.w3.org/2000/svg","line");n.setAttribute("x1",s[l].x),n.setAttribute("y1",s[l].y),n.setAttribute("x2",s[l+1].x),n.setAttribute("y2",s[l+1].y),n.setAttribute("stroke",a["c-"+e].hex),n.setAttribute("stroke-width","2.5"),n.setAttribute("stroke-opacity","0.8"),t.appendChild(n)}}}}
 
-hkRef.once("value").then((t=>{const e = document.getElementById("loading"),s = document.getElementById("paitoTable"),a = document.getElementById("tableBody");if(e.style.display="none", s.style.display="table", !t.exists())return void(a.innerHTML='<tr><td colspan="7" style="text-align:center;">Belum ada data HK di database.</td></tr>');const l = t.val();let n = {};Object.keys(l).forEach((t=>{let e = t.split("-");if(3 !== e.length)return;let s = new Date(`${e[2]}-${e[1]}-${e[0]}`);if(isNaN(s))return;let a = function(t){let e = new Date(t),s = e.getDay(),a = e.getDate()-s+(0===s?-6:1);return new Date(e.setDate(a))}(s),i = `${(o=a).getFullYear()}-${String(o.getMonth()+1).padStart(2,"0")}-${String(o.getDate()).padStart(2,"0")}`;var o;n[i] || (n[i]={1:"",2:"",3:"",4:"",5:"",6:"",0:""});let r = s.getDay(),c = l[t].split(",").map((t=>`<span class="number-group">${t.trim().split("").map((t=>`<span class="digit" onclick="toggleDigitColor(this)">${t}</span>`)).join("")}</span>`)).join("<br>");n[i][r] = c}));let i = Object.keys(n).sort(),o = "";const r = '<span class="number-group" style="letter-spacing:0.5px;"><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span></span>';i.forEach((t=>{let e = n[t],s = e[1] || r,a = e[2] || r,l = e[3] || r,i = e[4] || r,c = e[5] || r,d = e[6] || r,f = e[0] || r;o += `<tr><td>${s}</td><td>${a}</td><td>${l}</td><td>${i}</td><td>${c}</td><td>${d}</td><td>${f}</td></tr>`})),a.innerHTML = o || '<tr><td colspan="7" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>',updateSvgLines(),window.addEventListener("resize",updateSvgLines)})).catch((t=>{console.error("Gagal mengambil data:",t),document.getElementById("loading").textContent="Gagal memuat data dari Firebase."}));
+function parseDateKey(rawKey){const parts=String(rawKey||"").trim().split(/[-/]/);if(3!==parts.length)return null;let day,month,year;if(parts[0].length===4){year=parseInt(parts[0],10);month=parseInt(parts[1],10);day=parseInt(parts[2],10);}else{day=parseInt(parts[0],10);month=parseInt(parts[1],10);year=parseInt(parts[2],10);}if(!day||!month||!year)return null;const dt=new Date(year,month-1,day);return isNaN(dt.getTime())?null:dt;}
+function getMondayDate(dt){const copy=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate());const day=copy.getDay();const diff=copy.getDate()-day+(0===day?-6:1);copy.setDate(diff);copy.setHours(0,0,0,0);return copy;}
+function extractFourDigitGroups(rawValue){const digitsOnly=String(rawValue||"").replace(/\D/g,"");if(!digitsOnly)return[];if(String(rawValue||"").includes(",")){return String(rawValue).split(",").map(part=>part.replace(/\D/g,"").trim()).filter(Boolean);}const groups=[];for(let i=0;i<digitsOnly.length;i+=4){const chunk=digitsOnly.slice(i,i+4);if(chunk)groups.push(chunk);}return groups;}
+function renderNumberGroup(numStr){return`<span class="number-group">${String(numStr).split("").map(d=>`<span class="digit" onclick="toggleDigitColor(this)">${d}</span>`).join("")}</span>`;}
+
+hkRef.once("value").then((t=>{
+  const e = document.getElementById("loading"),s = document.getElementById("paitoTable"),a = document.getElementById("tableBody");
+  if(e.style.display="none", s.style.display="table", !t.exists())return void(a.innerHTML='<tr><td colspan="7" style="text-align:center;">Belum ada data HK di database.</td></tr>');
+  const rawData = t.val() || {};
+  let weeksMap = {};
+  Object.keys(rawData).forEach((dateKey=>{
+    const baseDt = parseDateKey(dateKey);
+    if(!baseDt)return;
+    const groups = extractFourDigitGroups(rawData[dateKey]);
+    if(!groups.length)return;
+    for(let idx=0;idx<groups.length;idx++){
+      const offsetFromRight=(groups.length-1)-idx;
+      const targetDt=new Date(baseDt.getFullYear(),baseDt.getMonth(),baseDt.getDate()-offsetFromRight);
+      const monday=getMondayDate(targetDt);
+      const weekKey=`${monday.getFullYear()}-${String(monday.getMonth()+1).padStart(2,"0")}-${String(monday.getDate()).padStart(2,"0")}`;
+      if(!weeksMap[weekKey]){
+        weeksMap[weekKey]={ts:monday.getTime(),days:{1:[],2:[],3:[],4:[],5:[],6:[],0:[]}};
+      }
+      const dayOfWeek=targetDt.getDay();
+      weeksMap[weekKey].days[dayOfWeek].push(renderNumberGroup(groups[idx]));
+    }
+  }));
+  const sortedWeeks=Object.keys(weeksMap).map(k=>weeksMap[k]).sort((a,b)=>a.ts-b.ts);
+  const placeholder = '<span class="number-group" style="letter-spacing:0.5px;"><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span></span>';
+  let rowsHtml = "";
+  sortedWeeks.forEach((wk=>{
+    const d = wk.days;
+    const c1 = d[1].length ? d[1].join("<br>") : placeholder;
+    const c2 = d[2].length ? d[2].join("<br>") : placeholder;
+    const c3 = d[3].length ? d[3].join("<br>") : placeholder;
+    const c4 = d[4].length ? d[4].join("<br>") : placeholder;
+    const c5 = d[5].length ? d[5].join("<br>") : placeholder;
+    const c6 = d[6].length ? d[6].join("<br>") : placeholder;
+    const c0 = d[0].length ? d[0].join("<br>") : placeholder;
+    rowsHtml += `<tr><td>${c1}</td><td>${c2}</td><td>${c3}</td><td>${c4}</td><td>${c5}</td><td>${c6}</td><td>${c0}</td></tr>`;
+  }));
+  a.innerHTML = rowsHtml || '<tr><td colspan="7" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>';
+  updateSvgLines();
+  window.addEventListener("resize",updateSvgLines);
+})).catch((t=>{console.error("Gagal mengambil data:",t),document.getElementById("loading").textContent="Gagal memuat data dari Firebase."}));
 
 let clickCount = 0;
 const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
