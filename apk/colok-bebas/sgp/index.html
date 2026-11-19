@@ -41,7 +41,8 @@ body{background-color:#0b1d3a;color:#fff;display:flex;flex-direction:column;alig
 
 /* KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) */
 .main-card{width:100%;max-width:420px;background-color:#163868;border:1px solid rgba(56,189,248,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(56,189,248,.2);margin-bottom:15px}
-h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#38bdf8}
+h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#38bdf8;line-height:1.35}
+.pred-date-sub{display:block;font-size:12px;font-weight:700;color:#e2e8f0;margin-top:4px;letter-spacing:0.2px}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI (12x RESULT) */
 .trek-container{display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:10px}
@@ -246,7 +247,7 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 
 <!-- KARTU UTAMA PREDIKSI (URL LINK OTOMATIS TERCETAK DI BAGIAN BAWAH DALAM KARTU) -->
 <div class="main-card" id="capture-card">
-<h1>PREDIKSI COLOK BEBAS SGP</h1>
+<h1 id="main-title">PREDIKSI COLOK BEBAS SGP</h1>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI (12x RESULT) -->
 <div class="trek-container" id="trek-container">
     <!-- Data 12 result terakhir akan dimuat secara dinamis di sini -->
@@ -276,11 +277,10 @@ Prediksi Colok Bebas Singapore, Bocoran Colok Bebas SGP Jitu, Angka Tunggal SGP 
 
 <script type=module>
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
-// MENGAMBIL DAN MENAMPILKAN URL HALAMAN SECARA OTOMATIS
 const currentUrl = window.location.href;
 const linkElement = document.getElementById("dynamic-site-link");
 linkElement.href = currentUrl;
@@ -288,28 +288,116 @@ linkElement.textContent = currentUrl;
 
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
-      db=getDatabase(app),
-      dbRef=ref(db);
+      db=getDatabase(app);
 
-// AMBIL DATA 12 RESULT TERAKHIR DARI live/singapore & RUMUS PATEN 1 DIGIT (COLOK BEBAS)
-get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
-    if(snapshot.exists() && snapshot.val()){
+const PASARAN_LABEL = "COLOK BEBAS SGP";
+const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_ID = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
+// SGP libur setiap Selasa (2) dan Jumat (5)
+const HARI_LIBUR_SGP = new Set([2, 5]);
+
+function parseDateKey(dateStr) {
+  const parts = String(dateStr).trim().split("-");
+  if (parts.length === 3) {
+    const d = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const y = Number(parts[2]);
+    const dt = new Date(y, m, d, 12, 0, 0);
+    if (!isNaN(dt.getTime())) return dt;
+  }
+  return null;
+}
+
+function formatTanggalTanpaKurung(dateObj) {
+  const hari = HARI_ID[dateObj.getDay()];
+  const tgl = String(dateObj.getDate()).padStart(2, "0");
+  const bulan = BULAN_ID[dateObj.getMonth()];
+  const tahun = dateObj.getFullYear();
+  return `${hari}, ${tgl} ${bulan} ${tahun}`;
+}
+
+function getNextSgpDrawDate(latestDateObj) {
+  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+    ? latestDateObj
+    : new Date();
+
+  const nextDraw = new Date(baseDate.getTime());
+  nextDraw.setDate(nextDraw.getDate() + 1);
+
+  while (HARI_LIBUR_SGP.has(nextDraw.getDay())) {
+    nextDraw.setDate(nextDraw.getDate() + 1);
+  }
+
+  return nextDraw;
+}
+
+function updateJudulPrediksiSgp(latestDateObj) {
+  const nextDrawDate = getNextSgpDrawDate(latestDateObj);
+  const labelJadwal = formatTanggalTanpaKurung(nextDrawDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `PREDIKSI ${PASARAN_LABEL}<span class="pred-date-sub">${labelJadwal}</span>`;
+  }
+  document.title = `Prediksi Angka ${PASARAN_LABEL} ${labelJadwal} - Tunggal Paito`;
+}
+
+function extract4DResults(rawValue) {
+  if (rawValue === null || rawValue === undefined) return [];
+  const str = String(rawValue).trim();
+  if (!str) return [];
+
+  if (str.includes(",")) {
+    return str
+      .split(",")
+      .map(s => s.trim())
+      .filter(s => /^\d{4,}$/.test(s))
+      .map(s => s.slice(-4));
+  }
+
+  const digitsOnly = str.replace(/\D/g, "");
+  if (digitsOnly.length >= 4) {
+    return [digitsOnly.slice(-4)];
+  }
+
+  return [];
+}
+
+const dataRef = ref(db, "live/data-sgp");
+onValue(dataRef, (snapshot) => {
+    if (snapshot.exists() && snapshot.val()) {
         const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
+
+        const validKeyItems = Object.keys(data)
+            .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
+            .filter(entry => entry.dateObj !== null)
+            .sort((a, b) => a.dateObj - b.dateObj);
+
+        let latestDateObj = null;
+        for (let i = validKeyItems.length - 1; i >= 0; i--) {
+            if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
+                latestDateObj = validKeyItems[i].dateObj;
+                break;
+            }
+        }
+        updateJudulPrediksiSgp(latestDateObj);
+
+        const allResults = [];
+        validKeyItems.forEach(({ dateStr, dateObj }) => {
+            const list4d = extract4DResults(data[dateStr]);
+            list4d.forEach((val4d, idx) => {
+                allResults.push({
+                    dateStr,
+                    dateObj,
+                    idx,
+                    val: val4d
+                });
+            });
         });
 
-        // Urutkan secara kronologis berdasarkan tanggal
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-
-        // Ambil 12 data terakhir
-        const last12 = entries.slice(-12);
+        const last12 = allResults.slice(-12);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
 
@@ -320,7 +408,7 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
             const result4d = item.val;
             if (result4d.length < 4) return;
 
-            const digits = result4d.split("").map(Number);
+            const digits = result4d.slice(-4).split("").map(Number);
             
             // --- BAGIAN RUMUS TARGET 4D KUAT 5 ---
             let scores5 = {}; for(let i=0; i<=9; i++) scores5[i]=1;
@@ -331,9 +419,8 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
             scores5[(kop5 + ekor5 * 2) % 10] += 5;
             let predDigit = Number(Object.keys(scores5).sort((x, y) => scores5[y] - scores5[x])[0]);
             
-            // Cari result hari berikutnya (untuk koreksi nilai centang / silang)
-            const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
-            const nextItem = entries[globalIndex + 1]; 
+            const globalPos = allResults.length - last12.length + index;
+            const nextItem = allResults[globalPos + 1]; 
             
             let status = "";
             let badgeClass = "badge-pending";
@@ -342,14 +429,13 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
                 badgeClass = "badge-pending";
             } else {
                 const next4d = nextItem.val;
-                const nextDigits = next4d.split("").map(Number);
+                const nextDigits = next4d.slice(-4).split("").map(Number);
                 const isMatched = nextDigits.includes(predDigit);
                 
                 status = "";
                 badgeClass = isMatched ? "badge-true" : "badge-false";
             }
 
-            // Cek apakah ini baris paling bawah (terbaru)
             const isLastRow = (index === last12.length - 1);
             let ballHtml = "";
 
@@ -367,7 +453,6 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
                 ballHtml = `<div class="ball ball-white">${predDigit}</div>`;
             }
 
-            // Buat elemen baris trek
             let rowHtml = `<div class="trek-row"><div class="trek-balls">`;
             
             digits.forEach(d => {
@@ -382,7 +467,6 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
             trekContainer.insertAdjacentHTML('beforeend', rowHtml);
         });
 
-        // Event listener untuk tombol buka kunci PIN
         const btnUnlock = document.getElementById("btn-unlock-pin");
         if (btnUnlock) {
             btnUnlock.addEventListener("click", function(e) {
@@ -397,16 +481,16 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
                 }
             });
         }
+    } else {
+        updateJudulPrediksiSgp(null);
     }
-}).catch((e)=>{
+}, (e)=>{
     console.error("Gagal mengambil data Singapore dari Firebase:", e);
 });
 
-// FITUR DOWNLOAD GAMBAR KARTU PREDIKSI
 document.getElementById("btn-download").addEventListener("click", function() {
     const cardElement = document.getElementById("capture-card");
     
-    // Buka blur sementara untuk tangkapan layar jika terkunci
     const blurTarget = cardElement.querySelector(".blur-target");
     const lockOverlay = cardElement.querySelector(".lock-overlay");
     if (blurTarget) blurTarget.style.filter = "none";
@@ -418,7 +502,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
 
     html2canvas(cardElement, {
         backgroundColor: "#163868",
-        scale: 2 // Kualitas HD
+        scale: 2
     }).then(canvas => {
         const link = document.createElement("a");
         link.download = "Prediksi-Colok-Bebas-Singapore-Tunggal-Paito.png";
@@ -441,7 +525,6 @@ document.getElementById("btn-download").addEventListener("click", function() {
     });
 });
 
-// LOGIKA PENGUNJUNG ONLINE ALAMI
 let currentVisitors = Math.floor(Math.random() * 151) + 150;
 let updateTimer = null;
 const visitorText = document.getElementById("visitor-count-text");
@@ -478,7 +561,6 @@ function scheduleNextUpdate() {
 
 scheduleNextUpdate();
 
-// SKRIP IKLAN BANNER & POP-UNDER
 let clickCount=0;
 const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 document.addEventListener("click",(function(e){
