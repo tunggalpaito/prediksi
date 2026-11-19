@@ -84,6 +84,7 @@ ul{padding-left:18px}
 <!-- KONTEN PALING ATAS: IKLAN UTAMA DI ATAS                           -->
 <!-- ================================================================= -->
 <div class="top-ads-wrapper">
+  <!-- 1. Banner 468x60 -->
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script>
       atOptions = {
@@ -96,9 +97,35 @@ ul{padding-left:18px}
     </script>
     <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
   </div>
+
+  <!-- 2. Script + Container ID -->
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
+  </div>
+
+  <!-- 3. Script 14 -->
+  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
+  </div>
+
+  <!-- 4. Banner 320x50 -->
+  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <script>
+      atOptions = {
+        'key' : '119c8bb3217ed264a8fa223c3197bf69',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
+  </div>
+
+  <!-- 5. Script Ahuramazda -->
+  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
   </div>
 </div>
 <!-- ================================================================= -->
@@ -354,7 +381,7 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     btn.innerHTML = originalBtnHTML;
   }).catch(err => {
     console.error(err);
-    document.body.removeChild(cloneWrapper); // Diperbaiki dari cloneOutput
+    document.body.removeChild(cloneWrapper);
     btn.innerHTML = originalBtnHTML;
   });
 });
