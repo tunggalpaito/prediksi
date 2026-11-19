@@ -143,7 +143,74 @@ Paito warna SGP, data pengeluaran Singapore Pools, live result SGP akurat, paito
 &copy; <span id=currentYear></span> Tunggal Paito. All Rights Reserved.
 </footer>
 </div>
-<script>document.getElementById("currentYear").textContent=(new Date).getFullYear();const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"};firebase.apps.length||firebase.initializeApp(firebaseConfig);const db=firebase.database(),sglRef=db.ref("live/data-sgp");let activeColorClass="c-0",selectedPosIndex=0;function setSelectedColor(t){activeColorClass=t}function resetColors(){document.querySelectorAll(".digit").forEach((t=>{t.className="digit"})),updateSvgLines()}function toggleDigitColor(t){let e=!1;for(let s=0;s<=9;s++)if(t.classList.contains("c-"+s)){e=!0;break}if(e)for(let e=0;e<=9;e++)t.classList.remove("c-"+e);else{for(let e=0;e<=9;e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}updateSvgLines()}function selectPosition(t,e){selectedPosIndex=t,document.querySelectorAll(".pos-btn").forEach((t=>t.classList.remove("active"))),e.classList.add("active")}function autoColorByPosition(t){document.querySelectorAll(".number-group").forEach((e=>{let s=e.querySelectorAll(".digit");if(s.length>selectedPosIndex){let e=s[selectedPosIndex];if(parseInt(e.textContent.trim())===t){for(let t=0;t<=9;t++)e.classList.remove("c-"+t);e.classList.add(activeColorClass)}}})),updateSvgLines()}function searchPattern(t){const e=document.getElementById("patternInput").value.trim();if(!e||isNaN(e))return void alert("Masukkan angka yang valid (contoh: 1234 atau 56)!");const s=e.split("");document.querySelectorAll(".number-group").forEach((a=>{const l=a.querySelectorAll(".digit");if(0===l.length)return;let i="";l.forEach((t=>i+=t.textContent.trim()));let n=!1;if(t)i.includes(e)&&(n=!0);else{let t=i;n=!0;for(let e of s){let s=t.indexOf(e);if(-1===s){n=!1;break}t=t.substring(0,s)+t.substring(s+1)}}n&&l.forEach((t=>{for(let e=0;e<=9;e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}))})),updateSvgLines()}function updateSvgLines(){const t=document.getElementById("paitoSvg"),e=document.getElementById("paitoTable"),s=document.getElementById("tableResponsive");if(!t||!e)return;if(t.innerHTML="","none"===e.style.display)return;t.setAttribute("width",e.offsetWidth),t.setAttribute("height",e.offsetHeight);const a={};for(let t=0;t<=9;t++){a["c-"+t]=[];const e=["#ffadad","#ffd6a5","#fdffb6","#caffbf","#9bf6ff","#a0c4ff","#bdb2ff","#ffc6ff","#fffffc","#ffb703"];a["c-"+t].hex=e[t]}document.querySelectorAll(".digit").forEach((t=>{for(let e=0;e<=9;e++)if(t.classList.contains("c-"+e)){const l=t.getBoundingClientRect(),i=s.getBoundingClientRect(),n=l.left-i.left+s.scrollLeft+l.width/2,o=l.top-i.top+s.scrollTop+l.height/2;a["c-"+e].push({x:n,y:o});break}}));for(let e=0;e<=9;e++){const s=a["c-"+e];if(s.length>1)for(let l=0;l<s.length-1;l++){const i=document.createElementNS("http://www.w3.org/2000/svg","line");i.setAttribute("x1",s[l].x),i.setAttribute("y1",s[l].y),i.setAttribute("x2",s[l+1].x),i.setAttribute("y2",s[l+1].y),i.setAttribute("stroke",a["c-"+e].hex),i.setAttribute("stroke-width","2.5"),i.setAttribute("stroke-opacity","0.55"),t.appendChild(i)}}}sglRef.once("value").then((t=>{const e=document.getElementById("loading"),s=document.getElementById("paitoTable"),a=document.getElementById("tableBody");if(e.style.display="none",s.style.display="table",!t.exists())return void(a.innerHTML='<tr><td colspan="5" style="text-align:center;">Belum ada data SGP di database.</td></tr>');const l=t.val();let i={};Object.keys(l).forEach((t=>{let e=t.split("-");if(3!==e.length)return;let s=new Date(`${e[2]}-${e[1]}-${e[0]}`);if(isNaN(s))return;let a=function(t){let e=new Date(t),s=e.getDay(),a=e.getDate()-s+(0===s?-6:1);return new Date(e.setDate(a))}(s),n=`${(o=a).getFullYear()}-${String(o.getMonth()+1).padStart(2,"0")}-${String(o.getDate()).padStart(2,"0")}`;var o;i[n]||(i[n]={1:"",3:"",4:"",6:"",0:""});let r=s.getDay();if(2!==r&&5!==r){let e=l[t].split(",").map((t=>`<span class="number-group">${t.trim().split("").map((t=>`<span class="digit" onclick="toggleDigitColor(this)">${t}</span>`)).join("")}</span>`)).join("<br>");i[n][r]=e}}));let n=Object.keys(i).sort(),o="";const r='<span class="number-group" style="letter-spacing:0.5px;"><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;" >x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span></span>';n.forEach((t=>{let e=i[t],s=e[1]||r,a=e[3]||r,l=e[4]||r,n=e[6]||r,c=e[0]||r;o+=`<tr><td>${s}</td><td>${a}</td><td>${l}</td><td>${n}</td><td>${c}</td></tr>`})),a.innerHTML=o||'<tr><td colspan="5" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>',updateSvgLines(),window.addEventListener("resize",updateSvgLines)})).catch((t=>{console.error("Gagal mengambil data:",t),document.getElementById("loading").textContent="Gagal memuat data dari Firebase."}))</script>
+<script>
+document.getElementById("currentYear").textContent=(new Date).getFullYear();
+const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"};
+firebase.apps.length||firebase.initializeApp(firebaseConfig);
+const db=firebase.database(),sglRef=db.ref("live/data-sgp");
+let activeColorClass="c-0",selectedPosIndex=0;
+
+function setSelectedColor(t){activeColorClass=t}
+function resetColors(){document.querySelectorAll(".digit").forEach((t=>{t.className="digit"})),updateSvgLines()}
+function toggleDigitColor(t){let e=!1;for(let s=0;s<=9;s++)if(t.classList.contains("c-"+s)){e=!0;break}if(e)for(let e=0;e<=9;e++)t.classList.remove("c-"+e);else{for(let e=0;e<=9;e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}updateSvgLines()}
+function selectPosition(t,e){selectedPosIndex=t,document.querySelectorAll(".pos-btn").forEach((t=>t.classList.remove("active"))),e.classList.add("active")}
+function autoColorByPosition(t){document.querySelectorAll(".number-group").forEach((e=>{let s=e.querySelectorAll(".digit");if(s.length>selectedPosIndex){let e=s[selectedPosIndex];if(parseInt(e.textContent.trim())===t){for(let t=0;t<=9;t++)e.classList.remove("c-"+t);e.classList.add(activeColorClass)}}})),updateSvgLines()}
+function searchPattern(t){const e=document.getElementById("patternInput").value.trim();if(!e||isNaN(e))return void alert("Masukkan angka yang valid (contoh: 1234 atau 56)!");const s=e.split("");document.querySelectorAll(".number-group").forEach((a=>{const l=a.querySelectorAll(".digit");if(0===l.length)return;let i="";l.forEach((t=>i+=t.textContent.trim()));let n=!1;if(t)i.includes(e)&&(n=!0);else{let t=i;n=!0;for(let e of s){let s=t.indexOf(e);if(-1===s){n=!1;break}t=t.substring(0,s)+t.substring(s+1)}}n&&l.forEach((t=>{for(let e=0;e<=9;e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}))})),updateSvgLines()}
+function updateSvgLines(){const t=document.getElementById("paitoSvg"),e=document.getElementById("paitoTable"),s=document.getElementById("tableResponsive");if(!t||!e)return;if(t.innerHTML="","none"===e.style.display)return;t.setAttribute("width",e.offsetWidth),t.setAttribute("height",e.offsetHeight);const a={};for(let t=0;t<=9;t++){a["c-"+t]=[];const e=["#ffadad","#ffd6a5","#fdffb6","#caffbf","#9bf6ff","#a0c4ff","#bdb2ff","#ffc6ff","#fffffc","#ffb703"];a["c-"+t].hex=e[t]}document.querySelectorAll(".digit").forEach((t=>{for(let e=0;e<=9;e++)if(t.classList.contains("c-"+e)){const l=t.getBoundingClientRect(),i=s.getBoundingClientRect(),n=l.left-i.left+s.scrollLeft+l.width/2,o=l.top-i.top+s.scrollTop+l.height/2;a["c-"+e].push({x:n,y:o});break}}));for(let e=0;e<=9;e++){const s=a["c-"+e];if(s.length>1)for(let l=0;l<s.length-1;l++){const i=document.createElementNS("http://www.w3.org/2000/svg","line");i.setAttribute("x1",s[l].x),i.setAttribute("y1",s[l].y),i.setAttribute("x2",s[l+1].x),i.setAttribute("y2",s[l+1].y),i.setAttribute("stroke",a["c-"+e].hex),i.setAttribute("stroke-width","2.5"),i.setAttribute("stroke-opacity","0.55"),t.appendChild(n)}}
+
+function parseDateKey(rawKey){const parts=String(rawKey||"").trim().split(/[-/]/);if(3!==parts.length)return null;let day,month,year;if(parts[0].length===4){year=parseInt(parts[0],10);month=parseInt(parts[1],10);day=parseInt(parts[2],10);}else{day=parseInt(parts[0],10);month=parseInt(parts[1],10);year=parseInt(parts[2],10);}if(!day||!month||!year)return null;const dt=new Date(year,month-1,day);return isNaN(dt.getTime())?null:dt;}
+function getMondayDate(dt){const copy=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate());const day=copy.getDay();const diff=copy.getDate()-day+(0===day?-6:1);copy.setDate(diff);copy.setHours(0,0,0,0);return copy;}
+function extractFourDigitGroups(rawValue){const digitsOnly=String(rawValue||"").replace(/\D/g,"");if(!digitsOnly)return[];if(String(rawValue||"").includes(",")){return String(rawValue).split(",").map(part=>part.replace(/\D/g,"").trim()).filter(Boolean);}const groups=[];for(let i=0;i<digitsOnly.length;i+=4){const chunk=digitsOnly.slice(i,i+4);if(chunk)groups.push(chunk);}return groups;}
+function renderNumberGroup(numStr){return`<span class="number-group">${String(numStr).split("").map(d=>`<span class="digit" onclick="toggleDigitColor(this)">${d}</span>`).join("")}</span>`;}
+
+sglRef.once("value").then((snapshot)=>{
+  const loadingEl=document.getElementById("loading"),tableEl=document.getElementById("paitoTable"),bodyEl=document.getElementById("tableBody");
+  loadingEl.style.display="none";
+  tableEl.style.display="table";
+  if(!snapshot.exists()){
+    bodyEl.innerHTML='<tr><td colspan="5" style="text-align:center;">Belum ada data SGP di database.</td></tr>';
+    return;
+  }
+  const rawData=snapshot.val()||{};
+  const weeksMap={};
+  Object.keys(rawData).forEach((dateKey)=>{
+    const baseDt=parseDateKey(dateKey);
+    if(!baseDt)return;
+    const groups=extractFourDigitGroups(rawData[dateKey]);
+    if(!groups.length)return;
+    for(let idx=0;idx<groups.length;idx++){
+      const offsetFromRight=(groups.length-1)-idx;
+      const targetDt=new Date(baseDt.getFullYear(),baseDt.getMonth(),baseDt.getDate()-offsetFromRight);
+      const dayOfWeek=targetDt.getDay();
+      if(2===dayOfWeek||5===dayOfWeek)continue;
+      const monday=getMondayDate(targetDt);
+      const weekKey=`${monday.getFullYear()}-${String(monday.getMonth()+1).padStart(2,"0")}-${String(monday.getDate()).padStart(2,"0")}`;
+      if(!weeksMap[weekKey]){
+        weeksMap[weekKey]={ts:monday.getTime(),days:{1:[],3:[],4:[],6:[],0:[]}};
+      }
+      weeksMap[weekKey].days[dayOfWeek].push(renderNumberGroup(groups[idx]));
+    }
+  });
+  const sortedWeeks=Object.keys(weeksMap).map(k=>weeksMap[k]).sort((a,b)=>a.ts-b.ts);
+  const placeholder='<span class="number-group" style="letter-spacing:0.5px;"><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span></span>';
+  let rowsHtml="";
+  sortedWeeks.forEach((wk)=>{
+    const d=wk.days;
+    const c1=d[1].length?d[1].join("<br>"):placeholder;
+    const c3=d[3].length?d[3].join("<br>"):placeholder;
+    const c4=d[4].length?d[4].join("<br>"):placeholder;
+    const c6=d[6].length?d[6].join("<br>"):placeholder;
+    const c0=d[0].length?d[0].join("<br>"):placeholder;
+    rowsHtml+=`<tr><td>${c1}</td><td>${c3}</td><td>${c4}</td><td>${c6}</td><td>${c0}</td></tr>`;
+  });
+  bodyEl.innerHTML=rowsHtml||'<tr><td colspan="5" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>';
+  updateSvgLines();
+  window.addEventListener("resize",updateSvgLines);
+}).catch((err)=>{
+  console.error("Gagal mengambil data:",err);
+  document.getElementById("loading").textContent="Gagal memuat data dari Firebase.";
+});
+</script>
 <script>document.addEventListener("contextmenu",(e=>e.preventDefault())),document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}</script>
 </body>
 </html>
