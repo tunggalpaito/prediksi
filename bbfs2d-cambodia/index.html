@@ -74,62 +74,6 @@ ul{padding-left:18px}
   color: #ffcc00;
   margin-left: 8px;
 }
-
-/* Modal Preview Khusus Browser Facebook */
-.fb-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: rgba(3, 7, 18, 0.92);
-  padding: 16px;
-  justify-content: center;
-  align-items: center;
-}
-.fb-modal-overlay.active {
-  display: flex;
-}
-.fb-modal-card {
-  width: 100%;
-  max-width: 380px;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: #0d1527;
-  border: 1px solid #ffcc00;
-  border-radius: 12px;
-  padding: 14px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-}
-.fb-modal-tip {
-  font-size: 12px;
-  color: #ffcc00;
-  font-weight: 700;
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-.fb-preview-img {
-  width: 100%;
-  max-height: 62vh;
-  object-fit: contain;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 102, 204, 0.5);
-  background: #070b14;
-  -webkit-touch-callout: default;
-  user-select: auto;
-}
-.fb-close-btn {
-  margin-top: 10px;
-  width: 100%;
-  background: linear-gradient(135deg, #cc0000, #990000);
-  color: #fff;
-  border: none;
-  padding: 9px 14px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
 </style>
 </head>
 <body>
@@ -202,18 +146,6 @@ dan jangan pakai angka dari orang jika terus-terusan tidak setangan denganmu
 💥</p>
 </div>
 
-<!-- Modal Preview Khusus Browser Facebook -->
-<div id="fb-image-modal" class="fb-modal-overlay">
-  <div class="fb-modal-card">
-    <p class="fb-modal-tip">Tekan &amp; tahan gambar untuk simpan, atau pakai tombol Bagikan di bawah.</p>
-    <img id="fb-preview-img" class="fb-preview-img" alt="Preview Gambar Prediksi Kamboja">
-    <button type="button" id="fb-share-img-btn" style="margin-top:10px;width:100%;background:linear-gradient(135deg,#0055a5,#003366);color:#fff;border:1px solid #ffcc00;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">
-      Bagikan / Simpan Gambar
-    </button>
-    <button type="button" id="fb-close-modal" class="fb-close-btn">Tutup Preview</button>
-  </div>
-</div>
-
 <div class="footer">&copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.</div>
 
 <script type="module">
@@ -225,73 +157,6 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
 app=initializeApp(firebaseConfig),db=getDatabase(app);
 
 let activeDownloadDateStr = new Date().toISOString().slice(0, 10);
-
-function isFacebookInAppBrowser() {
-  const ua = navigator.userAgent || navigator.vendor || window.opera || "";
-  return /FBAN|FBAV|FB_IAB|FBIOS|FB4A/i.test(ua);
-}
-
-const fbModal = document.getElementById("fb-image-modal");
-const fbPreviewImg = document.getElementById("fb-preview-img");
-const fbCloseBtn = document.getElementById("fb-close-modal");
-const fbShareImgBtn = document.getElementById("fb-share-img-btn");
-let activeBlobUrl = null;
-let activeShareFile = null;
-let activeFileName = "Analisis-Target-4D-Cambodia-16Trek.jpg";
-
-function revokeActiveBlobUrl() {
-  if (activeBlobUrl) {
-    URL.revokeObjectURL(activeBlobUrl);
-    activeBlobUrl = null;
-  }
-  activeShareFile = null;
-}
-
-function openFbImageModal(imgUrl, blobObj = null, fileName = "prediksi.jpg") {
-  revokeActiveBlobUrl();
-  activeFileName = fileName;
-  if (imgUrl.startsWith("blob:")) {
-    activeBlobUrl = imgUrl;
-  }
-  if (blobObj && typeof File !== "undefined") {
-    try {
-      activeShareFile = new File([blobObj], fileName, { type: "image/jpeg" });
-    } catch (e) {
-      activeShareFile = null;
-    }
-  }
-  fbPreviewImg.src = imgUrl;
-  fbModal.classList.add("active");
-}
-
-function closeFbImageModal() {
-  fbModal.classList.remove("active");
-  fbPreviewImg.removeAttribute("src");
-  revokeActiveBlobUrl();
-}
-
-fbShareImgBtn.addEventListener("click", async function() {
-  try {
-    if (activeShareFile && navigator.canShare && navigator.canShare({ files: [activeShareFile] })) {
-      await navigator.share({
-        files: [activeShareFile],
-        title: activeFileName
-      });
-      return;
-    }
-  } catch (err) {
-    // Jika dibatalkan atau tidak didukung, biarkan tetap di preview tekan-tahan
-  }
-  fbShareImgBtn.textContent = "Tekan & Tahan Gambar di Atas";
-  setTimeout(() => {
-    fbShareImgBtn.textContent = "Bagikan / Simpan Gambar";
-  }, 2000);
-});
-
-fbCloseBtn.addEventListener("click", closeFbImageModal);
-fbModal.addEventListener("click", function(e) {
-  if (e.target === fbModal) closeFbImageModal();
-});
 
 async function loadCambodiaAnalysis(){
   try{
@@ -334,6 +199,7 @@ async function loadCambodiaAnalysis(){
 
     activeDownloadDateStr = targetDisplayDate.toISOString().slice(0, 10);
 
+    // Gabungkan seluruh result lintas tanggal agar otomatis mencukupi 30 trek (diambil dari kanan ke kiri / terbaru ke terlama)
     let allFourDigitArrays = [];
     for(let i = n.length - 1; i >= 0; i--){
       let dayData = e[n[i]];
@@ -347,6 +213,7 @@ async function loadCambodiaAnalysis(){
 
     if(allFourDigitArrays.length === 0) return;
 
+    // Ambil tepat 30 data terbaru
     let last30Entries = allFourDigitArrays.slice(0, 30).reverse();
 
     let parsedData = last30Entries.map(resNum => {
@@ -414,10 +281,11 @@ async function loadCambodiaAnalysis(){
 
 loadCambodiaAnalysis();
 
-// FUNGSI DOWNLOAD GAMBAR RASIO 9:16 BESAR (1080x1920)
-document.getElementById("btn-download-img").addEventListener("click", function() {
+// FUNGSI DOWNLOAD GAMBAR RASIO 9:16 BESAR (1080x1920) - SUPPORT APK FACEBOOK
+document.getElementById("btn-download-img").addEventListener("click", async function () {
   const btn = this;
   const originalBtnHTML = btn.innerHTML;
+  btn.disabled = true;
   btn.textContent = "Memproses Gambar 9:16...";
 
   const cloneWrapper = document.createElement("div");
@@ -457,7 +325,7 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
 
     const bbfsNum = clonedRow.querySelector(".bbfs-num");
-    if(bbfsNum) {
+    if (bbfsNum) {
       bbfsNum.style.marginLeft = "24px";
     }
 
@@ -467,43 +335,57 @@ document.getElementById("btn-download-img").addEventListener("click", function()
   cloneWrapper.appendChild(rowsWrapper);
   document.body.appendChild(cloneWrapper);
 
-  html2canvas(cloneWrapper, {
-    width: 1080,
-    height: 1920,
-    scale: 1,
-    useCORS: true,
-    backgroundColor: "#070b14"
-  }).then(canvas => {
-    const fileName = "Analisis-Target-4D-Cambodia-16Trek-" + activeDownloadDateStr + ".jpg";
+  try {
+    const canvas = await html2canvas(cloneWrapper, {
+      width: 1080,
+      height: 1920,
+      scale: 1,
+      useCORS: true,
+      backgroundColor: "#070b14"
+    });
 
-    canvas.toBlob(blob => {
-      if (isFacebookInAppBrowser()) {
-        if (blob) {
-          const blobUrl = URL.createObjectURL(blob);
-          openFbImageModal(blobUrl, blob, fileName);
-        } else {
-          openFbImageModal(canvas.toDataURL("image/jpeg", 0.95), null, fileName);
-        }
-      } else {
-        const url = blob ? URL.createObjectURL(blob) : canvas.toDataURL("image/jpeg", 0.95);
-        const link = document.createElement("a");
-        link.download = fileName;
-        link.href = url;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        if (blob) {
-          setTimeout(() => URL.revokeObjectURL(url), 1500);
-        }
+    const fileName = `Analisis-Target-4D-Cambodia-16Trek-${activeDownloadDateStr}.jpg`;
+
+    const blob = await new Promise(resolve =>
+      canvas.toBlob(resolve, "image/jpeg", 0.95)
+    );
+
+    if (!blob) throw new Error("Gagal membuat file gambar");
+
+    const file = new File([blob], fileName, { type: "image/jpeg" });
+    const isFBWebView = /FBAN|FBAV|FB_IAB/i.test(navigator.userAgent);
+
+    if (navigator.canShare && navigator.canShare({ files: [file] }) && (isFBWebView || /Android|iPhone|iPad/i.test(navigator.userAgent))) {
+      try {
+        await navigator.share({
+          files: [file],
+          title: "Prediksi Cambodia 9:16"
+        });
+        return;
+      } catch (shareErr) {
+        if (shareErr.name === "AbortError") return;
       }
-      document.body.removeChild(cloneWrapper);
-      btn.innerHTML = originalBtnHTML;
-    }, "image/jpeg", 0.95);
-  }).catch(err => {
+    }
+
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
+
+  } catch (err) {
     console.error(err);
-    document.body.removeChild(cloneWrapper);
+    alert("Gagal memproses gambar. Coba buka halaman ini di browser Chrome.");
+  } finally {
+    if (cloneWrapper.parentNode) {
+      document.body.removeChild(cloneWrapper);
+    }
+    btn.disabled = false;
     btn.innerHTML = originalBtnHTML;
-  });
+  }
 });
 </script>
 </body>
