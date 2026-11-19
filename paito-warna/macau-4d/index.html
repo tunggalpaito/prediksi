@@ -185,7 +185,6 @@ macau4dRef.once("value").then((snapshot)=>{
     return daysMap[iso];
   }
 
-  // Urutkan key tanggal dari lama ke baru agar data terbaru di tanggal akhir menimpa/menempati slot terbarunya
   const sortedKeys=Object.keys(rawData).sort((a,b)=>{
     const da=parseDateKey(a),db=parseDateKey(b);
     return (da?da.getTime():0)-(db?db.getTime():0);
@@ -197,17 +196,18 @@ macau4dRef.once("value").then((snapshot)=>{
     const groups=extractFourDigitGroups(rawData[dateKey]);
     if(!groups.length)return;
 
-    // Hitung mundur otomatis per 1 kotak dari elemen paling kanan (terbaru),
-    // setiap 6 kotak bergeser mundur 1 hari kalender.
-    for(let idx=groups.length-1;idx>=0;idx--){
-      const offsetFromRight=(groups.length-1)-idx;
-      const dayOffset=Math.floor(offsetFromRight/6);
-      const boxIndexFromRight=offsetFromRight%6;
-      const boxIndex=5-boxIndexFromRight;
-
+    // Update ke-1 selalu berangkat dari PT1 (index 0) pada harinya.
+    // Jika total update > 6 (data skala besar), kelebihan mundur per 6 kotak ke hari sebelumnya.
+    const totalChunks=Math.ceil(groups.length/6);
+    for(let chunkIdx=totalChunks-1;chunkIdx>=0;chunkIdx--){
+      const dayOffset=(totalChunks-1)-chunkIdx;
       const targetDt=new Date(baseDt.getFullYear(),baseDt.getMonth(),baseDt.getDate()-dayOffset);
       const slot=ensureDaySlot(targetDt);
-      slot.boxes[boxIndex]=groups[idx];
+      const start=chunkIdx*6;
+      const slice=groups.slice(start,start+6);
+      for(let i=0;i<slice.length;i++){
+        slot.boxes[i]=slice[i];
+      }
     }
   });
 
