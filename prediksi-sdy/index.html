@@ -69,6 +69,7 @@ body {
 
 /* STYLING AREA IKLAN UTAMA */
 .top-ads-wrapper{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px;background-color:#00122e;border:1px solid rgba(255,204,0,.3);border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(0,102,255,.2)}
+.ad-slot{width:100%;display:flex;justify-content:center;align-items:center;min-height:50px;overflow:hidden;border-radius:6px}
 
 .main-card {
   width: 100%;
@@ -81,7 +82,8 @@ body {
   box-shadow: 0 4px 15px rgba(0, 102, 255, .3);
   margin-bottom: 25px;
 }
-h1 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--accent-gold); text-align: center; letter-spacing: .5px; }
+h1 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--accent-gold); text-align: center; letter-spacing: .5px; line-height: 1.35; }
+.pred-date-sub { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); letter-spacing: 0.3px; margin-top: 4px; }
 h3 { font-size: 14px; color: var(--accent-gold); margin: 15px 0 6px 0; border-bottom: 1px solid rgba(255, 204, 0, .3); padding-bottom: 4px; }
 li, p { font-size: 12px; color: var(--text-main); line-height: 1.5; margin-bottom: 6px; }
 ul { padding-left: 18px; }
@@ -120,39 +122,37 @@ ul { padding-left: 18px; }
 <!-- KONTEN PALING ATAS: IKLAN UTAMA (GAYA MASTER TONI) -->
 <!-- ================================================================= -->
 <div class="top-ads-wrapper">
-  <!-- Iklan Banner 468x60 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script>
-      atOptions = {
-        'key' : '9a986a45c62dcea8d8216b9210f159cb',
-        'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
-        'params' : {}
-      };
-    </script>
-    <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+  <!-- Iklan Banner 468x60 (Di-scale otomatis agar pas di layar mobile) -->
+  <div class="ad-slot" style="min-height:60px">
+    <div style="transform:scale(0.85);transform-origin:center center">
+      <script>
+        atOptions = {
+          'key' : '9a986a45c62dcea8d8216b9210f159cb',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    </div>
   </div>
 
   <!-- Iklan Script + Container ID -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <div class="ad-slot">
     <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
 
   <!-- Iklan Script Lainnya -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <div class="ad-slot">
     <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-  </div>
-
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
   </div>
 </div>
 <!-- ================================================================= -->
 
 <div class="main-card">
-<h1>ANALISIS PELARIAN SYDNEY (SDY)</h1>
+<h1 id="main-title">ANALISIS PELARIAN SDY</h1>
 <div class="highlight-box">
 <div>Prediksi Togel Hari Ini</div>
 <div style="margin-top:8px;font-size:11px">2 Result Acuan Terakhir (SDY)</div>
@@ -205,21 +205,86 @@ dan jangan pakai angka dari orang jika terus-terusan tidak setangan denganmu
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
 app=initializeApp(firebaseConfig),db=getDatabase(app);
+
+const PASARAN_LABEL = "SDY";
+const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_ID = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
 
 // Tabel Mistik Lama & Mistik Baru yang Familiar
 const mistikLama = {0:1, 1:0, 2:5, 3:8, 4:7, 5:2, 6:9, 7:4, 8:3, 9:6};
 const mistikBaru = {0:8, 1:7, 2:6, 3:9, 4:5, 5:4, 6:2, 7:1, 8:0, 9:3};
 const indeksAngka = {0:5, 1:6, 2:7, 3:8, 4:9, 5:0, 6:1, 7:2, 8:3, 9:4};
 
+function parseDateKey(dateStr) {
+  const parts = String(dateStr).trim().split("-");
+  if (parts.length === 3) {
+    const d = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const y = Number(parts[2]);
+    const dt = new Date(y, m, d, 12, 0, 0);
+    if (!isNaN(dt.getTime())) return dt;
+  }
+  return null;
+}
+
+function formatTanggalTanpaKurung(dateObj) {
+  const hari = HARI_ID[dateObj.getDay()];
+  const tgl = String(dateObj.getDate()).padStart(2, "0");
+  const bulan = BULAN_ID[dateObj.getMonth()];
+  const tahun = dateObj.getFullYear();
+  return `${hari}, ${tgl} ${bulan} ${tahun}`;
+}
+
+function updateJudulPrediksiBesok(latestDateObj) {
+  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+    ? latestDateObj
+    : new Date();
+
+  const nextDayDate = new Date(baseDate.getTime());
+  nextDayDate.setDate(nextDayDate.getDate() + 1);
+
+  const labelBesok = formatTanggalTanpaKurung(nextDayDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `ANALISIS PELARIAN ${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
+  }
+  document.title = `Prediksi Angka Pelarian ${PASARAN_LABEL} ${labelBesok} - Tunggal Paito`;
+}
+
+function extract4DResults(rawValue) {
+  if (rawValue === null || rawValue === undefined) return [];
+  const str = String(rawValue).trim();
+  if (!str) return [];
+
+  if (str.includes(",")) {
+    return str
+      .split(",")
+      .map(s => s.trim().split(":")[0].trim())
+      .filter(s => /^\d{4,}$/.test(s))
+      .map(s => s.slice(-4));
+  }
+
+  const cleanHead = str.split(":")[0].trim();
+  const digitsOnly = cleanHead.replace(/\D/g, "");
+  if (digitsOnly.length >= 4) {
+    return [digitsOnly.slice(-4)];
+  }
+
+  return [];
+}
+
 // Rumus Familiar Berbasis Ekor
 function calculatePredictionFromEkor(resultStr){
-  const ekor = parseInt(resultStr[3]);
-  const kepala = parseInt(resultStr[2]);
+  const ekor = parseInt(resultStr[3], 10);
+  const kepala = parseInt(resultStr[2], 10);
   
   const as = mistikLama[ekor] !== undefined ? mistikLama[ekor] : (ekor + 1) % 10;
   const kop = mistikBaru[kepala] !== undefined ? mistikBaru[kepala] : (kepala + 2) % 10;
@@ -231,54 +296,64 @@ function calculatePredictionFromEkor(resultStr){
 
 function saveFrequencyData(t,e,n){
   let a=JSON.parse(localStorage.getItem("sdy_formula_stats"))||{totalCheck:0,headHit:0,tailHit:0,doubleHit:0,lastEvaluated:""};
-  const o=parseInt(e[2]),r=parseInt(e[3]),s=t+"->"+e;
+  const o=parseInt(e[2], 10),r=parseInt(e[3], 10),s=t+"->"+e;
   a.lastEvaluated!==s&&(a.totalCheck++,n.kepala===o&&a.headHit++,n.ekor===r&&a.tailHit++,n.kepala===o&&n.ekor===r&&a.doubleHit++,a.lastEvaluated=s,localStorage.setItem("sdy_formula_stats",JSON.stringify(a)));
 }
 
-async function loadSdyAnalysis(){
-  try{
-    const t=await get(ref(db,"live/data-sdy"));
-    if(!t.exists())return;
-    const e=t.val();
-    let n=Object.keys(e);
-    if(n.sort(((t,e)=>{const[n,a,o]=t.split("-").map(Number),[r,s,l]=e.split("-").map(Number);return new Date(o,a-1,n)-new Date(l,s-1,r)})),n.length<3)return;
-    
-    let a=t=>{if(Array.isArray(t)&&t.length>0)return String(t[t.length-1]);if("object"==typeof t&&null!==t){const e=Object.keys(t);return String(t[e[e.length-1]])}return String(t)},
-    prevPrev=a(e[n[n.length-3]]).split(":")[0].trim(),
-    o=a(e[n[n.length-2]]).split(":")[0].trim(),
-    r=a(e[n[n.length-1]]).split(":")[0].trim();
-    
-    prevPrev=4===prevPrev.length?prevPrev:"0123";
-    o=4===o.length?o:"1234";
-    r=4===r.length?r:"5678";
-    
-    document.getElementById("prev-result-text").textContent=o;
-    document.getElementById("last-result-text").textContent=r;
-    
-    const k = calculatePredictionFromEkor(o);
-    const m = calculatePredictionFromEkor(r);
-    
-    saveFrequencyData(o,r,k);
-    
-    document.getElementById("position-analysis-list").innerHTML=`
-      <li style="color:#fc0; font-weight:bold; margin-bottom:4px;">✨ ANALISIS TARIKAN EKOR TERBARU:</li>
-      <li><strong>Ekor Acuan (${o[3]}):</strong> Mistik/Indeks Ekor melahirkan <strong>As ${m.as} & Kop ${m.kop}</strong>.</li>
-      <li><strong>Kepala/Ekor Baru:</strong> Proyeksi Kepala ➔ <strong>${m.kepala}</strong> & Ekor ➔ <strong>${m.ekor}</strong>.</li>
-      <br>
-      <li style="color:#fc0; font-weight:bold; margin-bottom:4px;">📌 ANALISIS TARIKAN EKOR SEBELUMNYA:</li>
-      <li><strong>Ekor Acuan Lalu (${prevPrev[3]}):</strong> Proyeksi As/Kop lalu ➔ <strong>As ${k.as} & Kop ${k.kop}</strong>.</li>
-      <li><strong>Proyeksi Saat Itu:</strong> Kepala ➔ <strong>${k.kepala}</strong> & Ekor ➔ <strong>${k.ekor}</strong>.</li>
-    `;
-    
-    const h=[...new Set([m.as,m.kop,m.kepala,m.ekor,(parseInt(r[0])+parseInt(r[3]))%10,(parseInt(r[1])+parseInt(r[2]))%10])];
-    document.getElementById("res-bbfs").textContent=h.join(" ");
-    document.getElementById("res-cb").textContent=`${m.kepala} & ${m.ekor}`;
-    document.getElementById("res-conclusion").textContent=m.full;
+const dataRef = ref(db, "live/data-sdy");
+onValue(dataRef, (snapshot) => {
+  if (!snapshot.exists() || !snapshot.val()) {
+    updateJudulPrediksiBesok(null);
+    return;
+  }
 
-  }catch(t){console.error(t);}
-}
+  const e = snapshot.val();
+  const validKeyItems = Object.keys(e)
+    .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
+    .filter(entry => entry.dateObj !== null)
+    .sort((a, b) => a.dateObj - b.dateObj);
 
-loadSdyAnalysis();
+  let latestDateObj = null;
+  for (let i = validKeyItems.length - 1; i >= 0; i--) {
+    if (extract4DResults(e[validKeyItems[i].dateStr]).length > 0) {
+      latestDateObj = validKeyItems[i].dateObj;
+      break;
+    }
+  }
+  updateJudulPrediksiBesok(latestDateObj);
+
+  const allResults = [];
+  validKeyItems.forEach(({ dateStr, dateObj }) => {
+    const list4d = extract4DResults(e[dateStr]);
+    list4d.forEach((val4d, idx) => {
+      allResults.push({ dateStr, dateObj, idx, val: val4d });
+    });
+  });
+
+  if (allResults.length === 0) return;
+
+  const r = allResults[allResults.length - 1].val;
+  const o = allResults.length >= 2 ? allResults[allResults.length - 2].val : "1234";
+
+  document.getElementById("prev-result-text").textContent = o;
+  document.getElementById("last-result-text").textContent = r;
+
+  const m = calculatePredictionFromEkor(r);
+  saveFrequencyData(o, r, m);
+
+  document.getElementById("position-analysis-list").innerHTML = `
+    <li style="color:#fc0; font-weight:bold; margin-bottom:4px;">✨ ANALISIS TARIKAN EKOR TERBARU:</li>
+    <li><strong>Ekor Acuan (${r[3]}):</strong> Mistik/Indeks Ekor melahirkan <strong>As ${m.as} & Kop ${m.kop}</strong>.</li>
+    <li><strong>Kepala/Ekor Baru:</strong> Proyeksi Kepala ➔ <strong>${m.kepala}</strong> & Ekor ➔ <strong>${m.ekor}</strong>.</li>
+  `;
+
+  const h = [...new Set([m.as, m.kop, m.kepala, m.ekor, (parseInt(r[0], 10) + parseInt(r[3], 10)) % 10, (parseInt(r[1], 10) + parseInt(r[2], 10)) % 10])];
+  document.getElementById("res-bbfs").textContent = h.join(" ");
+  document.getElementById("res-cb").textContent = `${m.kepala} & ${m.ekor}`;
+  document.getElementById("res-conclusion").textContent = m.full;
+}, (t) => {
+  console.error(t);
+});
 
 document.getElementById("btn-download-img").addEventListener("click",(function(){
   this.textContent="Memproses Gambar...";
@@ -307,5 +382,8 @@ document.addEventListener("click",(function(e){
 document.addEventListener("contextmenu",(t=>t.preventDefault()));
 document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}
 </script>
+
+<!-- POPUNDER SCRIPT (Ditempatkan di bawah agar tidak mengganggu tata letak konten) -->
+<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 </body>
 </html>
