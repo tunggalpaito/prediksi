@@ -74,6 +74,62 @@ ul{padding-left:18px}
   color: #ffcc00;
   margin-left: 8px;
 }
+
+/* Modal Preview Khusus Browser Facebook */
+.fb-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(3, 7, 18, 0.92);
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+}
+.fb-modal-overlay.active {
+  display: flex;
+}
+.fb-modal-card {
+  width: 100%;
+  max-width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #0d1527;
+  border: 1px solid #ffcc00;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+.fb-modal-tip {
+  font-size: 12px;
+  color: #ffcc00;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.fb-preview-img {
+  width: 100%;
+  max-height: 62vh;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 102, 204, 0.5);
+  background: #070b14;
+  -webkit-touch-callout: default;
+  user-select: auto;
+}
+.fb-close-btn {
+  margin-top: 12px;
+  width: 100%;
+  background: linear-gradient(135deg, #cc0000, #990000);
+  color: #fff;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -146,6 +202,15 @@ dan jangan pakai angka dari orang jika terus-terusan tidak setangan denganmu
 💥</p>
 </div>
 
+<!-- Modal Preview Khusus Browser Facebook -->
+<div id="fb-image-modal" class="fb-modal-overlay">
+  <div class="fb-modal-card">
+    <p class="fb-modal-tip">Tekan &amp; tahan gambar di bawah ini, lalu pilih "Simpan gambar" / "Download image".</p>
+    <img id="fb-preview-img" class="fb-preview-img" alt="Preview Gambar Prediksi Kamboja">
+    <button type="button" id="fb-close-modal" class="fb-close-btn">Tutup Preview</button>
+  </div>
+</div>
+
 <div class="footer">&copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.</div>
 
 <script type="module">
@@ -157,6 +222,30 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
 app=initializeApp(firebaseConfig),db=getDatabase(app);
 
 let activeDownloadDateStr = new Date().toISOString().slice(0, 10);
+
+function isFacebookInAppBrowser() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera || "";
+  return /FBAN|FBAV|FB_IAB|FBIOS|FB4A/i.test(ua);
+}
+
+const fbModal = document.getElementById("fb-image-modal");
+const fbPreviewImg = document.getElementById("fb-preview-img");
+const fbCloseBtn = document.getElementById("fb-close-modal");
+
+function openFbImageModal(imgSrc) {
+  fbPreviewImg.src = imgSrc;
+  fbModal.classList.add("active");
+}
+
+function closeFbImageModal() {
+  fbModal.classList.remove("active");
+  fbPreviewImg.src = "";
+}
+
+fbCloseBtn.addEventListener("click", closeFbImageModal);
+fbModal.addEventListener("click", function(e) {
+  if (e.target === fbModal) closeFbImageModal();
+});
 
 async function loadCambodiaAnalysis(){
   try{
@@ -199,7 +288,6 @@ async function loadCambodiaAnalysis(){
 
     activeDownloadDateStr = targetDisplayDate.toISOString().slice(0, 10);
 
-    // Gabungkan seluruh result lintas tanggal agar otomatis mencukupi 30 trek (diambil dari kanan ke kiri / terbaru ke terlama)
     let allFourDigitArrays = [];
     for(let i = n.length - 1; i >= 0; i--){
       let dayData = e[n[i]];
@@ -213,7 +301,6 @@ async function loadCambodiaAnalysis(){
 
     if(allFourDigitArrays.length === 0) return;
 
-    // Ambil tepat 30 data terbaru
     let last30Entries = allFourDigitArrays.slice(0, 30).reverse();
 
     let parsedData = last30Entries.map(resNum => {
@@ -341,10 +428,16 @@ document.getElementById("btn-download-img").addEventListener("click", function()
     useCORS: true,
     backgroundColor: "#070b14"
   }).then(canvas => {
-    const link = document.createElement("a");
-    link.download = "Analisis-Target-4D-Cambodia-16Trek-" + activeDownloadDateStr + ".jpg";
-    link.href = canvas.toDataURL("image/jpeg", 0.95);
-    link.click();
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+
+    if (isFacebookInAppBrowser()) {
+      openFbImageModal(dataUrl);
+    } else {
+      const link = document.createElement("a");
+      link.download = "Analisis-Target-4D-Cambodia-16Trek-" + activeDownloadDateStr + ".jpg";
+      link.href = dataUrl;
+      link.click();
+    }
 
     document.body.removeChild(cloneWrapper);
     btn.innerHTML = originalBtnHTML;
