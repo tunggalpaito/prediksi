@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Kebun Sawit Pribadi (Mode Belajar - Mulai dari 0)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #06130d;
+      color: #f8fafc;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .glass {
+      background: rgba(13, 35, 25, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .grad-text {
+      background: linear-gradient(135deg, #34d399 0%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-24 selection:bg-emerald-500 selection:text-black">
+
+  <!-- Top Bar -->
+  <header class="sticky top-0 z-40 glass border-b border-white/10 px-4 py-3">
+    <div class="max-w-3xl mx-auto flex items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 to-amber-400 p-0.5">
+          <div class="w-full h-full bg-[#06130d] rounded-[14px] flex items-center justify-center font-display font-bold text-emerald-400">
+            KS
+          </div>
+        </div>
+        <div>
+          <h1 class="font-display font-bold text-sm sm:text-base leading-tight">Kebun Sawit Pribadi</h1>
+          <p class="text-[11px] text-emerald-400" id="roleBadge">Posisi: Halaman Owner (Pemilik)</p>
+        </div>
+      </div>
+
+      <!-- Tombol Pindah Halaman Owner / Karyawan -->
+      <div class="flex bg-black/40 p-1 rounded-xl border border-white/10 text-xs font-semibold">
+        <button onclick="switchRole('owner')" id="btnOwner" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 transition">
+          Owner
+        </button>
+        <button onclick="switchRole('staff')" id="btnStaff" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition">
+          Karyawan
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 pt-5 space-y-5">
+
+    <!-- Kotak Panduan Singkat Alur Web -->
+    <section class="glass rounded-3xl p-4 border-emerald-500/30 space-y-2">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">🧭 Panduan Alur Data (Belajar)</span>
+        <button onclick="resetSemuaData()" class="text-[11px] bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 px-2.5 py-1 rounded-lg">
+          Reset Jadi 0
+        </button>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        <strong>1.</strong> Klik tombol <strong>Karyawan</strong> di kanan atas untuk mengisi laporan panen/kegiatan →
+        <strong>2.</strong> Data disimpan ke memori browser →
+        <strong>3.</strong> Kembali ke <strong>Owner</strong> (PIN bawaan: <code class="text-amber-300">1234</code>) untuk melihat hasil hitungan otomatis.
+      </p>
+    </section>
+
+    <!-- Header Harga TBS -->
+    <section class="glass rounded-3xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="space-y-1">
+        <span class="inline-block px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[11px] font-bold">
+          MODE BERSIH • MULAI DARI 0
+        </span>
+        <h2 class="font-display text-xl sm:text-2xl font-bold">Panel Kontrol <span class="grad-text">Lahan & Panen</span></h2>
+        <p class="text-xs text-slate-400">
+          Asal data harga: Diisi manual oleh Owner lewat tombol <strong>Edit</strong> di samping (atau diubah di kode).
+        </p>
+      </div>
+      <div class="bg-black/30 px-4 py-3 rounded-2xl border border-white/10 shrink-0">
+        <span class="text-[11px] text-slate-400 block">Harga TBS / Kg</span>
+        <div class="flex items-center gap-2 mt-0.5">
+          <span class="font-display font-bold text-lg text-amber-400" id="displayHarga">Rp 0</span>
+          <button onclick="ubahHarga()" class="text-[11px] bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded text-emerald-300 font-semibold">
+            Edit Harga
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- HALAMAN 1: OWNER                           -->
+    <!-- ========================================== -->
+    <div id="viewOwner" class="space-y-5">
+
+      <!-- 3 Kartu Rekap Otomatis -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="glass rounded-2xl p-4 space-y-1">
+          <p class="text-xs text-slate-400">Total Panen (Kg)</p>
+          <p class="font-display text-2xl font-bold text-white" id="statTonase">0 Kg</p>
+          <p class="text-[11px] text-emerald-400">Dari mana: Penjumlahan laporan "Panen TBS" yang beratnya &gt; 0 Kg.</p>
+        </div>
+
+        <div class="glass rounded-2xl p-4 space-y-1">
+          <p class="text-xs text-slate-400">Jumlah Trip Angkut</p>
+          <p class="font-display text-2xl font-bold text-sky-400" id="statTrip">0 Trip</p>
+          <p class="text-[11px] text-slate-400">Dari mana: Dihitung otomatis 1 trip setiap ada laporan panen berberat.</p>
+        </div>
+
+        <div class="glass rounded-2xl p-4 space-y-1">
+          <p class="text-xs text-slate-400">Estimasi Pendapatan</p>
+          <p class="font-display text-2xl font-bold text-amber-400" id="statOmzet">Rp 0</p>
+          <p class="text-[11px] text-slate-400">Rumus: Total Panen (Kg) × Harga TBS per Kg.</p>
+        </div>
+      </div>
+
+      <!-- Daftar Laporan Masuk -->
+      <section class="glass rounded-3xl p-5 space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="font-display font-bold text-base">Daftar Laporan Masuk</h3>
+            <p class="text-xs text-slate-400">
+              Larinya ke mana: Menampilkan semua kiriman dari form tab <strong>Karyawan</strong>.
+            </p>
+          </div>
+          <button onclick="switchRole('staff')" class="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-semibold self-start sm:self-auto">
+            + Isi Laporan Baru
+          </button>
+        </div>
+
+        <div id="listLaporan" class="space-y-2.5 pt-1"></div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HALAMAN 2: KARYAWAN                        -->
+    <!-- ========================================== -->
+    <div id="viewStaff" class="hidden space-y-5">
+      <div class="glass rounded-3xl p-5 space-y-4 border-amber-400/30">
+        <div class="border-b border-white/10 pb-3">
+          <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider">Form Input Lapangan</span>
+          <h3 class="font-display text-xl font-bold mt-0.5">Input Laporan Karyawan</h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Isi form ini lalu klik kirim. Data akan masuk ke <strong>Daftar Laporan Masuk</strong> dan mengupdate angka di halaman <strong>Owner</strong>.
+          </p>
+        </div>
+
+        <form onsubmit="simpanLaporan(event)" class="space-y-4 text-sm">
+          <div>
+            <label class="block text-xs font-semibold text-slate-200 mb-1">1. Nama Karyawan</label>
+            <input type="text" id="inputNama" required placeholder="Contoh: Budi (Pemanen)" class="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400">
+            <p class="text-[11px] text-slate-400 mt-1">Asal data: Diketik oleh pekerja. Akan tampil sebagai penanggung jawab laporan.</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-200 mb-1">2. Lokasi Blok</label>
+            <input type="text" id="inputBlok" required placeholder="Contoh: Blok 1 / Kavling Utara" class="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400">
+            <p class="text-[11px] text-slate-400 mt-1">Asal data: Diketik sesuai lokasi kerja di kebun.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1">3. Jenis Kegiatan</label>
+              <select id="inputJenis" class="w-full bg-[#091c13] border border-white/15 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-400">
+                <option value="Panen TBS">Panen TBS (menambah Total Panen &amp; Trip)</option>
+                <option value="Perawatan">Perawatan / Pupuk / Babat (tidak menambah Tonase)</option>
+                <option value="Kendala">Kendala / Catatan Lain (tidak menambah Tonase)</option>
+              </select>
+              <p class="text-[11px] text-slate-400 mt-1">Menentukan apakah laporan ini dihitung sebagai panen buah.</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1">4. Berat Timbangan (Kg)</label>
+              <input type="number" min="0" id="inputBerat" value="0" placeholder="0" class="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400">
+              <p class="text-[11px] text-slate-400 mt-1">Isi angka Kg jika memilih <strong>Panen TBS</strong>. Jika bukan panen, biarkan 0.</p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-200 mb-1">5. Catatan Keterangan</label>
+            <textarea id="inputCatatan" rows="2" required placeholder="Contoh: Hasil timbang di pos, 150 janjang..." class="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"></textarea>
+            <p class="text-[11px] text-slate-400 mt-1">Keterangan tambahan yang ikut tampil di kartu laporan Owner.</p>
+          </div>
+
+          <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl transition">
+            Simpan &amp; Kirim Laporan
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-5 inset-x-4 max-w-md mx-auto bg-emerald-500 text-slate-950 font-bold text-xs sm:text-sm px-4 py-3 rounded-2xl shadow-2xl text-center translate-y-24 opacity-0 transition-all duration-300 z-50">
+    Pesan
+  </div>
+
+  <script>
+    // Mulai dari 0 (kosong)
+    const OWNER_PIN = "1234";
+    let hargaTBS = Number(localStorage.getItem('belajar_sawit_harga')) || 0;
+    let laporanList = JSON.parse(localStorage.getItem('belajar_sawit_laporan')) || [];
+
+    function switchRole(role) {
+      const viewOwner = document.getElementById('viewOwner');
+      const viewStaff = document.getElementById('viewStaff');
+      const btnOwner = document.getElementById('btnOwner');
+      const btnStaff = document.getElementById('btnStaff');
+      const roleBadge = document.getElementById('roleBadge');
+
+      if (role === 'owner') {
+        const pin = prompt("Masukkan PIN Owner (bawaan: 1234):");
+        if (pin !== OWNER_PIN) {
+          showToast("PIN salah! Anda tetap di halaman Karyawan.");
+          return;
+        }
+        viewOwner.classList.remove('hidden');
+        viewStaff.classList.add('hidden');
+        btnOwner.className = "px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 transition";
+        btnStaff.className = "px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition";
+        roleBadge.textContent = "Posisi: Halaman Owner (Pemilik)";
+      } else {
+        viewOwner.classList.add('hidden');
+        viewStaff.classList.remove('hidden');
+        btnStaff.className = "px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 transition";
+        btnOwner.className = "px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition";
+        roleBadge.textContent = "Posisi: Halaman Karyawan";
+      }
+    }
+
+    function ubahHarga() {
+      const input = prompt("Masukkan harga TBS per Kg (angka saja, contoh: 2800):", hargaTBS);
+      if (input !== null && input.trim() !== "" && !isNaN(input) && Number(input) >= 0) {
+        hargaTBS = Number(input);
+        localStorage.setItem('belajar_sawit_harga', hargaTBS);
+        renderDashboard();
+        showToast("Harga TBS diperbarui!");
+      }
+    }
+
+    function simpanLaporan(e) {
+      e.preventDefault();
+      const nama = document.getElementById('inputNama').value.trim();
+      const blok = document.getElementById('inputBlok').value.trim();
+      const jenis = document.getElementById('inputJenis').value;
+      const berat = Number(document.getElementById('inputBerat').value) || 0;
+      const catatan = document.getElementById('inputCatatan').value.trim();
+
+      const now = new Date();
+      const jam = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+
+      laporanList.unshift({
+        id: Date.now(),
+        nama,
+        blok,
+        jenis,
+        berat,
+        catatan,
+        waktu: "Jam " + jam
+      });
+
+      localStorage.setItem('belajar_sawit_laporan', JSON.stringify(laporanList));
+      e.target.reset();
+      document.getElementById('inputBerat').value = 0;
+      renderDashboard();
+      showToast("Laporan tersimpan! Silakan cek di tab Owner.");
+    }
+
+    function hapusLaporan(id) {
+      laporanList = laporanList.filter(item => item.id !== id);
+      localStorage.setItem('belajar_sawit_laporan', JSON.stringify(laporanList));
+      renderDashboard();
+      showToast("Satu laporan dihapus.");
+    }
+
+    function resetSemuaData() {
+      if (!confirm("Kosongkan semua laporan dan set harga TBS kembali ke 0?")) return;
+      hargaTBS = 0;
+      laporanList = [];
+      localStorage.removeItem('belajar_sawit_harga');
+      localStorage.removeItem('belajar_sawit_laporan');
+      renderDashboard();
+      showToast("Semua data direset ke 0.");
+    }
+
+    function renderDashboard() {
+      document.getElementById('displayHarga').textContent = "Rp " + hargaTBS.toLocaleString('id-ID');
+
+      let totalKg = 0;
+      let totalTrip = 0;
+      const container = document.getElementById('listLaporan');
+      container.innerHTML = "";
+
+      if (laporanList.length === 0) {
+        container.innerHTML = `
+          <div class="bg-black/25 border border-dashed border-white/15 rounded-2xl p-6 text-center space-y-1">
+            <p class="text-sm font-semibold text-slate-300">Belum ada laporan masuk (Masih 0)</p>
+            <p class="text-xs text-slate-400">Klik tombol <strong>Karyawan</strong> di atas untuk mencoba mengirim laporan pertama.</p>
+          </div>
+        `;
+      } else {
+        laporanList.forEach(item => {
+          if (item.jenis === "Panen TBS" && item.berat > 0) {
+            totalKg += item.berat;
+            totalTrip++;
+          }
+
+          const badgeClass = item.jenis === "Panen TBS"
+            ? "bg-emerald-500/20 text-emerald-300"
+            : "bg-amber-500/20 text-amber-300";
+
+          container.innerHTML += `
+            <div class="bg-black/35 border border-white/10 rounded-2xl p-3.5 flex items-start justify-between gap-3">
+              <div class="space-y-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-[11px] font-bold px-2 py-0.5 rounded ${badgeClass}">${item.jenis}</span>
+                  <span class="text-xs font-bold text-white">${item.blok}</span>
+                  <span class="text-[11px] text-slate-400">• ${item.waktu}</span>
+                </div>
+                <p class="text-xs text-slate-200">${item.catatan}</p>
+                <p class="text-[11px] text-slate-400">
+                  Dari: <span class="text-slate-200 font-medium">${item.nama}</span>
+                  ${item.berat > 0 ? ` • <strong class="text-emerald-400">${item.berat.toLocaleString('id-ID')} Kg</strong>` : ''}
+                </p>
+              </div>
+              <button onclick="hapusLaporan(${item.id})" class="text-slate-500 hover:text-rose-400 text-xs px-2 py-1" title="Hapus">✕</button>
+            </div>
+          `;
+        });
+      }
+
+      const estimasiRp = totalKg * hargaTBS;
+      document.getElementById('statTonase').textContent = totalKg.toLocaleString('id-ID') + " Kg";
+      document.getElementById('statTrip').textContent = totalTrip + " Trip";
+      document.getElementById('statOmzet').textContent = "Rp " + estimasiRp.toLocaleString('id-ID');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => t.classList.add('translate-y-24', 'opacity-0'), 2800);
+    }
+
+    renderDashboard();
+  </script>
+</body>
+</html>
