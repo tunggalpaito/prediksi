@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PREDIKSI ANGKA Lemah 2D Master Abdi - Tunggal Paito</title>
+<title>PREDIKSI ANGKA Lemah 2D SDY Master Abdi - Tunggal Paito</title>
 <link rel="canonical" href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-abdi">
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,7 +126,8 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 230, 0, 0.1);
   margin-bottom: 15px;
 }
-h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px; color: var(--accent-gold); text-shadow: 0 0 10px var(--accent-glow); }
+h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px; color: var(--accent-gold); text-shadow: 0 0 10px var(--accent-glow); line-height: 1.35; }
+.pred-date-sub { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); letter-spacing: 0.3px; margin-top: 4px; }
 
 /* TREK CONTAINER & ROW */
 .trek-container { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-bottom: 12px; }
@@ -295,7 +296,7 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 
 <!-- KARTU UTAMA PREDIKSI -->
 <div class="main-card" id="capture-card">
-  <h1>PREDIKSI MASTER ABDI<br>LEMAH 2D</h1>
+  <h1 id="main-title">PREDIKSI MASTER ABDI<br>LEMAH 2D SDY</h1>
   <div class="trek-container" id="trek-container"></div>
   <a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
 </div>
@@ -321,7 +322,7 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
@@ -332,11 +333,17 @@ linkElement.textContent = currentUrl;
 
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
-      db=getDatabase(app),
-      dbRef=ref(db);
+      db=getDatabase(app);
+
+const PASARAN_LABEL = "SDY";
+const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_ID = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
 
 /**
- * Parsing tanggal DD-MM-YYYY menjadi Date object
+ * Parsing tanggal DD-MM-YYYY menjadi Date object[span_1](start_span)[span_1](end_span)
  */
 function parseDateKey(dateStr) {
   const parts = String(dateStr).trim().split("-");
@@ -344,18 +351,47 @@ function parseDateKey(dateStr) {
     const d = Number(parts[0]);
     const m = Number(parts[1]) - 1;
     const y = Number(parts[2]);
-    const dt = new Date(y, m, d);
+    const dt = new Date(y, m, d, 12, 0, 0);
     if (!isNaN(dt.getTime())) return dt;
   }
-  return new Date(0);
+  return null;
 }
 
 /**
- * Mengambil semua result 4D valid dari sebuah nilai di Firebase:
- * - Jika berupa deretan koma (misal: "xxxx,xxxx,1759,8040,...,6967"),
- *   urutan dari kiri ke kanan adalah lama -> terbaru (paling kanan = terbaru).
- *   Nilai "xxxx" atau non-4-digit diabaikan.
- * - Jika berupa 1 hari / 4 digit (misal: "6479"), dikembalikan sebagai ["6479"].
+ * Format tanggal menjadi "Hari, DD Bulan YYYY" tanpa tanda kurung ()
+ */
+function formatTanggalTanpaKurung(dateObj) {
+  const hari = HARI_ID[dateObj.getDay()];
+  const tgl = String(dateObj.getDate()).padStart(2, "0");
+  const bulan = BULAN_ID[dateObj.getMonth()];
+  const tahun = dateObj.getFullYear();
+  return `${hari}, ${tgl} ${bulan} ${tahun}`;
+}
+
+/**
+ * Memperbarui judul halaman (<title>) dan heading (<h1>) dengan nama pasaran (LEMAH 2D SDY)
+ * serta hari & tanggal tanpa tanda kurung () untuk prediksi hari besoknya.
+ */
+function updateJudulPrediksiBesok(latestDateObj) {
+  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+    ? latestDateObj
+    : new Date();
+
+  const nextDayDate = new Date(baseDate.getTime());
+  nextDayDate.setDate(nextDayDate.getDate() + 1);
+
+  const labelBesok = formatTanggalTanpaKurung(nextDayDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `PREDIKSI MASTER ABDI<br>LEMAH 2D ${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
+  }
+  document.title = `PREDIKSI ANGKA Lemah 2D ${PASARAN_LABEL} Master Abdi ${labelBesok} - Tunggal Paito`;
+}
+
+/**
+ * Mengambil semua result 4D valid dari sebuah nilai di Firebase[span_2](start_span)[span_2](end_span):
+ * - Deretan koma (lama -> terbaru, paling kanan = terbaru), mengabaikan "xxxx[span_3](start_span)"[span_3](end_span)
+ * - String 1 hari / 4 digit tunggal[span_4](start_span)[span_4](end_span)
  */
 function extract4DResults(rawValue) {
   if (rawValue === null || rawValue === undefined) return [];
@@ -378,20 +414,33 @@ function extract4DResults(rawValue) {
   return [];
 }
 
-get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
-    if(snapshot.exists() && snapshot.val()){
+// Pantau update 1x24 jam dari Firebase secara real-time (onValue)[span_5](start_span)[span_5](end_span)
+const dataRef = ref(db, "live/data-sdy");
+onValue(dataRef, (snapshot) => {
+    if (snapshot.exists() && snapshot.val()) {
         const data = snapshot.val();
 
-        // Urutkan key tanggal dari terlama ke terbaru
-        const sortedKeys = Object.keys(data).sort((a, b) => parseDateKey(a) - parseDateKey(b));
+        const validKeyItems = Object.keys(data)
+            .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
+            .filter(entry => entry.dateObj !== null)
+            .sort((a, b) => a.dateObj - b.dateObj);
 
-        // Gabungkan semua result 4D secara kronologis (paling kanan di string koma = paling baru)
+        let latestDateObj = null;
+        for (let i = validKeyItems.length - 1; i >= 0; i--) {
+            if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
+                latestDateObj = validKeyItems[i].dateObj;
+                break;
+            }
+        }
+        updateJudulPrediksiBesok(latestDateObj);
+
         const allResults = [];
-        sortedKeys.forEach(dateStr => {
+        validKeyItems.forEach(({ dateStr, dateObj }) => {
             const list4d = extract4DResults(data[dateStr]);
             list4d.forEach((val4d, idx) => {
                 allResults.push({
                     dateStr,
+                    dateObj,
                     idx,
                     val: val4d
                 });
@@ -417,7 +466,6 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
             let weakDigit = (step2 * 3 + Math.abs(kepala - ekor)) % 10;
             const weakDigits = [weakDigit];
 
-            // Cari posisi item ini di allResults untuk cek result berikutnya
             const globalPos = allResults.length - last15.length + index;
             const nextItem = allResults[globalPos + 1]; 
             
@@ -459,8 +507,10 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
 
             trekContainer.insertAdjacentHTML('beforeend', rowHtml);
         });
+    } else {
+        updateJudulPrediksiBesok(null);
     }
-}).catch((e)=>{
+}, (e) => {
     console.error("Gagal mengambil data dari Firebase:", e);
 });
 
@@ -475,7 +525,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
         scale: 2
     }).then(canvas => {
         const link = document.createElement("a");
-        link.download = "Lemah-Angka-2D-Master-Abdi.png";
+        link.download = "Lemah-Angka-2D-SDY-Master-Abdi.png";
         link.href = canvas.toDataURL("image/png");
         link.click();
 
