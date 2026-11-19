@@ -374,10 +374,9 @@ const BULAN_ID = [
   "Januari", "Februari", "Maret", "April", "Mei", "Juni",
   "Juli", "Agustus", "September", "Oktober", "November", "Desember"
 ];
+// SGP libur setiap Selasa (2) dan Jumat (5)
+const HARI_LIBUR_SGP = new Set([2, 5]);
 
-/**
- * Parsing tanggal DD-MM-YYYY menjadi Date object (noon local time agar aman dari pergeseran DST/TZ)
- */
 function parseDateKey(dateStr) {
   const parts = String(dateStr).trim().split("-");
   if (parts.length === 3) {
@@ -390,9 +389,6 @@ function parseDateKey(dateStr) {
   return null;
 }
 
-/**
- * Format tanggal menjadi "Hari, DD Bulan YYYY" tanpa tanda kurung ()
- */
 function formatTanggalTanpaKurung(dateObj) {
   const hari = HARI_ID[dateObj.getDay()];
   const tgl = String(dateObj.getDate()).padStart(2, "0");
@@ -401,31 +397,31 @@ function formatTanggalTanpaKurung(dateObj) {
   return `${hari}, ${tgl} ${bulan} ${tahun}`;
 }
 
-/**
- * Memperbarui judul halaman (<title>) dan heading (<h1>) dengan nama pasaran (LEMAH 2D SGP)
- * serta hari & tanggal tanpa tanda kurung () untuk prediksi hari besoknya.
- */
-function updateJudulPrediksiBesok(latestDateObj) {
+function getNextSgpDrawDate(latestDateObj) {
   const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
     ? latestDateObj
     : new Date();
 
-  const nextDayDate = new Date(baseDate.getTime());
-  nextDayDate.setDate(nextDayDate.getDate() + 1);
+  const nextDraw = new Date(baseDate.getTime());
+  nextDraw.setDate(nextDraw.getDate() + 1);
 
-  const labelBesok = formatTanggalTanpaKurung(nextDayDate);
-  const titleEl = document.getElementById("main-title");
-  if (titleEl) {
-    titleEl.innerHTML = `PREDIKSI MASTER EVI<br>LEMAH 2D ${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
+  while (HARI_LIBUR_SGP.has(nextDraw.getDay())) {
+    nextDraw.setDate(nextDraw.getDate() + 1);
   }
-  document.title = `PREDIKSI ANGKA Lemah 2D ${PASARAN_LABEL} Master Evi ${labelBesok} - Tunggal Paito ${PASARAN_LABEL}`;
+
+  return nextDraw;
 }
 
-/**
- * Mengambil semua result 4D valid dari sebuah nilai di Firebase:
- * - Deretan koma (lama -> terbaru, paling kanan = terbaru), mengabaikan "xxxx"
- * - String 1 hari / 4 digit tunggal
- */
+function updateJudulPrediksiSgp(latestDateObj) {
+  const nextDrawDate = getNextSgpDrawDate(latestDateObj);
+  const labelJadwal = formatTanggalTanpaKurung(nextDrawDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `PREDIKSI MASTER EVI<br>LEMAH 2D ${PASARAN_LABEL}<span class="pred-date-sub">${labelJadwal}</span>`;
+  }
+  document.title = `PREDIKSI ANGKA Lemah 2D ${PASARAN_LABEL} Master Evi ${labelJadwal} - Tunggal Paito ${PASARAN_LABEL}`;
+}
+
 function extract4DResults(rawValue) {
   if (rawValue === null || rawValue === undefined) return [];
   const str = String(rawValue).trim();
@@ -447,7 +443,6 @@ function extract4DResults(rawValue) {
   return [];
 }
 
-// Pantau update 1x24 jam dari Firebase secara real-time (onValue)
 const dataRef = ref(db, "live/data-sgp");
 onValue(dataRef, (snapshot) => {
     if (snapshot.exists() && snapshot.val()) {
@@ -465,7 +460,7 @@ onValue(dataRef, (snapshot) => {
                 break;
             }
         }
-        updateJudulPrediksiBesok(latestDateObj);
+        updateJudulPrediksiSgp(latestDateObj);
 
         const allResults = [];
         validKeyItems.forEach(({ dateStr, dateObj }) => {
@@ -480,7 +475,6 @@ onValue(dataRef, (snapshot) => {
             });
         });
 
-        // Mengambil 15 data terakhir untuk 15x trek Master Evi
         const last15 = allResults.slice(-15);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
@@ -492,7 +486,6 @@ onValue(dataRef, (snapshot) => {
             const digits = result4d.slice(-4).split("").map(Number);
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
             
-            // --- RUMUS 1 DIGIT TUNGGAL PATEN MASTER EVI ---
             const indeks = [5, 6, 7, 8, 9, 0, 1, 2, 3, 4];
             let weakDigit = (indeks[(kop + ekor) % 10] + indeks[kepala]) % 10;
             const weakDigits = [weakDigit];
@@ -511,7 +504,6 @@ onValue(dataRef, (snapshot) => {
                 const nKepala = Number(next4d[2]);
                 const nEkor = Number(next4d[3]);
                 
-                // Cek apakah 1 digit angka lemah lolos (tidak ada di posisi kepala/ekor result berikutnya = ✓)
                 const isTembus = weakDigits.includes(nKepala) || weakDigits.includes(nEkor);
                 if (!isTembus) {
                     status = "✓";
@@ -539,7 +531,7 @@ onValue(dataRef, (snapshot) => {
             trekContainer.insertAdjacentHTML('beforeend', rowHtml);
         });
     } else {
-        updateJudulPrediksiBesok(null);
+        updateJudulPrediksiSgp(null);
     }
 }, (e) => {
     console.error("Gagal mengambil data dari Firebase:", e);
