@@ -126,7 +126,7 @@
 <button class=dig-btn onclick=autoColorByPosition(9)>9</button>
 </div>
 <div class=search-pattern-box>
-<span style=font-size:.8rem;font-weight:600;display:block;margin-bottom:5px>Cari 2, 3, atau 4 Digit Sekaligus</span>
+<span style=font-size:.8rem;font-weight:600;display:block;margin-bottom:5px>Cari 2, 3, 4, atau 5 Digit Sekaligus</span>
 <input id=patternInput maxlength=5 placeholder="Ketik angka...">
 <button class=btn-pattern onclick=searchPattern(!0)>Cari Tersusun</button>
 <button class=btn-pattern onclick=searchPattern(!1)>Cari Acak</button>
@@ -161,7 +161,9 @@ function updateSvgLines(){const t=document.getElementById("paitoSvg"),e=document
 const NAMA_HARI=["minggu","senin","selasa","rabu","kamis","jumat","sabtu"];
 const NAMA_BULAN=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 
-function parseDateInfo(rawKey){const parts=String(rawKey||"").trim().split(/[-/]/);if(3!==parts.length)return null;let day,month,year;if(parts[0].length===4){year=parseInt(parts[0],10);month=parseInt(parts[1],10);day=parseInt(parts[2],10);}else{day=parseInt(parts[0],10);month=parseInt(parts[1],10);year=parseInt(parts[2],10);}if(!day||!month||!year)return null;const dt=new Date(year,month-1,day);if(isNaN(dt.getTime()))return null;const hari=NAMA_HARI[dt.getDay()];const tglFormatted=`${String(day).padStart(2,"0")}-${NAMA_BULAN[month-1]||String(month).padStart(2,"0")}-${year}`;return{dt,ts:dt.getTime(),hari,tglFormatted};}
+function parseDateKey(rawKey){const parts=String(rawKey||"").trim().split(/[-/]/);if(3!==parts.length)return null;let day,month,year;if(parts[0].length===4){year=parseInt(parts[0],10);month=parseInt(parts[1],10);day=parseInt(parts[2],10);}else{day=parseInt(parts[0],10);month=parseInt(parts[1],10);year=parseInt(parts[2],10);}if(!day||!month||!year)return null;const dt=new Date(year,month-1,day);return isNaN(dt.getTime())?null:dt;}
+function formatDateIso(dt){return`${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;}
+function formatDateDisplay(dt){const day=dt.getDate();const monthIdx=dt.getMonth();const year=dt.getFullYear();return`${String(day).padStart(2,"0")}-${NAMA_BULAN[monthIdx]||String(monthIdx+1).padStart(2,"0")}-${year}`;}
 function extractFiveDigitItems(rawValue){const str=String(rawValue||"").trim();if(!str)return[];if(str.includes(",")){return str.split(",").map(s=>s.replace(/\D/g,"").trim()).filter(Boolean);}const digitsOnly=str.replace(/\D/g,"");const groups=[];for(let i=0;i<digitsOnly.length;i+=5){const chunk=digitsOnly.slice(i,i+5);if(chunk)groups.push(chunk);}return groups;}
 function renderNumberGroup(numStr){return`<span class="number-group">${String(numStr).trim().split("").map(d=>`<span class="digit" onclick="toggleDigitColor(this)">${d}</span>`).join("")}</span>`;}
 
@@ -174,22 +176,48 @@ macau5dRef.once("value").then((snapshot)=>{
     return;
   }
   const rawData=snapshot.val()||{};
-  const entries=[];
-  Object.keys(rawData).forEach((dateKey)=>{
-    const info=parseDateInfo(dateKey);
-    if(!info)return;
+  const daysMap={};
+
+  function ensureDaySlot(dt){
+    const iso=formatDateIso(dt);
+    if(!daysMap[iso]){
+      daysMap[iso]={dt,ts:dt.getTime(),hari:NAMA_HARI[dt.getDay()],tglFormatted:formatDateDisplay(dt),slots:[null,null]};
+    }
+    return daysMap[iso];
+  }
+
+  const sortedKeys=Object.keys(rawData).sort((a,b)=>{
+    const da=parseDateKey(a),db=parseDateKey(b);
+    return (da?da.getTime():0)-(db?db.getTime():0);
+  });
+
+  sortedKeys.forEach((dateKey)=>{
+    const baseDt=parseDateKey(dateKey);
+    if(!baseDt)return;
     const items=extractFiveDigitItems(rawData[dateKey]);
     if(!items.length)return;
-    entries.push({ts:info.ts,hari:info.hari,tglFormatted:info.tglFormatted,items});
+
+    // Hitung mundur otomatis per kotak (2 kotak per hari: [15:00, 21:00])
+    // mulai dari update paling kanan/terbaru, lalu bergeser mundur ke hari sebelumnya.
+    for(let idx=items.length-1;idx>=0;idx--){
+      const offsetFromRight=(items.length-1)-idx;
+      const dayOffset=Math.floor(offsetFromRight/2);
+      const boxIndexFromRight=offsetFromRight%2;
+      const boxIndex=1-boxIndexFromRight; // 1 = 21:00, 0 = 15:00
+
+      const targetDt=new Date(baseDt.getFullYear(),baseDt.getMonth(),baseDt.getDate()-dayOffset);
+      const slot=ensureDaySlot(targetDt);
+      slot.slots[boxIndex]=items[idx];
+    }
   });
-  entries.sort((a,b)=>a.ts-b.ts);
+
+  const sortedDays=Object.keys(daysMap).map(k=>daysMap[k]).sort((a,b)=>a.ts-b.ts);
   const placeholder='<span class="number-group" style="letter-spacing:0.5px;"><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span></span>';
   let rowsHtml="";
-  entries.forEach((entry)=>{
-    const pairItems=entry.items.length>2?entry.items.slice(-2):entry.items;
-    const firstUpdate=pairItems[0]?renderNumberGroup(pairItems[0]):placeholder;
-    const secondUpdate=pairItems[1]?renderNumberGroup(pairItems[1]):placeholder;
-    rowsHtml+=`<tr><td class="day-col">${entry.hari}</td><td class="date-col">${entry.tglFormatted}</td><td>${firstUpdate}</td><td>${secondUpdate}</td></tr>`;
+  sortedDays.forEach((entry)=>{
+    const session15=entry.slots[0]?renderNumberGroup(entry.slots[0]):placeholder;
+    const session21=entry.slots[1]?renderNumberGroup(entry.slots[1]):placeholder;
+    rowsHtml+=`<tr><td class="day-col">${entry.hari}</td><td class="date-col">${entry.tglFormatted}</td><td>${session15}</td><td>${session21}</td></tr>`;
   });
   bodyEl.innerHTML=rowsHtml||'<tr><td colspan="4" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>';
   updateSvgLines();
