@@ -205,13 +205,17 @@ async function loadSingaporeAnalysis(){
 
     let latestDateKey = n[n.length - 1];
     
-    let targetDisplayDate = new Date();
+    // SGP libur Selasa (2) dan Jumat (5):
+    // Update Senin (1) -> Rabu (+2 hari)
+    // Update Kamis (4) -> Sabtu (+2 hari)
+    // Hari buka lainnya -> +1 hari
+    let targetDisplayDate = new Date(todayObj);
     if(latestDateKey === todayKeyStr) {
-      let dayOfWeek = targetDisplayDate.getDay(); 
+      const dayOfWeek = todayObj.getDay();
       if(dayOfWeek === 1 || dayOfWeek === 4) {
-        targetDisplayDate.setDate(targetDisplayDate.getDate() + 2);
+        targetDisplayDate.setDate(todayObj.getDate() + 2);
       } else {
-        targetDisplayDate.setDate(targetDisplayDate.getDate() + 1);
+        targetDisplayDate.setDate(todayObj.getDate() + 1);
       }
     }
 
