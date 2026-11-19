@@ -14,6 +14,7 @@ body{background-color:#7a0019;color:#fff;display:flex;flex-direction:column;alig
 
 /* Styling Paling Atas (Area Iklan Utama) */
 .top-ads-wrapper{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:15px;background-color:#520010;border:1px solid rgba(255,215,0,.3);border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(255,215,0,.2)}
+.ad-slot{width:100%;display:flex;justify-content:center;align-items:center;min-height:50px;overflow:hidden;border-radius:6px}
 
 /* Styling Tombol Navigasi Atas */
 .nav-top-container{width:100%;max-width:480px;display:flex;gap:10px;margin-bottom:15px}
@@ -22,7 +23,8 @@ body{background-color:#7a0019;color:#fff;display:flex;flex-direction:column;alig
 .nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(255,215,0,.4)}
 
 .main-card{width:100%;max-width:480px;background-color:#520010;border:1px solid rgba(255,215,0,.4);border-radius:12px;padding:20px 15px;text-align:left;box-shadow:0 4px 15px rgba(255,215,0,.2);margin-bottom:25px}
-h1{font-size:20px;font-weight:700;margin-bottom:12px;color:gold;text-align:center;letter-spacing:.5px}
+h1{font-size:20px;font-weight:700;margin-bottom:12px;color:gold;text-align:center;letter-spacing:.5px;line-height:1.35}
+.pred-date-sub{display:block;font-size:13px;font-weight:700;color:#f3f4f6;letter-spacing:0.3px;margin-top:4px}
 h3{font-size:14px;color:gold;margin:15px 0 6px 0;border-bottom:1px solid rgba(255,215,0,.3);padding-bottom:4px}
 li,p{font-size:12px;color:#f3f4f6;line-height:1.5;margin-bottom:6px}
 ul{padding-left:18px}
@@ -39,37 +41,34 @@ ul{padding-left:18px}
 <body>
 
 <!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: IKLAN UTAMA (1, 2, 3, 4)                      -->
+<!-- KONTEN PALING ATAS: IKLAN UTAMA                                   -->
 <!-- ================================================================= -->
 <div class="top-ads-wrapper">
-  <!-- Iklan Banner 468x60 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script>
-      atOptions = {
-        'key' : '9a986a45c62dcea8d8216b9210f159cb',
-        'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
-        'params' : {}
-      };
-    </script>
-    <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+  <!-- Iklan Banner 468x60 (Di-scale otomatis agar pas di layar mobile) -->
+  <div class="ad-slot" style="min-height:60px">
+    <div style="transform:scale(0.85);transform-origin:center center">
+      <script>
+        atOptions = {
+          'key' : '9a986a45c62dcea8d8216b9210f159cb',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    </div>
   </div>
 
   <!-- Iklan Script + Container ID -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <div class="ad-slot">
     <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
 
-  <!-- Iklan Script 2 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <!-- Iklan Script Lainnya -->
+  <div class="ad-slot">
     <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-  </div>
-
-  <!-- Iklan Script 4 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
   </div>
 </div>
 <!-- ================================================================= -->
@@ -81,7 +80,7 @@ ul{padding-left:18px}
 </div>
 
 <div class="main-card">
-<h1>ANGKA KUMAT 2D HONGKONG</h1>
+<h1 id="main-title">ANGKA KUMAT 2D HK</h1>
 
 <div class="highlight-box">
 <div><span>Bocoran & Prediksi Togel HK Hari Ini</span></div>
@@ -134,61 +133,147 @@ dan jangan pakai angka dari orang jika terus-terusan tidak setangan denganmu
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
 app=initializeApp(firebaseConfig),db=getDatabase(app);
 
-async function loadHkAnalysis(){
-  try{
-    // Mengambil data dari path live/data-hk
-    const t=await get(ref(db,"live/data-hk"));
-    if(!t.exists())return;
-    const e=t.val();
-    let n=Object.keys(e);
-    if(n.sort(((t,e)=>{const[n,a,o]=t.split("-").map(Number),[r,s,l]=e.split("-").map(Number);return new Date(o,a-1,n)-new Date(l,s-1,r)})),n.length<7)return;
-    
-    let a=t=>{if(Array.isArray(t)&&t.length>0)return String(t[t.length-1]);if("object"==typeof t&&null!==t){const e=Object.keys(t);return String(t[e[e.length-1]])}return String(t)};
+const PASARAN_LABEL = "ANGKA KUMAT 2D HK";
+const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_ID = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
 
-    let last7Keys=n.slice(-7);
-    let htmlRows="";
-
-    last7Keys.forEach(dateKey=>{
-      let rawVal=a(e[dateKey]);
-      let resNum=rawVal.split(":")[0].trim();
-      resNum=4===resNum.length?resNum:"0123";
-
-      let as=parseInt(resNum[0]),kop=parseInt(resNum[1]),kep=parseInt(resNum[2]),ek=parseInt(resNum[3]);
-
-      let b1 = (as + ek + 9) % 10;
-      let b2 = (kop + kep + 5) % 10;
-      let b3 = Math.abs(as - kop) % 10;
-      let b4 = Math.abs(ek - kep) % 10;
-      let b5 = Math.abs((as + ek) - (kop + kep)) % 10;
-      let b6 = (as + kop + kep + ek + 2) % 10;
-
-      let bbfsArr = [b1, b2, b3, b4, b5, b6];
-      let uniqueBbfs=[...new Set(bbfsArr)];
-      for(let i=0; i<=9 && uniqueBbfs.length<6; i++){
-        if(!uniqueBbfs.includes(i)) uniqueBbfs.push(i);
-      }
-      let bbfsStr=uniqueBbfs.slice(0,6).join("");
-
-      htmlRows+=`
-        <div style="display:flex;justify-content:space-between;align-items:center;background:#38000b;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,215,0,0.2);font-size:12px;">
-          <span style="color:#ddd;font-size:11px;">${dateKey}</span>
-          <span style="font-weight:bold;color:#fff;letter-spacing:1px;">${resNum} : <span style="color:gold;">${bbfsStr}</span></span>
-        </div>
-      `;
-    });
-
-    document.getElementById("result-7rows-container").innerHTML=htmlRows;
-
-  }catch(t){console.error(t);}
+function parseDateKey(dateStr) {
+  const parts = String(dateStr).trim().split("-");
+  if (parts.length === 3) {
+    const d = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const y = Number(parts[2]);
+    const dt = new Date(y, m, d, 12, 0, 0);
+    if (!isNaN(dt.getTime())) return dt;
+  }
+  return null;
 }
 
-loadHkAnalysis();
+function formatTanggalTanpaKurung(dateObj) {
+  const hari = HARI_ID[dateObj.getDay()];
+  const tgl = String(dateObj.getDate()).padStart(2, "0");
+  const bulan = BULAN_ID[dateObj.getMonth()];
+  const tahun = dateObj.getFullYear();
+  return `${hari}, ${tgl} ${bulan} ${tahun}`;
+}
+
+function updateJudulPrediksiBesok(latestDateObj) {
+  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+    ? latestDateObj
+    : new Date();
+
+  const nextDayDate = new Date(baseDate.getTime());
+  nextDayDate.setDate(nextDayDate.getDate() + 1);
+
+  const labelBesok = formatTanggalTanpaKurung(nextDayDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
+  }
+  document.title = `Prediksi Angka KUMAT HK ${labelBesok} - Tunggal Paito`;
+}
+
+function extract4DResults(rawValue) {
+  if (rawValue === null || rawValue === undefined) return [];
+  const str = String(rawValue).trim();
+  if (!str) return [];
+
+  if (str.includes(",")) {
+    return str
+      .split(",")
+      .map(s => s.trim().split(":")[0].trim())
+      .filter(s => /^\d{4,}$/.test(s))
+      .map(s => s.slice(-4));
+  }
+
+  const cleanHead = str.split(":")[0].trim();
+  const digitsOnly = cleanHead.replace(/\D/g, "");
+  if (digitsOnly.length >= 4) {
+    return [digitsOnly.slice(-4)];
+  }
+
+  return [];
+}
+
+const dataRef = ref(db, "live/data-hk");
+onValue(dataRef, (snapshot) => {
+  if (!snapshot.exists() || !snapshot.val()) {
+    updateJudulPrediksiBesok(null);
+    return;
+  }
+
+  const e = snapshot.val();
+  const validKeyItems = Object.keys(e)
+    .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
+    .filter(entry => entry.dateObj !== null)
+    .sort((a, b) => a.dateObj - b.dateObj);
+
+  let latestDateObj = null;
+  for (let i = validKeyItems.length - 1; i >= 0; i--) {
+    if (extract4DResults(e[validKeyItems[i].dateStr]).length > 0) {
+      latestDateObj = validKeyItems[i].dateObj;
+      break;
+    }
+  }
+  updateJudulPrediksiBesok(latestDateObj);
+
+  const allEntries = [];
+  validKeyItems.forEach(({ dateStr }) => {
+    const list4d = extract4DResults(e[dateStr]);
+    list4d.forEach((val4d, idx) => {
+      allEntries.push({
+        label: list4d.length > 1 ? `${dateStr} #${idx + 1}` : dateStr,
+        resNum: val4d
+      });
+    });
+  });
+
+  if (allEntries.length === 0) return;
+
+  const last7Entries = allEntries.slice(-7);
+  let htmlRows = "";
+
+  last7Entries.forEach(({ label, resNum }) => {
+    const as = parseInt(resNum[0], 10);
+    const kop = parseInt(resNum[1], 10);
+    const kep = parseInt(resNum[2], 10);
+    const ek = parseInt(resNum[3], 10);
+
+    const b1 = (as + ek + 9) % 10;
+    const b2 = (kop + kep + 5) % 10;
+    const b3 = Math.abs(as - kop) % 10;
+    const b4 = Math.abs(ek - kep) % 10;
+    const b5 = Math.abs((as + ek) - (kop + kep)) % 10;
+    const b6 = (as + kop + kep + ek + 2) % 10;
+
+    const bbfsArr = [b1, b2, b3, b4, b5, b6];
+    const uniqueBbfs = [...new Set(bbfsArr)];
+    for (let i = 0; i <= 9 && uniqueBbfs.length < 6; i++) {
+      if (!uniqueBbfs.includes(i)) uniqueBbfs.push(i);
+    }
+    const bbfsStr = uniqueBbfs.slice(0, 6).join("");
+
+    htmlRows += `
+      <div style="display:flex;justify-content:space-between;align-items:center;background:#38000b;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,215,0,0.2);font-size:12px;">
+        <span style="color:#ddd;font-size:11px;">${label}</span>
+        <span style="font-weight:bold;color:#fff;letter-spacing:1px;">${resNum} : <span style="color:gold;">${bbfsStr}</span></span>
+      </div>
+    `;
+  });
+
+  document.getElementById("result-7rows-container").innerHTML = htmlRows;
+}, (t) => {
+  console.error(t);
+});
 
 document.getElementById("btn-download-img").addEventListener("click",(function(){
   this.textContent="Memproses Gambar...";
@@ -207,17 +292,18 @@ document.addEventListener("click",(function(t){
   clickCount++;
   1!==clickCount&&(clickCount-1)%3!=0||window.open(adLink,"_blank");
 }),!0);
+
 document.addEventListener("contextmenu",(t=>t.preventDefault()));
+document.onkeydown=function(e){
+  if(e.keyCode == 123) return false;
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+}
 </script>
-<script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-    }
-</script>
+
+<!-- POPUNDER SCRIPT (Ditempatkan di bawah agar tidak mengganggu tata letak konten) -->
+<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 </body>
 </html>
