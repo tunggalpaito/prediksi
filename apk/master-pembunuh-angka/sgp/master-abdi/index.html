@@ -68,7 +68,29 @@ body {
 }
 
 /* STYLING AREA IKLAN UTAMA */
-.top-ads-wrapper{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px;background-color:#0b1a10;border:1px solid rgba(0,255,102,.3);border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(0,255,102,.2)}
+.top-ads-wrapper {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: #0b1a10;
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 255, 102, 0.2);
+}
+.ad-slot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  overflow: hidden;
+  border-radius: 6px;
+}
 
 /* CARDS COMMON STYLES */
 .glass-card {
@@ -126,7 +148,8 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 230, 0, 0.1);
   margin-bottom: 15px;
 }
-h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px; color: var(--accent-gold); text-shadow: 0 0 10px var(--accent-glow); }
+h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px; color: var(--accent-gold); text-shadow: 0 0 10px var(--accent-glow); line-height: 1.35; }
+.pred-date-sub { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); letter-spacing: 0.3px; margin-top: 4px; }
 
 /* TREK CONTAINER & ROW */
 .trek-container { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-bottom: 12px; }
@@ -182,7 +205,7 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 .badge-cross {
   background: rgba(255, 51, 102, 0.15);
   color: var(--accent-red);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 51, 102, 0.4);
 }
 .badge-off {
   background: rgba(255, 230, 0, 0.1);
@@ -249,37 +272,48 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 </a>
 
 <!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: IKLAN UTAMA -->
+<!-- KONTEN PALING ATAS: BANNER & NATIVE ADS -->
 <!-- ================================================================= -->
 <div class="top-ads-wrapper">
-  <!-- Iklan 3: Banner 468x60 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <!-- Banner 320x50 (Pas di lebar layar HP 420px) -->
+  <div class="ad-slot" style="min-height:50px">
     <script>
       atOptions = {
-        'key' : '9a986a45c62dcea8d8216b9210f159cb',
+        'key' : '119c8bb3217ed264a8fa223c3197bf69',
         'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
+        'height' : 50,
+        'width' : 320,
         'params' : {}
       };
     </script>
-    <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
   </div>
 
-  <!-- Iklan 1: Script + Container ID -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <!-- Banner 468x60 (Di-scale otomatis agar pas di layar mobile) -->
+  <div class="ad-slot" style="min-height:60px">
+    <div style="transform:scale(0.82);transform-origin:center center">
+      <script>
+        atOptions = {
+          'key' : '9a986a45c62dcea8d8216b9210f159cb',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    </div>
+  </div>
+
+  <!-- Native Banner -->
+  <div class="ad-slot">
     <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
 
-  <!-- Iklan 2 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <!-- Script Banner / Direct -->
+  <div class="ad-slot">
     <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-  </div>
-
-  <!-- Iklan 4 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
   </div>
 </div>
 <!-- ================================================================= -->
@@ -295,7 +329,7 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 
 <!-- KARTU UTAMA PREDIKSI -->
 <div class="main-card" id="capture-card">
-  <h1>PREDIKSI MASTER ABDI<br>LEMAH 2D SGP</h1>
+  <h1 id="main-title">PREDIKSI MASTER ABDI<br>LEMAH 2D SGP</h1>
   <div class="trek-container" id="trek-container"></div>
   <a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
 </div>
@@ -321,7 +355,7 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
@@ -332,26 +366,122 @@ linkElement.textContent = currentUrl;
 
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
-      db=getDatabase(app),
-      dbRef=ref(db);
+      db=getDatabase(app);
 
-get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
-    if(snapshot.exists() && snapshot.val()){
+const PASARAN_LABEL = "SGP";
+const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_ID = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
+
+/**
+ * Parsing tanggal DD-MM-YYYY menjadi Date object (noon local time agar aman dari pergeseran DST/TZ)
+ */
+function parseDateKey(dateStr) {
+  const parts = String(dateStr).trim().split("-");
+  if (parts.length === 3) {
+    const d = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const y = Number(parts[2]);
+    const dt = new Date(y, m, d, 12, 0, 0);
+    if (!isNaN(dt.getTime())) return dt;
+  }
+  return null;
+}
+
+/**
+ * Format tanggal menjadi "Hari, DD Bulan YYYY" tanpa tanda kurung ()
+ */
+function formatTanggalTanpaKurung(dateObj) {
+  const hari = HARI_ID[dateObj.getDay()];
+  const tgl = String(dateObj.getDate()).padStart(2, "0");
+  const bulan = BULAN_ID[dateObj.getMonth()];
+  const tahun = dateObj.getFullYear();
+  return `${hari}, ${tgl} ${bulan} ${tahun}`;
+}
+
+/**
+ * Memperbarui judul halaman (<title>) dan heading (<h1>) dengan nama pasaran (LEMAH 2D SGP)
+ * serta hari & tanggal tanpa tanda kurung () untuk prediksi hari besoknya.
+ */
+function updateJudulPrediksiBesok(latestDateObj) {
+  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+    ? latestDateObj
+    : new Date();
+
+  const nextDayDate = new Date(baseDate.getTime());
+  nextDayDate.setDate(nextDayDate.getDate() + 1);
+
+  const labelBesok = formatTanggalTanpaKurung(nextDayDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `PREDIKSI MASTER ABDI<br>LEMAH 2D ${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
+  }
+  document.title = `PREDIKSI Angka Lemah 2D ${PASARAN_LABEL} Master Abdi ${labelBesok} - Tunggal Paito ${PASARAN_LABEL}`;
+}
+
+/**
+ * Mengambil semua result 4D valid dari sebuah nilai di Firebase:
+ * - Deretan koma (lama -> terbaru, paling kanan = terbaru), mengabaikan "xxxx"
+ * - String 1 hari / 4 digit tunggal
+ */
+function extract4DResults(rawValue) {
+  if (rawValue === null || rawValue === undefined) return [];
+  const str = String(rawValue).trim();
+  if (!str) return [];
+
+  if (str.includes(",")) {
+    return str
+      .split(",")
+      .map(s => s.trim())
+      .filter(s => /^\d{4,}$/.test(s))
+      .map(s => s.slice(-4));
+  }
+
+  const digitsOnly = str.replace(/\D/g, "");
+  if (digitsOnly.length >= 4) {
+    return [digitsOnly.slice(-4)];
+  }
+
+  return [];
+}
+
+// Pantau update 1x24 jam dari Firebase secara real-time (onValue)
+const dataRef = ref(db, "live/data-sgp");
+onValue(dataRef, (snapshot) => {
+    if (snapshot.exists() && snapshot.val()) {
         const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
+
+        const validKeyItems = Object.keys(data)
+            .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
+            .filter(entry => entry.dateObj !== null)
+            .sort((a, b) => a.dateObj - b.dateObj);
+
+        let latestDateObj = null;
+        for (let i = validKeyItems.length - 1; i >= 0; i--) {
+            if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
+                latestDateObj = validKeyItems[i].dateObj;
+                break;
+            }
+        }
+        updateJudulPrediksiBesok(latestDateObj);
+
+        const allResults = [];
+        validKeyItems.forEach(({ dateStr, dateObj }) => {
+            const list4d = extract4DResults(data[dateStr]);
+            list4d.forEach((val4d, idx) => {
+                allResults.push({
+                    dateStr,
+                    dateObj,
+                    idx,
+                    val: val4d
+                });
+            });
         });
 
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-
         // Mengambil 15 data terakhir untuk 15x trek Master Abdi
-        const last15 = entries.slice(-15);
+        const last15 = allResults.slice(-15);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
 
@@ -359,7 +489,7 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
             const result4d = item.val;
             if (result4d.length < 4) return;
 
-            const digits = result4d.split("").map(Number);
+            const digits = result4d.slice(-4).split("").map(Number);
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
             
             // --- RUMUS MATRIX 3-LAPIS (PALING PATEN & STABIL) ---
@@ -369,8 +499,8 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
             let weakDigit = (step2 * 3 + Math.abs(kepala - ekor)) % 10;
             const weakDigits = [weakDigit];
 
-            const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
-            const nextItem = entries[globalIndex + 1]; 
+            const globalPos = allResults.length - last15.length + index;
+            const nextItem = allResults[globalPos + 1]; 
             
             let status = "✓";
             let badgeClass = "trek-badge badge-check";
@@ -410,8 +540,10 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
 
             trekContainer.insertAdjacentHTML('beforeend', rowHtml);
         });
+    } else {
+        updateJudulPrediksiBesok(null);
     }
-}).catch((e)=>{
+}, (e) => {
     console.error("Gagal mengambil data dari Firebase:", e);
 });
 
@@ -481,5 +613,8 @@ document.addEventListener("click",(function(e){
 document.addEventListener("contextmenu",(e=>e.preventDefault()));
 document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}
 </script>
+
+<!-- POPUNDER SCRIPT (Ditempatkan di bawah agar tidak mengganggu tata letak konten) -->
+<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 </body>
 </html>
