@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PREDIKSI ANGKA Lemah 2D Master Toni - Tunggal Paito</title>
+<title>PREDIKSI ANGKA Lemah 2D SDY Master Toni - Tunggal Paito</title>
 <link rel="canonical" href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/master-toni">
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,7 +68,29 @@ body {
 }
 
 /* STYLING AREA IKLAN UTAMA */
-.top-ads-wrapper{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px;background-color:#0b1a10;border:1px solid rgba(0,255,102,.3);border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(0,255,102,.2)}
+.top-ads-wrapper {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: #0b1a10;
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 255, 102, 0.2);
+}
+.ad-slot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  overflow: hidden;
+  border-radius: 6px;
+}
 
 /* CARDS COMMON STYLES */
 .glass-card {
@@ -250,37 +272,48 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 </a>
 
 <!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: IKLAN UTAMA -->
+<!-- KONTEN PALING ATAS: BANNER & NATIVE ADS -->
 <!-- ================================================================= -->
 <div class="top-ads-wrapper">
-  <!-- Iklan 3: Banner 468x60 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <!-- Banner 320x50 (Pas di lebar layar HP 420px) -->
+  <div class="ad-slot" style="min-height:50px">
     <script>
       atOptions = {
-        'key' : '9a986a45c62dcea8d8216b9210f159cb',
+        'key' : '119c8bb3217ed264a8fa223c3197bf69',
         'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
+        'height' : 50,
+        'width' : 320,
         'params' : {}
       };
     </script>
-    <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
   </div>
 
-  <!-- Iklan 1: Script + Container ID -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <!-- Banner 468x60 (Di-scale otomatis agar pas di layar mobile) -->
+  <div class="ad-slot" style="min-height:60px">
+    <div style="transform:scale(0.82);transform-origin:center center">
+      <script>
+        atOptions = {
+          'key' : '9a986a45c62dcea8d8216b9210f159cb',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+    </div>
+  </div>
+
+  <!-- Native Banner -->
+  <div class="ad-slot">
     <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
 
-  <!-- Iklan 2 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+  <!-- Script Banner / Direct -->
+  <div class="ad-slot">
     <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-  </div>
-
-  <!-- Iklan 4 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
   </div>
 </div>
 <!-- ================================================================= -->
@@ -296,7 +329,7 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 
 <!-- KARTU UTAMA PREDIKSI -->
 <div class="main-card" id="capture-card">
-  <h1 id="main-title">PREDIKSI MASTER TONI<br>LEMAH 2D</h1>
+  <h1 id="main-title">PREDIKSI MASTER TONI<br>LEMAH 2D SDY</h1>
   <div class="trek-container" id="trek-container"></div>
   <a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
 </div>
@@ -335,6 +368,7 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       app=initializeApp(firebaseConfig),
       db=getDatabase(app);
 
+const PASARAN_LABEL = "SDY";
 const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 const BULAN_ID = [
   "Januari", "Februari", "Maret", "April", "Mei", "Juni",
@@ -342,7 +376,7 @@ const BULAN_ID = [
 ];
 
 /**
- * Parsing tanggal DD-MM-YYYY menjadi Date object (noon local time agar aman dari pergeseran DST/TZ)
+ * Parsing tanggal DD-MM-YYYY menjadi Date object (noon local time agar aman dari pergeseran DST/TZ)[span_0](start_span)[span_0](end_span)
  */
 function parseDateKey(dateStr) {
   const parts = String(dateStr).trim().split("-");
@@ -368,8 +402,8 @@ function formatTanggalTanpaKurung(dateObj) {
 }
 
 /**
- * Memperbarui judul halaman (<title>) dan heading (<h1>) untuk prediksi hari besoknya
- * berdasarkan tanggal update terbaru dari Firebase.
+ * Memperbarui judul halaman (<title>) dan heading (<h1>) dengan nama pasaran (LEMAH 2D SDY)
+ * serta hari & tanggal tanpa tanda kurung () untuk prediksi hari besoknya.
  */
 function updateJudulPrediksiBesok(latestDateObj) {
   const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
@@ -382,15 +416,15 @@ function updateJudulPrediksiBesok(latestDateObj) {
   const labelBesok = formatTanggalTanpaKurung(nextDayDate);
   const titleEl = document.getElementById("main-title");
   if (titleEl) {
-    titleEl.innerHTML = `PREDIKSI MASTER TONI<br>LEMAH 2D SDY<span class="pred-date-sub">${labelBesok}</span>`;
+    titleEl.innerHTML = `PREDIKSI MASTER TONI<br>LEMAH 2D ${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
   }
-  document.title = `PREDIKSI ANGKA Lemah 2D Master Toni ${labelBesok} - Tunggal Paito`;
+  document.title = `PREDIKSI ANGKA Lemah 2D ${PASARAN_LABEL} Master Toni ${labelBesok} - Tunggal Paito`;
 }
 
 /**
- * Mengambil semua result 4D valid dari sebuah nilai di Firebase:
- * - Deretan koma (lama -> terbaru, paling kanan = terbaru), mengabaikan "xxxx"
- * - String 1 hari / 4 digit tunggal
+ * Mengambil semua result 4D valid dari sebuah nilai di Firebase[span_1](start_span)[span_1](end_span):
+ * - Deretan koma (lama -> terbaru, paling kanan = terbaru), mengabaikan "xxxx[span_2](start_span)"[span_2](end_span)
+ * - String 1 hari / 4 digit tunggal[span_3](start_span)[span_3](end_span)
  */
 function extract4DResults(rawValue) {
   if (rawValue === null || rawValue === undefined) return [];
@@ -413,7 +447,7 @@ function extract4DResults(rawValue) {
   return [];
 }
 
-// Pantau update 1x24 jam dari Firebase secara real-time (onValue)
+// Pantau update 1x24 jam dari Firebase secara real-time (onValue)[span_4](start_span)[span_4](end_span)
 const dataRef = ref(db, "live/data-sdy");
 onValue(dataRef, (snapshot) => {
     if (snapshot.exists() && snapshot.val()) {
@@ -424,7 +458,6 @@ onValue(dataRef, (snapshot) => {
             .filter(entry => entry.dateObj !== null)
             .sort((a, b) => a.dateObj - b.dateObj);
 
-        // Deteksi tanggal update terbaru di Firebase -> ubah judul langsung untuk prediksi hari besoknya
         let latestDateObj = null;
         for (let i = validKeyItems.length - 1; i >= 0; i--) {
             if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
@@ -522,7 +555,7 @@ document.getElementById("btn-download").addEventListener("click", function() {
         scale: 2
     }).then(canvas => {
         const link = document.createElement("a");
-        link.download = "Lemah-Angka-2D-Master-Toni.png";
+        link.download = "Lemah-Angka-2D-SDY-Master-Toni.png";
         link.href = canvas.toDataURL("image/png");
         link.click();
 
@@ -577,5 +610,8 @@ document.addEventListener("click",(function(e){
 document.addEventListener("contextmenu",(e=>e.preventDefault()));
 document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}
 </script>
+
+<!-- POPUNDER SCRIPT (Ditempatkan di bawah agar tidak mengganggu tata letak konten) -->
+<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 </body>
 </html>
