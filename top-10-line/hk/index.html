@@ -46,7 +46,8 @@ body{background-color:#8b0000;color:#fff;display:flex;flex-direction:column;alig
 
 /* KARTU UTAMA PREDIKSI (YANG AKAN DI-SCREENSHOT) */
 .main-card{width:100%;max-width:420px;background-color:#600;border:1px solid rgba(255,204,0,.4);border-radius:12px;padding:20px 15px 12px 15px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.4);margin-bottom:15px}
-h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#fc0}
+h1{font-size:20px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#fc0;line-height:1.3}
+.pred-date-sub{display:block;font-size:12px;font-weight:700;color:#fef08a;margin-top:4px;letter-spacing:0.2px}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI */
 .trek-container{display:flex;flex-direction:column;gap:12px;width:100%;margin-bottom:10px}
@@ -269,10 +270,10 @@ h1{font-size:22px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 
 <!-- KARTU UTAMA PREDIKSI -->
 <div class="main-card" id="capture-card">
-<h1>PREDIKSI TOGEL HARI INI</h1>
+<h1 id="main-title">PREDIKSI TOGEL HARI INI</h1>
 <!-- WADAH TREK TABEL RESULT & PREDIKSI -->
 <div class="trek-container" id="trek-container">
-    <!-- Data 20 result terakhir beserta 10 line invest masing-masing dimuat di sini -->
+    <!-- Data result terakhir beserta 10 line invest masing-masing dimuat di sini -->
 </div>
 <!-- LINK HALAMAN OTOMATIS DI DALAM KARTU -->
 <a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
@@ -315,11 +316,10 @@ Prediksi HK Hari Ini, Bocoran Togel Hongkong Jitu, Angka Main HK Akurat, Paito W
 
 <script type=module>
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,get,child}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 document.getElementById("auto-year").textContent=(new Date).getFullYear();
 
-// MENGAMBIL DAN MENAMPILKAN URL HALAMAN SECARA OTOMATIS
 const currentUrl = window.location.href;
 const linkElement = document.getElementById("dynamic-site-link");
 linkElement.href = currentUrl;
@@ -327,10 +327,75 @@ linkElement.textContent = currentUrl;
 
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
       app=initializeApp(firebaseConfig),
-      db=getDatabase(app),
-      dbRef=ref(db);
+      db=getDatabase(app);
 
-// GENERATE 10 LINE DENGAN KHUSUS INDEKS (10, 15, 6, 12, 14, 13, 16, 20) + 2 LINE BEBAS (20-99)
+const PASARAN_LABEL = "LINE 2D HK";
+const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN_ID = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
+
+function parseDateKey(dateStr) {
+  const parts = String(dateStr).trim().split("-");
+  if (parts.length === 3) {
+    const d = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const y = Number(parts[2]);
+    const dt = new Date(y, m, d, 12, 0, 0);
+    if (!isNaN(dt.getTime())) return dt;
+  }
+  return null;
+}
+
+function formatTanggalTanpaKurung(dateObj) {
+  const hari = HARI_ID[dateObj.getDay()];
+  const tgl = String(dateObj.getDate()).padStart(2, "0");
+  const bulan = BULAN_ID[dateObj.getMonth()];
+  const tahun = dateObj.getFullYear();
+  return `${hari}, ${tgl} ${bulan} ${tahun}`;
+}
+
+function getNextDrawDate(latestDateObj) {
+  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+    ? latestDateObj
+    : new Date();
+  const nextDay = new Date(baseDate.getTime());
+  nextDay.setDate(nextDay.getDate() + 1);
+  return nextDay;
+}
+
+function updateJudulPrediksi(latestDateObj) {
+  const nextDrawDate = getNextDrawDate(latestDateObj);
+  const labelJadwal = formatTanggalTanpaKurung(nextDrawDate);
+  const titleEl = document.getElementById("main-title");
+  if (titleEl) {
+    titleEl.innerHTML = `PREDIKSI ${PASARAN_LABEL}<span class="pred-date-sub">${labelJadwal}</span>`;
+  }
+  document.title = `Prediksi Top 10 ${PASARAN_LABEL} ${labelJadwal} - Tunggal Paito`;
+}
+
+function extract4DResults(rawValue) {
+  if (rawValue === null || rawValue === undefined) return [];
+  const str = String(rawValue).trim();
+  if (!str) return [];
+
+  if (str.includes(",")) {
+    return str
+      .split(",")
+      .map(s => s.trim())
+      .filter(s => /^\d{4,}$/.test(s))
+      .map(s => s.slice(-4));
+  }
+
+  const digitsOnly = str.replace(/\D/g, "");
+  if (digitsOnly.length >= 4) {
+    return [digitsOnly.slice(-4)];
+  }
+
+  return [];
+}
+
 function generate10Lines(d1, d2) {
     let base20 = new Set();
     base20.add(`${d1}${d2}`);
@@ -368,34 +433,50 @@ function generate10Lines(d1, d2) {
     return Array.from(finalSet);
 }
 
-// AMBIL DATA RESULT TERAKHIR DARI live/data-hk
-get(child(dbRef,"live/data-hk")).then((snapshot)=>{
-    if(snapshot.exists() && snapshot.val()){
+const dataRef = ref(db, "live/data-hk");
+onValue(dataRef, (snapshot) => {
+    if (snapshot.exists() && snapshot.val()) {
         const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
+
+        const validKeyItems = Object.keys(data)
+            .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
+            .filter(entry => entry.dateObj !== null)
+            .sort((a, b) => a.dateObj - b.dateObj);
+
+        let latestDateObj = null;
+        for (let i = validKeyItems.length - 1; i >= 0; i--) {
+            if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
+                latestDateObj = validKeyItems[i].dateObj;
+                break;
+            }
+        }
+        updateJudulPrediksi(latestDateObj);
+
+        const allResults = [];
+        validKeyItems.forEach(({ dateStr, dateObj }) => {
+            const list4d = extract4DResults(data[dateStr]);
+            list4d.forEach((val4d, idx) => {
+                allResults.push({
+                    dateStr,
+                    dateObj,
+                    idx,
+                    val: val4d
+                });
+            });
         });
 
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-
-        const last20 = entries.slice(-7);
+        const last7 = allResults.slice(-7);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
 
         const correctPin = "paito123";
         const isUnlocked = localStorage.getItem("paito_unlocked_latest") === "true";
 
-        last20.forEach((item, index) => {
+        last7.forEach((item, index) => {
             const result4d = item.val;
             if (result4d.length < 4) return;
 
-            const digits = result4d.split("").map(Number);
+            const digits = result4d.slice(-4).split("").map(Number);
 
             let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
@@ -407,8 +488,8 @@ get(child(dbRef,"live/data-hk")).then((snapshot)=>{
 
             let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
 
-            const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
-            const nextItem = entries[globalIndex + 1]; 
+            const globalPos = allResults.length - last7.length + index;
+            const nextItem = allResults[globalPos + 1]; 
             
             let status = "?";
             let badgeClass = "trek-badge";
@@ -416,7 +497,7 @@ get(child(dbRef,"live/data-hk")).then((snapshot)=>{
             let reverse2d = "";
             let nKepala = -1, nEkor = -1;
 
-            if (index === last20.length - 1 || !nextItem) {
+            if (index === last7.length - 1 || !nextItem) {
                 status = "?";
             } else {
                 const next4d = nextItem.val;
@@ -443,7 +524,7 @@ get(child(dbRef,"live/data-hk")).then((snapshot)=>{
                 }
             }
 
-            const isLastRow = (index === last20.length - 1);
+            const isLastRow = (index === last7.length - 1);
             let lines10 = generate10Lines(predDigits[0], predDigits[1]);
             
             let targetGlow = "";
@@ -527,13 +608,13 @@ get(child(dbRef,"live/data-hk")).then((snapshot)=>{
                 }
             });
         }
-
+    } else {
+        updateJudulPrediksi(null);
     }
-}).catch((e)=>{
+}, (e)=>{
     console.error("Gagal mengambil data Hongkong dari Firebase:", e);
 });
 
-// GENERATOR ANGKA HK
 document.getElementById("btn-generate").addEventListener("click",(function(){
   const e=document.getElementById("input-angka").value.trim();
   if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
@@ -560,7 +641,6 @@ document.getElementById("btn-generate").addEventListener("click",(function(){
   document.getElementById("generator-result").style.display="block";
 }));
 
-// DOWNLOAD GAMBAR
 document.getElementById("btn-download").addEventListener("click", function() {
     const cardElement = document.getElementById("capture-card");
     
@@ -587,7 +667,6 @@ document.getElementById("btn-download").addEventListener("click", function() {
     });
 });
 
-// PENGUNJUNG ONLINE ALAMI
 let currentVisitors = Math.floor(Math.random() * 151) + 150; 
 let updateTimer = null;
 const visitorText = document.getElementById("visitor-count-text");
@@ -624,7 +703,6 @@ function scheduleNextUpdate() {
 
 scheduleNextUpdate();
 
-// SKRIP IKLAN
 let clickCount=0;
 const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 document.addEventListener("click",(function(e){
