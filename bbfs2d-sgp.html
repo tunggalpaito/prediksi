@@ -188,35 +188,34 @@ app=initializeApp(firebaseConfig),db=getDatabase(app);
 
 let activeDownloadDateStr = new Date().toISOString().slice(0, 10);
 
+function parseDDMMYYYY(dateStr) {
+  const [dd, mm, yyyy] = dateStr.split("-").map(Number);
+  return new Date(yyyy, mm - 1, dd);
+}
+
 async function loadSingaporeAnalysis(){
   try{
     const t=await get(ref(db,"live/data-sgp"));
     if(!t.exists())return;
     const e=t.val();
     let n=Object.keys(e);
-    n.sort((t,e)=>{const[n,a,o]=t.split("-").map(Number);const[r,s,l]=e.split("-").map(Number);return new Date(o,a-1,n)-new Date(l,s-1,r)});
+    n.sort((a,b)=>parseDDMMYYYY(a)-parseDDMMYYYY(b));
     if(n.length === 0)return;
-    
-    const todayObj = new Date();
-    const dd = String(todayObj.getDate()).padStart(2, '0');
-    const mm = String(todayObj.getMonth() + 1).padStart(2, '0');
-    const yyyy = todayObj.getFullYear();
-    const todayKeyStr = `${dd}-${mm}-${yyyy}`;
 
-    let latestDateKey = n[n.length - 1];
-    
-    // SGP libur Selasa (2) dan Jumat (5):
-    // Update Senin (1) -> Rabu (+2 hari)
-    // Update Kamis (4) -> Sabtu (+2 hari)
-    // Hari buka lainnya -> +1 hari
-    let targetDisplayDate = new Date(todayObj);
-    if(latestDateKey === todayKeyStr) {
-      const dayOfWeek = todayObj.getDay();
-      if(dayOfWeek === 1 || dayOfWeek === 4) {
-        targetDisplayDate.setDate(todayObj.getDate() + 2);
-      } else {
-        targetDisplayDate.setDate(todayObj.getDate() + 1);
-      }
+    // Mengambil tanggal dari data result terbaru yang masuk di Firebase (update 1x24 jam)
+    const latestDateKey = n[n.length - 1];
+    const latestResultDate = parseDDMMYYYY(latestDateKey);
+    const latestDayOfWeek = latestResultDate.getDay(); // 0=Min, 1=Sen, 2=Sel, 3=Rab, 4=Kam, 5=Jum, 6=Sab
+
+    // SGP libur Selasa & Jumat:
+    // Result hari Senin (1) -> loncat ke Rabu (+2 hari)
+    // Result hari Kamis (4) -> loncat ke Sabtu (+2 hari)
+    // Result hari lainnya -> maju 1 hari (+1 hari)
+    let targetDisplayDate = new Date(latestResultDate);
+    if(latestDayOfWeek === 1 || latestDayOfWeek === 4) {
+      targetDisplayDate.setDate(latestResultDate.getDate() + 2);
+    } else {
+      targetDisplayDate.setDate(latestResultDate.getDate() + 1);
     }
 
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
