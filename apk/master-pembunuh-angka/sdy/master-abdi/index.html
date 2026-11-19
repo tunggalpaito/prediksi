@@ -182,7 +182,7 @@ h1 { font-size: 18px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px
 .badge-cross {
   background: rgba(255, 51, 102, 0.15);
   color: var(--accent-red);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 51, 102, 0.4);
 }
 .badge-off {
   background: rgba(255, 230, 0, 0.1);
@@ -335,23 +335,71 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       db=getDatabase(app),
       dbRef=ref(db);
 
+/**
+ * Parsing tanggal DD-MM-YYYY menjadi Date object
+ */
+function parseDateKey(dateStr) {
+  const parts = String(dateStr).trim().split("-");
+  if (parts.length === 3) {
+    const d = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const y = Number(parts[2]);
+    const dt = new Date(y, m, d);
+    if (!isNaN(dt.getTime())) return dt;
+  }
+  return new Date(0);
+}
+
+/**
+ * Mengambil semua result 4D valid dari sebuah nilai di Firebase:
+ * - Jika berupa deretan koma (misal: "xxxx,xxxx,1759,8040,...,6967"),
+ *   urutan dari kiri ke kanan adalah lama -> terbaru (paling kanan = terbaru).
+ *   Nilai "xxxx" atau non-4-digit diabaikan.
+ * - Jika berupa 1 hari / 4 digit (misal: "6479"), dikembalikan sebagai ["6479"].
+ */
+function extract4DResults(rawValue) {
+  if (rawValue === null || rawValue === undefined) return [];
+  const str = String(rawValue).trim();
+  if (!str) return [];
+
+  if (str.includes(",")) {
+    return str
+      .split(",")
+      .map(s => s.trim())
+      .filter(s => /^\d{4,}$/.test(s))
+      .map(s => s.slice(-4));
+  }
+
+  const digitsOnly = str.replace(/\D/g, "");
+  if (digitsOnly.length >= 4) {
+    return [digitsOnly.slice(-4)];
+  }
+
+  return [];
+}
+
 get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
         const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
+
+        // Urutkan key tanggal dari terlama ke terbaru
+        const sortedKeys = Object.keys(data).sort((a, b) => parseDateKey(a) - parseDateKey(b));
+
+        // Gabungkan semua result 4D secara kronologis (paling kanan di string koma = paling baru)
+        const allResults = [];
+        sortedKeys.forEach(dateStr => {
+            const list4d = extract4DResults(data[dateStr]);
+            list4d.forEach((val4d, idx) => {
+                allResults.push({
+                    dateStr,
+                    idx,
+                    val: val4d
+                });
+            });
         });
 
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-
         // Mengambil 15 data terakhir untuk 15x trek Master Abdi
-        const last15 = entries.slice(-15);
+        const last15 = allResults.slice(-15);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
 
@@ -359,7 +407,7 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
             const result4d = item.val;
             if (result4d.length < 4) return;
 
-            const digits = result4d.split("").map(Number);
+            const digits = result4d.slice(-4).split("").map(Number);
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
             
             // --- RUMUS MATRIX 3-LAPIS (PALING PATEN & STABIL) ---
@@ -369,8 +417,9 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
             let weakDigit = (step2 * 3 + Math.abs(kepala - ekor)) % 10;
             const weakDigits = [weakDigit];
 
-            const globalIndex = entries.findIndex(e => e.dateStr === item.dateStr);
-            const nextItem = entries[globalIndex + 1]; 
+            // Cari posisi item ini di allResults untuk cek result berikutnya
+            const globalPos = allResults.length - last15.length + index;
+            const nextItem = allResults[globalPos + 1]; 
             
             let status = "✓";
             let badgeClass = "trek-badge badge-check";
