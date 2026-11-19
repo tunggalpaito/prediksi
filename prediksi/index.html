@@ -18,27 +18,28 @@ body{font-family:Inter,sans-serif;background-color:#030712;background-image:radi
 #ads-popup{position:fixed;bottom:20px;right:12px;z-index:9999;cursor:grab;touch-action:none;filter:drop-shadow(0 10px 15px rgba(0, 0, 0, .85));transition:transform .1s ease}
 #ads-popup:active{cursor:grabbing}
 
-/* NOTIFIKASI PEMBELI APK DIPERKECIL */
-#buyer-notification{position:fixed;bottom:20px;left:12px;z-index:9998;max-width:220px;transform:translateY(100px);opacity:0;transition:all .5s cubic-bezier(.68, -.55, .27, 1.55);pointer-events:none}
+/* NOTIFIKASI PEMBELI APK DIPERKECIL & DIBERI JARAK DARI BAWAH */
+#buyer-notification{position:fixed;bottom:84px;left:12px;z-index:9998;max-width:220px;transform:translateY(100px);opacity:0;transition:all .5s cubic-bezier(.68, -.55, .27, 1.55);pointer-events:none}
 #buyer-notification.show{transform:translateY(0);opacity:1}
 
 @keyframes popupScale{0%{opacity:0;transform:scale(.9) translateY(20px)}100%{opacity:1;transform:scale(1) translateY(0)}}
 .animate-popup{animation:popupScale .3s cubic-bezier(.16,1,.3,1) forwards}
 body.modal-open{overflow:hidden}
 
-/* STYLE POP-UP TERBANG KECIL TOP 10 LINE */
+/* TOMBOL TETAP TOP 10 LINE YANG RAMAH DI HP */
 #top10-flying-popup {
     position: fixed;
-    z-index: 99999;
-    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    filter: drop-shadow(0 5px 15px rgba(239, 68, 68, 0.4));
+    top: 16px;
+    right: 12px;
+    z-index: 9999;
+    filter: drop-shadow(0 5px 15px rgba(239, 68, 68, 0.35));
 }
 </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-yellow-500 selection:text-slate-950">
 
 <!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: HIMBAUAN UTUH & IKLAN BANNER                  -->
+<!-- KONTEN PALING ATAS: HIMBAUAN UTUH & IKLAN RINGKAS                  -->
 <!-- ================================================================= -->
 <div class="w-full max-w-md mx-auto px-4 pt-4">
   <div class="w-full flex flex-col items-center gap-2.5 bg-slate-900/90 border border-amber-500/30 rounded-2xl p-3 shadow-xl backdrop-blur-md">
@@ -57,6 +58,20 @@ body.modal-open{overflow:hidden}
       </div>
     </div>
 
+    <!-- Iklan Banner 320x50 (Ramah Layar HP) -->
+    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
+      <script>
+        atOptions = {
+          'key' : '119c8bb3217ed264a8fa223c3197bf69',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
+    </div>
+
     <!-- Iklan Banner 468x60 -->
     <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
       <script>
@@ -71,22 +86,7 @@ body.modal-open{overflow:hidden}
       <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
     </div>
 
-    <!-- 4 Kotak Native Banner -->
-    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
-      <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
-      <div id="container-3f09897b852339f736b82a3190a40259"></div>
-    </div>
-
-    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
-      <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
-      <div id="container-3f09897b852339f736b82a3190a40259"></div>
-    </div>
-
-    <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
-      <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
-      <div id="container-3f09897b852339f736b82a3190a40259"></div>
-    </div>
-
+    <!-- Native Banner #1 (Atas) -->
     <div class="w-full flex justify-center overflow-hidden rounded-lg bg-slate-950/40 p-1">
       <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
       <div id="container-3f09897b852339f736b82a3190a40259"></div>
@@ -96,9 +96,9 @@ body.modal-open{overflow:hidden}
 </div>
 <!-- ================================================================= -->
 
-<!-- POP-UP TERBANG KECIL TOP 10 LINE -->
-<div id="top10-flying-popup" style="top: 25%; left: 15%;">
-    <a href="https://tunggalpaito.online/top-10-line/" class="ad-trigger block bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white font-black py-1.5 px-3 rounded-full text-[11px] shadow-[0_0_20px_rgba(239,68,68,0.7)] border border-red-400 tracking-wider uppercase text-center animate-pulse whitespace-nowrap">
+<!-- TOMBOL TOP 10 LINE TETAP -->
+<div id="top10-flying-popup">
+    <a href="https://tunggalpaito.online/top-10-line/" class="ad-trigger block bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white font-black py-1.5 px-3 rounded-full text-[10px] shadow-[0_0_15px_rgba(239,68,68,0.6)] border border-red-400 tracking-wider uppercase text-center whitespace-nowrap">
         🔥 TOP 10 LINE
     </a>
 </div>
@@ -482,6 +482,13 @@ body.modal-open{overflow:hidden}
 </a>
 </div>
 </div>
+
+<!-- Native Banner #2 (Tengah) -->
+<div class="w-full flex justify-center overflow-hidden rounded-2xl bg-slate-900/70 border border-slate-800 p-2">
+  <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
+  <div id="container-3f09897b852339f736b82a3190a40259-2"></div>
+</div>
+
 <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-xl">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
 <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl shrink-0 border border-emerald-500/20"> 🇸🇬 </div>
@@ -525,6 +532,13 @@ body.modal-open{overflow:hidden}
 </a>
 </div>
 </div>
+
+<!-- Native Banner #3 (Menengah Bawah) -->
+<div class="w-full flex justify-center overflow-hidden rounded-2xl bg-slate-900/70 border border-slate-800 p-2">
+  <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
+  <div id="container-3f09897b852339f736b82a3190a40259-3"></div>
+</div>
+
 <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-xl">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
 <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center text-xl shrink-0 border border-rose-500/20"> 🇭🇰 </div>
@@ -568,6 +582,13 @@ body.modal-open{overflow:hidden}
 </a>
 </div>
 </div>
+
+<!-- Native Banner #4 (Bawah Daftar Utama) -->
+<div class="w-full flex justify-center overflow-hidden rounded-2xl bg-slate-900/70 border border-slate-800 p-2">
+  <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
+  <div id="container-3f09897b852339f736b82a3190a40259-4"></div>
+</div>
+
 <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700/60 p-4 rounded-2xl shadow-xl">
 <div class="flex items-center space-x-3 mb-3 pb-3 border-b border-slate-800">
 <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-xl shrink-0 border border-orange-500/20"> 🇦🇺 </div>
@@ -711,27 +732,6 @@ document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||
 document.addEventListener("copy",(e=>{e.preventDefault();}));
 </script>
 
-<!-- SCRIPT EFEK TERBANG ACAK UNTUK TOP 10 LINE -->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const flyingPopup = document.getElementById("top10-flying-popup");
-    if (!flyingPopup) return;
-
-    function movePopupRandomly() {
-        const maxX = window.innerWidth - flyingPopup.offsetWidth - 20;
-        const maxY = window.innerHeight - flyingPopup.offsetHeight - 20;
-        
-        const randomX = Math.max(10, Math.floor(Math.random() * maxX));
-        const randomY = Math.max(10, Math.floor(Math.random() * maxY));
-
-        flyingPopup.style.left = randomX + "px";
-        flyingPopup.style.top = randomY + "px";
-    }
-
-    setInterval(movePopupRandomly, 5000);
-});
-</script>
-
 <!-- SCRIPT KENYAMANAN NAVIGASI: OTOMATIS BUKA HALAMAN TUJUAN SAAT PENGUNJUNG TEKAN KEMBALI -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -795,7 +795,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-<!-- SCRIPT POPUNDER -->
+<!-- SCRIPT IKLAN TAMBAHAN & POPUNDER -->
+<script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
 <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 
 </body>
