@@ -493,6 +493,82 @@ const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-
       db=getDatabase(app),
       dbRef=ref(db);
 
+// HELPER FLEKSIBEL: PARSE KEY TANGGAL (DD-MM-YYYY, YYYY-MM-DD, DD/MM/YYYY)
+function parseFlexibleDate(dateStr) {
+    if (!dateStr) return null;
+    const s = String(dateStr).trim();
+    let m = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+    if (m) return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+    m = s.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);
+    if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    const fallback = new Date(s);
+    return Number.isNaN(fallback.getTime()) ? null : fallback;
+}
+
+// HELPER FLEKSIBEL: EKSTRAK SEMUA ANGKA 4 DIGIT DARI FORMAT VALUE BEBAS
+function extract4DigitList(rawVal) {
+    if (rawVal === null || rawVal === undefined) return [];
+    let chunks = [];
+
+    if (Array.isArray(rawVal)) {
+        rawVal.forEach(v => chunks.push(...extract4DigitList(v)));
+        return chunks;
+    }
+
+    if (typeof rawVal === "object") {
+        Object.keys(rawVal).forEach(k => chunks.push(...extract4DigitList(rawVal[k])));
+        return chunks;
+    }
+
+    String(rawVal)
+        .split(/[,\n;|]+/)
+        .forEach(part => {
+            const clean = part.split(":")[0].trim();
+            if (/^\d{4}$/.test(clean)) {
+                chunks.push(clean);
+            }
+        });
+
+    return chunks;
+}
+
+// HELPER FLEKSIBEL: BENTUK URUTAN ENTRY RESULT DARI NODE FIREBASE BEBAS
+function buildEntriesFromFirebase(data) {
+    if (!data || typeof data !== "object") return [];
+
+    const keysWithMeta = Object.keys(data).map((key, idx) => ({
+        key,
+        idx,
+        dateObj: parseFlexibleDate(key),
+        rawVal: data[key]
+    }));
+
+    const hasValidDates = keysWithMeta.some(k => k.dateObj !== null);
+    if (hasValidDates) {
+        keysWithMeta.sort((a, b) => {
+            if (a.dateObj && b.dateObj) return a.dateObj - b.dateObj;
+            if (a.dateObj) return -1;
+            if (b.dateObj) return 1;
+            return a.idx - b.idx;
+        });
+    }
+
+    const entries = [];
+    keysWithMeta.forEach((item, kIdx) => {
+        const nums = extract4DigitList(item.rawVal);
+        nums.forEach((val, nIdx) => {
+            entries.push({
+                id: `${item.key}-${kIdx}-${nIdx}`,
+                dateStr: item.key,
+                val,
+                dateObj: item.dateObj
+            });
+        });
+    });
+
+    return entries;
+}
+
 // FUNGSI UTAMA RUMUS 20 POIN SGP
 function hitungTrekItem(item, globalIndex, entries) {
     const result4d = item.val;
@@ -567,22 +643,10 @@ function hitungTrekItem(item, globalIndex, entries) {
     return { rowHtml, status };
 }
 
-// AMBIL DATA RESULT DARI FIREBASE live/singapore
+// AMBIL DATA RESULT DARI FIREBASE live/data-sgp
 get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
     if(snapshot.exists() && snapshot.val()){
-        const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return {
-                dateStr,
-                val: String(data[dateStr]).trim(),
-                dateObj
-            };
-        });
-
-        entries.sort((a, b) => a.dateObj - b.dateObj);
-        
+        const entries = buildEntriesFromFirebase(snapshot.val());
         const last28 = entries.slice(-28);
         const trekContainer = document.getElementById("trek-container");
         trekContainer.innerHTML = "";
@@ -592,7 +656,7 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
         let rowsHtml = "";
 
         last28.forEach((item) => {
-            const gIdx = entries.findIndex(e => e.dateStr === item.dateStr);
+            const gIdx = entries.findIndex(e => e.id === item.id);
             const res = hitungTrekItem(item, gIdx, entries);
             if (!res) return;
             rowsHtml += res.rowHtml;
@@ -631,21 +695,15 @@ get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
 
 // FITUR DOWNLOAD GAMBAR 12 TREK TERAKHIR
 document.getElementById("btn-download").addEventListener("click", function() {
-    get(child(dbRef,"live/singapore")).then((snapshot)=>{
+    get(child(dbRef,"live/data-sgp")).then((snapshot)=>{
         if(!snapshot.exists()) return;
-        const data = snapshot.val();
-        const entries = Object.keys(data).map(dateStr => {
-            const parts = dateStr.split('-');
-            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
-            return { dateStr, val: String(data[dateStr]).trim(), dateObj };
-        });
-        entries.sort((a, b) => a.dateObj - b.dateObj);
+        const entries = buildEntriesFromFirebase(snapshot.val());
 
         const last12 = entries.slice(-12);
         let cCentang = 0, cX = 0, rHtml = "";
 
         last12.forEach((item) => {
-            let gIdx = entries.findIndex(e => e.dateStr === item.dateStr);
+            let gIdx = entries.findIndex(e => e.id === item.id);
             let res = hitungTrekItem(item, gIdx, entries);
             if(!res) return;
             rHtml += res.rowHtml;
