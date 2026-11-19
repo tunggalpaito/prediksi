@@ -160,10 +160,10 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 </a>
 
 <!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: WRAPPER 4 IKLAN BANNER UTAMA                  -->
+<!-- KONTEN PALING ATAS: IKLAN UTAMA DI ATAS                           -->
 <!-- ================================================================= -->
 <div class="top-ads-wrapper">
-  <!-- Iklan 3: Banner 468x60 (Brijmohan) -->
+  <!-- 1. Banner 468x60 -->
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script>
       atOptions = {
@@ -177,18 +177,32 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
     <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
   </div>
 
-  <!-- Iklan 1: Script + Container ID -->
+  <!-- 2. Script + Container ID -->
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     <div id="container-3f09897b852339f736b82a3190a40259"></div>
   </div>
 
-  <!-- Iklan 2: Script data-cfasync -->
+  <!-- 3. Script 14 -->
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
   </div>
 
-  <!-- Iklan 4: Ahuramazda Script -->
+  <!-- 4. Banner 320x50 -->
+  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <script>
+      atOptions = {
+        'key' : '119c8bb3217ed264a8fa223c3197bf69',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
+  </div>
+
+  <!-- 5. Script Ahuramazda -->
   <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
     <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
   </div>
@@ -247,22 +261,6 @@ h1{font-size:16px;font-weight:700;margin-bottom:15px;letter-spacing:.5px;color:#
 <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
 <span>Download Gambar Prediksi</span>
 </button>
-</div>
-
-<!-- IKLAN TAMBAHAN TEPAT DI BAWAH TOMBOL DOWNLOAD -->
-<div style="width:100%;max-width:420px; display:flex; justify-content:center; margin-bottom:20px;">
-  <div style="width:320px; height:50px; background-color:#163868; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:4px; border:1px solid rgba(56,189,248,0.4);">
-    <script>
-      atOptions = {
-        'key' : '119c8bb3217ed264a8fa223c3197bf69',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
-      };
-    </script>
-    <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
-  </div>
 </div>
 
 <div class=keywords-section>
@@ -324,7 +322,7 @@ get(child(dbRef,"live/data-sdy")).then((snapshot)=>{
 
             const digits = result4d.split("").map(Number);
 
-            // --- BAGIAN RUMUS COLOK BEBAS 1 DIGIT 19 ---
+            // --- BAGIAN RUMUS COLOK BEBAS 1 DIGIT ---
             let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
             let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
             scores[(as * kepala * kop + ekor) % 10] += 6;
