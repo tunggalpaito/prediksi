@@ -13,6 +13,10 @@
   :root {
     --bg-main: #060913;
   }
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
   body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: var(--bg-main);
@@ -26,6 +30,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
     overflow-x: hidden;
+    touch-action: manipulation;
+  }
+  a, button, .bento-card, .tab-btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   .font-mono-num {
     font-family: 'JetBrains Mono', monospace;
@@ -33,19 +42,30 @@
 
   /* Glassmorphism & Bento Card */
   .glass-panel {
-    background: rgba(15, 23, 42, 0.68);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(15, 23, 42, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
   .bento-card {
-    background: linear-gradient(145deg, rgba(17, 24, 39, 0.9) 0%, rgba(9, 13, 24, 0.95) 100%);
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.92) 0%, rgba(9, 13, 24, 0.96) 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+    box-shadow: 0 10px 28px -12px rgba(0, 0, 0, 0.65);
+    transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.18s ease, background-color 0.18s ease;
+    will-change: transform;
   }
   .bento-card:active {
-    transform: scale(0.985);
+    transform: scale(0.975);
+  }
+
+  /* Instant Press Feedback untuk Link & Tombol */
+  .tap-responsive {
+    transition: transform 0.14s cubic-bezier(0.22, 1, 0.36, 1), filter 0.14s ease, border-color 0.18s ease, background-color 0.18s ease;
+    will-change: transform;
+  }
+  .tap-responsive:active {
+    transform: scale(0.97);
+    filter: brightness(1.06);
   }
 
   /* Hide scrollbar for Shopee Horizontal Carousel */
@@ -57,6 +77,13 @@
     scrollbar-width: none;
   }
 
+  /* Tinggi Panduan Adaptif Sesuai Lebar Layar HP */
+  .guide-thumb {
+    height: clamp(5.25rem, 24vw, 6.75rem);
+    width: 100%;
+    transition: transform 0.2s ease, object-position 0.2s ease;
+  }
+
   /* Floating Ads & Buyer Notification */
   #ads-popup {
     position: fixed;
@@ -66,6 +93,7 @@
     cursor: grab;
     touch-action: none;
     filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.85));
+    will-change: transform;
   }
   #ads-popup:active {
     cursor: grabbing;
@@ -77,22 +105,23 @@
     left: 12px;
     z-index: 9998;
     max-width: 225px;
-    transform: translateY(90px);
+    transform: translate3d(0, 90px, 0);
     opacity: 0;
-    transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
     pointer-events: none;
+    will-change: transform, opacity;
   }
   #buyer-notification.show {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 
   @keyframes popupScale {
-    0% { opacity: 0; transform: scale(0.92) translateY(16px); }
+    0% { opacity: 0; transform: scale(0.94) translateY(10px); }
     100% { opacity: 1; transform: scale(1) translateY(0); }
   }
   .animate-popup {
-    animation: popupScale 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: popupScale 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   body.modal-open {
     overflow: hidden;
@@ -106,32 +135,52 @@
     box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
     border-color: transparent;
   }
+
+  /* Bar Indikator Navigasi Halus Saat Link Diklik */
+  #top-nav-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2.5px;
+    width: 0%;
+    background: linear-gradient(90deg, #f59e0b, #10b981, #38bdf8);
+    z-index: 100000;
+    opacity: 0;
+    transition: width 0.35s ease, opacity 0.2s ease;
+    pointer-events: none;
+  }
+  #top-nav-progress.active {
+    opacity: 1;
+    width: 78%;
+  }
 </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-amber-400 selection:text-slate-950">
+
+<div id="top-nav-progress" aria-hidden="true"></div>
 
 <!-- ================================================================= -->
 <!-- STICKY GLASS TOPBAR (MODERN HEADER + TOP 10 LINE)                 -->
 <!-- ================================================================= -->
 <nav class="sticky top-0 z-50 w-full glass-panel border-b border-white/10">
   <div class="max-w-md mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
-    <a href="https://tunggalpaito.online/prediksi" class="flex items-center gap-2.5 group">
-      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-950 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
+    <a href="https://tunggalpaito.online/prediksi" class="tap-responsive flex items-center gap-2.5 group">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-950 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform shrink-0">
         <i class="fa-solid fa-bolt text-sm"></i>
       </div>
       <div>
         <div class="flex items-center gap-1.5">
           <span class="font-extrabold text-xs tracking-wider uppercase text-white">TUNGGAL PAITO</span>
           <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> LIVE
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> LIVE
           </span>
         </div>
-        <p class="text-[10px] text-slate-400 leading-none mt-0.5">Analisa & Prediksi Jitu</p>
+        <p class="text-[10px] text-slate-400 leading-none mt-0.5">Analisa &amp; Prediksi Jitu</p>
       </div>
     </a>
 
     <!-- Tombol TOP 10 LINE Terintegrasi Rapi -->
-    <a href="https://tunggalpaito.online/top-10-line/" class="ad-trigger inline-flex items-center gap-1.5 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-extrabold py-1.5 px-3 rounded-full text-[10px] shadow-[0_0_16px_rgba(244,63,94,0.45)] border border-rose-400/50 tracking-wide uppercase active:scale-95 transition-all shrink-0">
+    <a href="https://tunggalpaito.online/top-10-line/" class="ad-trigger tap-responsive inline-flex items-center gap-1.5 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-extrabold py-1.5 px-3 rounded-full text-[10px] shadow-[0_0_16px_rgba(244,63,94,0.45)] border border-rose-400/50 tracking-wide uppercase shrink-0">
       <span>🔥 TOP 10 LINE</span>
     </a>
   </div>
@@ -142,7 +191,7 @@
 <!-- ================================================================= -->
 <div class="w-full max-w-md mx-auto px-4 pt-3.5 space-y-2.5">
 
-  <!-- Pemberitahuan Penting (Collapsible / Rapi & Modern) -->
+  <!-- Pemberitahuan Penting -->
   <div class="rounded-2xl bg-gradient-to-r from-rose-950/70 via-slate-900/90 to-slate-900/90 border border-rose-500/30 p-3 shadow-lg">
     <div class="flex items-start gap-2.5">
       <div class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 border border-rose-500/30 mt-0.5">
@@ -160,38 +209,42 @@
     </div>
   </div>
 
-  <!-- Slot Iklan Atas (Terbungkus Rapi) -->
+  <!-- Slot Iklan Atas (Terbungkus Rapi & Stabil Tingginya) -->
   <div class="glass-panel rounded-2xl p-2 flex flex-col items-center gap-2">
     <!-- Banner 320x50 -->
-    <div class="w-full flex justify-center overflow-hidden rounded-xl bg-slate-950/60 py-1">
+    <div class="w-full min-h-[58px] flex justify-center items-center overflow-hidden rounded-xl bg-slate-950/60 py-1">
       <script>
-        atOptions = {
-          'key' : '119c8bb3217ed264a8fa223c3197bf69',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
-        };
+        (function() {
+          window.atOptions = {
+            'key' : '119c8bb3217ed264a8fa223c3197bf69',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+          };
+        })();
       </script>
       <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
     </div>
 
     <!-- Banner 468x60 -->
-    <div class="w-full flex justify-center overflow-hidden rounded-xl bg-slate-950/60 py-1">
+    <div class="w-full min-h-[68px] flex justify-center items-center overflow-hidden rounded-xl bg-slate-950/60 py-1">
       <script>
-        atOptions = {
-          "key" : "9a986a45c62dcea8d8216b9210f159cb",
-          "format" : "iframe",
-          "height" : 60,
-          "width" : 468,
-          "params" : {}
-        };
+        (function() {
+          window.atOptions = {
+            "key" : "9a986a45c62dcea8d8216b9210f159cb",
+            "format" : "iframe",
+            "height" : 60,
+            "width" : 468,
+            "params" : {}
+          };
+        })();
       </script>
       <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
     </div>
 
-    <!-- Native Banner #1 -->
-    <div class="w-full flex justify-center overflow-hidden rounded-xl bg-slate-950/60 p-1">
+    <!-- Native Banner -->
+    <div class="w-full min-h-[70px] flex justify-center items-center overflow-hidden rounded-xl bg-slate-950/60 p-1">
       <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
       <div id="container-3f09897b852339f736b82a3190a40259"></div>
     </div>
@@ -229,21 +282,21 @@
   <!-- Bento Grid: Aksi Cepat -->
   <div class="grid grid-cols-2 gap-2.5 mb-3">
     <!-- Download APK (Full Width Highlight) -->
-    <button type="button" onclick="openDownloadModal(event)" class="col-span-2 flex items-center justify-between bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold p-3.5 rounded-2xl shadow-[0_10px_25px_-5px_rgba(16,185,129,0.4)] transition-all border border-emerald-300/50 cursor-pointer active:scale-[0.98] group">
+    <button type="button" onclick="openDownloadModal(event)" class="tap-responsive col-span-2 flex items-center justify-between bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold p-3.5 rounded-2xl shadow-[0_10px_25px_-5px_rgba(16,185,129,0.4)] border border-emerald-300/50 cursor-pointer group">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-slate-950/15 flex items-center justify-center text-lg">
+        <div class="w-10 h-10 rounded-xl bg-slate-950/15 flex items-center justify-center text-lg shrink-0">
           <i class="fa-solid fa-cloud-arrow-down group-hover:translate-y-0.5 transition-transform"></i>
         </div>
         <div class="text-left">
           <div class="text-sm font-extrabold leading-tight">Download APK Tunggal Paito</div>
-          <div class="text-[10px] font-semibold text-slate-900/80">Versi Resmi • Ringan & Anti Blokir</div>
+          <div class="text-[10px] font-semibold text-slate-900/80">Versi Resmi • Ringan &amp; Anti Blokir</div>
         </div>
       </div>
-      <span class="px-2.5 py-1 rounded-lg bg-slate-950 text-emerald-400 text-[10px] font-extrabold uppercase tracking-wider">Unduh</span>
+      <span class="px-2.5 py-1 rounded-lg bg-slate-950 text-emerald-400 text-[10px] font-extrabold uppercase tracking-wider shrink-0">Unduh</span>
     </button>
 
     <!-- APK Paporit -->
-    <a href="https://tunggalpaito.online/prediksi/angka-main/" class="ad-trigger flex flex-col justify-between bg-gradient-to-br from-fuchsia-600 via-pink-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white p-3.5 rounded-2xl shadow-[0_8px_20px_-4px_rgba(236,72,153,0.45)] border border-pink-400/40 active:scale-[0.98] transition-all">
+    <a href="https://tunggalpaito.online/prediksi/angka-main/" class="ad-trigger tap-responsive flex flex-col justify-between bg-gradient-to-br from-fuchsia-600 via-pink-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white p-3.5 rounded-2xl shadow-[0_8px_20px_-4px_rgba(236,72,153,0.45)] border border-pink-400/40">
       <div class="flex items-center justify-between mb-2">
         <div class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center">
           <i class="fa-solid fa-fire-flame-curved text-amber-300 text-sm"></i>
@@ -257,7 +310,7 @@
     </a>
 
     <!-- Jasa Website -->
-    <button type="button" onclick="openWebDevModal(event)" class="flex flex-col justify-between text-left bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white p-3.5 rounded-2xl shadow-[0_8px_20px_-4px_rgba(99,102,241,0.45)] border border-indigo-400/40 cursor-pointer active:scale-[0.98] transition-all">
+    <button type="button" onclick="openWebDevModal(event)" class="tap-responsive flex flex-col justify-between text-left bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white p-3.5 rounded-2xl shadow-[0_8px_20px_-4px_rgba(99,102,241,0.45)] border border-indigo-400/40 cursor-pointer">
       <div class="flex items-center justify-between mb-2">
         <div class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center">
           <i class="fa-solid fa-laptop-code text-sm"></i>
@@ -266,7 +319,7 @@
       </div>
       <div>
         <div class="text-xs font-extrabold leading-tight">Jasa Buat Website</div>
-        <div class="text-[10px] text-indigo-100/85 mt-0.5">Web & APK Profesional</div>
+        <div class="text-[10px] text-indigo-100/85 mt-0.5">Web &amp; APK Profesional</div>
       </div>
     </button>
   </div>
@@ -281,21 +334,21 @@
     </div>
 
     <div class="grid grid-cols-3 gap-2">
-      <a href="https://tunggalpaito.online/apk/bbfs/" class="ad-trigger bg-slate-950/80 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/50 p-3 rounded-2xl text-center transition-all group">
+      <a href="https://tunggalpaito.online/apk/bbfs/" class="ad-trigger tap-responsive bg-slate-950/80 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/50 p-3 rounded-2xl text-center group">
         <div class="w-9 h-9 mx-auto mb-1.5 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
           <i class="fa-solid fa-shield-halved text-sm"></i>
         </div>
         <div class="text-[11px] font-extrabold text-slate-100">APK BBFS</div>
       </a>
 
-      <a href="https://tunggalpaito.online/apk-line-2d/" class="ad-trigger bg-slate-950/80 hover:bg-sky-500/10 border border-white/10 hover:border-sky-500/50 p-3 rounded-2xl text-center transition-all group">
+      <a href="https://tunggalpaito.online/apk-line-2d/" class="ad-trigger tap-responsive bg-slate-950/80 hover:bg-sky-500/10 border border-white/10 hover:border-sky-500/50 p-3 rounded-2xl text-center group">
         <div class="w-9 h-9 mx-auto mb-1.5 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center group-hover:scale-110 transition-transform">
           <i class="fa-solid fa-bolt text-sm"></i>
         </div>
         <div class="text-[11px] font-extrabold text-slate-100">APK LINE 2D</div>
       </a>
 
-      <a href="https://tunggalpaito.online/apk/colok-bebas/" class="ad-trigger bg-slate-950/80 hover:bg-purple-500/10 border border-white/10 hover:border-purple-500/50 p-3 rounded-2xl text-center transition-all group">
+      <a href="https://tunggalpaito.online/apk/colok-bebas/" class="ad-trigger tap-responsive bg-slate-950/80 hover:bg-purple-500/10 border border-white/10 hover:border-purple-500/50 p-3 rounded-2xl text-center group">
         <div class="w-9 h-9 mx-auto mb-1.5 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">
           <i class="fa-solid fa-star text-sm"></i>
         </div>
@@ -305,14 +358,14 @@
   </div>
 
   <!-- Tombol Komunitas Facebook -->
-  <a href="https://www.facebook.com/share/1FkwuwQHpw/" target="_blank" rel="noopener noreferrer" class="mb-5 flex items-center justify-between bg-[#1877F2]/15 hover:bg-[#1877F2]/25 border border-[#1877F2]/40 text-white py-3 px-4 rounded-2xl transition-all active:scale-[0.98]">
+  <a href="https://www.facebook.com/share/1FkwuwQHpw/" target="_blank" rel="noopener noreferrer" class="tap-responsive mb-5 flex items-center justify-between bg-[#1877F2]/15 hover:bg-[#1877F2]/25 border border-[#1877F2]/40 text-white py-3 px-4 rounded-2xl">
     <div class="flex items-center gap-2.5">
-      <div class="w-8 h-8 rounded-xl bg-[#1877F2] flex items-center justify-center text-white shadow">
+      <div class="w-8 h-8 rounded-xl bg-[#1877F2] flex items-center justify-center text-white shadow shrink-0">
         <i class="fa-brands fa-facebook-f text-sm"></i>
       </div>
       <div>
         <div class="text-xs font-bold text-white">Kembali ke Halaman Facebook</div>
-        <div class="text-[10px] text-blue-200/80">Gabung diskusi & update prediksi</div>
+        <div class="text-[10px] text-blue-200/80">Gabung diskusi &amp; update prediksi</div>
       </div>
     </div>
     <i class="fa-solid fa-arrow-up-right-from-square text-xs text-blue-300"></i>
@@ -325,18 +378,18 @@
         <span class="w-2 h-2 rounded-full bg-amber-400"></span>
         <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-200">Rekomendasi Pembawa Hoki</h2>
       </div>
-      <span class="text-[10px] text-amber-400 font-semibold">Geser <i class="fa-solid fa-arrow-right-long ml-0.5"></i></span>
+      <span class="text-[10px] text-amber-400 font-semibold">⇦ Geser</span>
     </div>
 
     <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 snap-x snap-mandatory">
       <!-- Item 1 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/pohon-uang.png" alt="Pohon Uang" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0">
+        <img src="https://tunggalpaito.online/pohon-uang.png" alt="Pohon Uang" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
           <span class="inline-block bg-amber-500/15 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
           <h4 class="text-xs font-bold text-white truncate">FA CAI SHU Pohon Uang</h4>
           <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">Pajangan Fengshui pembawa hoki</p>
-          <a href="https://s.shopee.co.id/8pmfJYOWUw" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px] transition-all">
+          <a href="https://s.shopee.co.id/8pmfJYOWUw" target="_blank" rel="noopener noreferrer" class="tap-responsive inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px]">
             <i class="fa-solid fa-cart-shopping text-[9px]"></i> Beli
           </a>
         </div>
@@ -344,12 +397,12 @@
 
       <!-- Item 2 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/parfum-kopi.png" alt="Parfum Kopi" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0">
+        <img src="https://tunggalpaito.online/parfum-kopi.png" alt="Parfum Kopi" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
           <span class="inline-block bg-amber-500/15 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
           <h4 class="text-xs font-bold text-white truncate">Parfum Kopi Asli</h4>
-          <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">Aroma kopi tahan lama & segar</p>
-          <a href="https://s.shopee.co.id/20wL9zj7xc" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px] transition-all">
+          <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">Aroma kopi tahan lama &amp; segar</p>
+          <a href="https://s.shopee.co.id/20wL9zj7xc" target="_blank" rel="noopener noreferrer" class="tap-responsive inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px]">
             <i class="fa-solid fa-cart-shopping text-[9px]"></i> Beli
           </a>
         </div>
@@ -357,12 +410,12 @@
 
       <!-- Item 3 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/cakradayu.png" alt="CAKRADAYU" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0">
+        <img src="https://tunggalpaito.online/cakradayu.png" alt="CAKRADAYU" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
           <span class="inline-block bg-amber-500/15 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
           <h4 class="text-xs font-bold text-white truncate">CAKRADAYU</h4>
           <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">Plat Fengshui Mantra 5 Dewa</p>
-          <a href="https://s.shopee.co.id/9V2M7NOyv1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px] transition-all">
+          <a href="https://s.shopee.co.id/9V2M7NOyv1" target="_blank" rel="noopener noreferrer" class="tap-responsive inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px]">
             <i class="fa-solid fa-cart-shopping text-[9px]"></i> Beli
           </a>
         </div>
@@ -370,12 +423,12 @@
 
       <!-- Item 4 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/patung-kodok.png" alt="PATUNG HOKI" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0">
+        <img src="https://tunggalpaito.online/patung-kodok.png" alt="PATUNG HOKI" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
           <span class="inline-block bg-amber-500/15 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
           <h4 class="text-xs font-bold text-white truncate">PATUNG HOKI</h4>
           <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">Patung Kodok Fengsui Warna Emas</p>
-          <a href="https://s.shopee.co.id/8fTF86vESt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px] transition-all">
+          <a href="https://s.shopee.co.id/8fTF86vESt" target="_blank" rel="noopener noreferrer" class="tap-responsive inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px]">
             <i class="fa-solid fa-cart-shopping text-[9px]"></i> Beli
           </a>
         </div>
@@ -383,12 +436,12 @@
 
       <!-- Item 5 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/koin-tiongkok.png" alt="KOIN TIONGKOK" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0">
+        <img src="https://tunggalpaito.online/koin-tiongkok.png" alt="KOIN TIONGKOK" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
           <span class="inline-block bg-amber-500/15 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
           <h4 class="text-xs font-bold text-white truncate">KOIN TIONGKOK</h4>
           <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">Gantungan Koin 5 Kaisar Kuno</p>
-          <a href="https://s.shopee.co.id/70L19Mcixt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px] transition-all">
+          <a href="https://s.shopee.co.id/70L19Mcixt" target="_blank" rel="noopener noreferrer" class="tap-responsive inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px]">
             <i class="fa-solid fa-cart-shopping text-[9px]"></i> Beli
           </a>
         </div>
@@ -396,12 +449,12 @@
 
       <!-- Item 6 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/gelang-pixiu.png" alt="GELANG PIXIU" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0">
+        <img src="https://tunggalpaito.online/gelang-pixiu.png" alt="GELANG PIXIU" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
           <span class="inline-block bg-amber-500/15 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
           <h4 class="text-xs font-bold text-white truncate">GELANG PIXIU</h4>
           <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">Batu Pixiu Obsidian Mantra Buddha</p>
-          <a href="https://s.shopee.co.id/4B0pmNq6Yb" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px] transition-all">
+          <a href="https://s.shopee.co.id/4B0pmNq6Yb" target="_blank" rel="noopener noreferrer" class="tap-responsive inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px]">
             <i class="fa-solid fa-cart-shopping text-[9px]"></i> Beli
           </a>
         </div>
@@ -409,12 +462,12 @@
 
       <!-- Item 7 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/kayu-kesehatan.png" alt="KAYU KESEHATAN" class="w-16 h-16 object-cover rounded-xl border border-amber-500/40 shrink-0">
+        <img src="https://tunggalpaito.online/kayu-kesehatan.png" alt="KAYU KESEHATAN" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
           <span class="inline-block bg-amber-500/15 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
           <h4 class="text-xs font-bold text-white truncate">KAYU KESEHATAN</h4>
           <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">Tasbih Secang Kayu Kesehatan 8mm</p>
-          <a href="https://s.shopee.co.id/6VOkZ7O0R7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px] transition-all">
+          <a href="https://s.shopee.co.id/6VOkZ7O0R7" target="_blank" rel="noopener noreferrer" class="tap-responsive inline-flex items-center gap-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-1 px-2.5 rounded-lg text-[10px]">
             <i class="fa-solid fa-cart-shopping text-[9px]"></i> Beli
           </a>
         </div>
@@ -430,14 +483,14 @@
 
   <!-- Info Box SEO -->
   <section class="glass-panel rounded-2xl p-4 text-[11px] text-slate-400 leading-relaxed">
-    <h2 class="text-xs font-extrabold text-amber-400 mb-1 uppercase tracking-wide">Pusat Informasi & Analisa Angka Main Terakurat</h2>
+    <h2 class="text-xs font-extrabold text-amber-400 mb-1 uppercase tracking-wide">Pusat Informasi &amp; Analisa Angka Main Terakurat</h2>
     <p>Selamat datang di halaman resmi prediksi togel akurat dari <strong class="text-slate-200">Tunggal Paito</strong>. Kami menyajikan ulasan lengkap mengenai analisa angka jitu, live draw, paito warna, serta rumus racikan otomatis untuk berbagai pasaran resmi seperti Sydney (SDY), Singapore (SGP), dan Hongkong (HK).</p>
   </section>
 
   <!-- TOOLS & FITUR UTAMA (GRID 2 KOLOM MODERN) -->
   <div>
     <div class="flex items-center justify-between mb-2.5 px-0.5">
-      <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200">Aplikasi & Rumus Utama</h3>
+      <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200">Aplikasi &amp; Rumus Utama</h3>
     </div>
 
     <div class="grid grid-cols-2 gap-2.5">
@@ -501,7 +554,7 @@
           </div>
           <div>
             <div class="font-extrabold text-xs text-slate-100 group-hover:text-teal-400 transition-colors">RUANG KETENANGAN ANGKA HOKI</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">Fokus & ketenangan mencari angka hoki</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Fokus &amp; ketenangan mencari angka hoki</div>
           </div>
         </div>
         <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-teal-400"></i>
@@ -532,50 +585,45 @@
           <div class="w-10 h-10 rounded-xl bg-amber-500/15 flex items-center justify-center text-xl border border-amber-500/30">🇦🇺</div>
           <div>
             <div class="font-extrabold text-sm text-amber-400">PASARAN SYDNEY</div>
-            <div class="text-[11px] text-slate-400">Prediksi, Analisa & Line 2D SDY</div>
+            <div class="text-[11px] text-slate-400">Prediksi, Analisa &amp; Line 2D SDY</div>
           </div>
         </div>
         <span class="font-mono-num text-[10px] font-bold px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-300 border border-amber-500/20">SDY</span>
       </div>
       <div class="grid grid-cols-2 gap-2 text-xs">
-        <a href="https://tunggalpaito.online/prediksi/sdy" class="ad-trigger col-span-2 flex items-center justify-between bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 p-3 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi/sdy" class="ad-trigger tap-responsive col-span-2 flex items-center justify-between bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 p-3 rounded-xl group">
           <span class="text-amber-300 font-bold"><i class="fa-solid fa-chart-pie mr-2"></i>Prediksi Sydney Hari Ini</span>
           <i class="fa-solid fa-chevron-right text-[10px] text-amber-400"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi-sdy/" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi-sdy/" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-amber-300 font-medium text-[11px]">Analisa SDY</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi/2dsdy" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi/2dsdy" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-amber-300 font-medium text-[11px]">LINE 2D SDY</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/bbfs2d-sdy.html" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/bbfs2d-sdy.html" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-amber-300 font-medium text-[11px]">BBFS 2D SDY</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/kumat-sdy.html" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/kumat-sdy.html" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-amber-300 font-medium text-[11px]">KUMAT 2D SDY</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/kepala-sdy" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/kepala-sdy" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-amber-300 font-medium text-[11px]">Lemah Kepala</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/ekor-sdy" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/ekor-sdy" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-amber-300 font-medium text-[11px]">Lemah Ekor</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/2d-sdy" class="ad-trigger col-span-2 flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/2d-sdy" class="ad-trigger tap-responsive col-span-2 flex items-center justify-between bg-slate-950/70 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-amber-300 font-medium text-[11px]"><i class="fa-solid fa-arrow-down mr-1.5 text-amber-400"></i>Lemah 2D SDY</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
       </div>
-    </div>
-
-    <!-- Native Banner #2 -->
-    <div class="w-full flex justify-center overflow-hidden rounded-2xl glass-panel p-2">
-      <div id="container-3f09897b852339f736b82a3190a40259-2"></div>
     </div>
 
     <!-- PASARAN SINGAPORE -->
@@ -585,50 +633,45 @@
           <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center text-xl border border-emerald-500/30">🇸🇬</div>
           <div>
             <div class="font-extrabold text-sm text-emerald-400">PASARAN SINGAPORE</div>
-            <div class="text-[11px] text-slate-400">Prediksi, Analisa & Line 2D SGP</div>
+            <div class="text-[11px] text-slate-400">Prediksi, Analisa &amp; Line 2D SGP</div>
           </div>
         </div>
         <span class="font-mono-num text-[10px] font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">SGP</span>
       </div>
       <div class="grid grid-cols-2 gap-2 text-xs">
-        <a href="https://tunggalpaito.online/prediksi/sgp" class="ad-trigger col-span-2 flex items-center justify-between bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-3 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi/sgp" class="ad-trigger tap-responsive col-span-2 flex items-center justify-between bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-3 rounded-xl group">
           <span class="text-emerald-300 font-bold"><i class="fa-solid fa-chart-pie mr-2"></i>Prediksi Singapore Hari Ini</span>
           <i class="fa-solid fa-chevron-right text-[10px] text-emerald-400"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi-sgp/" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi-sgp/" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-emerald-300 font-medium text-[11px]">Analisa SGP</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi/2dsgp" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi/2dsgp" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-emerald-300 font-medium text-[11px]">LINE 2D SGP</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/bbfs2d-sgp.html" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/bbfs2d-sgp.html" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-emerald-300 font-medium text-[11px]">BBFS 2D SGP</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/kumat-sgp.html" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/kumat-sgp.html" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-emerald-300 font-medium text-[11px]">KUMAT 2D SGP</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/kepala-sgp" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/kepala-sgp" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-emerald-300 font-medium text-[11px]">Lemah Kepala</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/ekor-sgp" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/ekor-sgp" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-emerald-300 font-medium text-[11px]">Lemah Ekor</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/2d-sgp" class="ad-trigger col-span-2 flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/2d-sgp" class="ad-trigger tap-responsive col-span-2 flex items-center justify-between bg-slate-950/70 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-emerald-300 font-medium text-[11px]"><i class="fa-solid fa-arrow-down mr-1.5 text-emerald-400"></i>Lemah 2D SGP</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
       </div>
-    </div>
-
-    <!-- Native Banner #3 -->
-    <div class="w-full flex justify-center overflow-hidden rounded-2xl glass-panel p-2">
-      <div id="container-3f09897b852339f736b82a3190a40259-3"></div>
     </div>
 
     <!-- PASARAN HONGKONG -->
@@ -638,54 +681,49 @@
           <div class="w-10 h-10 rounded-xl bg-rose-500/15 flex items-center justify-center text-xl border border-rose-500/30">🇭🇰</div>
           <div>
             <div class="font-extrabold text-sm text-rose-400">PASARAN HONGKONG</div>
-            <div class="text-[11px] text-slate-400">Prediksi, Analisa & Line 2D HK</div>
+            <div class="text-[11px] text-slate-400">Prediksi, Analisa &amp; Line 2D HK</div>
           </div>
         </div>
         <span class="font-mono-num text-[10px] font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-300 border border-rose-500/20">HK</span>
       </div>
       <div class="grid grid-cols-2 gap-2 text-xs">
-        <a href="https://tunggalpaito.online/prediksi/hk" class="ad-trigger col-span-2 flex items-center justify-between bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 p-3 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi/hk" class="ad-trigger tap-responsive col-span-2 flex items-center justify-between bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 p-3 rounded-xl group">
           <span class="text-rose-300 font-bold"><i class="fa-solid fa-chart-pie mr-2"></i>Prediksi Hongkong Hari Ini</span>
           <i class="fa-solid fa-chevron-right text-[10px] text-rose-400"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi-hk/" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi-hk/" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-rose-300 font-medium text-[11px]">Analisa HK</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi/2dhk" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/prediksi/2dhk" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-rose-300 font-medium text-[11px]">LINE 2D HK</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/bbfs2d-hk.html" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/bbfs2d-hk.html" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-rose-300 font-medium text-[11px]">BBFS 2D HK</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/kumat-hk.html" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/kumat-hk.html" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-rose-300 font-medium text-[11px]">KUMAT 2D HK</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/kepala-hk" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/kepala-hk" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-rose-300 font-medium text-[11px]">Lemah Kepala</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/ekor-hk" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/ekor-hk" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-rose-300 font-medium text-[11px]">Lemah Ekor</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/2d-hk" class="ad-trigger col-span-2 flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl transition-all group">
+        <a href="https://tunggalpaito.online/angka-lemah/2d-hk" class="ad-trigger tap-responsive col-span-2 flex items-center justify-between bg-slate-950/70 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/40 p-2.5 rounded-xl group">
           <span class="text-slate-200 group-hover:text-rose-300 font-medium text-[11px]"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-400"></i>Lemah 2D HK</span>
           <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
         </a>
       </div>
     </div>
 
-    <!-- Native Banner #4 -->
-    <div class="w-full flex justify-center overflow-hidden rounded-2xl glass-panel p-2">
-      <div id="container-3f09897b852339f736b82a3190a40259-4"></div>
-    </div>
-
     <!-- PASARAN LOTTO (SDY & HK LOTTO) -->
-    <div class="grid grid-cols-1 gap-3">
+    <div id="lotto-grid" class="grid grid-cols-1 gap-3">
       <div data-market="sdy" class="market-block bento-card rounded-3xl p-4">
         <div class="flex items-center justify-between mb-2.5">
           <div class="flex items-center gap-2.5">
@@ -697,7 +735,7 @@
           </div>
           <span class="font-mono-num text-[9px] font-bold px-2 py-0.5 rounded bg-orange-500/15 text-orange-300">LOTTO</span>
         </div>
-        <a href="https://tunggalpaito.online/prediksi/sdylotto" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-orange-500/15 border border-white/10 hover:border-orange-500/40 p-3 rounded-xl transition-all group text-xs">
+        <a href="https://tunggalpaito.online/prediksi/sdylotto" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-orange-500/15 border border-white/10 hover:border-orange-500/40 p-3 rounded-xl group text-xs">
           <span class="text-slate-200 group-hover:text-orange-300 font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-orange-400"></i>Prediksi Angka Main SDY Lotto hari ini</span>
           <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-orange-400"></i>
         </a>
@@ -714,7 +752,7 @@
           </div>
           <span class="font-mono-num text-[9px] font-bold px-2 py-0.5 rounded bg-red-500/15 text-red-300">LOTTO</span>
         </div>
-        <a href="https://tunggalpaito.online/prediksi/hklotto" class="ad-trigger flex items-center justify-between bg-slate-950/70 hover:bg-red-500/15 border border-white/10 hover:border-red-500/40 p-3 rounded-xl transition-all group text-xs">
+        <a href="https://tunggalpaito.online/prediksi/hklotto" class="ad-trigger tap-responsive flex items-center justify-between bg-slate-950/70 hover:bg-red-500/15 border border-white/10 hover:border-red-500/40 p-3 rounded-xl group text-xs">
           <span class="text-slate-200 group-hover:text-red-300 font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-red-400"></i>Prediksi Angka Main HK Lotto hari ini</span>
           <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-red-400"></i>
         </a>
@@ -728,7 +766,7 @@
 <!-- ================================================================= -->
 <div id="webdev-popup" class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
   <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border border-indigo-500/50 rounded-3xl w-full max-w-sm p-6 shadow-[0_0_40px_rgba(99,102,241,0.35)] relative animate-popup text-left">
-    <button type="button" onclick="closeWebDevModal()" class="absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700">
+    <button type="button" onclick="closeWebDevModal()" aria-label="Tutup modal" class="tap-responsive absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700 cursor-pointer">
       <i class="fa-solid fa-xmark"></i>
     </button>
     <div class="flex items-center space-x-3 mb-4 pb-3 border-b border-slate-800">
@@ -737,31 +775,31 @@
       </div>
       <div>
         <h3 class="text-xs font-bold text-white uppercase tracking-wider">Jasa Pembuatan Website</h3>
-        <p class="text-[10px] text-indigo-400 font-medium">Custom profesional masa kini, Murah & Cepat!</p>
+        <p class="text-[10px] text-indigo-400 font-medium">Custom profesional masa kini, Murah &amp; Cepat!</p>
       </div>
     </div>
     <div class="text-xs text-slate-300 space-y-2.5 mb-5 max-h-[60vh] overflow-y-auto pr-1">
-      <p class="font-semibold text-indigo-300 bg-indigo-500/10 p-2.5 rounded-xl border border-indigo-500/20">Kami melayani pembuatan berbagai macam jenis aplikasi & website profesional sesuai kebutuhan Anda:</p>
+      <p class="font-semibold text-indigo-300 bg-indigo-500/10 p-2.5 rounded-xl border border-indigo-500/20">Kami melayani pembuatan berbagai macam jenis aplikasi &amp; website profesional sesuai kebutuhan Anda:</p>
       <ul class="space-y-2 text-slate-300 text-[11px] pl-1">
         <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">APK:</strong> Semua jenis aplikasi, (bisa pakai key/rumus anda sendiri).</li>
-        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Toko Pakan Ternak & Pertanian:</strong> Katalog produk, pemesanan grosir/eceran pakan, bibit, pupuk, & obat hewan.</li>
+        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Toko Pakan Ternak &amp; Pertanian:</strong> Katalog produk, pemesanan grosir/eceran pakan, bibit, pupuk, &amp; obat hewan.</li>
         <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Toko Online / E-Commerce:</strong> Sistem keranjang belanja, checkout WhatsApp/Midtrans, multi-kategori produk.</li>
-        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Landing Page Produk & Jasa:</strong> Optimal untuk iklan FB Ads, TikTok Ads, & Google Ads dengan konversi tinggi.</li>
+        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Landing Page Produk &amp; Jasa:</strong> Optimal untuk iklan FB Ads, TikTok Ads, &amp; Google Ads dengan konversi tinggi.</li>
         <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Company Profile:</strong> Profil perusahaan, CV, PT, pabrik, instansi, atau yayasan resmi.</li>
-        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web PPOB, Pulsa & Top Up Game:</strong> Sistem agen pulsa, kuota internet, token listrik, & voucher game otomatis.</li>
-        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Portal Berita & Blog:</strong> Website informasi, majalah online, atau media publikasi artikel SEO.</li>
-        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Booking & Reservasi:</strong> Hotel, villa, travel, salon, lapangan olahraga, hingga konsultasi online.</li>
-        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Portofolio & CV Kreatif:</strong> Personal branding untuk fotografer, desainer, freelancer, & profesional.</li>
-        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Sekolah & Lembaga Kursus:</strong> Sistem PPDB online, e-learning, dan informasi akademik.</li>
+        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web PPOB, Pulsa &amp; Top Up Game:</strong> Sistem agen pulsa, kuota internet, token listrik, &amp; voucher game otomatis.</li>
+        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Portal Berita &amp; Blog:</strong> Website informasi, majalah online, atau media publikasi artikel SEO.</li>
+        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Booking &amp; Reservasi:</strong> Hotel, villa, travel, salon, lapangan olahraga, hingga konsultasi online.</li>
+        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Portofolio &amp; CV Kreatif:</strong> Personal branding untuk fotografer, desainer, freelancer, &amp; profesional.</li>
+        <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Sekolah &amp; Lembaga Kursus:</strong> Sistem PPDB online, e-learning, dan informasi akademik.</li>
         <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> <strong class="text-white">Web Custom Sesuai Request:</strong> Sistem manajemen data khusus, dashboard admin, API integrasi, dll.</li>
       </ul>
       <div class="pt-2 border-t border-slate-800 space-y-1 text-slate-400 text-[10px]">
-        <p><i class="fa-solid fa-star text-amber-400 mr-1"></i> Desain modern, elegan & 100% Keren Sesuai Pemesanan</p>
-        <p><i class="fa-solid fa-star text-amber-400 mr-1"></i> Pengerjaan kilat, aman & bergaransi</p>
+        <p><i class="fa-solid fa-star text-amber-400 mr-1"></i> Desain modern, elegan &amp; 100% Keren Sesuai Pemesanan</p>
+        <p><i class="fa-solid fa-star text-amber-400 mr-1"></i> Pengerjaan kilat, aman &amp; bergaransi</p>
         <p><i class="fa-solid fa-star text-amber-400 mr-1"></i> Harga bersahabat, CS profesional</p>
       </div>
     </div>
-    <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20tertarik%20ingin%20memesan%20Jasa%20Pembuatan%20Website%20Custom." target="_blank" rel="noopener noreferrer" onclick="closeWebDevModal()" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white font-extrabold py-3 px-4 rounded-2xl text-xs shadow-[0_4px_20px_rgba(99,102,241,0.4)] transition-all active:scale-[0.98]">
+    <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20tertarik%20ingin%20memesan%20Jasa%20Pembuatan%20Website%20Custom." target="_blank" rel="noopener noreferrer" onclick="closeWebDevModal()" class="tap-responsive w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white font-extrabold py-3 px-4 rounded-2xl text-xs shadow-[0_4px_20px_rgba(99,102,241,0.4)]">
       <i class="fa-brands fa-whatsapp text-sm"></i> <span>Konsultasi / Pesan Sekarang</span>
     </a>
   </div>
@@ -772,7 +810,7 @@
 <!-- ================================================================= -->
 <div id="download-modal" class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
   <div class="bg-slate-900 border border-emerald-500/50 rounded-3xl w-full max-w-sm p-5 shadow-[0_0_40px_rgba(16,185,129,0.35)] relative animate-popup text-left">
-    <button type="button" onclick="closeDownloadModal()" class="absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700">
+    <button type="button" onclick="closeDownloadModal()" aria-label="Tutup modal" class="tap-responsive absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700 cursor-pointer">
       <i class="fa-solid fa-xmark"></i>
     </button>
     <div class="flex items-center space-x-3 mb-3.5 pb-3 border-b border-slate-800">
@@ -787,21 +825,21 @@
     <div class="text-xs text-slate-300 space-y-2.5 mb-4 max-h-[62vh] overflow-y-auto pr-1">
       <p class="font-semibold text-emerald-400 bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/20">📌 Pertama wajib login/pakai akun Email-Gmail bahwa anda bukan robot.</p>
 
-      <!-- 3 Gambar Panduan Ukuran Kecil 3x4 -->
+      <!-- 3 Gambar Panduan: Menyesuaikan Otomatis Layar HP Pengunjung -->
       <div>
-        <p class="text-[10px] font-bold text-amber-300 uppercase tracking-wider mb-1.5">Panduan Visual (3x4)</p>
+        <p class="text-[10px] font-bold text-amber-300 uppercase tracking-wider mb-1.5">Gambar Panduan Download Apk</p>
         <div class="grid grid-cols-3 gap-2">
-          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito1.jpg" target="_blank" rel="noopener noreferrer" class="group block rounded-xl overflow-hidden border border-white/15 hover:border-emerald-400/70 bg-slate-950/80 transition-all">
-            <img src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito1.jpg" alt="Panduan Download APK 1" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform">
-            <span class="block text-center text-[9px] font-bold text-slate-300 py-1 bg-slate-950/90">Langkah 1</span>
+          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" target="_blank" rel="noopener noreferrer" class="tap-responsive group block rounded-xl overflow-hidden border border-white/15 hover:border-emerald-400/70 bg-slate-950/80">
+            <img id="guide-img-1" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" alt="Panduan Langkah 1: Detail selengkapnya" loading="lazy" decoding="async" onload="syncGuideCropByViewport()" class="guide-thumb object-cover group-hover:scale-105">
+            <span class="block text-center text-[9px] font-bold text-slate-300 py-1 bg-slate-950/90">Detail / Opsi</span>
           </a>
-          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" target="_blank" rel="noopener noreferrer" class="group block rounded-xl overflow-hidden border border-white/15 hover:border-emerald-400/70 bg-slate-950/80 transition-all">
-            <img src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" alt="Panduan Download APK 2" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform">
-            <span class="block text-center text-[9px] font-bold text-slate-300 py-1 bg-slate-950/90">Langkah 2</span>
+          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.png" target="_blank" rel="noopener noreferrer" class="tap-responsive group block rounded-xl overflow-hidden border border-white/15 hover:border-emerald-400/70 bg-slate-950/80">
+            <img id="guide-img-2" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.png" alt="Panduan Langkah 2: Tetap instal" loading="lazy" decoding="async" onload="syncGuideCropByViewport()" class="guide-thumb object-cover group-hover:scale-105">
+            <span class="block text-center text-[9px] font-bold text-slate-300 py-1 bg-slate-950/90">Tetap Instal</span>
           </a>
-          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" target="_blank" rel="noopener noreferrer" class="group block rounded-xl overflow-hidden border border-white/15 hover:border-emerald-400/70 bg-slate-950/80 transition-all">
-            <img src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" alt="Panduan Download APK 3" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform">
-            <span class="block text-center text-[9px] font-bold text-slate-300 py-1 bg-slate-950/90">Langkah 3</span>
+          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" target="_blank" rel="noopener noreferrer" class="tap-responsive group block rounded-xl overflow-hidden border border-white/15 hover:border-emerald-400/70 bg-slate-950/80">
+            <img id="guide-img-3" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" alt="Panduan Langkah 3: Tetap download" loading="lazy" decoding="async" onload="syncGuideCropByViewport()" class="guide-thumb object-contain bg-white/95 group-hover:scale-105">
+            <span class="block text-center text-[9px] font-bold text-slate-300 py-1 bg-slate-950/90">Tetap Download</span>
           </a>
         </div>
       </div>
@@ -819,14 +857,14 @@
         </ol>
       </div>
     </div>
-    <a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" onclick="closeDownloadModal()" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-3 px-4 rounded-2xl text-xs shadow-lg transition-all active:scale-[0.98]">
+    <a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" onclick="closeDownloadModal()" class="tap-responsive w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-3 px-4 rounded-2xl text-xs shadow-lg">
       <i class="fa-solid fa-cloud-arrow-down"></i> <span>Lanjutkan Download APK</span>
     </a>
   </div>
 </div>
 
 <!-- NOTIFIKASI PEMBELI -->
-<div id="buyer-notification">
+<div id="buyer-notification" aria-live="polite">
   <div class="glass-panel border border-emerald-500/40 rounded-2xl p-2.5 shadow-[0_10px_25px_rgba(16,185,129,0.2)] flex items-center space-x-2.5">
     <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
       <i class="fa-solid fa-circle-check text-xs"></i>
@@ -842,7 +880,7 @@
 <!-- POP-UP SEWA BANNER (DRAGGABLE) -->
 <div id="ads-popup">
   <div class="relative bg-slate-950/95 border border-amber-500/40 rounded-2xl p-2.5 w-32 shadow-[0_10px_25px_rgba(245,158,11,0.25)] backdrop-blur-xl">
-    <button type="button" onclick='document.getElementById("ads-popup").style.display="none"' class="absolute -top-2 -right-2 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-5 h-5 rounded-full flex items-center justify-center text-[9px] border border-slate-700 transition-colors shadow">
+    <button type="button" onclick="closeAdsPopup()" aria-label="Tutup banner" class="tap-responsive absolute -top-2 -right-2 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-5 h-5 rounded-full flex items-center justify-center text-[9px] border border-slate-700 transition-colors shadow cursor-pointer">
       <i class="fa-solid fa-xmark"></i>
     </button>
     <div class="flex items-center space-x-1.5 mb-1 pb-1 border-b border-white/10">
@@ -851,7 +889,7 @@
     </div>
     <div class="text-center">
       <p class="text-[9px] text-slate-300 font-medium mb-1.5 leading-tight">Pasang Iklan Traffic Tinggi!</p>
-      <a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-1 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-1 px-2 rounded-lg text-[9px] shadow transition-all">
+      <a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target="_blank" rel="noopener noreferrer" class="tap-responsive flex items-center justify-center space-x-1 bg-gradient-to-r from-emerald-500 to-green-400 hover:from-emerald-400 hover:to-green-300 text-slate-950 font-extrabold py-1 px-2 rounded-lg text-[9px] shadow">
         <i class="fa-brands fa-whatsapp text-[10px]"></i> <span>Chat Admin</span>
       </a>
     </div>
@@ -869,6 +907,47 @@
 document.getElementById("current-year").textContent = String(new Date().getFullYear());
 </script>
 
+<!-- Penyesuaian Otomatis Gambar Panduan Sesuai Layar HP Pengunjung -->
+<script>
+function syncGuideCropByViewport() {
+  const vw = window.innerWidth || document.documentElement.clientWidth || 360;
+  const vh = window.innerHeight || document.documentElement.clientHeight || 640;
+  const aspect = vh / Math.max(vw, 1);
+
+  const img1 = document.getElementById("guide-img-1");
+  const img2 = document.getElementById("guide-img-2");
+  const img3 = document.getElementById("guide-img-3");
+
+  // Layar HP sempit/pendek butuh fokus sedikit lebih turun agar jari & kotak petunjuk tetap terlihat
+  const y1 = Math.min(84, Math.max(72, Math.round(76 + (aspect - 1.7) * 6)));
+  const y2 = Math.min(94, Math.max(84, Math.round(88 + (aspect - 1.7) * 5)));
+
+  if (img1) {
+    img1.style.objectPosition = `50% ${y1}%`;
+  }
+  if (img2) {
+    img2.style.objectPosition = `50% ${y2}%`;
+  }
+  if (img3) {
+    img3.style.objectPosition = "50% 50%";
+    if (img3.naturalWidth && img3.naturalHeight && img3.clientWidth) {
+      const ratio = img3.naturalHeight / img3.naturalWidth;
+      const idealHeight = Math.round(img3.clientWidth * Math.min(Math.max(ratio, 0.55), 1.15));
+      if (vw <= 420 && idealHeight >= 68 && idealHeight <= 125) {
+        img3.style.height = `${idealHeight}px`;
+      } else {
+        img3.style.height = "";
+      }
+    }
+  }
+}
+
+window.addEventListener("resize", syncGuideCropByViewport, { passive: true });
+window.addEventListener("orientationchange", function() {
+  setTimeout(syncGuideCropByViewport, 120);
+});
+</script>
+
 <!-- Filter Pasaran Script -->
 <script>
 function filterMarket(market, btn) {
@@ -876,68 +955,111 @@ function filterMarket(market, btn) {
   if (btn) btn.classList.add("active");
   document.querySelectorAll(".market-block").forEach((block) => {
     const m = block.getAttribute("data-market");
-    block.style.display = (market === "all" || m === market) ? "block" : "none";
+    block.style.display = (market === "all" || m === market) ? "" : "none";
   });
+  const lottoGrid = document.getElementById("lotto-grid");
+  if (lottoGrid) {
+    const anyVisibleLotto = Array.from(lottoGrid.querySelectorAll(".market-block")).some(
+      (el) => el.style.display !== "none"
+    );
+    lottoGrid.style.display = anyVisibleLotto ? "" : "none";
+  }
 }
 </script>
 
 <!-- Modal Controls -->
 <script>
 const downloadModal = document.getElementById("download-modal");
+const webdevModal = document.getElementById("webdev-popup");
+
+function closeAdsPopup() {
+  const adsEl = document.getElementById("ads-popup");
+  if (adsEl) adsEl.style.display = "none";
+}
+
+function syncBodyScrollLock() {
+  const anyOpen = !downloadModal.classList.contains("hidden") || !webdevModal.classList.contains("hidden");
+  document.body.classList.toggle("modal-open", anyOpen);
+}
+
 function openDownloadModal(e) {
   if (e) e.stopPropagation();
   downloadModal.classList.remove("hidden");
-  document.body.classList.add("modal-open");
+  syncBodyScrollLock();
+  requestAnimationFrame(syncGuideCropByViewport);
 }
 function closeDownloadModal() {
   downloadModal.classList.add("hidden");
-  document.body.classList.remove("modal-open");
+  syncBodyScrollLock();
 }
 downloadModal.addEventListener("click", function(e) {
   if (e.target === downloadModal) closeDownloadModal();
 });
 
-const webdevModal = document.getElementById("webdev-popup");
 function openWebDevModal(e) {
   if (e) e.stopPropagation();
   webdevModal.classList.remove("hidden");
-  document.body.classList.add("modal-open");
+  syncBodyScrollLock();
 }
 function closeWebDevModal() {
   webdevModal.classList.add("hidden");
-  document.body.classList.remove("modal-open");
+  syncBodyScrollLock();
 }
 webdevModal.addEventListener("click", function(e) {
   if (e.target === webdevModal) closeWebDevModal();
 });
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    closeDownloadModal();
+    closeWebDevModal();
+  }
+});
 </script>
 
-<!-- Draggable Floating Box -->
+<!-- Draggable Floating Box (GPU-accelerated translate3d & viewport-clamped) -->
 <script>
 const popup = document.getElementById("ads-popup");
-let startX = 0, startY = 0, initialX = 0, initialY = 0, isDragging = false;
+let pointerStartX = 0, pointerStartY = 0, baseX = 0, baseY = 0, currentX = 0, currentY = 0, isDragging = false, rafId = null;
+
+function clampVal(val, min, max) {
+  return Math.min(Math.max(val, min), max);
+}
+
+function applyPopupTransform() {
+  popup.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+  rafId = null;
+}
 
 function dragStart(e) {
   if (e.target.closest("a") || e.target.closest("button")) return;
   isDragging = true;
-  startX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
-  startY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
-  const rect = popup.getBoundingClientRect();
-  initialX = rect.left;
-  initialY = rect.top;
-  popup.style.bottom = "auto";
-  popup.style.right = "auto";
-  popup.style.left = `${initialX}px`;
-  popup.style.top = `${initialY}px`;
+  const pt = e.type === "touchstart" ? e.touches[0] : e;
+  pointerStartX = pt.clientX;
+  pointerStartY = pt.clientY;
+  baseX = currentX;
+  baseY = currentY;
 }
 
 function drag(e) {
   if (!isDragging) return;
   if (e.cancelable) e.preventDefault();
-  const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-  const clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
-  popup.style.left = `${initialX + (clientX - startX)}px`;
-  popup.style.top = `${initialY + (clientY - startY)}px`;
+  const pt = e.type === "touchmove" ? e.touches[0] : e;
+  const dx = pt.clientX - pointerStartX;
+  const dy = pt.clientY - pointerStartY;
+  const rect = popup.getBoundingClientRect();
+  const margin = 10;
+  const minX = baseX - (rect.left - margin);
+  const maxX = baseX + (window.innerWidth - rect.right - margin);
+  const minY = baseY - (rect.top - (margin + 52));
+  const maxY = baseY + (window.innerHeight - rect.bottom - margin);
+
+  currentX = clampVal(baseX + dx, minX, maxX);
+  currentY = clampVal(baseY + dy, minY, maxY);
+
+  if (!rafId) {
+    rafId = requestAnimationFrame(applyPopupTransform);
+  }
 }
 
 function dragEnd() {
@@ -945,9 +1067,9 @@ function dragEnd() {
 }
 
 popup.addEventListener("mousedown", dragStart);
-document.addEventListener("mousemove", drag);
+document.addEventListener("mousemove", drag, { passive: true });
 document.addEventListener("mouseup", dragEnd);
-popup.addEventListener("touchstart", dragStart, { passive: false });
+popup.addEventListener("touchstart", dragStart, { passive: true });
 document.addEventListener("touchmove", drag, { passive: false });
 document.addEventListener("touchend", dragEnd);
 </script>
@@ -988,6 +1110,12 @@ function generateBuyersBatch(count = 50) {
   return list;
 }
 
+function savePersistentBuyers(list) {
+  try {
+    localStorage.setItem("tp_persistent_buyers", JSON.stringify(list));
+  } catch (e) {}
+}
+
 function getPersistentBuyers() {
   let list = [];
   try {
@@ -998,12 +1126,12 @@ function getPersistentBuyers() {
   }
   if (!Array.isArray(list) || list.length === 0) {
     list = generateBuyersBatch(50);
-    try {
-      localStorage.setItem("tp_persistent_buyers", JSON.stringify(list));
-    } catch (e) {}
+    savePersistentBuyers(list);
   }
   return list;
 }
+
+let hideNotifTimer = null;
 
 function showRandomBuyer() {
   const box = document.getElementById("buyer-notification");
@@ -1012,13 +1140,14 @@ function showRandomBuyer() {
   const timeEl = document.getElementById("buyer-time");
   if (!box || !nameEl || !apkEl || !timeEl) return;
 
-  const list = getPersistentBuyers();
+  let list = getPersistentBuyers();
   const item = list.shift();
   if (!item) return;
 
-  try {
-    localStorage.setItem("tp_persistent_buyers", JSON.stringify(list));
-  } catch (e) {}
+  if (list.length === 0) {
+    list = generateBuyersBatch(50);
+  }
+  savePersistentBuyers(list);
 
   const elapsed = Math.max(0, Date.now() - Number(item.timestamp || Date.now()));
   nameEl.textContent = item.name;
@@ -1026,7 +1155,8 @@ function showRandomBuyer() {
   timeEl.textContent = formatTimeAgo(elapsed);
 
   box.classList.add("show");
-  setTimeout(() => {
+  clearTimeout(hideNotifTimer);
+  hideNotifTimer = setTimeout(() => {
     box.classList.remove("show");
   }, 4000);
 }
@@ -1038,59 +1168,92 @@ setInterval(showRandomBuyer, 10000);
 <!-- PROTEKSI KLIK KANAN & SHORTCUT -->
 <script>
 document.addEventListener("contextmenu", (e) => e.preventDefault());
-document.onkeydown = function(e) {
-  return (
-    e.keyCode !== 123 &&
-    (!e.ctrlKey || !e.shiftKey || e.keyCode !== "I".charCodeAt(0)) &&
-    (!e.ctrlKey || !e.shiftKey || e.keyCode !== "C".charCodeAt(0)) &&
-    (!e.ctrlKey || !e.shiftKey || e.keyCode !== "J".charCodeAt(0)) &&
-    (!e.ctrlKey || e.keyCode !== "U".charCodeAt(0))
-  );
-};
+document.addEventListener("keydown", function(e) {
+  const key = (e.key || "").toLowerCase();
+  const blocked =
+    key === "f12" ||
+    (e.ctrlKey && e.shiftKey && ["i", "c", "j"].includes(key)) ||
+    (e.ctrlKey && key === "u");
+  if (blocked) {
+    e.preventDefault();
+  }
+});
 document.addEventListener("copy", (e) => e.preventDefault());
 </script>
 
-<!-- SCRIPT NAVIGASI KEMBALI -->
+<!-- SCRIPT NAVIGASI RESPONSIF & KEMBALI -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+  const progressBar = document.getElementById("top-nav-progress");
   const navEntries = performance.getEntriesByType("navigation");
   const isBackForward = navEntries.length > 0 && navEntries[0].type === "back_forward";
 
+  function safeSetSession(key, val) {
+    try {
+      sessionStorage.setItem(key, val);
+    } catch (e) {}
+  }
+  function safeRemoveSession(key) {
+    try {
+      sessionStorage.removeItem(key);
+    } catch (e) {}
+  }
+  function safeGetSession(key) {
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      return null;
+    }
+  }
+
   if (!isBackForward) {
-    sessionStorage.removeItem("tp_intended_page2");
-    sessionStorage.removeItem("tp_click_time");
+    safeRemoveSession("tp_intended_page2");
+    safeRemoveSession("tp_click_time");
   }
 
   const menuLinks = document.querySelectorAll('a.ad-trigger, a[href*="tunggalpaito.online"]');
   menuLinks.forEach((link) => {
-    if (link.getAttribute("href") !== "https://tunggalpaito.online/prediksi") {
+    const href = link.getAttribute("href") || "";
+    if (!href.endsWith("/prediksi")) {
       link.removeAttribute("target");
     }
 
     const saveTarget = function() {
       const targetUrl = this.getAttribute("href");
-      if (!targetUrl || targetUrl === "#" || targetUrl === "https://tunggalpaito.online/prediksi") return;
-      sessionStorage.setItem("tp_intended_page2", targetUrl);
-      sessionStorage.setItem("tp_click_time", String(Date.now()));
+      if (!targetUrl || targetUrl === "#" || targetUrl.endsWith("/prediksi")) return;
+      safeSetSession("tp_intended_page2", targetUrl);
+      safeSetSession("tp_click_time", String(Date.now()));
+      if (progressBar) {
+        progressBar.classList.add("active");
+      }
     };
 
-    link.addEventListener("pointerdown", saveTarget);
-    link.addEventListener("click", saveTarget);
+    link.addEventListener("pointerdown", saveTarget, { passive: true });
+    link.addEventListener("click", saveTarget, { passive: true });
   });
 
   function redirectToIntendedPage() {
-    const intendedUrl = sessionStorage.getItem("tp_intended_page2");
-    const clickTime = parseInt(sessionStorage.getItem("tp_click_time") || "0", 10);
+    const intendedUrl = safeGetSession("tp_intended_page2");
+    const clickTime = parseInt(safeGetSession("tp_click_time") || "0", 10);
     if (intendedUrl && Date.now() - clickTime < 300000) {
-      sessionStorage.removeItem("tp_intended_page2");
-      sessionStorage.removeItem("tp_click_time");
+      safeRemoveSession("tp_intended_page2");
+      safeRemoveSession("tp_click_time");
+      if (progressBar) {
+        progressBar.classList.add("active");
+      }
       window.location.replace(intendedUrl);
+    } else if (progressBar) {
+      progressBar.classList.remove("active");
+      progressBar.style.width = "0%";
     }
   }
 
   window.addEventListener("pageshow", function(event) {
     if (event.persisted || isBackForward) {
       redirectToIntendedPage();
+    } else if (progressBar) {
+      progressBar.classList.remove("active");
+      progressBar.style.width = "0%";
     }
   });
 });
