@@ -185,23 +185,29 @@ macau4dRef.once("value").then((snapshot)=>{
     return daysMap[iso];
   }
 
-  Object.keys(rawData).forEach((dateKey)=>{
+  // Urutkan key tanggal dari lama ke baru agar data terbaru di tanggal akhir menimpa/menempati slot terbarunya
+  const sortedKeys=Object.keys(rawData).sort((a,b)=>{
+    const da=parseDateKey(a),db=parseDateKey(b);
+    return (da?da.getTime():0)-(db?db.getTime():0);
+  });
+
+  sortedKeys.forEach((dateKey)=>{
     const baseDt=parseDateKey(dateKey);
     if(!baseDt)return;
     const groups=extractFourDigitGroups(rawData[dateKey]);
     if(!groups.length)return;
 
-    for(let idxFromEnd=0;idxFromEnd<groups.length;idxFromEnd++){
-      const groupVal=groups[groups.length-1-idxFromEnd];
-      const dayOffset=Math.floor(idxFromEnd/6);
-      const boxIndexFromRight=idxFromEnd%6;
+    // Hitung mundur otomatis per 1 kotak dari elemen paling kanan (terbaru),
+    // setiap 6 kotak bergeser mundur 1 hari kalender.
+    for(let idx=groups.length-1;idx>=0;idx--){
+      const offsetFromRight=(groups.length-1)-idx;
+      const dayOffset=Math.floor(offsetFromRight/6);
+      const boxIndexFromRight=offsetFromRight%6;
       const boxIndex=5-boxIndexFromRight;
 
       const targetDt=new Date(baseDt.getFullYear(),baseDt.getMonth(),baseDt.getDate()-dayOffset);
       const slot=ensureDaySlot(targetDt);
-      if(slot.boxes[boxIndex]===null){
-        slot.boxes[boxIndex]=groupVal;
-      }
+      slot.boxes[boxIndex]=groups[idx];
     }
   });
 
