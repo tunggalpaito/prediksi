@@ -166,29 +166,37 @@
 <div id="top-nav-progress" aria-hidden="true"></div>
 
 <!-- ================================================================= -->
-<!-- STICKY GLASS TOPBAR (MODERN HEADER + TOP 10 LINE)                 -->
+<!-- STICKY GLASS TOPBAR (MODERN HEADER + TOMBOL CARI + TOP 10 LINE)   -->
 <!-- ================================================================= -->
 <nav class="sticky top-0 z-50 w-full glass-panel border-b border-white/10">
   <div class="max-w-md mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
-    <a href="https://tunggalpaito.online/prediksi" class="tap-responsive flex items-center gap-2.5 group">
+    <a href="https://tunggalpaito.online/prediksi" class="tap-responsive flex items-center gap-2 min-w-0 group">
       <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-950 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform shrink-0">
         <i class="fa-solid fa-bolt text-sm"></i>
       </div>
-      <div>
+      <div class="min-w-0">
         <div class="flex items-center gap-1.5">
-          <span class="font-extrabold text-xs tracking-wider uppercase text-white">TUNGGAL PAITO</span>
-          <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+          <span class="font-extrabold text-xs tracking-wider uppercase text-white truncate">TUNGGAL PAITO</span>
+          <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shrink-0">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> LIVE
           </span>
         </div>
-        <p class="text-[10px] text-slate-400 leading-none mt-0.5">Analisa &amp; Prediksi Jitu</p>
+        <p class="text-[10px] text-slate-400 leading-none mt-0.5 truncate">Analisa &amp; Prediksi Toto hari ini</p>
       </div>
     </a>
 
-    <!-- Tombol TOP 10 LINE Terintegrasi Rapi -->
-    <a href="https://tunggalpaito.online/top-10-line/" class="tap-responsive inline-flex items-center gap-1.5 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-extrabold py-1.5 px-3 rounded-full text-[10px] shadow-[0_0_16px_rgba(244,63,94,0.45)] border border-rose-400/50 tracking-wide uppercase shrink-0">
-      <span>🔥 TOP 10 LINE</span>
-    </a>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <!-- Tombol Cari Keren -->
+      <button type="button" onclick="openSearchModal(event)" aria-label="Cari daftar isi halaman" class="tap-responsive inline-flex items-center gap-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 font-extrabold py-1.5 px-2.5 rounded-full text-[10px] border border-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.2)] cursor-pointer">
+        <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
+        <span>Cari</span>
+      </button>
+
+      <!-- Tombol TOP 10 LINE Terintegrasi Rapi -->
+      <a href="https://tunggalpaito.online/top-10-line/" class="tap-responsive inline-flex items-center gap-1 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-extrabold py-1.5 px-2.5 rounded-full text-[10px] shadow-[0_0_16px_rgba(244,63,94,0.45)] border border-rose-400/50 tracking-wide uppercase">
+        <span>🔥 TOP 10</span>
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -220,31 +228,27 @@
     <!-- Banner 320x50 -->
     <div class="w-full min-h-[58px] flex justify-center items-center overflow-hidden rounded-xl bg-slate-950/60 py-1">
       <script>
-        (function() {
-          window.atOptions = {
-            "key" : "119c8bb3217ed264a8fa223c3197bf69",
-            "format" : "iframe",
-            "height" : 50,
-            "width" : 320,
-            "params" : {}
-          };
-        })();
+        window.atOptions = {
+          "key" : "119c8bb3217ed264a8fa223c3197bf69",
+          "format" : "iframe",
+          "height" : 50,
+          "width" : 320,
+          "params" : {}
+        };
       </script>
       <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
     </div>
 
-    <!-- Banner 468x60 -->
-    <div class="w-full min-h-[68px] flex justify-center items-center overflow-hidden rounded-xl bg-slate-950/60 py-1">
+    <!-- Banner 468x60 (Responsif agar tidak meluber di layar HP) -->
+    <div class="w-full min-h-[68px] flex justify-center items-center overflow-x-auto no-scrollbar rounded-xl bg-slate-950/60 py-1">
       <script>
-        (function() {
-          window.atOptions = {
-            "key" : "9a986a45c62dcea8d8216b9210f159cb",
-            "format" : "iframe",
-            "height" : 60,
-            "width" : 468,
-            "params" : {}
-          };
-        })();
+        window.atOptions = {
+          "key" : "9a986a45c62dcea8d8216b9210f159cb",
+          "format" : "iframe",
+          "height" : 60,
+          "width" : 468,
+          "params" : {}
+        };
       </script>
       <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
     </div>
@@ -768,6 +772,76 @@
 </main>
 
 <!-- ================================================================= -->
+<!-- BAGIAN PENUTUP SEBELUM COPYRIGHT + SMARTLINK TERPISAH             -->
+<!-- ================================================================= -->
+<section class="w-full max-w-md mx-auto px-4 pt-2 pb-1 text-center">
+  <div class="glass-panel rounded-2xl p-3.5 border border-white/10">
+    <p class="text-xs text-slate-300 leading-relaxed">
+      <a
+        id="smartlink-terima-kasih"
+        href="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        class="tap-responsive inline-block text-amber-300 hover:text-amber-200 underline decoration-amber-400/50 underline-offset-4 font-semibold transition-colors"
+      >
+        terimakasih sudah mengunjungi website ini
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- POPUP CARI DAFTAR ISI HALAMAN                                     -->
+<!-- ================================================================= -->
+<div id="search-modal" class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+  <div class="bg-gradient-to-br from-slate-900 via-[#0b1120] to-slate-950 border border-amber-500/45 rounded-3xl w-full max-w-sm p-4 shadow-[0_0_40px_rgba(245,158,11,0.25)] relative animate-popup text-left flex flex-col max-h-[82vh]">
+    <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-white/10">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center border border-amber-500/30">
+          <i class="fa-solid fa-magnifying-glass text-xs"></i>
+        </div>
+        <div>
+          <h3 class="text-xs font-extrabold text-white uppercase tracking-wider">Daftar Isi &amp; Cari Cepat</h3>
+          <p class="text-[10px] text-slate-400">Ketik kata kunci atau pilih tag pasaran</p>
+        </div>
+      </div>
+      <button type="button" onclick="closeSearchModal()" aria-label="Tutup pencarian" class="tap-responsive bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700 cursor-pointer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Input Pencarian -->
+    <div class="relative mb-2.5">
+      <i class="fa-solid fa-search text-slate-400 text-xs absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+      <input
+        id="toc-search-input"
+        type="text"
+        placeholder="Cari SDY, SGP, HK, BBFS, Line 2D, Live Draw..."
+        oninput="renderSearchResults()"
+        class="w-full bg-slate-950/90 text-white placeholder-slate-500 text-xs rounded-xl pl-9 pr-8 py-2.5 border border-white/15 focus:border-amber-400/70 focus:outline-none"
+      >
+      <button type="button" id="clear-search-btn" onclick="clearSearchQuery()" aria-label="Hapus kata kunci" class="hidden text-slate-400 hover:text-white text-xs absolute right-2.5 top-1/2 -translate-y-1/2 cursor-pointer px-1">
+        <i class="fa-solid fa-circle-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Chip Kata Kunci Cepat -->
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      <button type="button" onclick="setQuickSearch('')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 text-slate-200 border border-white/10 cursor-pointer">Semua</button>
+      <button type="button" onclick="setQuickSearch('SDY')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/25 cursor-pointer">SDY</button>
+      <button type="button" onclick="setQuickSearch('SGP')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/25 cursor-pointer">SGP</button>
+      <button type="button" onclick="setQuickSearch('HK')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/25 cursor-pointer">HK</button>
+      <button type="button" onclick="setQuickSearch('BBFS')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 text-slate-200 border border-white/10 cursor-pointer">BBFS</button>
+      <button type="button" onclick="setQuickSearch('LINE 2D')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 text-slate-200 border border-white/10 cursor-pointer">LINE 2D</button>
+      <button type="button" onclick="setQuickSearch('LOTTO')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 text-slate-200 border border-white/10 cursor-pointer">LOTTO</button>
+    </div>
+
+    <!-- Hasil Daftar Isi -->
+    <div id="toc-results-list" class="space-y-1.5 overflow-y-auto pr-1 flex-1 text-xs"></div>
+  </div>
+</div>
+
+<!-- ================================================================= -->
 <!-- MODAL JASA PEMBUATAN WEBSITE                                      -->
 <!-- ================================================================= -->
 <div id="webdev-popup" class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
@@ -902,7 +976,10 @@
   </div>
 </div>
 
-<footer class="w-full max-w-md mx-auto px-4 py-6 text-center text-xs text-slate-500 border-t border-white/10 mt-6">
+<!-- ================================================================= -->
+<!-- FOOTER / COPYRIGHT                                                -->
+<!-- ================================================================= -->
+<footer class="w-full max-w-md mx-auto px-4 py-6 text-center text-xs text-slate-500 border-t border-white/10 mt-3">
   <p>&copy; <span id="current-year"></span> <strong class="text-slate-300">Tunggal Paito</strong>. All rights reserved.</p>
 </footer>
 
@@ -986,6 +1063,143 @@ function filterMarket(market, btn) {
 }
 </script>
 
+<!-- Daftar Isi & Pencarian Popup Script -->
+<script>
+(function() {
+  let cachedItems = null;
+
+  function buildTocItems() {
+    const items = [];
+    const seen = new Set();
+
+    function addItem(title, subtitle, href, actionType) {
+      const key = `${title}|${href || ""}|${actionType || ""}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      items.push({
+        title: title.trim(),
+        subtitle: (subtitle || "").trim(),
+        href: href || "",
+        actionType: actionType || "link"
+      });
+    }
+
+    // Pintasan modal khusus
+    addItem("Download APK Tunggal Paito", "Versi Resmi • Ringan & Anti Blokir", "", "download");
+    addItem("Jasa Buat Website", "Web & APK Profesional Custom", "", "webdev");
+
+    // Ambil tautan fitur & pasaran dari halaman
+    const anchors = document.querySelectorAll("nav a[href], header a[href], main a[href]");
+    anchors.forEach((a) => {
+      const href = (a.getAttribute("href") || "").trim();
+      if (!href || href.startsWith("https://s.shopee.co.id") || href.startsWith("https://www.facebook.com")) {
+        return;
+      }
+
+      let rawText = (a.innerText || a.textContent || "").replace(/\s+/g, " ").trim();
+      if (!rawText) return;
+
+      let category = "Menu & Fitur";
+      const marketBlock = a.closest("[data-market]");
+      if (marketBlock) {
+        const mAttr = (marketBlock.getAttribute("data-market") || "").toUpperCase();
+        const headingEl = marketBlock.querySelector(".font-extrabold");
+        category = headingEl ? headingEl.textContent.trim() : `Pasaran ${mAttr}`;
+      } else if (href.includes("/apk/") || href.includes("/apk-line-2d/") || href.includes("/rumus/")) {
+        category = "Perlengkapan & APK";
+      } else if (href.includes("top-10-line")) {
+        category = "Unggulan";
+      }
+
+      addItem(rawText, category, href, "link");
+    });
+
+    return items;
+  }
+
+  window.renderSearchResults = function() {
+    const input = document.getElementById("toc-search-input");
+    const listEl = document.getElementById("toc-results-list");
+    const clearBtn = document.getElementById("clear-search-btn");
+    if (!input || !listEl) return;
+
+    if (!cachedItems) {
+      cachedItems = buildTocItems();
+    }
+
+    const q = (input.value || "").trim().toLowerCase();
+    if (clearBtn) {
+      clearBtn.classList.toggle("hidden", q.length === 0);
+    }
+
+    const filtered = q
+      ? cachedItems.filter((it) =>
+          it.title.toLowerCase().includes(q) ||
+          it.subtitle.toLowerCase().includes(q)
+        )
+      : cachedItems;
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = `
+        <div class="text-center py-8 text-slate-400">
+          <i class="fa-solid fa-folder-open text-lg mb-2 block text-slate-500"></i>
+          <p class="text-xs font-semibold text-slate-300">Tidak ditemukan untuk "${q.replace(/</g, "&lt;")}"</p>
+          <p class="text-[10px] text-slate-500 mt-0.5">Coba kata kunci seperti SDY, SGP, HK, BBFS, atau Live Draw.</p>
+        </div>
+      `;
+      return;
+    }
+
+    listEl.innerHTML = filtered.map((it) => {
+      if (it.actionType === "download") {
+        return `
+          <button type="button" onclick="closeSearchModal(); openDownloadModal();" class="tap-responsive w-full flex items-center justify-between bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-xl text-left cursor-pointer">
+            <div class="min-w-0 pr-2">
+              <div class="font-bold text-emerald-300 text-[11px] truncate">${it.title}</div>
+              <div class="text-[9px] text-slate-400 truncate">${it.subtitle}</div>
+            </div>
+            <i class="fa-solid fa-cloud-arrow-down text-[10px] text-emerald-400 shrink-0"></i>
+          </button>
+        `;
+      }
+      if (it.actionType === "webdev") {
+        return `
+          <button type="button" onclick="closeSearchModal(); openWebDevModal();" class="tap-responsive w-full flex items-center justify-between bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 p-2.5 rounded-xl text-left cursor-pointer">
+            <div class="min-w-0 pr-2">
+              <div class="font-bold text-indigo-300 text-[11px] truncate">${it.title}</div>
+              <div class="text-[9px] text-slate-400 truncate">${it.subtitle}</div>
+            </div>
+            <i class="fa-solid fa-laptop-code text-[10px] text-indigo-400 shrink-0"></i>
+          </button>
+        `;
+      }
+      return `
+        <a href="${it.href}" onclick="closeSearchModal()" class="tap-responsive flex items-center justify-between bg-slate-950/80 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
+          <div class="min-w-0 pr-2">
+            <div class="font-bold text-slate-100 group-hover:text-amber-300 text-[11px] truncate">${it.title}</div>
+            <div class="text-[9px] text-slate-400 truncate">${it.subtitle}</div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-amber-400 shrink-0"></i>
+        </a>
+      `;
+    }).join("");
+  };
+
+  window.setQuickSearch = function(keyword) {
+    const input = document.getElementById("toc-search-input");
+    if (!input) return;
+    input.value = keyword || "";
+    window.renderSearchResults();
+  };
+
+  window.clearSearchQuery = function() {
+    window.setQuickSearch("");
+    const input = document.getElementById("toc-search-input");
+    if (input) input.focus();
+  };
+})();
+</script>
+
 <!-- Modal Controls -->
 <script>
 (function() {
@@ -995,13 +1209,18 @@ function filterMarket(market, btn) {
   function getWebDevModal() {
     return document.getElementById("webdev-popup");
   }
+  function getSearchModal() {
+    return document.getElementById("search-modal");
+  }
 
   function syncBodyScrollLock() {
     const dl = getDownloadModal();
     const wd = getWebDevModal();
+    const sm = getSearchModal();
     const downloadOpen = dl ? !dl.classList.contains("hidden") : false;
     const webdevOpen = wd ? !wd.classList.contains("hidden") : false;
-    document.body.classList.toggle("modal-open", downloadOpen || webdevOpen);
+    const searchOpen = sm ? !sm.classList.contains("hidden") : false;
+    document.body.classList.toggle("modal-open", downloadOpen || webdevOpen || searchOpen);
   }
 
   window.closeAdsPopup = function() {
@@ -1009,6 +1228,28 @@ function filterMarket(market, btn) {
     if (!adsEl) return;
     adsEl.style.display = "none";
     adsEl.style.removeProperty("transform");
+  };
+
+  window.openSearchModal = function(e) {
+    if (e) e.stopPropagation();
+    const sm = getSearchModal();
+    if (!sm) return;
+    sm.classList.remove("hidden");
+    syncBodyScrollLock();
+    if (typeof window.renderSearchResults === "function") {
+      window.renderSearchResults();
+    }
+    const input = document.getElementById("toc-search-input");
+    if (input) {
+      setTimeout(() => input.focus(), 60);
+    }
+  };
+
+  window.closeSearchModal = function() {
+    const sm = getSearchModal();
+    if (!sm) return;
+    sm.classList.add("hidden");
+    syncBodyScrollLock();
   };
 
   window.openDownloadModal = function(e) {
@@ -1056,10 +1297,18 @@ function filterMarket(market, btn) {
     });
   }
 
+  const smInit = getSearchModal();
+  if (smInit) {
+    smInit.addEventListener("click", function(e) {
+      if (e.target === smInit) window.closeSearchModal();
+    });
+  }
+
   document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") {
       window.closeDownloadModal();
       window.closeWebDevModal();
+      window.closeSearchModal();
     }
   });
 })();
@@ -1226,6 +1475,7 @@ function filterMarket(market, btn) {
 (function() {
   document.addEventListener("contextmenu", (e) => e.preventDefault());
   document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") return;
     const key = (e.key || "").toLowerCase();
     const blocked =
       key === "f12" ||
@@ -1235,7 +1485,11 @@ function filterMarket(market, btn) {
       e.preventDefault();
     }
   });
-  document.addEventListener("copy", (e) => e.preventDefault());
+  document.addEventListener("copy", function(e) {
+    const tag = (e.target && e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea") return;
+    e.preventDefault();
+  });
 })();
 </script>
 
@@ -1277,9 +1531,20 @@ function filterMarket(market, btn) {
 })();
 </script>
 
-<!-- SKRIP IKLAN BAWAAN -->
-<script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
+<!-- SMARTLINK TERPISAH (HANYA AKTIF PADA TEKS TERIMA KASIH) -->
+<script>
+(function() {
+  const smartlinkEl = document.getElementById("smartlink-terima-kasih");
+  if (!smartlinkEl) return;
+
+  // Ganti URL di bawah ini jika Anda menggunakan URL Direct Link / Smartlink khusus dari dasbor iklan Anda
+  const SMARTLINK_URL = "https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230";
+
+  smartlinkEl.setAttribute("href", SMARTLINK_URL);
+  smartlinkEl.setAttribute("target", "_blank");
+  smartlinkEl.setAttribute("rel", "noopener noreferrer nofollow");
+})();
+</script>
 
 </body>
 </html>
