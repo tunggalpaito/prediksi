@@ -187,23 +187,23 @@ async function loadMacau5DAnalysis(){
     if(!t.exists())return;
     const e=t.val();
     let n=Object.keys(e);
-    
+
     n.sort((t,e)=>{
-      const[n,a,o]=t.split("-").map(Number);
-      const[r,s,l]=e.split("-").map(Number);
-      return new Date(o,a-1,n)-new Date(l,s-1,r);
+      const[tglA,blnA,thnA]=t.split("-").map(Number);
+      const[tglB,blnB,thnB]=e.split("-").map(Number);
+      return new Date(thnA,blnA-1,tglA)-new Date(thnB,blnB-1,tglB);
     });
 
     if(n.length === 0) return;
 
     let latestDateKey = n[n.length - 1];
     let rawStringData = e[latestDateKey];
-    
+
     if(typeof rawStringData !== "string") return;
 
     const now = new Date();
     const todayStr = `${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()}`;
-    
+
     let updateCountToday = 0;
     if (latestDateKey === todayStr) {
       let entriesToday = rawStringData.split(",").map(item => item.trim()).filter(item => item.length === 5);
@@ -213,7 +213,6 @@ async function loadMacau5DAnalysis(){
     }
 
     let dynamicTitleText = "";
-    // Jika update hari ini <= 2 kali, tampilkan Jam 21:00 (sesuai permintaan update 1x)
     if (updateCountToday <= 2) {
       dynamicTitleText = "TARGET 2D BBFS 8 DIGIT MACAU 5D JAM 21:00";
     } else {
@@ -234,32 +233,46 @@ async function loadMacau5DAnalysis(){
     });
 
     if(masterFiveDigitArray.length === 0) return;
-
-    // 2. RUMUS STATIS MUTLAK: Tidak bergeser dan terkunci permanen
+        // 2. RUMUS STATIS MUTLAK: Patokan jumlah 5D variasi titik tengah (22) & bobot silang
     let calculatedMasterData = masterFiveDigitArray.map((resNum, masterIndex) => {
-      let as  = parseInt(resNum[0]);
-      let kop = parseInt(resNum[1]);
-      let kep = parseInt(resNum[2]);
-      let ek  = parseInt(resNum[3]);
-      let cb  = parseInt(resNum[4]);
-      
-      
-      let bbfsArr = [as, kop, kep, ek, cb, s1, s2, s3, s4, s5, s6, s7, s8];
+      const cleanStr = String(resNum).trim().slice(0, 5);
+      const digits   = cleanStr.split("").map(ch => Number.parseInt(ch, 10));
+      const [as, kop, kep, ek, cb] = digits;
+
+      const jml5D       = as + kop + kep + ek + cb;
+      const jarakTengah = Math.abs(jml5D - 22);            // selisih terhadap titik tengah 0..45
+      const jumlah2D    = kep + ek;                        // jumlah posisi 2D (kepala + ekor)
+      const jumlahAwal  = as + kop + cb;                   // jumlah posisi luar/awal
+
+      const mod10 = val => ((val % 10) + 10) % 10;
+
+      const s1 = mod10(jml5D + jarakTengah * 2 + 3);
+      const s2 = mod10(jarakTengah * 3 + jumlah2D + 1);
+      const s3 = mod10((jml5D + jumlahAwal) * 2 + ek);
+      const s4 = mod10((9 - (jarakTengah % 10)) * 3 + kep + 2);
+      const s5 = mod10(Math.abs(jml5D - jumlah2D * 3) + cb * 2 + masterIndex);
+      const s6 = mod10((jarakTengah + jumlahAwal * 2) + (9 - ek));
+      const s7 = mod10((jml5D * 2 + jarakTengah + masterIndex * 3) % 10 + 4);
+      const s8 = mod10((jumlah2D * 4 + jarakTengah * 2 + as + masterIndex) % 10);
+
+      // Dahulukan variasi patokan jumlah 5D sebelum digit result aktif
+      const bbfsArr = [s1, s2, s3, s4, s5, s6, s7, s8, kep, ek, as, kop, cb];
       let uniqueBbfs = [...new Set(bbfsArr)];
-      
-      for(let i=0; i<=9 && uniqueBbfs.length<8; i++){
-        let altNum = (s1 + i * 3 + masterIndex) % 10;
-        if(!uniqueBbfs.includes(altNum)) uniqueBbfs.push(altNum);
+
+      for (let i = 0; i <= 9 && uniqueBbfs.length < 8; i++) {
+        let altNum = (jml5D + jarakTengah + i * 3 + masterIndex) % 10;
+        if (!uniqueBbfs.includes(altNum)) uniqueBbfs.push(altNum);
       }
-      
+
       let bbfsStr = uniqueBbfs.slice(0, 8).join("");
 
       return {
-        target5D: resNum,
+        target5D: cleanStr,
         bbfsStr: bbfsStr
       };
     });
 
+    
     // 3. AMBIL 30 DATA TERAKHIR DARI DATA YANG SUDAH DIKUNCI STATIS
     let last30Entries = calculatedMasterData.slice(-30);
 
@@ -269,11 +282,11 @@ async function loadMacau5DAnalysis(){
 
     for(let i = 0; i < last30Entries.length; i++){
       let current = last30Entries[i];
-      
+
       if(i < last30Entries.length - 1) {
         let nextResult = last30Entries[i+1].target5D;
         let currentBbfs = current.bbfsStr;
-        
+
         let kepalaBawah = nextResult[2];
         let ekorBawah = nextResult[3];
 
