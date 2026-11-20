@@ -617,8 +617,7 @@ function renderTrekList(allResults) {
   trekContainer.replaceChildren(fragment);
 }
 
-// Pantau update 1x24 jam dari Firebase secara real-time (onValue)
-const dataRef = ref(db, "live/singapore");
+const dataRef = ref(db, "live/data-sgp");
 onValue(dataRef, (snapshot) => {
   if (snapshot.exists() && snapshot.val()) {
     const data = snapshot.val();
