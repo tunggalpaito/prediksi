@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Live Draw Tercepat Pasaran SGP, HK, SDY Hari Ini Tercepat - Tunggal Paito</title>
-<meta name="description" content="Update Live Draw SGP, HK, SDY tercepat dan akurat hari ini. Saksikan pemutaran result Singapore, Hongkong, dan Sydney pools resmi dari situs Tunggal Paito.">
+<meta name="description" content="Update Live Draw HK, SGP, SDY tercepat dan akurat hari ini. Saksikan pemutaran result Singapore, Hongkong, dan Sydney pools resmi dari situs Tunggal Paito.">
 <meta name="keywords" content="live draw sgp, live draw hk, live draw sdy, result sgp, result hk, result sdy, tunggal paito, live result hongkong, live result singapore, live result sydney">
 <link rel="canonical" href="https://tunggalpaito.online/live-draw">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<!-- Library html2canvas untuk fitur download gambar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{
@@ -38,27 +37,23 @@ header h1{font-family:Outfit,sans-serif;font-size:20px;font-weight:900;backgroun
 
 .container{width:100%;max-width:480px;margin:0 auto}
 
-/* Styling Paling Atas (Area Iklan Utama) */
 .top-ads-wrapper{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:15px;background-color:var(--bg-card);border:1px solid var(--border-glass);border-radius:18px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 
-/* Styling Tombol Navigasi Atas */
 .nav-top-container{width:100%;max-width:480px;display:flex;gap:10px;margin-bottom:15px}
 .nav-btn{flex:1;background:var(--accent-gradient);color:#fff;text-decoration:none;padding:10px 12px;font-size:12px;font-weight:800;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(0,242,254,.3);transition:all .3s ease;display:flex;align-items:center;justify-content:center;gap:6px;text-transform:uppercase;letter-spacing:.5px}
 .nav-btn.apk{background:linear-gradient(135deg,#ff2a85 0%,#7928ca 100%);box-shadow:0 4px 15px rgba(255,42,133,.3)}
 .nav-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
 
-/* Style Teks Berjalan Disclaimer */
 .disclaimer-marquee-container{width:100%;margin-bottom:15px;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:12px;padding:8px 0;overflow:hidden}
 .disclaimer-marquee{display:flex;width:100%;overflow:hidden;white-space:nowrap}
 .disclaimer-marquee span{display:inline-block;padding-left:100%;animation:marquee 30s linear infinite;font-size:11px;font-weight:700;color:var(--accent-cyan);letter-spacing:.5px}
 @keyframes marquee{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
 
 .prediction-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}
-.pred-card{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:12px;padding:10px 6px;text-align:center;text-decoration:none;color:#fff;transition:all .3s ease;box-shadow:0 4px 15px rgba(0,0,0,.3)}
-.pred-card:hover{transform:translateY(-2px);border-color:var(--accent-cyan);box-shadow:var(--neon-glow-cyan)}
+.pred-card{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:12px;padding:10px 6px;text-align:center;text-decoration:none;color:#fff;transition:all .2s ease;box-shadow:0 4px 15px rgba(0,0,0,.3);cursor:pointer}
+.pred-card:hover,.pred-card:active{transform:translateY(-2px);border-color:var(--accent-cyan);box-shadow:var(--neon-glow-cyan)}
 .pred-card h4{font-family:Outfit,sans-serif;font-size:12px;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-/* TABEL UTAMA DI WEBSITE (30 HARI) */
 .table-responsive{width:100%;overflow-x:auto;background:var(--bg-card);backdrop-filter:blur(25px);border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.6);margin-bottom:15px;max-height:450px;overflow-y:auto;border:1px solid var(--border-glass)}
 table{width:100%;border-collapse:collapse;text-align:center;white-space:nowrap}
 td,th{padding:12px 10px;font-size:12px}
@@ -69,98 +64,40 @@ td{color:var(--text-muted);font-weight:600}
 td:nth-child(n+3){font-family:Outfit,sans-serif;font-weight:900;color:var(--accent-pink);text-shadow:0 0 12px rgba(255,42,133,.5);letter-spacing:2px}
 td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
 
-/* TOMBOL DOWNLOAD GAMBAR */
-.action-download-container{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:15px}
+.live-rolling-cell{
+  color:#00f2fe !important;
+  text-shadow:0 0 14px rgba(0,242,254,0.85) !important;
+}
+
+.cell-flash-update{
+  animation:flashHighlight 0.9s ease;
+}
+@keyframes flashHighlight{
+  0%{background-color:rgba(0,242,254,0.28);transform:scale(1.04)}
+  100%{background-color:transparent;transform:scale(1)}
+}
+
+.action-download-container{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:12px}
 .btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px 18px;font-size:13px;font-weight:800;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 20px rgba(34,197,94,0.4);transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px}
 .btn-download-img:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(34,197,94,0.7)}
 
-/* ==========================================================
-   KARTU EKSKLUSIF UNTUK HASIL DOWNLOAD (TEMA ANAK MUDA / CYBERPUNK)
-   ========================================================== */
-.download-card-wrapper {
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-  width: 480px;
-  background: linear-gradient(135deg, #05050a 0%, #0d0f18 50%, #120b24 100%);
-  border-radius: 24px;
-  padding: 24px 18px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.9);
-  border: 2px solid rgba(0, 242, 254, 0.4);
-  color: #fff;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-.dl-card-header {
-  text-align: center;
-  margin-bottom: 18px;
-}
-.dl-card-header h2 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 22px;
-  font-weight: 900;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 6px;
-}
-.dl-card-badge {
-  display: inline-block;
-  background: rgba(0,242,254,0.12);
-  border: 1px solid rgba(0,242,254,0.4);
-  color: #00f2fe;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 5px 14px;
-  border-radius: 20px;
-  letter-spacing: 1px;
-  box-shadow: 0 0 15px rgba(0,242,254,0.3);
-}
-.dl-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  background: rgba(13, 17, 32, 0.9);
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.dl-table th {
-  background: rgba(10, 14, 26, 0.95);
-  color: #00f2fe;
-  font-family: 'Outfit', sans-serif;
-  font-size: 12px;
-  font-weight: 800;
-  padding: 12px 8px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.dl-table td {
-  padding: 14px 8px;
-  font-size: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: #fff;
-  font-weight: 600;
-}
-.dl-table td:nth-child(n+3) {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 900;
-  color: #ff2a85;
-  text-shadow: 0 0 12px rgba(255,42,133,0.5);
-  letter-spacing: 2px;
-}
-.dl-card-footer {
-  margin-top: 16px;
-  text-align: center;
-  font-size: 11px;
-  color: #8a99ad;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  border-top: 1px dashed rgba(255,255,255,0.1);
-  padding-top: 12px;
-}
+.paito-warna-box{width:100%;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:14px;padding:10px;margin-bottom:15px;box-shadow:0 8px 25px rgba(0,0,0,.35)}
+.paito-warna-title{font-family:Outfit,sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:var(--accent-cyan);text-align:center;margin-bottom:8px}
+.paito-warna-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.paito-card{background:rgba(10,14,26,0.9);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 6px;text-align:center;text-decoration:none;color:#fff;transition:all .2s ease;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.paito-card:hover,.paito-card:active{transform:translateY(-2px);border-color:var(--accent-pink);box-shadow:var(--neon-glow-pink)}
+.paito-card span{font-family:Outfit,sans-serif;font-size:12px;font-weight:800;color:#fff;letter-spacing:.5px}
+.paito-card small{font-size:9px;font-weight:700;color:var(--accent-cyan);text-transform:uppercase}
+
+.download-card-wrapper{position:absolute;left:-9999px;top:-9999px;width:480px;background:linear-gradient(135deg,#05050a 0%,#0d0f18 50%,#120b24 100%);border-radius:24px;padding:24px 18px;box-shadow:0 30px 60px rgba(0,0,0,0.9);border:2px solid rgba(0,242,254,0.4);color:#fff;font-family:'Plus Jakarta Sans',sans-serif}
+.dl-card-header{text-align:center;margin-bottom:18px}
+.dl-card-header h2{font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.dl-card-badge{display:inline-block;background:rgba(0,242,254,0.12);border:1px solid rgba(0,242,254,0.4);color:#00f2fe;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:1px;box-shadow:0 0 15px rgba(0,242,254,0.3)}
+.dl-table{width:100%;border-collapse:collapse;text-align:center;background:rgba(13,17,32,0.9);border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
+.dl-table th{background:rgba(10,14,26,0.95);color:#00f2fe;font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;padding:12px 8px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.dl-table td{padding:14px 8px;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.05);color:#fff;font-weight:600}
+.dl-table td:nth-child(n+3){font-family:'Outfit',sans-serif;font-weight:900;color:#ff2a85;text-shadow:0 0 12px rgba(255,42,133,0.5);letter-spacing:2px}
+.dl-card-footer{margin-top:16px;text-align:center;font-size:11px;color:#8a99ad;font-weight:700;letter-spacing:0.5px;border-top:1px dashed rgba(255,255,255,0.1);padding-top:12px}
 
 .seo-section{background:var(--bg-card);backdrop-filter:blur(25px);padding:15px;border-radius:18px;border:1px solid var(--border-glass);margin-bottom:15px;font-size:12px;color:var(--text-muted);box-shadow:0 15px 30px rgba(0,0,0,.4)}
 .seo-section h3{font-family:Outfit,sans-serif;font-size:14px;margin-bottom:8px;color:var(--text-main);font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -179,15 +116,11 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
 .apk-reopen-btn{position:fixed;bottom:20px;right:20px;z-index:9998;background:var(--bg-secondary);color:#fff;border:1px solid rgba(0,242,254,.4);border-radius:20px;padding:8px 14px;font-weight:700;font-size:11px;cursor:pointer;display:none;align-items:center;gap:6px;box-shadow:0 8px 25px rgba(0,0,0,.6)}
 </style>
 </head>
-<body onclick="redirectToAds(event)">
+<body>
 
 <div class="container">
 
-  <!-- ================================================================= -->
-  <!-- KONTEN PALING ATAS: IKLAN UTAMA DI ATAS                           -->
-  <!-- ================================================================= -->
   <div class="top-ads-wrapper">
-    <!-- 1. Banner 468x60 -->
     <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
       <script>
         atOptions = {
@@ -201,18 +134,15 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
       <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
     </div>
 
-    <!-- 2. Script + Container ID -->
     <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
       <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
       <div id="container-3f09897b852339f736b82a3190a40259"></div>
     </div>
 
-    <!-- 3. Script 14 -->
     <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
       <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
     </div>
 
-    <!-- 4. Banner 320x50 -->
     <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
       <script>
         atOptions = {
@@ -226,14 +156,11 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
       <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
     </div>
 
-    <!-- 5. Script Ahuramazda -->
     <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
       <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
     </div>
   </div>
-  <!-- ================================================================= -->
 
-  <!-- Tombol Navigasi Atas -->
   <div class="nav-top-container">
     <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
     <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
@@ -246,7 +173,6 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
     </div>
   </header>
 
-  <!-- Teks Berjalan Disclaimer -->
   <div class="disclaimer-marquee-container">
     <div class="disclaimer-marquee">
       <span>🚨 DISCLAIMER: konten di halaman ini adalah sarana informasi dan hiburan semata. mohon gunakan layanan dengan bijak dan tetap mengikuti ketentuan serta regulasi yang berlaku ditempat anda berada. Terima kasih atas kunjungan nya!</span>
@@ -254,18 +180,18 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
   </div>
 
   <div class="prediction-main-grid">
-    <a href="https://tunggalpaito.online/prediksi/hk/" target="_blank" class="pred-card" onclick="event.stopPropagation()">
+    <a href="https://tunggalpaito.online/prediksi/hk/" target="_blank" rel="noopener" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/hk/">
       <h4>🎯 Prediksi HK</h4>
     </a>
-    <a href="https://tunggalpaito.online/prediksi/sgp/" target="_blank" class="pred-card" onclick="event.stopPropagation()">
+    <a href="https://tunggalpaito.online/prediksi/sgp/" target="_blank" rel="noopener" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sgp/">
       <h4>🎯 Prediksi SGP</h4>
     </a>
-    <a href="https://tunggalpaito.online/prediksi/sdy/" target="_blank" class="pred-card" onclick="event.stopPropagation()">
+    <a href="https://tunggalpaito.online/prediksi/sdy/" target="_blank" rel="noopener" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sdy/">
       <h4>🎯 Prediksi SDY</h4>
     </a>
   </div>
 
-  <!-- TABEL UTAMA DI WEBSITE (30 HARI) -->
+  <!-- TABEL UTAMA DI WEBSITE (1 MINGGU / 7 HARI: TERBARU DI ATAS, MUNDUR KE BAWAH) -->
   <div class="table-responsive">
     <table>
       <thead>
@@ -282,7 +208,6 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
     </table>
   </div>
 
-  <!-- TOMBOL DOWNLOAD GAMBAR -->
   <div class="action-download-container">
     <button class="btn-download-img" id="btn-download">
       <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
@@ -290,11 +215,29 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
     </button>
   </div>
 
-  <!-- KARTU EKSKLUSIF YANG DISEMBUNYIKAN UNTUK HASIL DOWNLOAD (3 HARI TERAKHIR) -->
+  <!-- LINK PAITO WARNA SDY, SGP, HK DI BAWAH TOMBOL DOWNLOAD -->
+  <div class="paito-warna-box">
+    <div class="paito-warna-title">🎨 Lihat Paito Warna Pasaran</div>
+    <div class="paito-warna-grid">
+      <a href="https://tunggalpaito.online/paito-warna/sdy/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/hk/">
+        <span>HK</span>
+        <small>Paito Warna</small>
+      </a>
+      <a href="https://tunggalpaito.online/paito-warna/sgp/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sgp/">
+        <span>SGP</span>
+        <small>Paito Warna</small>
+      </a>
+      <a href="https://tunggalpaito.online/paito-warna/hk/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sdy/">
+        <span>SDY</span>
+        <small>Paito Warna</small>
+      </a>
+    </div>
+  </div>
+
   <div class="download-card-wrapper" id="downloadCardTarget">
     <div class="dl-card-header">
       <h2>Tunggal Paito</h2>
-      <div class="dl-card-badge">✨ Live Result SGP | HK | SDY Tercepat</div>
+      <div class="dl-card-badge">✨ Live Result HK | SGP | SDY Tercepat</div>
     </div>
     <table class="dl-table">
       <thead>
@@ -307,7 +250,6 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
         </tr>
       </thead>
       <tbody id="dl-table-body">
-        <!-- Diisi otomatis 3 hari terakhir saat tombol download diklik -->
       </tbody>
     </table>
     <div class="dl-card-footer">
@@ -321,7 +263,6 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
     <p>Gunakan data paito warna dan hasil live draw kami untuk menyusun strategi angka jitu. Seluruh data result disinkronkan langsung dari server resmi masing-masing pasaran dengan pembaruan otomatis setiap hari sesuai jadwal keluaran.</p>
   </div>
 
-  <!-- FOOTER UTAMA HALAMAN BAWAH -->
   <footer>
     &copy; <span class="current-year"></span> TUNGGAL PAITO All Rights Reserved.
   </footer>
@@ -346,88 +287,380 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
 function closeApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopup").style.display="none",document.getElementById("apkReopenBtn").style.display="flex"}
 function openApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopup").style.display="flex",document.getElementById("apkReopenBtn").style.display="none"}
 
-let clickCount=0;
-const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-document.addEventListener("click",(function(t){
-  if(t.target.closest("#apkPopup") || t.target.closest("#apkReopenBtn") || t.target.closest(".prediction-main-grid") || t.target.closest(".nav-top-container") || t.target.closest(".action-download-container") || "A"===t.target.tagName || "IFRAME"===t.target.tagName || t.target.closest("iframe") || t.target.closest(".top-ads-wrapper")) return;
-  clickCount++;
-  if(1 === clickCount || (clickCount - 1) % 3 === 0) {
-    window.open(adLink,"_blank");
-  }
-}),!0);
+let clickCount = 0;
+const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 
-// Otomatis mengisi semua elemen dengan class "current-year"
+function openPredictionSmooth(e, url) {
+  e.preventDefault();
+  e.stopPropagation();
+  const targetUrl = url || e.currentTarget.getAttribute("data-pred-url") || e.currentTarget.getAttribute("href");
+  if (!targetUrl) return;
+  const win = window.open(targetUrl, "_blank", "noopener,noreferrer");
+  if (!win) {
+    window.location.href = targetUrl;
+  }
+}
+
+document.querySelectorAll(".pred-card, .paito-card").forEach((card) => {
+  card.addEventListener("click", function(e) {
+    openPredictionSmooth(e, this.getAttribute("data-pred-url") || this.getAttribute("href"));
+  });
+});
+
+document.addEventListener("click", function(t) {
+  if (
+    t.target.closest("#apkPopup") ||
+    t.target.closest("#apkReopenBtn") ||
+    t.target.closest(".prediction-main-grid") ||
+    t.target.closest(".paito-warna-box") ||
+    t.target.closest(".nav-top-container") ||
+    t.target.closest(".action-download-container") ||
+    "A" === t.target.tagName ||
+    "IFRAME" === t.target.tagName ||
+    t.target.closest("iframe") ||
+    t.target.closest(".top-ads-wrapper")
+  ) {
+    return;
+  }
+  clickCount++;
+  if (1 === clickCount || (clickCount - 1) % 3 === 0) {
+    window.open(adLink, "_blank", "noopener,noreferrer");
+  }
+}, !0);
+
+function syncOnReturn() {
+  if (typeof rebuildDaysTableIfNeeded === "function") {
+    rebuildDaysTableIfNeeded();
+  }
+  if (typeof selectSingleAnimatedMarket === "function" && typeof activeAnimatedMarket !== "undefined" && typeof latestTargetByMarket !== "undefined") {
+    selectSingleAnimatedMarket(null);
+    const mKey = activeAnimatedMarket;
+    if (mKey && latestTargetByMarket[mKey] && latestTargetByMarket[mKey].dateStr) {
+      renderCellDisplay(latestTargetByMarket[mKey].dateStr, mKey, false);
+    }
+  }
+}
+
+window.addEventListener("pageshow", syncOnReturn);
+window.addEventListener("focus", syncOnReturn);
+document.addEventListener("visibilitychange", function() {
+  if (!document.hidden) {
+    syncOnReturn();
+  }
+});
+
 const currentYear = new Date().getFullYear();
 document.querySelectorAll(".current-year").forEach(el => {
   el.textContent = currentYear;
 });
 
-const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"};
+const firebaseConfig = {
+  databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
 firebase.initializeApp(firebaseConfig);
-const db=firebase.database();
+const db = firebase.database();
 
-function extractRightmostResult(t){if(!t)return"-";let e=String(t).trim();if(e.includes(",")){let t=e.split(",");e=t[t.length-1].trim()}let a=e.replace(/\D/g,"");return a.length>0?a:"-"}
+const FOCUS_MARKETS = ["sdy", "hk", "sgp"];
+const MARKET_MAP = {
+  sdy: "data-sdy",
+  hk: "data-hk",
+  sgp: "data-sgp"
+};
+
+const DAYS_TO_SHOW = 7; // 1 minggu (7 hari)
+const ROLL_STEP_MS = 3000;
+const DAY_NAMES = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
 
 let globalDaysList = [];
-let globalPersistBackup = {};
+let globalLiveData = {};
+let latestTargetByMarket = {
+  sdy: { dateStr: "", val: "-" },
+  hk:  { dateStr: "", val: "-" },
+  sgp: { dateStr: "", val: "-" }
+};
+let lastSnapshotSignature = { sdy: "", hk: "", sgp: "" };
+let activeAnimatedMarket = null;
+let rollStepIndex = 0;
 
-function initLiveDraw(){
-  const dayNames = ["MINGGU","SENIN","SELASA","RABU","KAMIS","JUMAT","SABTU"];
-  let savedData = JSON.parse(localStorage.getItem("tunggalpaito_persistent_backup"))||{};
-  globalPersistBackup = savedData;
-  
-  let listDays = [];
-  for(let i = 0; i < 30; i++){
-    let d = new Date();
-    d.setDate(d.getDate() - i);
-    let dateStr = `${String(d.getDate()).padStart(2,"0")}-${String(d.getMonth()+1).padStart(2,"0")}-${d.getFullYear()}`;
-    let dayName = dayNames[d.getDay()];
-    listDays.push({dateStr: dateStr, dayName: dayName});
+function getJakartaDateAnchor() {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Jakarta",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(new Date());
+
+  const map = {};
+  parts.forEach(p => { map[p.type] = p.value; });
+  return new Date(parseInt(map.year, 10), parseInt(map.month, 10) - 1, parseInt(map.day, 10));
+}
+
+function getAsKopKepEkorFrame(fullDigits, stepIdx) {
+  const clean = String(fullDigits || "").replace(/\D/g, "");
+  if (!clean) return "-";
+  const maxSteps = Math.max(1, clean.length);
+  const count = (stepIdx % maxSteps) + 1;
+  return clean.slice(0, count);
+}
+
+function selectSingleAnimatedMarket(preferredMarket) {
+  if (
+    preferredMarket &&
+    latestTargetByMarket[preferredMarket] &&
+    latestTargetByMarket[preferredMarket].val &&
+    latestTargetByMarket[preferredMarket].val !== "-"
+  ) {
+    activeAnimatedMarket = preferredMarket;
+    return;
   }
+
+  if (
+    activeAnimatedMarket &&
+    latestTargetByMarket[activeAnimatedMarket] &&
+    latestTargetByMarket[activeAnimatedMarket].val &&
+    latestTargetByMarket[activeAnimatedMarket].val !== "-"
+  ) {
+    return;
+  }
+
+  let bestMarket = null;
+  let bestDateObj = null;
+
+  FOCUS_MARKETS.forEach((mKey) => {
+    const target = latestTargetByMarket[mKey];
+    if (!target || !target.val || target.val === "-" || !target.dateStr) return;
+    const dt = parseDateFromDDMMYYYY(target.dateStr);
+    if (!dt || isNaN(dt.getTime())) return;
+    if (!bestDateObj || dt > bestDateObj) {
+      bestDateObj = dt;
+      bestMarket = mKey;
+    }
+  });
+
+  activeAnimatedMarket = bestMarket;
+}
+
+function parseSingleToken(token) {
+  if (token === null || token === undefined) return "";
+  let s = String(token).trim();
+  if (!s || /^x+$/i.test(s)) return "";
+  return s.replace(/\D/g, "");
+}
+
+function normalizeDateKey(rawKey) {
+  let s = String(rawKey || "").trim();
+  let ymd = s.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);
+  if (ymd) {
+    return `${String(ymd[3]).padStart(2, "0")}-${String(ymd[2]).padStart(2, "0")}-${ymd[1]}`;
+  }
+  let dmy = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+  if (dmy) {
+    return `${String(dmy[1]).padStart(2, "0")}-${String(dmy[2]).padStart(2, "0")}-${dmy[3]}`;
+  }
+  return s;
+}
+
+function parseDateFromDDMMYYYY(dateStr) {
+  let parts = dateStr.split("-");
+  if (parts.length !== 3) return null;
+  let day = parseInt(parts[0], 10);
+  let month = parseInt(parts[1], 10) - 1;
+  let year = parseInt(parts[2], 10);
+  return new Date(year, month, day);
+}
+
+function formatDateToDDMMYYYY(dateObj) {
+  return `${String(dateObj.getDate()).padStart(2, "0")}-${String(dateObj.getMonth() + 1).padStart(2, "0")}-${dateObj.getFullYear()}`;
+}
+
+function extractRawString(rawVal) {
+  if (rawVal === null || rawVal === undefined) return "";
+  let target = rawVal;
+  if (typeof rawVal === "object") {
+    target = rawVal.result ?? rawVal.hasil ?? rawVal.angka ?? rawVal.live ?? rawVal.value ?? Object.values(rawVal).pop() ?? "";
+  }
+  return String(target).trim();
+}
+
+function rebuildDaysTableIfNeeded() {
+  const anchor = getJakartaDateAnchor();
+  let listDays = [];
+  for (let i = 0; i < DAYS_TO_SHOW; i++) {
+    let d = new Date(anchor);
+    d.setDate(anchor.getDate() - i);
+    let dateStr = formatDateToDDMMYYYY(d);
+    let dayName = DAY_NAMES[d.getDay()];
+    listDays.push({ dateStr, dayName });
+    if (!globalLiveData[dateStr]) {
+      globalLiveData[dateStr] = { sdy: "-", hk: "-", sgp: "-" };
+    }
+  }
+
+  const prevFirst = globalDaysList[0] ? globalDaysList[0].dateStr : "";
+  const nextFirst = listDays[0] ? listDays[0].dateStr : "";
   globalDaysList = listDays;
 
-  renderTableToDOM(listDays, savedData);
+  if (prevFirst !== nextFirst || document.getElementById("live-draw-data").children.length === 0) {
+    const tbody = document.getElementById("live-draw-data");
+    tbody.innerHTML = listDays.map((item) => `
+      <tr data-date="${item.dateStr}">
+        <td>${item.dateStr}</td>
+        <td>${item.dayName}</td>
+        <td class="col-hk" id="val-hk-${item.dateStr}">-</td>
+        <td class="col-sgp" id="val-sgp-${item.dateStr}">-</td>
+        <td class="col-sdy" id="val-sdy-${item.dateStr}">-</td>
+      </tr>
+    `).join("");
+  }
+}
 
-  const marketMap = {hk:"data-hk", sgp:"data-sgp", sdy:"data-sdy"};
-  listDays.forEach((item)=>{
-    ["hk","sgp","sdy"].forEach((marketKey)=>{
-      let dbMarketName = marketMap[marketKey];
-      db.ref(`live/${dbMarketName}/${item.dateStr}`).on("value",(snapshot)=>{
-        let val = snapshot.val(), resVal = "-";
-        if(null != val){
-          let extracted = extractRightmostResult(val);
-          "-" !== extracted && (resVal = extracted);
-        }
-        savedData[item.dateStr] || (savedData[item.dateStr] = {hk:"-", sgp:"-", sdy:"-"});
-        savedData[item.dateStr][marketKey] = resVal;
-        localStorage.setItem("tunggalpaito_persistent_backup", JSON.stringify(savedData));
-        
-        let cellTarget = document.getElementById(`val-${marketKey}-${item.dateStr}`);
-        cellTarget && (cellTarget.innerText = resVal);
-      });
+function renderCellDisplay(dateStr, marketKey, animateFlash = false) {
+  const cell = document.getElementById(`val-${marketKey}-${dateStr}`);
+  if (!cell) return;
+
+  const actualVal = (globalLiveData[dateStr] && globalLiveData[dateStr][marketKey]) || "-";
+  const isTargetCell =
+    activeAnimatedMarket === marketKey &&
+    latestTargetByMarket[marketKey].dateStr === dateStr &&
+    actualVal !== "-";
+
+  const nextText = isTargetCell
+    ? getAsKopKepEkorFrame(actualVal, rollStepIndex)
+    : actualVal;
+
+  const changedText = cell.innerText !== nextText;
+  cell.innerText = nextText;
+
+  if (isTargetCell) {
+    cell.classList.add("live-rolling-cell");
+  } else {
+    cell.classList.remove("live-rolling-cell");
+  }
+
+  if (animateFlash && changedText && nextText !== "-") {
+    cell.classList.remove("cell-flash-update");
+    void cell.offsetWidth;
+    cell.classList.add("cell-flash-update");
+  }
+}
+
+function applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate) {
+  rebuildDaysTableIfNeeded();
+
+  const prevValues = {};
+  globalDaysList.forEach((dayItem) => {
+    prevValues[dayItem.dateStr] = (globalLiveData[dayItem.dateStr] && globalLiveData[dayItem.dateStr][marketKey]) || "-";
+    if (!globalLiveData[dayItem.dateStr]) {
+      globalLiveData[dayItem.dateStr] = { sdy: "-", hk: "-", sgp: "-" };
+    }
+    globalLiveData[dayItem.dateStr][marketKey] = "-";
+  });
+
+  latestTargetByMarket[marketKey] = { dateStr: "", val: "-" };
+
+  if (rawMap && typeof rawMap === "object") {
+    let entries = [];
+    Object.keys(rawMap).forEach((rawKey) => {
+      let normDate = normalizeDateKey(rawKey);
+      let dt = parseDateFromDDMMYYYY(normDate);
+      let rawStr = extractRawString(rawMap[rawKey]);
+      if (dt && !isNaN(dt.getTime()) && rawStr) {
+        entries.push({ dateStr: normDate, dateObj: dt, rawStr });
+      }
     });
+
+    entries.sort((a, b) => b.dateObj - a.dateObj);
+
+    entries.forEach((entry) => {
+      let parts = entry.rawStr.split(",");
+
+      if (parts.length > 1) {
+        let offset = 0;
+        for (let idx = parts.length - 1; idx >= 0; idx--) {
+          let tokenNum = parseSingleToken(parts[idx]);
+          if (tokenNum) {
+            let targetDate = new Date(entry.dateObj);
+            targetDate.setDate(targetDate.getDate() - offset);
+            let targetKey = formatDateToDDMMYYYY(targetDate);
+
+            if (globalLiveData[targetKey] && globalLiveData[targetKey][marketKey] === "-") {
+              globalLiveData[targetKey][marketKey] = tokenNum;
+              if (!latestTargetByMarket[marketKey].val || latestTargetByMarket[marketKey].val === "-") {
+                latestTargetByMarket[marketKey] = { dateStr: targetKey, val: tokenNum };
+              }
+            }
+          }
+          offset++;
+        }
+      } else {
+        let singleNum = parseSingleToken(entry.rawStr);
+        if (singleNum && globalLiveData[entry.dateStr] && globalLiveData[entry.dateStr][marketKey] === "-") {
+          globalLiveData[entry.dateStr][marketKey] = singleNum;
+          if (!latestTargetByMarket[marketKey].val || latestTargetByMarket[marketKey].val === "-") {
+            latestTargetByMarket[marketKey] = { dateStr: entry.dateStr, val: singleNum };
+          }
+        }
+      }
+    });
+  }
+
+  globalDaysList.forEach((dayItem) => {
+    const newVal = (globalLiveData[dayItem.dateStr] && globalLiveData[dayItem.dateStr][marketKey]) || "-";
+    const wasUpdated = isLiveUpdate && prevValues[dayItem.dateStr] !== newVal;
+    renderCellDisplay(dayItem.dateStr, marketKey, wasUpdated);
   });
 }
 
-function renderTableToDOM(daysArray, dataBackup) {
-  const tbodyElement = document.getElementById("live-draw-data");
-  tbodyElement.innerHTML = "";
-  
-  daysArray.forEach((item)=>{
-    let dayRecord = dataBackup[item.dateStr] || {hk:"-", sgp:"-", sdy:"-"};
-    let hkVal = dayRecord.hk && "" !== dayRecord.hk ? dayRecord.hk : "-";
-    let sgpVal = dayRecord.sgp && "" !== dayRecord.sgp ? dayRecord.sgp : "-";
-    let sdyVal = dayRecord.sdy && "" !== dayRecord.sdy ? dayRecord.sdy : "-";
-    
-    let rowHtml = `<tr data-date="${item.dateStr}">
-      <td>${item.dateStr}</td>
-      <td>${item.dayName}</td>
-      <td class="col-hk" id="val-hk-${item.dateStr}">${hkVal}</td>
-      <td class="col-sgp" id="val-sgp-${item.dateStr}">${sgpVal}</td>
-      <td class="col-sdy" id="val-sdy-${item.dateStr}">${sdyVal}</td>
-    </tr>`;
-    tbodyElement.innerHTML += rowHtml;
+function initLiveDraw() {
+  rebuildDaysTableIfNeeded();
+
+  FOCUS_MARKETS.forEach((marketKey) => {
+    let dbMarketName = MARKET_MAP[marketKey];
+    let nodePath = `live/${dbMarketName}`;
+    let isFirstSnapshot = true;
+
+    db.ref(nodePath).on("value", (snapshot) => {
+      let rawMap = snapshot.val();
+      const sig = JSON.stringify(rawMap || {});
+      const changedSinceLast = lastSnapshotSignature[marketKey] !== sig;
+      lastSnapshotSignature[marketKey] = sig;
+
+      const isLiveUpdate = !isFirstSnapshot && changedSinceLast;
+      const prevAnimated = activeAnimatedMarket;
+
+      applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate);
+
+      if (isLiveUpdate) {
+        selectSingleAnimatedMarket(marketKey);
+        rollStepIndex = 0;
+      } else {
+        selectSingleAnimatedMarket(null);
+      }
+      isFirstSnapshot = false;
+
+      if (prevAnimated && latestTargetByMarket[prevAnimated].dateStr) {
+        renderCellDisplay(latestTargetByMarket[prevAnimated].dateStr, prevAnimated, false);
+      }
+      if (activeAnimatedMarket && latestTargetByMarket[activeAnimatedMarket].dateStr) {
+        renderCellDisplay(latestTargetByMarket[activeAnimatedMarket].dateStr, activeAnimatedMarket, false);
+      }
+    }, (err) => {
+      console.error(`Gagal membaca ${nodePath}:`, err);
+    });
   });
+
+  setInterval(() => {
+    rebuildDaysTableIfNeeded();
+    selectSingleAnimatedMarket(null);
+    const mKey = activeAnimatedMarket;
+    if (!mKey) return;
+
+    const targetDate = latestTargetByMarket[mKey].dateStr;
+    if (!targetDate) return;
+
+    rollStepIndex = (rollStepIndex + 1) % 4;
+    renderCellDisplay(targetDate, mKey, false);
+  }, ROLL_STEP_MS);
 }
 
 initLiveDraw();
@@ -441,26 +674,22 @@ document.getElementById("btn-download").addEventListener("click", function(e) {
 
   const downloadCard = document.getElementById("downloadCardTarget");
   const dlTableBody = document.getElementById("dl-table-body");
-  
+
   const originalBtnText = this.innerHTML;
   this.innerHTML = "<span>Sedang Mendownload Gambar HD...</span>";
   this.disabled = true;
 
   dlTableBody.innerHTML = "";
   const last3Days = globalDaysList.slice(0, 3);
-  
-  last3Days.forEach((item) => {
-    let dayRecord = globalPersistBackup[item.dateStr] || {hk:"-", sgp:"-", sdy:"-"};
-    let hkVal = dayRecord.hk && "" !== dayRecord.hk ? dayRecord.hk : "-";
-    let sgpVal = dayRecord.sgp && "" !== dayRecord.sgp ? dayRecord.sgp : "-";
-    let sdyVal = dayRecord.sdy && "" !== dayRecord.sdy ? dayRecord.sdy : "-";
 
+  last3Days.forEach((item) => {
+    let dayRecord = globalLiveData[item.dateStr] || { sdy: "-", hk: "-", sgp: "-" };
     dlTableBody.innerHTML += `<tr>
       <td>${item.dateStr}</td>
       <td>${item.dayName}</td>
-      <td>${hkVal}</td>
-      <td>${sgpVal}</td>
-      <td>${sdyVal}</td>
+      <td>${dayRecord.hk || "-"}</td>
+      <td>${dayRecord.sgp || "-"}</td>
+      <td>${dayRecord.sdy || "-"}</td>
     </tr>`;
   });
 
