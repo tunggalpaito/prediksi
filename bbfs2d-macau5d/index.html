@@ -181,6 +181,30 @@ document.getElementById("auto-year").textContent=(new Date).getFullYear();
 const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
 app=initializeApp(firebaseConfig),db=getDatabase(app);
 
+function parseDateKey(keyStr) {
+  const parts = String(keyStr).trim().split(/[-/]/).map(Number);
+  if (parts.length !== 3 || parts.some(Number.isNaN)) return new Date(0);
+  // Jika tahun di depan (YYYY-MM-DD)
+  if (parts[0] > 31) {
+    return new Date(parts[0], parts[1] - 1, parts[2]);
+  }
+  // Format umum DD-MM-YYYY
+  return new Date(parts[2], parts[1] - 1, parts[0]);
+}
+
+function extractFiveDigitEntries(val) {
+  if (typeof val === "string") {
+    return val.split(",").map(item => item.trim()).filter(item => /^\d{5}$/.test(item));
+  }
+  if (Array.isArray(val)) {
+    return val.map(item => String(item).trim()).filter(item => /^\d{5}$/.test(item));
+  }
+  if (val && typeof val === "object") {
+    return Object.values(val).map(item => String(item).trim()).filter(item => /^\d{5}$/.test(item));
+  }
+  return [];
+}
+
 async function loadMacau5DAnalysis(){
   try{
     const t=await get(ref(db,"live/data-macau5d"));
@@ -188,36 +212,30 @@ async function loadMacau5DAnalysis(){
     const e=t.val();
     let n=Object.keys(e);
 
-    n.sort((t,e)=>{
-      const[tglA,blnA,thnA]=t.split("-").map(Number);
-      const[tglB,blnB,thnB]=e.split("-").map(Number);
-      return new Date(thnA,blnA-1,tglA)-new Date(thnB,blnB-1,tglB);
-    });
+    n.sort((a,b) => parseDateKey(a) - parseDateKey(b));
 
     if(n.length === 0) return;
 
-    let latestDateKey = n[n.length - 1];
-    let rawStringData = e[latestDateKey];
-
-    if(typeof rawStringData !== "string") return;
+    const latestDateKey = n[n.length - 1];
+    const latestEntries = extractFiveDigitEntries(e[latestDateKey]);
 
     const now = new Date();
-    const todayStr = `${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()}`;
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const yyyy = now.getFullYear();
+    const todayFormats = new Set([`${dd}-${mm}-${yyyy}`, `${yyyy}-${mm}-${dd}`, `${dd}/${mm}/${yyyy}`]);
 
-    let updateCountToday = 0;
-    if (latestDateKey === todayStr) {
-      let entriesToday = rawStringData.split(",").map(item => item.trim()).filter(item => item.length === 5);
-      updateCountToday = entriesToday.length;
-    } else {
-      updateCountToday = 1;
+    const isLatestToday = todayFormats.has(String(latestDateKey).trim());
+
+    // Jika update hari ini sudah >= 2 angka (atau menimpa per 2 angka), judul menjadi 15:00
+    // Jika baru 1 angka, judul 21:00
+    let entryCount = latestEntries.length;
+    if (!isLatestToday && entryCount === 0) {
+      entryCount = 1;
     }
 
-    let dynamicTitleText = "";
-    if (updateCountToday <= 2) {
-      dynamicTitleText = "TARGET 2D BBFS 8 DIGIT MACAU 5D JAM 21:00";
-    } else {
-      dynamicTitleText = "TARGET 2D BBFS 8 DIGIT MACAU 5D JAM 15:00";
-    }
+    const jamLabel = entryCount >= 2 ? "15:00" : "21:00";
+    const dynamicTitleText = `TARGET 2D BBFS 8 DIGIT MACAU 5D JAM ${jamLabel}`;
 
     document.getElementById("dynamic-main-title").textContent = dynamicTitleText;
     document.getElementById("page-title").textContent = dynamicTitleText + " - Tunggal Paito";
@@ -225,24 +243,24 @@ async function loadMacau5DAnalysis(){
     // 1. KUMPULKAN SELURUH DATA DARI SEMUA TANGGAL SECARA ABSOLUT
     let masterFiveDigitArray = [];
     n.forEach(dateKey => {
-      let val = e[dateKey];
-      if(typeof val === "string") {
-        let arr = val.split(",").map(item => item.trim()).filter(item => item.length === 5);
+      const arr = extractFiveDigitEntries(e[dateKey]);
+      if (arr.length > 0) {
         masterFiveDigitArray.push(...arr);
       }
     });
 
     if(masterFiveDigitArray.length === 0) return;
-        // 2. RUMUS STATIS MUTLAK: Patokan jumlah 5D variasi titik tengah (22) & bobot silang
+
+    // 2. RUMUS STATIS MUTLAK: Patokan jumlah 5D variasi titik tengah (22) & bobot silang
     let calculatedMasterData = masterFiveDigitArray.map((resNum, masterIndex) => {
       const cleanStr = String(resNum).trim().slice(0, 5);
       const digits   = cleanStr.split("").map(ch => Number.parseInt(ch, 10));
       const [as, kop, kep, ek, cb] = digits;
 
       const jml5D       = as + kop + kep + ek + cb;
-      const jarakTengah = Math.abs(jml5D - 22);            // selisih terhadap titik tengah 0..45
-      const jumlah2D    = kep + ek;                        // jumlah posisi 2D (kepala + ekor)
-      const jumlahAwal  = as + kop + cb;                   // jumlah posisi luar/awal
+      const jarakTengah = Math.abs(jml5D - 22);
+      const jumlah2D    = kep + ek;
+      const jumlahAwal  = as + kop + cb;
 
       const mod10 = val => ((val % 10) + 10) % 10;
 
@@ -255,7 +273,6 @@ async function loadMacau5DAnalysis(){
       const s7 = mod10((jml5D * 2 + jarakTengah + masterIndex * 3) % 10 + 4);
       const s8 = mod10((jumlah2D * 4 + jarakTengah * 2 + as + masterIndex) % 10);
 
-      // Dahulukan variasi patokan jumlah 5D sebelum digit result aktif
       const bbfsArr = [s1, s2, s3, s4, s5, s6, s7, s8, kep, ek, as, kop, cb];
       let uniqueBbfs = [...new Set(bbfsArr)];
 
@@ -272,7 +289,6 @@ async function loadMacau5DAnalysis(){
       };
     });
 
-    
     // 3. AMBIL 30 DATA TERAKHIR DARI DATA YANG SUDAH DIKUNCI STATIS
     let last30Entries = calculatedMasterData.slice(-30);
 
