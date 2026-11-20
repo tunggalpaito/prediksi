@@ -27,16 +27,12 @@
     color: #f8fafc;
     user-select: none;
     -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     overflow-x: hidden;
     touch-action: manipulation;
   }
   input, textarea {
     user-select: text;
     -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
   }
   a, button, .bento-card, .tab-btn {
     touch-action: manipulation;
@@ -45,8 +41,6 @@
   .font-mono-num {
     font-family: 'JetBrains Mono', monospace;
   }
-
-  /* Glassmorphism & Bento Card */
   .glass-panel {
     background: rgba(15, 23, 42, 0.72);
     backdrop-filter: blur(14px);
@@ -63,8 +57,6 @@
   .bento-card:active {
     transform: scale(0.975);
   }
-
-  /* Instant Press Feedback Link & Tombol */
   .tap-responsive {
     transition: transform 0.14s cubic-bezier(0.22, 1, 0.36, 1), filter 0.14s ease, border-color 0.18s ease, background-color 0.18s ease;
     will-change: transform;
@@ -73,8 +65,6 @@
     transform: scale(0.97);
     filter: brightness(1.06);
   }
-
-  /* Hide scrollbar for Shopee Horizontal Carousel */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -82,15 +72,11 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  /* Tinggi Panduan Adaptif Sesuai Lebar Layar HP */
   .guide-thumb {
     height: clamp(5.25rem, 24vw, 6.75rem);
     width: 100%;
     transition: transform 0.2s ease, object-position 0.2s ease;
   }
-
-  /* Floating Ads & Buyer Notification */
   #ads-popup {
     position: fixed;
     bottom: 18px;
@@ -104,7 +90,6 @@
   #ads-popup:active {
     cursor: grabbing;
   }
-
   #buyer-notification {
     position: fixed;
     bottom: 84px;
@@ -121,7 +106,6 @@
     transform: translate3d(0, 0, 0);
     opacity: 1;
   }
-
   @keyframes popupScale {
     0% { opacity: 0; transform: scale(0.94) translateY(10px); }
     100% { opacity: 1; transform: scale(1) translateY(0); }
@@ -132,8 +116,6 @@
   body.modal-open {
     overflow: hidden;
   }
-
-  /* Market Filter Tabs */
   .tab-btn.active {
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     color: #090d16;
@@ -141,8 +123,6 @@
     box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
     border-color: transparent;
   }
-
-  /* Bar Indikator Navigasi Halus Saat Link Diklik */
   #top-nav-progress {
     position: fixed;
     top: 0;
@@ -165,9 +145,7 @@
 
 <div id="top-nav-progress" aria-hidden="true"></div>
 
-<!-- ================================================================= -->
-<!-- STICKY GLASS TOPBAR (MODERN HEADER + TOMBOL CARI + TOP 10 LINE)   -->
-<!-- ================================================================= -->
+<!-- STICKY GLASS TOPBAR -->
 <nav class="sticky top-0 z-50 w-full glass-panel border-b border-white/10">
   <div class="max-w-md mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
     <a href="https://tunggalpaito.online/prediksi" class="tap-responsive flex items-center gap-2 min-w-0 group">
@@ -186,13 +164,11 @@
     </a>
 
     <div class="flex items-center gap-1.5 shrink-0">
-      <!-- Tombol Cari Keren -->
       <button type="button" onclick="openSearchModal(event)" aria-label="Cari daftar isi halaman" class="tap-responsive inline-flex items-center gap-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 font-extrabold py-1.5 px-2.5 rounded-full text-[10px] border border-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.2)] cursor-pointer">
         <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
         <span>Cari</span>
       </button>
 
-      <!-- Tombol TOP 10 LINE Terintegrasi Rapi -->
       <a href="https://tunggalpaito.online/top-10-line/" class="tap-responsive inline-flex items-center gap-1 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-extrabold py-1.5 px-2.5 rounded-full text-[10px] shadow-[0_0_16px_rgba(244,63,94,0.45)] border border-rose-400/50 tracking-wide uppercase">
         <span>🔥 TOP 10</span>
       </a>
@@ -200,12 +176,8 @@
   </div>
 </nav>
 
-<!-- ================================================================= -->
-<!-- BAGIAN ATAS: PEMBERITAHUAN PENTING & SLOT IKLAN RINGKAS           -->
-<!-- ================================================================= -->
+<!-- BAGIAN ATAS: PEMBERITAHUAN PENTING & SLOT IKLAN -->
 <div class="w-full max-w-md mx-auto px-4 pt-3.5 space-y-2.5">
-
-  <!-- Pemberitahuan Penting -->
   <div class="rounded-2xl bg-gradient-to-r from-rose-950/70 via-slate-900/90 to-slate-900/90 border border-rose-500/30 p-3 shadow-lg">
     <div class="flex items-start gap-2.5">
       <div class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 border border-rose-500/30 mt-0.5">
@@ -223,37 +195,28 @@
     </div>
   </div>
 
-  <!-- Slot Iklan Atas (Terbungkus Rapi & Stabil Tingginya) -->
+  <!-- Catatan: Dua banner iframe dengan window.atOptions yang berbeda sebaiknya ditempatkan di iframe terpisah agar konfigurasi tidak saling menimpa -->
   <div class="glass-panel rounded-2xl p-2 flex flex-col items-center gap-2">
-    <!-- Banner 320x50 -->
     <div class="w-full min-h-[58px] flex justify-center items-center overflow-hidden rounded-xl bg-slate-950/60 py-1">
-      <script>
-        window.atOptions = {
-          "key" : "119c8bb3217ed264a8fa223c3197bf69",
-          "format" : "iframe",
-          "height" : 50,
-          "width" : 320,
-          "params" : {}
-        };
-      </script>
-      <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
+      <iframe
+        title="Banner 320x50"
+        scrolling="no"
+        frameborder="0"
+        style="width:320px;height:50px;border:0;overflow:hidden;"
+        srcdoc="<!doctype html><html><head><style>body{margin:0;padding:0;overflow:hidden;background:transparent;}</style></head><body><script>window.atOptions={'key':'119c8bb3217ed264a8fa223c3197bf69','format':'iframe','height':50,'width':320,'params':{}};</script><script src='https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69'></script></body></html>">
+      </iframe>
     </div>
 
-    <!-- Banner 468x60 (Responsif agar tidak meluber di layar HP) -->
     <div class="w-full min-h-[68px] flex justify-center items-center overflow-x-auto no-scrollbar rounded-xl bg-slate-950/60 py-1">
-      <script>
-        window.atOptions = {
-          "key" : "9a986a45c62dcea8d8216b9210f159cb",
-          "format" : "iframe",
-          "height" : 60,
-          "width" : 468,
-          "params" : {}
-        };
-      </script>
-      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+      <iframe
+        title="Banner 468x60"
+        scrolling="no"
+        frameborder="0"
+        style="width:468px;max-width:100%;height:60px;border:0;overflow:hidden;"
+        srcdoc="<!doctype html><html><head><style>body{margin:0;padding:0;overflow:hidden;background:transparent;}</style></head><body><script>window.atOptions={'key':'9a986a45c62dcea8d8216b9210f159cb','format':'iframe','height':60,'width':468,'params':{}};</script><script src='https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb'></script></body></html>">
+      </iframe>
     </div>
 
-    <!-- Native Banner -->
     <div class="w-full min-h-[70px] flex justify-center items-center overflow-hidden rounded-xl bg-slate-950/60 p-1">
       <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
       <div id="container-3f09897b852339f736b82a3190a40259"></div>
@@ -261,12 +224,8 @@
   </div>
 </div>
 
-<!-- ================================================================= -->
-<!-- HERO & BENTO ACTION GRID                                          -->
-<!-- ================================================================= -->
+<!-- HERO & BENTO ACTION GRID -->
 <header class="w-full max-w-md mx-auto px-4 pt-4">
-
-  <!-- Hero Title Card -->
   <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-[#0d1426] to-slate-950 border border-amber-500/25 p-5 mb-4 shadow-2xl">
     <div class="absolute -right-10 -top-10 w-36 h-36 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
@@ -289,9 +248,7 @@
     </div>
   </div>
 
-  <!-- Bento Grid: Aksi Cepat -->
   <div class="grid grid-cols-2 gap-2.5 mb-3">
-    <!-- Download APK (Full Width Highlight) -->
     <button type="button" onclick="openDownloadModal(event)" class="tap-responsive col-span-2 flex items-center justify-between bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold p-3.5 rounded-2xl shadow-[0_10px_25px_-5px_rgba(16,185,129,0.4)] border border-emerald-300/50 cursor-pointer group">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-slate-950/15 flex items-center justify-center text-lg shrink-0">
@@ -305,7 +262,6 @@
       <span class="px-2.5 py-1 rounded-lg bg-slate-950 text-emerald-400 text-[10px] font-extrabold uppercase tracking-wider shrink-0">Unduh</span>
     </button>
 
-    <!-- APK Paporit -->
     <a href="https://tunggalpaito.online/prediksi/angka-main/" class="tap-responsive flex flex-col justify-between bg-gradient-to-br from-fuchsia-600 via-pink-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white p-3.5 rounded-2xl shadow-[0_8px_20px_-4px_rgba(236,72,153,0.45)] border border-pink-400/40">
       <div class="flex items-center justify-between mb-2">
         <div class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center">
@@ -319,7 +275,6 @@
       </div>
     </a>
 
-    <!-- Jasa Website -->
     <button type="button" onclick="openWebDevModal(event)" class="tap-responsive flex flex-col justify-between text-left bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white p-3.5 rounded-2xl shadow-[0_8px_20px_-4px_rgba(99,102,241,0.45)] border border-indigo-400/40 cursor-pointer">
       <div class="flex items-center justify-between mb-2">
         <div class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center">
@@ -334,7 +289,6 @@
     </button>
   </div>
 
-  <!-- Bento Box: Perlengkapan Musuh Bandar -->
   <div class="bento-card rounded-3xl p-4 mb-3 relative overflow-hidden">
     <div class="flex items-center justify-between mb-3">
       <div class="inline-flex items-center gap-1.5 text-amber-400 text-[11px] font-extrabold uppercase tracking-wider">
@@ -367,7 +321,6 @@
     </div>
   </div>
 
-  <!-- Tombol Komunitas Facebook -->
   <a href="https://www.facebook.com/share/1FkwuwQHpw/" target="_blank" rel="noopener noreferrer" class="tap-responsive mb-5 flex items-center justify-between bg-[#1877F2]/15 hover:bg-[#1877F2]/25 border border-[#1877F2]/40 text-white py-3 px-4 rounded-2xl">
     <div class="flex items-center gap-2.5">
       <div class="w-8 h-8 rounded-xl bg-[#1877F2] flex items-center justify-center text-white shadow shrink-0">
@@ -381,7 +334,7 @@
     <i class="fa-solid fa-arrow-up-right-from-square text-xs text-blue-300"></i>
   </a>
 
-  <!-- ================= KATALOG REKOMENDASI SHOPEE (HORIZONTAL SWIPE) ================= -->
+  <!-- KATALOG REKOMENDASI SHOPEE -->
   <div class="mb-2">
     <div class="flex items-center justify-between mb-2.5 px-0.5">
       <div class="flex items-center gap-1.5">
@@ -392,7 +345,6 @@
     </div>
 
     <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 snap-x snap-mandatory">
-      <!-- Item 1 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
         <img src="https://tunggalpaito.online/pohon-uang.png" alt="Pohon Uang" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
@@ -405,7 +357,6 @@
         </div>
       </div>
 
-      <!-- Item 2 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
         <img src="https://tunggalpaito.online/parfum-kopi.png" alt="Parfum Kopi" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
@@ -418,7 +369,6 @@
         </div>
       </div>
 
-      <!-- Item 3 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
         <img src="https://tunggalpaito.online/cakradayu.png" alt="CAKRADAYU" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
@@ -431,7 +381,6 @@
         </div>
       </div>
 
-      <!-- Item 4 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
         <img src="https://tunggalpaito.online/patung-kodok.png" alt="PATUNG HOKI" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
@@ -444,7 +393,6 @@
         </div>
       </div>
 
-      <!-- Item 5 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
         <img src="https://tunggalpaito.online/koin-tiongkok.png" alt="KOIN TIONGKOK" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
@@ -457,7 +405,6 @@
         </div>
       </div>
 
-      <!-- Item 6 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
         <img src="https://tunggalpaito.online/gelang-pixiu.png" alt="GELANG PIXIU" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
@@ -470,7 +417,6 @@
         </div>
       </div>
 
-      <!-- Item 7 -->
       <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
         <img src="https://tunggalpaito.online/kayu-kesehatan.png" alt="KAYU KESEHATAN" loading="lazy" decoding="async" class="w-16 h-16 aspect-square object-cover rounded-xl border border-amber-500/40 shrink-0 bg-slate-900">
         <div class="min-w-0 flex-1">
@@ -486,18 +432,13 @@
   </div>
 </header>
 
-<!-- ================================================================= -->
-<!-- MAIN CONTENT: TOOLS & MENU PASARAN                                -->
-<!-- ================================================================= -->
+<!-- MAIN CONTENT -->
 <main class="w-full max-w-md mx-auto px-4 py-4 flex-grow space-y-5">
-
-  <!-- Info Box SEO -->
   <section class="glass-panel rounded-2xl p-4 text-[11px] text-slate-400 leading-relaxed">
     <h2 class="text-xs font-extrabold text-amber-400 mb-1 uppercase tracking-wide">Pusat Informasi &amp; Analisa Angka Main Setiap Hari</h2>
     <p>Selamat datang di halaman resmi prediksi togel hari ini dari <strong class="text-slate-200">Tunggal Paito</strong>. Kami menyajikan ulasan lengkap mengenai analisa angka jitu, live draw, paito warna serta banyak lagi yang lainnya untuk berbagai pasaran resmi seperti Sydney (SDY), Singapore (SGP), dan Hongkong (HK).</p>
   </section>
 
-  <!-- TOOLS & FITUR UTAMA (GRID 2 KOLOM MODERN) -->
   <div>
     <div class="flex items-center justify-between mb-2.5 px-0.5">
       <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200">Perlengkapan &amp; Pilihan Prediksi</h3>
@@ -572,9 +513,7 @@
     </div>
   </div>
 
-  <!-- ================================================================= -->
-  <!-- TAB FILTER PASARAN INTERAKTIF                                     -->
-  <!-- ================================================================= -->
+  <!-- TAB FILTER PASARAN INTERAKTIF -->
   <div class="space-y-3.5">
     <div class="flex items-center justify-between px-0.5">
       <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-200">Pilih Pasaran</h3>
@@ -732,7 +671,7 @@
       </div>
     </div>
 
-    <!-- PASARAN LOTTO (SDY & HK LOTTO) -->
+    <!-- PASARAN LOTTO -->
     <div id="lotto-grid" class="grid grid-cols-1 gap-3">
       <div data-market="sdy" class="market-block bento-card rounded-3xl p-4">
         <div class="flex items-center justify-between mb-2.5">
@@ -771,9 +710,7 @@
   </div>
 </main>
 
-<!-- ================================================================= -->
-<!-- BAGIAN PENUTUP SEBELUM COPYRIGHT + SMARTLINK TERPISAH             -->
-<!-- ================================================================= -->
+<!-- PENUTUP & SMARTLINK -->
 <section class="w-full max-w-md mx-auto px-4 pt-2 pb-1 text-center">
   <div class="glass-panel rounded-2xl p-3.5 border border-white/10">
     <p class="text-xs text-slate-300 leading-relaxed">
@@ -790,10 +727,8 @@
   </div>
 </section>
 
-<!-- ================================================================= -->
-<!-- POPUP CARI DAFTAR ISI HALAMAN                                     -->
-<!-- ================================================================= -->
-<div id="search-modal" class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+<!-- POPUP CARI DAFTAR ISI HALAMAN -->
+<div id="search-modal" class="fixed inset-0 z-[2147483640] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
   <div class="bg-gradient-to-br from-slate-900 via-[#0b1120] to-slate-950 border border-amber-500/45 rounded-3xl w-full max-w-sm p-4 shadow-[0_0_40px_rgba(245,158,11,0.25)] relative animate-popup text-left flex flex-col max-h-[82vh]">
     <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-white/10">
       <div class="flex items-center gap-2.5">
@@ -810,7 +745,6 @@
       </button>
     </div>
 
-    <!-- Input Pencarian -->
     <div class="relative mb-2.5">
       <i class="fa-solid fa-search text-slate-400 text-xs absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
       <input
@@ -825,7 +759,6 @@
       </button>
     </div>
 
-    <!-- Chip Kata Kunci Cepat -->
     <div class="flex flex-wrap gap-1.5 mb-3">
       <button type="button" onclick="setQuickSearch('')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 text-slate-200 border border-white/10 cursor-pointer">Semua</button>
       <button type="button" onclick="setQuickSearch('SDY')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/25 cursor-pointer">SDY</button>
@@ -836,15 +769,12 @@
       <button type="button" onclick="setQuickSearch('LOTTO')" class="tap-responsive text-[10px] font-bold px-2.5 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 text-slate-200 border border-white/10 cursor-pointer">LOTTO</button>
     </div>
 
-    <!-- Hasil Daftar Isi -->
     <div id="toc-results-list" class="space-y-1.5 overflow-y-auto pr-1 flex-1 text-xs"></div>
   </div>
 </div>
 
-<!-- ================================================================= -->
-<!-- MODAL JASA PEMBUATAN WEBSITE                                      -->
-<!-- ================================================================= -->
-<div id="webdev-popup" class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+<!-- MODAL JASA PEMBUATAN WEBSITE -->
+<div id="webdev-popup" class="fixed inset-0 z-[2147483640] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
   <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border border-indigo-500/50 rounded-3xl w-full max-w-sm p-6 shadow-[0_0_40px_rgba(99,102,241,0.35)] relative animate-popup text-left">
     <button type="button" onclick="closeWebDevModal()" aria-label="Tutup modal" class="tap-responsive absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700 cursor-pointer">
       <i class="fa-solid fa-xmark"></i>
@@ -885,10 +815,8 @@
   </div>
 </div>
 
-<!-- ================================================================= -->
-<!-- MODAL DOWNLOAD APK                                                -->
-<!-- ================================================================= -->
-<div id="download-modal" class="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+<!-- MODAL DOWNLOAD APK -->
+<div id="download-modal" class="fixed inset-0 z-[2147483640] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
   <div class="bg-slate-900 border border-emerald-500/50 rounded-3xl w-full max-w-sm p-5 shadow-[0_0_40px_rgba(16,185,129,0.35)] relative animate-popup text-left">
     <button type="button" onclick="closeDownloadModal()" aria-label="Tutup modal" class="tap-responsive absolute top-3.5 right-3.5 bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors border border-slate-700 cursor-pointer">
       <i class="fa-solid fa-xmark"></i>
@@ -905,7 +833,6 @@
     <div class="text-xs text-slate-300 space-y-2.5 mb-4 max-h-[62vh] overflow-y-auto pr-1">
       <p class="font-semibold text-emerald-400 bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/20">📌 Pertama wajib login/pakai akun Email-Gmail bahwa anda bukan robot.</p>
 
-      <!-- 3 Gambar Panduan: Menyesuaikan Otomatis Layar HP Pengunjung -->
       <div>
         <p class="text-[10px] font-bold text-amber-300 uppercase tracking-wider mb-1.5">Gambar Panduan Download Apk</p>
         <div class="grid grid-cols-3 gap-2">
@@ -976,104 +903,111 @@
   </div>
 </div>
 
-<!-- ================================================================= -->
-<!-- FOOTER / COPYRIGHT                                                -->
-<!-- ================================================================= -->
+<!-- FOOTER -->
 <footer class="w-full max-w-md mx-auto px-4 py-6 text-center text-xs text-slate-500 border-t border-white/10 mt-3">
   <p>&copy; <span id="current-year"></span> <strong class="text-slate-300">Tunggal Paito</strong>. All rights reserved.</p>
 </footer>
 
-<!-- ================================================================= -->
-<!-- SCRIPTS                                                           -->
-<!-- ================================================================= -->
 <script>
 (function() {
   const yearEl = document.getElementById("current-year");
-  if (yearEl) {
-    yearEl.textContent = String(new Date().getFullYear());
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
-})();
-</script>
 
-<!-- Penyesuaian Otomatis Gambar Panduan Sesuai Layar HP Pengunjung -->
-<script>
-function syncGuideCropByViewport() {
-  const vw = window.innerWidth || document.documentElement.clientWidth || 360;
-  const vh = window.innerHeight || document.documentElement.clientHeight || 640;
-  const aspect = vh / Math.max(vw, 1);
-
-  const img1 = document.getElementById("guide-img-1");
-  const img2 = document.getElementById("guide-img-2");
-  const img3 = document.getElementById("guide-img-3");
-
-  const y1 = Math.min(84, Math.max(72, Math.round(76 + (aspect - 1.7) * 6)));
-  const y2 = Math.min(94, Math.max(84, Math.round(88 + (aspect - 1.7) * 5)));
-
-  if (img1) {
-    img1.style.objectPosition = `50% ${y1}%`;
+  function isElementVisible(el) {
+    if (!el) return false;
+    let curr = el;
+    while (curr && curr !== document.body) {
+      if (curr.style && curr.style.display === "none") return false;
+      if (curr.classList && curr.classList.contains("hidden")) return false;
+      curr = curr.parentElement;
+    }
+    return true;
   }
-  if (img2) {
-    img2.style.objectPosition = `50% ${y2}%`;
-  }
-  if (img3) {
-    img3.style.objectPosition = "50% 50%";
-    if (img3.naturalWidth && img3.naturalHeight && img3.clientWidth) {
-      const ratio = img3.naturalHeight / img3.naturalWidth;
-      const idealHeight = Math.round(img3.clientWidth * Math.min(Math.max(ratio, 0.55), 1.15));
-      if (vw <= 420 && idealHeight >= 68 && idealHeight <= 125) {
-        img3.style.height = `${idealHeight}px`;
-      } else {
-        img3.style.removeProperty("height");
+
+  // Crop gambar panduan otomatis sesuai layar
+  window.syncGuideCropByViewport = function() {
+    const vw = window.innerWidth || document.documentElement.clientWidth || 360;
+    const vh = window.innerHeight || document.documentElement.clientHeight || 640;
+    const aspect = vh / Math.max(vw, 1);
+
+    const img1 = document.getElementById("guide-img-1");
+    const img2 = document.getElementById("guide-img-2");
+    const img3 = document.getElementById("guide-img-3");
+
+    const y1 = Math.min(84, Math.max(72, Math.round(76 + (aspect - 1.7) * 6)));
+    const y2 = Math.min(94, Math.max(84, Math.round(88 + (aspect - 1.7) * 5)));
+
+    if (img1) img1.style.objectPosition = "50% " + y1 + "%";
+    if (img2) img2.style.objectPosition = "50% " + y2 + "%";
+    if (img3) {
+      img3.style.objectPosition = "50% 50%";
+      if (img3.naturalWidth && img3.naturalHeight && img3.clientWidth) {
+        const ratio = img3.naturalHeight / img3.naturalWidth;
+        const idealHeight = Math.round(img3.clientWidth * Math.min(Math.max(ratio, 0.55), 1.15));
+        if (vw <= 420 && idealHeight >= 68 && idealHeight <= 125) {
+          img3.style.height = idealHeight + "px";
+        } else {
+          img3.style.removeProperty("height");
+        }
       }
     }
+  };
+
+  let guideCropRaf = null;
+  function scheduleGuideCropSync() {
+    if (guideCropRaf) return;
+    guideCropRaf = requestAnimationFrame(function() {
+      guideCropRaf = null;
+      window.syncGuideCropByViewport();
+    });
   }
-}
+  window.addEventListener("resize", scheduleGuideCropSync, { passive: true });
+  window.addEventListener("orientationchange", function() {
+    setTimeout(scheduleGuideCropSync, 120);
+  }, { passive: true });
 
-let guideCropRaf = null;
-function scheduleGuideCropSync() {
-  if (guideCropRaf) return;
-  guideCropRaf = requestAnimationFrame(function() {
-    guideCropRaf = null;
-    syncGuideCropByViewport();
-  });
-}
+  // Filter pasaran
+  window.filterMarket = function(market, btn) {
+    document.querySelectorAll(".tab-btn").forEach(function(b) {
+      b.classList.remove("active");
+    });
+    if (btn) btn.classList.add("active");
 
-window.addEventListener("resize", scheduleGuideCropSync, { passive: true });
-window.addEventListener("orientationchange", function() {
-  setTimeout(scheduleGuideCropSync, 120);
-}, { passive: true });
-</script>
+    document.querySelectorAll(".market-block").forEach(function(block) {
+      const m = block.getAttribute("data-market");
+      block.style.display = (market === "all" || m === market) ? "" : "none";
+    });
 
-<!-- Filter Pasaran Script -->
-<script>
-function filterMarket(market, btn) {
-  document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
-  if (btn) btn.classList.add("active");
-  document.querySelectorAll(".market-block").forEach((block) => {
-    const m = block.getAttribute("data-market");
-    block.style.display = (market === "all" || m === market) ? "" : "none";
-  });
-  const lottoGrid = document.getElementById("lotto-grid");
-  if (lottoGrid) {
-    const anyVisibleLotto = Array.from(lottoGrid.querySelectorAll(".market-block")).some(
-      (el) => el.style.display !== "none"
-    );
-    lottoGrid.style.display = anyVisibleLotto ? "" : "none";
-  }
-}
-</script>
+    const lottoGrid = document.getElementById("lotto-grid");
+    if (lottoGrid) {
+      const anyVisibleLotto = Array.from(lottoGrid.querySelectorAll(".market-block")).some(function(el) {
+        return el.style.display !== "none";
+      });
+      lottoGrid.style.display = anyVisibleLotto ? "" : "none";
+    }
 
-<!-- Daftar Isi & Pencarian Popup Script -->
-<script>
-(function() {
-  let cachedItems = null;
+    const searchModal = document.getElementById("search-modal");
+    if (searchModal && !searchModal.classList.contains("hidden")) {
+      window.renderSearchResults();
+    }
+  };
 
+  // Daftar isi & pencarian
   function buildTocItems() {
     const items = [];
     const seen = new Set();
 
     function addItem(title, subtitle, href, actionType) {
-      const key = `${title}|${href || ""}|${actionType || ""}`;
+      const key = title + "|" + (href || "") + "|" + (actionType || "");
       if (seen.has(key)) return;
       seen.add(key);
       items.push({
@@ -1084,19 +1018,17 @@ function filterMarket(market, btn) {
       });
     }
 
-    // Pintasan modal khusus
     addItem("Download APK Tunggal Paito", "Versi Resmi • Ringan & Anti Blokir", "", "download");
     addItem("Jasa Buat Website", "Web & APK Profesional Custom", "", "webdev");
 
-    // Ambil tautan fitur & pasaran dari halaman
     const anchors = document.querySelectorAll("nav a[href], header a[href], main a[href]");
-    anchors.forEach((a) => {
+    anchors.forEach(function(a) {
+      if (!isElementVisible(a)) return;
       const href = (a.getAttribute("href") || "").trim();
       if (!href || href.startsWith("https://s.shopee.co.id") || href.startsWith("https://www.facebook.com")) {
         return;
       }
-
-      let rawText = (a.innerText || a.textContent || "").replace(/\s+/g, " ").trim();
+      const rawText = (a.innerText || a.textContent || "").replace(/\s+/g, " ").trim();
       if (!rawText) return;
 
       let category = "Menu & Fitur";
@@ -1104,7 +1036,7 @@ function filterMarket(market, btn) {
       if (marketBlock) {
         const mAttr = (marketBlock.getAttribute("data-market") || "").toUpperCase();
         const headingEl = marketBlock.querySelector(".font-extrabold");
-        category = headingEl ? headingEl.textContent.trim() : `Pasaran ${mAttr}`;
+        category = headingEl ? headingEl.textContent.trim() : "Pasaran " + mAttr;
       } else if (href.includes("/apk/") || href.includes("/apk-line-2d/") || href.includes("/rumus/")) {
         category = "Perlengkapan & APK";
       } else if (href.includes("top-10-line")) {
@@ -1123,65 +1055,60 @@ function filterMarket(market, btn) {
     const clearBtn = document.getElementById("clear-search-btn");
     if (!input || !listEl) return;
 
-    if (!cachedItems) {
-      cachedItems = buildTocItems();
-    }
-
+    const items = buildTocItems();
     const q = (input.value || "").trim().toLowerCase();
-    if (clearBtn) {
-      clearBtn.classList.toggle("hidden", q.length === 0);
-    }
+    if (clearBtn) clearBtn.classList.toggle("hidden", q.length === 0);
 
     const filtered = q
-      ? cachedItems.filter((it) =>
-          it.title.toLowerCase().includes(q) ||
-          it.subtitle.toLowerCase().includes(q)
-        )
-      : cachedItems;
+      ? items.filter(function(it) {
+          return it.title.toLowerCase().includes(q) || it.subtitle.toLowerCase().includes(q);
+        })
+      : items;
 
     if (filtered.length === 0) {
-      listEl.innerHTML = `
-        <div class="text-center py-8 text-slate-400">
-          <i class="fa-solid fa-folder-open text-lg mb-2 block text-slate-500"></i>
-          <p class="text-xs font-semibold text-slate-300">Tidak ditemukan untuk "${q.replace(/</g, "&lt;")}"</p>
-          <p class="text-[10px] text-slate-500 mt-0.5">Coba kata kunci seperti SDY, SGP, HK, BBFS, atau Live Draw.</p>
-        </div>
-      `;
+      listEl.innerHTML =
+        '<div class="text-center py-8 text-slate-400">' +
+          '<i class="fa-solid fa-folder-open text-lg mb-2 block text-slate-500"></i>' +
+          '<p class="text-xs font-semibold text-slate-300">Tidak ditemukan untuk "' + escapeHtml(q) + '"</p>' +
+          '<p class="text-[10px] text-slate-500 mt-0.5">Coba kata kunci seperti SDY, SGP, HK, BBFS, atau Live Draw.</p>' +
+        "</div>";
       return;
     }
 
-    listEl.innerHTML = filtered.map((it) => {
+    listEl.innerHTML = filtered.map(function(it) {
+      const safeTitle = escapeHtml(it.title);
+      const safeSub = escapeHtml(it.subtitle);
       if (it.actionType === "download") {
-        return `
-          <button type="button" onclick="closeSearchModal(); openDownloadModal();" class="tap-responsive w-full flex items-center justify-between bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-xl text-left cursor-pointer">
-            <div class="min-w-0 pr-2">
-              <div class="font-bold text-emerald-300 text-[11px] truncate">${it.title}</div>
-              <div class="text-[9px] text-slate-400 truncate">${it.subtitle}</div>
-            </div>
-            <i class="fa-solid fa-cloud-arrow-down text-[10px] text-emerald-400 shrink-0"></i>
-          </button>
-        `;
+        return (
+          '<button type="button" onclick="closeSearchModal(); openDownloadModal();" class="tap-responsive w-full flex items-center justify-between bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-xl text-left cursor-pointer">' +
+            '<div class="min-w-0 pr-2">' +
+              '<div class="font-bold text-emerald-300 text-[11px] truncate">' + safeTitle + "</div>" +
+              '<div class="text-[9px] text-slate-400 truncate">' + safeSub + "</div>" +
+            "</div>" +
+            '<i class="fa-solid fa-cloud-arrow-down text-[10px] text-emerald-400 shrink-0"></i>' +
+          "</button>"
+        );
       }
       if (it.actionType === "webdev") {
-        return `
-          <button type="button" onclick="closeSearchModal(); openWebDevModal();" class="tap-responsive w-full flex items-center justify-between bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 p-2.5 rounded-xl text-left cursor-pointer">
-            <div class="min-w-0 pr-2">
-              <div class="font-bold text-indigo-300 text-[11px] truncate">${it.title}</div>
-              <div class="text-[9px] text-slate-400 truncate">${it.subtitle}</div>
-            </div>
-            <i class="fa-solid fa-laptop-code text-[10px] text-indigo-400 shrink-0"></i>
-          </button>
-        `;
+        return (
+          '<button type="button" onclick="closeSearchModal(); openWebDevModal();" class="tap-responsive w-full flex items-center justify-between bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 p-2.5 rounded-xl text-left cursor-pointer">' +
+            '<div class="min-w-0 pr-2">' +
+              '<div class="font-bold text-indigo-300 text-[11px] truncate">' + safeTitle + "</div>" +
+              '<div class="text-[9px] text-slate-400 truncate">' + safeSub + "</div>" +
+            "</div>" +
+            '<i class="fa-solid fa-laptop-code text-[10px] text-indigo-400 shrink-0"></i>' +
+          "</button>"
+        );
       }
-      return `
-        <a href="${it.href}" onclick="closeSearchModal()" class="tap-responsive flex items-center justify-between bg-slate-950/80 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">
-          <div class="min-w-0 pr-2">
-            <div class="font-bold text-slate-100 group-hover:text-amber-300 text-[11px] truncate">${it.title}</div>
-            <div class="text-[9px] text-slate-400 truncate">${it.subtitle}</div>
-          </div>
-          <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-amber-400 shrink-0"></i>
-        </a>
-      `;
+      return (
+        '<a href="' + escapeHtml(it.href) + '" onclick="closeSearchModal()" class="tap-responsive flex items-center justify-between bg-slate-950/80 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 p-2.5 rounded-xl group">' +
+          '<div class="min-w-0 pr-2">' +
+            '<div class="font-bold text-slate-100 group-hover:text-amber-300 text-[11px] truncate">' + safeTitle + "</div>" +
+            '<div class="text-[9px] text-slate-400 truncate">' + safeSub + "</div>" +
+          "</div>" +
+          '<i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-amber-400 shrink-0"></i>' +
+        "</a>"
+      );
     }).join("");
   };
 
@@ -1197,30 +1124,31 @@ function filterMarket(market, btn) {
     const input = document.getElementById("toc-search-input");
     if (input) input.focus();
   };
-})();
-</script>
 
-<!-- Modal Controls -->
-<script>
-(function() {
-  function getDownloadModal() {
-    return document.getElementById("download-modal");
-  }
-  function getWebDevModal() {
-    return document.getElementById("webdev-popup");
-  }
-  function getSearchModal() {
-    return document.getElementById("search-modal");
-  }
-
+  // Kontrol modal
   function syncBodyScrollLock() {
-    const dl = getDownloadModal();
-    const wd = getWebDevModal();
-    const sm = getSearchModal();
-    const downloadOpen = dl ? !dl.classList.contains("hidden") : false;
-    const webdevOpen = wd ? !wd.classList.contains("hidden") : false;
-    const searchOpen = sm ? !sm.classList.contains("hidden") : false;
-    document.body.classList.toggle("modal-open", downloadOpen || webdevOpen || searchOpen);
+    const ids = ["download-modal", "webdev-popup", "search-modal"];
+    const anyOpen = ids.some(function(id) {
+      const el = document.getElementById(id);
+      return el && !el.classList.contains("hidden");
+    });
+    document.body.classList.toggle("modal-open", anyOpen);
+  }
+
+  function openModalById(id, e, afterOpen) {
+    if (e) e.stopPropagation();
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove("hidden");
+    syncBodyScrollLock();
+    if (typeof afterOpen === "function") afterOpen(el);
+  }
+
+  function closeModalById(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add("hidden");
+    syncBodyScrollLock();
   }
 
   window.closeAdsPopup = function() {
@@ -1231,78 +1159,31 @@ function filterMarket(market, btn) {
   };
 
   window.openSearchModal = function(e) {
-    if (e) e.stopPropagation();
-    const sm = getSearchModal();
-    if (!sm) return;
-    sm.classList.remove("hidden");
-    syncBodyScrollLock();
-    if (typeof window.renderSearchResults === "function") {
+    openModalById("search-modal", e, function() {
       window.renderSearchResults();
-    }
-    const input = document.getElementById("toc-search-input");
-    if (input) {
-      setTimeout(() => input.focus(), 60);
-    }
+      const input = document.getElementById("toc-search-input");
+      if (input) setTimeout(function() { input.focus(); }, 60);
+    });
   };
-
-  window.closeSearchModal = function() {
-    const sm = getSearchModal();
-    if (!sm) return;
-    sm.classList.add("hidden");
-    syncBodyScrollLock();
-  };
+  window.closeSearchModal = function() { closeModalById("search-modal"); };
 
   window.openDownloadModal = function(e) {
-    if (e) e.stopPropagation();
-    const dl = getDownloadModal();
-    if (!dl) return;
-    dl.classList.remove("hidden");
-    syncBodyScrollLock();
-    requestAnimationFrame(syncGuideCropByViewport);
-  };
-
-  window.closeDownloadModal = function() {
-    const dl = getDownloadModal();
-    if (!dl) return;
-    dl.classList.add("hidden");
-    syncBodyScrollLock();
-  };
-
-  window.openWebDevModal = function(e) {
-    if (e) e.stopPropagation();
-    const wd = getWebDevModal();
-    if (!wd) return;
-    wd.classList.remove("hidden");
-    syncBodyScrollLock();
-  };
-
-  window.closeWebDevModal = function() {
-    const wd = getWebDevModal();
-    if (!wd) return;
-    wd.classList.add("hidden");
-    syncBodyScrollLock();
-  };
-
-  const dlInit = getDownloadModal();
-  if (dlInit) {
-    dlInit.addEventListener("click", function(e) {
-      if (e.target === dlInit) window.closeDownloadModal();
+    openModalById("download-modal", e, function() {
+      requestAnimationFrame(window.syncGuideCropByViewport);
     });
-  }
+  };
+  window.closeDownloadModal = function() { closeModalById("download-modal"); };
 
-  const wdInit = getWebDevModal();
-  if (wdInit) {
-    wdInit.addEventListener("click", function(e) {
-      if (e.target === wdInit) window.closeWebDevModal();
-    });
-  }
+  window.openWebDevModal = function(e) { openModalById("webdev-popup", e); };
+  window.closeWebDevModal = function() { closeModalById("webdev-popup"); };
 
-  const smInit = getSearchModal();
-  if (smInit) {
-    smInit.addEventListener("click", function(e) {
-      if (e.target === smInit) window.closeSearchModal();
+  ["download-modal", "webdev-popup", "search-modal"].forEach(function(id) {
+    const modalEl = document.getElementById(id);
+    if (!modalEl) return;
+    modalEl.addEventListener("click", function(e) {
+      if (e.target === modalEl) closeModalById(id);
     });
-  }
+  });
 
   document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") {
@@ -1311,75 +1192,59 @@ function filterMarket(market, btn) {
       window.closeSearchModal();
     }
   });
-})();
-</script>
 
-<!-- Draggable Floating Box -->
-<script>
-(function() {
+  // Draggable ads popup
   const popup = document.getElementById("ads-popup");
-  if (!popup) return;
+  if (popup) {
+    let pointerStartX = 0, pointerStartY = 0, baseX = 0, baseY = 0, currentX = 0, currentY = 0, isDragging = false, rafId = null;
 
-  let pointerStartX = 0, pointerStartY = 0, baseX = 0, baseY = 0, currentX = 0, currentY = 0, isDragging = false, rafId = null;
-
-  function clampVal(val, min, max) {
-    return Math.min(Math.max(val, min), max);
-  }
-
-  function applyPopupTransform() {
-    popup.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-    rafId = null;
-  }
-
-  function dragStart(e) {
-    if (e.target.closest("a") || e.target.closest("button")) return;
-    isDragging = true;
-    const pt = e.type === "touchstart" ? e.touches[0] : e;
-    if (!pt) return;
-    pointerStartX = pt.clientX;
-    pointerStartY = pt.clientY;
-    baseX = currentX;
-    baseY = currentY;
-  }
-
-  function drag(e) {
-    if (!isDragging) return;
-    if (e.cancelable) e.preventDefault();
-    const pt = e.type === "touchmove" ? e.touches[0] : e;
-    if (!pt) return;
-    const dx = pt.clientX - pointerStartX;
-    const dy = pt.clientY - pointerStartY;
-    const rect = popup.getBoundingClientRect();
-    const margin = 10;
-    const minX = baseX - (rect.left - margin);
-    const maxX = baseX + (window.innerWidth - rect.right - margin);
-    const minY = baseY - (rect.top - (margin + 52));
-    const maxY = baseY + (window.innerHeight - rect.bottom - margin);
-
-    currentX = clampVal(baseX + dx, minX, maxX);
-    currentY = clampVal(baseY + dy, minY, maxY);
-
-    if (!rafId) {
-      rafId = requestAnimationFrame(applyPopupTransform);
+    function clampVal(val, min, max) {
+      return Math.min(Math.max(val, min), max);
     }
+    function applyPopupTransform() {
+      popup.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
+      rafId = null;
+    }
+    function dragStart(e) {
+      if (e.target.closest("a") || e.target.closest("button")) return;
+      isDragging = true;
+      const pt = e.type === "touchstart" ? e.touches[0] : e;
+      if (!pt) return;
+      pointerStartX = pt.clientX;
+      pointerStartY = pt.clientY;
+      baseX = currentX;
+      baseY = currentY;
+    }
+    function drag(e) {
+      if (!isDragging) return;
+      if (e.cancelable) e.preventDefault();
+      const pt = e.type === "touchmove" ? e.touches[0] : e;
+      if (!pt) return;
+      const rect = popup.getBoundingClientRect();
+      const margin = 10;
+      currentX = clampVal(
+        baseX + (pt.clientX - pointerStartX),
+        baseX - (rect.left - margin),
+        baseX + (window.innerWidth - rect.right - margin)
+      );
+      currentY = clampVal(
+        baseY + (pt.clientY - pointerStartY),
+        baseY - (rect.top - (margin + 52)),
+        baseY + (window.innerHeight - rect.bottom - margin)
+      );
+      if (!rafId) rafId = requestAnimationFrame(applyPopupTransform);
+    }
+    function dragEnd() { isDragging = false; }
+
+    popup.addEventListener("mousedown", dragStart);
+    document.addEventListener("mousemove", drag, { passive: true });
+    document.addEventListener("mouseup", dragEnd);
+    popup.addEventListener("touchstart", dragStart, { passive: true });
+    document.addEventListener("touchmove", drag, { passive: false });
+    document.addEventListener("touchend", dragEnd);
   }
 
-  function dragEnd() {
-    isDragging = false;
-  }
-
-  popup.addEventListener("mousedown", dragStart);
-  document.addEventListener("mousemove", drag, { passive: true });
-  document.addEventListener("mouseup", dragEnd);
-  popup.addEventListener("touchstart", dragStart, { passive: true });
-  document.addEventListener("touchmove", drag, { passive: false });
-  document.addEventListener("touchend", dragEnd);
-})();
-</script>
-
-<!-- SCRIPT NOTIFIKASI PEMBELI -->
-<script>
-(function() {
+  // Notifikasi pembeli
   const firstNames = ["Budi","Eko","Agung","Rian","Joko","Dedi","Ahmad","Hendra","Rahmat","Doni","Fajar","Wahyu","Andi","Bayu","Yoga","Rizal","Iwan","Reza","Dimas","Gilang","Slamet","Heri","Teguh","Yudi","Roni","Ardi","Deny","Ferry","Hermawan","Kurniawan","Siti","Dewi","Sri","Ani","Rina","Fitri","Wahyudi","Supriyanto","Haryanto","Saputra"];
   const lastNames = ["Santoso","Prasetyo","Wibowo","Hidayat","Susilo","Kurniawan","Fauzi","Gunawan","Saputra","Nugraha","Setiawan","Pratama","Maulana","Pahlevi","Anggara","Ramadhan","Kusuma","Wijaya","Nugroho","Hartono","Subagio","Kusumo","Irawan","Utomo","Sanjaya"];
   const apkTypes = ["Membeli APK BBFS","Membeli APK LINE 2D","Membeli APK COLOK BEBAS"];
@@ -1392,32 +1257,30 @@ function filterMarket(market, btn) {
     const wk = Math.floor(day / 7);
     const mo = Math.floor(day / 30);
     if (min < 1) return "baru saja";
-    if (min < 60) return `${min} menit lalu`;
-    if (hr < 24) return `${hr} jam lalu`;
-    if (day < 7) return `${day} hari lalu`;
-    if (wk < 5) return `${wk} minggu lalu`;
-    return `${mo} bulan lalu`;
+    if (min < 60) return min + " menit lalu";
+    if (hr < 24) return hr + " jam lalu";
+    if (day < 7) return day + " hari lalu";
+    if (wk < 5) return wk + " minggu lalu";
+    return mo + " bulan lalu";
   }
 
-  function generateBuyersBatch(count = 50) {
+  function generateBuyersBatch(count) {
     const now = Date.now();
     let cursor = now - 3888000;
     const list = [];
     for (let i = 0; i < count; i++) {
-      const name = `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${lastNames[Math.floor(Math.random() * lastNames.length)]}`;
+      const name = firstNames[Math.floor(Math.random() * firstNames.length)] + " " + lastNames[Math.floor(Math.random() * lastNames.length)];
       const apk = apkTypes[Math.floor(Math.random() * apkTypes.length)];
       cursor += Math.floor(Math.random() * 60000) + 15000;
       if (cursor > now) cursor = now - Math.floor(Math.random() * 180000);
-      list.push({ name, apk, timestamp: cursor });
+      list.push({ name: name, apk: apk, timestamp: cursor });
     }
-    list.sort((a, b) => a.timestamp - b.timestamp);
+    list.sort(function(a, b) { return a.timestamp - b.timestamp; });
     return list;
   }
 
   function savePersistentBuyers(list) {
-    try {
-      localStorage.setItem("tp_persistent_buyers", JSON.stringify(list));
-    } catch (e) {}
+    try { localStorage.setItem("tp_persistent_buyers", JSON.stringify(list)); } catch (e) {}
   }
 
   function getPersistentBuyers() {
@@ -1425,9 +1288,7 @@ function filterMarket(market, btn) {
     try {
       const raw = localStorage.getItem("tp_persistent_buyers");
       if (raw) list = JSON.parse(raw);
-    } catch (e) {
-      list = [];
-    }
+    } catch (e) { list = []; }
     if (!Array.isArray(list) || list.length === 0) {
       list = generateBuyersBatch(50);
       savePersistentBuyers(list);
@@ -1436,7 +1297,6 @@ function filterMarket(market, btn) {
   }
 
   let hideNotifTimer = null;
-
   function showRandomBuyer() {
     const box = document.getElementById("buyer-notification");
     const nameEl = document.getElementById("buyer-name");
@@ -1447,10 +1307,7 @@ function filterMarket(market, btn) {
     let list = getPersistentBuyers();
     const item = list.shift();
     if (!item) return;
-
-    if (list.length === 0) {
-      list = generateBuyersBatch(50);
-    }
+    if (list.length === 0) list = generateBuyersBatch(50);
     savePersistentBuyers(list);
 
     const elapsed = Math.max(0, Date.now() - Number(item.timestamp || Date.now()));
@@ -1460,20 +1317,14 @@ function filterMarket(market, btn) {
 
     box.classList.add("show");
     clearTimeout(hideNotifTimer);
-    hideNotifTimer = setTimeout(() => {
-      box.classList.remove("show");
-    }, 4000);
+    hideNotifTimer = setTimeout(function() { box.classList.remove("show"); }, 4000);
   }
 
   setTimeout(showRandomBuyer, 3000);
   setInterval(showRandomBuyer, 10000);
-})();
-</script>
 
-<!-- PROTEKSI KLIK KANAN & SHORTCUT -->
-<script>
-(function() {
-  document.addEventListener("contextmenu", (e) => e.preventDefault());
+  // Proteksi klik kanan & shortcut
+  document.addEventListener("contextmenu", function(e) { e.preventDefault(); });
   document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") return;
     const key = (e.key || "").toLowerCase();
@@ -1481,68 +1332,31 @@ function filterMarket(market, btn) {
       key === "f12" ||
       (e.ctrlKey && e.shiftKey && ["i", "c", "j"].includes(key)) ||
       (e.ctrlKey && key === "u");
-    if (blocked) {
-      e.preventDefault();
-    }
+    if (blocked) e.preventDefault();
   });
   document.addEventListener("copy", function(e) {
     const tag = (e.target && e.target.tagName || "").toLowerCase();
     if (tag === "input" || tag === "textarea") return;
     e.preventDefault();
   });
-})();
-</script>
 
-<!-- INDIKATOR PROGRES NAVIGASI ALAMI & BERSIH -->
-<script>
-(function() {
+  // Indikator progres navigasi
   const progressBar = document.getElementById("top-nav-progress");
-
-  // Bersihkan key sessionStorage lama dari percobaan redirect sebelumnya
-  try {
-    sessionStorage.removeItem("tp_intended_page2");
-    sessionStorage.removeItem("tp_click_time");
-    sessionStorage.removeItem("tp_back_target_url");
-    sessionStorage.removeItem("tp_back_target_time");
-  } catch (e) {}
-
   function resetProgress() {
     if (!progressBar) return;
     progressBar.classList.remove("active");
     progressBar.style.removeProperty("width");
   }
-
   window.addEventListener("pageshow", resetProgress);
-
   document.addEventListener("click", function(e) {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     const link = e.target.closest("a[href]");
     if (!link) return;
     const href = (link.getAttribute("href") || "").trim();
     if (!href || href === "#" || href.toLowerCase().startsWith("javascript:")) return;
-
-    if (progressBar) {
-      progressBar.classList.add("active");
-    }
-    if (link.getAttribute("target") === "_blank") {
-      setTimeout(resetProgress, 600);
-    }
+    if (progressBar) progressBar.classList.add("active");
+    if (link.getAttribute("target") === "_blank") setTimeout(resetProgress, 600);
   }, { passive: true });
-})();
-</script>
-
-<!-- SMARTLINK TERPISAH (HANYA AKTIF PADA TEKS TERIMA KASIH) -->
-<script>
-(function() {
-  const smartlinkEl = document.getElementById("smartlink-terima-kasih");
-  if (!smartlinkEl) return;
-
-  // Ganti URL di bawah ini jika Anda menggunakan URL Direct Link / Smartlink khusus dari dasbor iklan Anda
-  const SMARTLINK_URL = "https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230";
-
-  smartlinkEl.setAttribute("href", SMARTLINK_URL);
-  smartlinkEl.setAttribute("target", "_blank");
-  smartlinkEl.setAttribute("rel", "noopener noreferrer nofollow");
 })();
 </script>
 
