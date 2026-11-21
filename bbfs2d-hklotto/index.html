@@ -82,7 +82,9 @@
       --danger: #ff4d6d;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -100,6 +102,7 @@
       align-items: center;
       padding: 14px 10px 24px;
       min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .container-shell {
@@ -413,13 +416,18 @@
       <!-- 4. Banner 320x50 -->
       <div class="ad-slot" id="ad-slot-4">
         <script>
-          window.atOptions = {
-            'key' : '119c8bb3217ed264a8fa223c3197bf69',
-            'format' : 'iframe',
-            'height' : 50,
-            'width' : 320,
-            'params' : {}
-          };
+          (function () {
+            try {
+              window.__atPrevOptions = window.atOptions;
+              window.atOptions = {
+                'key' : '119c8bb3217ed264a8fa223c3197bf69',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+              };
+            } catch (_) {}
+          })();
         </script>
         <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
       </div>
@@ -490,9 +498,8 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    const CACHE_KEY = "tp_hklotto_bbfs8d_cache_v1";
+    const CACHE_KEY = "tp_hklotto_bbfs8d_cache_v2";
     const CACHE_TTL_MS = 60 * 1000;
-    let memoryCache = null;
 
     const yearEl = document.getElementById("auto-year");
     if (yearEl) {
@@ -505,6 +512,15 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+
+    function setStatusMessage(container, message) {
+      if (!container) return;
+      container.textContent = "";
+      const div = document.createElement("div");
+      div.className = "status-msg";
+      div.textContent = message;
+      container.appendChild(div);
+    }
 
     function formatLocalISODate(dateObj) {
       const yyyy = dateObj.getFullYear();
@@ -539,14 +555,13 @@
       return html2canvasPromise;
     }
 
-    function parseDDMMYYYY(dateStr) {
-      if (typeof dateStr !== "string") return new Date(0);
-      const parts = dateStr.split("-").map(Number);
-      if (parts.length !== 3) return new Date(0);
-      const [dd, mm, yyyy] = parts;
-      if (!dd || !mm || !yyyy) return new Date(0);
-      const parsed = new Date(yyyy, mm - 1, dd);
-      return Number.isNaN(parsed.getTime()) ? new Date(0) : parsed;
+    function parseDateKey(keyStr) {
+      const parts = String(keyStr).trim().split(/[-/]/).map(Number);
+      if (parts.length !== 3 || parts.some(Number.isNaN)) return new Date(0);
+      if (parts[0] > 31) {
+        return new Date(parts[0], parts[1] - 1, parts[2]);
+      }
+      return new Date(parts[2], parts[1] - 1, parts[0]);
     }
 
     function extractVal(val) {
@@ -557,33 +572,31 @@
       }
       return val == null ? "" : String(val);
     }
-    
+
     function buildBbfsFrom4D(resNum) {
-  const as = parseInt(resNum[0], 10);
-  const kop = parseInt(resNum[1], 10);
-  const kep = parseInt(resNum[2], 10);
-  const ek = parseInt(resNum[3], 10);
+      const as = parseInt(resNum[0], 10);
+      const kop = parseInt(resNum[1], 10);
+      const kep = parseInt(resNum[2], 10);
+      const ek = parseInt(resNum[3], 10);
 
-  const s1 = ((9 - ek) * 3 + kep * 9 + 10) % 10;
-  const s2 = ((9 - kep) * 7 + as * 3 + 10) % 10;
-  const s3 = ((9 - kop) * 9 + ek * 7 + 10) % 10;
-  const s4 = ((9 - as) * 3 + kop * 9 + 10) % 10;
-  const s5 = ((as + kep) * 3 + (9 - ek) * 7) % 10;
-  const s6 = ((kop + ek) * 7 + (9 - as) * 3) % 10;
-  const s7 = Math.abs((9 - kop) - ek + kep * 3 + 20) % 10;
-  const s8 = Math.abs((9 - kep) - as + kop * 7 + 20) % 10;
+      const s1 = ((9 - ek) * 3 + kep * 9 + 10) % 10;
+      const s2 = ((9 - kep) * 7 + as * 3 + 10) % 10;
+      const s3 = ((9 - kop) * 9 + ek * 7 + 10) % 10;
+      const s4 = ((9 - as) * 3 + kop * 9 + 10) % 10;
+      const s5 = ((as + kep) * 3 + (9 - ek) * 7) % 10;
+      const s6 = ((kop + ek) * 7 + (9 - as) * 3) % 10;
+      const s7 = Math.abs((9 - kop) - ek + kep * 3 + 20) % 10;
+      const s8 = Math.abs((9 - kep) - as + kop * 7 + 20) % 10;
 
-  const bbfsArr = [as, kop, kep, ek, s1, s2, s3, s4, s5, s6, s7, s8];
-  const uniqueBbfs = [...new Set(bbfsArr)];
-  for (let i = 0; i <= 9 && uniqueBbfs.length < 8; i++) {
-    if (!uniqueBbfs.includes(i)) {
-      uniqueBbfs.push(i);
+      const bbfsArr = [as, kop, kep, ek, s1, s2, s3, s4, s5, s6, s7, s8];
+      const uniqueBbfs = [...new Set(bbfsArr)];
+      for (let i = 0; i <= 9 && uniqueBbfs.length < 8; i++) {
+        if (!uniqueBbfs.includes(i)) {
+          uniqueBbfs.push(i);
+        }
+      }
+      return uniqueBbfs.slice(0, 8).join("");
     }
-  }
-  return uniqueBbfs.slice(0, 8).join("");
-}
-
-      
 
     function renderRowsSafe(container, parsedData) {
       container.textContent = "";
@@ -628,28 +641,30 @@
       }
 
       container.appendChild(fragment);
-      document.getElementById("total-masuk").textContent = String(totalMasuk);
-      document.getElementById("total-zonk").textContent = String(totalZonk);
+      const masukEl = document.getElementById("total-masuk");
+      const zonkEl = document.getElementById("total-zonk");
+      if (masukEl) masukEl.textContent = String(totalMasuk);
+      if (zonkEl) zonkEl.textContent = String(totalZonk);
     }
 
     function applyRawDataToUI(rawData) {
       const container = document.getElementById("result-7rows-container");
       if (!rawData || typeof rawData !== "object") {
-        container.innerHTML = '<div class="status-msg">Data tanggal kosong.</div>';
+        setStatusMessage(container, "Data tanggal kosong.");
         return false;
       }
 
       const dateKeys = Object.keys(rawData)
-        .filter(k => parseDDMMYYYY(k).getTime() > 0)
-        .sort((a, b) => parseDDMMYYYY(a) - parseDDMMYYYY(b));
+        .filter(k => parseDateKey(k).getTime() > 0)
+        .sort((a, b) => parseDateKey(a) - parseDateKey(b));
 
       if (dateKeys.length === 0) {
-        container.innerHTML = '<div class="status-msg">Data tanggal kosong.</div>';
+        setStatusMessage(container, "Data tanggal kosong.");
         return false;
       }
 
       const latestDateKey = dateKeys[dateKeys.length - 1];
-      const latestResultDate = parseDDMMYYYY(latestDateKey);
+      const latestResultDate = parseDateKey(latestDateKey);
 
       const targetDisplayDate = new Date(latestResultDate);
       targetDisplayDate.setDate(latestResultDate.getDate() + 1);
@@ -657,19 +672,23 @@
       const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
       const formattedTargetDate = targetDisplayDate.toLocaleDateString("id-ID", options);
 
-      document.getElementById("dynamic-h1-date").textContent = formattedTargetDate;
-      document.getElementById("page-title").textContent = `Prediksi Target 2D BBFS HK LOTTO 8 Digit Hong Kong Lotto ${formattedTargetDate} - Tunggal Paito`;
+      const h1DateEl = document.getElementById("dynamic-h1-date");
+      const pageTitleEl = document.getElementById("page-title");
+      if (h1DateEl) h1DateEl.textContent = formattedTargetDate;
+      if (pageTitleEl) pageTitleEl.textContent = `Prediksi Target 2D BBFS HK LOTTO 8 Digit Hong Kong Lotto ${formattedTargetDate} - Tunggal Paito`;
 
       const subEl = document.getElementById("dynamic-subtitle-date");
-      subEl.textContent = "";
-      const line1 = document.createTextNode("Pusat Analisa Tarikan Paito, Target Angka 2D, & Pola BBFS 8 Digit HK Lotto Terjitu & Akurat.");
-      const brEl = document.createElement("br");
-      const strongEl = document.createElement("strong");
-      strongEl.style.color = "#ffd166";
-      strongEl.textContent = `Prediksi Periode: ${formattedTargetDate}`;
-      subEl.appendChild(line1);
-      subEl.appendChild(brEl);
-      subEl.appendChild(strongEl);
+      if (subEl) {
+        subEl.textContent = "";
+        const line1 = document.createTextNode("Pusat Analisa Tarikan Paito, Target Angka 2D, & Pola BBFS 8 Digit HK Lotto Terjitu & Akurat.");
+        const brEl = document.createElement("br");
+        const strongEl = document.createElement("strong");
+        strongEl.style.color = "#ffd166";
+        strongEl.textContent = `Prediksi Periode: ${formattedTargetDate}`;
+        subEl.appendChild(line1);
+        subEl.appendChild(brEl);
+        subEl.appendChild(strongEl);
+      }
 
       activeDownloadDateStr = formatLocalISODate(targetDisplayDate);
 
@@ -687,7 +706,7 @@
       }
 
       if (allFourDigitArrays.length === 0) {
-        container.innerHTML = '<div class="status-msg">Format angka 4 digit tidak ditemukan.</div>';
+        setStatusMessage(container, "Format angka 4 digit tidak ditemukan.");
         return false;
       }
 
@@ -701,57 +720,53 @@
       return true;
     }
 
-    function readCachedData() {
-      if (memoryCache && Date.now() - memoryCache.ts < CACHE_TTL_MS) {
-        return memoryCache.data;
-      }
+    function readCache() {
       try {
-        const cachedRaw = sessionStorage.getItem(CACHE_KEY);
-        if (cachedRaw) {
-          const cachedObj = JSON.parse(cachedRaw);
-          if (cachedObj && cachedObj.data && Date.now() - cachedObj.ts < CACHE_TTL_MS) {
-            memoryCache = cachedObj;
-            return cachedObj.data;
-          }
+        const cachedRaw = sessionStorage.getItem(CACHE_KEY) || localStorage.getItem(CACHE_KEY);
+        if (!cachedRaw) return null;
+        const cachedObj = JSON.parse(cachedRaw);
+        if (cachedObj && cachedObj.data && Date.now() - cachedObj.ts < CACHE_TTL_MS * 10) {
+          return cachedObj;
         }
       } catch (_) {}
       return null;
     }
 
-    function writeCachedData(data) {
-      const payload = { ts: Date.now(), data };
-      memoryCache = payload;
+    function writeCache(data) {
       try {
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+        const payload = JSON.stringify({ ts: Date.now(), data });
+        sessionStorage.setItem(CACHE_KEY, payload);
+        localStorage.setItem(CACHE_KEY, payload);
       } catch (_) {}
     }
 
     async function loadHkLottoAnalysis() {
       const container = document.getElementById("result-7rows-container");
+      const cached = readCache();
       let renderedFromCache = false;
 
-      const cachedData = readCachedData();
-      if (cachedData) {
-        renderedFromCache = applyRawDataToUI(cachedData);
+      if (cached && cached.data) {
+        renderedFromCache = applyRawDataToUI(cached.data);
       }
 
       try {
         const snapshot = await get(ref(db, "live/data-hklotto"));
         if (!snapshot.exists()) {
           if (!renderedFromCache) {
-            container.innerHTML = '<div class="status-msg">Data result HK Lotto belum tersedia.</div>';
-            document.getElementById("dynamic-h1-date").textContent = "Menunggu Pembaruan Data";
+            setStatusMessage(container, "Data result HK Lotto belum tersedia.");
+            const h1DateEl = document.getElementById("dynamic-h1-date");
+            if (h1DateEl) h1DateEl.textContent = "Menunggu Pembaruan Data";
           }
           return;
         }
 
         const rawData = snapshot.val();
-        writeCachedData(rawData);
+        writeCache(rawData);
         applyRawDataToUI(rawData);
       } catch (err) {
         console.error(err);
         if (!renderedFromCache) {
-          container.innerHTML = '<div class="status-msg">Gagal memuat data. Coba muat ulang halaman.</div>';
+          setStatusMessage(container, "Gagal memuat data. Coba muat ulang halaman.");
         }
       }
     }
@@ -773,90 +788,106 @@
       }, 2500);
     });
 
+    function triggerDownloadBlob(blob, filename) {
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2500);
+    }
+
     const downloadBtn = document.getElementById("btn-download-img");
-    downloadBtn.addEventListener("click", async function () {
-      const btn = this;
-      const originalBtnHTML = btn.innerHTML;
-      btn.disabled = true;
-      btn.textContent = "Memproses Gambar 9:16...";
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", async function () {
+        const btn = this;
+        const originalNodes = Array.from(btn.childNodes).map(n => n.cloneNode(true));
+        btn.disabled = true;
+        btn.textContent = "Memproses Gambar 9:16...";
 
-      let cloneWrapper = null;
-      try {
-        const html2canvasFn = await loadHtml2CanvasOnce();
-        const container = document.getElementById("result-7rows-container");
-        const allRows = container.querySelectorAll(".result-row");
-        const last16Rows = Array.from(allRows).slice(-16);
+        let cloneWrapper = null;
+        try {
+          const html2canvasFn = await loadHtml2CanvasOnce();
+          const container = document.getElementById("result-7rows-container");
+          const allRows = container ? container.querySelectorAll(".result-row") : [];
+          const last16Rows = Array.from(allRows).slice(-16);
 
-        if (last16Rows.length === 0) {
-          throw new Error("Belum ada baris data untuk diunduh.");
-        }
-
-        cloneWrapper = document.createElement("div");
-        cloneWrapper.style.position = "fixed";
-        cloneWrapper.style.left = "-9999px";
-        cloneWrapper.style.top = "0";
-        cloneWrapper.style.width = "1080px";
-        cloneWrapper.style.height = "1920px";
-        cloneWrapper.style.backgroundColor = "#16050f";
-        cloneWrapper.style.display = "flex";
-        cloneWrapper.style.flexDirection = "column";
-        cloneWrapper.style.justifyContent = "space-between";
-        cloneWrapper.style.padding = "70px 45px";
-        cloneWrapper.style.boxSizing = "border-box";
-
-        const rowsWrapper = document.createElement("div");
-        rowsWrapper.style.display = "flex";
-        rowsWrapper.style.flexDirection = "column";
-        rowsWrapper.style.justifyContent = "space-between";
-        rowsWrapper.style.height = "100%";
-        rowsWrapper.style.gap = "16px";
-        rowsWrapper.style.margin = "0";
-
-        last16Rows.forEach(rowEl => {
-          const clonedRow = rowEl.cloneNode(true);
-          clonedRow.style.flex = "1";
-          clonedRow.style.fontSize = "44px";
-          clonedRow.style.letterSpacing = "4px";
-          clonedRow.style.whiteSpace = "nowrap";
-          clonedRow.style.borderRadius = "16px";
-          clonedRow.style.border = "3px solid rgba(255, 92, 168, 0.35)";
-          clonedRow.style.backgroundColor = "#1c0714";
-          clonedRow.style.padding = "0 28px";
-          clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
-
-          const bbfsNum = clonedRow.querySelector(".bbfs-num");
-          if (bbfsNum) {
-            bbfsNum.style.marginLeft = "20px";
+          if (last16Rows.length === 0) {
+            throw new Error("Belum ada baris data untuk diunduh.");
           }
 
-          rowsWrapper.appendChild(clonedRow);
-        });
+          cloneWrapper = document.createElement("div");
+          cloneWrapper.style.position = "fixed";
+          cloneWrapper.style.left = "-9999px";
+          cloneWrapper.style.top = "0";
+          cloneWrapper.style.width = "1080px";
+          cloneWrapper.style.height = "1920px";
+          cloneWrapper.style.backgroundColor = "#16050f";
+          cloneWrapper.style.display = "flex";
+          cloneWrapper.style.flexDirection = "column";
+          cloneWrapper.style.justifyContent = "space-between";
+          cloneWrapper.style.padding = "70px 45px";
+          cloneWrapper.style.boxSizing = "border-box";
 
-        cloneWrapper.appendChild(rowsWrapper);
-        document.body.appendChild(cloneWrapper);
+          const rowsWrapper = document.createElement("div");
+          rowsWrapper.style.display = "flex";
+          rowsWrapper.style.flexDirection = "column";
+          rowsWrapper.style.justifyContent = "space-between";
+          rowsWrapper.style.height = "100%";
+          rowsWrapper.style.gap = "16px";
+          rowsWrapper.style.margin = "0";
 
-        const canvas = await html2canvasFn(cloneWrapper, {
-          width: 1080,
-          height: 1920,
-          scale: 1,
-          useCORS: true,
-          backgroundColor: "#16050f"
-        });
+          last16Rows.forEach(rowEl => {
+            const clonedRow = rowEl.cloneNode(true);
+            clonedRow.style.flex = "1";
+            clonedRow.style.fontSize = "60px";
+            clonedRow.style.letterSpacing = "6px";
+            clonedRow.style.whiteSpace = "nowrap";
+            clonedRow.style.borderRadius = "16px";
+            clonedRow.style.border = "3px solid rgba(255, 92, 168, 0.35)";
+            clonedRow.style.backgroundColor = "#1c0714";
+            clonedRow.style.padding = "0 28px";
+            clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
 
-        const link = document.createElement("a");
-        link.download = "Analisis-Target-4D-HK-Lotto-16Trek-" + activeDownloadDateStr + ".jpg";
-        link.href = canvas.toDataURL("image/jpeg", 0.95);
-        link.click();
-      } catch (err) {
-        console.error(err);
-      } finally {
-        if (cloneWrapper && cloneWrapper.parentNode) {
-          cloneWrapper.parentNode.removeChild(cloneWrapper);
+            const bbfsNum = clonedRow.querySelector(".bbfs-num");
+            if (bbfsNum) {
+              bbfsNum.style.marginLeft = "24px";
+            }
+
+            rowsWrapper.appendChild(clonedRow);
+          });
+
+          cloneWrapper.appendChild(rowsWrapper);
+          document.body.appendChild(cloneWrapper);
+
+          const canvas = await html2canvasFn(cloneWrapper, {
+            width: 1080,
+            height: 1920,
+            scale: 1,
+            useCORS: true,
+            backgroundColor: "#16050f"
+          });
+
+          const fileName = `Analisis-Target-4D-HK-Lotto-16Trek-${activeDownloadDateStr}.jpg`;
+          const blob = await new Promise((resolve, reject) => {
+            canvas.toBlob(b => (b ? resolve(b) : reject(new Error("Gagal membuat file JPG."))), "image/jpeg", 0.95);
+          });
+
+          triggerDownloadBlob(blob, fileName);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          if (cloneWrapper && cloneWrapper.parentNode) {
+            cloneWrapper.parentNode.removeChild(cloneWrapper);
+          }
+          btn.disabled = false;
+          btn.textContent = "";
+          originalNodes.forEach(node => btn.appendChild(node));
         }
-        btn.disabled = false;
-        btn.innerHTML = originalBtnHTML;
-      }
-    });
+      });
+    }
   </script>
 </body>
 </html>
