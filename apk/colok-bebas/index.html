@@ -1,579 +1,951 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<meta name="app-version" content="2026.11.22.1">
-<title>APK COLOK BEBAS Tunggal Paito</title>
-<meta name="description" content="Pusat aplikasi Colok Bebas generator Sydney, Singapore, dan Hongkong pools paling akurat. Dapatkan angka jitu colok bebas terbaik dari Tunggal Paito.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="app-version" content="2026.11.22.5">
+  <title>APK COLOK BEBAS Tunggal Paito</title>
+  <meta name="description" content="Pusat aplikasi Colok Bebas generator Sydney, Singapore, dan Hongkong pools paling akurat. Dapatkan angka jitu colok bebas terbaik dari Tunggal Paito.">
+  <meta name="keywords" content="apk colok bebas, tunggal paito colok bebas, colok bebas sdy, colok bebas sgp, colok bebas hk">
+  <meta name="author" content="Tunggal Paito Official">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://tunggalpaito.online/apk/colok-bebas">
 
-<!-- Auto-clear browser cache & check latest HTML version on load -->
-<script>
-(function() {
-  const CURRENT_VER = document.querySelector('meta[name="app-version"]')?.content || '1';
-  const VER_KEY = 'tp_cb_html_ver';
+  <!-- Auto-clear browser cache & check latest HTML version on load -->
+  <script>
+  (function() {
+    const CURRENT_VER = document.querySelector('meta[name="app-version"]')?.content || '1';
+    const VER_KEY = 'tp_cb_theme_ver';
 
-  async function clearBrowserCaches() {
-    try {
-      if ('caches' in window) {
-        const keys = await caches.keys();
-        await Promise.all(keys.map(k => caches.delete(k)));
-      }
-      if ('serviceWorker' in navigator) {
-        const regs = await navigator.serviceWorker.getRegistrations();
-        await Promise.all(regs.map(r => r.unregister()));
-      }
-    } catch (_) {}
-  }
-
-  clearBrowserCaches();
-
-  const savedVer = sessionStorage.getItem(VER_KEY);
-  if (savedVer && savedVer !== CURRENT_VER) {
-    sessionStorage.setItem(VER_KEY, CURRENT_VER);
-    const url = new URL(window.location.href);
-    url.searchParams.set('_v', CURRENT_VER);
-    window.location.replace(url.toString());
-    return;
-  }
-  sessionStorage.setItem(VER_KEY, CURRENT_VER);
-
-  fetch(window.location.pathname + '?_check=' + Date.now(), {
-    cache: 'no-store',
-    headers: { 'Cache-Control': 'no-cache' }
-  })
-  .then(res => res.ok ? res.text() : null)
-  .then(html => {
-    if (!html) return;
-    const match = html.match(/<meta\s+name=["']app-version["']\s+content=["']([^"']+)["']/i);
-    if (match && match[1] && match[1] !== CURRENT_VER) {
-      sessionStorage.setItem(VER_KEY, match[1]);
-      const nextUrl = new URL(window.location.href);
-      nextUrl.searchParams.set('_v', match[1]);
-      window.location.replace(nextUrl.toString());
+    async function clearBrowserCaches() {
+      try {
+        if ('caches' in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.map(k => caches.delete(k)));
+        }
+        if ('serviceWorker' in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map(r => r.unregister()));
+        }
+      } catch (_) {}
     }
-  })
-  .catch(() => {});
-})();
-</script>
 
-<style>
-:root{
-  --bg-main:#07090f;
-  --bg-surface:#0e131f;
-  --border-subtle:rgba(148,163,184,0.18);
-  --border-accent:rgba(56,189,248,0.45);
-  --neon-cyan:#38bdf8;
-  --neon-mint:#2dd4bf;
-  --neon-amber:#fbbf24;
-  --text-primary:#f8fafc;
-  --text-muted:#94a3b8
-}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-body{
-  background-color:var(--bg-main);
-  background-image:
-    radial-gradient(circle at 50% -10%,rgba(56,189,248,0.14),transparent 55%),
-    linear-gradient(180deg,#07090f 0%,#090d16 100%);
-  color:var(--text-primary);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:20px 10px;
-  min-height:100vh;
-  overflow-x:hidden
-}
+    clearBrowserCaches();
 
-/* KOTAK IKLAN BANNER ATAS */
-.ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:18px}
-.ad-box{
-  width:320px;min-height:50px;
-  background-color:var(--bg-surface);
-  border:1px solid var(--border-subtle);
-  display:flex;justify-content:center;align-items:center;
-  overflow:hidden;border-radius:8px
-}
+    const savedVer = sessionStorage.getItem(VER_KEY);
+    if (savedVer && savedVer !== CURRENT_VER) {
+      sessionStorage.setItem(VER_KEY, CURRENT_VER);
+      const url = new URL(window.location.href);
+      url.searchParams.set('_v', CURRENT_VER);
+      window.location.replace(url.toString());
+      return;
+    }
+    sessionStorage.setItem(VER_KEY, CURRENT_VER);
 
-/* KARTU STATUS PENGUNJUNG ONLINE */
-.visitor-card{
-  width:100%;max-width:420px;
-  background:linear-gradient(145deg,rgba(14,19,31,0.96),rgba(10,14,24,0.96));
-  border:1px solid var(--border-accent);
-  border-radius:12px;
-  padding:12px 18px;
-  margin-bottom:18px;
-  display:flex;align-items:center;justify-content:space-between;
-  box-shadow:0 8px 24px rgba(0,0,0,0.45)
-}
-.visitor-card .visitor-info{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px;font-weight:500}
-.visitor-card .online-dot{
-  width:8px;height:8px;
-  background-color:var(--neon-mint);
-  border-radius:50%;
-  box-shadow:0 0 10px var(--neon-mint);
-  animation:pulseDot 1.6s infinite
-}
-.visitor-card .visitor-count{font-size:14px;font-weight:700;color:var(--neon-cyan);letter-spacing:.3px}
-@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.85)}}
+    fetch(window.location.pathname + '?_check=' + Date.now(), {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache' }
+    })
+    .then(res => res.ok ? res.text() : null)
+    .then(html => {
+      if (!html) return;
+      const match = html.match(/<meta\s+name=["']app-version["']\s+content=["']([^"']+)["']/i);
+      if (match && match[1] && match[1] !== CURRENT_VER) {
+        sessionStorage.setItem(VER_KEY, match[1]);
+        const nextUrl = new URL(window.location.href);
+        nextUrl.searchParams.set('_v', match[1]);
+        window.location.replace(nextUrl.toString());
+      }
+    })
+    .catch(() => {});
+  })();
+  </script>
 
-/* KARTU UTAMA MENU */
-.menu-card{
-  width:100%;max-width:420px;
-  background:linear-gradient(180deg,rgba(16,23,38,0.98) 0%,rgba(11,15,25,0.98) 100%);
-  border:1px solid var(--border-accent);
-  border-top:2px solid var(--neon-cyan);
-  border-radius:16px;
-  padding:22px 16px;
-  text-align:center;
-  box-shadow:0 14px 34px rgba(0,0,0,0.65);
-  margin-bottom:20px
-}
-.menu-card h1{
-  font-size:19px;font-weight:800;margin-bottom:6px;
-  color:var(--text-primary);
-  letter-spacing:.7px;
-  text-transform:uppercase
-}
-.menu-card h1::after{
-  content:"";
-  display:block;
-  width:54px;height:3px;
-  margin:8px auto 0;
-  border-radius:99px;
-  background:linear-gradient(90deg,var(--neon-cyan),var(--neon-mint))
-}
-.menu-card p.sub-desc{font-size:12px;color:var(--text-muted);margin-bottom:14px;line-height:1.45}
-
-/* HIMBAUAN PROSES PEMBUATAN */
-.notice-box{
-  background:rgba(56,189,248,0.07);
-  border:1px solid rgba(56,189,248,0.28);
-  border-left:3px solid var(--neon-cyan);
-  border-radius:10px;
-  padding:11px 12px;
-  margin-bottom:16px;
-  text-align:left;
-  font-size:12px;
-  color:#cbd5e1;
-  line-height:1.48
-}
-.notice-box strong{color:var(--neon-cyan)}
-
-/* DAFTAR TOMBOL PASARAN (UKURAN SERAGAM MUTLAK) */
-.market-list{display:flex;flex-direction:column;gap:10px;width:100%}
-.market-btn{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  height:48px;
-  padding:0 16px;
-  background:linear-gradient(90deg,#121929 0%,#182236 100%);
-  color:var(--text-primary);
-  text-decoration:none;
-  border-radius:11px;
-  border:1px solid var(--border-subtle);
-  font-weight:700;
-  font-size:13.5px;
-  line-height:1;
-  transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
-  box-shadow:0 4px 12px rgba(0,0,0,0.35)
-}
-.market-btn:hover{
-  background:linear-gradient(90deg,#172238 0%,#1f2f4d 100%);
-  border-color:var(--neon-cyan);
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(56,189,248,0.16)
-}
-.market-btn span.left-label{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-align:left;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis
-}
-
-.market-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:68px;
-  height:22px;
-  font-size:10px;
-  padding:0 9px;
-  border-radius:99px;
-  font-weight:800;
-  letter-spacing:.4px;
-  text-transform:uppercase;
-  flex-shrink:0
-}
-.market-badge.is-ready{
-  background:rgba(45,212,191,0.16);
-  color:var(--neon-mint);
-  border:1px solid rgba(45,212,191,0.55);
-  box-shadow:0 0 10px rgba(45,212,191,0.18)
-}
-.market-badge.is-process{
-  background:rgba(251,191,36,0.12);
-  color:var(--neon-amber);
-  border:1px solid rgba(251,191,36,0.4)
-}
-
-/* TOAST INFORMASI PROSES PEMBUATAN */
-.dev-toast{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:#0f172a;color:var(--text-primary);
-  border:1px solid var(--neon-cyan);
-  padding:11px 16px;border-radius:11px;font-size:12px;font-weight:600;
-  box-shadow:0 10px 28px rgba(0,0,0,0.7);z-index:10000;
-  opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;
-  max-width:90%;text-align:center;line-height:1.45
-}
-.dev-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* FOOTER COPYRIGHT TUNGGAL PAITO */
-.footer{
-  margin-top:auto;padding:15px 0;
-  color:var(--text-muted);font-size:12px;font-weight:600;
-  text-align:center;letter-spacing:.5px
-}
-.footer span#auto-year{color:var(--neon-cyan)}
-
-/* STYLE POP-UP DOWNLOAD APK */
-.popup-overlay{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(3,6,12,0.78);
-  display:flex;justify-content:center;align-items:center;
-  z-index:9999;opacity:0;visibility:hidden;
-  transition:all .22s ease;backdrop-filter:blur(4px)
-}
-.popup-overlay.active{opacity:1;visibility:visible}
-.popup-box{
-  background:linear-gradient(180deg,#121a2d 0%,#0c111d 100%);
-  border:1px solid var(--border-accent);
-  border-top:2px solid var(--neon-cyan);
-  border-radius:16px;width:90%;max-width:380px;
-  padding:24px 20px;text-align:center;position:relative;
-  box-shadow:0 18px 40px rgba(0,0,0,0.75);
-  transform:scale(.92);transition:transform .22s ease
-}
-.popup-overlay.active .popup-box{transform:scale(1)}
-.popup-close{
-  position:absolute;top:10px;right:14px;
-  background:none;border:none;color:var(--text-muted);
-  font-size:22px;font-weight:bold;cursor:pointer;transition:color .18s ease
-}
-.popup-close:hover{color:var(--text-primary)}
-.popup-icon{font-size:40px;margin-bottom:10px}
-.popup-title{font-size:17px;font-weight:800;color:var(--neon-cyan);margin-bottom:8px}
-.popup-desc{font-size:13px;color:#cbd5e1;margin-bottom:20px;line-height:1.45}
-.download-btn{
-  display:inline-block;width:100%;
-  background:linear-gradient(90deg,var(--neon-cyan),var(--neon-mint));
-  color:#041019;text-decoration:none;padding:13px 0;
-  border-radius:10px;font-weight:800;font-size:14px;letter-spacing:.3px;
-  box-shadow:0 6px 20px rgba(45,212,191,0.28);
-  transition:transform .18s ease,box-shadow .18s ease
-}
-.download-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(56,189,248,0.4)
-}
-</style>
+  <style>
+    @import url(https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@700&display=swap);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    body, html {
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    body {
+      background-color: #050811;
+      background-image: radial-gradient(circle at 50% 0, rgba(56, 189, 248, .14) 0, transparent 55%), linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px, 24px 24px;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 10px 85px 10px;
+      min-height: 100vh;
+    }
+    .btn-back-main {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, .65);
+      backdrop-filter: blur(12px);
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 13px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(56, 189, 248, .35);
+      margin-bottom: 16px;
+      transition: all .25s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .4);
+    }
+    .btn-back-main:hover {
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: #fff;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(56, 189, 248, .35);
+    }
+    .ads-container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .ad-box {
+      width: 320px;
+      height: 50px;
+      background-color: rgba(15, 23, 42, .8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 1px solid rgba(56, 189, 248, .2);
+    }
+    .visitor-card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(15, 23, 42, .65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .4);
+    }
+    .visitor-card .visitor-info {
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .visitor-card .online-dot {
+      width: 9px;
+      height: 9px;
+      background-color: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #10b981;
+      animation: blink 1.5s infinite;
+    }
+    .visitor-card .visitor-count {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: .5px;
+    }
+    @keyframes blink {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .sawer-card {
+      width: 100%;
+      max-width: 480px;
+      background: linear-gradient(145deg, rgba(15, 23, 42, .85), rgba(9, 13, 26, .95));
+      border: 1px solid rgba(56, 189, 248, .35);
+      border-radius: 16px;
+      padding: 16px 14px;
+      margin-bottom: 18px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+      position: relative;
+      overflow: hidden;
+    }
+    .sawer-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #38bdf8, #a855f7, transparent);
+    }
+    .sawer-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      color: #f8fafc;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .sawer-card p {
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .sawer-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(14, 165, 233, .35);
+      transition: all .25s;
+    }
+    .sawer-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(14, 165, 233, .55);
+    }
+    .sawer-btn:active {
+      transform: scale(.98);
+    }
+    .copy-toast {
+      position: fixed;
+      bottom: 85px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      padding: 11px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, .4);
+      display: none;
+      z-index: 9999;
+      animation: popUp .3s cubic-bezier(.175, .885, .32, 1.275);
+    }
+    @keyframes popUp {
+      0% { transform: translate(-50%, 20px); opacity: 0; }
+      100% { transform: translate(-50%, 0); opacity: 1; }
+    }
+    .apk-card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(13, 19, 36, .75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 18px;
+      padding: 18px 14px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .6);
+      margin-bottom: 18px;
+    }
+    .apk-main-header {
+      text-align: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+    .apk-main-header h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      background: linear-gradient(90deg, #38bdf8, #e879f9, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+    .apk-main-header span {
+      display: block;
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    .notice-box {
+      background: rgba(56, 189, 248, .08);
+      border: 1px solid rgba(56, 189, 248, .28);
+      border-left: 3px solid #38bdf8;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .notice-box strong {
+      color: #38bdf8;
+    }
+    .market-section {
+      margin-bottom: 10px;
+    }
+    .market-section:last-child {
+      margin-bottom: 4px;
+    }
+    .market-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .6px;
+    }
+    .market-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .market-tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 10px;
+      min-width: 68px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .header-cb {
+      background: linear-gradient(90deg, rgba(56, 189, 248, .22) 0, rgba(56, 189, 248, .04) 100%);
+      border-left: 4px solid #38bdf8;
+      border-top: 1px solid rgba(56, 189, 248, .25);
+      border-right: 1px solid rgba(56, 189, 248, .1);
+      border-bottom: 1px solid rgba(56, 189, 248, .25);
+      color: #7dd3fc;
+    }
+    .header-cb .market-tag {
+      background: rgba(56, 189, 248, .2);
+      color: #38bdf8;
+    }
+    .apk-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .apk-item {
+      background: rgba(15, 23, 42, .9);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 12px;
+      padding: 11px 12px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      transition: all .25s cubic-bezier(.4, 0, .2, 1);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
+    }
+    .apk-item:hover {
+      background: rgba(30, 41, 59, .95);
+      border-color: rgba(255, 255, 255, .25);
+      transform: translateX(4px);
+    }
+    .apk-item:active {
+      transform: scale(.98);
+    }
+    .apk-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .apk-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: #f8fafc;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .apk-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: .2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .apk-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .status-pill {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    .status-pill.is-ready {
+      background: rgba(16, 185, 129, .18);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, .4);
+    }
+    .status-pill.is-process {
+      background: rgba(251, 191, 36, .14);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, .35);
+    }
+    .apk-action {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #0f172a;
+      background: #f8fafc;
+      padding: 6px 11px;
+      min-width: 64px;
+      border-radius: 8px;
+      letter-spacing: .5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-shrink: 0;
+      transition: all .2s;
+    }
+    .apk-item:hover .apk-action {
+      background: #fbbf24;
+      color: #000;
+    }
+    .keywords-section {
+      width: 100%;
+      max-width: 480px;
+      background-color: rgba(15, 23, 42, .6);
+      border-radius: 14px;
+      padding: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, .07);
+    }
+    .keywords-section h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+    .keywords-section p {
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    .footer {
+      margin-top: auto;
+      padding: 15px 0;
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: .5px;
+    }
+    .mini-apk-popup {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 9998;
+      width: 270px;
+      background: rgba(11, 17, 32, .92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, .45);
+      border-radius: 16px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .75), 0 0 18px rgba(56, 189, 248, .2);
+      animation: slideInPopup .55s cubic-bezier(.16, 1, .3, 1) forwards;
+    }
+    .mini-apk-popup::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #38bdf8, #e879f9, transparent);
+    }
+    @keyframes slideInPopup {
+      0% { opacity: 0; transform: translateY(30px) scale(.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .mini-apk-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, .4);
+    }
+    .mini-apk-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .mini-apk-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.2;
+    }
+    .mini-apk-sub {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    .mini-apk-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      text-decoration: none;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 7px 10px;
+      border-radius: 9px;
+      flex-shrink: 0;
+      letter-spacing: .3px;
+      box-shadow: 0 3px 10px rgba(16, 185, 129, .35);
+      transition: all .2s ease;
+    }
+    .mini-apk-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 14px rgba(16, 185, 129, .55);
+    }
+    .mini-apk-close {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: #cbd5e1;
+      font-size: 12px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .mini-apk-close:hover {
+      background: #ef4444;
+      color: #fff;
+      border-color: #ef4444;
+    }
+  </style>
 </head>
 <body>
+  <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
+    <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    <span>Kembali ke Menu Utama</span>
+  </a>
 
-<!-- KOTAK IKLAN BANNER (4 BUAH) -->
-<div class="ads-container">
-  <div class="ad-box" id="ad-slot-1"></div>
-  <div class="ad-box" id="ad-slot-2"></div>
-  <div class="ad-box" id="ad-slot-3"></div>
-  <div class="ad-box" id="ad-slot-4"></div>
-</div>
-<script>
-(function() {
-  const slots = ["ad-slot-1", "ad-slot-2", "ad-slot-3", "ad-slot-4"];
-  const adConfig = {
-    key: "119c8bb3217ed264a8fa223c3197bf69",
-    format: "iframe",
-    height: 50,
-    width: 320,
-    params: {}
-  };
-  slots.forEach(function(id) {
-    const box = document.getElementById(id);
-    if (!box) return;
-    const cfgScript = document.createElement("script");
-    cfgScript.type = "text/javascript";
-    cfgScript.text = "atOptions = " + JSON.stringify(adConfig) + ";";
-    const invokeScript = document.createElement("script");
-    invokeScript.type = "text/javascript";
-    invokeScript.async = true;
-    invokeScript.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
-    box.appendChild(cfgScript);
-    box.appendChild(invokeScript);
-  });
-})();
-</script>
-
-<!-- KARTU STATUS PENGUNJUNG ONLINE -->
-<div class="visitor-card">
-  <div class="visitor-info">
-    <div class="online-dot"></div>
-    <span>Pengunjung Online :</span>
-  </div>
-  <div class="visitor-count" id="visitor-count-text">348</div>
-</div>
-
-<!-- KARTU UTAMA MENU PASARAN -->
-<div class="menu-card">
-  <h1>APK COLOK BEBAS TUNGGAL PAITO OFFICIAL</h1>
-  <p class="sub-desc">Berikut ini aplikasi Colok Bebas lengkap untuk anda, salam hoki &amp; goodluck.</p>
-
-  <div class="notice-box" id="noticeBox">
-    <strong>Himbauan:</strong> Pasaran yang sudah siap saat ini baru <strong id="readyMarketsText">SDY, SGP, dan HK</strong>. Pasaran berstatus <strong>Proses</strong> masih dalam tahap pembuatan dan akan otomatis menjadi <strong>Update</strong> begitu halamannya tersedia.
+  <div class="ads-container">
+    <div class="ad-box">
+      <div style="width:100%;text-align:center;overflow:hidden">
+        <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+        <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+      </div>
+    </div>
+    <div class="ad-box">
+      <div style="width:100%;text-align:center;overflow:hidden">
+        <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+        <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+      </div>
+    </div>
+    <div class="ad-box">
+      <div style="width:100%;text-align:center;overflow:hidden">
+        <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+        <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+      </div>
+    </div>
+    <div class="ad-box">
+      <div style="width:100%;text-align:center;overflow:hidden">
+        <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
+        <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+      </div>
+    </div>
   </div>
 
-  <div class="market-list" id="marketList">
-    <a href="https://tunggalpaito.online/apk/colok-bebas/cambodia/" class="market-btn" data-market="CAMBODIA" data-short="Cambodia" data-ready="false">
-      <span class="left-label">🇰🇭 CAMBODIA</span>
-      <span class="market-badge is-process">Proses</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/sdy/" class="market-btn" data-market="SYDNEY POOLS" data-short="SDY" data-ready="true">
-      <span class="left-label">🇦🇺 SYDNEY POOLS</span>
-      <span class="market-badge is-ready">Update</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/sdylotto/" class="market-btn" data-market="SYDNEY LOTTO" data-short="Sydney Lotto" data-ready="false">
-      <span class="left-label">🇦🇺 SYDNEY LOTTO</span>
-      <span class="market-badge is-process">Proses</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/china/" class="market-btn" data-market="CHINA" data-short="China" data-ready="false">
-      <span class="left-label">🇨🇳 CHINA</span>
-      <span class="market-badge is-process">Proses</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/japan/" class="market-btn" data-market="JAPAN" data-short="Japan" data-ready="false">
-      <span class="left-label">🇯🇵 JAPAN</span>
-      <span class="market-badge is-process">Proses</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/sgp/" class="market-btn" data-market="SINGAPORE POOLS" data-short="SGP" data-ready="true">
-      <span class="left-label">🇸🇬 SINGAPORE POOLS</span>
-      <span class="market-badge is-ready">Update</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/taiwan/" class="market-btn" data-market="TAIWAN" data-short="Taiwan" data-ready="false">
-      <span class="left-label">🇹🇼 TAIWAN</span>
-      <span class="market-badge is-process">Proses</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/hk/" class="market-btn" data-market="HONGKONG POOLS" data-short="HK" data-ready="true">
-      <span class="left-label">🇭🇰 HONGKONG POOLS</span>
-      <span class="market-badge is-ready">Update</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/hklotto/" class="market-btn" data-market="HONGKONG LOTTO" data-short="HK Lotto" data-ready="false">
-      <span class="left-label">🇭🇰 HONGKONG LOTTO</span>
-      <span class="market-badge is-process">Proses</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/macau4d/" class="market-btn" data-market="MACAU 4D" data-short="Macau 4D" data-ready="false">
-      <span class="left-label">🇲🇴 MACAU 4D</span>
-      <span class="market-badge is-process">Proses</span>
-    </a>
-
-    <a href="https://tunggalpaito.online/apk/colok-bebas/macau5d/" class="market-btn" data-market="MACAU 5D" data-short="Macau 5D" data-ready="false">
-      <span class="left-label">🇲🇴 MACAU 5D</span>
-      <span class="market-badge is-process">Proses</span>
-    </a>
+  <div class="visitor-card">
+    <div class="visitor-info">
+      <div class="online-dot"></div>
+      <span>Pengunjung Online</span>
+    </div>
+    <div class="visitor-count" id="visitor-count-text"></div>
   </div>
-</div>
 
-<!-- FOOTER COPYRIGHT TUNGGAL PAITO OTOMATIS -->
-<div class="footer">
-  &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
-</div>
+  <div class="sawer-card">
+    <h3>🔥 Salam HOKI Satu HATI</h3>
+    <p>"Prediksi Pools 100% Gratis & Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit seikhlasnya melalui DANA untuk mendukung operasional admin."</p>
+    <button type="button" class="sawer-btn" id="btn-copy-dana">
+      <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-.25c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zM19 19H5V5h14v14z"/></svg>
+      <span>Salin Nomor DANA: 082152036787</span>
+    </button>
+  </div>
 
-<!-- TOAST HIMBAUAN -->
-<div class="dev-toast" id="devToast"></div>
+  <div class="copy-toast" id="copy-toast">Nomor DANA berhasil disalin!</div>
 
-<!-- POP-UP MODAL DOWNLOAD APK -->
-<div class="popup-overlay" id="apkModal">
-  <div class="popup-box">
-    <button type="button" class="popup-close" id="closePopup" aria-label="Tutup">&times;</button>
-    <div class="popup-icon">📱</div>
-    <div class="popup-title">Download APK Colok Bebas</div>
-    <div class="popup-desc">Dapatkan Akses Colok Bebas lebih cepat dan praktis langsung dari aplikasi Android Anda.</div>
+  <div class="apk-card">
+    <div class="apk-main-header">
+      <h1>APK COLOK BEBAS TUNGGAL PAITO OFFICIAL</h1>
+      <span>Berikut ini aplikasi Colok Bebas lengkap untuk anda, salam hoki &amp; goodluck.</span>
+    </div>
+
+    <div class="notice-box" id="noticeBox">
+      <strong>Himbauan:</strong> Pasaran yang sudah siap saat ini baru <strong id="readyMarketsText">SDY, SGP, dan HK</strong>. Pasaran berstatus <strong>PROSES</strong> masih dalam tahap pembuatan dan akan otomatis menjadi <strong>UPDATE</strong> begitu halamannya tersedia.
+    </div>
+
+    <div class="market-section">
+      <div class="market-header header-cb">
+        <div class="market-header-left">
+          <span>PILIHAN PASARAN</span>
+        </div>
+        <span class="market-tag">CB</span>
+      </div>
+      <div class="apk-list" id="marketList">
+        <a href="https://tunggalpaito.online/apk/colok-bebas/cambodia/" class="apk-item" data-market="CAMBODIA" data-short="Cambodia" data-ready="false">
+          <div class="apk-left">
+            <span class="apk-num">1</span>
+            <span class="apk-name">🇰🇭 COLOK BEBAS CAMBODIA</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-process">PROSES</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/sdy/" class="apk-item" data-market="SYDNEY POOLS" data-short="SDY" data-ready="true">
+          <div class="apk-left">
+            <span class="apk-num">2</span>
+            <span class="apk-name">🇦🇺 COLOK BEBAS SYDNEY POOLS</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-ready">UPDATE</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/sdylotto/" class="apk-item" data-market="SYDNEY LOTTO" data-short="Sydney Lotto" data-ready="false">
+          <div class="apk-left">
+            <span class="apk-num">3</span>
+            <span class="apk-name">🇦🇺 COLOK BEBAS SYDNEY LOTTO</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-process">PROSES</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/china/" class="apk-item" data-market="CHINA" data-short="China" data-ready="false">
+          <div class="apk-left">
+            <span class="apk-num">4</span>
+            <span class="apk-name">🇨🇳 COLOK BEBAS CHINA</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-process">PROSES</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/japan/" class="apk-item" data-market="JAPAN" data-short="Japan" data-ready="false">
+          <div class="apk-left">
+            <span class="apk-num">5</span>
+            <span class="apk-name">🇯🇵 COLOK BEBAS JAPAN</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-process">PROSES</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/sgp/" class="apk-item" data-market="SINGAPORE POOLS" data-short="SGP" data-ready="true">
+          <div class="apk-left">
+            <span class="apk-num">6</span>
+            <span class="apk-name">🇸🇬 COLOK BEBAS SINGAPORE POOLS</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-ready">UPDATE</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/taiwan/" class="apk-item" data-market="TAIWAN" data-short="Taiwan" data-ready="false">
+          <div class="apk-left">
+            <span class="apk-num">7</span>
+            <span class="apk-name">🇹🇼 COLOK BEBAS TAIWAN</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-process">PROSES</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/hk/" class="apk-item" data-market="HONGKONG POOLS" data-short="HK" data-ready="true">
+          <div class="apk-left">
+            <span class="apk-num">8</span>
+            <span class="apk-name">🇭🇰 COLOK BEBAS HONGKONG POOLS</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-ready">UPDATE</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/hklotto/" class="apk-item" data-market="HONGKONG LOTTO" data-short="HK Lotto" data-ready="false">
+          <div class="apk-left">
+            <span class="apk-num">9</span>
+            <span class="apk-name">🇭🇰 COLOK BEBAS HONGKONG LOTTO</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-process">PROSES</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/macau4d/" class="apk-item" data-market="MACAU 4D" data-short="Macau 4D" data-ready="false">
+          <div class="apk-left">
+            <span class="apk-num">10</span>
+            <span class="apk-name">🇲🇴 COLOK BEBAS MACAU 4D</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-process">PROSES</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+
+        <a href="https://tunggalpaito.online/apk/colok-bebas/macau5d/" class="apk-item" data-market="MACAU 5D" data-short="Macau 5D" data-ready="false">
+          <div class="apk-left">
+            <span class="apk-num">11</span>
+            <span class="apk-name">🇲🇴 COLOK BEBAS MACAU 5D</span>
+          </div>
+          <div class="apk-right">
+            <span class="status-pill is-process">PROSES</span>
+            <span class="apk-action">GAS ➔</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="keywords-section">
+    <h3>APK COLOK BEBAS TUNGGAL PAITO</h3>
+    <p>Pusat aplikasi Colok Bebas generator Sydney, Singapore, dan Hongkong pools paling akurat. Dapatkan angka jitu colok bebas terbaik dari Tunggal Paito.</p>
+  </div>
+
+  <div class="footer">
+    &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
+  </div>
+
+  <div class="mini-apk-popup" id="mini-apk-popup">
+    <button type="button" class="mini-apk-close" id="close-apk-popup" aria-label="Tutup">&times;</button>
+    <div class="mini-apk-icon">
+      <svg style="width:20px;height:20px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85-.29-.15-.65-.06-.83.22l-1.88 3.24c-2.86-1.21-6.08-1.21-8.94 0L5.65 5.67c-.19-.28-.54-.37-.83-.22-.3.16-.42.54-.26.85l1.84 3.18C4.8 10.85 3.5 12.62 3.5 14.5h17c0-1.88-1.3-3.65-2.9-5.02zM8.5 12.5c-.41 0-.75-.34-.75-.75s.34-.75.75-.75.75.34.75.75-.34.75-.75.75zm7 0c-.41 0-.75-.34-.75-.75s.34-.75.75-.75.75.34.75.75-.34.75-.75.75zM5 16v4c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-4H5z"/></svg>
+    </div>
+    <div class="mini-apk-info">
+      <div class="mini-apk-title">COLOK BEBAS APK</div>
+      <div class="mini-apk-sub">Akses lebih cepat &amp; praktis</div>
+    </div>
     <!-- Ganti href di bawah dengan tautan download APK Colok Bebas Anda -->
-    <a href="#download-apk"
-       class="download-btn"
-       id="downloadBtn"
-       target="_blank"
-       rel="noopener noreferrer">📥 DOWNLOAD SEKARANG</a>
+    <a href="#download-apk" id="mini-apk-btn" target="_blank" rel="noopener noreferrer" class="mini-apk-btn">UNDUH</a>
   </div>
-</div>
 
-<script>
-document.getElementById("auto-year").textContent = new Date().getFullYear();
+  <script>
+    document.getElementById("auto-year").textContent = (new Date).getFullYear();
 
-let currentReadyListText = "SDY, SGP, dan HK";
-let toastTimer = null;
-
-function formatIndonesianList(items) {
-  if (!items.length) return "belum ada";
-  if (items.length === 1) return items[0];
-  if (items.length === 2) return `${items[0]} dan ${items[1]}`;
-  return `${items.slice(0, -1).join(", ")}, dan ${items[items.length - 1]}`;
-}
-
-function refreshReadyMarketsSummary() {
-  const readyBtns = Array.from(document.querySelectorAll("#marketList .market-btn"))
-    .filter(btn => btn.dataset.ready === "true");
-  const names = readyBtns.map(btn => btn.dataset.short || btn.dataset.market || "").filter(Boolean);
-  currentReadyListText = formatIndonesianList(names);
-
-  const readyEl = document.getElementById("readyMarketsText");
-  if (readyEl) {
-    readyEl.textContent = currentReadyListText;
-  }
-}
-
-function showProcessNotice(marketName) {
-  const toast = document.getElementById("devToast");
-  if (!toast) return;
-  toast.textContent = `Himbauan: Pasaran ${marketName} masih dalam proses pembuatan. Yang sudah tersedia: ${currentReadyListText}.`;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 3600);
-}
-
-function applyMarketReadyState(btn, isReady) {
-  const badge = btn.querySelector(".market-badge");
-  btn.dataset.ready = isReady ? "true" : "false";
-  if (badge) {
-    badge.textContent = isReady ? "Update" : "Proses";
-    badge.classList.toggle("is-ready", isReady);
-    badge.classList.toggle("is-process", !isReady);
-  }
-  refreshReadyMarketsSummary();
-}
-
-async function checkMarketAvailability(btn) {
-  if (btn.dataset.ready === "true") {
-    applyMarketReadyState(btn, true);
-    return;
-  }
-
-  const targetUrl = btn.getAttribute("href");
-  if (!targetUrl || targetUrl.startsWith("#")) return;
-
-  const cacheKey = "cb_avail_" + targetUrl;
-  const cached = sessionStorage.getItem(cacheKey);
-  if (cached === "1") {
-    applyMarketReadyState(btn, true);
-    return;
-  }
-
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3500);
-    const resp = await fetch(targetUrl, {
-      method: "GET",
-      cache: "no-store",
-      signal: controller.signal
+    document.getElementById("close-apk-popup").addEventListener("click", function() {
+      document.getElementById("mini-apk-popup").style.display = "none";
     });
-    clearTimeout(timeoutId);
 
-    if (resp && resp.ok) {
-      const text = await resp.text();
-      const lower = text.toLowerCase();
-      const looksLike404 =
-        lower.includes("<title>404") ||
-        lower.includes("not found") ||
-        lower.includes("halaman tidak ditemukan") ||
-        lower.includes("page not found");
+    document.getElementById("mini-apk-btn").addEventListener("click", function(e) {
+      if (this.getAttribute("href") === "#download-apk") {
+        e.preventDefault();
+      }
+    });
 
-      if (!looksLike404 && text.trim().length > 0) {
-        sessionStorage.setItem(cacheKey, "1");
-        applyMarketReadyState(btn, true);
+    document.getElementById("btn-copy-dana").addEventListener("click", function() {
+      navigator.clipboard.writeText("082152036787").then(() => {
+        const t = document.getElementById("copy-toast");
+        t.style.display = "block";
+        setTimeout(() => { t.style.display = "none"; }, 2000);
+      }).catch(() => {
+        alert("Gagal menyalin nomor. Silakan salin manual: 082152036787");
+      });
+    });
+
+    let currentVisitors = Math.floor(151 * Math.random()) + 150, scrollScore = 0;
+    const visitorText = document.getElementById("visitor-count-text");
+    function scheduleNextVisitorUpdate() {
+      let t = Math.floor(180001 * Math.random()) + 120000;
+      setTimeout(() => {
+        if (scrollScore > 5) {
+          currentVisitors += Math.floor(20 * Math.random()) + 5;
+        } else if (scrollScore > 0) {
+          currentVisitors += Math.floor(10 * Math.random()) - 4;
+        } else {
+          currentVisitors -= Math.floor(12 * Math.random()) + 3;
+        }
+        currentVisitors > 2500 ? currentVisitors = 2500 : currentVisitors < 80 && (currentVisitors = 80);
+        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " Online";
+        scrollScore = 0;
+        scheduleNextVisitorUpdate();
+      }, t);
+    }
+    visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " Online";
+    window.addEventListener("scroll", function() { scrollScore += 1; });
+    scheduleNextVisitorUpdate();
+
+    let currentReadyListText = "SDY, SGP, dan HK";
+    function formatIndonesianList(items) {
+      if (!items.length) return "belum ada";
+      if (items.length === 1) return items[0];
+      if (items.length === 2) return `${items[0]} dan ${items[1]}`;
+      return `${items.slice(0, -1).join(", ")}, dan ${items[items.length - 1]}`;
+    }
+
+    function refreshReadyMarketsSummary() {
+      const readyItems = Array.from(document.querySelectorAll("#marketList .apk-item"))
+        .filter(item => item.dataset.ready === "true");
+      const names = readyItems.map(item => item.dataset.short || item.dataset.market || "").filter(Boolean);
+      currentReadyListText = formatIndonesianList(names);
+      const readyEl = document.getElementById("readyMarketsText");
+      if (readyEl) readyEl.textContent = currentReadyListText;
+    }
+
+    function applyMarketReadyState(item, isReady) {
+      const pill = item.querySelector(".status-pill");
+      item.dataset.ready = isReady ? "true" : "false";
+      if (pill) {
+        pill.textContent = isReady ? "UPDATE" : "PROSES";
+        pill.classList.toggle("is-ready", isReady);
+        pill.classList.toggle("is-process", !isReady);
+      }
+      refreshReadyMarketsSummary();
+    }
+
+    async function checkMarketAvailability(item) {
+      if (item.dataset.ready === "true") {
+        applyMarketReadyState(item, true);
         return;
       }
-    }
-  } catch (_) {}
+      const targetUrl = item.getAttribute("href");
+      if (!targetUrl || targetUrl.startsWith("#")) return;
 
-  applyMarketReadyState(btn, false);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  refreshReadyMarketsSummary();
-
-  const btns = document.querySelectorAll("#marketList .market-btn");
-  btns.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      if (btn.dataset.ready !== "true") {
-        e.preventDefault();
-        showProcessNotice(btn.dataset.market || "ini");
+      const cacheKey = "cb_theme_avail_" + targetUrl;
+      if (sessionStorage.getItem(cacheKey) === "1") {
+        applyMarketReadyState(item, true);
+        return;
       }
+
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const resp = await fetch(targetUrl, {
+          method: "GET",
+          cache: "no-store",
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (resp && resp.ok) {
+          const text = await resp.text();
+          const lower = text.toLowerCase();
+          const looksLike404 =
+            lower.includes("<title>404") ||
+            lower.includes("not found") ||
+            lower.includes("halaman tidak ditemukan") ||
+            lower.includes("page not found");
+          if (!looksLike404 && text.trim().length > 0) {
+            sessionStorage.setItem(cacheKey, "1");
+            applyMarketReadyState(item, true);
+            return;
+          }
+        }
+      } catch (_) {}
+
+      applyMarketReadyState(item, false);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      refreshReadyMarketsSummary();
+      const toast = document.getElementById("copy-toast");
+      document.querySelectorAll("#marketList .apk-item").forEach(item => {
+        item.addEventListener("click", (e) => {
+          if (item.dataset.ready !== "true") {
+            e.preventDefault();
+            if (toast) {
+              toast.textContent = `Himbauan: ${item.dataset.market || "Pasaran ini"} masih proses. Tersedia: ${currentReadyListText}.`;
+              toast.style.display = "block";
+              setTimeout(() => { toast.style.display = "none"; }, 3400);
+            }
+          }
+        });
+        checkMarketAvailability(item);
+      });
     });
-    checkMarketAvailability(btn);
-  });
 
-  const hasDownloaded = localStorage.getItem("tunggalPaitoColokBebasDownloaded");
-  if (!hasDownloaded) {
-    setTimeout(() => {
-      apkModal.classList.add("active");
-    }, 2000);
-  }
-});
-
-// Logika Pengunjung Online Dinamis
-let currentVisitors = Math.floor(Math.random() * 151) + 200;
-const visitorText = document.getElementById("visitor-count-text");
-visitorText.textContent = currentVisitors.toLocaleString("id-ID");
-
-function updateVisitorCount() {
-  const isIncrease = Math.random() > 0.4;
-  const change = Math.floor(Math.random() * 6) + 1;
-  currentVisitors += isIncrease ? change : -change;
-  if (currentVisitors > 4500) currentVisitors = 4500;
-  if (currentVisitors < 120) currentVisitors = 120;
-  visitorText.textContent = currentVisitors.toLocaleString("id-ID");
-  setTimeout(updateVisitorCount, Math.floor(Math.random() * 180000) + 120000);
-}
-setTimeout(updateVisitorCount, 150000);
-
-// Logika Kontrol Pop-up Download APK & localStorage
-const apkModal = document.getElementById("apkModal");
-const closePopup = document.getElementById("closePopup");
-const downloadBtn = document.getElementById("downloadBtn");
-
-downloadBtn.addEventListener("click", (e) => {
-  if (downloadBtn.getAttribute("href") === "#download-apk") {
-    e.preventDefault();
-  }
-  localStorage.setItem("tunggalPaitoColokBebasDownloaded", "true");
-  apkModal.classList.remove("active");
-});
-
-closePopup.addEventListener("click", () => {
-  apkModal.classList.remove("active");
-});
-
-apkModal.addEventListener("click", (e) => {
-  if (e.target === apkModal) {
-    apkModal.classList.remove("active");
-  }
-});
-</script>
+    let clickCount = 0;
+    const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
+    document.addEventListener("click", function(t) {
+      const e = document.getElementById("btn-copy-dana");
+      (e && (t.target === e || e.contains(t.target)) || t.target.closest(".btn-back-main") || t.target.closest(".apk-item") || t.target.closest(".mini-apk-popup")) || (clickCount++, 1 !== clickCount && (clickCount - 1) % 3 != 0 || window.open(adLink, "_blank"));
+    }, true);
+    document.addEventListener("contextmenu", t => t.preventDefault());
+    document.onkeydown = function(t) {
+      return 123 != t.keyCode && (!t.ctrlKey || !t.shiftKey || t.keyCode != "I".charCodeAt(0)) && (!t.ctrlKey || !t.shiftKey || t.keyCode != "C".charCodeAt(0)) && (!t.ctrlKey || !t.shiftKey || t.keyCode != "J".charCodeAt(0)) && (!t.ctrlKey || t.keyCode != "U".charCodeAt(0)) && void 0;
+    };
+  </script>
 </body>
 </html>
