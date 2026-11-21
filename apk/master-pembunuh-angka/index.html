@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-version" content="2026.11.22.5">
+<meta name="app-version" content="2026.11.22.9">
 <title>MASTER PEMBUNUH ANGKA - Tunggal Paito</title>
 <meta name="description" content="Pusat aplikasi Master Pembunuh Angka Lemah 2D generator Sydney, Singapore, dan Hongkong pools paling akurat dari Tunggal Paito.">
 
@@ -61,38 +61,107 @@
 </script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background-color:#030712;color:#fff;display:flex;flex-direction:column;align-items:center;padding:20px 10px;min-height:100vh;overflow-x:hidden}
+:root{
+  --bg-main:#07090f;
+  --bg-surface:#0e131f;
+  --bg-elevated:#141b2d;
+  --border-subtle:rgba(148,163,184,0.18);
+  --border-accent:rgba(56,189,248,0.45);
+  --neon-cyan:#38bdf8;
+  --neon-mint:#2dd4bf;
+  --neon-amber:#fbbf24;
+  --text-primary:#f8fafc;
+  --text-muted:#94a3b8
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+body{
+  background-color:var(--bg-main);
+  background-image:
+    radial-gradient(circle at 50% -10%,rgba(56,189,248,0.14),transparent 55%),
+    linear-gradient(180deg,#07090f 0%,#090d16 100%);
+  color:var(--text-primary);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 10px;
+  min-height:100vh;
+  overflow-x:hidden
+}
 
 /* KOTAK IKLAN BANNER ATAS */
-.ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
-.ad-box{width:320px;min-height:50px;background-color:#222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:4px}
+.ads-container{width:100%;max-width:450px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:18px}
+.ad-box{
+  width:320px;min-height:50px;
+  background-color:var(--bg-surface);
+  border:1px solid var(--border-subtle);
+  display:flex;justify-content:center;align-items:center;
+  overflow:hidden;border-radius:8px
+}
 
 /* KARTU STATUS PENGUNJUNG ONLINE */
-.visitor-card{width:100%;max-width:420px;background:rgba(15,23,42,0.92);border:1px solid #ffe600;border-radius:10px;padding:12px 18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 15px rgba(0,0,0,0.5)}
-.visitor-card .visitor-info{font-size:12px;color:#cbd5e1;display:flex;align-items:center;gap:8px}
-.visitor-card .online-dot{width:8px;height:8px;background-color:#00ff88;border-radius:50%;box-shadow:0 0 8px #00ff88;animation:blink 1.5s infinite}
-.visitor-card .visitor-count{font-size:14px;font-weight:bold;color:#ffe600}
-@keyframes blink{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+.visitor-card{
+  width:100%;max-width:420px;
+  background:linear-gradient(145deg,rgba(14,19,31,0.96),rgba(10,14,24,0.96));
+  border:1px solid var(--border-accent);
+  border-radius:12px;
+  padding:12px 18px;
+  margin-bottom:18px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 8px 24px rgba(0,0,0,0.45)
+}
+.visitor-card .visitor-info{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px;font-weight:500}
+.visitor-card .online-dot{
+  width:8px;height:8px;
+  background-color:var(--neon-mint);
+  border-radius:50%;
+  box-shadow:0 0 10px var(--neon-mint);
+  animation:pulseDot 1.6s infinite
+}
+.visitor-card .visitor-count{font-size:14px;font-weight:700;color:var(--neon-cyan);letter-spacing:.3px}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.85)}}
 
 /* KARTU UTAMA MENU */
-.menu-card{width:100%;max-width:420px;background:#161322;border:1px solid rgba(255,230,0,0.4);border-radius:14px;padding:22px 16px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,.6);margin-bottom:20px}
-.menu-card h1{font-size:20px;font-weight:700;margin-bottom:8px;color:#ffe600;letter-spacing:.5px}
-.menu-card p.sub-desc{font-size:12px;color:#94a3b8;margin-bottom:14px;line-height:1.45}
+.menu-card{
+  width:100%;max-width:420px;
+  background:linear-gradient(180deg,rgba(16,23,38,0.98) 0%,rgba(11,15,25,0.98) 100%);
+  border:1px solid var(--border-accent);
+  border-top:2px solid var(--neon-cyan);
+  border-radius:16px;
+  padding:22px 16px;
+  text-align:center;
+  box-shadow:0 14px 34px rgba(0,0,0,0.65);
+  margin-bottom:20px
+}
+.menu-card h1{
+  font-size:19px;font-weight:800;margin-bottom:6px;
+  color:var(--text-primary);
+  letter-spacing:.8px;
+  text-transform:uppercase
+}
+.menu-card h1::after{
+  content:"";
+  display:block;
+  width:54px;height:3px;
+  margin:8px auto 0;
+  border-radius:99px;
+  background:linear-gradient(90deg,var(--neon-cyan),var(--neon-mint))
+}
+.menu-card p.sub-desc{font-size:12px;color:var(--text-muted);margin-bottom:14px;line-height:1.45}
 
 /* HIMBAUAN PROSES PEMBUATAN */
 .notice-box{
-  background:rgba(255,230,0,0.08);
-  border:1px solid rgba(255,230,0,0.45);
+  background:rgba(56,189,248,0.07);
+  border:1px solid rgba(56,189,248,0.28);
+  border-left:3px solid var(--neon-cyan);
   border-radius:10px;
   padding:11px 12px;
   margin-bottom:16px;
   text-align:left;
   font-size:12px;
-  color:#fde68a;
-  line-height:1.45
+  color:#cbd5e1;
+  line-height:1.48
 }
-.notice-box strong{color:#ffe600}
+.notice-box strong{color:var(--neon-cyan)}
 
 /* DAFTAR TOMBOL PASARAN MASTER (UKURAN SERAGAM MUTLAK) */
 .market-list{display:flex;flex-direction:column;gap:10px;width:100%}
@@ -103,18 +172,23 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
   width:100%;
   height:48px;
   padding:0 16px;
-  background:linear-gradient(135deg,#1f1a3a,#2e2557);
-  color:#fff;
+  background:linear-gradient(90deg,#121929 0%,#182236 100%);
+  color:var(--text-primary);
   text-decoration:none;
-  border-radius:10px;
-  border:1px solid rgba(255,230,0,0.4);
-  font-weight:bold;
-  font-size:14px;
+  border-radius:11px;
+  border:1px solid var(--border-subtle);
+  font-weight:700;
+  font-size:13.5px;
   line-height:1;
-  transition:transform .2s ease,border-color .2s ease,background .2s ease;
-  box-shadow:0 4px 12px rgba(0,0,0,0.3)
+  transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,0.35)
 }
-.market-btn:hover{background:linear-gradient(135deg,#2e2557,#42357a);border-color:#ffe600;transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,230,0,0.2)}
+.market-btn:hover{
+  background:linear-gradient(90deg,#172238 0%,#1f2f4d 100%);
+  border-color:var(--neon-cyan);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(56,189,248,0.16)
+}
 .market-btn span.left-label{
   display:flex;
   align-items:center;
@@ -132,49 +206,85 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
   min-width:68px;
   height:22px;
   font-size:10px;
-  padding:0 8px;
-  border-radius:20px;
-  font-weight:700;
+  padding:0 9px;
+  border-radius:99px;
+  font-weight:800;
+  letter-spacing:.4px;
   text-transform:uppercase;
   flex-shrink:0
 }
 .market-badge.is-ready{
-  background:#00ff88;
-  color:#000;
-  box-shadow:0 0 8px rgba(0,255,136,0.5)
+  background:rgba(45,212,191,0.16);
+  color:var(--neon-mint);
+  border:1px solid rgba(45,212,191,0.55);
+  box-shadow:0 0 10px rgba(45,212,191,0.18)
 }
 .market-badge.is-process{
-  background:rgba(255,230,0,0.16);
-  color:#ffe600;
-  border:1px solid rgba(255,230,0,0.45)
+  background:rgba(251,191,36,0.12);
+  color:var(--neon-amber);
+  border:1px solid rgba(251,191,36,0.4)
 }
 
 /* TOAST INFORMASI PROSES PEMBUATAN */
 .dev-toast{
   position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:#1e293b;color:#ffe600;border:1px solid #ffe600;
-  padding:10px 16px;border-radius:10px;font-size:12px;font-weight:bold;
-  box-shadow:0 6px 20px rgba(0,0,0,0.6);z-index:10000;
-  opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;
-  max-width:90%;text-align:center
+  background:#0f172a;color:var(--text-primary);
+  border:1px solid var(--neon-cyan);
+  padding:11px 16px;border-radius:11px;font-size:12px;font-weight:600;
+  box-shadow:0 10px 28px rgba(0,0,0,0.7);z-index:10000;
+  opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;
+  max-width:90%;text-align:center;line-height:1.45
 }
 .dev-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* FOOTER COPYRIGHT TUNGGAL PAITO */
-.footer{margin-top:auto;padding:15px 0;color:#ffe600;font-size:12px;font-weight:700;text-align:center;letter-spacing:.5px}
+.footer{
+  margin-top:auto;padding:15px 0;
+  color:var(--text-muted);font-size:12px;font-weight:600;
+  text-align:center;letter-spacing:.5px
+}
+.footer span#auto-year{color:var(--neon-cyan)}
 
 /* STYLE POP-UP DOWNLOAD APK */
-.popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);display:flex;justify-content:center;align-items:center;z-index:9999;opacity:0;visibility:hidden;transition:all 0.25s ease;backdrop-filter:blur(3px)}
+.popup-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(3,6,12,0.78);
+  display:flex;justify-content:center;align-items:center;
+  z-index:9999;opacity:0;visibility:hidden;
+  transition:all .22s ease;backdrop-filter:blur(4px)
+}
 .popup-overlay.active{opacity:1;visibility:visible}
-.popup-box{background:#161322;border:2px solid #ffe600;border-radius:16px;width:90%;max-width:380px;padding:24px 20px;text-align:center;position:relative;box-shadow:0 0 25px rgba(255,230,0,0.4);transform:scale(0.9);transition:transform 0.25s ease}
+.popup-box{
+  background:linear-gradient(180deg,#121a2d 0%,#0c111d 100%);
+  border:1px solid var(--border-accent);
+  border-top:2px solid var(--neon-cyan);
+  border-radius:16px;width:90%;max-width:380px;
+  padding:24px 20px;text-align:center;position:relative;
+  box-shadow:0 18px 40px rgba(0,0,0,0.75);
+  transform:scale(.92);transition:transform .22s ease
+}
 .popup-overlay.active .popup-box{transform:scale(1)}
-.popup-close{position:absolute;top:10px;right:14px;background:none;border:none;color:#94a3b8;font-size:22px;font-weight:bold;cursor:pointer;transition:color 0.2s}
-.popup-close:hover{color:#fff}
-.popup-icon{font-size:42px;margin-bottom:10px}
-.popup-title{font-size:18px;font-weight:bold;color:#ffe600;margin-bottom:8px}
-.popup-desc{font-size:13px;color:#cbd5e1;margin-bottom:20px;line-height:1.4}
-.download-btn{display:inline-block;width:100%;background:linear-gradient(135deg,#00ff88,#16a34a);color:#000;text-decoration:none;padding:14px 0;border-radius:10px;font-weight:bold;font-size:15px;box-shadow:0 4px 15px rgba(0,255,136,0.4);transition:all 0.2s ease}
-.download-btn:hover{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,255,136,0.6)}
+.popup-close{
+  position:absolute;top:10px;right:14px;
+  background:none;border:none;color:var(--text-muted);
+  font-size:22px;font-weight:bold;cursor:pointer;transition:color .18s ease
+}
+.popup-close:hover{color:var(--text-primary)}
+.popup-icon{font-size:40px;margin-bottom:10px}
+.popup-title{font-size:17px;font-weight:800;color:var(--neon-cyan);margin-bottom:8px}
+.popup-desc{font-size:13px;color:#cbd5e1;margin-bottom:20px;line-height:1.45}
+.download-btn{
+  display:inline-block;width:100%;
+  background:linear-gradient(90deg,var(--neon-cyan),var(--neon-mint));
+  color:#041019;text-decoration:none;padding:13px 0;
+  border-radius:10px;font-weight:800;font-size:14px;letter-spacing:.3px;
+  box-shadow:0 6px 20px rgba(45,212,191,0.28);
+  transition:transform .18s ease,box-shadow .18s ease
+}
+.download-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(56,189,248,0.4)
+}
 </style>
 </head>
 <body>
@@ -226,62 +336,62 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
   <h1>MASTER PEMBUNUH ANGKA</h1>
   <p class="sub-desc">Pilih pasaran untuk membuka halaman Master Pembunuh Angka.</p>
 
-  <div class="notice-box">
-    <strong>Himbauan:</strong> Pasaran yang sudah siap saat ini baru <strong>SDY</strong>, <strong>SGP</strong>, dan <strong>HK</strong>. Pasaran berstatus <strong>Proses</strong> masih dalam tahap pembuatan dan akan otomatis menjadi <strong>Master</strong> begitu halamannya tersedia.
+  <div class="notice-box" id="noticeBox">
+    <strong>Himbauan:</strong> Pasaran yang sudah siap saat ini baru <strong id="readyMarketsText">SDY, SGP, dan HK</strong>. Pasaran berstatus <strong>Proses</strong> masih dalam tahap pembuatan dan akan otomatis menjadi <strong>Master</strong> begitu halamannya tersedia.
   </div>
 
   <div class="market-list" id="marketList">
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/cambodia" class="market-btn" data-market="CAMBODIA" data-ready="false">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/cambodia" class="market-btn" data-market="CAMBODIA" data-short="Cambodia" data-ready="false">
       <span class="left-label">🇰🇭 CAMBODIA</span>
       <span class="market-badge is-process">Proses</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy" class="market-btn" data-market="SYDNEY POOLS" data-ready="true">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy" class="market-btn" data-market="SYDNEY POOLS" data-short="SDY" data-ready="true">
       <span class="left-label">🇦🇺 SYDNEY POOLS</span>
       <span class="market-badge is-ready">Master</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdylotto" class="market-btn" data-market="SYDNEY LOTTO" data-ready="false">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdylotto" class="market-btn" data-market="SYDNEY LOTTO" data-short="Sydney Lotto" data-ready="false">
       <span class="left-label">🇦🇺 SYDNEY LOTTO</span>
       <span class="market-badge is-process">Proses</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/china" class="market-btn" data-market="CHINA" data-ready="false">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/china" class="market-btn" data-market="CHINA" data-short="China" data-ready="false">
       <span class="left-label">🇨🇳 CHINA</span>
       <span class="market-badge is-process">Proses</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/japan" class="market-btn" data-market="JAPAN" data-ready="false">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/japan" class="market-btn" data-market="JAPAN" data-short="Japan" data-ready="false">
       <span class="left-label">🇯🇵 JAPAN</span>
       <span class="market-badge is-process">Proses</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sgp" class="market-btn" data-market="SINGAPORE POOLS" data-ready="true">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sgp" class="market-btn" data-market="SINGAPORE POOLS" data-short="SGP" data-ready="true">
       <span class="left-label">🇸🇬 SINGAPORE POOLS</span>
       <span class="market-badge is-ready">Master</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/taiwan" class="market-btn" data-market="TAIWAN" data-ready="false">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/taiwan" class="market-btn" data-market="TAIWAN" data-short="Taiwan" data-ready="false">
       <span class="left-label">🇹🇼 TAIWAN</span>
       <span class="market-badge is-process">Proses</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/hk" class="market-btn" data-market="HONGKONG POOLS" data-ready="true">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/hk" class="market-btn" data-market="HONGKONG POOLS" data-short="HK" data-ready="true">
       <span class="left-label">🇭🇰 HONGKONG POOLS</span>
       <span class="market-badge is-ready">Master</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/hklotto" class="market-btn" data-market="HONGKONG LOTTO" data-ready="false">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/hklotto" class="market-btn" data-market="HONGKONG LOTTO" data-short="HK Lotto" data-ready="false">
       <span class="left-label">🇭🇰 HONGKONG LOTTO</span>
       <span class="market-badge is-process">Proses</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/macau4d" class="market-btn" data-market="MACAU 4D" data-ready="false">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/macau4d" class="market-btn" data-market="MACAU 4D" data-short="Macau 4D" data-ready="false">
       <span class="left-label">🇲🇴 MACAU 4D</span>
       <span class="market-badge is-process">Proses</span>
     </a>
 
-    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/macau5d" class="market-btn" data-market="MACAU 5D" data-ready="false">
+    <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/macau5d" class="market-btn" data-market="MACAU 5D" data-short="Macau 5D" data-ready="false">
       <span class="left-label">🇲🇴 MACAU 5D</span>
       <span class="market-badge is-process">Proses</span>
     </a>
@@ -314,16 +424,37 @@ body{background-color:#030712;color:#fff;display:flex;flex-direction:column;alig
 <script>
 document.getElementById("auto-year").textContent = new Date().getFullYear();
 
+let currentReadyListText = "SDY, SGP, dan HK";
 let toastTimer = null;
+
+function formatIndonesianList(items) {
+  if (!items.length) return "belum ada";
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} dan ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")}, dan ${items[items.length - 1]}`;
+}
+
+function refreshReadyMarketsSummary() {
+  const readyBtns = Array.from(document.querySelectorAll("#marketList .market-btn"))
+    .filter(btn => btn.dataset.ready === "true");
+  const names = readyBtns.map(btn => btn.dataset.short || btn.dataset.market || "").filter(Boolean);
+  currentReadyListText = formatIndonesianList(names);
+
+  const readyEl = document.getElementById("readyMarketsText");
+  if (readyEl) {
+    readyEl.textContent = currentReadyListText;
+  }
+}
+
 function showProcessNotice(marketName) {
   const toast = document.getElementById("devToast");
   if (!toast) return;
-  toast.textContent = `Himbauan: Pasaran ${marketName} masih dalam proses pembuatan. Saat ini yang tersedia baru SDY, SGP, dan HK.`;
+  toast.textContent = `Himbauan: Pasaran ${marketName} masih dalam proses pembuatan. Yang sudah tersedia: ${currentReadyListText}.`;
   toast.classList.add("show");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
     toast.classList.remove("show");
-  }, 3400);
+  }, 3600);
 }
 
 function applyMarketReadyState(btn, isReady) {
@@ -334,6 +465,7 @@ function applyMarketReadyState(btn, isReady) {
     badge.classList.toggle("is-ready", isReady);
     badge.classList.toggle("is-process", !isReady);
   }
+  refreshReadyMarketsSummary();
 }
 
 async function checkMarketAvailability(btn) {
@@ -383,6 +515,8 @@ async function checkMarketAvailability(btn) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  refreshReadyMarketsSummary();
+
   const btns = document.querySelectorAll("#marketList .market-btn");
   btns.forEach(btn => {
     btn.addEventListener("click", (e) => {
