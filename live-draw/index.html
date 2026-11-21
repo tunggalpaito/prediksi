@@ -55,30 +55,67 @@ header h1{font-family:Outfit,sans-serif;font-size:20px;font-weight:900;backgroun
 .pred-card h4{font-family:Outfit,sans-serif;font-size:12px;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
 .table-responsive{width:100%;overflow-x:auto;background:var(--bg-card);backdrop-filter:blur(25px);border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.6);margin-bottom:15px;max-height:450px;overflow-y:auto;border:1px solid var(--border-glass)}
-table{width:100%;border-collapse:collapse;text-align:center;white-space:nowrap}
-td,th{padding:12px 10px;font-size:12px}
+table{width:100%;border-collapse:collapse;text-align:center;white-space:nowrap;table-layout:fixed}
+td,th{padding:12px 8px;font-size:12px}
 th{background:rgba(10,14,26,.95);color:var(--accent-cyan);font-family:Outfit,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:1px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border-glass)}
-tr{border-bottom:1px solid rgba(255,255,255,.03);transition:all .2s ease}
+tr{border-bottom:1px solid rgba(255,255,255,.03);transition:background-color .2s ease}
 tr:hover{background:rgba(0,242,254,.03)!important}
 td{color:var(--text-muted);font-weight:600}
 td:nth-child(n+3){font-family:Outfit,sans-serif;font-weight:900;color:var(--accent-pink);text-shadow:0 0 12px rgba(255,42,133,.5);letter-spacing:2px}
 td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
 
-.live-rolling-cell{
-  color:#00f2fe !important;
-  text-shadow:0 0 14px rgba(0,242,254,0.85) !important;
+/* Bayangan warna hijau berkedip stabil pada sel target yang menunggu diisi (tanpa ubah ukuran/teks) */
+.green-shadow-blink{
+  color:#4ade80 !important;
+  text-shadow:0 0 10px rgba(74,222,128,0.85) !important;
+  box-shadow:inset 0 0 14px rgba(34,197,94,0.45), 0 0 10px rgba(34,197,94,0.3) !important;
+  animation:greenShadowPulse 1.35s ease-in-out infinite;
+}
+@keyframes greenShadowPulse{
+  0%,100%{
+    background-color:rgba(34,197,94,0.20);
+    box-shadow:inset 0 0 16px rgba(74,222,128,0.55), 0 0 12px rgba(34,197,94,0.35);
+  }
+  50%{
+    background-color:rgba(34,197,94,0.03);
+    box-shadow:inset 0 0 4px rgba(74,222,128,0.12), 0 0 2px rgba(34,197,94,0.08);
+  }
 }
 
-.cell-flash-update{
-  animation:flashHighlight 0.9s ease;
+/* Animasi masuk mulus saat angka result masuk dari Firebase */
+.cell-result-enter{
+  display:inline-block;
+  animation:resultPopIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-@keyframes flashHighlight{
-  0%{background-color:rgba(0,242,254,0.28);transform:scale(1.04)}
-  100%{background-color:transparent;transform:scale(1)}
+@keyframes resultPopIn{
+  0%{
+    opacity:0;
+    transform:translateY(-6px) scale(0.78);
+    color:#4ade80;
+    text-shadow:0 0 18px rgba(74,222,128,0.95);
+  }
+  55%{
+    opacity:1;
+    transform:translateY(0) scale(1.12);
+    color:#00f2fe;
+    text-shadow:0 0 16px rgba(0,242,254,0.85);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    color:#ff2a85;
+    text-shadow:0 0 12px rgba(255,42,133,0.5);
+  }
 }
 
-.action-download-container{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:12px}
-.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px 18px;font-size:13px;font-weight:800;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 20px rgba(34,197,94,0.4);transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px}
+.action-download-container{width:100%;display:grid;grid-template-columns:1fr 1.45fr;gap:8px;align-items:center;margin-bottom:12px}
+.btn-refresh-live{width:100%;background:linear-gradient(135deg,#0284c7,#00f2fe);color:#05050a;border:none;padding:12px 12px;font-size:12px;font-weight:900;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 18px rgba(0,242,254,0.35);transition:all .25s ease;text-transform:uppercase;letter-spacing:.4px}
+.btn-refresh-live:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,242,254,0.6)}
+.btn-refresh-live:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.btn-refresh-live.is-spinning svg{animation:spinRefresh .7s linear infinite}
+@keyframes spinRefresh{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px 12px;font-size:12px;font-weight:800;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 20px rgba(34,197,94,0.4);transition:all .3s ease;text-transform:uppercase;letter-spacing:.4px}
 .btn-download-img:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(34,197,94,0.7)}
 
 .paito-warna-box{width:100%;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:14px;padding:10px;margin-bottom:15px;box-shadow:0 8px 25px rgba(0,0,0,.35)}
@@ -191,7 +228,6 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
     </a>
   </div>
 
-  <!-- TABEL UTAMA DI WEBSITE (1 MINGGU / 7 HARI: TERBARU DI ATAS, MUNDUR KE BAWAH) -->
   <div class="table-responsive">
     <table>
       <thead>
@@ -209,17 +245,20 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
   </div>
 
   <div class="action-download-container">
-    <button class="btn-download-img" id="btn-download">
-      <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-      <span>Download Gambar Result</span>
+    <button type="button" class="btn-refresh-live" id="btn-refresh">
+      <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+      <span>Refresh Live</span>
+    </button>
+    <button type="button" class="btn-download-img" id="btn-download">
+      <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+      <span>Download Result</span>
     </button>
   </div>
 
-  <!-- LINK PAITO WARNA SDY, SGP, HK DI BAWAH TOMBOL DOWNLOAD -->
   <div class="paito-warna-box">
     <div class="paito-warna-title">🎨 Lihat Paito Warna Pasaran</div>
     <div class="paito-warna-grid">
-      <a href="https://tunggalpaito.online/paito-warna/sdy/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/hk/">
+      <a href="https://tunggalpaito.online/paito-warna/hk/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/hk/">
         <span>HK</span>
         <small>Paito Warna</small>
       </a>
@@ -227,7 +266,7 @@ footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webki
         <span>SGP</span>
         <small>Paito Warna</small>
       </a>
-      <a href="https://tunggalpaito.online/paito-warna/hk/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sdy/">
+      <a href="https://tunggalpaito.online/paito-warna/sdy/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sdy/">
         <span>SDY</span>
         <small>Paito Warna</small>
       </a>
@@ -290,6 +329,17 @@ function openApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopu
 let clickCount = 0;
 const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 
+function isLinkOrProtectedArea(target) {
+  if (!target || typeof target.closest !== "function") return false;
+  return Boolean(
+    target.closest(
+      "a, [href], [data-pred-url], [onclick], #apkPopup, #apkReopenBtn, .prediction-main-grid, .paito-warna-box, .nav-top-container, .action-download-container, iframe, .top-ads-wrapper"
+    ) ||
+    "A" === target.tagName ||
+    "IFRAME" === target.tagName
+  );
+}
+
 function openPredictionSmooth(e, url) {
   e.preventDefault();
   e.stopPropagation();
@@ -308,18 +358,7 @@ document.querySelectorAll(".pred-card, .paito-card").forEach((card) => {
 });
 
 document.addEventListener("click", function(t) {
-  if (
-    t.target.closest("#apkPopup") ||
-    t.target.closest("#apkReopenBtn") ||
-    t.target.closest(".prediction-main-grid") ||
-    t.target.closest(".paito-warna-box") ||
-    t.target.closest(".nav-top-container") ||
-    t.target.closest(".action-download-container") ||
-    "A" === t.target.tagName ||
-    "IFRAME" === t.target.tagName ||
-    t.target.closest("iframe") ||
-    t.target.closest(".top-ads-wrapper")
-  ) {
+  if (isLinkOrProtectedArea(t.target)) {
     return;
   }
   clickCount++;
@@ -332,12 +371,9 @@ function syncOnReturn() {
   if (typeof rebuildDaysTableIfNeeded === "function") {
     rebuildDaysTableIfNeeded();
   }
-  if (typeof selectSingleAnimatedMarket === "function" && typeof activeAnimatedMarket !== "undefined" && typeof latestTargetByMarket !== "undefined") {
-    selectSingleAnimatedMarket(null);
-    const mKey = activeAnimatedMarket;
-    if (mKey && latestTargetByMarket[mKey] && latestTargetByMarket[mKey].dateStr) {
-      renderCellDisplay(latestTargetByMarket[mKey].dateStr, mKey, false);
-    }
+  if (typeof lockNextSlotFromFirebase === "function") {
+    lockNextSlotFromFirebase();
+    renderAllCells();
   }
 }
 
@@ -360,27 +396,30 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-const FOCUS_MARKETS = ["sdy", "hk", "sgp"];
+// Urutan maju satu arah: sdy -> sgp -> hk -> sdy
+const CYCLE_ORDER = ["sdy", "sgp", "hk"];
+const FOCUS_MARKETS = CYCLE_ORDER;
 const MARKET_MAP = {
   sdy: "data-sdy",
-  hk: "data-hk",
-  sgp: "data-sgp"
+  sgp: "data-sgp",
+  hk: "data-hk"
 };
 
-const DAYS_TO_SHOW = 7; // 1 minggu (7 hari)
-const ROLL_STEP_MS = 3000;
+const DAYS_TO_SHOW = 7;
 const DAY_NAMES = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
 
 let globalDaysList = [];
 let globalLiveData = {};
 let latestTargetByMarket = {
-  sdy: { dateStr: "", val: "-" },
-  hk:  { dateStr: "", val: "-" },
-  sgp: { dateStr: "", val: "-" }
+  sdy: { dateStr: "", dateObj: null, val: "-" },
+  sgp: { dateStr: "", dateObj: null, val: "-" },
+  hk:  { dateStr: "", dateObj: null, val: "-" }
 };
-let lastSnapshotSignature = { sdy: "", hk: "", sgp: "" };
-let activeAnimatedMarket = null;
-let rollStepIndex = 0;
+let lastSnapshotSignature = { sdy: "", sgp: "", hk: "" };
+
+// Slot kosong ("-") yang terkunci dan akan diisi berikutnya sesuai update Firebase
+let lockedMarket = null;
+let lockedDateStr = "";
 
 function getJakartaDateAnchor() {
   const parts = new Intl.DateTimeFormat("en-GB", {
@@ -395,49 +434,140 @@ function getJakartaDateAnchor() {
   return new Date(parseInt(map.year, 10), parseInt(map.month, 10) - 1, parseInt(map.day, 10));
 }
 
-function getAsKopKepEkorFrame(fullDigits, stepIdx) {
-  const clean = String(fullDigits || "").replace(/\D/g, "");
-  if (!clean) return "-";
-  const maxSteps = Math.max(1, clean.length);
-  const count = (stepIdx % maxSteps) + 1;
-  return clean.slice(0, count);
+// SGP libur pada hari Selasa (2) dan Jumat (5)
+function isSgpHoliday(dateObj) {
+  if (!dateObj || isNaN(dateObj.getTime())) return false;
+  const day = dateObj.getDay();
+  return day === 2 || day === 5;
 }
 
-function selectSingleAnimatedMarket(preferredMarket) {
-  if (
-    preferredMarket &&
-    latestTargetByMarket[preferredMarket] &&
-    latestTargetByMarket[preferredMarket].val &&
-    latestTargetByMarket[preferredMarket].val !== "-"
-  ) {
-    activeAnimatedMarket = preferredMarket;
-    return;
+// Maju satu arah sesuai urutan: sdy -> sgp -> hk -> sdy
+// Jika sgp libur pada tanggal tersebut, langsung lanjut ke hk (tidak pernah mundur ke sdy)
+function getNextForwardMarket(currentMarket, dateObj) {
+  const startIdx = CYCLE_ORDER.indexOf(currentMarket);
+  const baseIdx = startIdx >= 0 ? startIdx : 0;
+  const sgpLibur = isSgpHoliday(dateObj);
+
+  for (let step = 1; step <= CYCLE_ORDER.length; step++) {
+    const candidate = CYCLE_ORDER[(baseIdx + step) % CYCLE_ORDER.length];
+    if (candidate === "sgp" && sgpLibur) {
+      continue;
+    }
+    return candidate;
   }
+  return "hk";
+}
 
-  if (
-    activeAnimatedMarket &&
-    latestTargetByMarket[activeAnimatedMarket] &&
-    latestTargetByMarket[activeAnimatedMarket].val &&
-    latestTargetByMarket[activeAnimatedMarket].val !== "-"
-  ) {
-    return;
-  }
-
-  let bestMarket = null;
-  let bestDateObj = null;
-
-  FOCUS_MARKETS.forEach((mKey) => {
-    const target = latestTargetByMarket[mKey];
-    if (!target || !target.val || target.val === "-" || !target.dateStr) return;
-    const dt = parseDateFromDDMMYYYY(target.dateStr);
-    if (!dt || isNaN(dt.getTime())) return;
-    if (!bestDateObj || dt > bestDateObj) {
-      bestDateObj = dt;
-      bestMarket = mKey;
+function getMaxFirebaseDateObj() {
+  let maxDt = null;
+  CYCLE_ORDER.forEach((mKey) => {
+    const t = latestTargetByMarket[mKey];
+    if (t && t.val && t.val !== "-" && t.dateObj && !isNaN(t.dateObj.getTime())) {
+      if (!maxDt || t.dateObj > maxDt) {
+        maxDt = t.dateObj;
+      }
     }
   });
+  return maxDt || getJakartaDateAnchor();
+}
 
-  activeAnimatedMarket = bestMarket;
+function hasAnyValueForMarket(marketKey) {
+  return globalDaysList.some((dayItem) => {
+    const row = globalLiveData[dayItem.dateStr];
+    return row && row[marketKey] && row[marketKey] !== "-";
+  });
+}
+
+// Mengunci pada sel kosong ("-") berikutnya yang akan diisi sesuai data terbaru di Firebase
+function lockNextSlotFromFirebase() {
+  const validMarkets = CYCLE_ORDER.filter((mKey) => {
+    const t = latestTargetByMarket[mKey];
+    return Boolean(t && t.val && t.val !== "-" && t.dateStr && t.dateObj && !isNaN(t.dateObj.getTime()));
+  });
+
+  if (validMarkets.length === 0) {
+    lockedMarket = null;
+    lockedDateStr = "";
+    return;
+  }
+
+  let latestDateObj = null;
+  validMarkets.forEach((mKey) => {
+    const dt = latestTargetByMarket[mKey].dateObj;
+    if (!latestDateObj || dt > latestDateObj) {
+      latestDateObj = dt;
+    }
+  });
+  const latestDateStr = formatDateToDDMMYYYY(latestDateObj);
+  const sgpLibur = isSgpHoliday(latestDateObj);
+
+  // Pasaran yang sudah terisi pada tanggal terbaru di Firebase
+  const filledOnLatest = CYCLE_ORDER.filter((mKey) => {
+    const row = globalLiveData[latestDateStr];
+    return Boolean(row && row[mKey] && row[mKey] !== "-");
+  });
+
+  let nextMarket = "sdy";
+  let nextDateObj = latestDateObj;
+
+  if (filledOnLatest.length > 0) {
+    const lastFilled = filledOnLatest[filledOnLatest.length - 1];
+    nextMarket = getNextForwardMarket(lastFilled, latestDateObj);
+
+    if (lastFilled === "hk" && nextMarket === "sdy") {
+      const nextDay = new Date(latestDateObj);
+      nextDay.setDate(latestDateObj.getDate() + 1);
+      nextDateObj = nextDay;
+    }
+
+    let guard = 0;
+    while (guard < CYCLE_ORDER.length) {
+      const checkDateStr = formatDateToDDMMYYYY(nextDateObj);
+      const existingVal = globalLiveData[checkDateStr] && globalLiveData[checkDateStr][nextMarket];
+      if (!existingVal || existingVal === "-") {
+        break;
+      }
+      const after = getNextForwardMarket(nextMarket, nextDateObj);
+      if (nextMarket === "hk" && after === "sdy") {
+        const dNext = new Date(nextDateObj);
+        dNext.setDate(nextDateObj.getDate() + 1);
+        nextDateObj = dNext;
+      }
+      nextMarket = after;
+      guard++;
+    }
+  } else {
+    nextMarket = (sgpLibur && !hasAnyValueForMarket("sdy"))
+      ? getNextForwardMarket("sgp", latestDateObj)
+      : "sdy";
+  }
+
+  // Jika SGP libur pada tanggal terbaru, pastikan selalu lanjut ke HK (tidak mundur ke SDY)
+  if (nextMarket === "sgp" && isSgpHoliday(nextDateObj)) {
+    nextMarket = getNextForwardMarket("sgp", nextDateObj);
+  }
+
+  let targetDateStr = formatDateToDDMMYYYY(nextDateObj);
+
+  if (!globalLiveData[targetDateStr]) {
+    if (globalLiveData[latestDateStr] && (!globalLiveData[latestDateStr][nextMarket] || globalLiveData[latestDateStr][nextMarket] === "-")) {
+      targetDateStr = latestDateStr;
+    } else {
+      for (let i = 0; i < globalDaysList.length; i++) {
+        const dStr = globalDaysList[i].dateStr;
+        if (!globalLiveData[dStr][nextMarket] || globalLiveData[dStr][nextMarket] === "-") {
+          targetDateStr = dStr;
+          break;
+        }
+      }
+      if (!targetDateStr && globalDaysList[0]) {
+        targetDateStr = globalDaysList[0].dateStr;
+      }
+    }
+  }
+
+  lockedMarket = nextMarket;
+  lockedDateStr = targetDateStr;
 }
 
 function parseSingleToken(token) {
@@ -484,15 +614,18 @@ function extractRawString(rawVal) {
 
 function rebuildDaysTableIfNeeded() {
   const anchor = getJakartaDateAnchor();
+  const maxFbDate = getMaxFirebaseDateObj();
+  const startAnchor = maxFbDate > anchor ? maxFbDate : anchor;
+
   let listDays = [];
   for (let i = 0; i < DAYS_TO_SHOW; i++) {
-    let d = new Date(anchor);
-    d.setDate(anchor.getDate() - i);
+    let d = new Date(startAnchor);
+    d.setDate(startAnchor.getDate() - i);
     let dateStr = formatDateToDDMMYYYY(d);
     let dayName = DAY_NAMES[d.getDay()];
     listDays.push({ dateStr, dayName });
     if (!globalLiveData[dateStr]) {
-      globalLiveData[dateStr] = { sdy: "-", hk: "-", sgp: "-" };
+      globalLiveData[dateStr] = { sdy: "-", sgp: "-", hk: "-" };
     }
   }
 
@@ -514,33 +647,31 @@ function rebuildDaysTableIfNeeded() {
   }
 }
 
-function renderCellDisplay(dateStr, marketKey, animateFlash = false) {
+function renderCellDisplay(dateStr, marketKey, animateResultEnter = false) {
   const cell = document.getElementById(`val-${marketKey}-${dateStr}`);
   if (!cell) return;
 
   const actualVal = (globalLiveData[dateStr] && globalLiveData[dateStr][marketKey]) || "-";
-  const isTargetCell =
-    activeAnimatedMarket === marketKey &&
-    latestTargetByMarket[marketKey].dateStr === dateStr &&
-    actualVal !== "-";
+  const isWaitingSlot =
+    lockedMarket === marketKey &&
+    lockedDateStr === dateStr &&
+    actualVal === "-";
 
-  const nextText = isTargetCell
-    ? getAsKopKepEkorFrame(actualVal, rollStepIndex)
-    : actualVal;
+  const prevVal = cell.dataset.lastVal || "-";
+  const valChangedToNumber = prevVal !== actualVal && actualVal !== "-";
 
-  const changedText = cell.innerText !== nextText;
-  cell.innerText = nextText;
+  cell.dataset.lastVal = actualVal;
 
-  if (isTargetCell) {
-    cell.classList.add("live-rolling-cell");
+  if (animateResultEnter && valChangedToNumber) {
+    cell.innerHTML = `<span class="cell-result-enter">${actualVal}</span>`;
   } else {
-    cell.classList.remove("live-rolling-cell");
+    cell.textContent = actualVal;
   }
 
-  if (animateFlash && changedText && nextText !== "-") {
-    cell.classList.remove("cell-flash-update");
-    void cell.offsetWidth;
-    cell.classList.add("cell-flash-update");
+  if (isWaitingSlot) {
+    cell.classList.add("green-shadow-blink");
+  } else {
+    cell.classList.remove("green-shadow-blink");
   }
 }
 
@@ -551,12 +682,12 @@ function applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate) {
   globalDaysList.forEach((dayItem) => {
     prevValues[dayItem.dateStr] = (globalLiveData[dayItem.dateStr] && globalLiveData[dayItem.dateStr][marketKey]) || "-";
     if (!globalLiveData[dayItem.dateStr]) {
-      globalLiveData[dayItem.dateStr] = { sdy: "-", hk: "-", sgp: "-" };
+      globalLiveData[dayItem.dateStr] = { sdy: "-", sgp: "-", hk: "-" };
     }
     globalLiveData[dayItem.dateStr][marketKey] = "-";
   });
 
-  latestTargetByMarket[marketKey] = { dateStr: "", val: "-" };
+  latestTargetByMarket[marketKey] = { dateStr: "", dateObj: null, val: "-" };
 
   if (rawMap && typeof rawMap === "object") {
     let entries = [];
@@ -586,7 +717,11 @@ function applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate) {
             if (globalLiveData[targetKey] && globalLiveData[targetKey][marketKey] === "-") {
               globalLiveData[targetKey][marketKey] = tokenNum;
               if (!latestTargetByMarket[marketKey].val || latestTargetByMarket[marketKey].val === "-") {
-                latestTargetByMarket[marketKey] = { dateStr: targetKey, val: tokenNum };
+                latestTargetByMarket[marketKey] = {
+                  dateStr: targetKey,
+                  dateObj: targetDate,
+                  val: tokenNum
+                };
               }
             }
           }
@@ -597,17 +732,89 @@ function applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate) {
         if (singleNum && globalLiveData[entry.dateStr] && globalLiveData[entry.dateStr][marketKey] === "-") {
           globalLiveData[entry.dateStr][marketKey] = singleNum;
           if (!latestTargetByMarket[marketKey].val || latestTargetByMarket[marketKey].val === "-") {
-            latestTargetByMarket[marketKey] = { dateStr: entry.dateStr, val: singleNum };
+            latestTargetByMarket[marketKey] = {
+              dateStr: entry.dateStr,
+              dateObj: entry.dateObj,
+              val: singleNum
+            };
           }
         }
       }
     });
   }
 
+  lockNextSlotFromFirebase();
+
   globalDaysList.forEach((dayItem) => {
     const newVal = (globalLiveData[dayItem.dateStr] && globalLiveData[dayItem.dateStr][marketKey]) || "-";
-    const wasUpdated = isLiveUpdate && prevValues[dayItem.dateStr] !== newVal;
-    renderCellDisplay(dayItem.dateStr, marketKey, wasUpdated);
+    const wasNewlyEntered = isLiveUpdate && prevValues[dayItem.dateStr] !== newVal && newVal !== "-";
+    renderCellDisplay(dayItem.dateStr, marketKey, wasNewlyEntered);
+  });
+}
+
+function renderAllCells() {
+  globalDaysList.forEach((dayItem) => {
+    FOCUS_MARKETS.forEach((mKey) => {
+      renderCellDisplay(dayItem.dateStr, mKey, false);
+    });
+  });
+}
+
+function handleMarketSnapshot(marketKey, rawMap, isFirstSnapshotRef) {
+  const sig = JSON.stringify(rawMap || {});
+  const changedSinceLast = lastSnapshotSignature[marketKey] !== sig;
+  lastSnapshotSignature[marketKey] = sig;
+
+  const isLiveUpdate = !isFirstSnapshotRef.current && changedSinceLast;
+
+  applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate);
+  isFirstSnapshotRef.current = false;
+
+  renderAllCells();
+}
+
+function refreshLiveInPlace() {
+  const btn = document.getElementById("btn-refresh");
+  const scrollX = window.scrollX || window.pageXOffset || 0;
+  const scrollY = window.scrollY || window.pageYOffset || 0;
+  const tableBox = document.querySelector(".table-responsive");
+  const tableScrollTop = tableBox ? tableBox.scrollTop : 0;
+
+  if (btn) {
+    btn.disabled = true;
+    btn.classList.add("is-spinning");
+  }
+
+  rebuildDaysTableIfNeeded();
+
+  const fetches = FOCUS_MARKETS.map((marketKey) => {
+    const nodePath = `live/${MARKET_MAP[marketKey]}`;
+    return db.ref(nodePath).get().then((snap) => {
+      const rawMap = snap.val();
+      const sig = JSON.stringify(rawMap || {});
+      const isLiveUpdate = lastSnapshotSignature[marketKey] !== sig;
+      lastSnapshotSignature[marketKey] = sig;
+      applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate);
+    }).catch((err) => {
+      console.error(`Gagal refresh ${nodePath}:`, err);
+    });
+  });
+
+  Promise.all(fetches).finally(() => {
+    lockNextSlotFromFirebase();
+    renderAllCells();
+
+    if (tableBox) {
+      tableBox.scrollTop = tableScrollTop;
+    }
+    window.scrollTo({ left: scrollX, top: scrollY, behavior: "instant" });
+
+    setTimeout(() => {
+      if (btn) {
+        btn.disabled = false;
+        btn.classList.remove("is-spinning");
+      }
+    }, 350);
   });
 }
 
@@ -615,55 +822,25 @@ function initLiveDraw() {
   rebuildDaysTableIfNeeded();
 
   FOCUS_MARKETS.forEach((marketKey) => {
-    let dbMarketName = MARKET_MAP[marketKey];
-    let nodePath = `live/${dbMarketName}`;
-    let isFirstSnapshot = true;
+    const dbMarketName = MARKET_MAP[marketKey];
+    const nodePath = `live/${dbMarketName}`;
+    const isFirstSnapshotRef = { current: true };
 
     db.ref(nodePath).on("value", (snapshot) => {
-      let rawMap = snapshot.val();
-      const sig = JSON.stringify(rawMap || {});
-      const changedSinceLast = lastSnapshotSignature[marketKey] !== sig;
-      lastSnapshotSignature[marketKey] = sig;
-
-      const isLiveUpdate = !isFirstSnapshot && changedSinceLast;
-      const prevAnimated = activeAnimatedMarket;
-
-      applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate);
-
-      if (isLiveUpdate) {
-        selectSingleAnimatedMarket(marketKey);
-        rollStepIndex = 0;
-      } else {
-        selectSingleAnimatedMarket(null);
-      }
-      isFirstSnapshot = false;
-
-      if (prevAnimated && latestTargetByMarket[prevAnimated].dateStr) {
-        renderCellDisplay(latestTargetByMarket[prevAnimated].dateStr, prevAnimated, false);
-      }
-      if (activeAnimatedMarket && latestTargetByMarket[activeAnimatedMarket].dateStr) {
-        renderCellDisplay(latestTargetByMarket[activeAnimatedMarket].dateStr, activeAnimatedMarket, false);
-      }
+      handleMarketSnapshot(marketKey, snapshot.val(), isFirstSnapshotRef);
     }, (err) => {
       console.error(`Gagal membaca ${nodePath}:`, err);
     });
   });
-
-  setInterval(() => {
-    rebuildDaysTableIfNeeded();
-    selectSingleAnimatedMarket(null);
-    const mKey = activeAnimatedMarket;
-    if (!mKey) return;
-
-    const targetDate = latestTargetByMarket[mKey].dateStr;
-    if (!targetDate) return;
-
-    rollStepIndex = (rollStepIndex + 1) % 4;
-    renderCellDisplay(targetDate, mKey, false);
-  }, ROLL_STEP_MS);
 }
 
 initLiveDraw();
+
+document.getElementById("btn-refresh").addEventListener("click", function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  refreshLiveInPlace();
+});
 
 document.getElementById("btn-download").addEventListener("click", function(e) {
   e.stopPropagation();
@@ -683,7 +860,7 @@ document.getElementById("btn-download").addEventListener("click", function(e) {
   const last3Days = globalDaysList.slice(0, 3);
 
   last3Days.forEach((item) => {
-    let dayRecord = globalLiveData[item.dateStr] || { sdy: "-", hk: "-", sgp: "-" };
+    let dayRecord = globalLiveData[item.dateStr] || { sdy: "-", sgp: "-", hk: "-" };
     dlTableBody.innerHTML += `<tr>
       <td>${item.dateStr}</td>
       <td>${item.dayName}</td>
