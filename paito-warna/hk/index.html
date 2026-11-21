@@ -3,72 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Paito Warna HK - Data Hongkong Pools Terakurat | Tunggal Paito</title>
 <link rel="canonical" href="https://tunggalpaito.online/paito-warna/hk">
 <meta name="description" content="Paito warna HK resmi dan terlengkap. Data pengeluaran Hongkong Pools, tabel paito warna HK mingguan, prediksi angka jitu, dan live draw HK akurat di Tunggal Paito.">
 <meta name="keywords" content="paito warna hk, data hk, paito hongkong, pengeluaran hk, live hk, result hk, tunggal paito">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
 <style>
 :root{
   --bg-primary:#050d08;
   --bg-secondary:#0b1a10;
-  --bg-card:rgba(11, 26, 16, 0.85);
+  --bg-card:rgba(11, 26, 16, 0.9);
+  --surface-soft:#06140a;
   --accent-cyan:#00ff66;
   --accent-purple:#00ff88;
   --accent-pink:#ff4d4d;
   --accent-gradient:linear-gradient(135deg,#00ff66,#00b34d);
   --neon-glow-cyan:0 0 15px rgba(0,255,102,.3);
   --text-main:#ffffff;
-  --text-muted:#f3f4f6;
+  --text-muted:#cbd5e1;
   --border-glass:rgba(0,255,102,.3);
 }
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif}
-body{background-color:var(--bg-primary);color:var(--text-main);line-height:1.5;padding:15px 10px;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans','Segoe UI',Tahoma,sans-serif}
+body{
+  background-color:var(--bg-primary);color:var(--text-main);line-height:1.5;
+  padding:15px 10px 78px 10px;display:flex;flex-direction:column;align-items:center;min-height:100vh
+}
 .container{width:100%;max-width:480px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
-header{text-align:center;margin-bottom:15px;background:rgba(11,26,16,.9);backdrop-filter:blur(25px);border:1px solid rgba(0,255,102,.4);padding:20px 15px;width:100%;border-radius:12px;box-shadow:0 4px 15px rgba(0,255,102,.2)}
-h1{color:#00ff66;font-size:18px;font-weight:700;margin-bottom:4px;font-family:Outfit,sans-serif;text-shadow:0 0 8px rgba(0,255,102,.5);text-transform:uppercase}
+header{
+  text-align:center;margin-bottom:15px;background:rgba(11,26,16,.92);
+  backdrop-filter:blur(25px);border:1px solid rgba(0,255,102,.4);padding:18px 15px;
+  width:100%;border-radius:12px;box-shadow:0 4px 15px rgba(0,255,102,.2)
+}
+h1{
+  color:#00ff66;font-size:18px;font-weight:700;margin-bottom:4px;
+  font-family:Outfit,'Segoe UI',sans-serif;text-shadow:0 0 8px rgba(0,255,102,.5);text-transform:uppercase
+}
 p.subtitle{color:var(--text-muted);font-size:11px;font-weight:600}
 
-/* Styling Paling Atas (Area Iklan Utama) */
-.top-ads-wrapper{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:15px;background-color:#0b1a10;border:1px solid rgba(0,255,102,.3);border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(0,255,102,.2)}
+.top-ads-wrapper{
+  width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;
+  margin-bottom:15px;background-color:#0b1a10;border:1px solid rgba(0,255,102,.3);
+  border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(0,255,102,.2)
+}
+.ad-slot{
+  width:100%;max-width:100%;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;overflow-x:auto;overflow-y:hidden;min-height:36px
+}
+.ad-slot iframe{max-width:100%!important}
 
-/* Tombol Navigasi Atas */
 .nav-top-container{width:100%;max-width:480px;display:flex;gap:10px;margin-bottom:15px}
-.nav-btn{flex:1;background:linear-gradient(135deg,#00ff66,#00b34d);color:#050d08;text-decoration:none;padding:10px 12px;font-size:12px;font-weight:700;border-radius:8px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.3);transition:all .2s ease;display:flex;align-items:center;justify-content:center;gap:6px}
+.nav-btn{
+  flex:1;background:linear-gradient(135deg,#00ff66,#00b34d);color:#050d08;text-decoration:none;
+  padding:10px 12px;font-size:12px;font-weight:700;border-radius:8px;text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);transition:transform .15s ease,box-shadow .15s ease;
+  display:flex;align-items:center;justify-content:center;gap:6px
+}
 .nav-btn.apk{background:linear-gradient(135deg,#00ff88,#00bfff);color:#050d08}
 .nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,255,102,.4)}
 
-.card{background:var(--bg-card);border-radius:12px;box-shadow:0 4px 15px rgba(0,255,102,.2);padding:15px;margin-bottom:15px;position:relative;width:100%;border:1px solid rgba(0,255,102,.3)}
-.section-title{font-size:13px;color:#00ff66;margin-bottom:12px;border-bottom:1px solid rgba(0,255,102,.3);padding-bottom:4px;display:block;text-align:center;font-weight:700;font-family:Outfit,sans-serif}
-.table-responsive{width:100%;overflow-x:auto;margin-bottom:15px;border:1px solid rgba(0,255,102,.3);border-radius:8px;position:relative;background:#06140a}
+.card{
+  background:var(--bg-card);border-radius:12px;box-shadow:0 4px 15px rgba(0,255,102,.2);
+  padding:15px;margin-bottom:15px;position:relative;width:100%;border:1px solid rgba(0,255,102,.3)
+}
+.section-title{
+  font-size:13px;color:#00ff66;margin-bottom:10px;border-bottom:1px solid rgba(0,255,102,.3);
+  padding-bottom:4px;display:block;text-align:center;font-weight:700;font-family:Outfit,'Segoe UI',sans-serif
+}
+.status-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:8px;flex-wrap:wrap;font-size:11px;color:var(--text-muted);margin-bottom:12px
+}
+.status-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface-soft);border:1px solid rgba(0,255,102,.25);
+  padding:4px 10px;border-radius:999px;color:#e2e8f0
+}
+.status-dot{
+  width:7px;height:7px;border-radius:50%;background:#00ff66;display:inline-block
+}
+.btn-refresh{
+  padding:5px 11px;border-radius:7px;cursor:pointer;font-size:11px;font-weight:700;
+  border:1px solid rgba(0,255,102,.35);background:var(--surface-soft);color:#00ff66;
+  transition:background-color .15s ease,border-color .15s ease
+}
+.btn-refresh:hover{background:#0d2415;border-color:#00ff66}
+
+.floating-download-bar{
+  position:fixed;left:50%;bottom:12px;transform:translateX(-50%);
+  z-index:990;display:flex;align-items:center;gap:6px;flex-wrap:nowrap;
+  background:rgba(6,20,10,.94);backdrop-filter:blur(10px);
+  padding:7px 11px;border-radius:999px;
+  border:1px solid rgba(0,255,102,.45);
+  box-shadow:0 10px 28px rgba(0,0,0,.65);
+  max-width:calc(100vw - 16px);overflow-x:auto;scrollbar-width:none
+}
+.floating-download-bar::-webkit-scrollbar{display:none}
+.floating-dl-label{
+  color:#cbd5e1;font-size:11px;font-weight:700;
+  padding-left:4px;white-space:nowrap
+}
+.btn-download{
+  padding:5px 10px;border-radius:999px;cursor:pointer;font-size:11px;font-weight:700;
+  border:none;white-space:nowrap;transition:transform .12s ease,opacity .15s ease
+}
+.btn-download:active{transform:scale(.97)}
+.btn-download:disabled{opacity:.5;cursor:not-allowed}
+.btn-download.primary{background:linear-gradient(135deg,#00ff66,#00b34d);color:#050d08}
+.btn-download.secondary{background:linear-gradient(135deg,#00ff88,#00bfff);color:#050d08}
+.btn-download.outline{background:#0b1a10;color:#ffffff;border:1px solid rgba(0,255,102,.4)}
+
+.table-responsive{
+  width:100%;overflow-x:auto;margin-bottom:15px;border:1px solid rgba(0,255,102,.3);
+  border-radius:8px;position:relative;background:#06140a;-webkit-overflow-scrolling:touch
+}
 .paito-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11px;position:relative;z-index:1}
-.paito-table td,.paito-table th{border:1px solid rgba(0,255,102,.2);padding:6px 2px;text-align:center;vertical-align:top}
-.paito-table th{background-color:#06140a;color:#00ff66;font-weight:700;font-size:11px;font-family:Outfit,sans-serif}
-.paito-table tr:nth-child(2n){background-color:rgba(0,255,102,.02)}
-.number-group{display:inline-block;padding:1px 3px;background:#0b1a10;border-radius:4px;border:1px solid rgba(0,255,102,.2);margin:1px 0;font-family:monospace;letter-spacing:.5px;white-space:nowrap}
-.digit{display:inline-block;width:12px;text-align:center;cursor:pointer;font-weight:700;margin:0 -.5px;position:relative;z-index:2;color:#fff}
+.paito-table td,.paito-table th{border:1px solid rgba(0,255,102,.2);padding:5px 2px;text-align:center;vertical-align:middle}
+.paito-table th{
+  background-color:#06140a;color:#00ff66;font-weight:700;font-size:11px;
+  font-family:Outfit,'Segoe UI',sans-serif
+}
+.paito-table tr:nth-child(2n){background-color:rgba(0,255,102,.03)}
+
+.number-group{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:1px 2px;background:transparent;border:none;
+  margin:1px 0;font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;
+  letter-spacing:0;white-space:nowrap
+}
+.digit{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:12px;height:18px;font-size:11px;cursor:pointer;font-weight:700;
+  margin:0;position:relative;z-index:2;color:#fff;border-radius:3px;
+  transition:background-color .12s ease;user-select:none
+}
+.digit:not(.is-empty):hover{background-color:rgba(0,255,102,.15)}
+.digit.is-empty{color:#4b6b56;font-weight:400;cursor:default}
+
 .color-controls{margin-top:15px;padding:12px;background:#06140a;border-radius:8px;border:1px solid rgba(0,255,102,.2)}
 .color-controls h3{font-size:12px;margin-bottom:8px;color:#00ff66;font-weight:700}
 .palette-options{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.color-btn{width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 5px rgba(0,255,102,.4);cursor:pointer;transition:transform .2s}
-.color-btn:hover{transform:scale(1.15)}
-.btn-reset{padding:6px 12px;background:#ff4d4d;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:11px;font-weight:700;box-shadow:0 2px 8px rgba(255,77,77,.4)}
-.btn-reset:hover{opacity:.9}
+.color-btn{
+  width:24px;height:24px;border-radius:50%;border:2px solid #fff;
+  box-shadow:0 0 5px rgba(0,255,102,.35);cursor:pointer;transition:transform .15s ease
+}
+.color-btn:hover{transform:scale(1.12)}
+.color-btn.active-swatch{box-shadow:0 0 0 2px #00ff66;transform:scale(1.12)}
+.btn-reset{
+  padding:6px 12px;background:#ff4d4d;color:#fff;border:none;border-radius:6px;
+  cursor:pointer;font-size:11px;font-weight:700;box-shadow:0 2px 8px rgba(255,77,77,.35)
+}
+.btn-reset:hover{opacity:.92}
+
 .auto-search-controls{margin-top:15px;padding:12px;background:#06140a;border-radius:8px;border:1px solid rgba(0,255,102,.2)}
 .auto-search-controls h3{font-size:12px;margin-bottom:8px;color:#00ff66;font-weight:700}
 .position-group{margin-bottom:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.pos-btn{padding:4px 10px;background:#0b1a10;border:1px solid rgba(0,255,102,.3);border-radius:4px;cursor:pointer;font-size:11px;font-weight:700;color:#f3f4f6}
+.pos-btn{
+  padding:4px 10px;background:#0b1a10;border:1px solid rgba(0,255,102,.3);
+  border-radius:4px;cursor:pointer;font-size:11px;font-weight:700;color:#f3f4f6
+}
 .pos-btn.active{background:#00ff66;color:#050d08;border-color:#00ff66}
 .digit-select-group{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
-.dig-btn{width:24px;height:24px;background:#0b1a10;border:1px solid rgba(0,255,102,.3);border-radius:4px;cursor:pointer;font-size:11px;font-weight:700;color:#00ff66}
+.dig-btn{
+  width:24px;height:24px;background:#0b1a10;border:1px solid rgba(0,255,102,.3);
+  border-radius:4px;cursor:pointer;font-size:11px;font-weight:700;color:#00ff66
+}
 .dig-btn:hover{background:#00ff66;color:#050d08}
-.search-pattern-box{margin-top:10px;padding-top:8px;border-top:1px dashed rgba(0,255,102,.2)}
-.search-pattern-box input{padding:6px 8px;font-size:11px;border:1px solid rgba(0,255,102,.3);border-radius:4px;width:130px;margin-right:5px;background:#0b1a10;color:#fff}
-.btn-pattern{padding:6px 10px;background:linear-gradient(135deg,#00ff66,#00b34d);color:#050d08;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-weight:700;margin-right:4px}
-.btn-pattern:hover{opacity:.9}
-#paitoSvg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:3;mix-blend-mode:screen}
+.search-pattern-box{
+  margin-top:10px;padding-top:8px;border-top:1px dashed rgba(0,255,102,.2);
+  display:flex;align-items:center;flex-wrap:wrap;gap:5px
+}
+.search-pattern-box input{
+  padding:6px 8px;font-size:11px;border:1px solid rgba(0,255,102,.3);
+  border-radius:4px;width:130px;background:#0b1a10;color:#fff
+}
+.btn-pattern{
+  padding:6px 10px;background:linear-gradient(135deg,#00ff66,#00b34d);
+  color:#050d08;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-weight:700
+}
+.btn-pattern:hover{opacity:.92}
+
+#paitoSvg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:3;opacity:.88}
+
 .c-0{background-color:#ffadad!important;color:#000!important}
 .c-1{background-color:#ffd6a5!important;color:#000!important}
 .c-2{background-color:#fdffb6!important;color:#000!important}
@@ -79,78 +203,88 @@ p.subtitle{color:var(--text-muted);font-size:11px;font-weight:600}
 .c-7{background-color:#ffc6ff!important;color:#000!important}
 .c-8{background-color:#fffffc!important;color:#000!important}
 .c-9{background-color:#ffb703!important;color:#000!important}
-.seo-section{margin-top:15px;font-size:11px;color:var(--text-muted);background:var(--bg-card);padding:15px;border-radius:12px;border:1px solid rgba(0,255,102,.3);box-shadow:0 4px 15px rgba(0,255,102,.2);width:100%}
+
+.seo-section{
+  margin-top:15px;font-size:11px;color:var(--text-muted);background:var(--bg-card);
+  padding:15px;border-radius:12px;border:1px solid rgba(0,255,102,.3);
+  box-shadow:0 4px 15px rgba(0,255,102,.2);width:100%
+}
 .seo-section h4{margin-bottom:6px;color:#00ff66;font-weight:700}
-footer{text-align:center;margin-top:15px;padding:10px;font-size:13px;color:#00ff66;font-weight:700;text-shadow:0 0 5px rgba(0,255,102,.3);border-top:1px solid rgba(0,255,102,.3);width:100%}
+footer{
+  text-align:center;margin-top:15px;padding:10px;font-size:13px;color:#00ff66;
+  font-weight:700;text-shadow:0 0 5px rgba(0,255,102,.3);
+  border-top:1px solid rgba(0,255,102,.3);width:100%
+}
 #loading{text-align:center;padding:15px;font-style:italic;color:var(--text-muted);font-size:11px}
+.toast-notice{
+  position:fixed;bottom:64px;left:50%;transform:translateX(-50%);
+  background:#0b1a10;color:#ffffff;border:1px solid #00ff66;
+  padding:8px 14px;border-radius:10px;font-size:11px;z-index:9999;
+  box-shadow:0 6px 18px rgba(0,0,0,.6);display:none;max-width:92vw;text-align:center
+}
 </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="pageContainer">
 
   <header>
     <h1>Paito Warna Hongkong</h1>
-    <p class="subtitle">Data Pengeluaran & Paito Warna HK</p>
+    <p class="subtitle">Data Pengeluaran &amp; Paito Warna HK</p>
   </header>
 
-  <!-- ================================================================= -->
-  <!-- KONTEN PALING ATAS: IKLAN UTAMA DI ATAS                           -->
-  <!-- ================================================================= -->
   <div class="top-ads-wrapper">
-    <!-- 1. Banner 468x60 -->
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <div class="ad-slot" id="adSlotBanner468">
       <script>
-        atOptions = {
-          'key' : '9a986a45c62dcea8d8216b9210f159cb',
-          'format' : 'iframe',
-          'height' : 60,
-          'width' : 468,
-          'params' : {}
+        window.atOptions = {
+          "key": "9a986a45c62dcea8d8216b9210f159cb",
+          "format": "iframe",
+          "height": 60,
+          "width": 468,
+          "params": {}
         };
       </script>
       <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
     </div>
 
-    <!-- 2. Script + Container ID -->
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <div class="ad-slot" id="adSlotNative3f09">
       <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
       <div id="container-3f09897b852339f736b82a3190a40259"></div>
     </div>
 
-    <!-- 3. Script 14 -->
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <div class="ad-slot" id="adSlotScript14">
       <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
     </div>
 
-    <!-- 4. Banner 320x50 -->
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <div class="ad-slot" id="adSlotBanner320">
       <script>
-        atOptions = {
-          'key' : '119c8bb3217ed264a8fa223c3197bf69',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
+        window.atOptions = {
+          "key": "119c8bb3217ed264a8fa223c3197bf69",
+          "format": "iframe",
+          "height": 50,
+          "width": 320,
+          "params": {}
         };
       </script>
       <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
     </div>
 
-    <!-- 5. Script Ahuramazda -->
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
+    <div class="ad-slot" id="adSlotAhuramazda">
       <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
     </div>
   </div>
-  <!-- ================================================================= -->
 
-  <!-- Tombol Navigasi Atas -->
   <div class="nav-top-container">
     <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
     <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
   </div>
 
-  <div class="card">
-    <h2 class="section-title">Tabel Data Paito Warna HK Tahun <span id="currentYear"></span></h2>
+  <div class="card" id="paitoCard">
+    <h2 class="section-title">Tabel Data Paito Warna HK Tahun <span class="current-year"></span></h2>
+    <div class="status-bar">
+      <span class="status-pill"><span class="status-dot" id="statusDot"></span><span id="syncStatus">Mode cepat aktif</span></span>
+      <button type="button" class="btn-refresh" onclick="forceRefreshData()">Muat Ulang Data</button>
+    </div>
+
     <div id="loading">Memuat data resmi hongkong...</div>
     <div class="table-responsive" id="tableResponsive">
       <svg id="paitoSvg"></svg>
@@ -166,203 +300,821 @@ footer{text-align:center;margin-top:15px;padding:10px;font-size:13px;color:#00ff
             <th>Min</th>
           </tr>
         </thead>
-        <tbody id="tableBody">
-        </tbody>
+        <tbody id="tableBody"></tbody>
       </table>
     </div>
 
     <div class="color-controls">
       <h3>Pilihan Paito Warna (Klik Angka 1x: Beri warna | Klik Angka 2x: Hapus warna)</h3>
-      <div class="palette-options">
-        <button class="color-btn" style="background-color:#ffadad" onclick="setSelectedColor('c-0')" title="0"></button>
-        <button class="color-btn" style="background-color:#ffd6a5" onclick="setSelectedColor('c-1')" title="1"></button>
-        <button class="color-btn" style="background-color:#fdffb6" onclick="setSelectedColor('c-2')" title="2"></button>
-        <button class="color-btn" style="background-color:#caffbf" onclick="setSelectedColor('c-3')" title="3"></button>
-        <button class="color-btn" style="background-color:#9bf6ff" onclick="setSelectedColor('c-4')" title="4"></button>
-        <button class="color-btn" style="background-color:#a0c4ff" onclick="setSelectedColor('c-5')" title="5"></button>
-        <button class="color-btn" style="background-color:#bdb2ff" onclick="setSelectedColor('c-6')" title="6"></button>
-        <button class="color-btn" style="background-color:#ffc6ff" onclick="setSelectedColor('c-7')" title="7"></button>
-        <button class="color-btn" style="background-color:#fffffc" onclick="setSelectedColor('c-8')" title="8"></button>
-        <button class="color-btn" style="background-color:#ffb703" onclick="setSelectedColor('c-9')" title="9"></button>
-        <button class="btn-reset" onclick="resetColors()">Reset Warna</button>
+      <div class="palette-options" id="paletteOptions">
+        <button type="button" class="color-btn active-swatch" style="background-color:#ffadad" onclick="setSelectedColor('c-0', this)" title="0" aria-label="Warna 0"></button>
+        <button type="button" class="color-btn" style="background-color:#ffd6a5" onclick="setSelectedColor('c-1', this)" title="1" aria-label="Warna 1"></button>
+        <button type="button" class="color-btn" style="background-color:#fdffb6" onclick="setSelectedColor('c-2', this)" title="2" aria-label="Warna 2"></button>
+        <button type="button" class="color-btn" style="background-color:#caffbf" onclick="setSelectedColor('c-3', this)" title="3" aria-label="Warna 3"></button>
+        <button type="button" class="color-btn" style="background-color:#9bf6ff" onclick="setSelectedColor('c-4', this)" title="4" aria-label="Warna 4"></button>
+        <button type="button" class="color-btn" style="background-color:#a0c4ff" onclick="setSelectedColor('c-5', this)" title="5" aria-label="Warna 5"></button>
+        <button type="button" class="color-btn" style="background-color:#bdb2ff" onclick="setSelectedColor('c-6', this)" title="6" aria-label="Warna 6"></button>
+        <button type="button" class="color-btn" style="background-color:#ffc6ff" onclick="setSelectedColor('c-7', this)" title="7" aria-label="Warna 7"></button>
+        <button type="button" class="color-btn" style="background-color:#fffffc" onclick="setSelectedColor('c-8', this)" title="8" aria-label="Warna 8"></button>
+        <button type="button" class="color-btn" style="background-color:#ffb703" onclick="setSelectedColor('c-9', this)" title="9" aria-label="Warna 9"></button>
+        <button type="button" class="btn-reset" onclick="resetColors()">Reset Warna</button>
       </div>
     </div>
 
     <div class="auto-search-controls">
-      <h3>Pencarian Otomatis Berdasarkan Posisi Angka<br>rubah warna kesukaan klick warna diatas</h3>
+      <h3>Pencarian Otomatis Berdasarkan Posisi Angka<br><span style="font-weight:400;font-size:11px;color:var(--text-muted)">rubah warna kesukaan klick warna diatas</span></h3>
       <div class="position-group">
         <span style="font-size:11px;font-weight:600">Pilih Posisi:</span>
-        <button class="pos-btn active" onclick="selectPosition(0,this)">As</button>
-        <button class="pos-btn" onclick="selectPosition(1,this)">Kop</button>
-        <button class="pos-btn" onclick="selectPosition(2,this)">Kepala</button>
-        <button class="pos-btn" onclick="selectPosition(3,this)">Ekor</button>
+        <button type="button" class="pos-btn active" onclick="selectPosition(0, this)">As</button>
+        <button type="button" class="pos-btn" onclick="selectPosition(1, this)">Kop</button>
+        <button type="button" class="pos-btn" onclick="selectPosition(2, this)">Kepala</button>
+        <button type="button" class="pos-btn" onclick="selectPosition(3, this)">Ekor</button>
       </div>
       <div class="digit-select-group">
         <span style="font-size:11px;font-weight:600;margin-right:5px">Pilih Angka:</span>
-        <button class="dig-btn" onclick="autoColorByPosition(0)">0</button>
-        <button class="dig-btn" onclick="autoColorByPosition(1)">1</button>
-        <button class="dig-btn" onclick="autoColorByPosition(2)">2</button>
-        <button class="dig-btn" onclick="autoColorByPosition(3)">3</button>
-        <button class="dig-btn" onclick="autoColorByPosition(4)">4</button>
-        <button class="dig-btn" onclick="autoColorByPosition(5)">5</button>
-        <button class="dig-btn" onclick="autoColorByPosition(6)">6</button>
-        <button class="dig-btn" onclick="autoColorByPosition(7)">7</button>
-        <button class="dig-btn" onclick="autoColorByPosition(8)">8</button>
-        <button class="dig-btn" onclick="autoColorByPosition(9)">9</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(0)">0</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(1)">1</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(2)">2</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(3)">3</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(4)">4</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(5)">5</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(6)">6</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(7)">7</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(8)">8</button>
+        <button type="button" class="dig-btn" onclick="autoColorByPosition(9)">9</button>
       </div>
       <div class="search-pattern-box">
-        <span style="font-size:11px;font-weight:600;display:block;margin-bottom:5px">Cari 2, 3, atau 4 Digit Sekaligus</span>
-        <input id="patternInput" maxlength="4" placeholder="Ketik angka...">
-        <button class="btn-pattern" onclick="searchPattern(true)">Cari Tersusun</button>
-        <button class="btn-pattern" onclick="searchPattern(false)">Cari Acak</button>
+        <span style="font-size:11px;font-weight:600;width:100%">Cari 2, 3, atau 4 Digit Sekaligus</span>
+        <input id="patternInput" type="text" inputmode="numeric" maxlength="4" placeholder="Ketik angka...">
+        <button type="button" class="btn-pattern" onclick="searchPattern(true)">Cari Tersusun</button>
+        <button type="button" class="btn-pattern" onclick="searchPattern(false)">Cari Acak</button>
       </div>
     </div>
   </div>
 
   <div class="seo-section">
-    <h4>Informasi & Kata Kunci Terkait</h4>
+    <h4>Informasi &amp; Kata Kunci Terkait</h4>
     <p>Paito warna HK, data pengeluaran Hongkong Pools, live result HK akurat, paito hongkong harian, paito 4D HK, angka jitu Hongkong, bocoran togel HK, situs resmi Tunggal Paito.</p>
   </div>
 
   <footer>
-    &copy; <span id="currentYearFooter"></span> TUNGGAL PAITO All Rights Reserved.
+    &copy; <span class="current-year"></span> TUNGGAL PAITO All Rights Reserved.
   </footer>
 </div>
 
+<div class="floating-download-bar" id="floatingDownloadBar" data-html2canvas-ignore="true">
+  <span class="floating-dl-label">Unduh:</span>
+  <button type="button" class="btn-download primary" data-dl-btn onclick="downloadFocusedView()">Fokus Layar</button>
+  <button type="button" class="btn-download secondary" data-dl-btn onclick="downloadFullTable()">Tabel + Garis</button>
+  <button type="button" class="btn-download outline" data-dl-btn onclick="downloadCardSection()">Kartu Penuh</button>
+</div>
+
+<div class="toast-notice" id="toastNotice" role="status" aria-live="polite"></div>
+
 <script>
-const currentYear = new Date().getFullYear();
-document.getElementById("currentYear").textContent = currentYear;
-document.getElementById("currentYearFooter").textContent = currentYear;
+(function () {
+  "use strict";
 
-const firebaseConfig = {databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"};
-firebase.apps.length || firebase.initializeApp(firebaseConfig);
-const db = firebase.database(), hkRef = db.ref("live/data-hk");
-let activeColorClass = "c-0", selectedPosIndex = 0;
+  const PAGE_BUILD_VERSION = "2026.11.21.v24";
+  const CACHE_STORAGE_KEY = "tp_hk_cache_v24";
+  const VERSION_STORAGE_KEY = "tp_hk_ver_v24";
+  const CACHE_TTL_MS = 60 * 1000;
+  const TREND_HEX = ["#ffadad","#ffd6a5","#fdffb6","#caffbf","#9bf6ff","#a0c4ff","#bdb2ff","#ffc6ff","#fffffc","#ffb703"];
+  const COLOR_CLASSES = ["c-0","c-1","c-2","c-3","c-4","c-5","c-6","c-7","c-8","c-9"];
 
-function setSelectedColor(t){activeColorClass = t}
-function resetColors(){document.querySelectorAll(".digit").forEach((t=>{t.className="digit"})),updateSvgLines()}
-function toggleDigitColor(t){let e = !1;for(let s = 0; s <= 9; s++)if(t.classList.contains("c-"+s)){e = !0;break}if(e)for(let e = 0; e <= 9; e++)t.classList.remove("c-"+e);else{for(let e = 0; e <= 9; e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}updateSvgLines()}
-function selectPosition(t,e){selectedPosIndex = t,document.querySelectorAll(".pos-btn").forEach((t=>t.classList.remove("active"))),e.classList.add("active")}
-function autoColorByPosition(t){document.querySelectorAll(".number-group").forEach((e=>{let s = e.querySelectorAll(".digit");if(s.length > selectedPosIndex){let e = s[selectedPosIndex];if(parseInt(e.textContent.trim()) === t){for(let t = 0; t <= 9; t++)e.classList.remove("c-"+t);e.classList.add(activeColorClass)}}})),updateSvgLines()}
-function searchPattern(t){const e = document.getElementById("patternInput").value.trim();if(!e || isNaN(e))return void alert("Masukkan angka yang valid (contoh: 1234 atau 56)!");const s = e.split("");document.querySelectorAll(".number-group").forEach((a=>{const l = a.querySelectorAll(".digit");if(0 === l.length)return;let n = "";l.forEach((t=>n += t.textContent.trim()));let i = !1;if(t)n.includes(e) && (i = !0);else{let t = n;i = !0;for(let e of s){let s = t.indexOf(e);if(-1 === s){i = !1;break}t = t.substring(0,s)+t.substring(s+1)}}i && l.forEach((t=>{for(let e = 0; e <= 9; e++)t.classList.remove("c-"+e);t.classList.add(activeColorClass)}))})),updateSvgLines()}
-function updateSvgLines(){const t = document.getElementById("paitoSvg"),e = document.getElementById("paitoTable"),s = document.getElementById("tableResponsive");if(!t || !e)return;if(t.innerHTML="", "none" === e.style.display)return;t.setAttribute("width",e.offsetWidth),t.setAttribute("height",e.offsetHeight);const a = {};for(let t = 0; t <= 9; t++){a["c-"+t] = [];const e = ["#ffadad","#ffd6a5","#fdffb6","#caffbf","#9bf6ff","#a0c4ff","#bdb2ff","#ffc6ff","#fffffc","#ffb703"];a["c-"+t].hex = e[t]}document.querySelectorAll(".digit").forEach((t=>{for(let e = 0; e <= 9; e++)if(t.classList.contains("c-"+e)){const l = t.getBoundingClientRect(),n = s.getBoundingClientRect(),i = l.left - n.left + s.scrollLeft + l.width/2,o = l.top - n.top + s.scrollTop + l.height/2;a["c-"+e].push({x:i,y:o});break}}));for(let e = 0; e <= 9; e++){const s = a["c-"+e];if(s.length > 1)for(let l = 0; l < s.length - 1; l++){const n = document.createElementNS("http://www.w3.org/2000/svg","line");n.setAttribute("x1",s[l].x),n.setAttribute("y1",s[l].y),n.setAttribute("x2",s[l+1].x),n.setAttribute("y2",s[l+1].y),n.setAttribute("stroke",a["c-"+e].hex),n.setAttribute("stroke-width","2.5"),n.setAttribute("stroke-opacity","0.8"),t.appendChild(n)}}}
+  const dom = {
+    toast: document.getElementById("toastNotice"),
+    syncStatus: document.getElementById("syncStatus"),
+    statusDot: document.getElementById("statusDot"),
+    loading: document.getElementById("loading"),
+    table: document.getElementById("paitoTable"),
+    tableBody: document.getElementById("tableBody"),
+    tableResponsive: document.getElementById("tableResponsive"),
+    svg: document.getElementById("paitoSvg"),
+    card: document.getElementById("paitoCard"),
+    patternInput: document.getElementById("patternInput")
+  };
 
-function parseDateKey(rawKey){
-  const parts = String(rawKey || "").trim().split(/[-/]/);
-  if(3 !== parts.length) return null;
-  let day, month, year;
-  if(parts[0].length === 4){
-    year = parseInt(parts[0], 10);
-    month = parseInt(parts[1], 10);
-    day = parseInt(parts[2], 10);
-  } else {
-    day = parseInt(parts[0], 10);
-    month = parseInt(parts[1], 10);
-    year = parseInt(parts[2], 10);
-  }
-  if(!day || !month || !year) return null;
-  const dt = new Date(year, month - 1, day);
-  return isNaN(dt.getTime()) ? null : dt;
-}
+  let activeColorClass = "c-0";
+  let selectedPosIndex = 0;
+  let resizeTimer = null;
+  let scrollTimer = null;
+  let toastTimer = null;
+  let clickTimer = null;
+  let isExporting = false;
 
-function getMondayDate(dt){
-  const copy = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
-  const day = copy.getDay();
-  const diff = copy.getDate() - day + (0 === day ? -6 : 1);
-  copy.setDate(diff);
-  copy.setHours(0, 0, 0, 0);
-  return copy;
-}
-
-function extractFourDigitGroups(rawValue){
-  const digitsOnly = String(rawValue || "").replace(/\D/g, "");
-  if(!digitsOnly) return [];
-  if(String(rawValue || "").includes(",")){
-    return String(rawValue).split(",").map(part => part.replace(/\D/g, "").trim()).filter(Boolean);
-  }
-  const groups = [];
-  for(let i = 0; i < digitsOnly.length; i += 4){
-    const chunk = digitsOnly.slice(i, i + 4);
-    if(chunk) groups.push(chunk);
-  }
-  return groups;
-}
-
-function renderNumberGroup(numStr){
-  return `<span class="number-group">${String(numStr).split("").map(d => `<span class="digit" onclick="toggleDigitColor(this)">${d}</span>`).join("")}</span>`;
-}
-
-hkRef.once("value").then((snapshot) => {
-  const loadingEl = document.getElementById("loading");
-  const tableEl = document.getElementById("paitoTable");
-  const bodyEl = document.getElementById("tableBody");
-  loadingEl.style.display = "none";
-  tableEl.style.display = "table";
-
-  if(!snapshot.exists()){
-    bodyEl.innerHTML = '<tr><td colspan="7" style="text-align:center;">Belum ada data HK di database.</td></tr>';
-    return;
+  function showToast(msg) {
+    if (!dom.toast) return;
+    dom.toast.textContent = msg;
+    dom.toast.style.display = "block";
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      dom.toast.style.display = "none";
+    }, 2800);
   }
 
-  const rawData = snapshot.val() || {};
-  const weeksMap = {};
+  function setStatusIndicator(text, colorHex) {
+    if (dom.syncStatus && text) dom.syncStatus.textContent = text;
+    if (dom.statusDot && colorHex) dom.statusDot.style.backgroundColor = colorHex;
+  }
 
-  Object.keys(rawData).forEach((dateKey) => {
-    const baseDt = parseDateKey(dateKey);
-    if(!baseDt) return;
-    const groups = extractFourDigitGroups(rawData[dateKey]);
-    if(!groups.length) return;
-
-    for(let idx = 0; idx < groups.length; idx++){
-      const offsetFromRight = (groups.length - 1) - idx;
-      const targetDt = new Date(baseDt.getFullYear(), baseDt.getMonth(), baseDt.getDate() - offsetFromRight);
-      const monday = getMondayDate(targetDt);
-      const weekKey = `${monday.getFullYear()}-${String(monday.getMonth() + 1).padStart(2, "0")}-${String(monday.getDate()).padStart(2, "0")}`;
-      if(!weeksMap[weekKey]){
-        weeksMap[weekKey] = { ts: monday.getTime(), days: { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 0: [] } };
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (ch) {
+      switch (ch) {
+        case "&": return "&amp;";
+        case "<": return "&lt;";
+        case ">": return "&gt;";
+        case '"': return "&quot;";
+        case "'": return "&#39;";
+        default: return ch;
       }
-      const dayOfWeek = targetDt.getDay();
-      weeksMap[weekKey].days[dayOfWeek].push(renderNumberGroup(groups[idx]));
+    });
+  }
+
+  function clearStaleCachesOnOpen() {
+    try {
+      const prevVer = localStorage.getItem(VERSION_STORAGE_KEY);
+      if (prevVer !== PAGE_BUILD_VERSION) {
+        sessionStorage.clear();
+
+        try {
+          for (let i = localStorage.length - 1; i >= 0; i--) {
+            const k = localStorage.key(i);
+            if (k && k !== VERSION_STORAGE_KEY && (k.indexOf("tp_hk_") === 0 || k.indexOf("hk_cache_") === 0)) {
+              localStorage.removeItem(k);
+            }
+          }
+        } catch (_) {}
+
+        if ("caches" in window && typeof caches.keys === "function") {
+          caches.keys().then(function (keys) {
+            keys.forEach(function (k) {
+              if (
+                k.indexOf("hk") !== -1 ||
+                k.indexOf("tunggalpaito") !== -1 ||
+                k.indexOf("tp_") !== -1 ||
+                k.indexOf("workbox") !== -1 ||
+                k.indexOf("precache") !== -1
+              ) {
+                caches.delete(k);
+              }
+            });
+          }).catch(function () {});
+        }
+
+        if ("serviceWorker" in navigator && typeof navigator.serviceWorker.getRegistrations === "function") {
+          navigator.serviceWorker.getRegistrations().then(function (regs) {
+            regs.forEach(function (reg) {
+              reg.update().catch(function () {});
+            });
+          }).catch(function () {});
+        }
+
+        if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+          const cleanUrl = window.location.href.split("#")[0];
+          const sep = cleanUrl.indexOf("?") === -1 ? "?" : "&";
+          fetch(cleanUrl + sep + "_v=" + encodeURIComponent(PAGE_BUILD_VERSION), {
+            method: "GET",
+            cache: "reload",
+            headers: { "Cache-Control": "no-cache" }
+          }).catch(function () {});
+        }
+
+        localStorage.setItem(VERSION_STORAGE_KEY, PAGE_BUILD_VERSION);
+      }
+    } catch (_) {}
+  }
+
+  clearStaleCachesOnOpen();
+
+  const yr = String(new Date().getFullYear());
+  document.querySelectorAll(".current-year").forEach(function (el) {
+    el.textContent = yr;
+  });
+
+  function clearDigitColorClasses(el) {
+    for (let i = 0; i < COLOR_CLASSES.length; i++) {
+      el.classList.remove(COLOR_CLASSES[i]);
+    }
+  }
+
+  window.setSelectedColor = function (cls, btnEl) {
+    if (COLOR_CLASSES.indexOf(cls) === -1) return;
+    activeColorClass = cls;
+    document.querySelectorAll(".color-btn").forEach(function (b) {
+      b.classList.remove("active-swatch");
+    });
+    if (btnEl) btnEl.classList.add("active-swatch");
+  };
+
+  window.resetColors = function () {
+    document.querySelectorAll("#tableBody .digit").forEach(function (d) {
+      clearDigitColorClasses(d);
+    });
+    scheduleSvgUpdate();
+  };
+
+  function applySingleClickColor(digitEl) {
+    if (!digitEl || !digitEl.classList.contains("digit") || digitEl.classList.contains("is-empty")) return;
+    clearDigitColorClasses(digitEl);
+    digitEl.classList.add(activeColorClass);
+    scheduleSvgUpdate();
+  }
+
+  function removeDigitColor(digitEl) {
+    if (!digitEl || !digitEl.classList.contains("digit") || digitEl.classList.contains("is-empty")) return;
+    clearDigitColorClasses(digitEl);
+    scheduleSvgUpdate();
+  }
+
+  window.selectPosition = function (posIdx, btnEl) {
+    if (posIdx < 0 || posIdx > 3) return;
+    selectedPosIndex = posIdx;
+    document.querySelectorAll(".pos-btn").forEach(function (b) {
+      b.classList.remove("active");
+    });
+    if (btnEl) btnEl.classList.add("active");
+  };
+
+  window.autoColorByPosition = function (targetDigit) {
+    if (typeof targetDigit !== "number" || targetDigit < 0 || targetDigit > 9) return;
+    document.querySelectorAll("#tableBody .number-group").forEach(function (grp) {
+      const digits = grp.querySelectorAll(".digit:not(.is-empty)");
+      if (digits.length > selectedPosIndex) {
+        const targetEl = digits[selectedPosIndex];
+        const rawText = targetEl.textContent.trim();
+        if (/^\d$/.test(rawText) && parseInt(rawText, 10) === targetDigit) {
+          clearDigitColorClasses(targetEl);
+          targetEl.classList.add(activeColorClass);
+        }
+      }
+    });
+    scheduleSvgUpdate();
+  };
+
+  window.searchPattern = function (ordered) {
+    const val = (dom.patternInput ? dom.patternInput.value : "").replace(/\D/g, "").trim();
+    if (!/^\d{2,4}$/.test(val)) {
+      showToast("Masukkan 2, 3, atau 4 digit angka yang valid (contoh: 1234 atau 56).");
+      return;
+    }
+    const chars = val.split("");
+    document.querySelectorAll("#tableBody .number-group").forEach(function (grp) {
+      const digits = grp.querySelectorAll(".digit:not(.is-empty)");
+      if (!digits.length) return;
+      let combined = "";
+      digits.forEach(function (d) {
+        const ch = d.textContent.trim();
+        combined += /^\d$/.test(ch) ? ch : " ";
+      });
+      let matched = false;
+      if (ordered) {
+        matched = combined.indexOf(val) !== -1;
+      } else {
+        let pool = combined;
+        matched = true;
+        for (let i = 0; i < chars.length; i++) {
+          const idx = pool.indexOf(chars[i]);
+          if (idx === -1) {
+            matched = false;
+            break;
+          }
+          pool = pool.slice(0, idx) + pool.slice(idx + 1);
+        }
+      }
+      if (matched) {
+        digits.forEach(function (d) {
+          if (/^\d$/.test(d.textContent.trim())) {
+            clearDigitColorClasses(d);
+            d.classList.add(activeColorClass);
+          }
+        });
+      }
+    });
+    scheduleSvgUpdate();
+  };
+
+  if (dom.patternInput) {
+    dom.patternInput.addEventListener("keydown", function (ev) {
+      if (ev && ev.key === "Enter") {
+        ev.preventDefault();
+        window.searchPattern(true);
+      }
+    });
+  }
+
+  function collectSvgLinesRelativeTo(targetEl) {
+    if (!dom.svg || !dom.table || !dom.tableResponsive || !targetEl) return [];
+    const targetRect = targetEl.getBoundingClientRect();
+    const linesOut = [];
+
+    for (let i = 0; i < 10; i++) {
+      const cls = "c-" + i;
+      const pts = [];
+      document.querySelectorAll("#tableBody .digit." + cls).forEach(function (d) {
+        const r = d.getBoundingClientRect();
+        pts.push({
+          x: r.left + r.width / 2 - targetRect.left,
+          y: r.top + r.height / 2 - targetRect.top
+        });
+      });
+      if (pts.length > 1) {
+        for (let j = 0; j < pts.length - 1; j++) {
+          linesOut.push({
+            x1: pts[j].x,
+            y1: pts[j].y,
+            x2: pts[j + 1].x,
+            y2: pts[j + 1].y,
+            stroke: TREND_HEX[i]
+          });
+        }
+      }
+    }
+    return linesOut;
+  }
+
+  function updateSvgLines() {
+    if (!dom.svg || !dom.table || !dom.tableResponsive) return;
+
+    dom.svg.textContent = "";
+    if (dom.table.style.display === "none") return;
+
+    const w = dom.table.offsetWidth;
+    const h = dom.table.offsetHeight;
+    if (!w || !h) return;
+
+    dom.svg.setAttribute("width", String(w));
+    dom.svg.setAttribute("height", String(h));
+
+    const buckets = {};
+    for (let i = 0; i < 10; i++) buckets["c-" + i] = [];
+
+    const wrapperRect = dom.tableResponsive.getBoundingClientRect();
+    document.querySelectorAll("#tableBody .digit:not(.is-empty)").forEach(function (d) {
+      for (let i = 0; i < 10; i++) {
+        const cls = "c-" + i;
+        if (d.classList.contains(cls)) {
+          const r = d.getBoundingClientRect();
+          const cx = r.left - wrapperRect.left + dom.tableResponsive.scrollLeft + r.width / 2;
+          const cy = r.top - wrapperRect.top + dom.tableResponsive.scrollTop + r.height / 2;
+          buckets[cls].push({ x: cx, y: cy });
+          break;
+        }
+      }
+    });
+
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < 10; i++) {
+      const pts = buckets["c-" + i];
+      if (pts.length > 1) {
+        for (let j = 0; j < pts.length - 1; j++) {
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", String(pts[j].x));
+          line.setAttribute("y1", String(pts[j].y));
+          line.setAttribute("x2", String(pts[j + 1].x));
+          line.setAttribute("y2", String(pts[j + 1].y));
+          line.setAttribute("stroke", TREND_HEX[i]);
+          line.setAttribute("stroke-width", "2.4");
+          line.setAttribute("stroke-opacity", "0.85");
+          frag.appendChild(line);
+        }
+      }
+    }
+    dom.svg.appendChild(frag);
+  }
+
+  function scheduleSvgUpdate() {
+    window.requestAnimationFrame(updateSvgLines);
+  }
+
+  function setExportButtonsDisabled(disabled) {
+    isExporting = disabled;
+    document.querySelectorAll("[data-dl-btn]").forEach(function (btn) {
+      btn.disabled = disabled;
+    });
+  }
+
+  function clickDownloadHref(href, fileName, revokeUrlAfter) {
+    const link = document.createElement("a");
+    link.href = href;
+    link.download = fileName;
+    link.rel = "noopener";
+    link.style.position = "fixed";
+    link.style.left = "-9999px";
+    link.style.opacity = "0";
+    document.body.appendChild(link);
+
+    const evt = new MouseEvent("click", {
+      view: window,
+      bubbles: true,
+      cancelable: true
+    });
+    link.dispatchEvent(evt);
+
+    setTimeout(function () {
+      try {
+        if (link.parentNode) link.parentNode.removeChild(link);
+      } catch (_) {}
+    }, 500);
+
+    if (revokeUrlAfter) {
+      setTimeout(function () {
+        try { URL.revokeObjectURL(href); } catch (_) {}
+      }, 25000);
+    }
+  }
+
+  function triggerCanvasDownload(canvas, fileName) {
+    let downloadStarted = false;
+
+    function finishDownload() {
+      showToast("Gambar diunduh: " + fileName);
+      setTimeout(function () {
+        setExportButtonsDisabled(false);
+      }, 600);
+    }
+
+    function fallbackDataUrl() {
+      try {
+        const dataUrl = canvas.toDataURL("image/png");
+        if (dataUrl && dataUrl.indexOf("data:image/png") === 0) {
+          downloadStarted = true;
+          clickDownloadHref(dataUrl, fileName, false);
+          finishDownload();
+          return true;
+        }
+      } catch (_) {}
+      return false;
+    }
+
+    try {
+      if (typeof canvas.toBlob === "function") {
+        canvas.toBlob(function (blob) {
+          if (downloadStarted) return;
+          if (blob && blob.size > 0) {
+            try {
+              const url = URL.createObjectURL(blob);
+              downloadStarted = true;
+              clickDownloadHref(url, fileName, true);
+              finishDownload();
+              return;
+            } catch (_) {}
+          }
+          if (!fallbackDataUrl()) {
+            setExportButtonsDisabled(false);
+            showToast("Gagal membuat file gambar.");
+          }
+        }, "image/png");
+
+        setTimeout(function () {
+          if (!downloadStarted) {
+            if (!fallbackDataUrl()) {
+              setExportButtonsDisabled(false);
+              showToast("Proses unduh melebihi batas waktu.");
+            }
+          }
+        }, 4000);
+        return;
+      }
+    } catch (_) {}
+
+    if (!fallbackDataUrl()) {
+      setExportButtonsDisabled(false);
+      showToast("Perangkat memblokir unduhan langsung.");
+    }
+  }
+
+  function captureElementWithSvg(targetEl, filePrefix, cropViewportOnly) {
+    if (isExporting) return;
+    if (typeof window.html2canvas !== "function") {
+      showToast("Modul gambar sedang dimuat, coba 1 detik lagi.");
+      return;
+    }
+    if (!targetEl || !dom.table || dom.table.style.display === "none") {
+      showToast("Data tabel belum siap untuk diunduh.");
+      return;
+    }
+
+    setExportButtonsDisabled(true);
+    showToast("Menyiapkan gambar...");
+    const svgLines = collectSvgLinesRelativeTo(targetEl);
+    const scale = Math.min(window.devicePixelRatio || 1.5, 2);
+
+    window.html2canvas(targetEl, {
+      backgroundColor: "#0b1a10",
+      scale: scale,
+      useCORS: true,
+      allowTaint: true,
+      logging: false
+    }).then(function (baseCanvas) {
+      const ctx = baseCanvas.getContext("2d");
+      if (ctx && svgLines.length) {
+        ctx.save();
+        ctx.scale(scale, scale);
+        ctx.lineWidth = 2.4;
+        ctx.globalAlpha = 0.85;
+        svgLines.forEach(function (ln) {
+          ctx.strokeStyle = ln.stroke;
+          ctx.beginPath();
+          ctx.moveTo(ln.x1, ln.y1);
+          ctx.lineTo(ln.x2, ln.y2);
+          ctx.stroke();
+        });
+        ctx.restore();
+      }
+
+      const stamp = new Date().toISOString().slice(0, 10);
+      if (!cropViewportOnly) {
+        triggerCanvasDownload(baseCanvas, filePrefix + "-" + stamp + ".png");
+        return;
+      }
+
+      const rect = targetEl.getBoundingClientRect();
+      const vw = window.innerWidth || document.documentElement.clientWidth || (baseCanvas.width / scale);
+      const vh = window.innerHeight || document.documentElement.clientHeight || (baseCanvas.height / scale);
+      const totalW = baseCanvas.width / scale;
+      const totalH = baseCanvas.height / scale;
+
+      const localLeft = Math.max(0, Math.min(totalW, -rect.left));
+      const localTop = Math.max(0, Math.min(totalH, -rect.top));
+      const localRight = Math.max(localLeft + 60, Math.min(totalW, vw - rect.left));
+      const localBottom = Math.max(localTop + 60, Math.min(totalH, vh - rect.top));
+
+      const cropX = Math.max(0, Math.round(localLeft * scale));
+      const cropY = Math.max(0, Math.round(localTop * scale));
+      const cropW = Math.max(1, Math.min(baseCanvas.width - cropX, Math.round((localRight - localLeft) * scale)));
+      const cropH = Math.max(1, Math.min(baseCanvas.height - cropY, Math.round((localBottom - localTop) * scale)));
+
+      const outCanvas = document.createElement("canvas");
+      outCanvas.width = cropW;
+      outCanvas.height = cropH;
+      const outCtx = outCanvas.getContext("2d");
+      outCtx.fillStyle = "#0b1a10";
+      outCtx.fillRect(0, 0, cropW, cropH);
+      outCtx.drawImage(baseCanvas, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
+
+      triggerCanvasDownload(outCanvas, filePrefix + "-fokus-layar-" + stamp + ".png");
+    }).catch(function () {
+      setExportButtonsDisabled(false);
+      showToast("Gagal menangkap tampilan layar.");
+    });
+  }
+
+  window.downloadFocusedView = function () {
+    captureElementWithSvg(dom.card, "paito-hk", true);
+  };
+
+  window.downloadFullTable = function () {
+    captureElementWithSvg(dom.tableResponsive, "paito-hk-tabel", false);
+  };
+
+  window.downloadCardSection = function () {
+    captureElementWithSvg(dom.card, "paito-hk-kartu", false);
+  };
+
+  function parseDateKey(rawKey) {
+    const parts = String(rawKey || "").trim().split(/[-/]/);
+    if (parts.length !== 3) return null;
+    let day, month, year;
+    if (parts[0].length === 4) {
+      year = parseInt(parts[0], 10);
+      month = parseInt(parts[1], 10);
+      day = parseInt(parts[2], 10);
+    } else {
+      day = parseInt(parts[0], 10);
+      month = parseInt(parts[1], 10);
+      year = parseInt(parts[2], 10);
+    }
+    if (!day || !month || !year) return null;
+    const dt = new Date(year, month - 1, day);
+    return isNaN(dt.getTime()) ? null : dt;
+  }
+
+  function getMondayDate(dt) {
+    const copy = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+    const day = copy.getDay();
+    const diff = copy.getDate() - day + (day === 0 ? -6 : 1);
+    copy.setDate(diff);
+    copy.setHours(0, 0, 0, 0);
+    return copy;
+  }
+
+  function extractFourDigitGroups(rawValue) {
+    const str = String(rawValue || "").trim();
+    if (!str) return [];
+    if (str.indexOf(",") !== -1) {
+      return str.split(",").map(function (part) {
+        return part.replace(/\D/g, "").trim();
+      }).filter(Boolean);
+    }
+    const digitsOnly = str.replace(/\D/g, "");
+    const groups = [];
+    for (let i = 0; i < digitsOnly.length; i += 4) {
+      const chunk = digitsOnly.slice(i, i + 4);
+      if (chunk) groups.push(chunk);
+    }
+    return groups;
+  }
+
+  function renderNumberGroup(numStr) {
+    const chars = String(numStr).replace(/\D/g, "").split("");
+    if (!chars.length) {
+      return '<span class="number-group"><span class="digit is-empty">x</span><span class="digit is-empty">x</span><span class="digit is-empty">x</span><span class="digit is-empty">x</span></span>';
+    }
+    const spans = chars.map(function (d) {
+      return '<span class="digit">' + escapeHtml(d) + "</span>";
+    }).join("");
+    return '<span class="number-group">' + spans + "</span>";
+  }
+
+  function buildRowsHtml(rawData) {
+    if (!rawData || typeof rawData !== "object") {
+      return '<tr><td colspan="7" style="text-align:center;">Belum ada data HK di database.</td></tr>';
+    }
+    const keys = Object.keys(rawData);
+    if (!keys.length) {
+      return '<tr><td colspan="7" style="text-align:center;">Belum ada data HK di database.</td></tr>';
+    }
+
+    const weeksMap = {};
+    keys.forEach(function (dateKey) {
+      const baseDt = parseDateKey(dateKey);
+      if (!baseDt) return;
+      const groups = extractFourDigitGroups(rawData[dateKey]);
+      if (!groups.length) return;
+      for (let idx = 0; idx < groups.length; idx++) {
+        const offsetFromRight = (groups.length - 1) - idx;
+        const targetDt = new Date(baseDt.getFullYear(), baseDt.getMonth(), baseDt.getDate() - offsetFromRight);
+        const monday = getMondayDate(targetDt);
+        const weekKey = monday.getFullYear() + "-" +
+          String(monday.getMonth() + 1).padStart(2, "0") + "-" +
+          String(monday.getDate()).padStart(2, "0");
+        if (!weeksMap[weekKey]) {
+          weeksMap[weekKey] = { ts: monday.getTime(), days: { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 0: [] } };
+        }
+        const dayOfWeek = targetDt.getDay();
+        weeksMap[weekKey].days[dayOfWeek].push(renderNumberGroup(groups[idx]));
+      }
+    });
+
+    const sortedWeeks = Object.keys(weeksMap).map(function (k) {
+      return weeksMap[k];
+    }).sort(function (a, b) {
+      return a.ts - b.ts;
+    });
+
+    const placeholder = '<span class="number-group"><span class="digit is-empty">x</span><span class="digit is-empty">x</span><span class="digit is-empty">x</span><span class="digit is-empty">x</span></span>';
+    let rowsHtml = "";
+    sortedWeeks.forEach(function (wk) {
+      const d = wk.days;
+      const c1 = d[1].length ? d[1].join("<br>") : placeholder;
+      const c2 = d[2].length ? d[2].join("<br>") : placeholder;
+      const c3 = d[3].length ? d[3].join("<br>") : placeholder;
+      const c4 = d[4].length ? d[4].join("<br>") : placeholder;
+      const c5 = d[5].length ? d[5].join("<br>") : placeholder;
+      const c6 = d[6].length ? d[6].join("<br>") : placeholder;
+      const c0 = d[0].length ? d[0].join("<br>") : placeholder;
+      rowsHtml += "<tr>" +
+        "<td>" + c1 + "</td>" +
+        "<td>" + c2 + "</td>" +
+        "<td>" + c3 + "</td>" +
+        "<td>" + c4 + "</td>" +
+        "<td>" + c5 + "</td>" +
+        "<td>" + c6 + "</td>" +
+        "<td>" + c0 + "</td>" +
+        "</tr>";
+    });
+
+    return rowsHtml || '<tr><td colspan="7" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>';
+  }
+
+  function renderDataToDom(rawData, sourceLabel, dotColor) {
+    if (dom.loading) dom.loading.style.display = "none";
+    if (dom.table) dom.table.style.display = "table";
+    if (dom.tableBody) dom.tableBody.innerHTML = buildRowsHtml(rawData);
+    setStatusIndicator(sourceLabel || "Siap", dotColor || "#00ff66");
+    scheduleSvgUpdate();
+  }
+
+  function readSessionCache() {
+    try {
+      const raw = sessionStorage.getItem(CACHE_STORAGE_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || !parsed.ts || !parsed.data || parsed.ver !== PAGE_BUILD_VERSION) return null;
+      if ((Date.now() - parsed.ts) > CACHE_TTL_MS) return null;
+      return parsed.data;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function writeSessionCache(data) {
+    try {
+      sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({
+        ts: Date.now(),
+        ver: PAGE_BUILD_VERSION,
+        data: data
+      }));
+    } catch (_) {}
+  }
+
+  if (dom.tableBody) {
+    dom.tableBody.addEventListener("click", function (ev) {
+      const target = ev.target && ev.target.closest ? ev.target.closest(".digit") : null;
+      if (!target || target.classList.contains("is-empty")) return;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(function () {
+        applySingleClickColor(target);
+      }, 170);
+    });
+
+    dom.tableBody.addEventListener("dblclick", function (ev) {
+      const target = ev.target && ev.target.closest ? ev.target.closest(".digit") : null;
+      if (!target || target.classList.contains("is-empty")) return;
+      clearTimeout(clickTimer);
+      removeDigitColor(target);
+    });
+  }
+
+  let hkRef = null;
+  try {
+    const firebaseConfig = {
+      databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    hkRef = firebase.database().ref("live/data-hk");
+  } catch (_) {
+    if (dom.loading) dom.loading.textContent = "Gagal menginisialisasi koneksi data.";
+    setStatusIndicator("Koneksi gagal", "#ff4d4d");
+  }
+
+  function fetchFromFirebase(isManual) {
+    if (!hkRef) return;
+    if (isManual) setStatusIndicator("Menyinkronkan data...", "#facc15");
+
+    hkRef.once("value").then(function (snapshot) {
+      const val = snapshot.exists() ? (snapshot.val() || {}) : {};
+      writeSessionCache(val);
+      const nowTime = new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      renderDataToDom(val, "Terupdate " + nowTime + " WIB", "#00ff66");
+    }).catch(function () {
+      const cached = readSessionCache();
+      if (cached) {
+        renderDataToDom(cached, "Menampilkan cache sesi", "#facc15");
+      } else {
+        if (dom.loading && dom.table && dom.table.style.display === "none") {
+          dom.loading.textContent = "Gagal memuat data dari Firebase.";
+        }
+        setStatusIndicator("Koneksi terputus sementara", "#ff4d4d");
+      }
+    });
+  }
+
+  window.forceRefreshData = function () {
+    try {
+      sessionStorage.removeItem(CACHE_STORAGE_KEY);
+    } catch (_) {}
+    fetchFromFirebase(true);
+  };
+
+  const initialCache = readSessionCache();
+  if (initialCache) {
+    renderDataToDom(initialCache, "Dimuat instan • menyegarkan...", "#00ff66");
+  }
+  fetchFromFirebase(false);
+
+  window.addEventListener("pageshow", function (ev) {
+    if (ev && ev.persisted) {
+      clearStaleCachesOnOpen();
+      fetchFromFirebase(false);
     }
   });
 
-  const sortedWeeks = Object.keys(weeksMap).map(k => weeksMap[k]).sort((a, b) => a.ts - b.ts);
-  const placeholder = '<span class="number-group" style="letter-spacing:0.5px;"><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span><span class="digit" onclick="toggleDigitColor(this)" style="color:#adb5bd;">x</span></span>';
-
-  let rowsHtml = "";
-  sortedWeeks.forEach((wk) => {
-    const d = wk.days;
-    const c1 = d[1].length ? d[1].join("<br>") : placeholder;
-    const c2 = d[2].length ? d[2].join("<br>") : placeholder;
-    const c3 = d[3].length ? d[3].join("<br>") : placeholder;
-    const c4 = d[4].length ? d[4].join("<br>") : placeholder;
-    const c5 = d[5].length ? d[5].join("<br>") : placeholder;
-    const c6 = d[6].length ? d[6].join("<br>") : placeholder;
-    const c0 = d[0].length ? d[0].join("<br>") : placeholder;
-    rowsHtml += `<tr><td>${c1}</td><td>${c2}</td><td>${c3}</td><td>${c4}</td><td>${c5}</td><td>${c6}</td><td>${c0}</td></tr>`;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(scheduleSvgUpdate, 80);
   });
 
-  bodyEl.innerHTML = rowsHtml || '<tr><td colspan="7" style="text-align:center;">Tidak ada data yang tersedia.</td></tr>';
-  updateSvgLines();
-  window.addEventListener("resize", updateSvgLines);
-}).catch((err) => {
-  console.error("Gagal mengambil data:", err);
-  document.getElementById("loading").textContent = "Gagal memuat data dari Firebase.";
-});
-
-let clickCount = 0;
-const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-document.addEventListener("click", function(t){
-  if(t.target.closest(".color-controls") || t.target.closest(".auto-search-controls") || t.target.closest(".nav-top-container") || "A" === t.target.tagName || "IFRAME" === t.target.tagName || t.target.closest("iframe") || t.target.closest(".top-ads-wrapper") || t.target.classList.contains("digit")) return;
-  clickCount++;
-  if(1 === clickCount || (clickCount - 1) % 3 === 0){
-    window.open(adLink, "_blank");
+  if (dom.tableResponsive) {
+    dom.tableResponsive.addEventListener("scroll", function () {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(scheduleSvgUpdate, 60);
+    }, { passive: true });
   }
-}, !0);
-
-document.addEventListener("contextmenu", (e => e.preventDefault()));
-document.onkeydown = function(e){
-  return 123 != e.keyCode && (!e.ctrlKey || !e.shiftKey || e.keyCode != "I".charCodeAt(0)) && (!e.ctrlKey || !e.shiftKey || e.keyCode != "C".charCodeAt(0)) && (!e.ctrlKey || !e.shiftKey || e.keyCode != "J".charCodeAt(0)) && (!e.ctrlKey || e.keyCode != "U".charCodeAt(0)) && void 0;
+})();
+</script>
+<script>
+document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+document.onkeydown = function (e) {
+  return 123 !== e.keyCode &&
+    (!e.ctrlKey || !e.shiftKey || e.keyCode !== "I".charCodeAt(0)) &&
+    (!e.ctrlKey || !e.shiftKey || e.keyCode !== "C".charCodeAt(0)) &&
+    (!e.ctrlKey || !e.shiftKey || e.keyCode !== "J".charCodeAt(0)) &&
+    (!e.ctrlKey || e.keyCode !== "U".charCodeAt(0)) &&
+    void 0;
 };
 </script>
 </body>
