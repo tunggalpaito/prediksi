@@ -83,7 +83,9 @@
       --zonk: #ff4d4d;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -99,6 +101,7 @@
       align-items: center;
       padding: 14px 10px 24px;
       min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .container-shell {
@@ -413,13 +416,18 @@
       <!-- 4. Banner 320x50 -->
       <div class="ad-slot" id="ad-slot-4">
         <script>
-          window.atOptions = {
-            'key' : '119c8bb3217ed264a8fa223c3197bf69',
-            'format' : 'iframe',
-            'height' : 50,
-            'width' : 320,
-            'params' : {}
-          };
+          (function () {
+            try {
+              window.__atPrevOptions = window.atOptions;
+              window.atOptions = {
+                'key' : '119c8bb3217ed264a8fa223c3197bf69',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+              };
+            } catch (_) {}
+          })();
         </script>
         <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
       </div>
@@ -460,8 +468,9 @@
         </div>
       </div>
 
+      <!-- Opsional: isi data-redirect-url="https://..." jika ingin redirect otomatis setelah download dimulai -->
       <div class="download-btn-container">
-        <button type="button" class="btn-download" id="btn-download-img">
+        <button type="button" class="btn-download" id="btn-download-img" data-redirect-url="">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
             <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
@@ -490,9 +499,8 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    const CACHE_KEY = "tp_japan_bbfs8d_cache_v1";
+    const CACHE_KEY = "tp_japan_bbfs8d_cache_v2";
     const CACHE_TTL_MS = 60 * 1000;
-    let memoryCache = null;
 
     const yearEl = document.getElementById("auto-year");
     if (yearEl) {
@@ -511,6 +519,15 @@
       const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
       const dd = String(dateObj.getDate()).padStart(2, "0");
       return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function setStatusMessage(container, message) {
+      if (!container) return;
+      container.textContent = "";
+      const div = document.createElement("div");
+      div.className = "status-msg";
+      div.textContent = message;
+      container.appendChild(div);
     }
 
     let activeDownloadDateStr = formatLocalISODate(new Date());
@@ -539,14 +556,29 @@
       return html2canvasPromise;
     }
 
-    function parseDDMMYYYY(dateStr) {
+    function parseFlexibleDate(dateStr) {
       if (typeof dateStr !== "string") return new Date(0);
-      const parts = dateStr.split("-").map(Number);
-      if (parts.length !== 3) return new Date(0);
-      const [dd, mm, yyyy] = parts;
-      if (!dd || !mm || !yyyy) return new Date(0);
-      const parsed = new Date(yyyy, mm - 1, dd);
-      return Number.isNaN(parsed.getTime()) ? new Date(0) : parsed;
+      const trimmed = dateStr.trim();
+
+      const dmyMatch = /^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/.exec(trimmed);
+      if (dmyMatch) {
+        const dd = Number(dmyMatch[1]);
+        const mm = Number(dmyMatch[2]);
+        const yyyy = Number(dmyMatch[3]);
+        const d = new Date(yyyy, mm - 1, dd);
+        return Number.isNaN(d.getTime()) ? new Date(0) : d;
+      }
+
+      const isoMatch = /^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/.exec(trimmed);
+      if (isoMatch) {
+        const yyyy = Number(isoMatch[1]);
+        const mm = Number(isoMatch[2]);
+        const dd = Number(isoMatch[3]);
+        const d = new Date(yyyy, mm - 1, dd);
+        return Number.isNaN(d.getTime()) ? new Date(0) : d;
+      }
+
+      return new Date(0);
     }
 
     function extractVal(val) {
@@ -558,6 +590,7 @@
       return val == null ? "" : String(val);
     }
 
+    // Logika asli dipertahankan tanpa perubahan
     function buildBbfsFrom4D(resNum) {
       const as = parseInt(resNum[0], 10);
       const kop = parseInt(resNum[1], 10);
@@ -627,28 +660,30 @@
       }
 
       container.appendChild(fragment);
-      document.getElementById("total-masuk").textContent = String(totalMasuk);
-      document.getElementById("total-zonk").textContent = String(totalZonk);
+      const masukEl = document.getElementById("total-masuk");
+      const zonkEl = document.getElementById("total-zonk");
+      if (masukEl) masukEl.textContent = String(totalMasuk);
+      if (zonkEl) zonkEl.textContent = String(totalZonk);
     }
 
     function applyRawDataToUI(rawData) {
       const container = document.getElementById("result-7rows-container");
       if (!rawData || typeof rawData !== "object") {
-        container.innerHTML = '<div class="status-msg">Data tanggal kosong.</div>';
+        setStatusMessage(container, "Data tanggal kosong.");
         return false;
       }
 
       const dateKeys = Object.keys(rawData)
-        .filter(k => parseDDMMYYYY(k).getTime() > 0)
-        .sort((a, b) => parseDDMMYYYY(a) - parseDDMMYYYY(b));
+        .filter(k => parseFlexibleDate(k).getTime() > 0)
+        .sort((a, b) => parseFlexibleDate(a) - parseFlexibleDate(b));
 
       if (dateKeys.length === 0) {
-        container.innerHTML = '<div class="status-msg">Data tanggal kosong.</div>';
+        setStatusMessage(container, "Data tanggal kosong.");
         return false;
       }
 
       const latestDateKey = dateKeys[dateKeys.length - 1];
-      const latestResultDate = parseDDMMYYYY(latestDateKey);
+      const latestResultDate = parseFlexibleDate(latestDateKey);
 
       const targetDisplayDate = new Date(latestResultDate);
       targetDisplayDate.setDate(latestResultDate.getDate() + 1);
@@ -656,19 +691,26 @@
       const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
       const formattedTargetDate = targetDisplayDate.toLocaleDateString("id-ID", options);
 
-      document.getElementById("dynamic-h1-date").textContent = formattedTargetDate;
-      document.getElementById("page-title").textContent = `Prediksi Angka 2D BBFS Japan ${formattedTargetDate} - Tunggal Paito`;
-
+      const h1DateEl = document.getElementById("dynamic-h1-date");
+      const titleEl = document.getElementById("page-title");
       const subEl = document.getElementById("dynamic-subtitle-date");
-      subEl.textContent = "";
-      const line1 = document.createTextNode("Pusat Analisa Tarikan Paito, Target Angka 2D, & Pola BBFS 8 Digit Pasaran Japan Terjitu & Akurat.");
-      const brEl = document.createElement("br");
-      const strongEl = document.createElement("strong");
-      strongEl.style.color = "#ff3b30";
-      strongEl.textContent = `Prediksi Periode: ${formattedTargetDate}`;
-      subEl.appendChild(line1);
-      subEl.appendChild(brEl);
-      subEl.appendChild(strongEl);
+
+      if (h1DateEl) h1DateEl.textContent = formattedTargetDate;
+      if (titleEl) {
+        titleEl.textContent = `Prediksi Angka 2D BBFS Japan ${formattedTargetDate} - Tunggal Paito`;
+      }
+
+      if (subEl) {
+        subEl.textContent = "";
+        const line1 = document.createTextNode("Pusat Analisa Tarikan Paito, Target Angka 2D, & Pola BBFS 8 Digit Pasaran Japan Terjitu & Akurat.");
+        const brEl = document.createElement("br");
+        const strongEl = document.createElement("strong");
+        strongEl.style.color = "#ff3b30";
+        strongEl.textContent = `Prediksi Periode: ${formattedTargetDate}`;
+        subEl.appendChild(line1);
+        subEl.appendChild(brEl);
+        subEl.appendChild(strongEl);
+      }
 
       activeDownloadDateStr = formatLocalISODate(targetDisplayDate);
 
@@ -686,7 +728,7 @@
       }
 
       if (allFourDigitArrays.length === 0) {
-        container.innerHTML = '<div class="status-msg">Format angka 4 digit tidak ditemukan.</div>';
+        setStatusMessage(container, "Format angka 4 digit tidak ditemukan.");
         return false;
       }
 
@@ -700,57 +742,53 @@
       return true;
     }
 
-    function readCachedData() {
-      if (memoryCache && Date.now() - memoryCache.ts < CACHE_TTL_MS) {
-        return memoryCache.data;
-      }
+    function readCache() {
       try {
-        const cachedRaw = sessionStorage.getItem(CACHE_KEY);
-        if (cachedRaw) {
-          const cachedObj = JSON.parse(cachedRaw);
-          if (cachedObj && cachedObj.data && Date.now() - cachedObj.ts < CACHE_TTL_MS) {
-            memoryCache = cachedObj;
-            return cachedObj.data;
-          }
+        const cachedRaw = sessionStorage.getItem(CACHE_KEY) || localStorage.getItem(CACHE_KEY);
+        if (!cachedRaw) return null;
+        const cachedObj = JSON.parse(cachedRaw);
+        if (cachedObj && cachedObj.data && Date.now() - cachedObj.ts < CACHE_TTL_MS * 10) {
+          return cachedObj;
         }
       } catch (_) {}
       return null;
     }
 
-    function writeCachedData(data) {
-      const payload = { ts: Date.now(), data };
-      memoryCache = payload;
+    function writeCache(data) {
       try {
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+        const payload = JSON.stringify({ ts: Date.now(), data });
+        sessionStorage.setItem(CACHE_KEY, payload);
+        localStorage.setItem(CACHE_KEY, payload);
       } catch (_) {}
     }
 
     async function loadJapanAnalysis() {
       const container = document.getElementById("result-7rows-container");
+      const cached = readCache();
       let renderedFromCache = false;
 
-      const cachedData = readCachedData();
-      if (cachedData) {
-        renderedFromCache = applyRawDataToUI(cachedData);
+      if (cached && cached.data) {
+        renderedFromCache = applyRawDataToUI(cached.data);
       }
 
       try {
         const snapshot = await get(ref(db, "live/data-japan"));
         if (!snapshot.exists()) {
           if (!renderedFromCache) {
-            container.innerHTML = '<div class="status-msg">Data result Japan belum tersedia.</div>';
-            document.getElementById("dynamic-h1-date").textContent = "Menunggu Pembaruan Data";
+            setStatusMessage(container, "Data result Japan belum tersedia.");
+            const h1DateEl = document.getElementById("dynamic-h1-date");
+            if (h1DateEl) h1DateEl.textContent = "Menunggu Pembaruan Data";
           }
           return;
         }
 
         const rawData = snapshot.val();
-        writeCachedData(rawData);
+        writeCache(rawData);
         applyRawDataToUI(rawData);
       } catch (err) {
         console.error(err);
         if (!renderedFromCache) {
-          container.innerHTML = '<div class="status-msg">Gagal memuat data. Coba muat ulang halaman.</div>';
+          setStatusMessage(container, "Gagal memuat data. Coba muat ulang halaman.");
         }
       }
     }
@@ -772,90 +810,114 @@
       }, 2500);
     });
 
+    function triggerDownloadBlob(blob, filename) {
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2500);
+    }
+
     const downloadBtn = document.getElementById("btn-download-img");
-    downloadBtn.addEventListener("click", async function () {
-      const btn = this;
-      const originalBtnHTML = btn.innerHTML;
-      btn.disabled = true;
-      btn.textContent = "Memproses Gambar 9:16...";
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", async function () {
+        const btn = this;
+        const originalNodes = Array.from(btn.childNodes).map(n => n.cloneNode(true));
+        const redirectUrl = (btn.dataset.redirectUrl || "").trim();
 
-      let cloneWrapper = null;
-      try {
-        const html2canvasFn = await loadHtml2CanvasOnce();
-        const container = document.getElementById("result-7rows-container");
-        const allRows = container.querySelectorAll(".result-row");
-        const last16Rows = Array.from(allRows).slice(-16);
+        btn.disabled = true;
+        btn.textContent = "Memproses Gambar 9:16...";
 
-        if (last16Rows.length === 0) {
-          throw new Error("Belum ada baris data untuk diunduh.");
-        }
+        let cloneWrapper = null;
+        try {
+          const html2canvasFn = await loadHtml2CanvasOnce();
+          const container = document.getElementById("result-7rows-container");
+          const allRows = container ? container.querySelectorAll(".result-row") : [];
+          const last16Rows = Array.from(allRows).slice(-16);
 
-        cloneWrapper = document.createElement("div");
-        cloneWrapper.style.position = "fixed";
-        cloneWrapper.style.left = "-9999px";
-        cloneWrapper.style.top = "0";
-        cloneWrapper.style.width = "1080px";
-        cloneWrapper.style.height = "1920px";
-        cloneWrapper.style.backgroundColor = "#0d0d0d";
-        cloneWrapper.style.display = "flex";
-        cloneWrapper.style.flexDirection = "column";
-        cloneWrapper.style.justifyContent = "space-between";
-        cloneWrapper.style.padding = "70px 45px";
-        cloneWrapper.style.boxSizing = "border-box";
-
-        const rowsWrapper = document.createElement("div");
-        rowsWrapper.style.display = "flex";
-        rowsWrapper.style.flexDirection = "column";
-        rowsWrapper.style.justifyContent = "space-between";
-        rowsWrapper.style.height = "100%";
-        rowsWrapper.style.gap = "16px";
-        rowsWrapper.style.margin = "0";
-
-        last16Rows.forEach(rowEl => {
-          const clonedRow = rowEl.cloneNode(true);
-          clonedRow.style.flex = "1";
-          clonedRow.style.fontSize = "44px";
-          clonedRow.style.letterSpacing = "4px";
-          clonedRow.style.whiteSpace = "nowrap";
-          clonedRow.style.borderRadius = "16px";
-          clonedRow.style.border = "3px solid rgba(255, 59, 48, 0.35)";
-          clonedRow.style.backgroundColor = "#222222";
-          clonedRow.style.padding = "0 28px";
-          clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
-
-          const bbfsNum = clonedRow.querySelector(".bbfs-num");
-          if (bbfsNum) {
-            bbfsNum.style.marginLeft = "20px";
+          if (last16Rows.length === 0) {
+            throw new Error("Belum ada baris data untuk diunduh.");
           }
 
-          rowsWrapper.appendChild(clonedRow);
-        });
+          cloneWrapper = document.createElement("div");
+          cloneWrapper.style.position = "fixed";
+          cloneWrapper.style.left = "-9999px";
+          cloneWrapper.style.top = "0";
+          cloneWrapper.style.width = "1080px";
+          cloneWrapper.style.height = "1920px";
+          cloneWrapper.style.backgroundColor = "#0d0d0d";
+          cloneWrapper.style.display = "flex";
+          cloneWrapper.style.flexDirection = "column";
+          cloneWrapper.style.justifyContent = "space-between";
+          cloneWrapper.style.padding = "70px 45px";
+          cloneWrapper.style.boxSizing = "border-box";
 
-        cloneWrapper.appendChild(rowsWrapper);
-        document.body.appendChild(cloneWrapper);
+          const rowsWrapper = document.createElement("div");
+          rowsWrapper.style.display = "flex";
+          rowsWrapper.style.flexDirection = "column";
+          rowsWrapper.style.justifyContent = "space-between";
+          rowsWrapper.style.height = "100%";
+          rowsWrapper.style.gap = "16px";
+          rowsWrapper.style.margin = "0";
 
-        const canvas = await html2canvasFn(cloneWrapper, {
-          width: 1080,
-          height: 1920,
-          scale: 1,
-          useCORS: true,
-          backgroundColor: "#0d0d0d"
-        });
+          last16Rows.forEach(rowEl => {
+            const clonedRow = rowEl.cloneNode(true);
+            clonedRow.style.flex = "1";
+            clonedRow.style.fontSize = "44px";
+            clonedRow.style.letterSpacing = "4px";
+            clonedRow.style.whiteSpace = "nowrap";
+            clonedRow.style.borderRadius = "16px";
+            clonedRow.style.border = "3px solid rgba(255, 59, 48, 0.35)";
+            clonedRow.style.backgroundColor = "#222222";
+            clonedRow.style.padding = "0 28px";
+            clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
 
-        const link = document.createElement("a");
-        link.download = "Analisis-Target-4D-Japan-16Trek-" + activeDownloadDateStr + ".jpg";
-        link.href = canvas.toDataURL("image/jpeg", 0.95);
-        link.click();
-      } catch (err) {
-        console.error(err);
-      } finally {
-        if (cloneWrapper && cloneWrapper.parentNode) {
-          cloneWrapper.parentNode.removeChild(cloneWrapper);
+            const bbfsNum = clonedRow.querySelector(".bbfs-num");
+            if (bbfsNum) {
+              bbfsNum.style.marginLeft = "20px";
+            }
+
+            rowsWrapper.appendChild(clonedRow);
+          });
+
+          cloneWrapper.appendChild(rowsWrapper);
+          document.body.appendChild(cloneWrapper);
+
+          const canvas = await html2canvasFn(cloneWrapper, {
+            width: 1080,
+            height: 1920,
+            scale: 1,
+            useCORS: true,
+            backgroundColor: "#0d0d0d"
+          });
+
+          const fileName = `Analisis-Target-4D-Japan-16Trek-${activeDownloadDateStr}.jpg`;
+          const blob = await new Promise((resolve, reject) => {
+            canvas.toBlob(b => (b ? resolve(b) : reject(new Error("Gagal membuat file JPG."))), "image/jpeg", 0.95);
+          });
+
+          triggerDownloadBlob(blob, fileName);
+
+          if (redirectUrl && /^https?:\/\//i.test(redirectUrl)) {
+            setTimeout(() => {
+              window.location.assign(redirectUrl);
+            }, 350);
+          }
+        } catch (err) {
+          console.error(err);
+        } finally {
+          if (cloneWrapper && cloneWrapper.parentNode) {
+            cloneWrapper.parentNode.removeChild(cloneWrapper);
+          }
+          btn.disabled = false;
+          btn.textContent = "";
+          originalNodes.forEach(node => btn.appendChild(node));
         }
-        btn.disabled = false;
-        btn.innerHTML = originalBtnHTML;
-      }
-    });
+      });
+    }
   </script>
 </body>
 </html>
