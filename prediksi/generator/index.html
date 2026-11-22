@@ -1,423 +1,898 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generator BBFS Lengkap - Tunggal Paito</title>
-<link rel="canonical" href="https://tunggalpaito.online/generator-bbfs">
-<style>
-body{background-color:#000;color:#fff;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:20px 10px;display:flex;flex-direction:column;align-items:center;min-height:100vh;box-sizing:border-box}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050508">
+  <meta name="color-scheme" content="dark">
+  <title>Generator BBFS Lengkap - Tunggal Paito</title>
+  <link rel="canonical" href="https://tunggalpaito.online/generator-bbfs">
 
-/* Styling Area Iklan Utama yg disamakan */
-.top-ads-wrapper{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px;background-color:#0b1a10;border:1px solid rgba(0,255,102,.3);border-radius:10px;padding:10px;box-shadow:0 4px 15px rgba(0,255,102,.2)}
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://brijmohan.org" crossorigin>
+  <link rel="preconnect" href="https://ahuramazda.org" crossorigin>
 
-.container{width:100%;max-width:480px;background:#080808;border:1px solid #1c1c1c;border-radius:16px;padding:24px;box-shadow:0 8px 32px rgba(0,0,0,.9);margin-bottom:20px}
-h1{font-size:1.15rem;text-align:center;margin-bottom:20px;color:#0fc;letter-spacing:.5px}
-.input-group{margin-bottom:12px;display:flex;flex-direction:column;position:relative}
-.input-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.input-label{font-size:.8rem;color:#888}
-.btn-reset-field{background:0 0;border:none;color:#f55;font-size:.75rem;cursor:pointer;padding:2px 6px;border-radius:4px;transition:background .2s}
-.btn-reset-field:hover{background:rgba(255,85,85,.15)}
-textarea{width:100%;height:65px;padding:10px;background:#111;color:#0fc;border:1px solid #2a2a2a;border-radius:8px;font-size:1.05rem;font-family:'Courier New',Courier,monospace;outline:0;box-sizing:border-box;letter-spacing:2px;text-align:center;resize:vertical}
-textarea::placeholder{color:#555;font-style:italic;font-size:.8rem;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;letter-spacing:normal;line-height:1.4}
-textarea:focus{border-color:#0fc}
-.btn-container{display:flex;gap:10px;margin-top:15px;margin-bottom:20px}
-.btn{flex:1;padding:12px;background:#0fc;color:#000;border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s,transform .1s}
-.btn:hover{background:#00ccb8}
-.btn:active{transform:scale(.98)}
-.result-section{margin-top:15px;background:#111;border:1px solid #222;border-radius:10px;padding:14px}
-.result-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid #222;padding-bottom:8px}
-.result-title{font-size:.9rem;font-weight:700;color:#0fc}
-.btn-copy-small{background:#222;color:#0fc;border:1px solid #0fc;padding:4px 10px;font-size:.75rem;border-radius:6px;cursor:pointer;font-weight:700;transition:background .2s}
-.btn-copy-small:hover{background:#2a2a2a}
-.result-box{max-height:180px;overflow-y:auto;font-family:'Courier New',Courier,monospace;font-size:1rem;line-height:1.6;color:#0fc;text-align:center;display:flex;flex-direction:column;align-items:center}
-.row{margin-bottom:4px;letter-spacing:2px}
-.placeholder{color:#555;font-style:italic;font-size:.85rem;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;letter-spacing:normal}
-.footer{width:100%;max-width:480px;text-align:center;font-size:.75rem;color:#666;margin-top:10px;padding:10px;line-height:1.5}
-.seo-keywords{margin-bottom:8px;color:#555}
-.toast{position:fixed;bottom:30px;background:#0fc;color:#000;padding:8px 16px;border-radius:8px;font-weight:700;font-size:.9rem;box-shadow:0 4px 12px rgba(0,0,0,.5);display:none;animation:fadeInOut 1.5s ease}
-</style>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+    :root {
+      --bg-main: #050508;
+      --bg-card: #12090e;
+      --bg-card-deep: #090407;
+      --maroon-accent: #ff1e56;
+      --maroon-crimson: #e11d48;
+      --maroon-dark: #881337;
+      --maroon-border: rgba(255, 30, 86, 0.28);
+      --maroon-border-bright: rgba(255, 77, 121, 0.55);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      -webkit-overflow-scrolling: touch;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 30, 86, 0.18) 0%, rgba(22, 10, 16, 0.92) 55%, #050508 100%),
+        linear-gradient(rgba(255, 30, 86, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 30, 86, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px, 24px 24px;
+      color: var(--text-main);
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 14px 10px 72px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100dvh;
+    }
+
+    body ::selection {
+      background-color: #e11d48;
+      color: #ffffff;
+    }
+
+    .top-ads-wrapper {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      background: linear-gradient(145deg, rgba(24, 10, 16, 0.94), rgba(9, 4, 7, 0.99));
+      border: 1px solid var(--maroon-border);
+      border-radius: 16px;
+      padding: 12px 10px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+    }
+
+    .ad-slot-box {
+      width: 100%;
+      min-height: 54px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 10px;
+      background: rgba(11, 5, 8, 0.85);
+      border: 1px solid rgba(255, 30, 86, 0.16);
+      padding: 3px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
+      border: 1px solid var(--maroon-border);
+      border-radius: 20px;
+      padding: 20px 16px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.7);
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff1e56, #fda4af, transparent);
+    }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 16.5px;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 18px;
+      background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .input-group {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .input-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .input-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fda4af;
+    }
+
+    .btn-reset-field {
+      background: rgba(255, 30, 86, 0.1);
+      border: 1px solid rgba(255, 77, 121, 0.25);
+      color: #fda4af;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 3px 8px;
+      min-height: 28px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-reset-field:hover {
+      background: rgba(255, 30, 86, 0.24);
+      color: #ffffff;
+      border-color: var(--maroon-border-bright);
+    }
+
+    textarea {
+      width: 100%;
+      height: 64px;
+      padding: 10px;
+      background: rgba(11, 5, 8, 0.92);
+      color: #fecdd3;
+      border: 1px solid rgba(255, 30, 86, 0.24);
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 700;
+      outline: none;
+      letter-spacing: 2px;
+      text-align: center;
+      resize: vertical;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    textarea::placeholder {
+      color: #6b7280;
+      font-style: italic;
+      font-size: 11.5px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-weight: 500;
+      letter-spacing: normal;
+      line-height: 1.4;
+    }
+
+    textarea:focus {
+      border-color: var(--maroon-border-bright);
+      box-shadow: 0 0 0 3px rgba(255, 30, 86, 0.14);
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      flex: 1;
+      min-height: 46px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #ff1e56 0%, #9f1239 100%);
+      border: 1px solid rgba(255, 130, 160, 0.45);
+      color: #ffffff;
+      border-radius: 12px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 30, 86, 0.35);
+      transition: transform 0.15s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 26px rgba(255, 30, 86, 0.5);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .result-section {
+      margin-top: 14px;
+      background: rgba(11, 5, 8, 0.92);
+      border: 1px solid var(--maroon-border);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 30, 86, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .result-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fda4af;
+      letter-spacing: 0.4px;
+    }
+
+    .btn-copy-small {
+      background: linear-gradient(135deg, rgba(255, 30, 86, 0.22), rgba(136, 19, 55, 0.25));
+      color: #fecdd3;
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      padding: 6px 11px;
+      min-height: 32px;
+      font-size: 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-copy-small:hover {
+      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      color: #ffffff;
+    }
+
+    .result-box {
+      max-height: 190px;
+      overflow-y: auto;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.65;
+      color: #ff4d79;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-right: 2px;
+    }
+
+    .row {
+      margin-bottom: 4px;
+      letter-spacing: 1.5px;
+      word-break: break-word;
+    }
+
+    .placeholder {
+      color: #6b7280;
+      font-style: italic;
+      font-size: 11.5px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-weight: 500;
+      letter-spacing: normal;
+    }
+
+    .footer {
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      padding: 12px 8px;
+      line-height: 1.55;
+      background: rgba(18, 9, 14, 0.85);
+      border: 1px solid rgba(255, 30, 86, 0.18);
+      border-radius: 14px;
+    }
+
+    .seo-keywords {
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .seo-keywords strong {
+      color: #fda4af;
+    }
+
+    .copyright strong {
+      font-family: "Orbitron", sans-serif;
+      color: #ff1e56;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: calc(100vw - 24px);
+      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      border: 1px solid rgba(255, 130, 160, 0.5);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 12.5px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(255, 30, 86, 0.45);
+      display: none;
+      z-index: 9999;
+    }
+  </style>
 </head>
 <body>
-
-<!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: IKLAN UTAMA (Sama seperti halaman Paito HK)  -->
-<!-- ================================================================= -->
-<div class="top-ads-wrapper">
-  <!-- Iklan 3: Banner 468x60 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script>
-      atOptions = {
-        'key' : '9a986a45c62dcea8d8216b9210f159cb',
-        'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
-        'params' : {}
-      };
-    </script>
-    <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+  <div class="top-ads-wrapper" id="topAdsWrapper">
+    <div class="ad-slot-box" id="adSlot1"></div>
+    <div class="ad-slot-box" id="adSlot2"></div>
+    <div class="ad-slot-box" id="adSlot3"></div>
+    <div class="ad-slot-box" id="adSlot4"></div>
   </div>
 
-  <!-- Iklan 1: Script + Container ID -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
-    <div id="container-3f09897b852339f736b82a3190a40259"></div>
-  </div>
+  <main class="container">
+    <h1>GENERATOR TUNGGAL PAITO</h1>
 
-  <!-- Iklan 2 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-  </div>
-
-  <!-- Iklan 4 -->
-  <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-    <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
-  </div>
-</div>
-<!-- ================================================================= -->
-
-<div class="container">
-  <h1>GENERATOR TUNGGAL PAITO</h1>
-  
-  <div class="input-group">
-    <div class="input-header">
-      <span class="input-label">Angka BBFS</span>
-      <button class="btn-reset-field" onclick="clearField('bbfsInput')">Reset ↺</button>
+    <div class="input-group">
+      <div class="input-header">
+        <label for="bbfsInput" class="input-label">Angka BBFS</label>
+        <button type="button" class="btn-reset-field" data-reset="bbfsInput">Reset &#8634;</button>
+      </div>
+      <textarea id="bbfsInput" placeholder="Contoh multi-baris:&#10;1234&#10;7890"></textarea>
     </div>
-    <textarea id="bbfsInput" placeholder="Contoh multi-baris:&#10;1234&#10;7890"></textarea>
-  </div>
 
-  <div class="input-group">
-    <div class="input-header">
-      <span class="input-label">Pangkas Kumat 2D</span>
-      <button class="btn-reset-field" onclick="clearField('kumatInput')">Reset ↺</button>
+    <div class="input-group">
+      <div class="input-header">
+        <label for="kumatInput" class="input-label">Pangkas Kumat 2D</label>
+        <button type="button" class="btn-reset-field" data-reset="kumatInput">Reset &#8634;</button>
+      </div>
+      <textarea id="kumatInput" placeholder="Contoh multi-baris:&#10;1234&#10;5678"></textarea>
     </div>
-    <textarea id="kumatInput" placeholder="Contoh multi-baris:&#10;1234&#10;5678"></textarea>
-  </div>
 
-  <div class="input-group">
-    <div class="input-header">
-      <span class="input-label">Pangkas Angka Main</span>
-      <button class="btn-reset-field" onclick="clearField('amInput')">Reset ↺</button>
+    <div class="input-group">
+      <div class="input-header">
+        <label for="amInput" class="input-label">Pangkas Angka Main</label>
+        <button type="button" class="btn-reset-field" data-reset="amInput">Reset &#8634;</button>
+      </div>
+      <textarea id="amInput" placeholder="Contoh multi-baris:&#10;123&#10;678"></textarea>
     </div>
-    <textarea id="amInput" placeholder="Contoh multi-baris:&#10;123&#10;678"></textarea>
-  </div>
 
-  <div class="input-group">
-    <div class="input-header">
-      <span class="input-label">Pangkas Off Kepala</span>
-      <button class="btn-reset-field" onclick="clearField('offKepalaInput')">Reset ↺</button>
+    <div class="input-group">
+      <div class="input-header">
+        <label for="offKepalaInput" class="input-label">Pangkas Off Kepala</label>
+        <button type="button" class="btn-reset-field" data-reset="offKepalaInput">Reset &#8634;</button>
+      </div>
+      <textarea id="offKepalaInput" placeholder="Contoh multi-baris:&#10;1&#10;2"></textarea>
     </div>
-    <textarea id="offKepalaInput" placeholder="Contoh multi-baris:&#10;1&#10;2"></textarea>
-  </div>
 
-  <div class="input-group">
-    <div class="input-header">
-      <span class="input-label">Pangkas Off Ekor</span>
-      <button class="btn-reset-field" onclick="clearField('offEkorInput')">Reset ↺</button>
+    <div class="input-group">
+      <div class="input-header">
+        <label for="offEkorInput" class="input-label">Pangkas Off Ekor</label>
+        <button type="button" class="btn-reset-field" data-reset="offEkorInput">Reset &#8634;</button>
+      </div>
+      <textarea id="offEkorInput" placeholder="Contoh multi-baris:&#10;3&#10;4"></textarea>
     </div>
-    <textarea id="offEkorInput" placeholder="Contoh multi-baris:&#10;3&#10;4"></textarea>
-  </div>
 
-  <div class="input-group">
-    <div class="input-header">
-      <span class="input-label">Pangkas Off 2D / Angka Lemah</span>
-      <button class="btn-reset-field" onclick="clearField('off2dInput')">Reset ↺</button>
+    <div class="input-group">
+      <div class="input-header">
+        <label for="off2dInput" class="input-label">Pangkas Off 2D / Angka Lemah</label>
+        <button type="button" class="btn-reset-field" data-reset="off2dInput">Reset &#8634;</button>
+      </div>
+      <textarea id="off2dInput" placeholder="Contoh multi-baris:&#10;12&#10;34"></textarea>
     </div>
-    <textarea id="off2dInput" placeholder="Contoh multi-baris:&#10;12&#10;34"></textarea>
-  </div>
 
-  <div class="input-group">
-    <div class="input-header">
-      <span class="input-label">Pangkas Jumlah 2D / Biji</span>
-      <button class="btn-reset-field" onclick="clearField('jumlah2dInput')">Reset ↺</button>
+    <div class="input-group">
+      <div class="input-header">
+        <label for="jumlah2dInput" class="input-label">Pangkas Jumlah 2D / Biji</label>
+        <button type="button" class="btn-reset-field" data-reset="jumlah2dInput">Reset &#8634;</button>
+      </div>
+      <textarea id="jumlah2dInput" placeholder="Contoh multi-baris:&#10;1&#10;123&#10;1234"></textarea>
     </div>
-    <textarea id="jumlah2dInput" placeholder="Contoh multi-baris:&#10;1&#10;123&#10;1234"></textarea>
-  </div>
 
-  <div class="input-group">
-    <div class="input-header">
-      <span class="input-label">Pangkas Selisih 2D</span>
-      <button class="btn-reset-field" onclick="clearField('selisih2dInput')">Reset ↺</button>
+    <div class="input-group">
+      <div class="input-header">
+        <label for="selisih2dInput" class="input-label">Pangkas Selisih 2D</label>
+        <button type="button" class="btn-reset-field" data-reset="selisih2dInput">Reset &#8634;</button>
+      </div>
+      <textarea id="selisih2dInput" placeholder="Contoh multi-baris:&#10;2&#10;123&#10;1234"></textarea>
     </div>
-    <textarea id="selisih2dInput" placeholder="Contoh multi-baris:&#10;2&#10;123&#10;1234"></textarea>
-  </div>
 
-  <div class="btn-container">
-    <button class="btn" onclick="generateBBFS()">Mulai</button>
-  </div>
-
-  <div class="result-section">
-    <div class="result-header">
-      <span class="result-title" id="title4d">Hasil 4D (Line: 0)</span>
-      <button class="btn-copy-small" onclick="copyResultType('4d')">Salin 4D</button>
+    <div class="btn-container">
+      <button type="button" class="btn" id="btnGenerate">Mulai</button>
     </div>
-    <div class="result-box" id="resultBox4d">
-      <span class="placeholder"></span>
+
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-title" id="title4d">Hasil 4D (Line: 0)</span>
+        <button type="button" class="btn-copy-small" data-copy="4d">Salin 4D</button>
+      </div>
+      <div class="result-box" id="resultBox4d">
+        <span class="placeholder">Belum ada hasil 4D</span>
+      </div>
     </div>
-  </div>
 
-  <div class="result-section">
-    <div class="result-header">
-      <span class="result-title" id="title3d">Hasil 3D (Line: 0)</span>
-      <button class="btn-copy-small" onclick="copyResultType('3d')">Salin 3D</button>
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-title" id="title3d">Hasil 3D (Line: 0)</span>
+        <button type="button" class="btn-copy-small" data-copy="3d">Salin 3D</button>
+      </div>
+      <div class="result-box" id="resultBox3d">
+        <span class="placeholder">Belum ada hasil 3D</span>
+      </div>
     </div>
-    <div class="result-box" id="resultBox3d">
-      <span class="placeholder"></span>
+
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-title" id="title2d">Hasil 2D (Line: 0)</span>
+        <button type="button" class="btn-copy-small" data-copy="2d">Salin 2D</button>
+      </div>
+      <div class="result-box" id="resultBox2d">
+        <span class="placeholder">Belum ada hasil 2D</span>
+      </div>
     </div>
-  </div>
+  </main>
 
-  <div class="result-section">
-    <div class="result-header">
-      <span class="result-title" id="title2d">Hasil 2D (Line: 0)</span>
-      <button class="btn-copy-small" onclick="copyResultType('2d')">Salin 2D</button>
+  <footer class="footer">
+    <div class="seo-keywords">
+      <strong>Kata Kunci:</strong> Generator BBFS 4D 3D 2D, Pangkas Kumat, Angka Main 2D, Bolak Balik Full Set, Tunggal Paito, Paito Warna, Rumus Jitu, Generator Angka.
     </div>
-    <div class="result-box" id="resultBox2d">
-      <span class="placeholder"></span>
+    <div class="copyright">
+      &copy; <span id="currentYear"></span> <strong>TUNGGAL PAITO</strong>. All rights reserved.
     </div>
-  </div>
-</div>
+  </footer>
 
-<footer class="footer">
-  <div class="seo-keywords">
-    <strong>Kata Kunci:</strong> Generator BBFS 4D 3D 2D, Pangkas Kumat, Angka Main 2D, Bolak Balik Full Set, Tunggal Paito, Paito Warna, Rumus Jitu, Generator Angka.
-  </div>
-  <div class="copyright">
-    &copy; <span id="currentYear"></span> Tunggal Paito. All rights reserved.
-  </div>
-</footer>
+  <div class="toast" id="toastMsg" role="status" aria-live="polite">Berhasil Disalin!</div>
 
-<div class="toast" id="toastMsg">Berhasil Disalin!😎</div>
+  <script>
+  (function() {
+    "use strict";
 
-<script>
-document.getElementById("currentYear").textContent = new Date().getFullYear();
-let generatedData = {"4d": [], "3d": [], "2d": []};
+    const yearEl = document.getElementById("currentYear");
+    if (yearEl) {
+      yearEl.textContent = String(new Date().getFullYear());
+    }
 
-function clearField(id) {
-  document.getElementById(id).value = "";
-}
+    const generatedData = { "4d": [], "3d": [], "2d": [] };
+    let toastTimer = null;
 
-function generateBBFS() {
-  let bbfsVal = document.getElementById("bbfsInput").value.trim();
-  let kumatVal = document.getElementById("kumatInput").value.trim();
-  let amVal = document.getElementById("amInput").value.trim();
-  let offKepalaVal = document.getElementById("offKepalaInput").value.trim();
-  let offEkorVal = document.getElementById("offEkorInput").value.trim();
-  let off2dVal = document.getElementById("off2dInput").value.trim();
-  let jumlah2dVal = document.getElementById("jumlah2dInput").value.trim();
-  let selisih2dVal = document.getElementById("selisih2dInput").value.trim();
+    function showToast(msg) {
+      const toastEl = document.getElementById("toastMsg");
+      if (!toastEl) return;
+      toastEl.textContent = msg;
+      toastEl.style.display = "block";
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() {
+        toastEl.style.display = "none";
+      }, 1500);
+    }
 
-  if (!bbfsVal) return void alert("Harap masukkan angka BBFS terlebih dahulu!");
+    function clearField(id) {
+      const el = document.getElementById(id);
+      if (el) el.value = "";
+    }
 
-  let bbfsLines = bbfsVal.split("\n").map(e => e.replace(/\D/g, "")).filter(e => e.length >= 2);
-  if (0 === bbfsLines.length) return void alert("Format BBFS tidak valid (minimal 2 digit)!");
-
-  let u = bbfsLines[0].split("");
-  for (let i = 1; i < bbfsLines.length; i++) {
-    let t = bbfsLines[i].split("");
-    u = u.filter(e => t.includes(e));
-  }
-
-  if (u.length < 2) return void alert("Tidak ada angka yang sama-sama ada di semua baris BBFS (minimal butuh 2 digit sama)!");
-
-  let kumatArr = [];
-  if ("" !== kumatVal) {
-    kumatVal.split("\n").map(e => e.replace(/\D/g, "")).filter(e => e.length > 0).forEach(e => {
-      kumatArr.push(e.split(""));
-    });
-  }
-
-  let amArr = [];
-  if ("" !== amVal) {
-    amVal.split("\n").map(e => e.replace(/\D/g, "")).filter(e => e.length > 0).forEach(e => {
-      amArr.push(e.split(""));
-    });
-  }
-
-  let offKepalaArr = [];
-  if ("" !== offKepalaVal) {
-    offKepalaVal.split("\n").map(e => e.replace(/\D/g, "")).filter(e => e.length > 0).forEach(e => {
-      e.split("").forEach(digit => {
-        offKepalaArr.includes(digit) || offKepalaArr.push(digit);
+    document.querySelectorAll(".btn-reset-field[data-reset]").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        clearField(btn.getAttribute("data-reset"));
       });
     });
-  }
 
-  let offEkorArr = [];
-  if ("" !== offEkorVal) {
-    offEkorVal.split("\n").map(e => e.replace(/\D/g, "")).filter(e => e.length > 0).forEach(e => {
-      e.split("").forEach(digit => {
-        offEkorArr.includes(digit) || offEkorArr.push(digit);
-      });
-    });
-  }
+    function generateBBFS() {
+      const bbfsVal = (document.getElementById("bbfsInput").value || "").trim();
+      const kumatVal = (document.getElementById("kumatInput").value || "").trim();
+      const amVal = (document.getElementById("amInput").value || "").trim();
+      const offKepalaVal = (document.getElementById("offKepalaInput").value || "").trim();
+      const offEkorVal = (document.getElementById("offEkorInput").value || "").trim();
+      const off2dVal = (document.getElementById("off2dInput").value || "").trim();
+      const jumlah2dVal = (document.getElementById("jumlah2dInput").value || "").trim();
+      const selisih2dVal = (document.getElementById("selisih2dInput").value || "").trim();
 
-  let off2dArr = [];
-  if ("" !== off2dVal) {
-    off2dVal.split("\n").map(e => e.trim()).filter(e => e.length > 0).forEach(e => {
-      e.split(/[\s,\-\*]+/).forEach(item => {
-        let t = item.replace(/\D/g, "");
-        if (1 === t.length) {
-          for (let i = 0; i <= 9; i++) {
-            let l = `${t}${i}`, n = `${i}${t}`;
-            off2dArr.includes(l) || off2dArr.push(l);
-            off2dArr.includes(n) || off2dArr.push(n);
-          }
-        } else if (t.length >= 2) {
-          let e = t.slice(-2);
-          off2dArr.includes(e) || off2dArr.push(e);
+      if (!bbfsVal) {
+        alert("Harap masukkan angka BBFS terlebih dahulu!");
+        return;
+      }
+
+      const bbfsLines = bbfsVal
+        .split("\n")
+        .map(function(e) { return e.replace(/\D/g, ""); })
+        .filter(function(e) { return e.length >= 2; });
+
+      if (bbfsLines.length === 0) {
+        alert("Format BBFS tidak valid (minimal 2 digit)!");
+        return;
+      }
+
+      let pool = bbfsLines[0].split("");
+      for (let i = 1; i < bbfsLines.length; i++) {
+        const lineDigits = bbfsLines[i].split("");
+        pool = pool.filter(function(ch) { return lineDigits.includes(ch); });
+      }
+
+      if (pool.length < 2) {
+        alert("Tidak ada angka yang sama-sama ada di semua baris BBFS (minimal butuh 2 digit sama)!");
+        return;
+      }
+
+      const kumatArr = [];
+      if (kumatVal !== "") {
+        kumatVal.split("\n")
+          .map(function(e) { return e.replace(/\D/g, ""); })
+          .filter(function(e) { return e.length > 0; })
+          .forEach(function(e) { kumatArr.push(e.split("")); });
+      }
+
+      const amArr = [];
+      if (amVal !== "") {
+        amVal.split("\n")
+          .map(function(e) { return e.replace(/\D/g, ""); })
+          .filter(function(e) { return e.length > 0; })
+          .forEach(function(e) { amArr.push(e.split("")); });
+      }
+
+      const offKepalaArr = [];
+      if (offKepalaVal !== "") {
+        offKepalaVal.split("\n")
+          .map(function(e) { return e.replace(/\D/g, ""); })
+          .filter(function(e) { return e.length > 0; })
+          .forEach(function(e) {
+            e.split("").forEach(function(digit) {
+              if (!offKepalaArr.includes(digit)) offKepalaArr.push(digit);
+            });
+          });
+      }
+
+      const offEkorArr = [];
+      if (offEkorVal !== "") {
+        offEkorVal.split("\n")
+          .map(function(e) { return e.replace(/\D/g, ""); })
+          .filter(function(e) { return e.length > 0; })
+          .forEach(function(e) {
+            e.split("").forEach(function(digit) {
+              if (!offEkorArr.includes(digit)) offEkorArr.push(digit);
+            });
+          });
+      }
+
+      const off2dArr = [];
+      if (off2dVal !== "") {
+        off2dVal.split("\n")
+          .map(function(e) { return e.trim(); })
+          .filter(function(e) { return e.length > 0; })
+          .forEach(function(e) {
+            e.split(/[\s,\-\*]+/).forEach(function(item) {
+              const t = item.replace(/\D/g, "");
+              if (t.length === 1) {
+                for (let d = 0; d <= 9; d++) {
+                  const p1 = t + String(d);
+                  const p2 = String(d) + t;
+                  if (!off2dArr.includes(p1)) off2dArr.push(p1);
+                  if (!off2dArr.includes(p2)) off2dArr.push(p2);
+                }
+              } else if (t.length >= 2) {
+                const last2 = t.slice(-2);
+                if (!off2dArr.includes(last2)) off2dArr.push(last2);
+              }
+            });
+          });
+      }
+
+      const jumlah2dArr = [];
+      if (jumlah2dVal !== "") {
+        jumlah2dVal.split("\n")
+          .map(function(e) { return e.trim(); })
+          .filter(function(e) { return e.length > 0; })
+          .forEach(function(e) {
+            e.split(/[\s,\-\*]+/)
+              .map(function(item) { return item.replace(/\D/g, ""); })
+              .filter(function(s) { return s.length > 0; })
+              .forEach(function(strNum) {
+                let sum = strNum.split("").reduce(function(acc, digit) {
+                  return acc + parseInt(digit, 10);
+                }, 0);
+                while (sum >= 10) {
+                  sum = String(sum).split("").reduce(function(acc, digit) {
+                    return acc + parseInt(digit, 10);
+                  }, 0);
+                }
+                if (!jumlah2dArr.includes(sum)) jumlah2dArr.push(sum);
+              });
+          });
+      }
+
+      const selisih2dArr = [];
+      if (selisih2dVal !== "") {
+        selisih2dVal.split("\n")
+          .map(function(e) { return e.trim(); })
+          .filter(function(e) { return e.length > 0; })
+          .forEach(function(e) {
+            e.split(/[\s,\-\*]+/)
+              .map(function(item) { return item.replace(/\D/g, ""); })
+              .filter(function(s) { return s.length > 0; })
+              .forEach(function(strNum) {
+                strNum.split("").forEach(function(digit) {
+                  const val = parseInt(digit, 10);
+                  if (!selisih2dArr.includes(val)) selisih2dArr.push(val);
+                });
+              });
+          });
+      }
+
+      let lines2d = [];
+      for (let i = 0; i < pool.length; i++) {
+        for (let j = 0; j < pool.length; j++) {
+          lines2d.push(pool[i] + pool[j]);
         }
-      });
-    });
-  }
+      }
 
-  let jumlah2dArr = [];
-  if ("" !== jumlah2dVal) {
-    jumlah2dVal.split("\n").map(e => e.trim()).filter(e => e.length > 0).forEach(e => {
-      e.split(/[\s,\-\*]+/).map(item => item.replace(/\D/g, "")).filter(e => e.length > 0).forEach(strNum => {
-        let sum = strNum.split("").reduce((acc, digit) => acc + parseInt(digit), 0);
-        while (sum >= 10) {
-          sum = String(sum).split("").reduce((acc, digit) => acc + parseInt(digit), 0);
-        }
-        jumlah2dArr.includes(sum) || jumlah2dArr.push(sum);
-      });
-    });
-  }
-
-  let selisih2dArr = [];
-  if ("" !== selisih2dVal) {
-    selisih2dVal.split("\n").map(e => e.trim()).filter(e => e.length > 0).forEach(e => {
-      e.split(/[\s,\-\*]+/).map(item => item.replace(/\D/g, "")).filter(e => e.length > 0).forEach(strNum => {
-        strNum.split("").forEach(digit => {
-          let val = parseInt(digit);
-          selisih2dArr.includes(val) || selisih2dArr.push(val);
+      if (kumatArr.length > 0) {
+        lines2d = lines2d.filter(function(pair) {
+          const h = pair[0];
+          const t = pair[1];
+          return !kumatArr.some(function(k) { return k.includes(h) && k.includes(t); });
         });
-      });
-    });
-  }
-
-  let E = [];
-  for (let i = 0; i < u.length; i++) {
-    for (let j = 0; j < u.length; j++) {
-      E.push(u[i] + u[j]);
-    }
-  }
-
-  kumatArr.length > 0 && (E = E.filter(e => {
-    let t = e[0], l = e[1];
-    return !kumatArr.some(k => k.includes(t) && k.includes(l));
-  }));
-
-  amArr.length > 0 && (E = E.filter(e => {
-    let t = e[0], l = e[1];
-    return amArr.every(am => am.includes(t) || am.includes(l));
-  }));
-
-  offKepalaArr.length > 0 && (E = E.filter(e => !offKepalaArr.includes(e[0])));
-  offEkorArr.length > 0 && (E = E.filter(e => !offEkorArr.includes(e[1])));
-  off2dArr.length > 0 && (E = E.filter(e => !off2dArr.includes(e)));
-
-  jumlah2dArr.length > 0 && (E = E.filter(e => {
-    let t = parseInt(e[0]) + parseInt(e[1]), l = t >= 10 ? Math.floor(t / 10) + t % 10 : t;
-    return jumlah2dArr.includes(t) || jumlah2dArr.includes(l);
-  }));
-
-  selisih2dArr.length > 0 && (E = E.filter(e => {
-    let t = Math.abs(parseInt(e[0]) - parseInt(e[1]));
-    return selisih2dArr.includes(t);
-  }));
-
-  generatedData["2d"] = E;
-
-  let I = [];
-  for (let i = 0; i < u.length; i++) {
-    for (let j = 0; j < u.length; j++) {
-      for (let k = 0; k < u.length; k++) {
-        let n = u[i] + u[j] + u[k], a = u[j] + u[k];
-        E.includes(a) && I.push(n);
       }
-    }
-  }
-  generatedData["3d"] = I;
 
-  let y = [];
-  for (let i = 0; i < u.length; i++) {
-    for (let j = 0; j < u.length; j++) {
-      for (let k = 0; k < u.length; k++) {
-        for (let m = 0; m < u.length; m++) {
-          let a = u[i] + u[j] + u[k] + u[m], i_val = u[k] + u[m];
-          E.includes(i_val) && y.push(a);
+      if (amArr.length > 0) {
+        lines2d = lines2d.filter(function(pair) {
+          const h = pair[0];
+          const t = pair[1];
+          return amArr.every(function(am) { return am.includes(h) || am.includes(t); });
+        });
+      }
+
+      if (offKepalaArr.length > 0) {
+        lines2d = lines2d.filter(function(pair) { return !offKepalaArr.includes(pair[0]); });
+      }
+
+      if (offEkorArr.length > 0) {
+        lines2d = lines2d.filter(function(pair) { return !offEkorArr.includes(pair[1]); });
+      }
+
+      if (off2dArr.length > 0) {
+        lines2d = lines2d.filter(function(pair) { return !off2dArr.includes(pair); });
+      }
+
+      if (jumlah2dArr.length > 0) {
+        lines2d = lines2d.filter(function(pair) {
+          const total = parseInt(pair[0], 10) + parseInt(pair[1], 10);
+          const biji = total >= 10 ? Math.floor(total / 10) + (total % 10) : total;
+          return jumlah2dArr.includes(total) || jumlah2dArr.includes(biji);
+        });
+      }
+
+      if (selisih2dArr.length > 0) {
+        lines2d = lines2d.filter(function(pair) {
+          const diff = Math.abs(parseInt(pair[0], 10) - parseInt(pair[1], 10));
+          return selisih2dArr.includes(diff);
+        });
+      }
+
+      generatedData["2d"] = lines2d;
+
+      const lines3d = [];
+      for (let i = 0; i < pool.length; i++) {
+        for (let j = 0; j < pool.length; j++) {
+          for (let k = 0; k < pool.length; k++) {
+            const num3 = pool[i] + pool[j] + pool[k];
+            const tail2 = pool[j] + pool[k];
+            if (lines2d.includes(tail2)) lines3d.push(num3);
+          }
         }
       }
+      generatedData["3d"] = lines3d;
+
+      const lines4d = [];
+      for (let i = 0; i < pool.length; i++) {
+        for (let j = 0; j < pool.length; j++) {
+          for (let k = 0; k < pool.length; k++) {
+            for (let m = 0; m < pool.length; m++) {
+              const num4 = pool[i] + pool[j] + pool[k] + pool[m];
+              const tail2 = pool[k] + pool[m];
+              if (lines2d.includes(tail2)) lines4d.push(num4);
+            }
+          }
+        }
+      }
+      generatedData["4d"] = lines4d;
+
+      renderResults("4d");
+      renderResults("3d");
+      renderResults("2d");
     }
-  }
-  generatedData["4d"] = y;
 
-  renderResults("4d");
-  renderResults("3d");
-  renderResults("2d");
-}
+    function renderResults(type) {
+      const box = document.getElementById("resultBox" + type);
+      const titleMap = {
+        "4d": document.getElementById("title4d"),
+        "3d": document.getElementById("title3d"),
+        "2d": document.getElementById("title2d")
+      };
+      const titleEl = titleMap[type];
+      const list = generatedData[type] || [];
 
-function renderResults(type) {
-  let t = document.getElementById("resultBox" + type), l = document.getElementById("title4d");
-  "3d" === type && (l = document.getElementById("title3d"));
-  "2d" === type && (l = document.getElementById("title2d"));
-  
-  let n = generatedData[type];
-  l.textContent = `Hasil ${type.toUpperCase()} (Line: ${n.length})`;
-  t.innerHTML = "";
-  
-  if (0 === n.length) return void (t.innerHTML = '<span class="placeholder" style="color: #ffaa00;">Tidak ada line</span>');
-  
-  let a = [];
-  for (let i = 0; i < n.length; i += 5) {
-    let chunk = n.slice(i, i + 5);
-    a.push(chunk.join("*"));
-  }
-  
-  a.forEach(rowText => {
-    let rowDiv = document.createElement("div");
-    rowDiv.className = "row";
-    rowDiv.textContent = rowText;
-    t.appendChild(rowDiv);
-  });
-}
+      if (titleEl) {
+        titleEl.textContent = "Hasil " + type.toUpperCase() + " (Line: " + list.length + ")";
+      }
+      if (!box) return;
 
-function copyResultType(type) {
-  let t = generatedData[type];
-  if (!t || 0 === t.length) return void showToast(`Tidak ada hasil ${type.toUpperCase()} untuk disalin!`);
-  
-  let l = [];
-  for (let i = 0; i < t.length; i += 5) {
-    let chunk = t.slice(i, i + 5);
-    l.push(chunk.join("*"));
-  }
-  let n = l.join("\n");
-  
-  navigator.clipboard.writeText(n).then(() => {
-    showToast(`Berhasil Disalin (${type.toUpperCase()})! 😎`);
-  }).catch(() => {
-    showToast("Gagal menyalin!");
-  });
-}
+      box.innerHTML = "";
+      if (list.length === 0) {
+        box.innerHTML = '<span class="placeholder" style="color: #fda4af;">Tidak ada line</span>';
+        return;
+      }
 
-function showToast(msg) {
-  let t = document.getElementById("toastMsg");
-  t.textContent = msg;
-  t.style.display = "block";
-  setTimeout(() => {
-    t.style.display = "none";
-  }, 1500);
-}
+      for (let i = 0; i < list.length; i += 5) {
+        const chunk = list.slice(i, i + 5);
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "row";
+        rowDiv.textContent = chunk.join("*");
+        box.appendChild(rowDiv);
+      }
+    }
 
-!function() {
-  if (!document.getElementById("toastMsg")) {
-    let e = document.createElement("div");
-    e.id = "toastMsg";
-    e.className = "toast";
-    document.body.appendChild(e);
-  }
-}();
-</script>
+    function copyResultType(type) {
+      const list = generatedData[type] || [];
+      if (list.length === 0) {
+        showToast("Tidak ada hasil " + type.toUpperCase() + " untuk disalin!");
+        return;
+      }
+
+      const rows = [];
+      for (let i = 0; i < list.length; i += 5) {
+        rows.push(list.slice(i, i + 5).join("*"));
+      }
+      const textToCopy = rows.join("\n");
+
+      function fallbackCopy(text) {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          return ok;
+        } catch (_) {
+          return false;
+        }
+      }
+
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        navigator.clipboard.writeText(textToCopy).then(function() {
+          showToast("Berhasil Disalin (" + type.toUpperCase() + ")!");
+        }).catch(function() {
+          if (fallbackCopy(textToCopy)) {
+            showToast("Berhasil Disalin (" + type.toUpperCase() + ")!");
+          } else {
+            showToast("Gagal menyalin!");
+          }
+        });
+      } else if (fallbackCopy(textToCopy)) {
+        showToast("Berhasil Disalin (" + type.toUpperCase() + ")!");
+      } else {
+        showToast("Gagal menyalin!");
+      }
+    }
+
+    const btnGenerate = document.getElementById("btnGenerate");
+    if (btnGenerate) {
+      btnGenerate.addEventListener("click", generateBBFS);
+    }
+
+    document.querySelectorAll(".btn-copy-small[data-copy]").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        copyResultType(btn.getAttribute("data-copy"));
+      });
+    });
+
+    // Load top banners sequentially so atOptions does not collide across slots
+    const bannerConfigs = [
+      {
+        slotId: "adSlot1",
+        type: "iframe",
+        options: { key: "9a986a45c62dcea8d8216b9210f159cb", format: "iframe", height: 60, width: 468, params: {} },
+        src: "https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"
+      },
+      {
+        slotId: "adSlot2",
+        type: "container",
+        containerId: "container-3f09897b852339f736b82a3190a40259",
+        src: "https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"
+      },
+      {
+        slotId: "adSlot3",
+        type: "script",
+        src: "https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"
+      },
+      {
+        slotId: "adSlot4",
+        type: "script",
+        src: "https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"
+      }
+    ];
+
+    function loadAdsSequentially(idx) {
+      if (idx >= bannerConfigs.length) return;
+      const cfg = bannerConfigs[idx];
+      const box = document.getElementById(cfg.slotId);
+      if (!box) {
+        loadAdsSequentially(idx + 1);
+        return;
+      }
+
+      if (cfg.type === "iframe" && cfg.options) {
+        window.atOptions = cfg.options;
+      }
+
+      if (cfg.type === "container" && cfg.containerId) {
+        const div = document.createElement("div");
+        div.id = cfg.containerId;
+        box.appendChild(div);
+      }
+
+      const sc = document.createElement("script");
+      sc.async = false;
+      sc.setAttribute("data-cfasync", "false");
+      sc.src = cfg.src;
+      sc.addEventListener("load", function() {
+        setTimeout(function() { loadAdsSequentially(idx + 1); }, 180);
+      }, { once: true });
+      sc.addEventListener("error", function() {
+        setTimeout(function() { loadAdsSequentially(idx + 1); }, 180);
+      }, { once: true });
+      box.appendChild(sc);
+      setTimeout(function() { loadAdsSequentially(idx + 1); }, 1400);
+    }
+
+    if (document.readyState === "complete") {
+      loadAdsSequentially(0);
+    } else {
+      window.addEventListener("load", function() { loadAdsSequentially(0); }, { once: true });
+    }
+
+    window.addEventListener("pagehide", function() {
+      clearTimeout(toastTimer);
+    }, { passive: true });
+  })();
+  </script>
 </body>
 </html>
