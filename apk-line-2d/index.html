@@ -1,12 +1,14 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="app-version" content="2026.11.22.4">
+  <meta name="theme-color" content="#050508">
+  <meta name="color-scheme" content="dark">
+  <meta name="app-version" content="2026.11.22.5">
   <title>Akses APK LINE 2D - Tunggal Paito</title>
   <meta name="description" content="Pusat analisa line 2D belakang Sydney, Singapore, dan Hongkong pools paling akurat. Dapatkan bocoran angka main jitu dan invest 20 line gratis dari Tunggal Paito.">
   <meta name="keywords" content="apk line 2d, tunggal paito line 2d, line 2d sdy, line 2d sgp, line 2d hk">
@@ -14,182 +16,247 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://tunggalpaito.online/prediksi/2d">
 
-  <!-- Auto-clear browser cache & check latest HTML version on load -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://crypotential.com" crossorigin>
+  <link rel="preconnect" href="https://tunggalpaito.online" crossorigin>
+
+  <!-- Auto-clear stale cache & check latest HTML version -->
   <script>
   (function() {
-    const CURRENT_VER = document.querySelector('meta[name="app-version"]')?.content || '1';
-    const VER_KEY = 'tp_line2d_theme_ver';
+    "use strict";
+    const metaVer = document.querySelector('meta[name="app-version"]');
+    const CURRENT_VER = metaVer ? metaVer.content : "2026.11.22.5";
+    const VER_KEY = "tp_line2d_maroon_ver";
+    const RELOAD_GUARD_KEY = "tp_line2d_maroon_reloaded";
 
-    async function clearBrowserCaches() {
+    async function clearStaleCaches() {
       try {
-        if ('caches' in window) {
+        if ("caches" in window && typeof caches.keys === "function") {
           const keys = await caches.keys();
-          await Promise.all(keys.map(k => caches.delete(k)));
-        }
-        if ('serviceWorker' in navigator) {
-          const regs = await navigator.serviceWorker.getRegistrations();
-          await Promise.all(regs.map(r => r.unregister()));
+          await Promise.all(
+            keys
+              .filter(function(k) { return !String(k).includes(CURRENT_VER); })
+              .map(function(k) { return caches.delete(k); })
+          );
         }
       } catch (_) {}
     }
 
-    clearBrowserCaches();
+    clearStaleCaches();
 
-    const savedVer = sessionStorage.getItem(VER_KEY);
-    if (savedVer && savedVer !== CURRENT_VER) {
-      sessionStorage.setItem(VER_KEY, CURRENT_VER);
-      const url = new URL(window.location.href);
-      url.searchParams.set('_v', CURRENT_VER);
-      window.location.replace(url.toString());
-      return;
-    }
-    sessionStorage.setItem(VER_KEY, CURRENT_VER);
-
-    fetch(window.location.pathname + '?_check=' + Date.now(), {
-      cache: 'no-store',
-      headers: { 'Cache-Control': 'no-cache' }
-    })
-    .then(res => res.ok ? res.text() : null)
-    .then(html => {
-      if (!html) return;
-      const match = html.match(/<meta\s+name=["']app-version["']\s+content=["']([^"']+)["']/i);
-      if (match && match[1] && match[1] !== CURRENT_VER) {
-        sessionStorage.setItem(VER_KEY, match[1]);
-        const nextUrl = new URL(window.location.href);
-        nextUrl.searchParams.set('_v', match[1]);
-        window.location.replace(nextUrl.toString());
+    try {
+      const savedVer = sessionStorage.getItem(VER_KEY);
+      if (savedVer && savedVer !== CURRENT_VER) {
+        sessionStorage.setItem(VER_KEY, CURRENT_VER);
+        if (sessionStorage.getItem(RELOAD_GUARD_KEY) !== CURRENT_VER) {
+          sessionStorage.setItem(RELOAD_GUARD_KEY, CURRENT_VER);
+          const url = new URL(window.location.href);
+          url.searchParams.set("_v", CURRENT_VER);
+          window.location.replace(url.toString());
+          return;
+        }
+      } else {
+        sessionStorage.setItem(VER_KEY, CURRENT_VER);
       }
-    })
-    .catch(() => {});
+
+      fetch(window.location.pathname + "?_check=" + Date.now(), {
+        cache: "no-store",
+        headers: { "Cache-Control": "no-cache" }
+      })
+      .then(function(res) { return res.ok ? res.text() : null; })
+      .then(function(html) {
+        if (!html) return;
+        const match = html.match(/<meta\s+name=["']app-version["']\s+content=["']([^"']+)["']/i);
+        if (match && match[1] && match[1] !== CURRENT_VER && sessionStorage.getItem(RELOAD_GUARD_KEY) !== match[1]) {
+          sessionStorage.setItem(VER_KEY, match[1]);
+          sessionStorage.setItem(RELOAD_GUARD_KEY, match[1]);
+          const nextUrl = new URL(window.location.href);
+          nextUrl.searchParams.set("_v", match[1]);
+          window.location.replace(nextUrl.toString());
+        }
+      })
+      .catch(function() {});
+    } catch (_) {}
   })();
   </script>
 
   <style>
-    @import url(https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@700&display=swap);
-    * {
+    @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Orbitron:wght@700;800;900&display=swap");
+
+    :root {
+      --bg-main: #050508;
+      --bg-card: #12090e;
+      --bg-card-deep: #090407;
+      --maroon-accent: #ff1e56;
+      --maroon-crimson: #e11d48;
+      --maroon-dark: #881337;
+      --maroon-border: rgba(255, 30, 86, 0.28);
+      --maroon-border-bright: rgba(255, 77, 121, 0.55);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+    }
+
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    body, html {
+
+    html, body {
       width: 100%;
-      overflow-x: hidden;
+      max-width: 100%;
+      overflow-x: clip;
       -webkit-overflow-scrolling: touch;
+      -webkit-tap-highlight-color: transparent;
     }
+
     body {
-      background-color: #050811;
-      background-image: radial-gradient(circle at 50% 0, rgba(56, 189, 248, .14) 0, transparent 55%), linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 30, 86, 0.18) 0%, rgba(22, 10, 16, 0.92) 55%, #050508 100%),
+        linear-gradient(rgba(255, 30, 86, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 30, 86, 0.04) 1px, transparent 1px);
       background-size: 100% 100%, 24px 24px, 24px 24px;
-      color: #f8fafc;
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 12px 10px 85px 10px;
-      min-height: 100vh;
+      padding: 12px 10px 96px 10px;
+      min-height: 100dvh;
     }
-    .btn-back-main {
+
+    body ::selection {
+      background-color: #e11d48;
+      color: #ffffff;
+    }
+
+    .page-shell {
       width: 100%;
       max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-back-main {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: rgba(15, 23, 42, .65);
-      backdrop-filter: blur(12px);
-      color: #38bdf8;
+      min-height: 44px;
+      background: linear-gradient(145deg, rgba(28, 11, 18, 0.92), rgba(12, 6, 9, 0.96));
+      color: #fda4af;
       text-decoration: none;
       font-weight: 700;
       font-size: 13px;
-      padding: 13px 16px;
+      padding: 12px 16px;
       border-radius: 14px;
-      border: 1px solid rgba(56, 189, 248, .35);
-      margin-bottom: 16px;
-      transition: all .25s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, .4);
+      border: 1px solid var(--maroon-border);
+      margin-bottom: 14px;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
     }
+
     .btn-back-main:hover {
-      background: linear-gradient(135deg, #38bdf8, #2563eb);
-      color: #fff;
-      border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(56, 189, 248, .35);
+      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      color: #ffffff;
+      border-color: rgba(255, 130, 160, 0.5);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255, 30, 86, 0.35);
     }
+
     .ads-container {
       width: 100%;
-      max-width: 480px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
+
     .ad-box {
-      width: 320px;
-      height: 50px;
-      background-color: rgba(15, 23, 42, .8);
+      width: 100%;
+      max-width: 340px;
+      height: 56px;
+      background-color: rgba(12, 6, 9, 0.9);
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      border-radius: 10px;
-      border: 1px solid rgba(56, 189, 248, .2);
+      border-radius: 12px;
+      border: 1px solid var(--maroon-border);
+      padding: 3px;
     }
+
+    .ad-inner {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
     .visitor-card {
       width: 100%;
-      max-width: 480px;
-      background: rgba(15, 23, 42, .65);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(24, 10, 16, 0.94), rgba(10, 5, 8, 0.98));
+      border: 1px solid var(--maroon-border);
+      border-radius: 16px;
       padding: 12px 16px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, .4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
+
     .visitor-card .visitor-info {
       font-size: 12px;
-      font-weight: 600;
-      color: #94a3b8;
+      font-weight: 700;
+      color: #d1d5db;
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
     .visitor-card .online-dot {
       width: 9px;
       height: 9px;
-      background-color: #10b981;
+      background-color: #fb7185;
       border-radius: 50%;
-      box-shadow: 0 0 12px #10b981;
+      box-shadow: 0 0 12px #ff1e56;
       animation: blink 1.5s infinite;
     }
+
     .visitor-card .visitor-count {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: #38bdf8;
-      letter-spacing: .5px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ff4d79;
+      letter-spacing: 0.5px;
     }
+
     @keyframes blink {
       0% { opacity: 1; transform: scale(1); }
-      50% { opacity: .4; transform: scale(.85); }
+      50% { opacity: 0.45; transform: scale(0.85); }
       100% { opacity: 1; transform: scale(1); }
     }
+
     .sawer-card {
       width: 100%;
-      max-width: 480px;
-      background: linear-gradient(145deg, rgba(15, 23, 42, .85), rgba(9, 13, 26, .95));
-      border: 1px solid rgba(56, 189, 248, .35);
-      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(29, 11, 19, 0.95), rgba(9, 4, 7, 0.99));
+      border: 1px solid var(--maroon-border);
+      border-radius: 18px;
       padding: 16px 14px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
       position: relative;
       overflow: hidden;
     }
+
     .sawer-card::before {
       content: "";
       position: absolute;
@@ -197,119 +264,137 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #38bdf8, #a855f7, transparent);
+      background: linear-gradient(90deg, transparent, #ff1e56, #be123c, transparent);
     }
-    .sawer-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 16px;
-      color: #f8fafc;
+
+    .sawer-card h2 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 15px;
+      color: #ffffff;
       margin-bottom: 6px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.4px;
     }
+
     .sawer-card p {
       font-size: 11.5px;
-      color: #94a3b8;
+      color: #d1d5db;
       margin-bottom: 14px;
       line-height: 1.5;
     }
+
     .sawer-btn {
       width: 100%;
-      padding: 12px;
-      font-size: 13px;
+      min-height: 44px;
+      padding: 12px 14px;
+      font-size: 12.5px;
       font-weight: 800;
       border-radius: 12px;
-      border: none;
+      border: 1px solid rgba(255, 130, 160, 0.45);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: linear-gradient(135deg, #0ea5e9, #2563eb);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(14, 165, 233, .35);
-      transition: all .25s;
+      background: linear-gradient(135deg, #ff1e56 0%, #9f1239 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(255, 30, 86, 0.35);
+      transition: all 0.2s ease;
     }
+
     .sawer-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 22px rgba(14, 165, 233, .55);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 26px rgba(255, 30, 86, 0.55);
+      filter: brightness(1.06);
     }
+
     .sawer-btn:active {
-      transform: scale(.98);
+      transform: scale(0.98);
     }
+
     .copy-toast {
       position: fixed;
-      bottom: 85px;
+      bottom: 88px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #fff;
-      padding: 11px 24px;
+      max-width: calc(100vw - 24px);
+      background: linear-gradient(135deg, #be123c, #881337);
+      border: 1px solid rgba(255, 130, 160, 0.5);
+      color: #ffffff;
+      padding: 11px 18px;
       border-radius: 12px;
       font-weight: 700;
-      font-size: 13px;
-      box-shadow: 0 8px 25px rgba(16, 185, 129, .4);
+      font-size: 12px;
+      line-height: 1.4;
+      text-align: center;
+      box-shadow: 0 10px 26px rgba(225, 29, 72, 0.45);
       display: none;
       z-index: 9999;
-      animation: popUp .3s cubic-bezier(.175, .885, .32, 1.275);
+      animation: popUp 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+
     @keyframes popUp {
-      0% { transform: translate(-50%, 20px); opacity: 0; }
+      0% { transform: translate(-50%, 16px); opacity: 0; }
       100% { transform: translate(-50%, 0); opacity: 1; }
     }
+
     .apk-card {
       width: 100%;
-      max-width: 480px;
-      background: rgba(13, 19, 36, .75);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, .1);
-      border-radius: 18px;
+      background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
+      border: 1px solid var(--maroon-border);
+      border-radius: 20px;
       padding: 18px 14px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, .6);
-      margin-bottom: 18px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+      margin-bottom: 16px;
     }
+
     .apk-main-header {
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      border-bottom: 1px solid rgba(255, 30, 86, 0.22);
     }
+
     .apk-main-header h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: .8px;
-      background: linear-gradient(90deg, #38bdf8, #e879f9, #fbbf24);
+      font-family: "Orbitron", sans-serif;
+      font-size: 16.5px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-transform: uppercase;
+      line-height: 1.35;
     }
+
     .apk-main-header span {
       display: block;
-      font-size: 11px;
-      color: #94a3b8;
-      margin-top: 4px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 6px;
       font-weight: 600;
     }
+
     .notice-box {
-      background: rgba(56, 189, 248, .08);
-      border: 1px solid rgba(56, 189, 248, .28);
-      border-left: 3px solid #38bdf8;
+      background: rgba(255, 30, 86, 0.08);
+      border: 1px solid rgba(255, 30, 86, 0.3);
+      border-left: 3px solid #ff1e56;
       border-radius: 12px;
       padding: 10px 12px;
       margin-bottom: 14px;
       font-size: 11.5px;
-      color: #cbd5e1;
+      color: #e5e7eb;
       line-height: 1.5;
     }
+
     .notice-box strong {
-      color: #38bdf8;
+      color: #fda4af;
     }
+
     .market-section {
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
-    .market-section:last-child {
-      margin-bottom: 4px;
-    }
+
     .market-header {
       display: flex;
       align-items: center;
@@ -317,192 +402,207 @@
       padding: 10px 14px;
       border-radius: 12px;
       margin-bottom: 10px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .6px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      background: linear-gradient(90deg, rgba(255, 30, 86, 0.22) 0%, rgba(136, 19, 55, 0.08) 100%);
+      border-left: 4px solid #ff1e56;
+      border-top: 1px solid rgba(255, 30, 86, 0.25);
+      border-right: 1px solid rgba(255, 30, 86, 0.14);
+      border-bottom: 1px solid rgba(255, 30, 86, 0.25);
+      color: #fda4af;
     }
-    .market-header-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+
     .market-tag {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
       padding: 5px 10px;
-      min-width: 68px;
+      min-width: 74px;
       border-radius: 8px;
       text-transform: uppercase;
-      letter-spacing: .5px;
+      letter-spacing: 0.5px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
+      background: rgba(255, 30, 86, 0.22);
+      color: #fecdd3;
+      border: 1px solid rgba(255, 77, 121, 0.35);
       flex-shrink: 0;
     }
-    .header-line2d {
-      background: linear-gradient(90deg, rgba(56, 189, 248, .22) 0, rgba(56, 189, 248, .04) 100%);
-      border-left: 4px solid #38bdf8;
-      border-top: 1px solid rgba(56, 189, 248, .25);
-      border-right: 1px solid rgba(56, 189, 248, .1);
-      border-bottom: 1px solid rgba(56, 189, 248, .25);
-      color: #7dd3fc;
-    }
-    .header-line2d .market-tag {
-      background: rgba(56, 189, 248, .2);
-      color: #38bdf8;
-    }
+
     .apk-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
+
     .apk-item {
-      background: rgba(15, 23, 42, .9);
-      border: 1px solid rgba(255, 255, 255, .07);
+      background: rgba(13, 6, 10, 0.92);
+      border: 1px solid rgba(255, 30, 86, 0.18);
       border-radius: 12px;
-      padding: 11px 12px;
+      padding: 10px 12px;
       min-height: 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
       text-decoration: none;
-      transition: all .25s cubic-bezier(.4, 0, .2, 1);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
+
     .apk-item:hover {
-      background: rgba(30, 41, 59, .95);
-      border-color: rgba(255, 255, 255, .25);
-      transform: translateX(4px);
+      background: rgba(34, 12, 22, 0.96);
+      border-color: var(--maroon-border-bright);
+      transform: translateX(3px);
     }
+
     .apk-item:active {
-      transform: scale(.98);
+      transform: scale(0.985);
     }
+
     .apk-left {
       display: flex;
       align-items: center;
       gap: 10px;
       min-width: 0;
     }
+
     .apk-num {
       width: 24px;
       height: 24px;
       border-radius: 7px;
-      background: rgba(255, 255, 255, .06);
-      border: 1px solid rgba(255, 255, 255, .12);
-      color: #f8fafc;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
+      background: rgba(255, 30, 86, 0.16);
+      border: 1px solid rgba(255, 77, 121, 0.35);
+      color: #fecdd3;
+      font-family: "Orbitron", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
+
     .apk-name {
       font-size: 12.5px;
       font-weight: 700;
-      color: #f1f5f9;
-      letter-spacing: .2px;
+      color: #f9fafb;
+      letter-spacing: 0.2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .apk-right {
       display: flex;
       align-items: center;
       gap: 6px;
       flex-shrink: 0;
     }
+
     .status-pill {
       font-size: 10px;
       font-weight: 800;
       padding: 4px 8px;
       border-radius: 6px;
-      letter-spacing: .4px;
+      letter-spacing: 0.4px;
       text-transform: uppercase;
     }
+
     .status-pill.is-ready {
-      background: rgba(16, 185, 129, .18);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, .4);
+      background: rgba(255, 30, 86, 0.22);
+      color: #fda4af;
+      border: 1px solid rgba(255, 77, 121, 0.48);
     }
+
     .status-pill.is-process {
-      background: rgba(251, 191, 36, .14);
-      color: #fbbf24;
-      border: 1px solid rgba(251, 191, 36, .35);
+      background: rgba(251, 191, 36, 0.14);
+      color: #fcd34d;
+      border: 1px solid rgba(251, 191, 36, 0.35);
     }
+
     .apk-action {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
-      color: #0f172a;
-      background: #f8fafc;
-      padding: 6px 11px;
-      min-width: 64px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      border: 1px solid rgba(255, 130, 160, 0.35);
+      padding: 6px 10px;
+      min-width: 60px;
       border-radius: 8px;
-      letter-spacing: .5px;
+      letter-spacing: 0.4px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
       flex-shrink: 0;
-      transition: all .2s;
+      transition: filter 0.2s ease;
     }
+
     .apk-item:hover .apk-action {
-      background: #fbbf24;
-      color: #000;
+      filter: brightness(1.12);
     }
+
     .keywords-section {
       width: 100%;
-      max-width: 480px;
-      background-color: rgba(15, 23, 42, .6);
-      border-radius: 14px;
+      background: rgba(18, 9, 14, 0.85);
+      border-radius: 16px;
       padding: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 30, 86, 0.22);
     }
+
     .keywords-section h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      color: #94a3b8;
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      color: #fda4af;
       margin-bottom: 6px;
-      font-weight: 700;
-      letter-spacing: .5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
     }
+
     .keywords-section p {
       font-size: 11px;
-      color: #64748b;
+      color: var(--text-muted);
       line-height: 1.6;
     }
+
     .footer {
       margin-top: auto;
-      padding: 15px 0;
-      color: #64748b;
+      padding: 14px 8px;
+      color: var(--text-muted);
       font-size: 12px;
       font-weight: 600;
       text-align: center;
-      letter-spacing: .5px;
+      letter-spacing: 0.4px;
     }
+
+    .footer strong {
+      font-family: "Orbitron", sans-serif;
+      color: #ff1e56;
+    }
+
     .mini-apk-popup {
       position: fixed;
       bottom: 16px;
-      right: 16px;
+      right: 12px;
       z-index: 9998;
-      width: 270px;
-      background: rgba(11, 17, 32, .92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(56, 189, 248, .45);
+      width: 272px;
+      max-width: calc(100vw - 24px);
+      background: linear-gradient(145deg, rgba(26, 10, 17, 0.96), rgba(9, 4, 7, 0.99));
+      border: 1px solid var(--maroon-border-bright);
       border-radius: 16px;
       padding: 10px 12px;
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, .75), 0 0 18px rgba(56, 189, 248, .2);
-      animation: slideInPopup .55s cubic-bezier(.16, 1, .3, 1) forwards;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.78), 0 0 18px rgba(255, 30, 86, 0.25);
+      animation: slideInPopup 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+
     .mini-apk-popup::before {
       content: "";
       position: absolute;
@@ -510,288 +610,280 @@
       left: 16px;
       right: 16px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #38bdf8, #e879f9, transparent);
+      background: linear-gradient(90deg, transparent, #ff1e56, #fda4af, transparent);
     }
+
     @keyframes slideInPopup {
-      0% { opacity: 0; transform: translateY(30px) scale(.95); }
+      0% { opacity: 0; transform: translateY(24px) scale(0.96); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
+
     .mini-apk-icon {
       width: 38px;
       height: 38px;
       border-radius: 11px;
-      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      background: linear-gradient(135deg, #ff1e56, #881337);
+      border: 1px solid rgba(255, 130, 160, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: #ffffff;
       flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(14, 165, 233, .4);
+      box-shadow: 0 4px 12px rgba(255, 30, 86, 0.35);
     }
+
     .mini-apk-info {
       flex: 1;
       min-width: 0;
     }
+
     .mini-apk-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      color: #f8fafc;
-      line-height: 1.2;
+      font-family: "Orbitron", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
     }
+
     .mini-apk-sub {
-      font-size: 10px;
-      color: #94a3b8;
+      font-size: 10.5px;
+      color: var(--text-muted);
       margin-top: 2px;
     }
+
     .mini-apk-btn {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #fff;
+      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      border: 1px solid rgba(255, 130, 160, 0.4);
+      color: #ffffff;
       text-decoration: none;
       font-size: 10.5px;
       font-weight: 800;
       padding: 7px 10px;
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
       border-radius: 9px;
       flex-shrink: 0;
-      letter-spacing: .3px;
-      box-shadow: 0 3px 10px rgba(16, 185, 129, .35);
-      transition: all .2s ease;
+      letter-spacing: 0.4px;
+      box-shadow: 0 3px 10px rgba(255, 30, 86, 0.35);
+      transition: filter 0.2s ease;
     }
+
     .mini-apk-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 5px 14px rgba(16, 185, 129, .55);
+      filter: brightness(1.1);
     }
+
     .mini-apk-close {
       position: absolute;
       top: -8px;
       right: -8px;
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      background: #1e293b;
-      border: 1px solid rgba(255, 255, 255, .2);
-      color: #cbd5e1;
-      font-size: 12px;
+      background: #1d0e16;
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      color: #fda4af;
+      font-size: 13px;
       line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all .2s;
+      transition: all 0.2s ease;
     }
+
     .mini-apk-close:hover {
-      background: #ef4444;
-      color: #fff;
-      border-color: #ef4444;
+      background: #e11d48;
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
-  <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
-    <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-    <span>Kembali ke Menu Utama</span>
-  </a>
+  <main class="page-shell">
+    <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
+      <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      <span>Kembali ke Menu Utama</span>
+    </a>
 
-  <div class="ads-container">
-    <div class="ad-box">
-      <div style="width:100%;text-align:center;overflow:hidden">
-        <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-        <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+    <div class="ads-container" id="adsContainer">
+      <div class="ad-box" id="adSlot1"><div class="ad-inner"></div></div>
+      <div class="ad-box" id="adSlot2"><div class="ad-inner"></div></div>
+      <div class="ad-box" id="adSlot3"><div class="ad-inner"></div></div>
+      <div class="ad-box" id="adSlot4"><div class="ad-inner"></div></div>
+    </div>
+
+    <section class="visitor-card" aria-label="Status Pengunjung Online">
+      <div class="visitor-info">
+        <div class="online-dot" aria-hidden="true"></div>
+        <span>Pengunjung Online</span>
       </div>
-    </div>
-    <div class="ad-box">
-      <div style="width:100%;text-align:center;overflow:hidden">
-        <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-        <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+      <div class="visitor-count" id="visitor-count-text"></div>
+    </section>
+
+    <section class="sawer-card" aria-label="Dukungan Operasional">
+      <h2>🔥 Salam HOKI Satu HATI</h2>
+      <p>"Prediksi Pools 100% Gratis &amp; Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit seikhlasnya melalui DANA untuk mendukung operasional admin."</p>
+      <button type="button" class="sawer-btn" id="btn-copy-dana">
+        <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-.25c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zM19 19H5V5h14v14z"/></svg>
+        <span>Salin Nomor DANA: 082152036787</span>
+      </button>
+    </section>
+
+    <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Nomor DANA berhasil disalin!</div>
+
+    <section class="apk-card" aria-label="Daftar Pasaran Line 2D">
+      <div class="apk-main-header">
+        <h1>APK LINE 2D TUNGGAL PAITO OFFICIAL</h1>
+        <span>Berikut ini apk line 2D lengkap untuk anda salam hoki &amp; goodluck.</span>
       </div>
-    </div>
-    <div class="ad-box">
-      <div style="width:100%;text-align:center;overflow:hidden">
-        <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-        <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
+
+      <div class="notice-box" id="noticeBox">
+        <strong>Himbauan:</strong> Pasaran yang sudah siap saat ini baru <strong id="readyMarketsText">SDY, SGP, dan HK</strong>. Pasaran berstatus <strong>PROSES</strong> masih dalam tahap pembuatan dan akan otomatis menjadi <strong>UPDATE</strong> begitu halamannya tersedia.
       </div>
-    </div>
-    <div class="ad-box">
-      <div style="width:100%;text-align:center;overflow:hidden">
-        <script>atOptions={key:"119c8bb3217ed264a8fa223c3197bf69",format:"iframe",height:50,width:320,params:{}}</script>
-        <script src="https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js"></script>
-      </div>
-    </div>
-  </div>
 
-  <div class="visitor-card">
-    <div class="visitor-info">
-      <div class="online-dot"></div>
-      <span>Pengunjung Online</span>
-    </div>
-    <div class="visitor-count" id="visitor-count-text"></div>
-  </div>
-
-  <div class="sawer-card">
-    <h3>🔥 Salam HOKI Satu HATI</h3>
-    <p>"Prediksi Pools 100% Gratis & Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit seikhlasnya melalui DANA untuk mendukung operasional admin."</p>
-    <button type="button" class="sawer-btn" id="btn-copy-dana">
-      <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-.25c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zM19 19H5V5h14v14z"/></svg>
-      <span>Salin Nomor DANA: 082152036787</span>
-    </button>
-  </div>
-
-  <div class="copy-toast" id="copy-toast">Nomor DANA berhasil disalin!</div>
-
-  <div class="apk-card">
-    <div class="apk-main-header">
-      <h1>APK LINE 2D TUNGGAL PAITO OFFICIAL</h1>
-      <span>Berikut ini apk line 2D lengkap untuk anda salam hoki &amp; goodluck.</span>
-    </div>
-
-    <div class="notice-box" id="noticeBox">
-      <strong>Himbauan:</strong> Pasaran yang sudah siap saat ini baru <strong id="readyMarketsText">SDY, SGP, dan HK</strong>. Pasaran berstatus <strong>PROSES</strong> masih dalam tahap pembuatan dan akan otomatis menjadi <strong>UPDATE</strong> begitu halamannya tersedia.
-    </div>
-
-    <div class="market-section">
-      <div class="market-header header-line2d">
-        <div class="market-header-left">
+      <div class="market-section">
+        <div class="market-header">
           <span>PILIHAN PASARAN</span>
+          <span class="market-tag">LINE 2D</span>
         </div>
-        <span class="market-tag">LINE 2D</span>
+        <div class="apk-list" id="marketList">
+          <a href="https://tunggalpaito.online/prediksi/2dcambodia/" class="apk-item" data-market="CAMBODIA" data-short="Cambodia" data-ready="false">
+            <div class="apk-left">
+              <span class="apk-num">1</span>
+              <span class="apk-name">🇰🇭 LINE 2D CAMBODIA</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-process">PROSES</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dsdy/" class="apk-item" data-market="SYDNEY POOLS" data-short="SDY" data-ready="true">
+            <div class="apk-left">
+              <span class="apk-num">2</span>
+              <span class="apk-name">🇦🇺 LINE 2D SYDNEY POOLS</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-ready">UPDATE</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dsdylotto/" class="apk-item" data-market="SYDNEY LOTTO" data-short="Sydney Lotto" data-ready="false">
+            <div class="apk-left">
+              <span class="apk-num">3</span>
+              <span class="apk-name">🇦🇺 LINE 2D SYDNEY LOTTO</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-process">PROSES</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dchina/" class="apk-item" data-market="CHINA" data-short="China" data-ready="false">
+            <div class="apk-left">
+              <span class="apk-num">4</span>
+              <span class="apk-name">🇨🇳 LINE 2D CHINA</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-process">PROSES</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2djapan/" class="apk-item" data-market="JAPAN" data-short="Japan" data-ready="false">
+            <div class="apk-left">
+              <span class="apk-num">5</span>
+              <span class="apk-name">🇯🇵 LINE 2D JAPAN</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-process">PROSES</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dsgp/" class="apk-item" data-market="SINGAPORE POOLS" data-short="SGP" data-ready="true">
+            <div class="apk-left">
+              <span class="apk-num">6</span>
+              <span class="apk-name">🇸🇬 LINE 2D SINGAPORE POOLS</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-ready">UPDATE</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dtaiwan/" class="apk-item" data-market="TAIWAN" data-short="Taiwan" data-ready="false">
+            <div class="apk-left">
+              <span class="apk-num">7</span>
+              <span class="apk-name">🇹🇼 LINE 2D TAIWAN</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-process">PROSES</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dhk/" class="apk-item" data-market="HONGKONG POOLS" data-short="HK" data-ready="true">
+            <div class="apk-left">
+              <span class="apk-num">8</span>
+              <span class="apk-name">🇭🇰 LINE 2D HONGKONG POOLS</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-ready">UPDATE</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dhklotto/" class="apk-item" data-market="HONGKONG LOTTO" data-short="HK Lotto" data-ready="false">
+            <div class="apk-left">
+              <span class="apk-num">9</span>
+              <span class="apk-name">🇭🇰 LINE 2D HONGKONG LOTTO</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-process">PROSES</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dmacau4d/" class="apk-item" data-market="MACAU 4D" data-short="Macau 4D" data-ready="false">
+            <div class="apk-left">
+              <span class="apk-num">10</span>
+              <span class="apk-name">🇲🇴 LINE 2D MACAU 4D</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-process">PROSES</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+
+          <a href="https://tunggalpaito.online/prediksi/2dmacau5d/" class="apk-item" data-market="MACAU 5D" data-short="Macau 5D" data-ready="false">
+            <div class="apk-left">
+              <span class="apk-num">11</span>
+              <span class="apk-name">🇲🇴 LINE 2D MACAU 5D</span>
+            </div>
+            <div class="apk-right">
+              <span class="status-pill is-process">PROSES</span>
+              <span class="apk-action">GAS ➔</span>
+            </div>
+          </a>
+        </div>
       </div>
-      <div class="apk-list" id="marketList">
-        <a href="https://tunggalpaito.online/prediksi/2dcambodia/" class="apk-item" data-market="CAMBODIA" data-short="Cambodia" data-ready="false">
-          <div class="apk-left">
-            <span class="apk-num">1</span>
-            <span class="apk-name">🇰🇭 LINE 2D CAMBODIA</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-process">PROSES</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
+    </section>
 
-        <a href="https://tunggalpaito.online/prediksi/2dsdy/" class="apk-item" data-market="SYDNEY POOLS" data-short="SDY" data-ready="true">
-          <div class="apk-left">
-            <span class="apk-num">2</span>
-            <span class="apk-name">🇦🇺 LINE 2D SYDNEY POOLS</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-ready">UPDATE</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
+    <section class="keywords-section" aria-label="Informasi Ringkas">
+      <h3>APK LINE 2D TUNGGAL PAITO</h3>
+      <p>Pusat analisa line 2D belakang Sydney, Singapore, dan Hongkong pools paling akurat. Dapatkan bocoran angka main jitu dan invest 20 line gratis dari Tunggal Paito.</p>
+    </section>
 
-        <a href="https://tunggalpaito.online/prediksi/2dsdylotto/" class="apk-item" data-market="SYDNEY LOTTO" data-short="Sydney Lotto" data-ready="false">
-          <div class="apk-left">
-            <span class="apk-num">3</span>
-            <span class="apk-name">🇦🇺 LINE 2D SYDNEY LOTTO</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-process">PROSES</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-
-        <a href="https://tunggalpaito.online/prediksi/2dchina/" class="apk-item" data-market="CHINA" data-short="China" data-ready="false">
-          <div class="apk-left">
-            <span class="apk-num">4</span>
-            <span class="apk-name">🇨🇳 LINE 2D CHINA</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-process">PROSES</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-
-        <a href="https://tunggalpaito.online/prediksi/2djapan/" class="apk-item" data-market="JAPAN" data-short="Japan" data-ready="false">
-          <div class="apk-left">
-            <span class="apk-num">5</span>
-            <span class="apk-name">🇯🇵 LINE 2D JAPAN</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-process">PROSES</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-
-        <a href="https://tunggalpaito.online/prediksi/2dsgp/" class="apk-item" data-market="SINGAPORE POOLS" data-short="SGP" data-ready="true">
-          <div class="apk-left">
-            <span class="apk-num">6</span>
-            <span class="apk-name">🇸🇬 LINE 2D SINGAPORE POOLS</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-ready">UPDATE</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-
-        <a href="https://tunggalpaito.online/prediksi/2dtaiwan/" class="apk-item" data-market="TAIWAN" data-short="Taiwan" data-ready="false">
-          <div class="apk-left">
-            <span class="apk-num">7</span>
-            <span class="apk-name">🇹🇼 LINE 2D TAIWAN</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-process">PROSES</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-
-        <a href="https://tunggalpaito.online/prediksi/2dhk/" class="apk-item" data-market="HONGKONG POOLS" data-short="HK" data-ready="true">
-          <div class="apk-left">
-            <span class="apk-num">8</span>
-            <span class="apk-name">🇭🇰 LINE 2D HONGKONG POOLS</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-ready">UPDATE</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-
-        <a href="https://tunggalpaito.online/prediksi/2dhklotto/" class="apk-item" data-market="HONGKONG LOTTO" data-short="HK Lotto" data-ready="false">
-          <div class="apk-left">
-            <span class="apk-num">9</span>
-            <span class="apk-name">🇭🇰 LINE 2D HONGKONG LOTTO</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-process">PROSES</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-
-        <a href="https://tunggalpaito.online/prediksi/2dmacau4d/" class="apk-item" data-market="MACAU 4D" data-short="Macau 4D" data-ready="false">
-          <div class="apk-left">
-            <span class="apk-num">10</span>
-            <span class="apk-name">🇲🇴 LINE 2D MACAU 4D</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-process">PROSES</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-
-        <a href="https://tunggalpaito.online/prediksi/2dmacau5d/" class="apk-item" data-market="MACAU 5D" data-short="Macau 5D" data-ready="false">
-          <div class="apk-left">
-            <span class="apk-num">11</span>
-            <span class="apk-name">🇲🇴 LINE 2D MACAU 5D</span>
-          </div>
-          <div class="apk-right">
-            <span class="status-pill is-process">PROSES</span>
-            <span class="apk-action">GAS ➔</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="keywords-section">
-    <h3>APK LINE 2D TUNGGAL PAITO</h3>
-    <p>Pusat analisa line 2D belakang Sydney, Singapore, dan Hongkong pools paling akurat. Dapatkan bocoran angka main jitu dan invest 20 line gratis dari Tunggal Paito.</p>
-  </div>
-
-  <div class="footer">
-    &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
-  </div>
+    <footer class="footer">
+      &copy; <span id="auto-year"></span> <strong>TUNGGAL PAITO</strong>. All rights reserved.
+    </footer>
+  </main>
 
   <div class="mini-apk-popup" id="mini-apk-popup">
     <button type="button" class="mini-apk-close" id="close-apk-popup" aria-label="Tutup">&times;</button>
-    <div class="mini-apk-icon">
+    <div class="mini-apk-icon" aria-hidden="true">
       <svg style="width:20px;height:20px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85-.29-.15-.65-.06-.83.22l-1.88 3.24c-2.86-1.21-6.08-1.21-8.94 0L5.65 5.67c-.19-.28-.54-.37-.83-.22-.3.16-.42.54-.26.85l1.84 3.18C4.8 10.85 3.5 12.62 3.5 14.5h17c0-1.88-1.3-3.65-2.9-5.02zM8.5 12.5c-.41 0-.75-.34-.75-.75s.34-.75.75-.75.75.34.75.75-.34.75-.75.75zm7 0c-.41 0-.75-.34-.75-.75s.34-.75.75-.75.75.34.75.75-.34.75-.75.75zM5 16v4c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-4H5z"/></svg>
     </div>
     <div class="mini-apk-info">
@@ -802,27 +894,86 @@
   </div>
 
   <script>
-    document.getElementById("auto-year").textContent = (new Date).getFullYear();
+  (function() {
+    "use strict";
 
-    document.getElementById("close-apk-popup").addEventListener("click", function() {
-      document.getElementById("mini-apk-popup").style.display = "none";
-    });
+    const yearEl = document.getElementById("auto-year");
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-    document.getElementById("btn-copy-dana").addEventListener("click", function() {
-      navigator.clipboard.writeText("082152036787").then(() => {
-        const t = document.getElementById("copy-toast");
-        t.style.display = "block";
-        setTimeout(() => { t.style.display = "none"; }, 2000);
-      }).catch(() => {
-        alert("Gagal menyalin nomor. Silakan salin manual: 082152036787");
+    const toastEl = document.getElementById("copy-toast");
+    let toastTimer = null;
+    function showToast(msg, durationMs) {
+      if (!toastEl) return;
+      toastEl.textContent = msg;
+      toastEl.style.display = "block";
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() {
+        toastEl.style.display = "none";
+      }, durationMs || 2200);
+    }
+
+    const closePopupBtn = document.getElementById("close-apk-popup");
+    const miniPopupEl = document.getElementById("mini-apk-popup");
+    if (closePopupBtn && miniPopupEl) {
+      closePopupBtn.addEventListener("click", function() {
+        miniPopupEl.style.display = "none";
       });
-    });
+    }
 
-    let currentVisitors = Math.floor(151 * Math.random()) + 150, scrollScore = 0;
+    const danaNumber = "082152036787";
+    const copyDanaBtn = document.getElementById("btn-copy-dana");
+    if (copyDanaBtn) {
+      copyDanaBtn.addEventListener("click", function() {
+        function fallbackCopy(text) {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            const ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+            return ok;
+          } catch (_) {
+            return false;
+          }
+        }
+
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+          navigator.clipboard.writeText(danaNumber).then(function() {
+            showToast("Nomor DANA berhasil disalin: " + danaNumber, 2200);
+          }).catch(function() {
+            if (fallbackCopy(danaNumber)) {
+              showToast("Nomor DANA berhasil disalin: " + danaNumber, 2200);
+            } else {
+              showToast("Salin manual nomor DANA: " + danaNumber, 3500);
+            }
+          });
+        } else if (fallbackCopy(danaNumber)) {
+          showToast("Nomor DANA berhasil disalin: " + danaNumber, 2200);
+        } else {
+          showToast("Salin manual nomor DANA: " + danaNumber, 3500);
+        }
+      });
+    }
+
+    let currentVisitors = Math.floor(151 * Math.random()) + 150;
+    let scrollScore = 0;
+    let visitorTimer = null;
     const visitorText = document.getElementById("visitor-count-text");
+
+    function renderVisitorCount() {
+      if (visitorText) {
+        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " Online";
+      }
+    }
+
     function scheduleNextVisitorUpdate() {
-      let t = Math.floor(180001 * Math.random()) + 120000;
-      setTimeout(() => {
+      clearTimeout(visitorTimer);
+      const delay = Math.floor(180001 * Math.random()) + 120000;
+      visitorTimer = setTimeout(function() {
         if (scrollScore > 5) {
           currentVisitors += Math.floor(20 * Math.random()) + 5;
         } else if (scrollScore > 0) {
@@ -830,28 +981,69 @@
         } else {
           currentVisitors -= Math.floor(12 * Math.random()) + 3;
         }
-        currentVisitors > 2500 ? currentVisitors = 2500 : currentVisitors < 80 && (currentVisitors = 80);
-        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " Online";
+        if (currentVisitors > 2500) currentVisitors = 2500;
+        if (currentVisitors < 80) currentVisitors = 80;
+        renderVisitorCount();
         scrollScore = 0;
         scheduleNextVisitorUpdate();
-      }, t);
+      }, delay);
     }
-    visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " Online";
-    window.addEventListener("scroll", function() { scrollScore += 1; });
+
+    renderVisitorCount();
+    window.addEventListener("scroll", function() { scrollScore += 1; }, { passive: true });
     scheduleNextVisitorUpdate();
+
+    // Load banners sequentially to avoid atOptions race condition
+    const adSlots = [
+      document.querySelector("#adSlot1 .ad-inner"),
+      document.querySelector("#adSlot2 .ad-inner"),
+      document.querySelector("#adSlot3 .ad-inner"),
+      document.querySelector("#adSlot4 .ad-inner")
+    ].filter(Boolean);
+
+    function loadSequentialSlots(index) {
+      if (index >= adSlots.length) return;
+      const target = adSlots[index];
+      window.atOptions = {
+        key: "119c8bb3217ed264a8fa223c3197bf69",
+        format: "iframe",
+        height: 50,
+        width: 320,
+        params: {}
+      };
+      const sc = document.createElement("script");
+      sc.async = false;
+      sc.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
+      sc.addEventListener("load", function() {
+        setTimeout(function() { loadSequentialSlots(index + 1); }, 180);
+      }, { once: true });
+      sc.addEventListener("error", function() {
+        setTimeout(function() { loadSequentialSlots(index + 1); }, 180);
+      }, { once: true });
+      target.appendChild(sc);
+      setTimeout(function() { loadSequentialSlots(index + 1); }, 1400);
+    }
+
+    if (document.readyState === "complete") {
+      loadSequentialSlots(0);
+    } else {
+      window.addEventListener("load", function() { loadSequentialSlots(0); }, { once: true });
+    }
 
     let currentReadyListText = "SDY, SGP, dan HK";
     function formatIndonesianList(items) {
       if (!items.length) return "belum ada";
       if (items.length === 1) return items[0];
-      if (items.length === 2) return `${items[0]} dan ${items[1]}`;
-      return `${items.slice(0, -1).join(", ")}, dan ${items[items.length - 1]}`;
+      if (items.length === 2) return items[0] + " dan " + items[1];
+      return items.slice(0, -1).join(", ") + ", dan " + items[items.length - 1];
     }
 
     function refreshReadyMarketsSummary() {
       const readyItems = Array.from(document.querySelectorAll("#marketList .apk-item"))
-        .filter(item => item.dataset.ready === "true");
-      const names = readyItems.map(item => item.dataset.short || item.dataset.market || "").filter(Boolean);
+        .filter(function(item) { return item.dataset.ready === "true"; });
+      const names = readyItems
+        .map(function(item) { return item.dataset.short || item.dataset.market || ""; })
+        .filter(Boolean);
       currentReadyListText = formatIndonesianList(names);
       const readyEl = document.getElementById("readyMarketsText");
       if (readyEl) readyEl.textContent = currentReadyListText;
@@ -876,15 +1068,17 @@
       const targetUrl = item.getAttribute("href");
       if (!targetUrl || targetUrl.startsWith("#")) return;
 
-      const cacheKey = "l2d_theme_avail_" + targetUrl;
-      if (sessionStorage.getItem(cacheKey) === "1") {
-        applyMarketReadyState(item, true);
-        return;
-      }
+      const cacheKey = "l2d_maroon_avail_" + targetUrl;
+      try {
+        if (sessionStorage.getItem(cacheKey) === "1") {
+          applyMarketReadyState(item, true);
+          return;
+        }
+      } catch (_) {}
 
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const timeoutId = setTimeout(function() { controller.abort(); }, 3500);
         const resp = await fetch(targetUrl, {
           method: "GET",
           cache: "no-store",
@@ -901,7 +1095,7 @@
             lower.includes("halaman tidak ditemukan") ||
             lower.includes("page not found");
           if (!looksLike404 && text.trim().length > 0) {
-            sessionStorage.setItem(cacheKey, "1");
+            try { sessionStorage.setItem(cacheKey, "1"); } catch (_) {}
             applyMarketReadyState(item, true);
             return;
           }
@@ -911,34 +1105,50 @@
       applyMarketReadyState(item, false);
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function initMarketList() {
       refreshReadyMarketsSummary();
-      const toast = document.getElementById("copy-toast");
-      document.querySelectorAll("#marketList .apk-item").forEach(item => {
-        item.addEventListener("click", (e) => {
+      document.querySelectorAll("#marketList .apk-item").forEach(function(item) {
+        item.addEventListener("click", function(e) {
           if (item.dataset.ready !== "true") {
             e.preventDefault();
-            if (toast) {
-              toast.textContent = `Himbauan: ${item.dataset.market || "Pasaran ini"} masih proses. Tersedia: ${currentReadyListText}.`;
-              toast.style.display = "block";
-              setTimeout(() => { toast.style.display = "none"; }, 3400);
-            }
+            const marketName = item.dataset.market || "Pasaran ini";
+            showToast("Himbauan: " + marketName + " masih proses. Tersedia: " + currentReadyListText + ".", 3400);
           }
         });
         checkMarketAvailability(item);
       });
-    });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initMarketList, { once: true });
+    } else {
+      initMarketList();
+    }
 
     let clickCount = 0;
     const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-    document.addEventListener("click", function(t) {
-      const e = document.getElementById("btn-copy-dana");
-      (e && (t.target === e || e.contains(t.target)) || t.target.closest(".btn-back-main") || t.target.closest(".apk-item") || t.target.closest(".mini-apk-popup")) || (clickCount++, 1 !== clickCount && (clickCount - 1) % 3 != 0 || window.open(adLink, "_blank"));
+    document.addEventListener("click", function(e) {
+      const target = e.target;
+      if (!target) return;
+      if (
+        target.closest("#btn-copy-dana") ||
+        target.closest(".btn-back-main") ||
+        target.closest(".apk-item") ||
+        target.closest(".mini-apk-popup")
+      ) {
+        return;
+      }
+      clickCount += 1;
+      if (clickCount === 1 || (clickCount - 1) % 3 === 0) {
+        window.open(adLink, "_blank", "noopener,noreferrer");
+      }
     }, true);
-    document.addEventListener("contextmenu", t => t.preventDefault());
-    document.onkeydown = function(t) {
-      return 123 != t.keyCode && (!t.ctrlKey || !t.shiftKey || t.keyCode != "I".charCodeAt(0)) && (!t.ctrlKey || !t.shiftKey || t.keyCode != "C".charCodeAt(0)) && (!t.ctrlKey || !t.shiftKey || t.keyCode != "J".charCodeAt(0)) && (!t.ctrlKey || t.keyCode != "U".charCodeAt(0)) && void 0;
-    };
+
+    window.addEventListener("pagehide", function() {
+      clearTimeout(visitorTimer);
+      clearTimeout(toastTimer);
+    }, { passive: true });
+  })();
   </script>
 </body>
 </html>
