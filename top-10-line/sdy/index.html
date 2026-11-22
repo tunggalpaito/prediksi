@@ -1,8 +1,10 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050508">
+<meta name="color-scheme" content="dark">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://tunggalpaito.online/top-10-line/sdy">
 <link rel="preconnect" href="https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app" crossorigin>
@@ -35,117 +37,347 @@
 }
 </script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-html{scroll-behavior:smooth}
-body{background:radial-gradient(circle at top,#133466 0%,#0b1d3a 55%,#061124 100%);color:#f8fafc;display:flex;flex-direction:column;align-items:center;padding:14px 10px 24px;min-height:100vh;-webkit-tap-highlight-color:transparent}
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+:root{
+  --bg-main:#050508;
+  --bg-card:#12090e;
+  --bg-card-deep:#090407;
+  --maroon-accent:#ff1e56;
+  --maroon-crimson:#e11d48;
+  --maroon-dark:#881337;
+  --maroon-border:rgba(255,30,86,0.28);
+  --maroon-border-bright:rgba(255,77,121,0.55);
+  --text-main:#f9fafb;
+  --text-muted:#9ca3af;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+html{scroll-behavior:smooth;width:100%;max-width:100%;overflow-x:clip}
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:clip;
+  background-color:var(--bg-main);
+  background-image:
+    radial-gradient(circle at 50% 0%,rgba(255,30,86,0.18) 0%,rgba(22,10,16,0.92) 55%,#050508 100%),
+    linear-gradient(rgba(255,30,86,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,30,86,0.04) 1px,transparent 1px);
+  background-size:100% 100%,24px 24px,24px 24px;
+  color:var(--text-main);
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  padding:12px 4px 24px;
+  min-height:100dvh;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body ::selection{background-color:#e11d48;color:#ffffff}
 
 /* TOMBOL KEMBALI KE MENU UTAMA */
-.btn-back-main{width:100%;max-width:420px;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,rgba(10,28,58,0.9),rgba(5,15,32,0.96));color:#38bdf8;text-decoration:none;font-weight:700;font-size:13px;padding:10px 15px;border-radius:10px;border:1px solid rgba(56,189,248,0.65);margin-bottom:14px;transition:transform .2s ease,background-color .2s ease,color .2s ease,box-shadow .2s ease;box-shadow:0 4px 14px rgba(0,0,0,0.45)}
-.btn-back-main:hover{background:#38bdf8;color:#041021;transform:translateY(-1px);box-shadow:0 6px 18px rgba(56,189,248,0.28)}
+.btn-back-main{
+  width:100%;
+  min-height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:linear-gradient(135deg,#ff1e56 0%,#9f1239 100%);
+  color:#ffffff;
+  text-decoration:none;
+  font-family:"Orbitron",sans-serif;
+  font-weight:800;
+  font-size:12.5px;
+  letter-spacing:.5px;
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,130,160,0.45);
+  margin-bottom:12px;
+  transition:transform .2s ease,filter .2s ease,box-shadow .2s ease;
+  box-shadow:0 6px 18px rgba(255,30,86,0.32);
+}
+.btn-back-main:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 8px 24px rgba(255,30,86,0.45)}
 
 /* STYLING PALING ATAS (AREA IKLAN UTAMA) */
-.top-ads-wrapper{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:16px;background:linear-gradient(180deg,#122f5c 0%,#0b1d3a 100%);border:1px solid rgba(56,189,248,0.36);border-radius:12px;padding:10px;box-shadow:0 6px 20px rgba(0,0,0,0.42)}
-.ad-slot-box{width:100%;min-height:50px;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:8px;background:rgba(0,0,0,0.25)}
-.ad-banner-468{width:468px;max-width:100%;min-height:60px;display:flex;justify-content:center;align-items:center;overflow:hidden}
+.top-ads-wrapper{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+  background:linear-gradient(145deg,rgba(24,10,16,0.94),rgba(9,4,7,0.99));
+  border:1px solid var(--maroon-border);
+  border-radius:14px;
+  padding:10px 6px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.55);
+}
+.ad-slot-box{
+  width:100%;
+  min-height:50px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  border-radius:10px;
+  background:rgba(11,5,8,0.85);
+  border:1px solid rgba(255,30,86,0.16);
+}
+.ad-banner-468{width:100%;min-height:60px;display:flex;justify-content:center;align-items:center;overflow:hidden}
 
 /* KARTU GENERATOR */
-.generator-card{width:100%;max-width:420px;background:linear-gradient(180deg,#122f5c 0%,#0b1d3a 100%);border:1px solid rgba(56,189,248,0.8);border-radius:12px;padding:16px;margin-bottom:18px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.42)}
-.generator-card h2{font-size:16px;color:#38bdf8;margin-bottom:8px;letter-spacing:.4px;text-transform:uppercase}
-.generator-card .guide-text{font-size:11.5px;color:#cbd5e1;margin-bottom:12px;line-height:1.5;text-align:left}
+.generator-card{
+  width:100%;
+  background:linear-gradient(150deg,rgba(24,10,16,0.95),rgba(9,4,7,0.99));
+  border:1px solid var(--maroon-border);
+  border-radius:16px;
+  padding:16px 10px;
+  margin-bottom:14px;
+  text-align:center;
+  box-shadow:0 10px 26px rgba(0,0,0,0.6);
+  position:relative;
+  overflow:hidden;
+}
+.generator-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#ff1e56,#fda4af,transparent);
+}
+.generator-card h2{
+  font-family:"Orbitron",sans-serif;
+  font-size:15px;
+  font-weight:900;
+  color:#fda4af;
+  margin-bottom:8px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+.generator-card .guide-text{font-size:12px;color:#cbd5e1;margin-bottom:12px;line-height:1.5;text-align:left}
 .generator-form-row{display:flex;flex-direction:column;align-items:center;gap:10px}
-.generator-card input{width:100%;max-width:220px;padding:9px 12px;font-size:16px;font-weight:700;letter-spacing:2px;text-align:center;border-radius:8px;border:1px solid #38bdf8;background:#061124;color:#fff;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
-.generator-card input:focus{border-color:#7dd3fc;box-shadow:0 0 0 3px rgba(56,189,248,0.22)}
-.generator-card button{background:linear-gradient(135deg,#38bdf8,#0284c7);color:#041021;border:none;padding:9px 24px;font-size:13.5px;font-weight:800;border-radius:8px;cursor:pointer;letter-spacing:.4px;box-shadow:0 4px 12px rgba(56,189,248,0.25);transition:transform .2s ease,filter .2s ease}
-.generator-card button:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.generator-card input{
+  width:100%;
+  padding:10px 12px;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-align:center;
+  border-radius:10px;
+  border:1px solid rgba(255,30,86,0.35);
+  background:#090407;
+  color:#ffffff;
+  outline:none;
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+.generator-card input:focus{border-color:var(--maroon-border-bright);box-shadow:0 0 0 3px rgba(255,30,86,0.18)}
+.generator-card button{
+  width:100%;
+  min-height:44px;
+  background:linear-gradient(135deg,#ff1e56,#9f1239);
+  color:#ffffff;
+  border:1px solid rgba(255,130,160,0.45);
+  padding:10px 20px;
+  font-family:"Orbitron",sans-serif;
+  font-size:13px;
+  font-weight:800;
+  border-radius:10px;
+  cursor:pointer;
+  letter-spacing:.5px;
+  box-shadow:0 6px 18px rgba(255,30,86,0.32);
+  transition:transform .2s ease,filter .2s ease;
+}
+.generator-card button:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .generator-feedback{margin-top:8px;font-size:11.5px;color:#fca5a5;min-height:16px}
 .generator-result{margin-top:12px;text-align:left;font-size:13px;display:none}
-.generator-result div{margin-bottom:8px;background:rgba(56,189,248,0.11);padding:9px 11px;border-radius:8px;border-left:3px solid #38bdf8;color:#f8fafc}
+.generator-result div{
+  margin-bottom:8px;
+  background:rgba(255,30,86,0.1);
+  padding:9px 11px;
+  border-radius:8px;
+  border-left:3px solid #ff1e56;
+  color:#f1f5f9;
+}
 .generator-result div:last-child{margin-bottom:0}
 
 /* KARTU STATUS PENGUNJUNG ONLINE DINAMIS */
-.visitor-card{width:100%;max-width:420px;background:linear-gradient(90deg,rgba(12,32,64,0.92),rgba(6,17,36,0.95));border:1px solid rgba(56,189,248,0.7);border-radius:10px;padding:10px 15px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 14px rgba(0,0,0,0.35)}
-.visitor-card .visitor-info{font-size:12px;color:#e2e8f0;display:flex;align-items:center;gap:8px;font-weight:600}
+.visitor-card{
+  width:100%;
+  background:linear-gradient(90deg,rgba(26,10,17,0.95),rgba(11,5,8,0.98));
+  border:1px solid var(--maroon-border);
+  border-radius:12px;
+  padding:10px 12px;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 6px 18px rgba(0,0,0,0.45);
+}
+.visitor-card .visitor-info{font-size:12px;color:#fecdd3;display:flex;align-items:center;gap:8px;font-weight:700}
 .visitor-card .online-dot{width:9px;height:9px;background-color:#22c55e;border-radius:50%;box-shadow:0 0 10px #22c55e;animation:blink 1.5s infinite}
-.visitor-card .visitor-count{font-size:14px;font-weight:800;color:#38bdf8;transition:all .4s ease}
+.visitor-card .visitor-count{font-family:"Orbitron",sans-serif;font-size:13.5px;font-weight:800;color:#ff4d79;transition:all .4s ease}
 @keyframes blink{0%{opacity:1}50%{opacity:.35}100%{opacity:1}}
 
 /* STYLING KHUSUS KARTU SAWERAN & TITIP PASANG */
-.sawer-card{width:100%;max-width:420px;background:linear-gradient(145deg,#050b14,#10213d);border:1px solid rgba(245,158,11,0.6);border-radius:12px;padding:16px;margin-bottom:18px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.45)}
-.sawer-card h2{font-size:15px;color:#f59e0b;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
-.sawer-card p{font-size:11.5px;color:#cbd5e1;margin-bottom:14px;line-height:1.5}
-.sawer-btn-group{display:flex;gap:10px;justify-content:center}
-.sawer-btn{flex:1;padding:10px 12px;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
-.sawer-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
-.btn-sawer-wa{background:linear-gradient(135deg,#22c55e,#15803d);color:#001206;box-shadow:0 4px 12px rgba(34,197,94,0.28)}
-.btn-sawer-qr{background:linear-gradient(135deg,#f59e0b,#d97706);color:#041021;box-shadow:0 4px 12px rgba(245,158,11,0.28)}
+.sawer-card{
+  width:100%;
+  background:linear-gradient(145deg,rgba(26,10,17,0.95),rgba(10,5,8,0.99));
+  border:1px solid var(--maroon-border);
+  border-radius:16px;
+  padding:16px 10px;
+  margin-bottom:14px;
+  text-align:center;
+  box-shadow:0 8px 24px rgba(0,0,0,0.55);
+}
+.sawer-card h2{font-family:"Orbitron",sans-serif;font-size:14.5px;color:#fda4af;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
+.sawer-card p{font-size:12px;color:#cbd5e1;margin-bottom:14px;line-height:1.5}
+.sawer-btn-group{display:flex;gap:8px;justify-content:center}
+.sawer-btn{
+  flex:1;
+  min-height:44px;
+  padding:10px 10px;
+  font-size:12px;
+  font-weight:800;
+  border-radius:10px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.sawer-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.btn-sawer-wa{background:linear-gradient(135deg,#ff1e56,#9f1239);color:#ffffff;border:1px solid rgba(255,130,160,0.4);box-shadow:0 4px 14px rgba(255,30,86,0.3)}
+.btn-sawer-qr{background:linear-gradient(135deg,#be123c,#4c0519);color:#fecdd3;border:1px solid rgba(255,77,121,0.45);box-shadow:0 4px 14px rgba(190,18,60,0.3)}
 
 /* KARTU UTAMA PREDIKSI */
-.main-card{width:100%;max-width:420px;background:linear-gradient(180deg,#183d73 0%,#0e2547 100%);border:1px solid rgba(56,189,248,0.52);border-radius:12px;padding:18px 14px 12px;text-align:center;box-shadow:0 6px 22px rgba(0,0,0,0.45);margin-bottom:14px}
-h1{font-size:16px;font-weight:800;margin-bottom:14px;letter-spacing:.4px;color:#38bdf8;line-height:1.35}
-.pred-date-sub{display:block;font-size:12px;font-weight:700;color:#e2e8f0;margin-top:4px;letter-spacing:.2px}
+.main-card{
+  width:100%;
+  background:linear-gradient(150deg,rgba(24,10,16,0.96),rgba(9,4,7,0.99));
+  border:1px solid var(--maroon-border);
+  border-radius:16px;
+  padding:18px 8px 12px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,0.65);
+  margin-bottom:14px;
+  position:relative;
+  overflow:hidden;
+}
+.main-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#ff1e56,#fda4af,transparent);
+}
+h1{
+  font-family:"Orbitron",sans-serif;
+  font-size:16px;
+  font-weight:900;
+  margin-bottom:14px;
+  letter-spacing:.4px;
+  background:linear-gradient(90deg,#ff4d79,#fda4af,#ff8c00);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1.35;
+}
+.pred-date-sub{display:block;font-family:"Plus Jakarta Sans",sans-serif;font-size:12px;font-weight:700;color:#fecdd3;-webkit-text-fill-color:#fecdd3;margin-top:4px;letter-spacing:.2px}
 
 /* WADAH TREK TABEL RESULT & PREDIKSI */
-.trek-container{display:flex;flex-direction:column;gap:11px;width:100%;margin-bottom:10px;min-height:80px}
-.trek-loading{padding:18px 10px;font-size:12px;color:#bae6fd;background:rgba(7,19,38,0.78);border:1px dashed rgba(56,189,248,0.4);border-radius:8px}
-.trek-item-box{background:rgba(7,19,38,0.92);border:1px solid rgba(56,189,248,0.45);border-radius:10px;padding:10px;box-shadow:0 3px 10px rgba(0,0,0,0.35)}
+.trek-container{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:10px;min-height:80px}
+.trek-loading{padding:18px 10px;font-size:12px;color:#fecdd3;background:rgba(18,9,14,0.85);border:1px dashed rgba(255,30,86,0.35);border-radius:10px}
+.trek-item-box{background:rgba(11,5,8,0.94);border:1px solid rgba(255,30,86,0.35);border-radius:12px;padding:10px 8px;box-shadow:0 4px 12px rgba(0,0,0,0.45)}
 .trek-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:6px}
 .trek-balls{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.ball{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;box-shadow:0 2px 5px rgba(0,0,0,0.5)}
-.ball-red{background:linear-gradient(135deg,#ef4444,#991b1b);color:#fff;border:1px solid #f87171}
-.ball-white{background:linear-gradient(135deg,#f8fafc,#cbd5e1);color:#041021;border:1px solid #fff}
-.trek-colon{color:#38bdf8;font-weight:800;margin:0 2px}
-.trek-badge{background:#061124;color:#38bdf8;border:1px solid rgba(56,189,248,0.8);padding:4px 8px;border-radius:6px;font-size:10px;font-weight:800;text-transform:uppercase;min-width:56px;text-align:center}
+.ball{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;box-shadow:0 2px 6px rgba(0,0,0,0.5)}
+.ball-red{background:linear-gradient(135deg,#ff1e56,#9f1239);color:#ffffff;border:1px solid #fda4af}
+.ball-white{background:linear-gradient(135deg,#f8fafc,#e2e8f0);color:#12090e;border:1px solid #ffffff}
+.trek-colon{color:#ff4d79;font-weight:800;margin:0 2px}
+.trek-badge{background:#1c0b13;color:#fda4af;border:1px solid rgba(255,77,121,0.55);padding:4px 8px;border-radius:6px;font-family:"Orbitron",sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;min-width:56px;text-align:center}
 
 /* KOTAK 10 LINE INVEST PER BARIS */
-.invest-section{background:rgba(16,42,82,0.68);border:1px solid rgba(56,189,248,0.34);border-radius:8px;padding:8px;text-align:left}
-.invest-title{font-size:10px;font-weight:800;color:#38bdf8;text-transform:uppercase;margin-bottom:6px;text-align:center;letter-spacing:.5px;border-bottom:1px dashed rgba(56,189,248,0.32);padding-bottom:4px}
-.invest-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-size:10.5px;text-align:center;font-weight:700}
-.invest-item{background:rgba(56,189,248,0.15);color:#f8fafc;padding:5px 2px;border-radius:4px;border:1px solid rgba(56,189,248,0.25)}
+.invest-section{background:rgba(20,9,15,0.78);border:1px solid rgba(255,30,86,0.25);border-radius:10px;padding:8px 6px;text-align:left}
+.invest-title{font-family:"Orbitron",sans-serif;font-size:10px;font-weight:800;color:#fda4af;text-transform:uppercase;margin-bottom:6px;text-align:center;letter-spacing:.5px;border-bottom:1px dashed rgba(255,30,86,0.3);padding-bottom:4px}
+.invest-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-size:11px;text-align:center;font-weight:700}
+.invest-item{background:rgba(255,30,86,0.12);color:#f9fafb;padding:6px 2px;border-radius:5px;border:1px solid rgba(255,30,86,0.24)}
 
 /* STYLING KHUSUS BLUR & KUNCI PIN */
 .blur-wrapper{position:relative;width:100%}
 .blur-target{filter:blur(6px);user-select:none;pointer-events:none;transition:filter .3s ease}
-.lock-overlay{position:absolute;inset:0;background:rgba(7,19,38,0.9);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;padding:10px;text-align:center;z-index:10}
-.lock-overlay p{font-size:10.5px;color:#e2e8f0;margin-bottom:8px;line-height:1.35;font-weight:600}
-.lock-overlay button{background:#38bdf8;color:#041021;border:none;padding:6px 14px;font-size:11px;font-weight:800;border-radius:6px;cursor:pointer;margin-bottom:6px;transition:transform .15s ease}
+.lock-overlay{position:absolute;inset:0;background:rgba(12,5,9,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;padding:10px;text-align:center;z-index:10}
+.lock-overlay p{font-size:11px;color:#fecdd3;margin-bottom:8px;line-height:1.35;font-weight:700}
+.lock-overlay button{background:linear-gradient(135deg,#ff1e56,#9f1239);color:#ffffff;border:1px solid rgba(255,130,160,0.45);padding:7px 14px;font-size:11px;font-weight:800;border-radius:7px;cursor:pointer;margin-bottom:6px;transition:transform .15s ease}
 .lock-overlay button:hover{transform:scale(1.03)}
-.lock-overlay a{font-size:9.5px;color:#4ade80;text-decoration:none;font-weight:700}
+.lock-overlay a{font-size:10px;color:#fda4af;text-decoration:none;font-weight:700}
 .lock-overlay a:hover{text-decoration:underline}
 
 /* KELAS EFEK MENYALA (GLOW HIJAU) JIKA JP / TEPAT TEMBUS RESULT BERIKUTNYA */
-.invest-item.glow-jp{background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:1px solid #86efac;box-shadow:0 0 12px #22c55e,inset 0 0 5px rgba(255,255,255,0.55);animation:glowPulse 1.2s infinite alternate}
-@keyframes glowPulse{0%{transform:scale(1);box-shadow:0 0 5px #22c55e}100%{transform:scale(1.04);box-shadow:0 0 14px #4ade80}}
+.invest-item.glow-jp,.ball-white.glow-jp{background:linear-gradient(135deg,#22c55e,#15803d)!important;color:#ffffff!important;border:1px solid #86efac!important;box-shadow:0 0 12px rgba(34,197,94,0.85),inset 0 0 5px rgba(255,255,255,0.6)!important;animation:glowPulse 1.2s infinite alternate}
+@keyframes glowPulse{0%{transform:scale(1);box-shadow:0 0 5px rgba(34,197,94,0.7)}100%{transform:scale(1.04);box-shadow:0 0 14px rgba(34,197,94,0.95)}}
 
 /* WATERMARK / LINK HALAMAN OTOMATIS DI DALAM KARTU */
-.card-website-footer{display:block;font-size:11px;color:#38bdf8;text-decoration:none;font-weight:700;letter-spacing:.4px;padding-top:10px;margin-top:8px;border-top:1px solid rgba(56,189,248,0.32);word-break:break-all}
+.card-website-footer{display:block;font-size:11px;color:#fda4af;text-decoration:none;font-weight:700;letter-spacing:.3px;padding-top:10px;margin-top:8px;border-top:1px solid rgba(255,30,86,0.28);word-break:break-all}
 
 /* WADAH TOMBOL DOWNLOAD DI LUAR KARTU */
-.action-download-container{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;margin-bottom:14px}
-.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px;font-size:13.5px;font-weight:800;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(34,197,94,0.3);transition:transform .2s ease,filter .2s ease}
-.btn-download-img:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.action-download-container{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:14px}
+.btn-download-img{
+  width:100%;
+  min-height:46px;
+  background:linear-gradient(135deg,#ff1e56,#9f1239);
+  color:#ffffff;
+  border:1px solid rgba(255,130,160,0.45);
+  padding:12px;
+  font-family:"Orbitron",sans-serif;
+  font-size:12.5px;
+  font-weight:800;
+  letter-spacing:.5px;
+  border-radius:12px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  box-shadow:0 6px 18px rgba(255,30,86,0.34);
+  transition:transform .2s ease,filter .2s ease;
+}
+.btn-download-img:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .btn-download-img:disabled{opacity:.7;cursor:not-allowed;transform:none}
-.download-feedback{margin-top:8px;font-size:11.5px;color:#86efac;min-height:16px;text-align:center}
-.download-feedback.is-error{color:#fca5a5}
+.download-feedback{margin-top:8px;font-size:11.5px;color:#fda4af;min-height:16px;text-align:center}
+.download-feedback.is-error{color:#fecaca}
 
 /* IKLAN BANNER KECIL */
-.bottom-ad-wrap{width:100%;max-width:420px;display:flex;justify-content:center;margin-top:6px;margin-bottom:18px}
-.ad-banner-320{width:320px;max-width:100%;height:50px;background-color:#071326;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:8px;border:1px solid rgba(56,189,248,0.28)}
+.bottom-ad-wrap{width:100%;display:flex;justify-content:center;margin-top:4px;margin-bottom:14px}
+.ad-banner-320{width:100%;min-height:50px;background-color:#0b0508;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:10px;border:1px solid var(--maroon-border)}
 
-.keywords-section{width:100%;max-width:420px;background:rgba(7,19,38,0.72);border-radius:12px;padding:15px;margin-bottom:18px;text-align:center;border:1px solid rgba(56,189,248,0.22)}
-.keywords-section h2{font-size:13.5px;color:#38bdf8;margin-bottom:8px;letter-spacing:.3px}
-.keywords-section p{font-size:11px;color:#cbd5e1;line-height:1.55}
-.footer{margin-top:auto;padding:10px 0 4px;color:#38bdf8;font-size:12.5px;font-weight:700;text-align:center}
+.keywords-section{
+  width:100%;
+  background:linear-gradient(145deg,rgba(22,9,15,0.92),rgba(9,4,7,0.97));
+  border-radius:14px;
+  padding:14px 10px;
+  margin-bottom:14px;
+  text-align:center;
+  border:1px solid var(--maroon-border);
+}
+.keywords-section h2{font-family:"Orbitron",sans-serif;font-size:13px;color:#fda4af;margin-bottom:8px;letter-spacing:.3px}
+.keywords-section p{font-size:11.5px;color:#cbd5e1;line-height:1.55}
+.footer{margin-top:auto;padding:10px 4px 4px;color:var(--text-muted);font-size:12px;font-weight:700;text-align:center;width:100%}
+.footer strong{font-family:"Orbitron",sans-serif;color:#ff1e56}
 
 /* MODAL KUNCI PIN */
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.78);display:none;align-items:center;justify-content:center;padding:16px;z-index:999}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.82);display:none;align-items:center;justify-content:center;padding:12px;z-index:999}
 .modal-backdrop.active{display:flex}
-.modal-box{width:100%;max-width:340px;background:#0b1d3a;border:1px solid #38bdf8;border-radius:12px;padding:18px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.75);color:#f8fafc}
-.modal-box h3{font-size:15px;color:#38bdf8;margin-bottom:8px}
+.modal-box{width:100%;max-width:360px;background:#160a10;border:1px solid var(--maroon-border-bright);border-radius:14px;padding:18px;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,0.8);color:#f8fafc}
+.modal-box h3{font-family:"Orbitron",sans-serif;font-size:14.5px;color:#fda4af;margin-bottom:8px}
 .modal-box p{font-size:11.5px;color:#cbd5e1;margin-bottom:12px;line-height:1.45}
-.modal-box input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid #38bdf8;background:#061124;color:#fff;font-size:14px;text-align:center;margin-bottom:10px;outline:none}
+.modal-box input{width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,30,86,0.4);background:#090407;color:#fff;font-size:14px;text-align:center;margin-bottom:10px;outline:none}
 .modal-actions{display:flex;gap:8px;justify-content:center}
-.modal-btn-primary{background:#38bdf8;color:#041021;border:none;padding:8px 16px;border-radius:8px;font-weight:800;font-size:12.5px;cursor:pointer}
-.modal-btn-secondary{background:rgba(255,255,255,0.12);color:#f1f5f9;border:1px solid rgba(255,255,255,0.2);padding:8px 14px;border-radius:8px;font-weight:700;font-size:12.5px;cursor:pointer}
+.modal-btn-primary{background:linear-gradient(135deg,#ff1e56,#9f1239);color:#ffffff;border:1px solid rgba(255,130,160,0.4);padding:8px 16px;border-radius:8px;font-weight:800;font-size:12.5px;cursor:pointer}
+.modal-btn-secondary{background:rgba(255,255,255,0.1);color:#f1f5f9;border:1px solid rgba(255,255,255,0.2);padding:8px 14px;border-radius:8px;font-weight:700;font-size:12.5px;cursor:pointer}
 .modal-err{font-size:11px;color:#fca5a5;min-height:16px;margin-bottom:8px}
 </style>
 </head>
@@ -163,7 +395,7 @@ h1{font-size:16px;font-weight:800;margin-bottom:14px;letter-spacing:.4px;color:#
   <div class="ad-slot-box">
     <div class="ad-banner-468" id="slot-banner-top">
       <script>
-        atOptions = {
+        window.atOptions = {
           key: '9a986a45c62dcea8d8216b9210f159cb',
           format: 'iframe',
           height: 60,
@@ -259,7 +491,7 @@ h1{font-size:16px;font-weight:800;margin-bottom:14px;letter-spacing:.4px;color:#
 <div class="bottom-ad-wrap">
   <div class="ad-banner-320" id="slot-banner-bottom">
     <script>
-      atOptions = {
+      window.atOptions = {
         key: '119c8bb3217ed264a8fa223c3197bf69',
         format: 'iframe',
         height: 50,
@@ -279,7 +511,7 @@ h1{font-size:16px;font-weight:800;margin-bottom:14px;letter-spacing:.4px;color:#
 </div>
 
 <div class="footer">
-  &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
+  &copy; <span id="auto-year"></span> <strong>TUNGGAL PAITO</strong> All Rights Reserved.
 </div>
 
 <!-- MODAL KUNCI PIN -->
@@ -574,14 +806,16 @@ function renderTrekData(data) {
     let status = "?";
     const badgeClass = "trek-badge";
     let winning2d = "";
+    let nKepala = -1;
+    let nEkor = -1;
 
     if (index === last7.length - 1 || !nextItem) {
       status = "?";
     } else {
       const next4d = nextItem.val;
       winning2d = next4d.slice(-2);
-      const nKepala = Number(next4d[2]);
-      const nEkor = Number(next4d[3]);
+      nKepala = Number(next4d[2]);
+      nEkor = Number(next4d[3]);
       const isTwin = nKepala === nEkor;
 
       const hasKepala = predDigits.includes(nKepala);
@@ -632,7 +866,13 @@ function renderTrekData(data) {
       </div>`;
 
     const redBallsHtml = digits.map(d => `<div class="ball ball-red">${d}</div>`).join("");
-    const whiteBallsHtml = predDigits.map(d => `<div class="ball ball-white">${d}</div>`).join("");
+    const whiteBallsHtml = predDigits
+      .map(d => {
+        const isHit = nKepala !== -1 && (d === nKepala || d === nEkor);
+        const ballGlow = isHit ? "ball ball-white glow-jp" : "ball ball-white";
+        return `<div class="${ballGlow}">${d}</div>`;
+      })
+      .join("");
 
     const box = document.createElement("div");
     box.className = "trek-item-box";
@@ -822,7 +1062,7 @@ document.getElementById("btn-download").addEventListener("click", async function
   try {
     const h2c = await loadHtml2Canvas();
     const canvas = await h2c(cardElement, {
-      backgroundColor: "#0e2547",
+      backgroundColor: "#12090e",
       scale: 2,
       useCORS: true
     });
@@ -839,7 +1079,6 @@ document.getElementById("btn-download").addEventListener("click", async function
       feedbackEl.textContent = "Gambar berhasil diunduh.";
     }
 
-    // Redirect bersamaan setelah proses pengunduhan gambar selesai
     try {
       const openedWin = window.open(AD_DIRECT_LINK, "_blank", "noopener,noreferrer");
       if (!openedWin) {
