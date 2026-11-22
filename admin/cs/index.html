@@ -4,58 +4,418 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Staff / Admin CS - Tunggal Paito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
-body{background:#000;color:#e2e8f0;padding:20px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;min-height:100vh}
-.admin-container{background:#080808;width:100%;max-width:500px;padding:25px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.8);border:1px solid #1a1a1a;margin-bottom:20px}
-.top-tracker{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:15px;background:rgba(15,15,15,.8);padding:10px;border-radius:8px;border:1px dashed #262626;min-height:40px}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
+body{
+  background:
+    radial-gradient(circle at 50% -8%,rgba(190,18,60,.28),rgba(13,5,8,.96) 52%,#050203 100%);
+  background-color:#050203;
+  color:#f3e8ea;
+  padding:20px 16px 32px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  min-height:100vh;
+}
+.admin-container{
+  background:linear-gradient(165deg,rgba(26,8,14,.96) 0%,rgba(11,4,7,.99) 100%);
+  width:100%;
+  max-width:500px;
+  padding:22px 20px 24px;
+  border-radius:20px;
+  box-shadow:0 16px 40px rgba(0,0,0,.85),0 0 0 1px rgba(244,63,94,.12);
+  border:1px solid rgba(251,113,133,.22);
+  margin-bottom:18px;
+}
+.top-tracker{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  margin-bottom:16px;
+  background:rgba(10,3,6,.85);
+  padding:9px 12px;
+  border-radius:12px;
+  border:1px dashed rgba(251,113,133,.24);
+  min-height:38px;
+}
 #histats_counter{display:flex;justify-content:center;align-items:center;width:100%}
-.header{text-align:center;margin-bottom:25px;padding-bottom:20px;border-bottom:2px solid #1a1a1a}
-h2{color:#38bdf8;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase;text-shadow:0 0 10px rgba(56,189,248,.3)}
-.auth-status-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:15px}
-.status-logged-in{background:rgba(16,185,129,.2);color:#34d399;border:1px solid #10b981}
-.status-logged-out{background:rgba(239,68,68,.2);color:#f87171;border:1px solid #ef4444}
-.main-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;width:100%;margin-top:15px}
-.btn-utama{flex:1 1 100%;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:10px 14px;border-radius:8px;font-weight:700;font-size:12px;color:#fff;transition:.2s;text-transform:uppercase;box-shadow:0 4px 10px rgba(0,0,0,.4)}
-.btn-menu-awal{background:#00b894;border:1px solid #00e6ac}
-.btn-menu-awal:hover{background:#009473;transform:translateY(-2px);box-shadow:0 0 12px rgba(0,184,148,.5)}
-.btn-sub{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:5px 9px;border-radius:6px;font-weight:600;font-size:10.5px;transition:.2s;background:#111827;border:1px solid #263244;line-height:1.2}
-.btn-sub:hover{transform:translateY(-1px);border-color:#38bdf8;background:#1e293b}
+.header{
+  text-align:center;
+  margin-bottom:22px;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(251,113,133,.18);
+}
+h2{
+  color:#fda4af;
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:.08em;
+  margin-bottom:10px;
+  text-transform:uppercase;
+  text-shadow:0 2px 16px rgba(225,29,72,.35);
+}
+.status-row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  margin-bottom:12px;
+}
+.auth-status-badge{
+  font-size:11px;
+  font-weight:700;
+  padding:5px 12px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  letter-spacing:.02em;
+}
+.status-logged-in{
+  background:rgba(16,185,129,.14);
+  color:#6ee7b7;
+  border:1px solid rgba(52,211,153,.35);
+}
+.status-logged-out{
+  background:rgba(225,29,72,.18);
+  color:#fda4af;
+  border:1px solid rgba(251,113,133,.4);
+}
+.mode-badge{
+  font-size:10.5px;
+  font-weight:700;
+  padding:5px 10px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border:1px solid transparent;
+}
+.mode-manual{
+  background:rgba(251,191,36,.14);
+  color:#fde68a;
+  border-color:rgba(251,191,36,.38);
+}
+.mode-auto{
+  background:rgba(244,63,94,.14);
+  color:#fecdd3;
+  border-color:rgba(251,113,133,.28);
+}
+.btn-reset-auto{
+  background:rgba(255,255,255,.06);
+  color:#fecdd3;
+  border:1px solid rgba(251,113,133,.3);
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.btn-reset-auto:hover{
+  background:rgba(225,29,72,.28);
+  border-color:#fb7185;
+  color:#fff1f2;
+}
+.main-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  margin-top:14px;
+}
+.btn-utama{
+  flex:1 1 100%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:12px;
+  color:#fff1f2;
+  transition:.2s ease;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  box-shadow:0 6px 16px rgba(136,19,55,.45);
+}
+.btn-menu-awal{
+  background:linear-gradient(135deg,#be123c 0%,#881337 100%);
+  border:1px solid rgba(253,164,175,.35);
+}
+.btn-menu-awal:hover{
+  filter:brightness(1.1);
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(190,18,60,.55);
+}
+.btn-sub{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  padding:6px 10px;
+  border-radius:9px;
+  font-weight:600;
+  font-size:11px;
+  transition:.2s ease;
+  background:rgba(24,7,13,.9);
+  border:1px solid rgba(251,113,133,.22);
+  line-height:1.2;
+}
+.btn-sub:hover{
+  transform:translateY(-1px);
+  border-color:#fb7185;
+  background:rgba(136,19,55,.35);
+  color:#fff1f2;
+}
 .c-white{color:#f8fafc}
-.c-top2d{color:#38bdf8}
-.section-title{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;text-align:left;margin:25px 0 12px 5px;display:flex;align-items:center}
-.section-title::after{content:"";flex:1;height:1px;background:#1a1a1a;margin-left:10px}
-.input-result-box{background:#0f172a;border:1px solid #1e293b;padding:15px;border-radius:8px;margin-bottom:15px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}
-.input-result-box label{font-size:11px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.5px}
-.input-result-box input,.input-result-box select,.input-result-box textarea{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:10px 12px;border-radius:6px;font-size:14px;outline:0;transition:.2s;font-weight:700}
-.input-result-box input[type=date]{text-align:center!important;color:#facc15!important;background:#0f172a!important;border:1px solid #38bdf8!important;font-size:15px!important;font-weight:800!important;color-scheme:dark}
-.input-result-box textarea{resize:vertical;height:120px;font-family:monospace;text-align:left;font-weight:400}
-.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{border-color:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.4)}
-.btn-kirim{background:linear-gradient(135deg,#ff6b81,#ff4757);border:1px solid #ff7979;color:#fff;padding:12px;border-radius:8px;font-weight:800;font-size:13px;cursor:pointer;text-transform:uppercase;transition:all .3s ease;box-shadow:0 0 15px rgba(255,71,87,.6),inset 0 1px 1px rgba(255,255,255,.4);letter-spacing:.5px}
-.btn-kirim:hover:not(:disabled){background:linear-gradient(135deg,#ff4757,#ff3838);box-shadow:0 0 22px rgba(255,71,87,.9),0 0 35px rgba(255,107,129,.5);transform:translateY(-1px)}
-.btn-kirim:disabled{opacity:.6;cursor:not-allowed}
+.c-top2d{color:#fda4af}
+.section-title{
+  font-size:11.5px;
+  font-weight:800;
+  color:#fda4af;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  text-align:left;
+  margin:22px 0 11px 4px;
+  display:flex;
+  align-items:center;
+}
+.section-title::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,rgba(251,113,133,.32),transparent);
+  margin-left:10px;
+}
+.input-result-box{
+  background:rgba(14,4,8,.92);
+  border:1px solid rgba(251,113,133,.22);
+  padding:16px;
+  border-radius:16px;
+  margin-bottom:14px;
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+  box-shadow:inset 0 2px 10px rgba(0,0,0,.65);
+}
+.input-result-box label{
+  font-size:11px;
+  font-weight:700;
+  color:#fda4af;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.input-result-box input,.input-result-box select,.input-result-box textarea{
+  width:100%;
+  background:#070204;
+  border:1px solid rgba(251,113,133,.25);
+  color:#fff1f2;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:14px;
+  outline:0;
+  transition:.2s ease;
+  font-weight:700;
+}
+.input-result-box input[type=date]{
+  text-align:center!important;
+  color:#fde68a!important;
+  background:#120409!important;
+  border:1px solid rgba(251,113,133,.45)!important;
+  font-size:14.5px!important;
+  font-weight:800!important;
+  color-scheme:dark;
+  font-family:'JetBrains Mono',monospace;
+}
+.input-result-box textarea{
+  resize:vertical;
+  height:116px;
+  font-family:'JetBrains Mono',monospace;
+  text-align:left;
+  font-weight:500;
+  font-size:13px;
+  line-height:1.5;
+}
+.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{
+  border-color:#fb7185;
+  box-shadow:0 0 0 3px rgba(225,29,72,.22);
+}
+.btn-kirim{
+  background:linear-gradient(135deg,#e11d48 0%,#9f1239 55%,#7f1d1d 100%);
+  border:1px solid rgba(253,164,175,.38);
+  color:#fff1f2;
+  padding:12px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:13px;
+  cursor:pointer;
+  text-transform:uppercase;
+  transition:all .22s ease;
+  box-shadow:0 6px 20px rgba(190,18,60,.45),inset 0 1px 0 rgba(255,255,255,.22);
+  letter-spacing:.06em;
+}
+.btn-kirim:hover:not(:disabled){
+  filter:brightness(1.1);
+  box-shadow:0 8px 26px rgba(225,29,72,.65);
+  transform:translateY(-1px);
+}
+.btn-kirim:disabled{opacity:.55;cursor:not-allowed}
 
-/* 2 Tombol kecil rapi bergaya tombol kirim Firebase */
-.prediksi-panel{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:2px;padding-top:10px;border-top:1px solid #1e293b;flex-wrap:wrap}
-.prediksi-label{font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
-.prediksi-btn-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.btn-prediksi-kecil{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:linear-gradient(135deg,#ff6b81,#ff4757);border:1px solid #ff7979;color:#fff;padding:5px 10px;border-radius:6px;font-weight:800;font-size:10.5px;cursor:pointer;text-transform:uppercase;letter-spacing:.3px;transition:all .25s ease;box-shadow:0 0 10px rgba(255,71,87,.45),inset 0 1px 1px rgba(255,255,255,.35);line-height:1.15}
-.btn-prediksi-kecil:hover{background:linear-gradient(135deg,#ff4757,#ff3838);box-shadow:0 0 16px rgba(255,71,87,.85),0 0 24px rgba(255,107,129,.45);transform:translateY(-1px)}
+.prediksi-panel{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:2px;
+  padding-top:11px;
+  border-top:1px solid rgba(251,113,133,.16);
+  flex-wrap:wrap;
+}
+.prediksi-label{
+  font-size:10.5px;
+  font-weight:800;
+  color:#d4b5bc;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.prediksi-btn-wrap{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.btn-prediksi-kecil{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  background:linear-gradient(135deg,#be123c 0%,#881337 100%);
+  border:1px solid rgba(253,164,175,.32);
+  color:#fff1f2;
+  padding:6px 11px;
+  border-radius:8px;
+  font-weight:800;
+  font-size:10.5px;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  transition:all .2s ease;
+  box-shadow:0 4px 12px rgba(136,19,55,.45);
+  line-height:1.15;
+}
+.btn-prediksi-kecil:hover{
+  filter:brightness(1.12);
+  border-color:#fda4af;
+  transform:translateY(-1px);
+}
 
-.status-firebase{font-size:11px;text-align:center;color:#94a3b8;margin-top:4px;font-weight:700;line-height:1.4}
-footer{text-align:center;font-size:12px;color:#475569;margin-top:10px;margin-bottom:20px}
-footer span{color:#38bdf8;font-weight:700}
-.btn-logout-admin{background:#dc2626;color:#fff;border:none;padding:6px 12px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;margin-top:8px;text-transform:uppercase}
-.btn-logout-admin:hover{background:#b91c1c}
-.login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px}
-.login-box{background:#080808;border:1px solid #334155;padding:25px;border-radius:12px;width:100%;max-width:380px;box-shadow:0 10px 25px rgba(0,0,0,.8)}
-.login-box h3{color:#38bdf8;text-align:center;margin-bottom:15px;font-size:16px;text-transform:uppercase}
-.login-box input{width:100%;background:#020617;border:1px solid #334155;color:#f8fafc;padding:12px;border-radius:6px;margin-bottom:12px;font-size:14px;outline:0}
-.login-box button{width:100%;background:#10b981;color:#fff;border:none;padding:12px;border-radius:6px;font-weight:700;cursor:pointer;text-transform:uppercase}
-.login-error{color:#ef4444;font-size:12px;text-align:center;margin-top:8px}
+.status-firebase{
+  font-size:11.5px;
+  text-align:center;
+  color:#d4b5bc;
+  margin-top:4px;
+  font-weight:700;
+  line-height:1.45;
+}
+footer{
+  text-align:center;
+  font-size:12px;
+  color:#9c7a82;
+  margin-top:6px;
+  margin-bottom:16px;
+}
+footer span{color:#fb7185;font-weight:800}
+.btn-logout-admin{
+  background:rgba(159,18,57,.28);
+  color:#fecdd3;
+  border:1px solid rgba(251,113,133,.4);
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:10.5px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:6px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  transition:.2s ease;
+}
+.btn-logout-admin:hover{
+  background:#be123c;
+  color:#fff1f2;
+}
+.login-overlay{
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:rgba(5,2,3,.95);
+  backdrop-filter:blur(6px);
+  z-index:9999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+.login-box{
+  background:linear-gradient(165deg,#1b070e 0%,#0b0306 100%);
+  border:1px solid rgba(251,113,133,.35);
+  padding:24px 22px;
+  border-radius:18px;
+  width:100%;
+  max-width:380px;
+  box-shadow:0 18px 40px rgba(0,0,0,.85);
+}
+.login-box h3{
+  color:#fda4af;
+  text-align:center;
+  margin-bottom:16px;
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.login-box input{
+  width:100%;
+  background:#070204;
+  border:1px solid rgba(251,113,133,.28);
+  color:#fff1f2;
+  padding:11px 12px;
+  border-radius:10px;
+  margin-bottom:12px;
+  font-size:14px;
+  font-weight:600;
+  outline:0;
+}
+.login-box input:focus{
+  border-color:#fb7185;
+  box-shadow:0 0 0 3px rgba(225,29,72,.22);
+}
+.login-box button{
+  width:100%;
+  background:linear-gradient(135deg,#e11d48 0%,#881337 100%);
+  border:1px solid rgba(253,164,175,.35);
+  color:#fff1f2;
+  padding:12px;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.login-box button:hover{filter:brightness(1.08)}
+.login-error{color:#fda4af;font-size:12px;text-align:center;margin-top:9px;font-weight:600}
 </style>
 </head>
 <body>
@@ -76,7 +436,9 @@ footer span{color:#38bdf8;font-weight:700}
 
   <div class="header">
     <h2>PANEL ADMIN CS</h2>
-    <div id="authStatusIndicator" class="auth-status-badge status-logged-out">Memeriksa Status Login...</div>
+    <div class="status-row">
+      <div id="authStatusIndicator" class="auth-status-badge status-logged-out">Memeriksa Status Login...</div>
+    </div>
     <div>
       <button type="button" id="btnLogout" class="btn-logout-admin" style="display:none" onclick="logoutAdmin()">🚪 LOGOUT AKUN</button>
     </div>
@@ -91,7 +453,13 @@ footer span{color:#38bdf8;font-weight:700}
 
   <div class="section-title">📡 Update Data Paito Warna</div>
   <div class="input-result-box">
-    <label for="marketSelect">Pilih Pasaran</label>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+      <label for="marketSelect" style="margin:0">Pilih Pasaran</label>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span id="selectionModeBadge" class="mode-badge mode-manual">🔒 Mode Manual</span>
+        <button type="button" id="btnResetAutoMarket" class="btn-reset-auto" onclick="resetToAutoMarket()">Ikut Jam WIB</button>
+      </div>
+    </div>
     <select id="marketSelect">
       <option value="data-macau4d-pt6">MACAU 4D PT6</option>
       <option value="data-cambodia">CAMBODIA</option>
@@ -148,127 +516,43 @@ firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const JADWAL_PASARAN = [
-  {
-    key: "data-macau4d-pt6",
-    dbKey: "data-macau4d",
-    label: "MACAU 4D PT6",
-    startMinute: 1, // 00:01
-    url: "https://tunggalpaito.online/bbfs2d-macau4d/"
-  },
-  {
-    key: "data-cambodia",
-    dbKey: "data-cambodia",
-    label: "CAMBODIA",
-    startMinute: 11 * 60 + 45, // 11:45
-    url: "https://tunggalpaito.online/bbfs2d-cambodia/"
-  },
-  {
-    key: "data-macau4d-pt1",
-    dbKey: "data-macau4d",
-    label: "MACAU 4D PT1",
-    startMinute: 13 * 60, // 13:00
-    url: "https://tunggalpaito.online/bbfs2d-macau4d/"
-  },
-  {
-    key: "data-sdy",
-    dbKey: "data-sdy",
-    label: "SDYPOL",
-    startMinute: 13 * 60 + 45, // 13:45
-    url: "https://tunggalpaito.online/bbfs2d-sdy"
-  },
-  {
-    key: "data-sdylotto",
-    dbKey: "data-sdylotto",
-    label: "SDYLOT",
-    startMinute: 14 * 60, // 14:00
-    url: "https://tunggalpaito.online/bbfs2d-sdylotto/"
-  },
-  {
-    key: "data-macau5d-pt1",
-    dbKey: "data-macau5d",
-    label: "MACAU 5D PT1",
-    startMinute: 15 * 60, // 15:00
-    url: "https://tunggalpaito.online/bbfs2d-macau5d/"
-  },
-  {
-    key: "data-china",
-    dbKey: "data-china",
-    label: "CHINA",
-    startMinute: 15 * 60 + 30, // 15:30
-    url: "https://tunggalpaito.online/bbfs2d-china/"
-  },
-  {
-    key: "data-macau4d-pt2",
-    dbKey: "data-macau4d",
-    label: "MACAU 4D PT2",
-    startMinute: 16 * 60, // 16:00
-    url: "https://tunggalpaito.online/bbfs2d-macau4d/"
-  },
-  {
-    key: "data-japan",
-    dbKey: "data-japan",
-    label: "JAPAN",
-    startMinute: 17 * 60 + 25, // 17:25
-    url: "https://tunggalpaito.online/bbfs2d-japan/"
-  },
-  {
-    key: "data-sgp",
-    dbKey: "data-sgp",
-    label: "SGP",
-    startMinute: 17 * 60 + 45, // 17:45 (Selasa=2 & Jumat=5 libur)
-    url: "https://tunggalpaito.online/bbfs2d-sgp",
-    closedDays: [2, 5]
-  },
-  {
-    key: "data-macau4d-pt3",
-    dbKey: "data-macau4d",
-    label: "MACAU 4D PT3",
-    startMinute: 19 * 60, // 19:00
-    url: "https://tunggalpaito.online/bbfs2d-macau4d/"
-  },
-  {
-    key: "data-taiwan",
-    dbKey: "data-taiwan",
-    label: "TAIWAN",
-    startMinute: 20 * 60 + 45, // 20:45
-    url: "https://tunggalpaito.online/bbfs2d-taiwan/"
-  },
-  {
-    key: "data-macau5d-pt2",
-    dbKey: "data-macau5d",
-    label: "MACAU 5D PT2",
-    startMinute: 21 * 60, // 21:00
-    url: "https://tunggalpaito.online/bbfs2d-macau5d/"
-  },
-  {
-    key: "data-macau4d-pt4",
-    dbKey: "data-macau4d",
-    label: "MACAU 4D PT4",
-    startMinute: 22 * 60, // 22:00
-    url: "https://tunggalpaito.online/bbfs2d-macau4d/"
-  },
-  {
-    key: "data-hk",
-    dbKey: "data-hk",
-    label: "HKPOL",
-    startMinute: 23 * 60, // 23:00
-    url: "https://tunggalpaito.online/bbfs2d-hk"
-  },
-  {
-    key: "data-macau4d-pt5",
-    dbKey: "data-macau4d",
-    label: "MACAU 4D PT5",
-    startMinute: 23 * 60 + 10, // 23:10
-    url: "https://tunggalpaito.online/bbfs2d-macau4d/"
-  },
-  {
-    key: "data-hklotto",
-    dbKey: "data-hklotto",
-    label: "HK LOT",
-    startMinute: 23 * 60 + 20, // 23:20
-    url: "https://tunggalpaito.online/bbfs2d-hklotto/"
-  }
+  { key: "data-macau4d-pt6", dbKey: "data-macau4d", label: "MACAU 4D PT6", startMinute: 1, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-cambodia", dbKey: "data-cambodia", label: "CAMBODIA", startMinute: 11 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-cambodia/" },
+  { key: "data-macau4d-pt1", dbKey: "data-macau4d", label: "MACAU 4D PT1", startMinute: 13 * 60, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-sdy", dbKey: "data-sdy", label: "SDYPOL", startMinute: 13 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-sdy" },
+  { key: "data-sdylotto", dbKey: "data-sdylotto", label: "SDYLOT", startMinute: 14 * 60, url: "https://tunggalpaito.online/bbfs2d-sdylotto/" },
+  { key: "data-macau5d-pt1", dbKey: "data-macau5d", label: "MACAU 5D PT1", startMinute: 15 * 60, url: "https://tunggalpaito.online/bbfs2d-macau5d/" },
+  { key: "data-china", dbKey: "data-china", label: "CHINA", startMinute: 15 * 60 + 30, url: "https://tunggalpaito.online/bbfs2d-china/" },
+  { key: "data-macau4d-pt2", dbKey: "data-macau4d", label: "MACAU 4D PT2", startMinute: 16 * 60, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-japan", dbKey: "data-japan", label: "JAPAN", startMinute: 17 * 60 + 25, url: "https://tunggalpaito.online/bbfs2d-japan/" },
+  { key: "data-sgp", dbKey: "data-sgp", label: "SGP", startMinute: 17 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-sgp", closedDays: [2, 5] },
+  { key: "data-macau4d-pt3", dbKey: "data-macau4d", label: "MACAU 4D PT3", startMinute: 19 * 60, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-taiwan", dbKey: "data-taiwan", label: "TAIWAN", startMinute: 20 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-taiwan/" },
+  { key: "data-macau5d-pt2", dbKey: "data-macau5d", label: "MACAU 5D PT2", startMinute: 21 * 60, url: "https://tunggalpaito.online/bbfs2d-macau5d/" },
+  { key: "data-macau4d-pt4", dbKey: "data-macau4d", label: "MACAU 4D PT4", startMinute: 22 * 60, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-hk", dbKey: "data-hk", label: "HKPOL", startMinute: 23 * 60, url: "https://tunggalpaito.online/bbfs2d-hk" },
+  { key: "data-macau4d-pt5", dbKey: "data-macau4d", label: "MACAU 4D PT5", startMinute: 23 * 60 + 10, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-hklotto", dbKey: "data-hklotto", label: "HK LOT", startMinute: 23 * 60 + 20, url: "https://tunggalpaito.online/bbfs2d-hklotto/" }
 ];
+
+// Begitu admin memilih atau mengubah pasaran, kunci ke manual agar tidak ketimpa jadwal otomatis
+let isManualMarketSelection = true;
+
+function updateSelectionModeBadge() {
+  const badge = document.getElementById("selectionModeBadge");
+  const resetBtn = document.getElementById("btnResetAutoMarket");
+  if (!badge) return;
+
+  if (isManualMarketSelection) {
+    badge.className = "mode-badge mode-manual";
+    badge.textContent = "🔒 Pilihan Dikunci Manual";
+    if (resetBtn) resetBtn.style.display = "inline-block";
+  } else {
+    badge.className = "mode-badge mode-auto";
+    badge.textContent = "🕒 Auto WIB";
+    if (resetBtn) resetBtn.style.display = "none";
+  }
+}
 
 function getWIBTimeInfo() {
   const now = new Date();
@@ -309,7 +593,20 @@ function getMarketConfig(marketKey) {
   return JADWAL_PASARAN.find((item) => item.key === marketKey) || JADWAL_PASARAN[0];
 }
 
-// Selalu tampilkan maksimal 2 tombol: pasaran aktif saat ini + pasaran berikutnya (berhenti di HK LOT)
+function getScheduledMarketByTime() {
+  const { totalMinutes, dayOfWeek } = getWIBTimeInfo();
+  let activeMarket = JADWAL_PASARAN[JADWAL_PASARAN.length - 1];
+
+  for (let i = 0; i < JADWAL_PASARAN.length; i++) {
+    const item = JADWAL_PASARAN[i];
+    const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
+    if (!isClosedToday && totalMinutes >= item.startMinute) {
+      activeMarket = item;
+    }
+  }
+  return activeMarket;
+}
+
 function renderPrediksiButtons(selectedKey) {
   const box = document.getElementById("prediksiButtonsBox");
   if (!box) return;
@@ -349,23 +646,20 @@ function autoSetDates() {
   if (inputDate) inputDate.value = getTodayString();
 }
 
-function autoSelectMarketByTime() {
-  const { totalMinutes, dayOfWeek } = getWIBTimeInfo();
-  let activeMarket = JADWAL_PASARAN[JADWAL_PASARAN.length - 1];
-
-  for (let i = 0; i < JADWAL_PASARAN.length; i++) {
-    const item = JADWAL_PASARAN[i];
-    const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
-    if (!isClosedToday && totalMinutes >= item.startMinute) {
-      activeMarket = item;
-    }
-  }
-
+function applyInitialMarketByTime() {
+  const activeMarket = getScheduledMarketByTime();
   const selectEl = document.getElementById("marketSelect");
   if (selectEl) {
     selectEl.value = activeMarket.key;
   }
+  updateSelectionModeBadge();
   renderPrediksiButtons(activeMarket.key);
+}
+
+function resetToAutoMarket() {
+  isManualMarketSelection = false;
+  applyInitialMarketByTime();
+  refreshAllFormPreviews();
 }
 
 function getLatestEntryFromObject(obj) {
@@ -396,7 +690,7 @@ function showLatestDataPaito(marketKey) {
   const cfg = getMarketConfig(marketKey);
   const dbPath = cfg.dbKey;
 
-  msgEl.style.color = "#38bdf8";
+  msgEl.style.color = "#fda4af";
   msgEl.innerText = "⏳ Memuat data paito terakhir...";
 
   database.ref(`live/${dbPath}`).once("value").then((snapshot) => {
@@ -404,10 +698,10 @@ function showLatestDataPaito(marketKey) {
       const latest = getLatestEntryFromObject(snapshot.val());
       const items = latest.data.split(",").map((item) => item.trim()).filter(Boolean);
       const lastValue = items.length > 0 ? items[items.length - 1] : latest.data;
-      msgEl.style.color = "#94a3b8";
-      msgEl.innerHTML = `📌 <b>Data Terakhir ${cfg.label}${latest.date ? " (" + latest.date + ")" : ""}:</b> <span style="color:#facc15;font-size:14px;font-weight:bold;">${lastValue}</span>`;
+      msgEl.style.color = "#d4b5bc";
+      msgEl.innerHTML = `📌 <b>Data Terakhir ${cfg.label}${latest.date ? " (" + latest.date + ")" : ""}:</b> <span style="color:#fde68a;font-size:14px;font-weight:800;">${lastValue}</span>`;
     } else {
-      msgEl.style.color = "#64748b";
+      msgEl.style.color = "#9c7a82";
       msgEl.innerText = `Belum ada data paito ${cfg.label}`;
     }
   }).catch(() => {
@@ -430,20 +724,20 @@ function loginAdmin() {
   const submitBtn = document.getElementById("btnLoginSubmit");
 
   if (!email || !password) {
-    errorEl.style.color = "#ef4444";
+    errorEl.style.color = "#fda4af";
     errorEl.innerText = "⚠️ Email dan Password wajib diisi!";
     return;
   }
 
   submitBtn.disabled = true;
-  errorEl.style.color = "#38bdf8";
+  errorEl.style.color = "#fda4af";
   errorEl.innerText = "⏳ Memverifikasi...";
 
   firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
     document.getElementById("adminLoginOverlay").style.display = "none";
     errorEl.innerText = "";
   }).catch((err) => {
-    errorEl.style.color = "#ef4444";
+    errorEl.style.color = "#fda4af";
     if (
       err.code === "auth/wrong-password" ||
       err.code === "auth/invalid-credential" ||
@@ -473,7 +767,7 @@ function saveDataPaito() {
   const btnUpdate = document.getElementById("btnUpdatePaito");
 
   if (!firebase.auth().currentUser) {
-    msgEl.style.color = "#f87171";
+    msgEl.style.color = "#fda4af";
     msgEl.textContent = "Sesi login berakhir. Silakan login ulang terlebih dahulu.";
     document.getElementById("adminLoginOverlay").style.display = "flex";
     return;
@@ -486,7 +780,7 @@ function saveDataPaito() {
   const rawNumbers = document.getElementById("inputNumbers").value.trim();
 
   if (!rawNumbers) {
-    msgEl.style.color = "#f87171";
+    msgEl.style.color = "#fda4af";
     msgEl.textContent = "Angka tidak boleh kosong!";
     return;
   }
@@ -496,7 +790,7 @@ function saveDataPaito() {
   const ref = database.ref("live/" + dbPath);
 
   btnUpdate.disabled = true;
-  msgEl.style.color = "#38bdf8";
+  msgEl.style.color = "#fda4af";
   msgEl.textContent = `Menyimpan data ${cfg.label}...`;
 
   ref.once("value").then((snapshot) => {
@@ -510,12 +804,13 @@ function saveDataPaito() {
     }
     return ref.update({ [formattedDate]: finalNumbers });
   }).then(() => {
-    msgEl.style.color = "#34d399";
+    msgEl.style.color = "#6ee7b7";
     msgEl.textContent = `Berhasil menyimpan data ${cfg.label} untuk tanggal ${formattedDate}!`;
     document.getElementById("inputNumbers").value = "";
+    // Tetap pertahankan pilihan pasaran saat ini setelah simpan agar tidak meloncat ke pasaran lain
     setTimeout(() => showLatestDataPaito(marketKey), 2500);
   }).catch((err) => {
-    msgEl.style.color = "#f87171";
+    msgEl.style.color = "#fda4af";
     msgEl.textContent = "Gagal menyimpan: " + err.message;
   }).finally(() => {
     btnUpdate.disabled = false;
@@ -524,20 +819,15 @@ function saveDataPaito() {
 
 document.addEventListener("DOMContentLoaded", () => {
   autoSetDates();
-  autoSelectMarketByTime();
+  applyInitialMarketByTime();
   refreshAllFormPreviews();
 
   let lastTrackedKey = document.getElementById("marketSelect")?.value || "";
+
+  // Hanya ganti otomatis jika mode Auto WIB aktif (tidak menimpa pilihan manual admin)
   setInterval(() => {
-    const { totalMinutes, dayOfWeek } = getWIBTimeInfo();
-    let activeMarket = JADWAL_PASARAN[JADWAL_PASARAN.length - 1];
-    for (let i = 0; i < JADWAL_PASARAN.length; i++) {
-      const item = JADWAL_PASARAN[i];
-      const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
-      if (!isClosedToday && totalMinutes >= item.startMinute) {
-        activeMarket = item;
-      }
-    }
+    if (isManualMarketSelection) return;
+    const activeMarket = getScheduledMarketByTime();
     if (activeMarket.key !== lastTrackedKey) {
       lastTrackedKey = activeMarket.key;
       const selectEl = document.getElementById("marketSelect");
@@ -549,7 +839,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 15000);
 
   document.getElementById("marketSelect")?.addEventListener("change", (e) => {
+    isManualMarketSelection = true;
     lastTrackedKey = e.target.value;
+    updateSelectionModeBadge();
     refreshAllFormPreviews();
   });
 
