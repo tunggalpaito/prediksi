@@ -1,899 +1,1564 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Draw Tercepat Pasaran SGP, HK, SDY Hari Ini Tercepat - Tunggal Paito</title>
-<meta name="description" content="Update Live Draw HK, SGP, SDY tercepat dan akurat hari ini. Saksikan pemutaran result Singapore, Hongkong, dan Sydney pools resmi dari situs Tunggal Paito.">
-<meta name="keywords" content="live draw sgp, live draw hk, live draw sdy, result sgp, result hk, result sdy, tunggal paito, live result hongkong, live result singapore, live result sydney">
-<link rel="canonical" href="https://tunggalpaito.online/live-draw">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
-:root{
-  --bg-primary:#05050a;
-  --bg-secondary:#0d0f18;
-  --bg-card:rgba(13, 17, 32, 0.85);
-  --accent-cyan:#00f2fe;
-  --accent-purple:#9d4edd;
-  --accent-pink:#ff2a85;
-  --accent-gradient:linear-gradient(135deg, #00f2fe 0%, #7928ca 50%, #ff2a85 100%);
-  --neon-glow-cyan:0 0 20px rgba(0, 242, 254, 0.4);
-  --neon-glow-pink:0 0 20px rgba(255, 42, 133, 0.4);
-  --text-main:#ffffff;
-  --text-muted:#8a99ad;
-  --border-glass:rgba(255, 255, 255, 0.1);
-}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif}
-body{background-color:var(--bg-primary);color:var(--text-main);line-height:1.6;background-image:radial-gradient(circle at 15% 10%,rgba(157,78,221,.15) 0,transparent 45%),radial-gradient(circle at 85% 90%,rgba(0,242,254,.1) 0,transparent 45%),radial-gradient(circle at 50% 50%,rgba(255,42,133,.07) 0,transparent 60%);background-attachment:fixed;min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;padding:15px 10px}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050508">
+  <meta name="color-scheme" content="dark">
+  <title>Live Draw Tercepat Pasaran SGP, HK, SDY Hari Ini Tercepat - Tunggal Paito</title>
+  <meta name="description" content="Update Live Draw HK, SGP, SDY tercepat dan akurat hari ini. Saksikan pemutaran result Singapore, Hongkong, dan Sydney pools resmi dari situs Tunggal Paito.">
+  <meta name="keywords" content="live draw sgp, live draw hk, live draw sdy, result sgp, result hk, result sdy, tunggal paito, live result hongkong, live result singapore, live result sydney">
+  <link rel="canonical" href="https://tunggalpaito.online/live-draw">
 
-header{background:rgba(13,15,24,.85);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border:1px solid var(--border-glass);padding:20px 15px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 15px 35px rgba(0,0,0,.5);width:100%;max-width:480px;border-radius:18px;margin-bottom:15px}
-header h1{font-family:Outfit,sans-serif;font-size:20px;font-weight:900;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;filter:drop-shadow(0 0 15px rgba(0, 242, 254, .4))}
-.live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,242,254,.08);padding:6px 16px;border-radius:30px;border:1px solid rgba(0,242,254,.3);font-size:11px;color:var(--accent-cyan);font-weight:700;box-shadow:var(--neon-glow-cyan)}
-.live-badge span{width:6px;height:6px;background-color:#00f2fe;border-radius:50%;display:inline-block;box-shadow:0 0 10px #00f2fe;animation:pulse-dot 1.5s infinite}
-@keyframes pulse-dot{0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(0,242,254,.8)}70%{transform:scale(1);box-shadow:0 0 0 10px rgba(0,242,254,0)}100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(0,242,254,0)}}
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-.container{width:100%;max-width:480px;margin:0 auto}
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-.top-ads-wrapper{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:15px;background-color:var(--bg-card);border:1px solid var(--border-glass);border-radius:18px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  <style>
+    :root {
+      --bg-main: #050508;
+      --bg-card: rgba(18, 9, 14, 0.92);
+      --bg-card-deep: rgba(9, 4, 7, 0.97);
+      --maroon-accent: #ff1e56;
+      --maroon-crimson: #e11d48;
+      --maroon-dark: #881337;
+      --maroon-border: rgba(255, 30, 86, 0.28);
+      --maroon-border-bright: rgba(255, 77, 121, 0.55);
+      --accent-gradient: linear-gradient(135deg, #ff1e56 0%, #be123c 55%, #881337 100%);
+      --neon-glow-maroon: 0 0 20px rgba(255, 30, 86, 0.35);
+      --text-main: #ffffff;
+      --text-muted: #9ca3af;
+      --border-glass: rgba(255, 30, 86, 0.24);
+    }
 
-.nav-top-container{width:100%;max-width:480px;display:flex;gap:10px;margin-bottom:15px}
-.nav-btn{flex:1;background:var(--accent-gradient);color:#fff;text-decoration:none;padding:10px 12px;font-size:12px;font-weight:800;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(0,242,254,.3);transition:all .3s ease;display:flex;align-items:center;justify-content:center;gap:6px;text-transform:uppercase;letter-spacing:.5px}
-.nav-btn.apk{background:linear-gradient(135deg,#ff2a85 0%,#7928ca 100%);box-shadow:0 4px 15px rgba(255,42,133,.3)}
-.nav-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-.disclaimer-marquee-container{width:100%;margin-bottom:15px;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:12px;padding:8px 0;overflow:hidden}
-.disclaimer-marquee{display:flex;width:100%;overflow:hidden;white-space:nowrap}
-.disclaimer-marquee span{display:inline-block;padding-left:100%;animation:marquee 30s linear infinite;font-size:11px;font-weight:700;color:var(--accent-cyan);letter-spacing:.5px}
-@keyframes marquee{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      -webkit-overflow-scrolling: touch;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.prediction-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}
-.pred-card{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:12px;padding:10px 6px;text-align:center;text-decoration:none;color:#fff;transition:all .2s ease;box-shadow:0 4px 15px rgba(0,0,0,.3);cursor:pointer}
-.pred-card:hover,.pred-card:active{transform:translateY(-2px);border-color:var(--accent-cyan);box-shadow:var(--neon-glow-cyan)}
-.pred-card h4{font-family:Outfit,sans-serif;font-size:12px;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 30, 86, 0.18) 0%, rgba(22, 10, 16, 0.92) 55%, #050508 100%),
+        linear-gradient(rgba(255, 30, 86, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 30, 86, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px, 24px 24px;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 10px 96px 10px;
+    }
 
-.table-responsive{width:100%;overflow-x:auto;background:var(--bg-card);backdrop-filter:blur(25px);border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.6);margin-bottom:15px;max-height:450px;overflow-y:auto;border:1px solid var(--border-glass)}
-table{width:100%;border-collapse:collapse;text-align:center;white-space:nowrap;table-layout:fixed}
-td,th{padding:12px 8px;font-size:12px}
-th{background:rgba(10,14,26,.95);color:var(--accent-cyan);font-family:Outfit,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:1px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border-glass)}
-tr{border-bottom:1px solid rgba(255,255,255,.03);transition:background-color .2s ease}
-tr:hover{background:rgba(0,242,254,.03)!important}
-td{color:var(--text-muted);font-weight:600}
-td:nth-child(n+3){font-family:Outfit,sans-serif;font-weight:900;color:var(--accent-pink);text-shadow:0 0 12px rgba(255,42,133,.5);letter-spacing:2px}
-td:first-child,td:nth-child(2){color:var(--text-main);font-weight:700}
+    body ::selection {
+      background-color: #e11d48;
+      color: #ffffff;
+    }
 
-/* Bayangan warna hijau berkedip stabil pada sel target yang menunggu diisi (tanpa ubah ukuran/teks) */
-.green-shadow-blink{
-  color:#4ade80 !important;
-  text-shadow:0 0 10px rgba(74,222,128,0.85) !important;
-  box-shadow:inset 0 0 14px rgba(34,197,94,0.45), 0 0 10px rgba(34,197,94,0.3) !important;
-  animation:greenShadowPulse 1.35s ease-in-out infinite;
-}
-@keyframes greenShadowPulse{
-  0%,100%{
-    background-color:rgba(34,197,94,0.20);
-    box-shadow:inset 0 0 16px rgba(74,222,128,0.55), 0 0 12px rgba(34,197,94,0.35);
-  }
-  50%{
-    background-color:rgba(34,197,94,0.03);
-    box-shadow:inset 0 0 4px rgba(74,222,128,0.12), 0 0 2px rgba(34,197,94,0.08);
-  }
-}
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
 
-/* Animasi masuk mulus saat angka result masuk dari Firebase */
-.cell-result-enter{
-  display:inline-block;
-  animation:resultPopIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-@keyframes resultPopIn{
-  0%{
-    opacity:0;
-    transform:translateY(-6px) scale(0.78);
-    color:#4ade80;
-    text-shadow:0 0 18px rgba(74,222,128,0.95);
-  }
-  55%{
-    opacity:1;
-    transform:translateY(0) scale(1.12);
-    color:#00f2fe;
-    text-shadow:0 0 16px rgba(0,242,254,0.85);
-  }
-  100%{
-    opacity:1;
-    transform:translateY(0) scale(1);
-    color:#ff2a85;
-    text-shadow:0 0 12px rgba(255,42,133,0.5);
-  }
-}
+    header {
+      background: linear-gradient(145deg, rgba(26, 10, 17, 0.94), rgba(10, 5, 8, 0.98));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--maroon-border);
+      padding: 18px 14px;
+      text-align: center;
+      position: sticky;
+      top: 8px;
+      z-index: 100;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.65);
+      width: 100%;
+      border-radius: 18px;
+      margin-bottom: 14px;
+    }
 
-.action-download-container{width:100%;display:grid;grid-template-columns:1fr 1.45fr;gap:8px;align-items:center;margin-bottom:12px}
-.btn-refresh-live{width:100%;background:linear-gradient(135deg,#0284c7,#00f2fe);color:#05050a;border:none;padding:12px 12px;font-size:12px;font-weight:900;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 18px rgba(0,242,254,0.35);transition:all .25s ease;text-transform:uppercase;letter-spacing:.4px}
-.btn-refresh-live:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,242,254,0.6)}
-.btn-refresh-live:disabled{opacity:.7;cursor:not-allowed;transform:none}
-.btn-refresh-live.is-spinning svg{animation:spinRefresh .7s linear infinite}
-@keyframes spinRefresh{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    header h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 19px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
 
-.btn-download-img{width:100%;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border:none;padding:12px 12px;font-size:12px;font-weight:800;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 20px rgba(34,197,94,0.4);transition:all .3s ease;text-transform:uppercase;letter-spacing:.4px}
-.btn-download-img:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(34,197,94,0.7)}
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 30, 86, 0.14);
+      padding: 6px 15px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 77, 121, 0.4);
+      font-size: 11px;
+      color: #fda4af;
+      font-weight: 700;
+      box-shadow: var(--neon-glow-maroon);
+    }
 
-.paito-warna-box{width:100%;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:14px;padding:10px;margin-bottom:15px;box-shadow:0 8px 25px rgba(0,0,0,.35)}
-.paito-warna-title{font-family:Outfit,sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:var(--accent-cyan);text-align:center;margin-bottom:8px}
-.paito-warna-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.paito-card{background:rgba(10,14,26,0.9);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 6px;text-align:center;text-decoration:none;color:#fff;transition:all .2s ease;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-.paito-card:hover,.paito-card:active{transform:translateY(-2px);border-color:var(--accent-pink);box-shadow:var(--neon-glow-pink)}
-.paito-card span{font-family:Outfit,sans-serif;font-size:12px;font-weight:800;color:#fff;letter-spacing:.5px}
-.paito-card small{font-size:9px;font-weight:700;color:var(--accent-cyan);text-transform:uppercase}
+    .live-badge span {
+      width: 7px;
+      height: 7px;
+      background-color: #ff1e56;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 10px #ff1e56;
+      animation: pulse-dot 1.5s infinite;
+    }
 
-.download-card-wrapper{position:absolute;left:-9999px;top:-9999px;width:480px;background:linear-gradient(135deg,#05050a 0%,#0d0f18 50%,#120b24 100%);border-radius:24px;padding:24px 18px;box-shadow:0 30px 60px rgba(0,0,0,0.9);border:2px solid rgba(0,242,254,0.4);color:#fff;font-family:'Plus Jakarta Sans',sans-serif}
-.dl-card-header{text-align:center;margin-bottom:18px}
-.dl-card-header h2{font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
-.dl-card-badge{display:inline-block;background:rgba(0,242,254,0.12);border:1px solid rgba(0,242,254,0.4);color:#00f2fe;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:1px;box-shadow:0 0 15px rgba(0,242,254,0.3)}
-.dl-table{width:100%;border-collapse:collapse;text-align:center;background:rgba(13,17,32,0.9);border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
-.dl-table th{background:rgba(10,14,26,0.95);color:#00f2fe;font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;padding:12px 8px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,0.1)}
-.dl-table td{padding:14px 8px;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.05);color:#fff;font-weight:600}
-.dl-table td:nth-child(n+3){font-family:'Outfit',sans-serif;font-weight:900;color:#ff2a85;text-shadow:0 0 12px rgba(255,42,133,0.5);letter-spacing:2px}
-.dl-card-footer{margin-top:16px;text-align:center;font-size:11px;color:#8a99ad;font-weight:700;letter-spacing:0.5px;border-top:1px dashed rgba(255,255,255,0.1);padding-top:12px}
+    @keyframes pulse-dot {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 30, 86, 0.8); }
+      70% { transform: scale(1); box-shadow: 0 0 0 9px rgba(255, 30, 86, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 30, 86, 0); }
+    }
 
-.seo-section{background:var(--bg-card);backdrop-filter:blur(25px);padding:15px;border-radius:18px;border:1px solid var(--border-glass);margin-bottom:15px;font-size:12px;color:var(--text-muted);box-shadow:0 15px 30px rgba(0,0,0,.4)}
-.seo-section h3{font-family:Outfit,sans-serif;font-size:14px;margin-bottom:8px;color:var(--text-main);font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.seo-section p{margin-bottom:8px;text-align:justify;line-height:1.5}
+    .top-ads-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      background: linear-gradient(145deg, rgba(22, 9, 15, 0.92), rgba(9, 4, 7, 0.97));
+      border: 1px solid var(--maroon-border);
+      border-radius: 18px;
+      padding: 12px 10px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+    }
 
-footer{text-align:center;padding:12px 0;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:12px;font-weight:900;letter-spacing:1px;margin-top:auto;width:100%;max-width:480px;text-transform:uppercase}
+    .ad-slot {
+      width: 100%;
+      min-height: 52px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 10px;
+      background: rgba(11, 5, 8, 0.75);
+      border: 1px solid rgba(255, 30, 86, 0.14);
+    }
 
-.apk-float-popup{position:fixed;bottom:20px;right:20px;z-index:9999;background:rgba(13,17,32,.95);backdrop-filter:blur(25px);color:#fff;padding:12px 15px;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.8),var(--neon-glow-cyan);display:flex;align-items:center;gap:12px;max-width:280px;border:1px solid rgba(0,242,254,.4)}
-.apk-icon{width:36px;height:36px;background:var(--accent-gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 15px rgba(0,242,254,.5)}
-.apk-icon svg{width:20px;height:20px;fill:#fff}
-.apk-info{flex-grow:1}
-.apk-info h4{font-family:Outfit,sans-serif;font-size:12px;font-weight:800;color:#fff;margin-bottom:2px}
-.apk-info p{font-size:10px;color:var(--text-muted);margin-bottom:6px}
-.btn-download-apk{display:inline-block;background:linear-gradient(135deg,#ff2a85 0,#ff70a6 100%);color:#fff!important;text-decoration:none;font-size:10px;font-weight:800;padding:5px 12px;border-radius:20px;text-transform:uppercase;box-shadow:0 4px 15px rgba(255,42,133,.4)}
-.apk-close-btn{position:absolute;top:-6px;right:-6px;background:#ff2a85;color:#fff;border:none;width:20px;height:20px;border-radius:50%;cursor:pointer;font-weight:700;font-size:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.5)}
-.apk-reopen-btn{position:fixed;bottom:20px;right:20px;z-index:9998;background:var(--bg-secondary);color:#fff;border:1px solid rgba(0,242,254,.4);border-radius:20px;padding:8px 14px;font-weight:700;font-size:11px;cursor:pointer;display:none;align-items:center;gap:6px;box-shadow:0 8px 25px rgba(0,0,0,.6)}
-</style>
+    .nav-top-container {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      min-height: 44px;
+      background: linear-gradient(135deg, #ff1e56 0%, #9f1239 100%);
+      border: 1px solid rgba(255, 130, 160, 0.35);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 13px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(255, 30, 86, 0.3);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .nav-btn.apk {
+      background: linear-gradient(135deg, #be123c 0%, #4c0519 100%);
+      border-color: rgba(255, 77, 121, 0.45);
+      color: #fecdd3;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    .disclaimer-marquee-container {
+      width: 100%;
+      margin-bottom: 14px;
+      background: linear-gradient(145deg, rgba(24, 10, 16, 0.92), rgba(10, 5, 8, 0.97));
+      border: 1px solid var(--maroon-border);
+      border-radius: 12px;
+      padding: 8px 0;
+      overflow: hidden;
+    }
+
+    .disclaimer-marquee {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .disclaimer-marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 30s linear infinite;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fda4af;
+      letter-spacing: 0.4px;
+    }
+
+    @keyframes marquee {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+    }
+
+    .prediction-main-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .pred-card {
+      min-height: 44px;
+      background: linear-gradient(145deg, rgba(26, 10, 17, 0.94), rgba(11, 5, 8, 0.98));
+      border: 1px solid var(--maroon-border);
+      border-radius: 12px;
+      padding: 10px 6px;
+      text-align: center;
+      text-decoration: none;
+      color: #ffffff;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pred-card:hover, .pred-card:active {
+      transform: translateY(-2px);
+      border-color: var(--maroon-border-bright);
+      box-shadow: var(--neon-glow-maroon);
+    }
+
+    .pred-card h4 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: #fecdd3;
+      letter-spacing: 0.3px;
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
+      border-radius: 18px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+      margin-bottom: 14px;
+      max-height: 450px;
+      overflow-y: auto;
+      border: 1px solid var(--maroon-border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      white-space: nowrap;
+      table-layout: fixed;
+    }
+
+    td, th {
+      padding: 12px 6px;
+      font-size: 11.5px;
+    }
+
+    th {
+      background: rgba(24, 8, 15, 0.98);
+      color: #fda4af;
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255, 30, 86, 0.3);
+    }
+
+    tr {
+      border-bottom: 1px solid rgba(255, 30, 86, 0.1);
+      transition: background-color 0.2s ease;
+    }
+
+    tr:hover {
+      background: rgba(255, 30, 86, 0.06) !important;
+    }
+
+    td {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    td:nth-child(n+3) {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 900;
+      color: #ff4d79;
+      text-shadow: 0 0 12px rgba(255, 30, 86, 0.45);
+      letter-spacing: 1.5px;
+    }
+
+    td:first-child, td:nth-child(2) {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Bayangan warna hijau berkedip stabil pada sel target yang menunggu diisi */
+    .green-shadow-blink {
+      color: #4ade80 !important;
+      text-shadow: 0 0 10px rgba(74, 222, 128, 0.85) !important;
+      box-shadow: inset 0 0 14px rgba(34, 197, 94, 0.45), 0 0 10px rgba(34, 197, 94, 0.3) !important;
+      animation: greenShadowPulse 1.35s ease-in-out infinite;
+    }
+
+    @keyframes greenShadowPulse {
+      0%, 100% {
+        background-color: rgba(34, 197, 94, 0.2);
+        box-shadow: inset 0 0 16px rgba(74, 222, 128, 0.55), 0 0 12px rgba(34, 197, 94, 0.35);
+      }
+      50% {
+        background-color: rgba(34, 197, 94, 0.03);
+        box-shadow: inset 0 0 4px rgba(74, 222, 128, 0.12), 0 0 2px rgba(34, 197, 94, 0.08);
+      }
+    }
+
+    .cell-result-enter {
+      display: inline-block;
+      animation: resultPopIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes resultPopIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.78);
+        color: #4ade80;
+        text-shadow: 0 0 18px rgba(74, 222, 128, 0.95);
+      }
+      55% {
+        opacity: 1;
+        transform: translateY(0) scale(1.12);
+        color: #fda4af;
+        text-shadow: 0 0 16px rgba(255, 77, 121, 0.85);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        color: #ff4d79;
+        text-shadow: 0 0 12px rgba(255, 30, 86, 0.5);
+      }
+    }
+
+    .action-download-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1.45fr;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .btn-refresh-live {
+      width: 100%;
+      min-height: 44px;
+      background: linear-gradient(135deg, #be123c, #4c0519);
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      color: #ffffff;
+      padding: 11px 12px;
+      font-size: 11.5px;
+      font-weight: 800;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(190, 18, 60, 0.35);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .btn-refresh-live:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    .btn-refresh-live:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-refresh-live.is-spinning svg {
+      animation: spinRefresh 0.7s linear infinite;
+    }
+
+    @keyframes spinRefresh {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .btn-download-img {
+      width: 100%;
+      min-height: 44px;
+      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      border: 1px solid rgba(255, 130, 160, 0.4);
+      color: #ffffff;
+      padding: 11px 12px;
+      font-size: 11.5px;
+      font-weight: 800;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 20px rgba(255, 30, 86, 0.4);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .btn-download-img:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    .paito-warna-box {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(24, 10, 16, 0.94), rgba(10, 5, 8, 0.98));
+      border: 1px solid var(--maroon-border);
+      border-radius: 16px;
+      padding: 12px 10px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .paito-warna-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: #fda4af;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .paito-warna-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .paito-card {
+      min-height: 48px;
+      background: rgba(13, 6, 10, 0.92);
+      border: 1px solid rgba(255, 30, 86, 0.22);
+      border-radius: 11px;
+      padding: 9px 6px;
+      text-align: center;
+      text-decoration: none;
+      color: #ffffff;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .paito-card:hover, .paito-card:active {
+      transform: translateY(-2px);
+      border-color: var(--maroon-border-bright);
+      box-shadow: var(--neon-glow-maroon);
+    }
+
+    .paito-card span {
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .paito-card small {
+      font-size: 9px;
+      font-weight: 700;
+      color: #fda4af;
+      text-transform: uppercase;
+    }
+
+    .download-card-wrapper {
+      position: fixed;
+      left: -9999px;
+      top: -9999px;
+      width: 480px;
+      background: linear-gradient(150deg, #180a10 0%, #090407 100%);
+      border-radius: 24px;
+      padding: 24px 18px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
+      border: 2px solid rgba(255, 77, 121, 0.5);
+      color: #ffffff;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    .dl-card-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .dl-card-header h2 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .dl-card-badge {
+      display: inline-block;
+      background: rgba(255, 30, 86, 0.16);
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      color: #fecdd3;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.8px;
+    }
+
+    .dl-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      background: rgba(12, 6, 9, 0.95);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 30, 86, 0.25);
+    }
+
+    .dl-table th {
+      background: rgba(34, 12, 22, 0.98);
+      color: #fda4af;
+      font-family: "Orbitron", sans-serif;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 12px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 1px solid rgba(255, 30, 86, 0.25);
+    }
+
+    .dl-table td {
+      padding: 13px 8px;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255, 30, 86, 0.1);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .dl-table td:nth-child(n+3) {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 900;
+      color: #ff4d79;
+      letter-spacing: 1.5px;
+    }
+
+    .dl-card-footer {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border-top: 1px dashed rgba(255, 30, 86, 0.25);
+      padding-top: 12px;
+    }
+
+    .seo-section {
+      background: linear-gradient(145deg, rgba(24, 10, 16, 0.92), rgba(10, 5, 8, 0.97));
+      padding: 16px 14px;
+      border-radius: 18px;
+      border: 1px solid var(--maroon-border);
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    .seo-section h3 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: 800;
+      color: #fda4af;
+      letter-spacing: 0.4px;
+    }
+
+    .seo-section p {
+      margin-bottom: 8px;
+      text-align: justify;
+      line-height: 1.6;
+    }
+
+    .seo-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 12px 8px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-top: auto;
+      width: 100%;
+    }
+
+    footer strong {
+      font-family: "Orbitron", sans-serif;
+      color: #ff1e56;
+    }
+
+    .apk-float-popup {
+      position: fixed;
+      bottom: 16px;
+      right: 12px;
+      z-index: 9999;
+      background: linear-gradient(145deg, rgba(26, 10, 17, 0.97), rgba(9, 4, 7, 0.99));
+      color: #ffffff;
+      padding: 11px 14px;
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.8), var(--neon-glow-maroon);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      width: 276px;
+      max-width: calc(100vw - 24px);
+      border: 1px solid var(--maroon-border-bright);
+    }
+
+    .apk-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #ff1e56, #881337);
+      border: 1px solid rgba(255, 130, 160, 0.35);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .apk-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    .apk-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .apk-info h4 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .apk-info p {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .btn-download-apk {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      background: linear-gradient(135deg, #ff1e56 0%, #9f1239 100%);
+      border: 1px solid rgba(255, 130, 160, 0.4);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .apk-close-btn {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      background: #1d0e16;
+      color: #fda4af;
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .apk-close-btn:hover {
+      background: #e11d48;
+      color: #ffffff;
+    }
+
+    .apk-reopen-btn {
+      position: fixed;
+      bottom: 16px;
+      right: 12px;
+      z-index: 9998;
+      min-height: 38px;
+      background: linear-gradient(145deg, rgba(26, 10, 17, 0.96), rgba(9, 4, 7, 0.99));
+      color: #fecdd3;
+      border: 1px solid var(--maroon-border-bright);
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 11px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.65);
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <div class="top-ads-wrapper" id="topAdsWrapper">
+      <div class="ad-slot">
+        <script>
+          window.atOptions = {
+            key: "9a986a45c62dcea8d8216b9210f159cb",
+            format: "iframe",
+            height: 60,
+            width: 468,
+            params: {}
+          };
+        </script>
+        <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+      </div>
 
-<div class="container">
+      <div class="ad-slot">
+        <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
+        <div id="container-3f09897b852339f736b82a3190a40259"></div>
+      </div>
 
-  <div class="top-ads-wrapper">
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-      <script>
-        atOptions = {
-          'key' : '9a986a45c62dcea8d8216b9210f159cb',
-          'format' : 'iframe',
-          'height' : 60,
-          'width' : 468,
-          'params' : {}
-        };
-      </script>
-      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+      <div class="ad-slot">
+        <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
+      </div>
+
+      <div class="ad-slot">
+        <script>
+          window.atOptions = {
+            key: "119c8bb3217ed264a8fa223c3197bf69",
+            format: "iframe",
+            height: 50,
+            width: 320,
+            params: {}
+          };
+        </script>
+        <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
+      </div>
+
+      <div class="ad-slot">
+        <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
+      </div>
     </div>
 
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-      <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
-      <div id="container-3f09897b852339f736b82a3190a40259"></div>
+    <div class="nav-top-container">
+      <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
+      <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
     </div>
 
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-      <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
+    <header>
+      <h1>TUNGGAL PAITO</h1>
+      <div class="live-badge">
+        <span></span> Live SGP | HK | SDY Resmi Tercepat
+      </div>
+    </header>
+
+    <div class="disclaimer-marquee-container">
+      <div class="disclaimer-marquee">
+        <span>🚨 DISCLAIMER: konten di halaman ini adalah sarana informasi dan hiburan semata. mohon gunakan layanan dengan bijak dan tetap mengikuti ketentuan serta regulasi yang berlaku ditempat anda berada. Terima kasih atas kunjungan nya!</span>
+      </div>
     </div>
 
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-      <script>
-        atOptions = {
-          'key' : '119c8bb3217ed264a8fa223c3197bf69',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
-        };
-      </script>
-      <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
-    </div>
-
-    <div style="width:100%;display:flex;justify-content:center;overflow:hidden">
-      <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
-    </div>
-  </div>
-
-  <div class="nav-top-container">
-    <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
-    <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
-  </div>
-
-  <header>
-    <h1>TUNGGAL PAITO</h1>
-    <div class="live-badge">
-      <span></span> Live SGP | HK | SDY Resmi Tercepat
-    </div>
-  </header>
-
-  <div class="disclaimer-marquee-container">
-    <div class="disclaimer-marquee">
-      <span>🚨 DISCLAIMER: konten di halaman ini adalah sarana informasi dan hiburan semata. mohon gunakan layanan dengan bijak dan tetap mengikuti ketentuan serta regulasi yang berlaku ditempat anda berada. Terima kasih atas kunjungan nya!</span>
-    </div>
-  </div>
-
-  <div class="prediction-main-grid">
-    <a href="https://tunggalpaito.online/prediksi/hk/" target="_blank" rel="noopener" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/hk/">
-      <h4>🎯 Prediksi HK</h4>
-    </a>
-    <a href="https://tunggalpaito.online/prediksi/sgp/" target="_blank" rel="noopener" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sgp/">
-      <h4>🎯 Prediksi SGP</h4>
-    </a>
-    <a href="https://tunggalpaito.online/prediksi/sdy/" target="_blank" rel="noopener" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sdy/">
-      <h4>🎯 Prediksi SDY</h4>
-    </a>
-  </div>
-
-  <div class="table-responsive">
-    <table>
-      <thead>
-        <tr id="table-headers">
-          <th>TANGGAL</th>
-          <th>HARI</th>
-          <th data-market="hk">HK</th>
-          <th data-market="sgp">SGP</th>
-          <th data-market="sdy">SDY</th>
-        </tr>
-      </thead>
-      <tbody id="live-draw-data">
-      </tbody>
-    </table>
-  </div>
-
-  <div class="action-download-container">
-    <button type="button" class="btn-refresh-live" id="btn-refresh">
-      <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
-      <span>Refresh Live</span>
-    </button>
-    <button type="button" class="btn-download-img" id="btn-download">
-      <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-      <span>Download Result</span>
-    </button>
-  </div>
-
-  <div class="paito-warna-box">
-    <div class="paito-warna-title">🎨 Lihat Paito Warna Pasaran</div>
-    <div class="paito-warna-grid">
-      <a href="https://tunggalpaito.online/paito-warna/hk/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/hk/">
-        <span>HK</span>
-        <small>Paito Warna</small>
+    <div class="prediction-main-grid">
+      <a href="https://tunggalpaito.online/prediksi/hk/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/hk/">
+        <h4>🎯 Prediksi HK</h4>
       </a>
-      <a href="https://tunggalpaito.online/paito-warna/sgp/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sgp/">
-        <span>SGP</span>
-        <small>Paito Warna</small>
+      <a href="https://tunggalpaito.online/prediksi/sgp/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sgp/">
+        <h4>🎯 Prediksi SGP</h4>
       </a>
-      <a href="https://tunggalpaito.online/paito-warna/sdy/" target="_blank" rel="noopener" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sdy/">
-        <span>SDY</span>
-        <small>Paito Warna</small>
+      <a href="https://tunggalpaito.online/prediksi/sdy/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sdy/">
+        <h4>🎯 Prediksi SDY</h4>
       </a>
     </div>
-  </div>
 
-  <div class="download-card-wrapper" id="downloadCardTarget">
-    <div class="dl-card-header">
-      <h2>Tunggal Paito</h2>
-      <div class="dl-card-badge">✨ Live Result HK | SGP | SDY Tercepat</div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr id="table-headers">
+            <th>TANGGAL</th>
+            <th>HARI</th>
+            <th data-market="hk">HK</th>
+            <th data-market="sgp">SGP</th>
+            <th data-market="sdy">SDY</th>
+          </tr>
+        </thead>
+        <tbody id="live-draw-data">
+        </tbody>
+      </table>
     </div>
-    <table class="dl-table">
-      <thead>
-        <tr>
-          <th>TANGGAL</th>
-          <th>HARI</th>
-          <th>HK</th>
-          <th>SGP</th>
-          <th>SDY</th>
-        </tr>
-      </thead>
-      <tbody id="dl-table-body">
-      </tbody>
-    </table>
-    <div class="dl-card-footer">
-      &copy; <span class="current-year"></span> Tunggal Paito. All Rights Reserved.
+
+    <div class="action-download-container">
+      <button type="button" class="btn-refresh-live" id="btn-refresh">
+        <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+        <span>Refresh Live</span>
+      </button>
+      <button type="button" class="btn-download-img" id="btn-download">
+        <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+        <span>Download Result</span>
+      </button>
+    </div>
+
+    <div class="paito-warna-box">
+      <div class="paito-warna-title">🎨 Lihat Paito Warna Pasaran</div>
+      <div class="paito-warna-grid">
+        <a href="https://tunggalpaito.online/paito-warna/hk/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/hk/">
+          <span>HK</span>
+          <small>Paito Warna</small>
+        </a>
+        <a href="https://tunggalpaito.online/paito-warna/sgp/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sgp/">
+          <span>SGP</span>
+          <small>Paito Warna</small>
+        </a>
+        <a href="https://tunggalpaito.online/paito-warna/sdy/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sdy/">
+          <span>SDY</span>
+          <small>Paito Warna</small>
+        </a>
+      </div>
+    </div>
+
+    <div class="download-card-wrapper" id="downloadCardTarget" aria-hidden="true">
+      <div class="dl-card-header">
+        <h2>Tunggal Paito</h2>
+        <div class="dl-card-badge">✨ Live Result HK | SGP | SDY Tercepat</div>
+      </div>
+      <table class="dl-table">
+        <thead>
+          <tr>
+            <th>TANGGAL</th>
+            <th>HARI</th>
+            <th>HK</th>
+            <th>SGP</th>
+            <th>SDY</th>
+          </tr>
+        </thead>
+        <tbody id="dl-table-body">
+        </tbody>
+      </table>
+      <div class="dl-card-footer">
+        &copy; <span class="current-year"></span> Tunggal Paito. All Rights Reserved.
+      </div>
+    </div>
+
+    <div class="seo-section">
+      <h3>Pusat Live Draw Result SGP, HK, dan SDY Tercepat</h3>
+      <p>Selamat datang di situs resmi <strong>Tunggal Paito</strong>, penyedia informasi live draw dan result pasaran togel terpopuler seperti Singapore (SGP), Hongkong (HK), dan Sydney (SDY). Halaman ini dirancang khusus dengan kecepatan akses optimal agar Anda dapat memantau angka keluaran secara real-time dan akurat setiap harinya tanpa hambatan.</p>
+      <p>Gunakan data paito warna dan hasil live draw kami untuk menyusun strategi angka jitu. Seluruh data result disinkronkan langsung dari server resmi masing-masing pasaran dengan pembaruan otomatis setiap hari sesuai jadwal keluaran.</p>
+    </div>
+
+    <footer>
+      &copy; <span class="current-year"></span> <strong>TUNGGAL PAITO</strong>. All Rights Reserved.
+    </footer>
+  </div>
+
+  <div class="apk-float-popup" id="apkPopup">
+    <button type="button" class="apk-close-btn" id="btnCloseApk" aria-label="Tutup">&times;</button>
+    <div class="apk-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/></svg>
+    </div>
+    <div class="apk-info">
+      <h4>APK Live Draw Resmi</h4>
+      <p>Akses SGP, HK, SDY Lebih Cepat!</p>
+      <a href="https://drive.google.com/file/d/1bl8pFCZRRDmW49xroXyxWcr7MCFkEYLy/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="btn-download-apk">DOWNLOAD APK</a>
     </div>
   </div>
 
-  <div class="seo-section">
-    <h3>Pusat Live Draw Result SGP, HK, dan SDY Tercepat</h3>
-    <p>Selamat datang di situs resmi <strong>Tunggal Paito</strong>, penyedia informasi live draw dan result pasaran togel terpopuler seperti Singapore (SGP), Hongkong (HK), dan Sydney (SDY). Halaman ini dirancang khusus dengan kecepatan akses optimal agar Anda dapat memantau angka keluaran secara real-time dan akurat setiap harinya tanpa hambatan.</p>
-    <p>Gunakan data paito warna dan hasil live draw kami untuk menyusun strategi angka jitu. Seluruh data result disinkronkan langsung dari server resmi masing-masing pasaran dengan pembaruan otomatis setiap hari sesuai jadwal keluaran.</p>
-  </div>
+  <button type="button" class="apk-reopen-btn" id="apkReopenBtn">📱 APK Resmi</button>
 
-  <footer>
-    &copy; <span class="current-year"></span> TUNGGAL PAITO All Rights Reserved.
-  </footer>
+  <script>
+  (function() {
+    "use strict";
 
-</div>
+    let clickCount = 0;
+    const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
 
-<div class="apk-float-popup" id="apkPopup">
-  <button class="apk-close-btn" onclick="closeApkPopup(event)">&times;</button>
-  <div class="apk-icon">
-    <svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/></svg>
-  </div>
-  <div class="apk-info">
-    <h4>APK Live Draw Resmi</h4>
-    <p>Akses SGP, HK, SDY Lebih Cepat!</p>
-    <a href="https://drive.google.com/file/d/1bl8pFCZRRDmW49xroXyxWcr7MCFkEYLy/view?usp=drivesdk" target="_blank" class="btn-download-apk" onclick="event.stopPropagation()">DOWNLOAD APK</a>
-  </div>
-</div>
+    const apkPopup = document.getElementById("apkPopup");
+    const apkReopenBtn = document.getElementById("apkReopenBtn");
+    const btnCloseApk = document.getElementById("btnCloseApk");
 
-<button class="apk-reopen-btn" id="apkReopenBtn" onclick="openApkPopup(event)">📱 APK Resmi</button>
-
-<script>
-function closeApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopup").style.display="none",document.getElementById("apkReopenBtn").style.display="flex"}
-function openApkPopup(t){t&&t.stopPropagation(),document.getElementById("apkPopup").style.display="flex",document.getElementById("apkReopenBtn").style.display="none"}
-
-let clickCount = 0;
-const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-
-function isLinkOrProtectedArea(target) {
-  if (!target || typeof target.closest !== "function") return false;
-  return Boolean(
-    target.closest(
-      "a, [href], [data-pred-url], [onclick], #apkPopup, #apkReopenBtn, .prediction-main-grid, .paito-warna-box, .nav-top-container, .action-download-container, iframe, .top-ads-wrapper"
-    ) ||
-    "A" === target.tagName ||
-    "IFRAME" === target.tagName
-  );
-}
-
-function openPredictionSmooth(e, url) {
-  e.preventDefault();
-  e.stopPropagation();
-  const targetUrl = url || e.currentTarget.getAttribute("data-pred-url") || e.currentTarget.getAttribute("href");
-  if (!targetUrl) return;
-  const win = window.open(targetUrl, "_blank", "noopener,noreferrer");
-  if (!win) {
-    window.location.href = targetUrl;
-  }
-}
-
-document.querySelectorAll(".pred-card, .paito-card").forEach((card) => {
-  card.addEventListener("click", function(e) {
-    openPredictionSmooth(e, this.getAttribute("data-pred-url") || this.getAttribute("href"));
-  });
-});
-
-document.addEventListener("click", function(t) {
-  if (isLinkOrProtectedArea(t.target)) {
-    return;
-  }
-  clickCount++;
-  if (1 === clickCount || (clickCount - 1) % 3 === 0) {
-    window.open(adLink, "_blank", "noopener,noreferrer");
-  }
-}, !0);
-
-function syncOnReturn() {
-  if (typeof rebuildDaysTableIfNeeded === "function") {
-    rebuildDaysTableIfNeeded();
-  }
-  if (typeof lockNextSlotFromFirebase === "function") {
-    lockNextSlotFromFirebase();
-    renderAllCells();
-  }
-}
-
-window.addEventListener("pageshow", syncOnReturn);
-window.addEventListener("focus", syncOnReturn);
-document.addEventListener("visibilitychange", function() {
-  if (!document.hidden) {
-    syncOnReturn();
-  }
-});
-
-const currentYear = new Date().getFullYear();
-document.querySelectorAll(".current-year").forEach(el => {
-  el.textContent = currentYear;
-});
-
-const firebaseConfig = {
-  databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-// Urutan maju satu arah: sdy -> sgp -> hk -> sdy
-const CYCLE_ORDER = ["sdy", "sgp", "hk"];
-const FOCUS_MARKETS = CYCLE_ORDER;
-const MARKET_MAP = {
-  sdy: "data-sdy",
-  sgp: "data-sgp",
-  hk: "data-hk"
-};
-
-const DAYS_TO_SHOW = 7;
-const DAY_NAMES = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
-
-let globalDaysList = [];
-let globalLiveData = {};
-let latestTargetByMarket = {
-  sdy: { dateStr: "", dateObj: null, val: "-" },
-  sgp: { dateStr: "", dateObj: null, val: "-" },
-  hk:  { dateStr: "", dateObj: null, val: "-" }
-};
-let lastSnapshotSignature = { sdy: "", sgp: "", hk: "" };
-
-// Slot kosong ("-") yang terkunci dan akan diisi berikutnya sesuai update Firebase
-let lockedMarket = null;
-let lockedDateStr = "";
-
-function getJakartaDateAnchor() {
-  const parts = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Asia/Jakarta",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit"
-  }).formatToParts(new Date());
-
-  const map = {};
-  parts.forEach(p => { map[p.type] = p.value; });
-  return new Date(parseInt(map.year, 10), parseInt(map.month, 10) - 1, parseInt(map.day, 10));
-}
-
-// SGP libur pada hari Selasa (2) dan Jumat (5)
-function isSgpHoliday(dateObj) {
-  if (!dateObj || isNaN(dateObj.getTime())) return false;
-  const day = dateObj.getDay();
-  return day === 2 || day === 5;
-}
-
-// Maju satu arah sesuai urutan: sdy -> sgp -> hk -> sdy
-// Jika sgp libur pada tanggal tersebut, langsung lanjut ke hk (tidak pernah mundur ke sdy)
-function getNextForwardMarket(currentMarket, dateObj) {
-  const startIdx = CYCLE_ORDER.indexOf(currentMarket);
-  const baseIdx = startIdx >= 0 ? startIdx : 0;
-  const sgpLibur = isSgpHoliday(dateObj);
-
-  for (let step = 1; step <= CYCLE_ORDER.length; step++) {
-    const candidate = CYCLE_ORDER[(baseIdx + step) % CYCLE_ORDER.length];
-    if (candidate === "sgp" && sgpLibur) {
-      continue;
+    function closeApkPopup(e) {
+      if (e) e.stopPropagation();
+      if (apkPopup) apkPopup.style.display = "none";
+      if (apkReopenBtn) apkReopenBtn.style.display = "flex";
     }
-    return candidate;
-  }
-  return "hk";
-}
 
-function getMaxFirebaseDateObj() {
-  let maxDt = null;
-  CYCLE_ORDER.forEach((mKey) => {
-    const t = latestTargetByMarket[mKey];
-    if (t && t.val && t.val !== "-" && t.dateObj && !isNaN(t.dateObj.getTime())) {
-      if (!maxDt || t.dateObj > maxDt) {
-        maxDt = t.dateObj;
+    function openApkPopup(e) {
+      if (e) e.stopPropagation();
+      if (apkPopup) apkPopup.style.display = "flex";
+      if (apkReopenBtn) apkReopenBtn.style.display = "none";
+    }
+
+    if (btnCloseApk) btnCloseApk.addEventListener("click", closeApkPopup);
+    if (apkReopenBtn) apkReopenBtn.addEventListener("click", openApkPopup);
+
+    function isLinkOrProtectedArea(target) {
+      if (!target || typeof target.closest !== "function") return false;
+      return Boolean(
+        target.closest(
+          "a, [href], [data-pred-url], [onclick], #apkPopup, #apkReopenBtn, .prediction-main-grid, .paito-warna-box, .nav-top-container, .action-download-container, iframe, .top-ads-wrapper"
+        ) ||
+        target.tagName === "A" ||
+        target.tagName === "IFRAME"
+      );
+    }
+
+    function openPredictionSmooth(e, url) {
+      e.preventDefault();
+      e.stopPropagation();
+      const targetUrl = url || (e.currentTarget && (e.currentTarget.getAttribute("data-pred-url") || e.currentTarget.getAttribute("href")));
+      if (!targetUrl) return;
+      const win = window.open(targetUrl, "_blank", "noopener,noreferrer");
+      if (!win) {
+        window.location.href = targetUrl;
       }
     }
-  });
-  return maxDt || getJakartaDateAnchor();
-}
 
-function hasAnyValueForMarket(marketKey) {
-  return globalDaysList.some((dayItem) => {
-    const row = globalLiveData[dayItem.dateStr];
-    return row && row[marketKey] && row[marketKey] !== "-";
-  });
-}
-
-// Mengunci pada sel kosong ("-") berikutnya yang akan diisi sesuai data terbaru di Firebase
-function lockNextSlotFromFirebase() {
-  const validMarkets = CYCLE_ORDER.filter((mKey) => {
-    const t = latestTargetByMarket[mKey];
-    return Boolean(t && t.val && t.val !== "-" && t.dateStr && t.dateObj && !isNaN(t.dateObj.getTime()));
-  });
-
-  if (validMarkets.length === 0) {
-    lockedMarket = null;
-    lockedDateStr = "";
-    return;
-  }
-
-  let latestDateObj = null;
-  validMarkets.forEach((mKey) => {
-    const dt = latestTargetByMarket[mKey].dateObj;
-    if (!latestDateObj || dt > latestDateObj) {
-      latestDateObj = dt;
-    }
-  });
-  const latestDateStr = formatDateToDDMMYYYY(latestDateObj);
-  const sgpLibur = isSgpHoliday(latestDateObj);
-
-  // Pasaran yang sudah terisi pada tanggal terbaru di Firebase
-  const filledOnLatest = CYCLE_ORDER.filter((mKey) => {
-    const row = globalLiveData[latestDateStr];
-    return Boolean(row && row[mKey] && row[mKey] !== "-");
-  });
-
-  let nextMarket = "sdy";
-  let nextDateObj = latestDateObj;
-
-  if (filledOnLatest.length > 0) {
-    const lastFilled = filledOnLatest[filledOnLatest.length - 1];
-    nextMarket = getNextForwardMarket(lastFilled, latestDateObj);
-
-    if (lastFilled === "hk" && nextMarket === "sdy") {
-      const nextDay = new Date(latestDateObj);
-      nextDay.setDate(latestDateObj.getDate() + 1);
-      nextDateObj = nextDay;
-    }
-
-    let guard = 0;
-    while (guard < CYCLE_ORDER.length) {
-      const checkDateStr = formatDateToDDMMYYYY(nextDateObj);
-      const existingVal = globalLiveData[checkDateStr] && globalLiveData[checkDateStr][nextMarket];
-      if (!existingVal || existingVal === "-") {
-        break;
-      }
-      const after = getNextForwardMarket(nextMarket, nextDateObj);
-      if (nextMarket === "hk" && after === "sdy") {
-        const dNext = new Date(nextDateObj);
-        dNext.setDate(nextDateObj.getDate() + 1);
-        nextDateObj = dNext;
-      }
-      nextMarket = after;
-      guard++;
-    }
-  } else {
-    nextMarket = (sgpLibur && !hasAnyValueForMarket("sdy"))
-      ? getNextForwardMarket("sgp", latestDateObj)
-      : "sdy";
-  }
-
-  // Jika SGP libur pada tanggal terbaru, pastikan selalu lanjut ke HK (tidak mundur ke SDY)
-  if (nextMarket === "sgp" && isSgpHoliday(nextDateObj)) {
-    nextMarket = getNextForwardMarket("sgp", nextDateObj);
-  }
-
-  let targetDateStr = formatDateToDDMMYYYY(nextDateObj);
-
-  if (!globalLiveData[targetDateStr]) {
-    if (globalLiveData[latestDateStr] && (!globalLiveData[latestDateStr][nextMarket] || globalLiveData[latestDateStr][nextMarket] === "-")) {
-      targetDateStr = latestDateStr;
-    } else {
-      for (let i = 0; i < globalDaysList.length; i++) {
-        const dStr = globalDaysList[i].dateStr;
-        if (!globalLiveData[dStr][nextMarket] || globalLiveData[dStr][nextMarket] === "-") {
-          targetDateStr = dStr;
-          break;
-        }
-      }
-      if (!targetDateStr && globalDaysList[0]) {
-        targetDateStr = globalDaysList[0].dateStr;
-      }
-    }
-  }
-
-  lockedMarket = nextMarket;
-  lockedDateStr = targetDateStr;
-}
-
-function parseSingleToken(token) {
-  if (token === null || token === undefined) return "";
-  let s = String(token).trim();
-  if (!s || /^x+$/i.test(s)) return "";
-  return s.replace(/\D/g, "");
-}
-
-function normalizeDateKey(rawKey) {
-  let s = String(rawKey || "").trim();
-  let ymd = s.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);
-  if (ymd) {
-    return `${String(ymd[3]).padStart(2, "0")}-${String(ymd[2]).padStart(2, "0")}-${ymd[1]}`;
-  }
-  let dmy = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
-  if (dmy) {
-    return `${String(dmy[1]).padStart(2, "0")}-${String(dmy[2]).padStart(2, "0")}-${dmy[3]}`;
-  }
-  return s;
-}
-
-function parseDateFromDDMMYYYY(dateStr) {
-  let parts = dateStr.split("-");
-  if (parts.length !== 3) return null;
-  let day = parseInt(parts[0], 10);
-  let month = parseInt(parts[1], 10) - 1;
-  let year = parseInt(parts[2], 10);
-  return new Date(year, month, day);
-}
-
-function formatDateToDDMMYYYY(dateObj) {
-  return `${String(dateObj.getDate()).padStart(2, "0")}-${String(dateObj.getMonth() + 1).padStart(2, "0")}-${dateObj.getFullYear()}`;
-}
-
-function extractRawString(rawVal) {
-  if (rawVal === null || rawVal === undefined) return "";
-  let target = rawVal;
-  if (typeof rawVal === "object") {
-    target = rawVal.result ?? rawVal.hasil ?? rawVal.angka ?? rawVal.live ?? rawVal.value ?? Object.values(rawVal).pop() ?? "";
-  }
-  return String(target).trim();
-}
-
-function rebuildDaysTableIfNeeded() {
-  const anchor = getJakartaDateAnchor();
-  const maxFbDate = getMaxFirebaseDateObj();
-  const startAnchor = maxFbDate > anchor ? maxFbDate : anchor;
-
-  let listDays = [];
-  for (let i = 0; i < DAYS_TO_SHOW; i++) {
-    let d = new Date(startAnchor);
-    d.setDate(startAnchor.getDate() - i);
-    let dateStr = formatDateToDDMMYYYY(d);
-    let dayName = DAY_NAMES[d.getDay()];
-    listDays.push({ dateStr, dayName });
-    if (!globalLiveData[dateStr]) {
-      globalLiveData[dateStr] = { sdy: "-", sgp: "-", hk: "-" };
-    }
-  }
-
-  const prevFirst = globalDaysList[0] ? globalDaysList[0].dateStr : "";
-  const nextFirst = listDays[0] ? listDays[0].dateStr : "";
-  globalDaysList = listDays;
-
-  if (prevFirst !== nextFirst || document.getElementById("live-draw-data").children.length === 0) {
-    const tbody = document.getElementById("live-draw-data");
-    tbody.innerHTML = listDays.map((item) => `
-      <tr data-date="${item.dateStr}">
-        <td>${item.dateStr}</td>
-        <td>${item.dayName}</td>
-        <td class="col-hk" id="val-hk-${item.dateStr}">-</td>
-        <td class="col-sgp" id="val-sgp-${item.dateStr}">-</td>
-        <td class="col-sdy" id="val-sdy-${item.dateStr}">-</td>
-      </tr>
-    `).join("");
-  }
-}
-
-function renderCellDisplay(dateStr, marketKey, animateResultEnter = false) {
-  const cell = document.getElementById(`val-${marketKey}-${dateStr}`);
-  if (!cell) return;
-
-  const actualVal = (globalLiveData[dateStr] && globalLiveData[dateStr][marketKey]) || "-";
-  const isWaitingSlot =
-    lockedMarket === marketKey &&
-    lockedDateStr === dateStr &&
-    actualVal === "-";
-
-  const prevVal = cell.dataset.lastVal || "-";
-  const valChangedToNumber = prevVal !== actualVal && actualVal !== "-";
-
-  cell.dataset.lastVal = actualVal;
-
-  if (animateResultEnter && valChangedToNumber) {
-    cell.innerHTML = `<span class="cell-result-enter">${actualVal}</span>`;
-  } else {
-    cell.textContent = actualVal;
-  }
-
-  if (isWaitingSlot) {
-    cell.classList.add("green-shadow-blink");
-  } else {
-    cell.classList.remove("green-shadow-blink");
-  }
-}
-
-function applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate) {
-  rebuildDaysTableIfNeeded();
-
-  const prevValues = {};
-  globalDaysList.forEach((dayItem) => {
-    prevValues[dayItem.dateStr] = (globalLiveData[dayItem.dateStr] && globalLiveData[dayItem.dateStr][marketKey]) || "-";
-    if (!globalLiveData[dayItem.dateStr]) {
-      globalLiveData[dayItem.dateStr] = { sdy: "-", sgp: "-", hk: "-" };
-    }
-    globalLiveData[dayItem.dateStr][marketKey] = "-";
-  });
-
-  latestTargetByMarket[marketKey] = { dateStr: "", dateObj: null, val: "-" };
-
-  if (rawMap && typeof rawMap === "object") {
-    let entries = [];
-    Object.keys(rawMap).forEach((rawKey) => {
-      let normDate = normalizeDateKey(rawKey);
-      let dt = parseDateFromDDMMYYYY(normDate);
-      let rawStr = extractRawString(rawMap[rawKey]);
-      if (dt && !isNaN(dt.getTime()) && rawStr) {
-        entries.push({ dateStr: normDate, dateObj: dt, rawStr });
-      }
+    document.querySelectorAll(".pred-card, .paito-card").forEach(function(card) {
+      card.addEventListener("click", function(e) {
+        openPredictionSmooth(e, this.getAttribute("data-pred-url") || this.getAttribute("href"));
+      });
     });
 
-    entries.sort((a, b) => b.dateObj - a.dateObj);
+    document.addEventListener("click", function(t) {
+      if (isLinkOrProtectedArea(t.target)) return;
+      clickCount += 1;
+      if (clickCount === 1 || (clickCount - 1) % 3 === 0) {
+        window.open(adLink, "_blank", "noopener,noreferrer");
+      }
+    }, true);
 
-    entries.forEach((entry) => {
-      let parts = entry.rawStr.split(",");
+    const currentYear = new Date().getFullYear();
+    document.querySelectorAll(".current-year").forEach(function(el) {
+      el.textContent = String(currentYear);
+    });
 
-      if (parts.length > 1) {
-        let offset = 0;
-        for (let idx = parts.length - 1; idx >= 0; idx--) {
-          let tokenNum = parseSingleToken(parts[idx]);
-          if (tokenNum) {
-            let targetDate = new Date(entry.dateObj);
-            targetDate.setDate(targetDate.getDate() - offset);
-            let targetKey = formatDateToDDMMYYYY(targetDate);
+    const firebaseConfig = {
+      databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.database();
 
-            if (globalLiveData[targetKey] && globalLiveData[targetKey][marketKey] === "-") {
-              globalLiveData[targetKey][marketKey] = tokenNum;
+    const CYCLE_ORDER = ["sdy", "sgp", "hk"];
+    const FOCUS_MARKETS = CYCLE_ORDER;
+    const MARKET_MAP = {
+      sdy: "data-sdy",
+      sgp: "data-sgp",
+      hk: "data-hk"
+    };
+
+    const DAYS_TO_SHOW = 7;
+    const DAY_NAMES = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
+
+    let globalDaysList = [];
+    let globalLiveData = {};
+    let latestTargetByMarket = {
+      sdy: { dateStr: "", dateObj: null, val: "-" },
+      sgp: { dateStr: "", dateObj: null, val: "-" },
+      hk:  { dateStr: "", dateObj: null, val: "-" }
+    };
+    let lastSnapshotSignature = { sdy: "", sgp: "", hk: "" };
+    let lockedMarket = null;
+    let lockedDateStr = "";
+    const activeListeners = [];
+
+    function getJakartaDateAnchor() {
+      const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Jakarta",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(new Date());
+
+      const map = {};
+      parts.forEach(function(p) { map[p.type] = p.value; });
+      return new Date(parseInt(map.year, 10), parseInt(map.month, 10) - 1, parseInt(map.day, 10));
+    }
+
+    function isSgpHoliday(dateObj) {
+      if (!dateObj || isNaN(dateObj.getTime())) return false;
+      const day = dateObj.getDay();
+      return day === 2 || day === 5;
+    }
+
+    function getNextForwardMarket(currentMarket, dateObj) {
+      const startIdx = CYCLE_ORDER.indexOf(currentMarket);
+      const baseIdx = startIdx >= 0 ? startIdx : 0;
+      const sgpLibur = isSgpHoliday(dateObj);
+
+      for (let step = 1; step <= CYCLE_ORDER.length; step++) {
+        const candidate = CYCLE_ORDER[(baseIdx + step) % CYCLE_ORDER.length];
+        if (candidate === "sgp" && sgpLibur) continue;
+        return candidate;
+      }
+      return "hk";
+    }
+
+    function getMaxFirebaseDateObj() {
+      let maxDt = null;
+      CYCLE_ORDER.forEach(function(mKey) {
+        const t = latestTargetByMarket[mKey];
+        if (t && t.val && t.val !== "-" && t.dateObj && !isNaN(t.dateObj.getTime())) {
+          if (!maxDt || t.dateObj > maxDt) {
+            maxDt = t.dateObj;
+          }
+        }
+      });
+      return maxDt || getJakartaDateAnchor();
+    }
+
+    function hasAnyValueForMarket(marketKey) {
+      return globalDaysList.some(function(dayItem) {
+        const row = globalLiveData[dayItem.dateStr];
+        return Boolean(row && row[marketKey] && row[marketKey] !== "-");
+      });
+    }
+
+    function parseSingleToken(token) {
+      if (token === null || token === undefined) return "";
+      const s = String(token).trim();
+      if (!s || /^x+$/i.test(s)) return "";
+      return s.replace(/\D/g, "");
+    }
+
+    function normalizeDateKey(rawKey) {
+      const s = String(rawKey || "").trim();
+      const ymd = s.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);
+      if (ymd) {
+        return String(ymd[3]).padStart(2, "0") + "-" + String(ymd[2]).padStart(2, "0") + "-" + ymd[1];
+      }
+      const dmy = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+      if (dmy) {
+        return String(dmy[1]).padStart(2, "0") + "-" + String(dmy[2]).padStart(2, "0") + "-" + dmy[3];
+      }
+      return s;
+    }
+
+    function parseDateFromDDMMYYYY(dateStr) {
+      const parts = dateStr.split("-");
+      if (parts.length !== 3) return null;
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const year = parseInt(parts[2], 10);
+      return new Date(year, month, day);
+    }
+
+    function formatDateToDDMMYYYY(dateObj) {
+      return String(dateObj.getDate()).padStart(2, "0") + "-" + String(dateObj.getMonth() + 1).padStart(2, "0") + "-" + dateObj.getFullYear();
+    }
+
+    function pickFirstDefined() {
+      for (let i = 0; i < arguments.length; i++) {
+        if (arguments[i] !== undefined && arguments[i] !== null) {
+          return arguments[i];
+        }
+      }
+      return "";
+    }
+
+    function extractRawString(rawVal) {
+      if (rawVal === null || rawVal === undefined) return "";
+      let target = rawVal;
+      if (typeof rawVal === "object") {
+        const objVals = Object.values(rawVal);
+        const lastObjVal = objVals.length ? objVals[objVals.length - 1] : "";
+        target = pickFirstDefined(
+          rawVal.result,
+          rawVal.hasil,
+          rawVal.angka,
+          rawVal.live,
+          rawVal.value,
+          lastObjVal,
+          ""
+        );
+      }
+      return String(target).trim();
+    }
+
+    function rebuildDaysTableIfNeeded() {
+      const anchor = getJakartaDateAnchor();
+      const maxFbDate = getMaxFirebaseDateObj();
+      const startAnchor = maxFbDate > anchor ? maxFbDate : anchor;
+
+      const listDays = [];
+      for (let i = 0; i < DAYS_TO_SHOW; i++) {
+        const d = new Date(startAnchor);
+        d.setDate(startAnchor.getDate() - i);
+        const dateStr = formatDateToDDMMYYYY(d);
+        const dayName = DAY_NAMES[d.getDay()];
+        listDays.push({ dateStr: dateStr, dayName: dayName });
+        if (!globalLiveData[dateStr]) {
+          globalLiveData[dateStr] = { sdy: "-", sgp: "-", hk: "-" };
+        }
+      }
+
+      const prevFirst = globalDaysList[0] ? globalDaysList[0].dateStr : "";
+      const nextFirst = listDays[0] ? listDays[0].dateStr : "";
+      globalDaysList = listDays;
+
+      const tbody = document.getElementById("live-draw-data");
+      if (!tbody) return;
+
+      if (prevFirst !== nextFirst || tbody.children.length === 0) {
+        tbody.innerHTML = listDays.map(function(item) {
+          return (
+            '<tr data-date="' + item.dateStr + '">' +
+              "<td>" + item.dateStr + "</td>" +
+              "<td>" + item.dayName + "</td>" +
+              '<td class="col-hk" id="val-hk-' + item.dateStr + '">-</td>' +
+              '<td class="col-sgp" id="val-sgp-' + item.dateStr + '">-</td>' +
+              '<td class="col-sdy" id="val-sdy-' + item.dateStr + '">-</td>' +
+            "</tr>"
+          );
+        }).join("");
+      }
+    }
+
+    function lockNextSlotFromFirebase() {
+      const validMarkets = CYCLE_ORDER.filter(function(mKey) {
+        const t = latestTargetByMarket[mKey];
+        return Boolean(t && t.val && t.val !== "-" && t.dateStr && t.dateObj && !isNaN(t.dateObj.getTime()));
+      });
+
+      if (validMarkets.length === 0) {
+        lockedMarket = null;
+        lockedDateStr = "";
+        return;
+      }
+
+      let latestDateObj = null;
+      validMarkets.forEach(function(mKey) {
+        const dt = latestTargetByMarket[mKey].dateObj;
+        if (!latestDateObj || dt > latestDateObj) {
+          latestDateObj = dt;
+        }
+      });
+      const latestDateStr = formatDateToDDMMYYYY(latestDateObj);
+      const sgpLibur = isSgpHoliday(latestDateObj);
+
+      const filledOnLatest = CYCLE_ORDER.filter(function(mKey) {
+        const row = globalLiveData[latestDateStr];
+        return Boolean(row && row[mKey] && row[mKey] !== "-");
+      });
+
+      let nextMarket = "sdy";
+      let nextDateObj = latestDateObj;
+
+      if (filledOnLatest.length > 0) {
+        const lastFilled = filledOnLatest[filledOnLatest.length - 1];
+        nextMarket = getNextForwardMarket(lastFilled, latestDateObj);
+
+        if (lastFilled === "hk" && nextMarket === "sdy") {
+          const nextDay = new Date(latestDateObj);
+          nextDay.setDate(latestDateObj.getDate() + 1);
+          nextDateObj = nextDay;
+        }
+
+        let guard = 0;
+        while (guard < CYCLE_ORDER.length) {
+          const checkDateStr = formatDateToDDMMYYYY(nextDateObj);
+          const existingVal = globalLiveData[checkDateStr] && globalLiveData[checkDateStr][nextMarket];
+          if (!existingVal || existingVal === "-") break;
+          const after = getNextForwardMarket(nextMarket, nextDateObj);
+          if (nextMarket === "hk" && after === "sdy") {
+            const dNext = new Date(nextDateObj);
+            dNext.setDate(nextDateObj.getDate() + 1);
+            nextDateObj = dNext;
+          }
+          nextMarket = after;
+          guard++;
+        }
+      } else {
+        nextMarket = (sgpLibur && !hasAnyValueForMarket("sdy"))
+          ? getNextForwardMarket("sgp", latestDateObj)
+          : "sdy";
+      }
+
+      if (nextMarket === "sgp" && isSgpHoliday(nextDateObj)) {
+        nextMarket = getNextForwardMarket("sgp", nextDateObj);
+      }
+
+      let targetDateStr = formatDateToDDMMYYYY(nextDateObj);
+
+      if (!globalLiveData[targetDateStr]) {
+        if (globalLiveData[latestDateStr] && (!globalLiveData[latestDateStr][nextMarket] || globalLiveData[latestDateStr][nextMarket] === "-")) {
+          targetDateStr = latestDateStr;
+        } else {
+          for (let i = 0; i < globalDaysList.length; i++) {
+            const dStr = globalDaysList[i].dateStr;
+            if (!globalLiveData[dStr][nextMarket] || globalLiveData[dStr][nextMarket] === "-") {
+              targetDateStr = dStr;
+              break;
+            }
+          }
+          if (!targetDateStr && globalDaysList[0]) {
+            targetDateStr = globalDaysList[0].dateStr;
+          }
+        }
+      }
+
+      lockedMarket = nextMarket;
+      lockedDateStr = targetDateStr;
+    }
+
+    function renderCellDisplay(dateStr, marketKey, animateResultEnter) {
+      const cell = document.getElementById("val-" + marketKey + "-" + dateStr);
+      if (!cell) return;
+
+      const actualVal = (globalLiveData[dateStr] && globalLiveData[dateStr][marketKey]) || "-";
+      const isWaitingSlot =
+        lockedMarket === marketKey &&
+        lockedDateStr === dateStr &&
+        actualVal === "-";
+
+      const prevVal = cell.dataset.lastVal || "-";
+      const valChangedToNumber = prevVal !== actualVal && actualVal !== "-";
+
+      cell.dataset.lastVal = actualVal;
+
+      if (animateResultEnter && valChangedToNumber) {
+        cell.innerHTML = '<span class="cell-result-enter">' + actualVal + "</span>";
+      } else {
+        cell.textContent = actualVal;
+      }
+
+      if (isWaitingSlot) {
+        cell.classList.add("green-shadow-blink");
+      } else {
+        cell.classList.remove("green-shadow-blink");
+      }
+    }
+
+    function applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate) {
+      rebuildDaysTableIfNeeded();
+
+      const prevValues = {};
+      globalDaysList.forEach(function(dayItem) {
+        prevValues[dayItem.dateStr] = (globalLiveData[dayItem.dateStr] && globalLiveData[dayItem.dateStr][marketKey]) || "-";
+        if (!globalLiveData[dayItem.dateStr]) {
+          globalLiveData[dayItem.dateStr] = { sdy: "-", sgp: "-", hk: "-" };
+        }
+        globalLiveData[dayItem.dateStr][marketKey] = "-";
+      });
+
+      latestTargetByMarket[marketKey] = { dateStr: "", dateObj: null, val: "-" };
+
+      if (rawMap && typeof rawMap === "object") {
+        const entries = [];
+        Object.keys(rawMap).forEach(function(rawKey) {
+          const normDate = normalizeDateKey(rawKey);
+          const dt = parseDateFromDDMMYYYY(normDate);
+          const rawStr = extractRawString(rawMap[rawKey]);
+          if (dt && !isNaN(dt.getTime()) && rawStr) {
+            entries.push({ dateStr: normDate, dateObj: dt, rawStr: rawStr });
+          }
+        });
+
+        entries.sort(function(a, b) { return b.dateObj - a.dateObj; });
+
+        entries.forEach(function(entry) {
+          const parts = entry.rawStr.split(",");
+
+          if (parts.length > 1) {
+            let offset = 0;
+            for (let idx = parts.length - 1; idx >= 0; idx--) {
+              const tokenNum = parseSingleToken(parts[idx]);
+              if (tokenNum) {
+                const targetDate = new Date(entry.dateObj);
+                targetDate.setDate(targetDate.getDate() - offset);
+                const targetKey = formatDateToDDMMYYYY(targetDate);
+
+                if (globalLiveData[targetKey] && globalLiveData[targetKey][marketKey] === "-") {
+                  globalLiveData[targetKey][marketKey] = tokenNum;
+                  if (!latestTargetByMarket[marketKey].val || latestTargetByMarket[marketKey].val === "-") {
+                    latestTargetByMarket[marketKey] = {
+                      dateStr: targetKey,
+                      dateObj: targetDate,
+                      val: tokenNum
+                    };
+                  }
+                }
+              }
+              offset++;
+            }
+          } else {
+            const singleNum = parseSingleToken(entry.rawStr);
+            if (singleNum && globalLiveData[entry.dateStr] && globalLiveData[entry.dateStr][marketKey] === "-") {
+              globalLiveData[entry.dateStr][marketKey] = singleNum;
               if (!latestTargetByMarket[marketKey].val || latestTargetByMarket[marketKey].val === "-") {
                 latestTargetByMarket[marketKey] = {
-                  dateStr: targetKey,
-                  dateObj: targetDate,
-                  val: tokenNum
+                  dateStr: entry.dateStr,
+                  dateObj: entry.dateObj,
+                  val: singleNum
                 };
               }
             }
           }
-          offset++;
-        }
-      } else {
-        let singleNum = parseSingleToken(entry.rawStr);
-        if (singleNum && globalLiveData[entry.dateStr] && globalLiveData[entry.dateStr][marketKey] === "-") {
-          globalLiveData[entry.dateStr][marketKey] = singleNum;
-          if (!latestTargetByMarket[marketKey].val || latestTargetByMarket[marketKey].val === "-") {
-            latestTargetByMarket[marketKey] = {
-              dateStr: entry.dateStr,
-              dateObj: entry.dateObj,
-              val: singleNum
-            };
-          }
-        }
+        });
       }
-    });
-  }
 
-  lockNextSlotFromFirebase();
+      lockNextSlotFromFirebase();
 
-  globalDaysList.forEach((dayItem) => {
-    const newVal = (globalLiveData[dayItem.dateStr] && globalLiveData[dayItem.dateStr][marketKey]) || "-";
-    const wasNewlyEntered = isLiveUpdate && prevValues[dayItem.dateStr] !== newVal && newVal !== "-";
-    renderCellDisplay(dayItem.dateStr, marketKey, wasNewlyEntered);
-  });
-}
-
-function renderAllCells() {
-  globalDaysList.forEach((dayItem) => {
-    FOCUS_MARKETS.forEach((mKey) => {
-      renderCellDisplay(dayItem.dateStr, mKey, false);
-    });
-  });
-}
-
-function handleMarketSnapshot(marketKey, rawMap, isFirstSnapshotRef) {
-  const sig = JSON.stringify(rawMap || {});
-  const changedSinceLast = lastSnapshotSignature[marketKey] !== sig;
-  lastSnapshotSignature[marketKey] = sig;
-
-  const isLiveUpdate = !isFirstSnapshotRef.current && changedSinceLast;
-
-  applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate);
-  isFirstSnapshotRef.current = false;
-
-  renderAllCells();
-}
-
-function refreshLiveInPlace() {
-  const btn = document.getElementById("btn-refresh");
-  const scrollX = window.scrollX || window.pageXOffset || 0;
-  const scrollY = window.scrollY || window.pageYOffset || 0;
-  const tableBox = document.querySelector(".table-responsive");
-  const tableScrollTop = tableBox ? tableBox.scrollTop : 0;
-
-  if (btn) {
-    btn.disabled = true;
-    btn.classList.add("is-spinning");
-  }
-
-  rebuildDaysTableIfNeeded();
-
-  const fetches = FOCUS_MARKETS.map((marketKey) => {
-    const nodePath = `live/${MARKET_MAP[marketKey]}`;
-    return db.ref(nodePath).get().then((snap) => {
-      const rawMap = snap.val();
-      const sig = JSON.stringify(rawMap || {});
-      const isLiveUpdate = lastSnapshotSignature[marketKey] !== sig;
-      lastSnapshotSignature[marketKey] = sig;
-      applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate);
-    }).catch((err) => {
-      console.error(`Gagal refresh ${nodePath}:`, err);
-    });
-  });
-
-  Promise.all(fetches).finally(() => {
-    lockNextSlotFromFirebase();
-    renderAllCells();
-
-    if (tableBox) {
-      tableBox.scrollTop = tableScrollTop;
+      globalDaysList.forEach(function(dayItem) {
+        const newVal = (globalLiveData[dayItem.dateStr] && globalLiveData[dayItem.dateStr][marketKey]) || "-";
+        const wasNewlyEntered = Boolean(isLiveUpdate && prevValues[dayItem.dateStr] !== newVal && newVal !== "-");
+        renderCellDisplay(dayItem.dateStr, marketKey, wasNewlyEntered);
+      });
     }
-    window.scrollTo({ left: scrollX, top: scrollY, behavior: "instant" });
 
-    setTimeout(() => {
+    function renderAllCells() {
+      globalDaysList.forEach(function(dayItem) {
+        FOCUS_MARKETS.forEach(function(mKey) {
+          renderCellDisplay(dayItem.dateStr, mKey, false);
+        });
+      });
+    }
+
+    function handleMarketSnapshot(marketKey, rawMap, isFirstSnapshotRef) {
+      const sig = JSON.stringify(rawMap || {});
+      const changedSinceLast = lastSnapshotSignature[marketKey] !== sig;
+      lastSnapshotSignature[marketKey] = sig;
+
+      const isLiveUpdate = !isFirstSnapshotRef.current && changedSinceLast;
+
+      applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate);
+      isFirstSnapshotRef.current = false;
+
+      renderAllCells();
+    }
+
+    function refreshLiveInPlace() {
+      const btn = document.getElementById("btn-refresh");
+      const scrollX = window.scrollX || window.pageXOffset || 0;
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const tableBox = document.querySelector(".table-responsive");
+      const tableScrollTop = tableBox ? tableBox.scrollTop : 0;
+
       if (btn) {
-        btn.disabled = false;
-        btn.classList.remove("is-spinning");
+        btn.disabled = true;
+        btn.classList.add("is-spinning");
       }
-    }, 350);
-  });
-}
 
-function initLiveDraw() {
-  rebuildDaysTableIfNeeded();
+      rebuildDaysTableIfNeeded();
 
-  FOCUS_MARKETS.forEach((marketKey) => {
-    const dbMarketName = MARKET_MAP[marketKey];
-    const nodePath = `live/${dbMarketName}`;
-    const isFirstSnapshotRef = { current: true };
+      const fetches = FOCUS_MARKETS.map(function(marketKey) {
+        const nodePath = "live/" + MARKET_MAP[marketKey];
+        return db.ref(nodePath).get().then(function(snap) {
+          const rawMap = snap.val();
+          const sig = JSON.stringify(rawMap || {});
+          const isLiveUpdate = lastSnapshotSignature[marketKey] !== sig;
+          lastSnapshotSignature[marketKey] = sig;
+          applyMarketDataFromSnapshot(marketKey, rawMap, isLiveUpdate);
+        }).catch(function(err) {
+          console.error("Gagal refresh " + nodePath + ":", err);
+        });
+      });
 
-    db.ref(nodePath).on("value", (snapshot) => {
-      handleMarketSnapshot(marketKey, snapshot.val(), isFirstSnapshotRef);
-    }, (err) => {
-      console.error(`Gagal membaca ${nodePath}:`, err);
+      Promise.all(fetches).finally(function() {
+        lockNextSlotFromFirebase();
+        renderAllCells();
+
+        if (tableBox) {
+          tableBox.scrollTop = tableScrollTop;
+        }
+        window.scrollTo(scrollX, scrollY);
+
+        setTimeout(function() {
+          if (btn) {
+            btn.disabled = false;
+            btn.classList.remove("is-spinning");
+          }
+        }, 350);
+      });
+    }
+
+    function initLiveDraw() {
+      rebuildDaysTableIfNeeded();
+
+      FOCUS_MARKETS.forEach(function(marketKey) {
+        const dbMarketName = MARKET_MAP[marketKey];
+        const nodePath = "live/" + dbMarketName;
+        const isFirstSnapshotRef = { current: true };
+        const ref = db.ref(nodePath);
+
+        const cb = ref.on("value", function(snapshot) {
+          handleMarketSnapshot(marketKey, snapshot.val(), isFirstSnapshotRef);
+        }, function(err) {
+          console.error("Gagal membaca " + nodePath + ":", err);
+        });
+
+        activeListeners.push({ ref: ref, cb: cb });
+      });
+    }
+
+    function syncOnReturn() {
+      rebuildDaysTableIfNeeded();
+      lockNextSlotFromFirebase();
+      renderAllCells();
+    }
+
+    window.addEventListener("pageshow", syncOnReturn);
+    window.addEventListener("focus", syncOnReturn);
+    document.addEventListener("visibilitychange", function() {
+      if (!document.hidden) syncOnReturn();
     });
-  });
-}
 
-initLiveDraw();
+    window.addEventListener("pagehide", function() {
+      activeListeners.forEach(function(item) {
+        try {
+          item.ref.off("value", item.cb);
+        } catch (_) {}
+      });
+    }, { passive: true });
 
-document.getElementById("btn-refresh").addEventListener("click", function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  refreshLiveInPlace();
-});
+    initLiveDraw();
 
-document.getElementById("btn-download").addEventListener("click", function(e) {
-  e.stopPropagation();
-  if (globalDaysList.length === 0) {
-    alert("Data sedang dimuat, mohon tunggu sebentar.");
-    return;
-  }
+    const btnRefresh = document.getElementById("btn-refresh");
+    if (btnRefresh) {
+      btnRefresh.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        refreshLiveInPlace();
+      });
+    }
 
-  const downloadCard = document.getElementById("downloadCardTarget");
-  const dlTableBody = document.getElementById("dl-table-body");
+    const btnDownload = document.getElementById("btn-download");
+    if (btnDownload) {
+      btnDownload.addEventListener("click", function(e) {
+        e.stopPropagation();
+        if (globalDaysList.length === 0) {
+          alert("Data sedang dimuat, mohon tunggu sebentar.");
+          return;
+        }
+        if (typeof html2canvas !== "function") {
+          alert("Fitur unduh gambar sedang tidak tersedia.");
+          return;
+        }
 
-  const originalBtnText = this.innerHTML;
-  this.innerHTML = "<span>Sedang Mendownload Gambar HD...</span>";
-  this.disabled = true;
+        const downloadCard = document.getElementById("downloadCardTarget");
+        const dlTableBody = document.getElementById("dl-table-body");
+        if (!downloadCard || !dlTableBody) return;
 
-  dlTableBody.innerHTML = "";
-  const last3Days = globalDaysList.slice(0, 3);
+        const originalBtnText = this.innerHTML;
+        this.innerHTML = "<span>Mengunduh Gambar HD...</span>";
+        this.disabled = true;
 
-  last3Days.forEach((item) => {
-    let dayRecord = globalLiveData[item.dateStr] || { sdy: "-", sgp: "-", hk: "-" };
-    dlTableBody.innerHTML += `<tr>
-      <td>${item.dateStr}</td>
-      <td>${item.dayName}</td>
-      <td>${dayRecord.hk || "-"}</td>
-      <td>${dayRecord.sgp || "-"}</td>
-      <td>${dayRecord.sdy || "-"}</td>
-    </tr>`;
-  });
+        dlTableBody.innerHTML = "";
+        const last3Days = globalDaysList.slice(0, 3);
 
-  setTimeout(() => {
-    html2canvas(downloadCard, {
-      backgroundColor: null,
-      scale: 2
-    }).then(canvas => {
-      const link = document.createElement("a");
-      link.download = "Tunggal-Paito-Live-Result-Hari-ini.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
+        last3Days.forEach(function(item) {
+          const dayRecord = globalLiveData[item.dateStr] || { sdy: "-", sgp: "-", hk: "-" };
+          dlTableBody.innerHTML +=
+            "<tr>" +
+              "<td>" + item.dateStr + "</td>" +
+              "<td>" + item.dayName + "</td>" +
+              "<td>" + (dayRecord.hk || "-") + "</td>" +
+              "<td>" + (dayRecord.sgp || "-") + "</td>" +
+              "<td>" + (dayRecord.sdy || "-") + "</td>" +
+            "</tr>";
+        });
 
-      this.innerHTML = originalBtnText;
-      this.disabled = false;
-    }).catch(err => {
-      console.error("Gagal mendownload gambar:", err);
-      alert("Terjadi kesalahan saat mengunduh gambar.");
-      this.innerHTML = originalBtnText;
-      this.disabled = false;
-    });
-  }, 200);
-});
-</script>
-<script>
-document.addEventListener("contextmenu",(e=>e.preventDefault()));
-document.onkeydown=function(e){return 123!=e.keyCode&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&((!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&((!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0))))}
-</script>
+        setTimeout(function() {
+          html2canvas(downloadCard, {
+            backgroundColor: null,
+            scale: 2
+          }).then(function(canvas) {
+            const link = document.createElement("a");
+            link.download = "Tunggal-Paito-Live-Result-Hari-ini.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+
+            btnDownload.innerHTML = originalBtnText;
+            btnDownload.disabled = false;
+          }).catch(function(err) {
+            console.error("Gagal mendownload gambar:", err);
+            alert("Terjadi kesalahan saat mengunduh gambar.");
+            btnDownload.innerHTML = originalBtnText;
+            btnDownload.disabled = false;
+          });
+        }, 200);
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
