@@ -2,7 +2,7 @@
 <html lang="id" class="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -10,7 +10,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="author" content="Tunggal Paito">
-<meta name="keywords" content="prediksi togel hari ini, tunggal paito, prediksi sdy jitu, prediksi sgp hari ini, prediksi hk malam ini, paito warna lengkap, live draw sdy sgp hk, generator bbfs, line 2d jitu, sdy lotto, hk lotto">
+<meta name="keywords" content="prediksi togel hari ini, tunggal paito, prediksi sdy jitu, prediksi sgp hari ini, prediksi hk malam ini, paito warna lengkap, live draw sdy sgp hk, generator bbfs, line 2d jitu, sdy lotto, hk lotto, analisa sdy, analisa sgp, analisa hk, bbfs 2d sdy, bbfs 2d sgp, bbfs 2d hk, kumat 2d sdy, kumat 2d sgp, kumat 2d hk, angka lemah kepala ekor, prediksi angka main sdy lotto, prediksi angka main hk lotto">
 
 <title>Prediksi Togel Jitu Hari Ini - Live Analisa &amp; Angka Main | Tunggal Paito</title>
 <meta name="description" content="Pusat prediksi angka togel jitu hari ini untuk pasaran Sydney (SDY), Singapore (SGP), Hongkong (HK), SDY Lotto, dan HK Lotto dengan analisa lengkap, paito warna, dan live draw di Tunggal Paito.">
@@ -43,10 +43,18 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://tunggalpaito.online/#organization",
+      "name": "Tunggal Paito",
+      "url": "https://tunggalpaito.online/",
+      "logo": "https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg"
+    },
+    {
       "@type": "WebSite",
       "@id": "https://tunggalpaito.online/#website",
       "url": "https://tunggalpaito.online/",
       "name": "Tunggal Paito",
+      "publisher": { "@id": "https://tunggalpaito.online/#organization" },
       "description": "Pusat Prediksi Togel Jitu Hari Ini, Paito Warna, Live Draw, dan Alat Racik Angka SDY, SGP, HK.",
       "inLanguage": "id-ID"
     },
@@ -56,6 +64,7 @@
       "url": "https://tunggalpaito.online/prediksi/",
       "name": "Prediksi Togel Jitu Hari Ini - Live Analisa & Angka Main | Tunggal Paito",
       "isPartOf": { "@id": "https://tunggalpaito.online/#website" },
+      "publisher": { "@id": "https://tunggalpaito.online/#organization" },
       "description": "Kumpulan prediksi angka main harian, analisa line 2D, BBFS, angka lemah, live draw, dan paito warna untuk pasaran Sydney (SDY), Singapore (SGP), Hongkong (HK), SDY Lotto, dan HK Lotto.",
       "inLanguage": "id-ID"
     },
@@ -97,12 +106,21 @@
 
 <style>
   :root {
-    --bg-main: #050508;
-    --neon-red: #ff1e56;
-    --neon-crimson: #ff3366;
-    --neon-orange: #ff8c00;
+    --bg-main: #060609;
+    --neon-red: #e11d48;
+    --neon-crimson: #be123c;
+    --neon-orange: #ea580c;
+    --accent-rose: #fb7185;
+    --accent-rose-soft: #fda4af;
+    --accent-amber: #fbbf24;
+    --text-soft-warm: #dcd4ce;
+    --text-muted-warm: #b5a9a0;
     --frame-gap: 6px;
-    --fs-main: 11px;
+    --fs-main: 14.5px;
+  }
+
+  @media (min-width: 640px) {
+    :root { --fs-main: 15.5px; }
   }
 
   *, *::before, *::after {
@@ -111,10 +129,9 @@
 
   html {
     -webkit-tap-highlight-color: transparent;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     width: 100%;
     max-width: 100%;
-    overflow-x: clip;
     -webkit-text-size-adjust: 100%;
     font-size: var(--fs-main);
   }
@@ -122,10 +139,10 @@
   body {
     margin: 0;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: var(--fs-main);
-    line-height: 1.35;
+    font-size: 1rem;
+    line-height: 1.5;
     background-color: var(--bg-main);
-    color: #f3f4f6;
+    color: var(--text-soft-warm);
     width: 100%;
     max-width: 100%;
     min-height: 100svh;
@@ -136,28 +153,56 @@
     overflow-x: clip;
     overscroll-behavior-y: contain;
     touch-action: manipulation;
-    text-rendering: optimizeSpeed;
+    text-rendering: optimizeLegibility;
     position: relative;
   }
 
   body ::selection {
-    background-color: #e11d48;
-    color: #ffffff;
+    background-color: #be123c;
+    color: #ffe4e6;
   }
 
-  /* Hierarki ukuran font yang jelas namun tetap ringkas */
   h1 {
-    font-size: 1.25rem;
+    font-size: 1.32rem;
+    line-height: 1.34;
+    overflow-wrap: anywhere;
   }
 
   h2,
   .section-heading {
-    font-size: 1.05rem;
+    font-size: 1.06rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
   }
 
   h3,
   .modal-title {
-    font-size: 1rem;
+    font-size: 1.02rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  p, li, a, button {
+    overflow-wrap: anywhere;
+  }
+
+  .text-xs-custom { font-size: 0.78rem; line-height: 1.3; }
+  .text-sm-custom { font-size: 0.88rem; line-height: 1.4; }
+
+  .text-unboxed {
+    color: var(--text-soft-warm);
+  }
+
+  .text-unboxed-muted {
+    color: var(--text-muted-warm);
+  }
+
+  .flag-badge {
+    font-size: 1.25rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #screen-frame-border {
@@ -165,31 +210,17 @@
     top: var(--frame-gap);
     left: var(--frame-gap);
     right: var(--frame-gap);
-    height: calc(100svh - var(--frame-gap));
-    border-top: 1px solid rgba(255, 30, 86, 0.38);
-    border-left: 1px solid rgba(255, 30, 86, 0.38);
-    border-right: 1px solid rgba(255, 30, 86, 0.38);
+    bottom: 0;
+    border-top: 1px solid rgba(251, 113, 133, 0.16);
+    border-left: 1px solid rgba(251, 113, 133, 0.16);
+    border-right: 1px solid rgba(251, 113, 133, 0.16);
     border-bottom: none;
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
     pointer-events: none;
     z-index: 40;
-    box-shadow: inset 0 12px 18px -12px rgba(255, 30, 86, 0.14);
-  }
-
-  #screen-frame-border::before {
-    content: "";
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    width: 14px;
-    height: 14px;
-    border-top: 2px solid rgba(255, 95, 130, 0.88);
-    border-left: 2px solid rgba(255, 95, 130, 0.88);
-    border-top-left-radius: 18px;
-    pointer-events: none;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   @media (min-width: 640px) {
@@ -198,110 +229,159 @@
       border-top-left-radius: 22px;
       border-top-right-radius: 22px;
     }
-    #screen-frame-border::before {
-      border-top-left-radius: 22px;
-    }
   }
 
+  /* Layar pertama yang kokoh, anti-kedip, dan tertata profesional */
   #first-screen-lock {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
-    padding-top: 0.625rem;
-    padding-bottom: 0.25rem;
+    gap: 0.85rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.45rem;
     flex-shrink: 0;
-    transform: none !important;
-    animation: none !important;
     contain: layout style;
   }
 
   #first-screen-lock > * {
     flex-shrink: 0;
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
+    contain: layout style;
   }
 
-  #first-screen-lock .bento-card:active,
-  #first-screen-lock .tap-responsive:active,
-  #first-screen-lock .cyber-btn-red:hover {
-    transform: none !important;
+  .hero-pro-card {
+    background: linear-gradient(155deg, rgba(24, 13, 20, 0.98) 0%, rgba(12, 8, 12, 0.99) 60%, rgba(8, 6, 9, 1) 100%);
+    border: 1px solid rgba(251, 113, 133, 0.28);
+    box-shadow: 0 10px 26px -14px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .top-jump-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding: 0.4rem 0.5rem;
+    border-radius: 1rem;
+    background: rgba(15, 9, 13, 0.96);
+    border: 1px solid rgba(251, 113, 133, 0.25);
+  }
+
+  .quick-jump-btn {
+    flex: 0 0 auto;
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    padding: 0.36rem 0.68rem;
+    border-radius: 0.65rem;
+    background: rgba(244, 63, 94, 0.11);
+    color: #f3d5dc;
+    border: 1px solid rgba(251, 113, 133, 0.24);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .quick-jump-btn:hover,
+  .quick-jump-btn.active-jump {
+    background: linear-gradient(135deg, #be123c 0%, #881337 100%);
+    color: #fff1f2;
+    border-color: rgba(253, 164, 175, 0.45);
   }
 
   .sub-action-card {
-    min-height: 44px;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    min-height: 4.35rem;
+    padding: 0.78rem 0.88rem;
+  }
+
+  .sub-action-title {
+    font-size: 0.9rem;
+    line-height: 1.28;
   }
 
   .first-screen-tags {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 0.25rem;
-    margin-top: 0.5rem;
-    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(251, 113, 133, 0.14);
   }
 
   .first-screen-tag {
-    line-height: 1.2 !important;
-    padding: 0.25rem 0.5rem !important;
+    font-size: 0.8rem;
+    line-height: 1.25;
+    padding: 0.28rem 0.6rem;
     white-space: nowrap;
   }
 
+  .hoki-carousel {
+    display: flex;
+    gap: 0.65rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.35rem;
+  }
+
+  .hoki-slide-card {
+    flex: 0 0 calc(50% - 0.325rem);
+    width: calc(50% - 0.325rem);
+    scroll-snap-align: start;
+  }
+
   .bg-mesh {
-    background-color: #050508;
+    background-color: #060609;
     background-image:
-      radial-gradient(circle at 50% 14%, rgba(255, 30, 86, 0.17), rgba(12, 8, 14, 0.95) 56%, #030712 96%),
-      radial-gradient(circle at 12% 18%, rgba(255, 51, 102, 0.11), transparent 42%),
-      radial-gradient(circle at 88% 82%, rgba(200, 20, 60, 0.09), transparent 45%);
+      radial-gradient(circle at 50% 10%, rgba(225, 29, 72, 0.1), rgba(10, 7, 11, 0.96) 58%, #050508 100%);
   }
 
   .font-cyber { font-family: 'Orbitron', 'Plus Jakarta Sans', sans-serif; }
   .font-mono-num { font-family: 'JetBrains Mono', 'Plus Jakarta Sans', monospace; }
 
+  .brand-title-elegant {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #fda4af;
+  }
+
   .neon-glow-red {
-    color: #ff1e56;
-    text-shadow: 0 0 10px rgba(255, 30, 86, 0.55), 0 0 24px rgba(255, 30, 86, 0.35), 0 0 42px rgba(255, 0, 50, 0.25);
+    color: #fb7185;
   }
 
   .glass-panel {
-    background: rgba(18, 10, 15, 0.92);
-    border: 1px solid rgba(255, 30, 86, 0.25);
-    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.55);
+    background: rgba(16, 10, 14, 0.97);
+    border: 1px solid rgba(251, 113, 133, 0.22);
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.45);
   }
 
   .bento-card {
-    background: linear-gradient(145deg, rgba(22, 12, 18, 0.96) 0%, rgba(10, 6, 10, 0.99) 100%);
-    border: 1px solid rgba(255, 30, 86, 0.24);
-    box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.82), inset 0 1px 0 rgba(255, 30, 86, 0.1);
-    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    background: linear-gradient(145deg, rgba(20, 12, 17, 0.98) 0%, rgba(10, 7, 10, 0.99) 100%);
+    border: 1px solid rgba(251, 113, 133, 0.2);
+    box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.75);
+    transition: border-color 0.16s ease;
   }
 
   .bento-card:hover {
-    border-color: rgba(255, 30, 86, 0.52);
-    box-shadow: 0 12px 28px -10px rgba(255, 30, 86, 0.26);
+    border-color: rgba(251, 113, 133, 0.4);
   }
 
   .cyber-btn-red {
-    background: linear-gradient(135deg, #ff1e56 0%, #b8042d 100%);
-    color: #ffffff;
-    box-shadow: 0 0 18px rgba(255, 30, 86, 0.38);
-    border: 1px solid rgba(255, 110, 145, 0.45);
-    transition: box-shadow 0.18s ease, filter 0.14s ease;
+    background: linear-gradient(135deg, #be123c 0%, #881337 100%);
+    color: #fff1f2;
+    box-shadow: 0 4px 14px rgba(190, 18, 60, 0.28);
+    border: 1px solid rgba(253, 164, 175, 0.32);
+    transition: filter 0.14s ease, border-color 0.16s ease;
   }
 
   .cyber-btn-red:hover {
-    box-shadow: 0 0 26px rgba(255, 30, 86, 0.65);
-    filter: brightness(1.05);
+    filter: brightness(1.07);
   }
 
   .tap-responsive {
-    transition: filter 0.12s ease, border-color 0.16s ease, background-color 0.16s ease, box-shadow 0.16s ease;
+    transition: filter 0.12s ease, border-color 0.16s ease, background-color 0.16s ease;
   }
 
   .tap-responsive:active {
-    filter: brightness(1.08);
+    filter: brightness(1.06);
   }
 
   a { text-decoration: none; color: inherit; }
@@ -321,28 +401,34 @@
     overflow: hidden;
     border-radius: 0.75rem;
     background-color: #070407;
-    border: 1px solid rgba(255, 30, 86, 0.16);
+    border: 1px solid rgba(251, 113, 133, 0.16);
     padding: 4px;
     position: relative;
+    contain: layout style;
   }
 
   #slot-banner-320 {
-    height: 54px;
-    min-height: 54px;
-    max-height: 54px;
+    width: 100%;
+    max-width: 328px;
+    height: 58px;
+    min-height: 58px;
+    max-height: 58px;
   }
 
   #slot-banner-468 {
-    height: 64px;
-    min-height: 64px;
-    max-height: 64px;
+    width: 100%;
+    max-width: 476px;
+    height: 68px;
+    min-height: 68px;
+    max-height: 68px;
   }
 
   #slot-native-box {
-    min-height: 68px;
+    min-height: 80px;
   }
 
   .ad-slot-box iframe {
+    display: block;
     max-width: 100% !important;
     max-height: 100% !important;
     background: transparent !important;
@@ -351,37 +437,23 @@
   }
 
   .guide-thumb {
-    height: clamp(5.25rem, 24vw, 6.75rem);
+    height: 6.25rem;
     width: 100%;
     display: block;
-    transition: transform 0.2s ease, object-position 0.2s ease;
+    transition: object-position 0.2s ease;
   }
 
   @media (max-width: 360px) {
-    .guide-thumb { height: 5rem; }
-  }
-
-  @keyframes pulsePing {
-    75%, 100% { transform: scale(2); opacity: 0; }
-  }
-
-  .live-dot-ping {
-    animation: pulsePing 1.25s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .neon-glow-red, .live-dot-ping, .animate-popup { animation: none !important; }
-    html { scroll-behavior: auto; }
+    .guide-thumb { height: 5.5rem; }
   }
 
   #ads-popup {
     position: fixed;
-    bottom: 18px;
-    right: 12px;
-    z-index: 9999;
+    top: 122px;
+    right: 10px;
+    z-index: 9997;
     cursor: grab;
     touch-action: none;
-    filter: drop-shadow(0 12px 24px rgba(255, 30, 86, 0.28));
     will-change: transform;
   }
 
@@ -389,13 +461,15 @@
 
   #buyer-notification {
     position: fixed;
-    bottom: 92px;
-    left: 12px;
-    z-index: 9998;
-    max-width: 220px;
-    transform: translate3d(0, 90px, 0);
+    bottom: 12px;
+    left: 10px;
+    z-index: 9996;
+    max-width: 215px;
+    font-size: 0.78rem;
+    line-height: 1.25;
+    transform: translate3d(0, 64px, 0);
     opacity: 0;
-    transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease;
+    transition: transform 0.28s ease-out, opacity 0.24s ease-out;
     pointer-events: none;
     will-change: transform, opacity;
   }
@@ -407,13 +481,13 @@
 
   #scroll-top-btn {
     position: fixed;
-    bottom: 92px;
-    right: 12px;
+    bottom: 12px;
+    right: 10px;
     z-index: 9995;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(10px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translateY(8px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
   }
 
   #scroll-top-btn.visible {
@@ -423,12 +497,12 @@
   }
 
   @keyframes popupScale {
-    0% { opacity: 0; transform: scale(0.95) translateY(8px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
+    0% { opacity: 0; transform: translateY(6px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
   .animate-popup {
-    animation: popupScale 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: popupScale 0.16s ease-out forwards;
   }
 
   body.modal-open {
@@ -443,27 +517,26 @@
   }
 
   .tab-btn.active {
-    background: linear-gradient(135deg, #ff1e56 0%, #be123c 100%);
-    color: #ffffff;
+    background: linear-gradient(135deg, #be123c 0%, #881337 100%);
+    color: #fff1f2;
     font-weight: 800;
-    box-shadow: 0 0 18px rgba(255, 30, 86, 0.55);
-    border-color: rgba(255, 130, 160, 0.5);
+    box-shadow: 0 3px 10px rgba(190, 18, 60, 0.3);
+    border-color: rgba(253, 164, 175, 0.35);
   }
 
   .quick-tag.active-tag {
-    background-color: rgba(255, 30, 86, 0.28);
-    border-color: rgba(255, 110, 145, 0.65);
-    color: #ffffff;
+    background-color: rgba(244, 63, 94, 0.2);
+    border-color: rgba(251, 113, 133, 0.5);
+    color: #ffe4e6;
   }
 
   #top-nav-progress {
     position: fixed;
     top: 0;
     left: 0;
-    height: 2.5px;
+    height: 2px;
     width: 0%;
-    background: linear-gradient(90deg, #ff1e56, #ff3366, #ff8c00);
-    box-shadow: 0 0 10px rgba(255, 30, 86, 0.8);
+    background: linear-gradient(90deg, #fb7185, #e11d48, #fbbf24);
     z-index: 100000;
     opacity: 0;
     transition: width 0.2s ease, opacity 0.15s ease;
@@ -475,16 +548,6 @@
     width: 85%;
   }
 
-  #particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .container-mobile {
     width: 100%;
     max-width: 100%;
@@ -493,11 +556,11 @@
   }
 
   @media (min-width: 768px) {
-    .container-mobile { max-width: 56rem; }
+    .container-mobile { max-width: 58rem; }
   }
 
   @media (min-width: 1280px) {
-    .container-mobile { max-width: 72rem; }
+    .container-mobile { max-width: 74rem; }
   }
 
   .px-4 { padding-left: 1rem; padding-right: 1rem; }
@@ -514,22 +577,17 @@
   .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
   .px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
   .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
-  .p-1\.5 { padding: 0.375rem; }
   .p-2 { padding: 0.5rem; }
   .p-2\.5 { padding: 0.625rem; }
   .p-3 { padding: 0.75rem; }
   .p-3\.5 { padding: 0.875rem; }
   .p-4 { padding: 1rem; }
   .p-5 { padding: 1.25rem; }
-  .p-6 { padding: 1.5rem; }
   .pt-1 { padding-top: 0.25rem; }
   .pt-2 { padding-top: 0.5rem; }
+  .pt-3 { padding-top: 0.75rem; }
   .pt-3\.5 { padding-top: 0.875rem; }
-  .pt-4 { padding-top: 1rem; }
   .pb-1 { padding-bottom: 0.25rem; }
-  .pb-2 { padding-bottom: 0.5rem; }
-  .pb-2\.5 { padding-bottom: 0.625rem; }
-  .pb-3 { padding-bottom: 0.75rem; }
   .pr-1 { padding-right: 0.25rem; }
   .pr-2 { padding-right: 0.5rem; }
   .pr-8 { padding-right: 2rem; }
@@ -538,10 +596,7 @@
   .mt-0\.5 { margin-top: 0.125rem; }
   .mt-1 { margin-top: 0.25rem; }
   .mt-1\.5 { margin-top: 0.375rem; }
-  .mt-2 { margin-top: 0.5rem; }
   .mt-3 { margin-top: 0.75rem; }
-  .mt-3\.5 { margin-top: 0.875rem; }
-  .mb-0\.5 { margin-bottom: 0.125rem; }
   .mb-1 { margin-bottom: 0.25rem; }
   .mb-1\.5 { margin-bottom: 0.375rem; }
   .mb-2 { margin-bottom: 0.5rem; }
@@ -572,45 +627,38 @@
   .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .col-span-2 { grid-column: span 2 / span 2; }
-  .gap-1 { gap: 0.25rem; }
   .gap-1\.5 { gap: 0.375rem; }
   .gap-2 { gap: 0.5rem; }
   .gap-2\.5 { gap: 0.625rem; }
   .gap-3 { gap: 0.75rem; }
-  .gap-3\.5 { gap: 0.875rem; }
   .space-y-1 > * + * { margin-top: 0.25rem; }
   .space-y-1\.5 > * + * { margin-top: 0.375rem; }
   .space-y-2 > * + * { margin-top: 0.5rem; }
   .space-y-2\.5 > * + * { margin-top: 0.625rem; }
+  .space-y-3 > * + * { margin-top: 0.75rem; }
   .space-y-3\.5 > * + * { margin-top: 0.875rem; }
+  .space-y-4 > * + * { margin-top: 1rem; }
   .space-y-5 > * + * { margin-top: 1.25rem; }
   .space-x-1 > * + * { margin-left: 0.25rem; }
-  .space-x-1\.5 > * + * { margin-left: 0.375rem; }
   .space-x-2 > * + * { margin-left: 0.5rem; }
-  .space-x-2\.5 > * + * { margin-left: 0.625rem; }
   .space-x-3 > * + * { margin-left: 0.75rem; }
   .w-full { width: 100%; }
-  .w-5 { width: 1.25rem; }
-  .w-7 { width: 1.75rem; }
+  .w-2 { width: 0.5rem; }
+  .w-2\.5 { width: 0.625rem; }
+  .w-6 { width: 1.5rem; }
   .w-8 { width: 2rem; }
   .w-9 { width: 2.25rem; }
   .w-10 { width: 2.5rem; }
-  .w-16 { width: 4rem; }
+  .w-14 { width: 3.5rem; }
   .w-32 { width: 8rem; }
-  .w-36 { width: 9rem; }
-  .w-40 { width: 10rem; }
-  .w-64 { width: 16rem; }
-  .h-1\.5 { height: 0.375rem; }
   .h-2 { height: 0.5rem; }
-  .h-5 { height: 1.25rem; }
-  .h-7 { height: 1.75rem; }
+  .h-2\.5 { height: 0.625rem; }
+  .h-6 { height: 1.5rem; }
   .h-8 { height: 2rem; }
   .h-9 { height: 2.25rem; }
   .h-10 { height: 2.5rem; }
-  .h-16 { height: 4rem; }
-  .h-36 { height: 9rem; }
-  .h-40 { height: 10rem; }
-  .max-w-sm { max-width: 24rem; }
+  .h-14 { height: 3.5rem; }
+  .max-w-sm { max-width: 26rem; }
   .max-h-\[60vh\] { max-height: 60vh; }
   .max-h-\[62vh\] { max-height: 62vh; }
   .max-h-\[82vh\] { max-height: 82vh; }
@@ -629,84 +677,75 @@
   .border-white\/20 { border-color: rgba(255, 255, 255, 0.2); }
   .border-rose-300\/30 { border-color: rgba(253, 164, 175, 0.3); }
   .border-rose-400\/40 { border-color: rgba(251, 113, 133, 0.4); }
-  .border-rose-500\/20 { border-color: rgba(244, 63, 94, 0.2); }
-  .border-rose-500\/25 { border-color: rgba(244, 63, 94, 0.25); }
-  .border-rose-500\/30 { border-color: rgba(244, 63, 94, 0.3); }
-  .border-rose-500\/35 { border-color: rgba(244, 63, 94, 0.35); }
-  .border-rose-500\/40 { border-color: rgba(244, 63, 94, 0.4); }
-  .border-rose-500\/45 { border-color: rgba(244, 63, 94, 0.45); }
-  .border-rose-500\/50 { border-color: rgba(244, 63, 94, 0.5); }
-  .border-amber-500\/40 { border-color: rgba(245, 158, 11, 0.4); }
-  .border-amber-500\/45 { border-color: rgba(245, 158, 11, 0.45); }
+  .border-rose-400\/60 { border-color: rgba(251, 113, 133, 0.6); }
+  .border-rose-500\/20 { border-color: rgba(251, 113, 133, 0.2); }
+  .border-rose-500\/25 { border-color: rgba(251, 113, 133, 0.25); }
+  .border-rose-500\/30 { border-color: rgba(251, 113, 133, 0.3); }
+  .border-rose-500\/35 { border-color: rgba(251, 113, 133, 0.35); }
+  .border-rose-500\/40 { border-color: rgba(251, 113, 133, 0.4); }
+  .border-rose-500\/45 { border-color: rgba(251, 113, 133, 0.45); }
+  .border-rose-500\/50 { border-color: rgba(251, 113, 133, 0.5); }
+  .border-amber-500\/35 { border-color: rgba(251, 191, 36, 0.35); }
+  .border-amber-500\/40 { border-color: rgba(251, 191, 36, 0.4); }
+  .border-amber-500\/45 { border-color: rgba(251, 191, 36, 0.45); }
   .bg-black\/30 { background-color: rgba(0, 0, 0, 0.3); }
   .bg-black\/50 { background-color: rgba(0, 0, 0, 0.5); }
   .bg-black\/60 { background-color: rgba(0, 0, 0, 0.6); }
   .bg-black\/85 { background-color: rgba(0, 0, 0, 0.85); }
+  .bg-white\/5 { background-color: rgba(255, 255, 255, 0.05); }
   .bg-white\/95 { background-color: rgba(255, 255, 255, 0.95); }
   .bg-\[\#070407\]\/95 { background-color: rgba(7, 4, 7, 0.95); }
   .bg-\[\#0b060a\] { background-color: #0b060a; }
   .bg-\[\#0b060a\]\/85 { background-color: rgba(11, 6, 10, 0.85); }
   .bg-\[\#0b060a\]\/90 { background-color: rgba(11, 6, 10, 0.9); }
   .bg-\[\#0b060a\]\/95 { background-color: rgba(11, 6, 10, 0.95); }
+  .bg-\[\#0f070c\]\/95 { background-color: rgba(15, 7, 12, 0.95); }
   .bg-\[\#160a10\]\/95 { background-color: rgba(22, 10, 16, 0.95); }
   .bg-\[\#1a0a11\]\/95 { background-color: rgba(26, 10, 17, 0.95); }
   .bg-\[\#1d0e16\] { background-color: #1d0e16; }
-  .bg-rose-500 { background-color: #f43f5e; }
+  .bg-rose-400 { background-color: #fb7185; }
   .bg-rose-500\/10 { background-color: rgba(244, 63, 94, 0.1); }
   .bg-rose-500\/15 { background-color: rgba(244, 63, 94, 0.15); }
   .bg-rose-500\/20 { background-color: rgba(244, 63, 94, 0.2); }
-  .bg-amber-500\/20 { background-color: rgba(245, 158, 11, 0.2); }
+  .bg-rose-500\/25 { background-color: rgba(244, 63, 94, 0.25); }
+  .bg-amber-500\/15 { background-color: rgba(251, 191, 36, 0.15); }
+  .bg-amber-500\/20 { background-color: rgba(251, 191, 36, 0.2); }
   .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
   .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
   .bg-gradient-to-tr { background-image: linear-gradient(to top right, var(--tw-gradient-stops)); }
-  .from-\[\#240913\]\/90 { --tw-gradient-from: rgba(36, 9, 19, 0.9); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, transparent); }
-  .via-\[\#140a10\]\/90 { --tw-gradient-stops: var(--tw-gradient-from), rgba(20, 10, 16, 0.9), var(--tw-gradient-to, transparent); }
-  .to-\[\#0d080c\]\/95 { --tw-gradient-to: rgba(13, 8, 12, 0.95); }
   .from-\[\#160a10\] { --tw-gradient-from: #160a10; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, transparent); }
   .via-\[\#0b060a\] { --tw-gradient-stops: var(--tw-gradient-from), #0b060a, var(--tw-gradient-to, transparent); }
   .to-\[\#050508\] { --tw-gradient-to: #050508; }
-  .from-\[\#ff1e56\] { --tw-gradient-from: #ff1e56; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, transparent); }
-  .to-red-800 { --tw-gradient-to: #991b1b; }
-  .to-red-900 { --tw-gradient-to: #7f1d1d; }
-  .blur-3xl { filter: blur(64px); }
-  .text-white { color: #ffffff; }
-  .text-gray-100 { color: #f3f4f6; }
-  .text-gray-200 { color: #e5e7eb; }
-  .text-gray-300 { color: #d1d5db; }
-  .text-gray-400 { color: #9ca3af; }
-  .text-gray-500 { color: #6b7280; }
+  .from-\[\#ff1e56\] { --tw-gradient-from: #be123c; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, transparent); }
+  .to-red-800 { --tw-gradient-to: #9f1239; }
+  .to-red-900 { --tw-gradient-to: #881337; }
+  .text-warm-bright { color: #ede5df; }
+  .text-warm-body { color: #d8cfc8; }
+  .text-warm-muted { color: #b5a9a0; }
   .text-rose-100\/90 { color: rgba(255, 228, 230, 0.9); }
+  .text-rose-200 { color: #fecdd3; }
   .text-rose-300 { color: #fda4af; }
   .text-rose-400 { color: #fb7185; }
-  .text-rose-500 { color: #f43f5e; }
-  .text-rose-500\/60 { color: rgba(244, 63, 94, 0.6); }
-  .text-rose-500\/70 { color: rgba(244, 63, 94, 0.7); }
+  .text-amber-200 { color: #fde68a; }
   .text-amber-300 { color: #fcd34d; }
-  .text-amber-400 { color: #fbbf24; }
   .text-left { text-align: left; }
   .text-center { text-align: center; }
   .font-medium { font-weight: 500; }
   .font-semibold { font-weight: 600; }
   .font-bold { font-weight: 700; }
   .font-extrabold { font-weight: 800; }
-  .leading-none { line-height: 1.1; }
-  .leading-tight { line-height: 1.25; }
-  .leading-snug { line-height: 1.35; }
-  .leading-relaxed { line-height: 1.5; }
-  .tracking-wide { letter-spacing: 0.025em; }
-  .tracking-wider { letter-spacing: 0.05em; }
+  .leading-none { line-height: 1.15; }
+  .leading-tight { line-height: 1.3; }
+  .leading-snug { line-height: 1.42; }
+  .leading-relaxed { line-height: 1.55; }
+  .tracking-wide { letter-spacing: 0.02em; }
+  .tracking-wider { letter-spacing: 0.04em; }
   .uppercase { text-transform: uppercase; }
   .underline { text-decoration-line: underline; }
-  .decoration-rose-500\/50 { text-decoration-color: rgba(244, 63, 94, 0.5); }
   .underline-offset-4 { text-underline-offset: 4px; }
-  .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
   .overflow-hidden { overflow: hidden; }
   .overflow-x-auto { overflow-x: auto; }
   .overflow-y-auto { overflow-y: auto; }
-  .snap-x { scroll-snap-type: x mandatory; }
-  .snap-mandatory { scroll-snap-type: x mandatory; }
-  .snap-start { scroll-snap-align: start; }
   .sticky { position: sticky; }
   .fixed { position: fixed; }
   .relative { position: relative; }
@@ -716,16 +755,11 @@
   .top-1\/2 { top: 50%; }
   .top-3\.5 { top: 0.875rem; }
   .-top-2 { top: -0.5rem; }
-  .-top-10 { top: -2.5rem; }
   .right-2\.5 { right: 0.625rem; }
   .right-3\.5 { right: 0.875rem; }
   .-right-2 { right: -0.5rem; }
-  .-right-10 { right: -2.5rem; }
-  .-bottom-10 { bottom: -2.5rem; }
   .left-3\.5 { left: 0.875rem; }
-  .-left-10 { left: -2.5rem; }
   .-translate-y-1\/2 { transform: translateY(-50%); }
-  .z-0 { z-index: 0; }
   .z-10 { z-index: 10; }
   .z-50 { z-index: 50; }
   .z-\[2147483640\] { z-index: 2147483640; }
@@ -734,18 +768,16 @@
   .list-decimal { list-style-type: decimal; }
   .list-inside { list-style-position: inside; }
   .min-w-0 { min-width: 0; }
+  .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-  .hover\:bg-rose-500\/10:hover { background-color: rgba(244, 63, 94, 0.1); }
-  .hover\:bg-rose-500\/15:hover { background-color: rgba(244, 63, 94, 0.15); }
+  .hover\:bg-rose-500\/10:hover { background-color: rgba(244, 63, 94, 0.12); }
+  .hover\:bg-rose-500\/15:hover { background-color: rgba(244, 63, 94, 0.16); }
   .hover\:bg-rose-500\/25:hover { background-color: rgba(244, 63, 94, 0.25); }
   .hover\:bg-rose-600:hover { background-color: #e11d48; }
-  .hover\:border-rose-500\/50:hover { border-color: rgba(244, 63, 94, 0.5); }
-  .hover\:border-rose-500\/60:hover { border-color: rgba(244, 63, 94, 0.6); }
-  .hover\:border-rose-500\/70:hover { border-color: rgba(244, 63, 94, 0.7); }
-  .hover\:text-white:hover { color: #ffffff; }
-  .hover\:text-rose-300:hover { color: #fda4af; }
-  .hover\:text-rose-400:hover { color: #fb7185; }
-  .focus\:border-rose-500\/80:focus { border-color: rgba(244, 63, 94, 0.8); }
+  .hover\:border-rose-500\/50:hover { border-color: rgba(251, 113, 133, 0.5); }
+  .hover\:border-rose-500\/70:hover { border-color: rgba(251, 113, 133, 0.7); }
+  .hover\:text-rose-200:hover { color: #fecdd3; }
+  .focus\:border-rose-500\/80:focus { border-color: rgba(251, 113, 133, 0.8); }
   .focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
 
   .hidden { display: none !important; }
@@ -754,248 +786,215 @@
 <body class="bg-mesh">
 
 <div id="screen-frame-border" aria-hidden="true"></div>
-<canvas id="particle-canvas" aria-hidden="true"></canvas>
 <div id="top-nav-progress" aria-hidden="true"></div>
 
 <nav class="sticky top-0 z-50 w-full glass-panel border-b border-rose-500/25 shrink-0" aria-label="Navigasi Utama">
-  <div class="container-mobile px-4 py-2 flex items-center justify-between gap-2">
-    <a href="https://tunggalpaito.online/prediksi/" class="tap-responsive flex items-center gap-2 min-w-0 group">
-      <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#ff1e56] to-red-900 flex items-center justify-center text-white border border-rose-400/40 shrink-0">
-        <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+  <div class="container-mobile px-4 py-2.5 flex items-center justify-between gap-2">
+    <a href="https://tunggalpaito.online/prediksi/" class="tap-responsive flex items-center gap-2.5 min-w-0">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#ff1e56] to-red-900 flex items-center justify-center text-rose-100/90 border border-rose-400/40 shrink-0">
+        <i class="fa-solid fa-crown text-sm" aria-hidden="true"></i>
       </div>
       <div class="min-w-0">
-        <div class="flex items-center gap-1.5">
-          <span class="font-cyber font-bold tracking-wider uppercase text-rose-500 truncate">TUNGGAL PAITO</span>
-          <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full font-bold bg-rose-500/15 text-rose-300 border border-rose-500/40 shrink-0">
-            <span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot-ping"></span> LIVE
-          </span>
-        </div>
-        <p class="text-gray-400 leading-none mt-0.5 truncate">Analisa &amp; Prediksi Toto hari ini</p>
+        <span class="brand-title-elegant text-base block truncate">TUNGGAL PAITO</span>
       </div>
     </a>
 
     <div class="flex items-center gap-1.5 shrink-0">
-      <button type="button" onclick="openSearchModal(event)" aria-label="Cari daftar isi halaman" class="tap-responsive inline-flex items-center gap-1.5 bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 font-extrabold py-1.5 px-2.5 rounded-full border border-rose-500/40 cursor-pointer">
-        <i class="fa-solid fa-magnifying-glass text-rose-400" aria-hidden="true"></i>
+      <button type="button" onclick="openSearchModal(event)" aria-label="Cari daftar isi halaman" class="tap-responsive text-sm-custom inline-flex items-center gap-1.5 bg-rose-500/15 hover:bg-rose-500/25 text-rose-200 font-extrabold py-1.5 px-3 rounded-full border border-rose-500/40 cursor-pointer">
+        <i class="fa-solid fa-magnifying-glass text-rose-300" aria-hidden="true"></i>
         <span>Cari</span>
       </button>
-      <a href="https://tunggalpaito.online/top-10-line/" class="tap-responsive cyber-btn-red inline-flex items-center gap-1 text-white font-cyber font-extrabold py-1.5 px-2.5 rounded-full tracking-wide uppercase">
-        <span>🔥 TOP 10</span>
+      <a href="https://tunggalpaito.online/top-10-line/" class="tap-responsive text-sm-custom cyber-btn-red inline-flex items-center gap-1 font-cyber font-extrabold py-1.5 px-3 rounded-full tracking-wide uppercase">
+        <span>TOP 10</span>
       </a>
     </div>
   </div>
 </nav>
 
 <div id="first-screen-lock" class="relative z-10 w-full container-mobile px-4">
-  <!-- 1. PREDIKSI TOGEL HARI INI / SALAM HOKI -->
-  <div class="bento-card rounded-3xl p-3.5 relative overflow-hidden">
-    <div class="absolute -right-10 -top-10 w-36 h-36 bg-rose-500/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-red-800/20 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="top-jump-bar no-scrollbar" role="navigation" aria-label="Lompat Cepat">
+    <button type="button" onclick="instantJump('all')" class="quick-jump-btn active-jump" data-jump="all">Semua</button>
+    <button type="button" onclick="instantJump('sdy')" class="quick-jump-btn" data-jump="sdy">🇦🇺 SDY</button>
+    <button type="button" onclick="instantJump('sgp')" class="quick-jump-btn" data-jump="sgp">🇸🇬 SGP</button>
+    <button type="button" onclick="instantJump('hk')" class="quick-jump-btn" data-jump="hk">🇭🇰 HK</button>
+    <a href="https://tunggalpaito.online/live-draw/" class="quick-jump-btn">Live Draw</a>
+    <a href="https://tunggalpaito.online/paito-warna/" class="quick-jump-btn">Paito</a>
+    <a href="https://tunggalpaito.online/prediksi/generator" class="quick-jump-btn">BBFS</a>
+    <a href="https://tunggalpaito.online/top-10-line/" class="quick-jump-btn">TOP 10</a>
+  </div>
 
-    <div class="flex items-center justify-between mb-2 pb-2 border-b border-rose-500/20">
-      <div class="inline-flex items-center gap-1.5 text-rose-400 font-cyber font-bold uppercase tracking-wider">
-        <i class="fa-solid fa-chart-line text-rose-500" aria-hidden="true"></i>
+  <div class="hero-pro-card rounded-3xl p-4 relative overflow-hidden">
+    <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-rose-500/20 gap-2">
+      <div class="inline-flex items-center gap-2 text-rose-300 text-xs-custom font-cyber font-bold uppercase tracking-wider">
+        <i class="fa-solid fa-chart-line text-rose-400" aria-hidden="true"></i>
         <span>Prediksi Togel Hari Ini</span>
       </div>
-      <span class="font-mono-num font-bold px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/25">JITU</span>
+      <span class="text-xs-custom font-mono-num font-bold px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-200 border border-rose-500/35 shrink-0">JITU</span>
     </div>
 
-    <h1 class="font-extrabold tracking-tight text-white leading-snug">
-      Prediksi Togel Jitu Hari Ini — <span class="font-cyber neon-glow-red tracking-wide">Tunggal Paito ✔️</span>
+    <h1 class="font-extrabold tracking-tight text-warm-bright">
+      Prediksi Togel Jitu Hari Ini — <span class="font-cyber neon-glow-red tracking-wide">Tunggal Paito</span>
     </h1>
-    <p class="text-gray-300 mt-1 leading-snug">
-      Menyediakan prediksi angka pasaran populer yang banyak diminati dari berbagai kalangan, JP kita prioritas utama. <span class="text-rose-400 font-semibold">⇲ Salam hoki satu hati</span>
+    <p class="text-warm-body mt-1.5 leading-relaxed">
+      Menyediakan prediksi angka pasaran populer yang banyak diminati dari berbagai kalangan, JP kita prioritas utama. <span class="text-rose-300 font-semibold">Salam hoki satu hati</span>
     </p>
 
     <div class="first-screen-tags">
-      <span class="first-screen-tag font-mono-num rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#liveprediksi</span>
-      <span class="first-screen-tag font-mono-num rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitosdy</span>
-      <span class="first-screen-tag font-mono-num rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitosgp</span>
-      <span class="first-screen-tag font-mono-num rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitohk</span>
+      <span class="first-screen-tag font-mono-num rounded-lg bg-rose-500/10 text-rose-200 border border-rose-500/25">#liveprediksi</span>
+      <span class="first-screen-tag font-mono-num rounded-lg bg-rose-500/10 text-rose-200 border border-rose-500/25">#tunggalpaitosdy</span>
+      <span class="first-screen-tag font-mono-num rounded-lg bg-rose-500/10 text-rose-200 border border-rose-500/25">#tunggalpaitosgp</span>
+      <span class="first-screen-tag font-mono-num rounded-lg bg-rose-500/10 text-rose-200 border border-rose-500/25">#tunggalpaitohk</span>
     </div>
   </div>
 
-  <!-- 2. IKLAN BANNER KECIL -->
   <div id="top-small-ad" class="bento-card rounded-3xl p-2 flex items-center justify-center overflow-hidden">
     <div id="slot-banner-320" class="ad-slot-box"></div>
   </div>
 
-  <!-- 3. PUSAT INFORMASI & ANALISA -->
-  <section class="bento-card rounded-3xl p-3.5 text-gray-300 leading-snug">
-    <div class="flex items-center justify-between mb-2 pb-2 border-b border-rose-500/20">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center border border-rose-500/35 shrink-0">
-          <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-        </div>
-        <div class="min-w-0">
-          <h2 class="section-heading font-cyber font-extrabold text-rose-400 uppercase tracking-wide truncate">Pusat Informasi &amp; Analisa Angka Main</h2>
-          <p class="text-gray-400 truncate">Update Harian SDY, SGP &amp; HK</p>
-        </div>
+  <div class="bento-card rounded-3xl p-4 space-y-4">
+    <section class="text-warm-body leading-relaxed">
+      <div class="mb-2.5 pb-2 border-b border-rose-500/20">
+        <h2 class="section-heading font-cyber font-extrabold text-rose-300 uppercase tracking-wide">Pusat Informasi &amp; Analisa Angka Main</h2>
+        <p class="text-sm-custom text-warm-muted mt-0.5">Update Harian SDY, SGP &amp; HK DLL</p>
       </div>
-      <span class="font-mono-num font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-500/30 shrink-0">INFO</span>
-    </div>
-    <p>Selamat datang di halaman resmi prediksi togel hari ini dari <strong class="text-white">Tunggal Paito</strong>. Kami menyajikan ulasan lengkap mengenai analisa angka jitu, live draw, paito warna serta banyak lagi yang lainnya untuk berbagai pasaran resmi seperti Sydney (SDY), Singapore (SGP), dan Hongkong (HK).</p>
-  </section>
+      <p>Selamat datang di halaman resmi prediksi togel hari ini dari <strong class="text-warm-bright">Tunggal Paito</strong>. Kami menyajikan ulasan lengkap mengenai analisa angka jitu, live draw, paito warna serta banyak lagi yang lainnya untuk berbagai pasaran resmi seperti Sydney (SDY), Singapore (SGP), dan Hongkong (HK) Cambodia, China, Japan, Taiwan, Macau.</p>
+    </section>
 
-  <!-- 4. PEMBERITAHUAN PENTING -->
-  <section class="bento-card rounded-3xl p-3.5 text-gray-300 leading-snug">
-    <div class="flex items-center justify-between mb-2 pb-2 border-b border-rose-500/20">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center border border-rose-500/35 shrink-0">
-          <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-        </div>
-        <div class="min-w-0">
-          <h2 class="section-heading font-cyber text-rose-400 uppercase tracking-wider font-extrabold truncate">Pemberitahuan Penting</h2>
-          <p class="text-gray-400 truncate">Independen &amp; Tanpa Kerja Sama BO</p>
-        </div>
+    <section class="pt-3.5 border-t border-rose-500/25 text-warm-body leading-relaxed">
+      <div class="mb-2.5 pb-2 border-b border-rose-500/20">
+        <h2 class="section-heading font-cyber text-amber-300 uppercase tracking-wider font-extrabold">Pemberitahuan Penting</h2>
+        <p class="text-sm-custom text-warm-muted mt-0.5">Independen &amp; Anti BO</p>
       </div>
-      <span class="px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-500/30 font-mono-num font-bold shrink-0">ANTI-BO</span>
-    </div>
-    <p class="font-medium text-gray-200">
-      Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia jaringan iklan pihak ketiga dan <strong class="text-white">BUKAN dari kita</strong>. Tunggal Paito tidak pernah bekerja sama, merekomendasikan, atau menjadi bagian dari pihak BO manapun. Jika dibawa ke halaman iklan liar, trik atasinya <strong class="text-rose-400">kembali 1x kemudian coba lagi</strong>, jika masih terobos saja. Salam HOKI — Teruslah Berjuang kita sama-sama sebagai musuh bandar!
-    </p>
-  </section>
+      <p class="font-medium text-warm-bright">
+        Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia jaringan iklan pihak ketiga dan <strong class="text-rose-200">BUKAN dari kita</strong>. Tunggal Paito tidak pernah bekerja sama, merekomendasikan, atau menjadi bagian dari pihak BO manapun. Jika dibawa ke halaman iklan liar, trik atasinya <strong class="text-amber-300">kembali 1x kemudian coba lagi</strong>, jika masih terobos saja. Salam HOKI — Teruslah Berjuang kita sama-sama sebagai musuh bandar!
+      </p>
+    </section>
+  </div>
 
-  <!-- 5. DOWNLOAD APLIKASI & AKSES CEPAT -->
-  <div class="bento-card rounded-3xl p-3.5 space-y-2.5">
-    <button type="button" onclick="openDownloadModal(event)" class="w-full flex items-center justify-between text-white font-extrabold py-2.5 px-3 rounded-xl cursor-pointer cyber-btn-red">
+  <div class="bento-card rounded-3xl p-4 space-y-3.5">
+    <button type="button" onclick="openDownloadModal(event)" class="w-full flex items-center justify-between font-extrabold py-2.5 px-3.5 rounded-xl cursor-pointer cyber-btn-red gap-2">
       <div class="flex items-center gap-2.5 min-w-0">
-        <div class="w-8 h-8 rounded-lg bg-black/30 border border-white/20 flex items-center justify-center shrink-0">
+        <div class="w-9 h-9 rounded-lg bg-black/30 border border-white/20 flex items-center justify-center shrink-0">
           <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
         </div>
         <div class="text-left min-w-0">
-          <div class="font-extrabold leading-tight truncate">Download APK Tunggal Paito</div>
-          <div class="font-semibold text-rose-100/90 truncate">Versi Resmi • Ringan &amp; Anti Blokir</div>
+          <div class="font-extrabold leading-tight text-warm-bright">Download APK Tunggal Paito</div>
+          <div class="text-xs-custom font-semibold text-rose-100/90">Ringan &amp; Anti Error</div>
         </div>
       </div>
-      <span class="px-2 py-0.5 rounded-lg bg-black/60 border border-rose-300/30 text-white font-cyber font-extrabold uppercase tracking-wider shrink-0">Unduh</span>
+      <span class="text-xs-custom px-2.5 py-1 rounded-lg bg-black/60 border border-rose-300/30 text-rose-200 font-cyber font-extrabold uppercase tracking-wider shrink-0">Unduh</span>
     </button>
 
-    <!-- 6. PERLENGKAPAN MUSUH BANDAR -->
-    <section class="bento-card rounded-2xl p-3 relative overflow-hidden">
-      <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-rose-500/20">
-        <div class="inline-flex items-center gap-2 text-rose-400 font-cyber font-extrabold uppercase tracking-wider">
-          <i class="fa-solid fa-fire text-rose-500" aria-hidden="true"></i>
-          <span>Perlengkapan Musuh Bandar</span>
+    <section class="bento-card rounded-2xl p-3.5 relative overflow-hidden">
+      <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-rose-500/20 gap-2">
+        <div class="inline-flex items-center gap-2 text-rose-300 text-xs-custom font-cyber font-extrabold uppercase tracking-wider">
+          
         </div>
-        <span class="font-mono-num font-bold px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/25">ALAT</span>
       </div>
 
       <div class="grid grid-cols-3 gap-2">
-        <a href="https://tunggalpaito.online/apk/bbfs/" class="tap-responsive bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl text-center group">
-          <div class="w-8 h-8 mx-auto mb-1.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+        <a href="https://tunggalpaito.online/apk/bbfs/" class="tap-responsive bg-[#0b060a]/90 hover:bg-rose-500/15 border border-rose-500/22 hover:border-rose-500/50 p-2.5 rounded-xl text-center">
+          <div class="w-8 h-8 mx-auto mb-1.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 flex items-center justify-center">
             <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
           </div>
-          <div class="font-extrabold text-gray-100 truncate">APK BBFS</div>
+          <div class="text-sm-custom font-extrabold text-warm-bright">BBFS</div>
         </a>
 
-        <a href="https://tunggalpaito.online/apk-line-2d/" class="tap-responsive bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl text-center group">
-          <div class="w-8 h-8 mx-auto mb-1.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+        <a href="https://tunggalpaito.online/apk-line-2d/" class="tap-responsive bg-[#0b060a]/90 hover:bg-rose-500/15 border border-rose-500/22 hover:border-rose-500/50 p-2.5 rounded-xl text-center">
+          <div class="w-8 h-8 mx-auto mb-1.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 flex items-center justify-center">
             <i class="fa-solid fa-bolt" aria-hidden="true"></i>
           </div>
-          <div class="font-extrabold text-gray-100 truncate">APK LINE 2D</div>
+          <div class="text-sm-custom font-extrabold text-warm-bright">LINE 2D</div>
         </a>
 
-        <a href="https://tunggalpaito.online/apk/colok-bebas/" class="tap-responsive bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl text-center group">
-          <div class="w-8 h-8 mx-auto mb-1.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+        <a href="https://tunggalpaito.online/apk/colok-bebas/" class="tap-responsive bg-[#0b060a]/90 hover:bg-rose-500/15 border border-rose-500/22 hover:border-rose-500/50 p-2.5 rounded-xl text-center">
+          <div class="w-8 h-8 mx-auto mb-1.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 flex items-center justify-center">
             <i class="fa-solid fa-star" aria-hidden="true"></i>
           </div>
-          <div class="font-extrabold text-gray-100 truncate">COLOK BEBAS</div>
+          <div class="text-sm-custom font-extrabold text-warm-bright">CB</div>
         </a>
       </div>
     </section>
 
-    <div class="grid grid-cols-2 gap-2">
-      <a href="https://tunggalpaito.online/prediksi/angka-main/" class="sub-action-card flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 text-white px-2.5 rounded-xl">
-        <div class="flex items-center gap-2 min-w-0">
-          <div class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/35 flex items-center justify-center shrink-0">
-            <i class="fa-solid fa-fire-flame-curved text-rose-400" aria-hidden="true"></i>
-          </div>
-          <div class="min-w-0">
-            <div class="font-cyber font-extrabold uppercase tracking-wide text-white truncate">APK FAVORIT</div>
-            <div class="text-gray-400 truncate">Angka Main Andalan</div>
-          </div>
+    <div class="grid grid-cols-2 gap-2.5">
+      <a href="https://tunggalpaito.online/prediksi/angka-main/" class="tap-responsive bento-card sub-action-card flex items-center gap-2.5 rounded-2xl">
+        <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-300 border border-rose-500/35 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i>
         </div>
-        <span class="font-cyber font-extrabold uppercase px-1.5 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 shrink-0">Hot</span>
+        <div class="min-w-0">
+          <div class="sub-action-title font-cyber font-extrabold uppercase tracking-wide text-rose-200">FAVORIT</div>
+        </div>
       </a>
 
-      <button type="button" onclick="openWebDevModal(event)" class="sub-action-card flex items-center justify-between text-left bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 text-white px-2.5 rounded-xl cursor-pointer">
-        <div class="flex items-center gap-2 min-w-0">
-          <div class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/35 flex items-center justify-center shrink-0">
-            <i class="fa-solid fa-laptop-code text-rose-400" aria-hidden="true"></i>
-          </div>
-          <div class="min-w-0">
-            <div class="font-cyber font-extrabold leading-tight text-white truncate">Jasa Buat Website</div>
-            <div class="text-gray-400 truncate">Web &amp; APK Custom</div>
-          </div>
+      <button type="button" onclick="openWebDevModal(event)" class="tap-responsive bento-card sub-action-card flex items-center gap-2.5 text-left rounded-2xl cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-300 border border-rose-500/35 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
         </div>
-        <span class="font-cyber font-extrabold uppercase px-1.5 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 shrink-0">Custom</span>
+        <div class="min-w-0">
+          <div class="sub-action-title font-cyber font-extrabold uppercase tracking-wide text-rose-200">CUSTOM</div>
+        </div>
       </button>
     </div>
   </div>
 
-  <!-- 7. MASTER PEMBUNUH ANGKA -->
-  <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/" class="tap-responsive bento-card hover:border-rose-500/70 p-3.5 rounded-3xl flex items-center justify-between group">
+  <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/" class="tap-responsive bento-card hover:border-rose-500/70 p-4 rounded-3xl flex items-center justify-between gap-3">
     <div class="flex items-center gap-3 min-w-0">
-      <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center border border-rose-500/35 shrink-0">
+      <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center border border-rose-500/35 shrink-0">
         <i class="fa-solid fa-skull-crossbones" aria-hidden="true"></i>
       </div>
       <div class="min-w-0">
-        <div class="font-cyber font-extrabold text-gray-100 truncate">MASTER PEMBUNUH ANGKA</div>
-        <div class="text-gray-400 mt-0.5 truncate">Lemah 2D Lengkap Dari Nama-nama Master Berbeda</div>
+        <div class="text-sm-custom font-cyber font-extrabold text-warm-bright">MASTER PEMBUNUH ANGKA</div>
       </div>
     </div>
-    <i class="fa-solid fa-chevron-right text-rose-500/70 shrink-0" aria-hidden="true"></i>
+    <i class="fa-solid fa-chevron-right text-rose-400 shrink-0" aria-hidden="true"></i>
   </a>
 
-  <!-- 8. RUANG KETENANGAN ANGKA HOKI -->
-  <a href="https://tunggalpaito.online/apk/ruang-tenang/angka-hoki/" class="tap-responsive bento-card hover:border-rose-500/70 p-3.5 rounded-3xl flex items-center justify-between group">
+  <a href="https://tunggalpaito.online/apk/ruang-tenang/angka-hoki/" class="tap-responsive bento-card hover:border-rose-500/70 p-4 rounded-3xl flex items-center justify-between gap-3">
     <div class="flex items-center gap-3 min-w-0">
-      <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center border border-rose-500/35 shrink-0">
+      <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center border border-rose-500/35 shrink-0">
         <i class="fa-solid fa-spa" aria-hidden="true"></i>
       </div>
       <div class="min-w-0">
-        <div class="font-cyber font-extrabold text-gray-100 truncate">RUANG KETENANGAN ANGKA HOKI</div>
-        <div class="text-gray-400 mt-0.5 truncate">Fokus &amp; ketenangan mencari angka hoki</div>
+        <div class="text-sm-custom font-cyber font-extrabold text-warm-bright">RUANG KETENANGAN ANGKA HOKI</div>
       </div>
     </div>
-    <i class="fa-solid fa-chevron-right text-rose-500/70 shrink-0" aria-hidden="true"></i>
+    <i class="fa-solid fa-chevron-right text-rose-400 shrink-0" aria-hidden="true"></i>
   </a>
 
-  <!-- 9. KEMBALI KE HALAMAN FACEBOOK -->
-  <a href="https://www.facebook.com/share/1FkwuwQHpw/" target="_blank" rel="noopener noreferrer" class="tap-responsive bento-card hover:border-rose-500/50 flex items-center justify-between text-white p-3.5 rounded-3xl">
-    <div class="flex items-center gap-2.5 min-w-0">
-      <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#ff1e56] to-red-800 flex items-center justify-center text-white shrink-0">
-        <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+  <div class="pt-1">
+    <a href="https://www.facebook.com/share/1FkwuwQHpw/" target="_blank" rel="noopener noreferrer" class="tap-responsive bento-card hover:border-rose-500/50 flex items-center justify-between gap-3 p-4 rounded-3xl">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#ff1e56] to-red-800 flex items-center justify-center text-rose-100/90 shrink-0">
+          <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+        </div>
+        <div class="min-w-0">
+          <div class="font-bold text-warm-bright">Kembali ke Halaman Facebook</div>
+        </div>
       </div>
-      <div class="min-w-0">
-        <div class="font-bold text-white truncate">Kembali ke Halaman Facebook</div>
-        <div class="text-gray-400 truncate">Gabung diskusi &amp; update prediksi</div>
-      </div>
-    </div>
-    <i class="fa-solid fa-arrow-up-right-from-square text-rose-400 shrink-0" aria-hidden="true"></i>
-  </a>
+      <i class="fa-solid fa-arrow-up-right-from-square text-rose-300 shrink-0" aria-hidden="true"></i>
+    </a>
+  </div>
 </div>
 
-<header class="relative z-10 w-full container-mobile px-4 pt-2.5">
-  <div id="adblock-friendly-banner" class="hidden rounded-2xl bg-[#1a0a11]/95 border border-amber-500/45 p-3 mb-2.5">
+<header class="relative z-10 w-full container-mobile px-4 pt-3">
+  <div id="adblock-friendly-banner" class="hidden rounded-2xl bg-[#1a0a11]/95 border border-amber-500/45 p-3.5 mb-3">
     <div class="flex items-start gap-2.5">
-      <div class="w-7 h-7 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/40 mt-0.5">
+      <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-500/40 mt-0.5">
         <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
       </div>
-      <div class="text-gray-200 leading-snug flex-1">
-        <div class="flex items-center justify-between">
-          <span class="font-cyber font-extrabold text-amber-300 uppercase">Dukungan Server Gratis</span>
-          <button type="button" onclick="document.getElementById('adblock-friendly-banner').classList.add('hidden')" class="text-gray-400 hover:text-white px-1 cursor-pointer" aria-label="Tutup info iklan">Tutup</button>
+      <div class="text-sm-custom text-warm-body leading-relaxed flex-1">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-xs-custom font-cyber font-extrabold text-amber-300 uppercase">Dukungan Server Gratis</span>
+          <button type="button" onclick="document.getElementById('adblock-friendly-banner').classList.add('hidden')" class="text-xs-custom text-warm-muted hover:text-rose-200 px-2 py-0.5 rounded bg-white/5 cursor-pointer" aria-label="Tutup info iklan">Tutup</button>
         </div>
-        <p class="mt-1 text-gray-300">
-          Perangkat atau DNS Anda terdeteksi memblokir iklan sponsor. Izinkan iklan (nonaktifkan AdBlock atau Private DNS sementara) agar server <strong class="text-white">Prediksi &amp; Live Draw Tunggal Paito</strong> tetap gratis 24 jam.
+        <p class="mt-1 text-warm-body">
+          Perangkat atau DNS Anda terdeteksi memblokir iklan sponsor. Izinkan iklan (nonaktifkan AdBlock atau Private DNS sementara) agar server <strong class="text-warm-bright">Prediksi &amp; Live Draw Tunggal Paito</strong> tetap gratis 24 jam.
         </p>
       </div>
     </div>
   </div>
 
-  <div id="ad-slots-wrapper" class="bento-card rounded-3xl p-2.5 flex flex-col items-center gap-2 overflow-hidden mb-3">
+  <div id="ad-slots-wrapper" class="bento-card rounded-3xl p-3 flex flex-col items-center gap-2.5 overflow-hidden mb-3.5">
     <div id="slot-banner-468" class="ad-slot-box"></div>
     <div id="slot-native-box" class="ad-slot-box">
       <div id="container-3f09897b852339f736b82a3190a40259" class="w-full overflow-hidden flex justify-center"></div>
@@ -1003,363 +1002,355 @@
   </div>
 
   <section class="mb-2" aria-label="Rekomendasi Pembawa Hoki">
-    <div class="flex items-center justify-between mb-2.5 px-0.5">
-      <div class="flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-        <h2 class="section-heading font-cyber font-extrabold uppercase tracking-wider text-gray-100">Rekomendasi Pembawa Hoki</h2>
+    <div class="flex items-center justify-between mb-2.5 px-0.5 gap-2">
+      <div class="flex items-center gap-2">
+        <h2 class="section-heading font-cyber font-extrabold uppercase tracking-wider text-rose-200">Toko</h2>
       </div>
-      <span class="text-rose-400 font-semibold">⇦ Geser</span>
+      <span class="text-xs-custom text-rose-300 font-semibold shrink-0">⪻GESER</span>
     </div>
 
-    <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 snap-x snap-mandatory">
-      <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/pohon-uang.png" alt="FA CAI SHU Pohon Uang" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-16 h-16 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
-        <div class="min-w-0 flex-1">
-          <span class="inline-block bg-rose-500/15 text-rose-400 border border-rose-500/25 font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
-          <h3 class="font-bold text-white truncate">FA CAI SHU Pohon Uang</h3>
-          <p class="text-gray-400 line-clamp-1 mb-2">Pajangan Fengshui pembawa hoki</p>
-          <a href="https://s.shopee.co.id/8pmfJYOWUw" target="_blank" rel="noopener noreferrer" class="tap-responsive cyber-btn-red inline-flex items-center gap-1 text-white font-extrabold py-1 px-2.5 rounded-lg">
-            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
-          </a>
+    <div class="hoki-carousel no-scrollbar">
+      <div class="hoki-slide-card bento-card rounded-2xl p-2.5 flex flex-col justify-between gap-2">
+        <div class="flex items-start gap-2 min-w-0">
+          <img src="https://tunggalpaito.online/pohon-uang.png" alt="FA CAI SHU Pohon Uang" width="56" height="56" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-14 h-14 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
+          <div class="min-w-0 flex-1">
+            <span class="text-xs-custom inline-block bg-amber-500/15 text-amber-300 border border-amber-500/35 font-bold px-1.5 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
+            <h3 class="text-sm-custom font-bold text-warm-bright leading-tight">FA CAI SHU Pohon Uang</h3>
+            <p class="text-xs-custom text-warm-muted leading-snug mt-0.5">Pajangan Fengshui hoki</p>
+          </div>
         </div>
+        <a href="https://s.shopee.co.id/8pmfJYOWUw" target="_blank" rel="noopener noreferrer" class="tap-responsive text-sm-custom cyber-btn-red w-full inline-flex items-center justify-center gap-1 font-extrabold py-1.5 px-2.5 rounded-lg">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
+        </a>
       </div>
 
-      <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/parfum-kopi.png" alt="Parfum Kopi Asli" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-16 h-16 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
-        <div class="min-w-0 flex-1">
-          <span class="inline-block bg-rose-500/15 text-rose-400 border border-rose-500/25 font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
-          <h3 class="font-bold text-white truncate">Parfum Kopi Asli</h3>
-          <p class="text-gray-400 line-clamp-1 mb-2">Aroma kopi tahan lama &amp; segar</p>
-          <a href="https://s.shopee.co.id/20wL9zj7xc" target="_blank" rel="noopener noreferrer" class="tap-responsive cyber-btn-red inline-flex items-center gap-1 text-white font-extrabold py-1 px-2.5 rounded-lg">
-            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
-          </a>
+      <div class="hoki-slide-card bento-card rounded-2xl p-2.5 flex flex-col justify-between gap-2">
+        <div class="flex items-start gap-2 min-w-0">
+          <img src="https://tunggalpaito.online/parfum-kopi.png" alt="Parfum Kopi Asli" width="56" height="56" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-14 h-14 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
+          <div class="min-w-0 flex-1">
+            <span class="text-xs-custom inline-block bg-amber-500/15 text-amber-300 border border-amber-500/35 font-bold px-1.5 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
+            <h3 class="text-sm-custom font-bold text-warm-bright leading-tight">Parfum Kopi Asli</h3>
+            <p class="text-xs-custom text-warm-muted leading-snug mt-0.5">Aroma kopi tahan lama</p>
+          </div>
         </div>
+        <a href="https://s.shopee.co.id/20wL9zj7xc" target="_blank" rel="noopener noreferrer" class="tap-responsive text-sm-custom cyber-btn-red w-full inline-flex items-center justify-center gap-1 font-extrabold py-1.5 px-2.5 rounded-lg">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
+        </a>
       </div>
 
-      <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/cakradayu.png" alt="CAKRADAYU" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-16 h-16 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
-        <div class="min-w-0 flex-1">
-          <span class="inline-block bg-rose-500/15 text-rose-400 border border-rose-500/25 font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
-          <h3 class="font-bold text-white truncate">CAKRADAYU</h3>
-          <p class="text-gray-400 line-clamp-1 mb-2">Plat Fengshui Mantra 5 Dewa</p>
-          <a href="https://s.shopee.co.id/9V2M7NOyv1" target="_blank" rel="noopener noreferrer" class="tap-responsive cyber-btn-red inline-flex items-center gap-1 text-white font-extrabold py-1 px-2.5 rounded-lg">
-            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
-          </a>
+      <div class="hoki-slide-card bento-card rounded-2xl p-2.5 flex flex-col justify-between gap-2">
+        <div class="flex items-start gap-2 min-w-0">
+          <img src="https://tunggalpaito.online/cakradayu.png" alt="CAKRADAYU" width="56" height="56" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-14 h-14 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
+          <div class="min-w-0 flex-1">
+            <span class="text-xs-custom inline-block bg-amber-500/15 text-amber-300 border border-amber-500/35 font-bold px-1.5 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
+            <h3 class="text-sm-custom font-bold text-warm-bright leading-tight">CAKRADAYU</h3>
+            <p class="text-xs-custom text-warm-muted leading-snug mt-0.5">Plat Fengshui 5 Dewa</p>
+          </div>
         </div>
+        <a href="https://s.shopee.co.id/9V2M7NOyv1" target="_blank" rel="noopener noreferrer" class="tap-responsive text-sm-custom cyber-btn-red w-full inline-flex items-center justify-center gap-1 font-extrabold py-1.5 px-2.5 rounded-lg">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
+        </a>
       </div>
 
-      <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/patung-kodok.png" alt="PATUNG HOKI" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-16 h-16 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
-        <div class="min-w-0 flex-1">
-          <span class="inline-block bg-rose-500/15 text-rose-400 border border-rose-500/25 font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
-          <h3 class="font-bold text-white truncate">PATUNG HOKI</h3>
-          <p class="text-gray-400 line-clamp-1 mb-2">Patung Kodok Fengshui Warna Emas</p>
-          <a href="https://s.shopee.co.id/8fTF86vESt" target="_blank" rel="noopener noreferrer" class="tap-responsive cyber-btn-red inline-flex items-center gap-1 text-white font-extrabold py-1 px-2.5 rounded-lg">
-            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
-          </a>
+      <div class="hoki-slide-card bento-card rounded-2xl p-2.5 flex flex-col justify-between gap-2">
+        <div class="flex items-start gap-2 min-w-0">
+          <img src="https://tunggalpaito.online/patung-kodok.png" alt="PATUNG HOKI" width="56" height="56" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-14 h-14 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
+          <div class="min-w-0 flex-1">
+            <span class="text-xs-custom inline-block bg-amber-500/15 text-amber-300 border border-amber-500/35 font-bold px-1.5 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
+            <h3 class="text-sm-custom font-bold text-warm-bright leading-tight">PATUNG HOKI</h3>
+            <p class="text-xs-custom text-warm-muted leading-snug mt-0.5">Kodok Fengshui Emas</p>
+          </div>
         </div>
+        <a href="https://s.shopee.co.id/8fTF86vESt" target="_blank" rel="noopener noreferrer" class="tap-responsive text-sm-custom cyber-btn-red w-full inline-flex items-center justify-center gap-1 font-extrabold py-1.5 px-2.5 rounded-lg">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
+        </a>
       </div>
 
-      <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/koin-tiongkok.png" alt="KOIN TIONGKOK" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-16 h-16 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
-        <div class="min-w-0 flex-1">
-          <span class="inline-block bg-rose-500/15 text-rose-400 border border-rose-500/25 font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
-          <h3 class="font-bold text-white truncate">KOIN TIONGKOK</h3>
-          <p class="text-gray-400 line-clamp-1 mb-2">Gantungan Koin 5 Kaisar Kuno</p>
-          <a href="https://s.shopee.co.id/70L19Mcixt" target="_blank" rel="noopener noreferrer" class="tap-responsive cyber-btn-red inline-flex items-center gap-1 text-white font-extrabold py-1 px-2.5 rounded-lg">
-            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
-          </a>
+      <div class="hoki-slide-card bento-card rounded-2xl p-2.5 flex flex-col justify-between gap-2">
+        <div class="flex items-start gap-2 min-w-0">
+          <img src="https://tunggalpaito.online/koin-tiongkok.png" alt="KOIN TIONGKOK" width="56" height="56" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-14 h-14 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
+          <div class="min-w-0 flex-1">
+            <span class="text-xs-custom inline-block bg-amber-500/15 text-amber-300 border border-amber-500/35 font-bold px-1.5 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
+            <h3 class="text-sm-custom font-bold text-warm-bright leading-tight">KOIN TIONGKOK</h3>
+            <p class="text-xs-custom text-warm-muted leading-snug mt-0.5">Gantungan 5 Kaisar</p>
+          </div>
         </div>
+        <a href="https://s.shopee.co.id/70L19Mcixt" target="_blank" rel="noopener noreferrer" class="tap-responsive text-sm-custom cyber-btn-red w-full inline-flex items-center justify-center gap-1 font-extrabold py-1.5 px-2.5 rounded-lg">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
+        </a>
       </div>
 
-      <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/gelang-pixiu.png" alt="GELANG PIXIU" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-16 h-16 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
-        <div class="min-w-0 flex-1">
-          <span class="inline-block bg-rose-500/15 text-rose-400 border border-rose-500/25 font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
-          <h3 class="font-bold text-white truncate">GELANG PIXIU</h3>
-          <p class="text-gray-400 line-clamp-1 mb-2">Batu Pixiu Obsidian Mantra Buddha</p>
-          <a href="https://s.shopee.co.id/4B0pmNq6Yb" target="_blank" rel="noopener noreferrer" class="tap-responsive cyber-btn-red inline-flex items-center gap-1 text-white font-extrabold py-1 px-2.5 rounded-lg">
-            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
-          </a>
+      <div class="hoki-slide-card bento-card rounded-2xl p-2.5 flex flex-col justify-between gap-2">
+        <div class="flex items-start gap-2 min-w-0">
+          <img src="https://tunggalpaito.online/gelang-pixiu.png" alt="GELANG PIXIU" width="56" height="56" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-14 h-14 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
+          <div class="min-w-0 flex-1">
+            <span class="text-xs-custom inline-block bg-amber-500/15 text-amber-300 border border-amber-500/35 font-bold px-1.5 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
+            <h3 class="text-sm-custom font-bold text-warm-bright leading-tight">GELANG PIXIU</h3>
+            <p class="text-xs-custom text-warm-muted leading-snug mt-0.5">Pixiu Obsidian Mantra</p>
+          </div>
         </div>
+        <a href="https://s.shopee.co.id/4B0pmNq6Yb" target="_blank" rel="noopener noreferrer" class="tap-responsive text-sm-custom cyber-btn-red w-full inline-flex items-center justify-center gap-1 font-extrabold py-1.5 px-2.5 rounded-lg">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
+        </a>
       </div>
 
-      <div class="snap-start shrink-0 w-64 bento-card rounded-2xl p-3 flex items-center gap-3">
-        <img src="https://tunggalpaito.online/kayu-kesehatan.png" alt="KAYU KESEHATAN" width="64" height="64" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-16 h-16 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
-        <div class="min-w-0 flex-1">
-          <span class="inline-block bg-rose-500/15 text-rose-400 border border-rose-500/25 font-bold px-2 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
-          <h3 class="font-bold text-white truncate">KAYU KESEHATAN</h3>
-          <p class="text-gray-400 line-clamp-1 mb-2">Tasbih Secang Kayu Kesehatan 8mm</p>
-          <a href="https://s.shopee.co.id/6VOkZ7O0R7" target="_blank" rel="noopener noreferrer" class="tap-responsive cyber-btn-red inline-flex items-center gap-1 text-white font-extrabold py-1 px-2.5 rounded-lg">
-            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
-          </a>
+      <div class="hoki-slide-card bento-card rounded-2xl p-2.5 flex flex-col justify-between gap-2">
+        <div class="flex items-start gap-2 min-w-0">
+          <img src="https://tunggalpaito.online/kayu-kesehatan.png" alt="KAYU KESEHATAN" width="56" height="56" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" class="w-14 h-14 aspect-square object-cover rounded-xl border border-rose-500/40 shrink-0 bg-[#0b060a]">
+          <div class="min-w-0 flex-1">
+            <span class="text-xs-custom inline-block bg-amber-500/15 text-amber-300 border border-amber-500/35 font-bold px-1.5 py-0.5 rounded-full mb-1">Shopee Pilihan</span>
+            <h3 class="text-sm-custom font-bold text-warm-bright leading-tight">KAYU KESEHATAN</h3>
+            <p class="text-xs-custom text-warm-muted leading-snug mt-0.5">Tasbih Secang 8mm</p>
+          </div>
         </div>
+        <a href="https://s.shopee.co.id/6VOkZ7O0R7" target="_blank" rel="noopener noreferrer" class="tap-responsive text-sm-custom cyber-btn-red w-full inline-flex items-center justify-center gap-1 font-extrabold py-1.5 px-2.5 rounded-lg">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Beli
+        </a>
       </div>
     </div>
   </section>
 </header>
 
-<main class="relative z-10 w-full container-mobile px-4 py-4 flex-grow space-y-5">
-  <section aria-label="Perlengkapan dan Pilihan Prediksi">
-    <div class="flex items-center justify-between mb-2.5 px-0.5">
-      <h2 class="section-heading font-cyber font-extrabold uppercase tracking-wider text-gray-100">Perlengkapan &amp; Pilihan Prediksi</h2>
-    </div>
-
+<main class="relative z-10 w-full container-mobile px-4 py-4 flex<main class="relative z-10 w-full container-mobile px-4 py-4 flex-grow space-y-5">
+  <section aria-label="Menu Prediksi">
     <div class="grid grid-cols-2 gap-2.5">
-      <a href="https://tunggalpaito.online/live-draw/" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between group">
-        <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center mb-2.5 border border-rose-500/30">
+      <a href="https://tunggalpaito.online/live-draw/" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center mb-2.5 border border-rose-500/30">
           <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
         </div>
         <div>
-          <div class="font-bold text-gray-100">Live Draw Togel</div>
-          <div class="text-gray-400 mt-0.5 leading-snug">Siaran langsung pemutaran angka</div>
+          <div class="font-bold text-warm-bright">Live Draw</div>
+          <div class="text-xs-custom text-warm-muted mt-0.5 leading-snug">Siaran langsung</div>
         </div>
       </a>
 
-      <a href="https://tunggalpaito.online/paito-warna/" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between group">
-        <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center mb-2.5 border border-rose-500/30">
+      <a href="https://tunggalpaito.online/paito-warna/" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center mb-2.5 border border-rose-500/30">
           <i class="fa-solid fa-palette" aria-hidden="true"></i>
         </div>
         <div>
-          <div class="font-bold text-gray-100">Paito Warna</div>
-          <div class="text-gray-400 mt-0.5 leading-snug">Data paito lengkap semua pasaran</div>
+          <div class="font-bold text-warm-bright">Paito Warna</div>
+          <div class="text-xs-custom text-warm-muted mt-0.5 leading-snug">Data lengkap semua pasaran</div>
         </div>
       </a>
 
-      <a href="https://tunggalpaito.online/prediksi/generator" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between group">
-        <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center mb-2.5 border border-rose-500/30">
+      <a href="https://tunggalpaito.online/prediksi/generator" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center mb-2.5 border border-rose-500/30">
           <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
         </div>
         <div>
-          <div class="font-bold text-gray-100">Generator BBFS</div>
-          <div class="text-gray-400 mt-0.5 leading-snug">Alat peracik angka lengkap</div>
+          <div class="font-bold text-warm-bright">Generator BBFS</div>
+          <div class="text-xs-custom text-warm-muted mt-0.5 leading-snug">Alat kombinasi angka</div>
         </div>
       </a>
 
-      <a href="https://tunggalpaito.online/rumus/" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between group">
-        <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center mb-2.5 border border-rose-500/30">
+      <a href="https://tunggalpaito.online/rumus/" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center mb-2.5 border border-rose-500/30">
           <i class="fa-solid fa-calculator" aria-hidden="true"></i>
         </div>
         <div>
-          <div class="font-bold text-gray-100">APK VS 2D</div>
-          <div class="text-gray-400 mt-0.5 leading-snug">Rumus racik angka otomatis</div>
+          <div class="font-bold text-warm-bright">APK VS 2D</div>
+          <div class="text-xs-custom text-warm-muted mt-0.5 leading-snug">Angka bocoran otomatis</div>
         </div>
-      </a>
-
-      <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/" class="col-span-2 bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex items-center justify-between group">
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center border border-rose-500/30 shrink-0">
-            <i class="fa-solid fa-skull-crossbones" aria-hidden="true"></i>
-          </div>
-          <div class="min-w-0">
-            <div class="font-cyber font-extrabold text-gray-100 truncate">MASTER PEMBUNUH ANGKA</div>
-            <div class="text-gray-400 mt-0.5 truncate">Lemah 2D Lengkap Dari Nama-nama Master Berbeda</div>
-          </div>
-        </div>
-        <i class="fa-solid fa-chevron-right text-rose-500/70 shrink-0" aria-hidden="true"></i>
-      </a>
-
-      <a href="https://tunggalpaito.online/apk/ruang-tenang/angka-hoki/" class="col-span-2 bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex items-center justify-between group">
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center border border-rose-500/30 shrink-0">
-            <i class="fa-solid fa-spa" aria-hidden="true"></i>
-          </div>
-          <div class="min-w-0">
-            <div class="font-cyber font-extrabold text-gray-100 truncate">RUANG KETENANGAN ANGKA HOKI</div>
-            <div class="text-gray-400 mt-0.5 truncate">Fokus &amp; ketenangan mencari angka hoki</div>
-          </div>
-        </div>
-        <i class="fa-solid fa-chevron-right text-rose-500/70 shrink-0" aria-hidden="true"></i>
       </a>
     </div>
   </section>
 
+
   <section id="market-section" class="space-y-3.5" aria-label="Pilih Pasaran">
-    <div class="flex items-center justify-between px-0.5">
-      <h2 class="section-heading font-cyber font-extrabold uppercase tracking-wider text-gray-100">Pilih Pasaran</h2>
-      <span class="text-rose-400 font-semibold">Tap Pasaran Khusus</span>
+    <div class="flex items-center justify-between px-0.5 gap-2">
     </div>
 
     <div class="grid grid-cols-4 gap-1.5 glass-panel p-1.5 rounded-2xl" role="tablist" aria-label="Filter Pasaran">
-      <button type="button" role="tab" data-tab="all" aria-selected="true" onclick="filterMarket('all', this)" class="tab-btn active py-2 px-2 rounded-xl font-bold text-gray-300 border border-transparent cursor-pointer">Semua</button>
-      <button type="button" role="tab" data-tab="sdy" aria-selected="false" onclick="filterMarket('sdy', this)" class="tab-btn py-2 px-2 rounded-xl font-bold text-gray-300 border border-transparent hover:bg-rose-500/10 cursor-pointer">🇦🇺 SDY</button>
-      <button type="button" role="tab" data-tab="sgp" aria-selected="false" onclick="filterMarket('sgp', this)" class="tab-btn py-2 px-2 rounded-xl font-bold text-gray-300 border border-transparent hover:bg-rose-500/10 cursor-pointer">🇸🇬 SGP</button>
-      <button type="button" role="tab" data-tab="hk" aria-selected="false" onclick="filterMarket('hk', this)" class="tab-btn py-2 px-2 rounded-xl font-bold text-gray-300 border border-transparent hover:bg-rose-500/10 cursor-pointer">🇭🇰 HK</button>
+      <button type="button" role="tab" data-tab="all" aria-selected="true" onclick="filterMarket('all', this)" class="tab-btn text-sm-custom active py-2 px-2 rounded-xl font-bold text-warm-body border border-transparent cursor-pointer">Semua</button>
+      <button type="button" role="tab" data-tab="sdy" aria-selected="false" onclick="filterMarket('sdy', this)" class="tab-btn text-sm-custom py-2 px-2 rounded-xl font-bold text-warm-body border border-transparent hover:bg-rose-500/10 cursor-pointer">🇦🇺 SDY</button>
+      <button type="button" role="tab" data-tab="sgp" aria-selected="false" onclick="filterMarket('sgp', this)" class="tab-btn text-sm-custom py-2 px-2 rounded-xl font-bold text-warm-body border border-transparent hover:bg-rose-500/10 cursor-pointer">🇸🇬 SGP</button>
+      <button type="button" role="tab" data-tab="hk" aria-selected="false" onclick="filterMarket('hk', this)" class="tab-btn text-sm-custom py-2 px-2 rounded-xl font-bold text-warm-body border border-transparent hover:bg-rose-500/10 cursor-pointer">🇭🇰 HK</button>
+    </div>
+
+    <div id="market-filter-status" class="hidden flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/25 text-xs-custom">
+      <span id="market-filter-label" class="text-rose-200 font-semibold"></span>
+      <button type="button" onclick="filterMarket('all', document.querySelector('.tab-btn[data-tab=&quot;all&quot;]'))" class="text-amber-300 font-bold hover:underline cursor-pointer shrink-0">Tampilkan Semua</button>
     </div>
 
     <div data-market="sdy" class="market-block bento-card rounded-3xl p-4">
-      <div class="flex items-center justify-between mb-3 pb-3 border-b border-rose-500/20">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/15 flex items-center justify-center border border-rose-500/35">🇦🇺</div>
-          <div>
-            <div class="font-cyber font-extrabold text-rose-400">PASARAN SYDNEY</div>
-            <div class="text-gray-400">Prediksi, Analisa &amp; Line 2D SDY</div>
+      <div class="flex items-center justify-between mb-3 pb-3 border-b border-rose-500/20 gap-2">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center border border-rose-500/35 shrink-0" role="img" aria-label="Bendera Australia">
+            <span class="flag-badge">🇦🇺</span>
+          </div>
+          <div class="min-w-0">
+            <div class="font-cyber font-extrabold text-rose-300">PASARAN SYDNEY</div>
           </div>
         </div>
-        <span class="font-mono-num font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-500/30">SDY</span>
+        <span class="text-xs-custom font-mono-num font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-200 border border-rose-500/30 shrink-0">SDY</span>
       </div>
       <div class="grid grid-cols-2 gap-2">
-        <a href="https://tunggalpaito.online/prediksi/sdy" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl group">
-          <span class="text-rose-300 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-400" aria-hidden="true"></i>Prediksi Sydney Hari Ini</span>
+        <a href="https://tunggalpaito.online/prediksi/sdy" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl">
+          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi Sydney Hari Ini</span>
+          <i class="fa-solid fa-chevron-right text-rose-300" aria-hidden="true"></i>
+        </a>
+        <a href="https://tunggalpaito.online/prediksi-sdy/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Analisa SDY</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi-sdy/" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Analisa SDY</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/prediksi/2dsdy" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">LINE 2D SDY</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi/2dsdy" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">LINE 2D SDY</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/bbfs2d-sdy.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">BBFS 2D SDY</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/bbfs2d-sdy.html" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">BBFS 2D SDY</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/kumat-sdy.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">KUMAT 2D SDY</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/kumat-sdy.html" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">KUMAT 2D SDY</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/kepala-sdy" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Lemah Kepala</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/kepala-sdy" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Lemah Kepala</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/ekor-sdy" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Lemah Ekor</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/ekor-sdy" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Lemah Ekor</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
-        </a>
-        <a href="https://tunggalpaito.online/angka-lemah/2d-sdy" class="tap-responsive col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-400" aria-hidden="true"></i>Lemah 2D SDY</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/2d-sdy" class="tap-responsive text-sm-custom col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>Lemah 2D SDY</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
     </div>
 
     <div data-market="sgp" class="market-block bento-card rounded-3xl p-4">
-      <div class="flex items-center justify-between mb-3 pb-3 border-b border-rose-500/20">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/15 flex items-center justify-center border border-rose-500/35">🇸🇬</div>
-          <div>
-            <div class="font-cyber font-extrabold text-rose-400">PASARAN SINGAPORE</div>
-            <div class="text-gray-400">Prediksi, Analisa &amp; Line 2D SGP</div>
+      <div class="flex items-center justify-between mb-3 pb-3 border-b border-rose-500/20 gap-2">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center border border-rose-500/35 shrink-0" role="img" aria-label="Bendera Singapura">
+            <span class="flag-badge">🇸🇬</span>
+          </div>
+          <div class="min-w-0">
+            <div class="font-cyber font-extrabold text-rose-300">PASARAN SINGAPORE</div>
           </div>
         </div>
-        <span class="font-mono-num font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-500/30">SGP</span>
+        <span class="text-xs-custom font-mono-num font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-200 border border-rose-500/30 shrink-0">SGP</span>
       </div>
       <div class="grid grid-cols-2 gap-2">
-        <a href="https://tunggalpaito.online/prediksi/sgp" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl group">
-          <span class="text-rose-300 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-400" aria-hidden="true"></i>Prediksi Singapore Hari Ini</span>
+        <a href="https://tunggalpaito.online/prediksi/sgp" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl">
+          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi Singapore Hari Ini</span>
+          <i class="fa-solid fa-chevron-right text-rose-300" aria-hidden="true"></i>
+        </a>
+        <a href="https://tunggalpaito.online/prediksi-sgp/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Analisa SGP</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi-sgp/" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Analisa SGP</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/prediksi/2dsgp" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">LINE 2D SGP</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi/2dsgp" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">LINE 2D SGP</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/bbfs2d-sgp.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">BBFS 2D SGP</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/bbfs2d-sgp.html" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">BBFS 2D SGP</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/kumat-sgp.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">KUMAT 2D SGP</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/kumat-sgp.html" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">KUMAT 2D SGP</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/kepala-sgp" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Lemah Kepala</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/kepala-sgp" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Lemah Kepala</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/ekor-sgp" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Lemah Ekor</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/ekor-sgp" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Lemah Ekor</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
-        </a>
-        <a href="https://tunggalpaito.online/angka-lemah/2d-sgp" class="tap-responsive col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-400" aria-hidden="true"></i>Lemah 2D SGP</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/2d-sgp" class="tap-responsive text-sm-custom col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>Lemah 2D SGP</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
     </div>
 
     <div data-market="hk" class="market-block bento-card rounded-3xl p-4">
-      <div class="flex items-center justify-between mb-3 pb-3 border-b border-rose-500/20">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/15 flex items-center justify-center border border-rose-500/35">🇭🇰</div>
-          <div>
-            <div class="font-cyber font-extrabold text-rose-400">PASARAN HONGKONG</div>
-            <div class="text-gray-400">Prediksi, Analisa &amp; Line 2D HK</div>
+      <div class="flex items-center justify-between mb-3 pb-3 border-b border-rose-500/20 gap-2">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center border border-rose-500/35 shrink-0" role="img" aria-label="Bendera Hong Kong">
+            <span class="flag-badge">🇭🇰</span>
+          </div>
+          <div class="min-w-0">
+            <div class="font-cyber font-extrabold text-rose-300">PASARAN HONGKONG</div>
           </div>
         </div>
-        <span class="font-mono-num font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-500/30">HK</span>
+        <span class="text-xs-custom font-mono-num font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-200 border border-rose-500/30 shrink-0">HK</span>
       </div>
       <div class="grid grid-cols-2 gap-2">
-        <a href="https://tunggalpaito.online/prediksi/hk" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl group">
-          <span class="text-rose-300 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-400" aria-hidden="true"></i>Prediksi Hongkong Hari Ini</span>
+        <a href="https://tunggalpaito.online/prediksi/hk" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl">
+          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi Hongkong Hari Ini</span>
+          <i class="fa-solid fa-chevron-right text-rose-300" aria-hidden="true"></i>
+        </a>
+        <a href="https://tunggalpaito.online/prediksi-hk/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Analisa HK</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi-hk/" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Analisa HK</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/prediksi/2dhk" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">LINE 2D HK</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/prediksi/2dhk" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">LINE 2D HK</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/bbfs2d-hk.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">BBFS 2D HK</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/bbfs2d-hk.html" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">BBFS 2D HK</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/kumat-hk.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">KUMAT 2D HK</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/kumat-hk.html" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">KUMAT 2D HK</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/kepala-hk" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Lemah Kepala</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/kepala-hk" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Lemah Kepala</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/ekor-hk" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium">Lemah Ekor</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
-        <a href="https://tunggalpaito.online/angka-lemah/ekor-hk" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium">Lemah Ekor</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
-        </a>
-        <a href="https://tunggalpaito.online/angka-lemah/2d-hk" class="tap-responsive col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group">
-          <span class="text-gray-200 font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-400" aria-hidden="true"></i>Lemah 2D HK</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/angka-lemah/2d-hk" class="tap-responsive text-sm-custom col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
+          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>Lemah 2D HK</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
     </div>
 
     <div id="lotto-grid" class="grid grid-cols-1 gap-3">
       <div data-market="sdy" class="market-block bento-card rounded-3xl p-4">
-        <div class="flex items-center justify-between mb-2.5">
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-rose-500/15 flex items-center justify-center border border-rose-500/35">🇦🇺</div>
-            <div>
-              <div class="font-cyber font-extrabold text-rose-400">PASARAN SDY LOTTO</div>
-              <div class="text-gray-400">Prediksi Angka Main SDY Lotto</div>
+        <div class="flex items-center justify-between mb-2.5 gap-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center border border-rose-500/35 shrink-0" role="img" aria-label="Bendera Australia">
+              <span class="flag-badge">🇦🇺</span>
+            </div>
+            <div class="min-w-0">
+              <div class="font-cyber font-extrabold text-rose-300">PASARAN SDY LOTTO</div>
             </div>
           </div>
-          <span class="font-mono-num font-bold px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/25">LOTTO</span>
+          <span class="text-xs-custom font-mono-num font-bold px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-200 border border-rose-500/30 shrink-0">LOTTO</span>
         </div>
-        <a href="https://tunggalpaito.online/prediksi/angka-main/sdy-lotto/" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-3 rounded-xl group">
-          <span class="text-gray-200 font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-rose-400" aria-hidden="true"></i>Prediksi Angka Main SDY Lotto hari ini</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/prediksi/angka-main/sdy-lotto/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-3 rounded-xl">
+          <span class="text-warm-body font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi Angka Main SDY Lotto hari ini</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
 
       <div data-market="hk" class="market-block bento-card rounded-3xl p-4">
-        <div class="flex items-center justify-between mb-2.5">
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-rose-500/15 flex items-center justify-center border border-rose-500/35">🇭🇰</div>
-            <div>
-              <div class="font-cyber font-extrabold text-rose-400">PASARAN HK LOTTO</div>
-              <div class="text-gray-400">Prediksi Angka Main HK Lotto</div>
+        <div class="flex items-center justify-between mb-2.5 gap-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-300 flex items-center justify-center border border-rose-500/35 shrink-0" role="img" aria-label="Bendera Hong Kong">
+              <span class="flag-badge">🇭🇰</span>
+            </div>
+            <div class="min-w-0">
+              <div class="font-cyber font-extrabold text-rose-300">PASARAN HK LOTTO</div>
             </div>
           </div>
-          <span class="font-mono-num font-bold px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/25">LOTTO</span>
+          <span class="text-xs-custom font-mono-num font-bold px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-200 border border-rose-500/30 shrink-0">LOTTO</span>
         </div>
-        <a href="https://tunggalpaito.online/prediksi/angka-main/hk-lotto/" class="tap-responsive flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-3 rounded-xl group">
-          <span class="text-gray-200 font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-rose-400" aria-hidden="true"></i>Prediksi Angka Main HK Lotto hari ini</span>
-          <i class="fa-solid fa-chevron-right text-rose-500/60" aria-hidden="true"></i>
+        <a href="https://tunggalpaito.online/prediksi/angka-main/hk-lotto/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-3 rounded-xl">
+          <span class="text-warm-body font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi Angka Main HK Lotto hari ini</span>
+          <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -1367,200 +1358,192 @@
 </main>
 
 <section class="relative z-10 w-full container-mobile px-4 pt-2 pb-1 text-center">
-  <div class="glass-panel rounded-2xl p-3.5 border border-rose-500/25">
-    <p class="text-gray-300 leading-relaxed">
-      <a id="terima-kasih-link" href="https://tunggalpaito.online/prediksi/" class="tap-responsive inline-block text-rose-400 hover:text-rose-300 underline decoration-rose-500/50 underline-offset-4 font-semibold">
+  <div class="glass-panel rounded-2xl p-4 border border-rose-500/25">
+    <p class="text-warm-body leading-relaxed">
+      <a id="terima-kasih-link" href="https://tunggalpaito.online/prediksi/" class="tap-responsive inline-block text-rose-300 hover:text-rose-200 underline decoration-rose-400/60 underline-offset-4 font-semibold">
         Terima kasih sudah mengunjungi website ini
       </a>
     </p>
   </div>
 </section>
 
-<!-- MODAL CARI -->
 <div id="search-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="search-modal-title" class="fixed inset-0 z-[2147483640] bg-black/85 flex items-center justify-center p-4 hidden">
   <div class="bg-gradient-to-br from-[#160a10] via-[#0b060a] to-[#050508] border border-rose-500/50 rounded-3xl w-full max-w-sm p-4 relative animate-popup text-left flex flex-col max-h-[82vh]">
     <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-rose-500/20">
       <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center border border-rose-500/35">
+        <div class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center border border-rose-500/35">
           <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         </div>
         <div>
-          <h3 id="search-modal-title" class="modal-title font-cyber font-extrabold text-white uppercase tracking-wider">Daftar Isi &amp; Cari Cepat</h3>
-          <p class="text-gray-400">Ketik kata kunci atau pilih tag pasaran</p>
+          <h3 id="search-modal-title" class="modal-title font-cyber font-extrabold text-warm-bright uppercase tracking-wider">Daftar Isi &amp; Cari Cepat</h3>
+          <p class="text-xs-custom text-warm-muted">Ketik kata kunci atau pilih tag pasaran</p>
         </div>
       </div>
-      <button type="button" onclick="closeSearchModal()" aria-label="Tutup pencarian" class="tap-responsive bg-[#1d0e16] hover:bg-rose-600 text-gray-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center border border-rose-500/30 cursor-pointer">
+      <button type="button" onclick="closeSearchModal()" aria-label="Tutup pencarian" class="tap-responsive bg-[#1d0e16] hover:bg-rose-600 text-warm-body hover:text-rose-100/90 w-8 h-8 rounded-full flex items-center justify-center border border-rose-500/30 cursor-pointer">
         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
     </div>
 
     <div class="relative mb-2.5">
-      <i class="fa-solid fa-search text-rose-400/70 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true"></i>
-      <input id="toc-search-input" type="text" autocomplete="off" placeholder="Cari SDY, SGP, HK, BBFS, Line 2D, Live Draw..." oninput="syncQuickTagState(); renderSearchResults();" class="w-full bg-[#070407]/95 text-white placeholder-gray-500 rounded-xl pl-9 pr-8 py-2.5 border border-rose-500/25 focus:border-rose-500/80 focus:outline-none">
-      <button type="button" id="clear-search-btn" onclick="clearSearchQuery()" aria-label="Hapus kata kunci" class="hidden text-gray-400 hover:text-white absolute right-2.5 top-1/2 -translate-y-1/2 cursor-pointer px-1">
+      <i class="fa-solid fa-search text-rose-300/80 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true"></i>
+      <input id="toc-search-input" type="text" autocomplete="off" placeholder="Cari SDY, SGP, HK, BBFS, Line 2D..." oninput="syncQuickTagState(); renderSearchResults();" class="text-sm-custom w-full bg-[#070407]/95 text-warm-bright rounded-xl pl-9 pr-8 py-2.5 border border-rose-500/25 focus:border-rose-500/80 focus:outline-none">
+      <button type="button" id="clear-search-btn" onclick="clearSearchQuery()" aria-label="Hapus kata kunci" class="hidden text-warm-muted hover:text-rose-200 absolute right-2.5 top-1/2 -translate-y-1/2 cursor-pointer px-1">
         <i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>
       </button>
     </div>
 
     <div id="quick-search-tags" class="flex flex-wrap gap-1.5 mb-3">
-      <button type="button" data-q="" onclick="setQuickSearch('')" class="quick-tag active-tag tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-gray-200 border border-rose-500/20 cursor-pointer">Semua</button>
-      <button type="button" data-q="SDY" onclick="setQuickSearch('SDY')" class="quick-tag tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 cursor-pointer">SDY</button>
-      <button type="button" data-q="SGP" onclick="setQuickSearch('SGP')" class="quick-tag tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 cursor-pointer">SGP</button>
-      <button type="button" data-q="HK" onclick="setQuickSearch('HK')" class="quick-tag tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 cursor-pointer">HK</button>
-      <button type="button" data-q="BBFS" onclick="setQuickSearch('BBFS')" class="quick-tag tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-gray-200 border border-rose-500/20 cursor-pointer">BBFS</button>
-      <button type="button" data-q="LINE 2D" onclick="setQuickSearch('LINE 2D')" class="quick-tag tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-gray-200 border border-rose-500/20 cursor-pointer">LINE 2D</button>
-      <button type="button" data-q="LOTTO" onclick="setQuickSearch('LOTTO')" class="quick-tag tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-gray-200 border border-rose-500/20 cursor-pointer">LOTTO</button>
+      <button type="button" data-q="" onclick="setQuickSearch('')" class="quick-tag text-xs-custom active-tag tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-warm-body border border-rose-500/20 cursor-pointer">Semua</button>
+      <button type="button" data-q="SDY" onclick="setQuickSearch('SDY')" class="quick-tag text-xs-custom tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-200 border border-rose-500/30 cursor-pointer">🇦🇺 SDY</button>
+      <button type="button" data-q="SGP" onclick="setQuickSearch('SGP')" class="quick-tag text-xs-custom tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-200 border border-rose-500/30 cursor-pointer">🇸🇬 SGP</button>
+      <button type="button" data-q="HK" onclick="setQuickSearch('HK')" class="quick-tag text-xs-custom tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-200 border border-rose-500/30 cursor-pointer">🇭🇰 HK</button>
+      <button type="button" data-q="BBFS" onclick="setQuickSearch('BBFS')" class="quick-tag text-xs-custom tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-warm-body border border-rose-500/20 cursor-pointer">BBFS</button>
+      <button type="button" data-q="LINE 2D" onclick="setQuickSearch('LINE 2D')" class="quick-tag text-xs-custom tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-warm-body border border-rose-500/20 cursor-pointer">LINE 2D</button>
+      <button type="button" data-q="LOTTO" onclick="setQuickSearch('LOTTO')" class="quick-tag text-xs-custom tap-responsive font-bold px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/25 text-warm-body border border-rose-500/20 cursor-pointer">LOTTO</button>
     </div>
 
     <div id="toc-results-list" class="space-y-1.5 overflow-y-auto pr-1 flex-1"></div>
   </div>
 </div>
 
-<!-- MODAL JASA WEBSITE -->
 <div id="webdev-popup" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="webdev-modal-title" class="fixed inset-0 z-[2147483640] bg-black/85 flex items-center justify-center p-4 hidden">
-  <div class="bg-gradient-to-br from-[#160a10] via-[#0b060a] to-[#050508] border border-rose-500/50 rounded-3xl w-full max-w-sm p-6 relative animate-popup text-left">
-    <button type="button" onclick="closeWebDevModal()" aria-label="Tutup modal" class="tap-responsive absolute top-3.5 right-3.5 bg-[#1d0e16] hover:bg-rose-600 text-gray-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center border border-rose-500/30 cursor-pointer">
+  <div class="bg-gradient-to-br from-[#160a10] via-[#0b060a] to-[#050508] border border-rose-500/50 rounded-3xl w-full max-w-sm p-5 relative animate-popup text-left">
+    <button type="button" onclick="closeWebDevModal()" aria-label="Tutup modal" class="tap-responsive absolute top-3.5 right-3.5 bg-[#1d0e16] hover:bg-rose-600 text-warm-body hover:text-rose-100/90 w-8 h-8 rounded-full flex items-center justify-center border border-rose-500/30 cursor-pointer">
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
     <div class="flex items-center space-x-3 mb-4 pb-3 border-b border-rose-500/20">
-      <div class="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 border border-rose-500/35">
+      <div class="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-300 flex items-center justify-center shrink-0 border border-rose-500/35">
         <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
       </div>
       <div>
-        <h3 id="webdev-modal-title" class="modal-title font-cyber font-bold text-white uppercase tracking-wider">Jasa Pembuatan Website</h3>
-        <p class="text-rose-400 font-medium">Custom profesional masa kini, Murah &amp; Cepat!</p>
+        <h3 id="webdev-modal-title" class="modal-title font-cyber font-bold text-warm-bright uppercase tracking-wider">Jasa Pembuatan Website</h3>
+        <p class="text-xs-custom text-rose-300 font-medium">Custom profesional masa kini, Murah &amp; Cepat!</p>
       </div>
     </div>
-    <div class="text-gray-300 space-y-2.5 mb-5 max-h-[60vh] overflow-y-auto pr-1">
-      <p class="font-semibold text-rose-300 bg-rose-500/15 p-2.5 rounded-xl border border-rose-500/30">Kami melayani pembuatan berbagai macam jenis aplikasi &amp; website profesional sesuai kebutuhan Anda:</p>
-      <ul class="space-y-2 text-gray-300 pl-1">
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">APK:</strong> Semua jenis aplikasi (bisa pakai key/rumus Anda sendiri).</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web Toko Pakan Ternak &amp; Pertanian:</strong> Katalog produk, pemesanan grosir/eceran pakan, bibit, pupuk, &amp; obat hewan.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web Toko Online / E-Commerce:</strong> Sistem keranjang belanja, checkout WhatsApp/Midtrans, multi-kategori produk.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Landing Page Produk &amp; Jasa:</strong> Optimal untuk iklan FB Ads, TikTok Ads, &amp; Google Ads dengan konversi tinggi.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web Company Profile:</strong> Profil perusahaan, CV, PT, pabrik, instansi, atau yayasan resmi.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web PPOB, Pulsa &amp; Top Up Game:</strong> Sistem agen pulsa, kuota internet, token listrik, &amp; voucher game otomatis.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web Portal Berita &amp; Blog:</strong> Website informasi, majalah online, atau media publikasi artikel SEO.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web Booking &amp; Reservasi:</strong> Hotel, villa, travel, salon, lapangan olahraga, hingga konsultasi online.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web Portofolio &amp; CV Kreatif:</strong> Personal branding untuk fotografer, desainer, freelancer, &amp; profesional.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web Sekolah &amp; Lembaga Kursus:</strong> Sistem PPDB online, e-learning, dan informasi akademik.</li>
-        <li><i class="fa-solid fa-check text-rose-500 mr-1.5" aria-hidden="true"></i> <strong class="text-white">Web Custom Sesuai Request:</strong> Sistem manajemen data khusus, dashboard admin, API integrasi, dll.</li>
+    <div class="text-sm-custom text-warm-body space-y-2.5 mb-5 max-h-[60vh] overflow-y-auto pr-1 leading-relaxed">
+      <p class="font-semibold text-rose-200 bg-rose-500/15 p-3 rounded-xl border border-rose-500/30">Kami melayani pembuatan berbagai macam jenis aplikasi &amp; website profesional sesuai kebutuhan Anda:</p>
+      <ul class="space-y-2 text-warm-body pl-1">
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">APK:</strong> Semua jenis aplikasi (bisa pakai key/rumus Anda sendiri).</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web Toko Pakan Ternak &amp; Pertanian:</strong> Katalog produk, pemesanan grosir/eceran pakan, bibit, pupuk, &amp; obat hewan.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web Toko Online / E-Commerce:</strong> Sistem keranjang belanja, checkout WhatsApp/Midtrans, multi-kategori produk.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Landing Page Produk &amp; Jasa:</strong> Optimal untuk iklan FB Ads, TikTok Ads, &amp; Google Ads dengan konversi tinggi.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web Company Profile:</strong> Profil perusahaan, CV, PT, pabrik, instansi, atau yayasan resmi.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web PPOB, Pulsa &amp; Top Up Game:</strong> Sistem agen pulsa, kuota internet, token listrik, &amp; voucher game otomatis.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web Portal Berita &amp; Blog:</strong> Website informasi, majalah online, atau media publikasi artikel SEO.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web Booking &amp; Reservasi:</strong> Hotel, villa, travel, salon, lapangan olahraga, hingga konsultasi online.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web Portofolio &amp; CV Kreatif:</strong> Personal branding untuk fotografer, desainer, freelancer, &amp; profesional.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web Sekolah &amp; Lembaga Kursus:</strong> Sistem PPDB online, e-learning, dan informasi akademik.</li>
+        <li><i class="fa-solid fa-check text-rose-400 mr-1.5" aria-hidden="true"></i> <strong class="text-warm-bright">Web Custom Sesuai Request:</strong> Sistem manajemen data khusus, dashboard admin, API integrasi, dll.</li>
       </ul>
-      <div class="pt-2 border-t border-rose-500/20 space-y-1 text-gray-400">
-        <p><i class="fa-solid fa-star text-rose-500 mr-1" aria-hidden="true"></i> Desain modern, elegan &amp; 100% keren sesuai pemesanan</p>
-        <p><i class="fa-solid fa-star text-rose-500 mr-1" aria-hidden="true"></i> Pengerjaan kilat, aman &amp; bergaransi</p>
-        <p><i class="fa-solid fa-star text-rose-500 mr-1" aria-hidden="true"></i> Harga bersahabat, CS profesional</p>
+      <div class="pt-2.5 border-t border-rose-500/20 space-y-1 text-warm-muted">
+        <p><i class="fa-solid fa-star text-amber-300 mr-1" aria-hidden="true"></i> Desain modern, elegan &amp; 100% keren sesuai pemesanan</p>
+        <p><i class="fa-solid fa-star text-amber-300 mr-1" aria-hidden="true"></i> Pengerjaan kilat, aman &amp; bergaransi</p>
+        <p><i class="fa-solid fa-star text-amber-300 mr-1" aria-hidden="true"></i> Harga bersahabat, CS profesional</p>
       </div>
     </div>
-    <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20tertarik%20ingin%20memesan%20Jasa%20Pembuatan%20Website%20Custom." target="_blank" rel="noopener noreferrer" onclick="closeWebDevModal()" class="tap-responsive cyber-btn-red w-full flex items-center justify-center space-x-2 text-white font-extrabold py-3 px-4 rounded-2xl">
+    <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20tertarik%20ingin%20memesan%20Jasa%20Pembuatan%20Website%20Custom." target="_blank" rel="noopener noreferrer" onclick="closeWebDevModal()" class="tap-responsive cyber-btn-red w-full flex items-center justify-center space-x-2 font-extrabold py-3 px-4 rounded-2xl">
       <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> <span>Konsultasi / Pesan Sekarang</span>
     </a>
   </div>
 </div>
 
-<!-- MODAL DOWNLOAD -->
 <div id="download-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="download-modal-title" class="fixed inset-0 z-[2147483640] bg-black/85 flex items-center justify-center p-4 hidden">
   <div class="bg-gradient-to-br from-[#160a10] via-[#0b060a] to-[#050508] border border-rose-500/50 rounded-3xl w-full max-w-sm p-5 relative animate-popup text-left">
-    <button type="button" onclick="closeDownloadModal()" aria-label="Tutup modal" class="tap-responsive absolute top-3.5 right-3.5 bg-[#1d0e16] hover:bg-rose-600 text-gray-300 hover:text-white w-7 h-7 rounded-full flex items-center justify-center border border-rose-500/30 cursor-pointer">
+    <button type="button" onclick="closeDownloadModal()" aria-label="Tutup modal" class="tap-responsive absolute top-3.5 right-3.5 bg-[#1d0e16] hover:bg-rose-600 text-warm-body hover:text-rose-100/90 w-8 h-8 rounded-full flex items-center justify-center border border-rose-500/30 cursor-pointer">
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
     <div class="flex items-center space-x-3 mb-3.5 pb-3 border-b border-rose-500/20">
-      <div class="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 border border-rose-500/35">
+      <div class="w-10 h-10 rounded-2xl bg-amber-500/15 text-amber-300 flex items-center justify-center shrink-0 border border-amber-500/40">
         <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
       </div>
       <div>
-        <h3 id="download-modal-title" class="modal-title font-cyber font-bold text-white uppercase tracking-wider">Imbauan Penting</h3>
-        <p class="text-rose-400 font-medium">Jika Kesulitan Download APK Resmi TUNGGAL PAITO</p>
+        <h3 id="download-modal-title" class="modal-title font-cyber font-bold text-warm-bright uppercase tracking-wider">Imbauan Penting</h3>
+        <p class="text-xs-custom text-amber-300 font-medium">Jika Kesulitan Download APK Resmi TUNGGAL PAITO</p>
       </div>
     </div>
-    <div class="text-gray-300 space-y-2.5 mb-4 max-h-[62vh] overflow-y-auto pr-1">
-      <p class="font-semibold text-rose-300 bg-rose-500/15 p-2.5 rounded-xl border border-rose-500/30">📌 Pertama wajib login/pakai akun Gmail bahwa Anda bukan robot.</p>
+    <div class="text-sm-custom text-warm-body space-y-2.5 mb-4 max-h-[62vh] overflow-y-auto pr-1 leading-relaxed">
+      <p class="font-semibold text-amber-200 bg-amber-500/15 p-3 rounded-xl border border-amber-500/35">Pertama wajib login/pakai akun Gmail bahwa Anda bukan robot.</p>
       <div>
-        <p class="font-cyber font-bold text-rose-400 uppercase tracking-wider mb-1.5">Gambar Panduan Download APK</p>
+        <p class="text-xs-custom font-cyber font-bold text-rose-300 uppercase tracking-wider mb-1.5">Gambar Panduan Download APK</p>
         <div class="grid grid-cols-3 gap-2">
-          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" download="panduan-download-apk-tunggal-paito2.jpg" target="_blank" rel="noopener noreferrer" class="tap-responsive group block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
+          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" download="panduan-download-apk-tunggal-paito2.jpg" target="_blank" rel="noopener noreferrer" class="tap-responsive block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
             <img id="guide-img-1" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" alt="Panduan Langkah 1: Detail selengkapnya" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-cover">
-            <span class="block text-center font-bold text-gray-300 py-1 bg-[#0b060a]/95">Detail / Opsi</span>
+            <span class="text-xs-custom block text-center font-bold text-warm-body py-1 bg-[#0b060a]/95">Detail / Opsi</span>
           </a>
-          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.png" download="panduan-download-apk-tunggal-paito2.png" target="_blank" rel="noopener noreferrer" class="tap-responsive group block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
+          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.png" download="panduan-download-apk-tunggal-paito2.png" target="_blank" rel="noopener noreferrer" class="tap-responsive block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
             <img id="guide-img-2" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.png" alt="Panduan Langkah 2: Tetap instal" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-cover">
-            <span class="block text-center font-bold text-gray-300 py-1 bg-[#0b060a]/95">Tetap Instal</span>
+            <span class="text-xs-custom block text-center font-bold text-warm-body py-1 bg-[#0b060a]/95">Tetap Instal</span>
           </a>
-          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" download="panduan-download-apk-tunggal-paito3.jpg" target="_blank" rel="noopener noreferrer" class="tap-responsive group block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
+          <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" download="panduan-download-apk-tunggal-paito3.jpg" target="_blank" rel="noopener noreferrer" class="tap-responsive block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
             <img id="guide-img-3" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" alt="Panduan Langkah 3: Tetap download" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-contain bg-white/95">
-            <span class="block text-center font-bold text-gray-300 py-1 bg-[#0b060a]/95">Tetap Download</span>
+            <span class="text-xs-custom block text-center font-bold text-warm-body py-1 bg-[#0b060a]/95">Tetap Download</span>
           </a>
         </div>
       </div>
       <div>
-        <p class="font-bold text-gray-200 mb-1.5">Langkah Selanjutnya:</p>
-        <ol class="list-decimal list-inside space-y-1.5 text-gray-400 pl-1">
-          <li>Buka aplikasi <strong class="text-gray-200">Google Play Store</strong> di HP Anda.</li>
+        <p class="font-bold text-warm-bright mb-1.5">Langkah Selanjutnya:</p>
+        <ol class="list-decimal list-inside space-y-1.5 text-warm-muted pl-1">
+          <li>Buka aplikasi <strong class="text-warm-body">Google Play Store</strong> di HP Anda.</li>
           <li>Ketuk foto profil akun Anda di pojok kanan atas layar.</li>
-          <li>Pilih menu <strong class="text-gray-200">Play Protect</strong> (ikon berbentuk tameng hijau).</li>
-          <li>Ketuk ikon <strong class="text-gray-200">Roda Gigi / Setelan (Gear)</strong> di pojok kanan atas halaman Play Protect.</li>
-          <li>Matikan tombol pada pilihan <strong class="text-gray-200">Pindai aplikasi dengan Play Protect</strong> (Scan apps with Play Protect).</li>
-          <li>Akan muncul kotak konfirmasi, ketuk <strong class="text-gray-200">Nonaktifkan / Turn Off</strong>.</li>
-          <li><span class="text-rose-400">(Opsional)</span> Matikan juga tombol <strong class="text-gray-200">Tingkatkan deteksi aplikasi</strong> tepat di bawahnya.</li>
+          <li>Pilih menu <strong class="text-warm-body">Play Protect</strong> (ikon berbentuk tameng hijau).</li>
+          <li>Ketuk ikon <strong class="text-warm-body">Roda Gigi / Setelan (Gear)</strong> di pojok kanan atas halaman Play Protect.</li>
+          <li>Matikan tombol pada pilihan <strong class="text-warm-body">Pindai aplikasi dengan Play Protect</strong> (Scan apps with Play Protect).</li>
+          <li>Akan muncul kotak konfirmasi, ketuk <strong class="text-warm-body">Nonaktifkan / Turn Off</strong>.</li>
+          <li><span class="text-amber-300 font-semibold">(Opsional)</span> Matikan juga tombol <strong class="text-warm-body">Tingkatkan deteksi aplikasi</strong> tepat di bawahnya.</li>
         </ol>
       </div>
     </div>
-    <a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" onclick="closeDownloadModal()" class="tap-responsive cyber-btn-red w-full flex items-center justify-center space-x-2 text-white font-extrabold py-3 px-4 rounded-2xl">
+    <a href="https://drive.google.com/file/d/152jxsqRj80Dvsh5csvoDFEw-aGHwqxha/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" onclick="closeDownloadModal()" class="tap-responsive cyber-btn-red w-full flex items-center justify-center space-x-2 font-extrabold py-3 px-4 rounded-2xl">
       <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i> <span>Lanjutkan Download APK</span>
     </a>
   </div>
 </div>
 
-<button type="button" id="scroll-top-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Kembali ke atas" class="tap-responsive w-9 h-9 rounded-full bg-[#160a10]/95 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/45 flex items-center justify-center cursor-pointer">
+<button type="button" id="scroll-top-btn" onclick="window.scrollTo({ top: 0, behavior: 'auto' })" aria-label="Kembali ke atas" class="tap-responsive w-9 h-9 rounded-full bg-[#160a10]/95 hover:bg-rose-600 text-rose-200 border border-rose-500/45 flex items-center justify-center cursor-pointer">
   <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
 </button>
 
 <div id="buyer-notification" aria-live="polite">
-  <div class="glass-panel border border-rose-500/45 rounded-2xl p-2.5 flex items-center space-x-2.5">
-    <div class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 border border-rose-500/35">
+  <div class="glass-panel border border-rose-500/35 rounded-xl p-2 flex items-center gap-2">
+    <div class="w-6 h-6 rounded-lg bg-rose-500/20 text-rose-300 flex items-center justify-center shrink-0 border border-rose-500/30">
       <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
     </div>
-    <div class="overflow-hidden">
-      <span id="buyer-name" class="block font-bold text-white truncate">Budi Santoso</span>
-      <p id="buyer-apk" class="text-rose-400 font-semibold truncate">Membeli APK BBFS</p>
-      <span id="buyer-time" class="text-gray-400"></span>
+    <div class="min-w-0">
+      <span id="buyer-name" class="block font-bold text-warm-bright truncate">Budi Santoso</span>
+      <p id="buyer-apk" class="text-rose-300 font-semibold truncate">APK BBFS</p>
+      <span id="buyer-time" class="text-warm-muted block"></span>
     </div>
   </div>
 </div>
 
 <div id="ads-popup">
-  <div class="relative bg-[#0f070c]/95 border border-rose-500/50 rounded-2xl p-2.5 w-32">
-    <button type="button" onclick="closeAdsPopup()" aria-label="Tutup banner" class="tap-responsive absolute -top-2 -right-2 bg-[#1d0e16] hover:bg-rose-600 text-gray-300 hover:text-white w-5 h-5 rounded-full flex items-center justify-center border border-rose-500/40 cursor-pointer">
+  <div class="relative bg-[#0f070c]/95 border border-rose-500/40 rounded-2xl p-2.5 w-32">
+    <button type="button" onclick="closeAdsPopup()" aria-label="Tutup banner" class="tap-responsive absolute -top-2 -right-2 bg-[#1d0e16] hover:bg-rose-600 text-warm-body w-6 h-6 rounded-full flex items-center justify-center border border-rose-500/35 cursor-pointer">
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
     <div class="flex items-center space-x-1.5 mb-1 pb-1 border-b border-rose-500/20">
-      <div class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot-ping"></div>
-      <span class="font-cyber font-extrabold uppercase tracking-wider text-rose-400">Sewa Banner</span>
+      <div class="w-2 h-2 rounded-full bg-rose-400"></div>
     </div>
     <div class="text-center">
-      <p class="text-gray-300 font-medium mb-1.5 leading-tight">Pasang Iklan Traffic Tinggi!</p>
-      <a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target="_blank" rel="noopener noreferrer" class="tap-responsive cyber-btn-red flex items-center justify-center space-x-1 text-white font-extrabold py-1 px-2 rounded-lg">
-        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> <span>Chat Admin</span>
+      <p class="text-xs-custom text-warm-body font-medium mb-1.5 leading-snug">Pasang Iklan</p>
+      <a href="https://wa.me/6288970383950?text=Halo,%20saya%20tertarik%20pasang%20banner/iklan%20di%20TunggalPaito" target="_blank" rel="noopener noreferrer" class="tap-responsive text-xs-custom cyber-btn-red flex items-center justify-center space-x-1 font-extrabold py-1 px-2 rounded-lg">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> <span>Chat</span>
       </a>
     </div>
   </div>
 </div>
 
-<footer class="relative z-10 w-full container-mobile px-4 py-6 text-center text-gray-400 border-t border-rose-500/20 mt-3 bg-black/50">
-  <p>&copy; <span id="current-year"></span> <strong class="font-cyber text-rose-500 tracking-wider">Tunggal Paito</strong>. All rights reserved.</p>
+<footer class="relative z-10 w-full container-mobile px-4 py-6 text-center text-unboxed border-t border-rose-500/20 mt-3 bg-black/50">
+  <p class="text-unboxed">&copy; <span id="current-year"></span> <strong class="font-cyber text-rose-400 tracking-wider">Tunggal Paito</strong>. <span class="text-unboxed-muted">All rights reserved.</span></p>
 </footer>
 
 <script>
 (function() {
   "use strict";
 
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_22_final_v15";
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_22_final_v23";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
-  const RELOAD_GUARD_KEY = "tp_prediksi_reloaded_for";
 
-  function safeSessionGet(key) {
-    try { return window.sessionStorage.getItem(key); } catch (e) { return null; }
-  }
   function safeSessionSet(key, val) {
     try { window.sessionStorage.setItem(key, val); } catch (e) {}
   }
@@ -1586,25 +1569,8 @@
     }).catch(function() {});
   }
 
-  function runAutoCacheRefresh() {
-    purgeStaleClientCaches();
-    const prevVersion = safeSessionGet(CACHE_KEY_NAME);
-    if (prevVersion && prevVersion !== CACHE_BUILD_VERSION) {
-      safeSessionSet(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
-      if (safeSessionGet(RELOAD_GUARD_KEY) !== CACHE_BUILD_VERSION) {
-        safeSessionSet(RELOAD_GUARD_KEY, CACHE_BUILD_VERSION);
-        try {
-          window.location.replace(window.location.href);
-          return true;
-        } catch (e) {}
-      }
-    } else {
-      safeSessionSet(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
-    }
-    return false;
-  }
-
-  if (runAutoCacheRefresh()) return;
+  purgeStaleClientCaches();
+  safeSessionSet(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
 
   const yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
@@ -1637,17 +1603,18 @@
   function syncAdSlotsLayout() {
     const slot468 = document.getElementById("slot-banner-468");
     if (!slot468) return;
-    const containerWidth = Math.max(0, slot468.clientWidth - 8);
+    const availW = Math.max(0, slot468.clientWidth - 8);
     slot468.querySelectorAll("iframe").forEach(function(iframe) {
       iframe.style.maxWidth = "100%";
       iframe.style.maxHeight = "100%";
       iframe.style.background = "transparent";
-      const w = parseFloat(iframe.getAttribute("width") || iframe.style.width || "468");
-      if (containerWidth > 0 && Number.isFinite(w) && w > containerWidth) {
-        iframe.style.transformOrigin = "center center";
-        iframe.style.transform = "scale(" + Math.max(0.55, containerWidth / w).toFixed(4) + ")";
-      } else {
-        iframe.style.removeProperty("transform");
+      iframe.style.removeProperty("transform");
+      const attrW = parseFloat(iframe.getAttribute("width") || "0");
+      if (availW > 0 && Number.isFinite(attrW) && attrW > availW) {
+        const ratio = Math.max(0.6, availW / attrW);
+        iframe.style.width = attrW + "px";
+        iframe.style.transformOrigin = "left center";
+        iframe.style.transform = "scale(" + ratio.toFixed(4) + ")";
       }
     });
   }
@@ -1657,6 +1624,7 @@
   let banner320Error = false;
   let banner468Error = false;
   let nativeAdError = false;
+  let adQueueLock = Promise.resolve();
 
   function hasRenderedNativeAd() {
     const nativeBox = document.getElementById("container-3f09897b852339f736b82a3190a40259");
@@ -1678,20 +1646,36 @@
   }
 
   function injectAdScript(container, id, src, optionsObj, onLoad, onError) {
-    if (!container) return;
-    const existing = document.getElementById(id);
-    if (existing) existing.remove();
+    if (!container) return Promise.resolve();
+    adQueueLock = adQueueLock.then(function() {
+      return new Promise(function(resolve) {
+        const existing = document.getElementById(id);
+        if (existing) existing.remove();
 
-    window.atOptions = optionsObj;
-    const script = document.createElement("script");
-    script.id = id;
-    script.async = false;
-    script.setAttribute("data-cfasync", "false");
-    script.referrerPolicy = "no-referrer-when-downgrade";
-    script.src = src;
-    if (onLoad) script.addEventListener("load", onLoad, { once: true });
-    if (onError) script.addEventListener("error", onError, { once: true });
-    container.appendChild(script);
+        window.atOptions = optionsObj;
+        const script = document.createElement("script");
+        script.id = id;
+        script.async = false;
+        script.setAttribute("data-cfasync", "false");
+        script.referrerPolicy = "strict-origin-when-cross-origin";
+        script.src = src;
+
+        let settled = false;
+        const finish = function(cb, err) {
+          if (settled) return;
+          settled = true;
+          if (cb) cb(err);
+          setTimeout(resolve, 180);
+        };
+
+        script.addEventListener("load", function() { finish(onLoad); }, { once: true });
+        script.addEventListener("error", function(err) { finish(onError, err); }, { once: true });
+        setTimeout(function() { finish(onLoad); }, 1400);
+
+        container.appendChild(script);
+      });
+    });
+    return adQueueLock;
   }
 
   function loadSequentialBanners() {
@@ -1740,7 +1724,7 @@
         width: 320,
         params: {}
       },
-      function() { banner468Timer = setTimeout(loadBanner468, 250); },
+      function() { banner468Timer = setTimeout(loadBanner468, 400); },
       function() {
         banner320Error = true;
         loadBanner468();
@@ -1748,7 +1732,7 @@
       }
     );
 
-    banner468Timer = setTimeout(loadBanner468, 1800);
+    banner468Timer = setTimeout(loadBanner468, 2000);
   }
 
   function loadNativeAd(scriptId) {
@@ -1759,7 +1743,7 @@
     nativeScript.id = scriptId;
     nativeScript.async = true;
     nativeScript.setAttribute("data-cfasync", "false");
-    nativeScript.referrerPolicy = "no-referrer-when-downgrade";
+    nativeScript.referrerPolicy = "strict-origin-when-cross-origin";
     nativeScript.src = "https://brijmohan.org/21/3f09897b852339f736b82a3190a40259";
     nativeScript.addEventListener("error", function() {
       nativeAdError = true;
@@ -1797,91 +1781,6 @@
     }, { passive: true });
   }
 
-  const particleCanvas = document.getElementById("particle-canvas");
-  const prefersReducedMotion = Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  const isLowEndDevice = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 2;
-
-  function resizeParticleCanvas() {
-    if (!particleCanvas) return;
-    particleCanvas.width = window.innerWidth;
-    particleCanvas.height = window.innerHeight;
-  }
-
-  let particleAnimId = null;
-  let animateParticlesFn = null;
-
-  function stopParticles() {
-    if (particleAnimId !== null) {
-      cancelAnimationFrame(particleAnimId);
-      particleAnimId = null;
-    }
-  }
-
-  function startParticles() {
-    if (!particleCanvas || prefersReducedMotion || isLowEndDevice) return;
-    const ctx = particleCanvas.getContext("2d");
-    if (!ctx) return;
-
-    resizeParticleCanvas();
-    const particlesArray = [];
-    for (let i = 0; i < 12; i++) {
-      particlesArray.push({
-        x: Math.random() * particleCanvas.width,
-        y: Math.random() * particleCanvas.height,
-        size: Math.random() * 1.5 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: (Math.random() - 0.5) * 0.3,
-        color: Math.random() > 0.4 ? "rgba(255, 30, 86, 0.38)" : "rgba(200, 20, 60, 0.25)"
-      });
-    }
-
-    function stepParticles() {
-      if (document.hidden) {
-        particleAnimId = null;
-        return;
-      }
-      ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        const p = particlesArray[i];
-        p.x += p.speedX;
-        p.y += p.speedY;
-        if (p.x > particleCanvas.width) p.x = 0;
-        else if (p.x < 0) p.x = particleCanvas.width;
-        if (p.y > particleCanvas.height) p.y = 0;
-        else if (p.y < 0) p.y = particleCanvas.height;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a + 1; b < particlesArray.length; b++) {
-          const dx = particlesArray[a].x - particlesArray[b].x;
-          const dy = particlesArray[a].y - particlesArray[b].y;
-          const distSq = dx * dx + dy * dy;
-          if (distSq < 9000) {
-            ctx.strokeStyle = "rgba(255, 30, 86, " + (0.09 * (1 - Math.sqrt(distSq) / 95)) + ")";
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-      particleAnimId = requestAnimationFrame(stepParticles);
-    }
-
-    animateParticlesFn = function() {
-      if (document.hidden || particleAnimId !== null) return;
-      particleAnimId = requestAnimationFrame(stepParticles);
-    };
-    animateParticlesFn();
-  }
-
-  if ("requestIdleCallback" in window) requestIdleCallback(startParticles, { timeout: 600 });
-  else setTimeout(startParticles, 250);
-
   function isElementVisible(el) {
     if (!el || !el.isConnected) return false;
     let curr = el;
@@ -1903,14 +1802,7 @@
 
     if (img1) img1.style.objectPosition = "50% " + Math.min(84, Math.max(72, Math.round(76 + (aspect - 1.7) * 6))) + "%";
     if (img2) img2.style.objectPosition = "50% " + Math.min(94, Math.max(84, Math.round(88 + (aspect - 1.7) * 5))) + "%";
-    if (img3) {
-      img3.style.objectPosition = "50% 50%";
-      img3.style.removeProperty("height");
-      if (img3.naturalWidth && img3.naturalHeight && img3.clientWidth) {
-        const idealHeight = Math.round(img3.clientWidth * Math.min(Math.max(img3.naturalHeight / img3.naturalWidth, 0.55), 1.15));
-        if (vw <= 420 && idealHeight >= 68 && idealHeight <= 125) img3.style.height = idealHeight + "px";
-      }
-    }
+    if (img3) img3.style.objectPosition = "50% 50%";
   };
 
   let guideCropRaf = null;
@@ -1927,26 +1819,46 @@
     clearTimeout(resizeSyncTimer);
     resizeSyncTimer = setTimeout(function() {
       syncAdSlotsLayout();
-      resizeParticleCanvas();
       window.scheduleGuideCropSync();
-    }, 60);
+    }, 80);
   }, { passive: true });
 
   window.addEventListener("orientationchange", function() {
     setTimeout(function() {
       syncAdSlotsLayout();
-      resizeParticleCanvas();
       window.scheduleGuideCropSync();
-    }, 80);
+    }, 100);
   }, { passive: true });
 
   let activeMarketFilter = "all";
+  const marketFilterNames = {
+    sdy: "Sydney (SDY & SDY Lotto)",
+    sgp: "Singapore (SGP)",
+    hk: "Hongkong (HK & HK Lotto)"
+  };
+
+  function syncMarketFilterStatus() {
+    const statusBox = document.getElementById("market-filter-status");
+    const statusLabel = document.getElementById("market-filter-label");
+    if (!statusBox || !statusLabel) return;
+    if (activeMarketFilter === "all") {
+      statusBox.classList.add("hidden");
+      statusLabel.textContent = "";
+    } else {
+      statusLabel.textContent = "Filter aktif: " + (marketFilterNames[activeMarketFilter] || activeMarketFilter.toUpperCase());
+      statusBox.classList.remove("hidden");
+    }
+  }
+
   window.filterMarket = function(market, btn) {
     activeMarketFilter = market || "all";
     document.querySelectorAll(".tab-btn").forEach(function(b) {
       const isTarget = btn ? b === btn : b.getAttribute("data-tab") === activeMarketFilter;
       b.classList.toggle("active", isTarget);
       b.setAttribute("aria-selected", isTarget ? "true" : "false");
+    });
+    document.querySelectorAll(".quick-jump-btn[data-jump]").forEach(function(jb) {
+      jb.classList.toggle("active-jump", jb.getAttribute("data-jump") === activeMarketFilter);
     });
     document.querySelectorAll(".market-block").forEach(function(block) {
       block.classList.toggle("hidden", !(activeMarketFilter === "all" || block.getAttribute("data-market") === activeMarketFilter));
@@ -1955,8 +1867,18 @@
     if (lottoGrid) {
       lottoGrid.classList.toggle("hidden", !Array.from(lottoGrid.querySelectorAll(".market-block")).some(function(el) { return !el.classList.contains("hidden"); }));
     }
+    syncMarketFilterStatus();
     const searchModal = document.getElementById("search-modal");
     if (searchModal && !searchModal.classList.contains("hidden")) window.renderSearchResults();
+  };
+
+  window.instantJump = function(market) {
+    const tabBtn = document.querySelector('.tab-btn[data-tab="' + market + '"]');
+    window.filterMarket(market, tabBtn || null);
+    const target = document.getElementById("market-section");
+    if (!target) return;
+    const y = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 56);
+    window.scrollTo({ top: y, behavior: "auto" });
   };
 
   function buildTocItems() {
@@ -2044,18 +1966,18 @@
 
     if (filtered.length === 0) {
       const emptyBox = document.createElement("div");
-      emptyBox.className = "text-center py-8 text-gray-400";
+      emptyBox.className = "text-center py-8 text-warm-body";
 
       const icon = document.createElement("i");
-      icon.className = "fa-solid fa-folder-open mb-2 block text-rose-500/70";
+      icon.className = "fa-solid fa-folder-open mb-2 block text-rose-400";
       icon.setAttribute("aria-hidden", "true");
 
       const p1 = document.createElement("p");
-      p1.className = "font-semibold text-gray-300";
+      p1.className = "font-semibold text-warm-bright";
       p1.textContent = 'Tidak ditemukan untuk "' + q + '"';
 
       const p2 = document.createElement("p");
-      p2.className = "text-gray-500 mt-0.5";
+      p2.className = "text-xs-custom text-warm-muted mt-0.5";
       p2.textContent = "Coba kata kunci lain seperti SDY, SGP, HK, BBFS, atau Live Draw.";
 
       emptyBox.append(icon, p1, p2);
@@ -2075,15 +1997,15 @@
         textWrap.className = "min-w-0 pr-2";
 
         const titleDiv = document.createElement("div");
-        titleDiv.className = "font-bold text-rose-300 truncate";
+        titleDiv.className = "font-bold text-rose-200";
         titleDiv.textContent = it.title;
 
         const subDiv = document.createElement("div");
-        subDiv.className = "text-gray-400 truncate";
+        subDiv.className = "text-xs-custom text-warm-muted";
         subDiv.textContent = it.subtitle;
 
         const ic = document.createElement("i");
-        ic.className = "fa-solid " + (it.actionType === "download" ? "fa-cloud-arrow-down" : "fa-laptop-code") + " text-rose-400 shrink-0";
+        ic.className = "fa-solid " + (it.actionType === "download" ? "fa-cloud-arrow-down" : "fa-laptop-code") + " text-rose-300 shrink-0";
         ic.setAttribute("aria-hidden", "true");
 
         textWrap.append(titleDiv, subDiv);
@@ -2092,22 +2014,22 @@
       } else if (isSafeHttpUrl(it.href)) {
         const a = document.createElement("a");
         a.href = it.href;
-        a.className = "tap-responsive flex items-center justify-between bg-[#0b060a]/90 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl group";
+        a.className = "tap-responsive flex items-center justify-between bg-[#0b060a]/90 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl";
         a.addEventListener("click", function() { closeSearchModal(); });
 
         const textWrap = document.createElement("div");
         textWrap.className = "min-w-0 pr-2";
 
         const titleDiv = document.createElement("div");
-        titleDiv.className = "font-bold text-gray-100 truncate";
+        titleDiv.className = "font-bold text-warm-bright";
         titleDiv.textContent = it.title;
 
         const subDiv = document.createElement("div");
-        subDiv.className = "text-gray-400 truncate";
+        subDiv.className = "text-xs-custom text-warm-muted";
         subDiv.textContent = it.subtitle;
 
         const ic = document.createElement("i");
-        ic.className = "fa-solid fa-chevron-right text-rose-500/60 shrink-0";
+        ic.className = "fa-solid fa-chevron-right text-rose-400 shrink-0";
         ic.setAttribute("aria-hidden", "true");
 
         textWrap.append(titleDiv, subDiv);
@@ -2249,8 +2171,8 @@
       if (!pt) return;
       const rect = popup.getBoundingClientRect();
       const w = rect.width || 128, h = rect.height || 90;
-      cx = clamp(bx + (pt.clientX - sx), -(window.innerWidth - w - 22), 2);
-      cy = clamp(by + (pt.clientY - sy), -(window.innerHeight - h - 28) + 56, 8);
+      cx = clamp(bx + (pt.clientX - sx), -(window.innerWidth - w - 18), 4);
+      cy = clamp(by + (pt.clientY - sy), -60, window.innerHeight - h - 110);
       if (!rafId) rafId = requestAnimationFrame(renderPos);
     };
     const endDrag = function() { dragging = false; };
@@ -2264,13 +2186,13 @@
 
   const firstNames = ["Budi","Eko","Agung","Rian","Joko","Dedi","Ahmad","Hendra","Rahmat","Doni","Fajar","Wahyu","Andi","Bayu","Yoga","Rizal","Iwan","Reza","Dimas","Gilang","Slamet","Heri","Teguh","Yudi","Roni","Ardi","Deny","Ferry","Siti","Dewi","Sri","Ani","Rina","Fitri"];
   const lastNames = ["Santoso","Prasetyo","Wibowo","Hidayat","Susilo","Kurniawan","Fauzi","Gunawan","Saputra","Nugraha","Setiawan","Pratama","Maulana","Pahlevi","Anggara","Ramadhan","Kusuma","Wijaya","Nugroho","Hartono","Subagio","Kusumo","Irawan","Utomo","Sanjaya","Wahyudi","Haryanto"];
-  const apkTypes = ["Membeli APK BBFS","Membeli APK LINE 2D","Membeli APK COLOK BEBAS"];
+  const apkTypes = ["APK BBFS","APK LINE 2D","APK COLOK BEBAS"];
 
   function formatTimeAgo(ms) {
     const min = Math.floor(ms / 60000);
     if (!Number.isFinite(min) || min < 1) return "baru saja";
-    if (min < 60) return min + " menit lalu";
-    return Math.floor(min / 60) + " jam lalu";
+    if (min < 60) return min + "m lalu";
+    return Math.floor(min / 60) + "j lalu";
   }
 
   function generateBuyersBatch(count) {
@@ -2320,33 +2242,30 @@
 
     const ts = Number(item.timestamp);
     nameEl.textContent = String(item.name || "Pengguna");
-    apkEl.textContent = String(item.apk || "Membeli APK BBFS");
+    apkEl.textContent = String(item.apk || "APK BBFS");
     timeEl.textContent = formatTimeAgo(Math.max(0, Date.now() - (Number.isFinite(ts) ? ts : Date.now())));
     box.classList.add("show");
     clearTimeout(hideNotifTimer);
-    hideNotifTimer = setTimeout(function() { box.classList.remove("show"); }, 4000);
+    hideNotifTimer = setTimeout(function() { box.classList.remove("show"); }, 2800);
   }
 
   function startBuyerLoop() {
-    if (!buyerIntervalId) buyerIntervalId = setInterval(showRandomBuyer, 10000);
+    if (!buyerIntervalId) buyerIntervalId = setInterval(showRandomBuyer, 22000);
   }
 
-  buyerStartTimer = setTimeout(function() { showRandomBuyer(); startBuyerLoop(); }, 2500);
+  buyerStartTimer = setTimeout(function() { showRandomBuyer(); startBuyerLoop(); }, 5000);
 
   document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
-      stopParticles();
       clearTimeout(hideNotifTimer);
       const box = document.getElementById("buyer-notification");
       if (box) box.classList.remove("show");
     } else {
-      if (typeof animateParticlesFn === "function") animateParticlesFn();
       startBuyerLoop();
     }
   });
 
   window.addEventListener("pagehide", function() {
-    stopParticles();
     clearTimeout(buyerStartTimer);
     clearTimeout(hideNotifTimer);
     clearTimeout(adRetryTimer);
@@ -2363,8 +2282,12 @@
     progressBar.classList.remove("active");
     progressBar.style.removeProperty("width");
   }
-  window.addEventListener("pageshow", function() {
+  window.addEventListener("pageshow", function(e) {
     resetProgress();
+    if (e.persisted) {
+      modalIds.forEach(closeModalById);
+      syncMarketFilterStatus();
+    }
     syncAdSlotsLayout();
     window.scheduleGuideCropSync();
   });
@@ -2382,6 +2305,5 @@
   }, { passive: true });
 })();
 </script>
-
 </body>
 </html>
