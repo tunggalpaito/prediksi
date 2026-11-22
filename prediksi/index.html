@@ -8,7 +8,7 @@
 <meta http-equiv="Expires" content="0">
 <meta name="theme-color" content="#050508">
 <meta name="color-scheme" content="dark">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:large">
 <meta name="author" content="Tunggal Paito">
 <meta name="keywords" content="prediksi togel hari ini, tunggal paito, prediksi sdy jitu, prediksi sgp hari ini, prediksi hk malam ini, paito warna lengkap, live draw sdy sgp hk, generator bbfs, line 2d jitu, sdy lotto, hk lotto, analisa sdy, analisa sgp, analisa hk, bbfs 2d sdy, bbfs 2d sgp, bbfs 2d hk, kumat 2d sdy, kumat 2d sgp, kumat 2d hk, angka lemah kepala ekor, prediksi angka main sdy lotto, prediksi angka main hk lotto">
 
@@ -19,6 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://brijmohan.org">
 <link rel="dns-prefetch" href="https://tunggalpaito.online">
 
@@ -134,6 +135,7 @@
     max-width: 100%;
     -webkit-text-size-adjust: 100%;
     font-size: var(--fs-main);
+    overflow-anchor: none;
   }
 
   body {
@@ -151,6 +153,7 @@
     flex-direction: column;
     justify-content: space-between;
     overflow-x: clip;
+    overflow-anchor: none;
     overscroll-behavior-y: contain;
     touch-action: manipulation;
     text-rendering: optimizeLegibility;
@@ -219,8 +222,7 @@
     border-top-right-radius: 18px;
     pointer-events: none;
     z-index: 40;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    contain: layout style paint;
   }
 
   @media (min-width: 640px) {
@@ -231,7 +233,6 @@
     }
   }
 
-  /* Layar pertama yang kokoh, anti-kedip, dan tertata profesional */
   #first-screen-lock {
     width: 100%;
     display: flex;
@@ -246,6 +247,182 @@
   #first-screen-lock > * {
     flex-shrink: 0;
     contain: layout style;
+  }
+
+  .fire-cta-box {
+    width: 100%;
+    max-width: 328px;
+    height: 58px;
+    min-height: 58px;
+    max-height: 58px;
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, rgba(74, 18, 7, 0.92) 0%, rgba(22, 68, 38, 0.42) 52%, rgba(28, 92, 48, 0.34) 100%);
+    border: 1px solid rgba(74, 222, 128, 0.55);
+    box-shadow: 0 6px 18px rgba(234, 88, 12, 0.22), 0 0 14px rgba(74, 222, 128, 0.14), inset 0 6px 14px rgba(251, 146, 60, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.16s ease, filter 0.14s ease;
+  }
+
+  .fire-cta-box::before {
+    content: "";
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    top: -12px;
+    height: 36px;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 20px 28px at 10% 0%, rgba(254, 240, 138, 0.86) 0%, rgba(249, 115, 22, 0.72) 52%, transparent 78%),
+      radial-gradient(ellipse 24px 32px at 28% 0%, rgba(251, 146, 60, 0.84) 0%, rgba(250, 204, 21, 0.62) 56%, transparent 80%),
+      radial-gradient(ellipse 22px 30px at 48% 0%, rgba(254, 249, 195, 0.88) 0%, rgba(234, 88, 12, 0.74) 52%, transparent 78%),
+      radial-gradient(ellipse 25px 32px at 68% 0%, rgba(251, 146, 60, 0.84) 0%, rgba(250, 204, 21, 0.62) 56%, transparent 80%),
+      radial-gradient(ellipse 21px 28px at 86% 0%, rgba(254, 240, 138, 0.85) 0%, rgba(249, 115, 22, 0.7) 52%, transparent 78%);
+    filter: blur(2.6px);
+    transform-origin: top center;
+    animation: emberDropTop 2.1s ease-in-out infinite;
+    animation-play-state: var(--fire-play-state, running);
+  }
+
+  .fire-cta-box::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 22px;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      radial-gradient(circle 3.5px at 16% 25%, rgba(250, 204, 21, 0.9) 0%, rgba(251, 146, 60, 0.42) 60%, transparent 100%),
+      radial-gradient(circle 4px at 41% 20%, rgba(254, 240, 138, 0.88) 0%, rgba(234, 88, 12, 0.38) 60%, transparent 100%),
+      radial-gradient(circle 3.5px at 64% 28%, rgba(250, 204, 21, 0.9) 0%, rgba(251, 146, 60, 0.42) 60%, transparent 100%),
+      radial-gradient(circle 4px at 84% 22%, rgba(254, 240, 138, 0.86) 0%, rgba(234, 88, 12, 0.38) 60%, transparent 100%);
+    filter: blur(1px);
+    animation: topFlamePulse 1.8s ease-in-out infinite;
+    animation-play-state: var(--fire-play-state, running);
+  }
+
+  .fire-cta-box:hover {
+    border-color: rgba(134, 239, 172, 0.85);
+    filter: brightness(1.05);
+  }
+
+  .fire-cta-track-wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fire-sentence {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    line-height: 1.15;
+    color: #facc15;
+    text-shadow:
+      0 0 8px rgba(250, 204, 21, 0.82),
+      0 0 16px rgba(253, 224, 71, 0.46),
+      0 2px 3px rgba(0, 0, 0, 0.96);
+    transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: expandFromCenterSlow 16s ease-out infinite;
+    animation-play-state: var(--fire-play-state, running);
+  }
+
+  .fire-cta-click-last {
+    color: #fef08a;
+    font-size: 0.96rem;
+    letter-spacing: 0.06em;
+    text-shadow:
+      0 0 10px rgba(254, 240, 138, 0.65),
+      0 0 14px rgba(250, 204, 21, 0.5),
+      0 2px 3px rgba(0, 0, 0, 0.96);
+  }
+
+  .fire-s1 { animation-delay: 0s; }
+  .fire-s2 { animation-delay: -4s; }
+  .fire-s3 { animation-delay: -8s; }
+  .fire-s4 { animation-delay: -12s; }
+
+  .fire-cta-box:hover .fire-sentence,
+  .fire-cta-box:active .fire-sentence {
+    animation-play-state: paused;
+  }
+
+  @keyframes expandFromCenterSlow {
+    0% {
+      transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+      opacity: 0;
+    }
+    5% {
+      transform: translate3d(-50%, -50%, 0) scaleX(0.75) scaleY(0.95);
+      opacity: 0.96;
+    }
+    11% {
+      transform: translate3d(-50%, -50%, 0) scaleX(1.05) scaleY(1.02);
+      opacity: 1;
+    }
+    20% {
+      transform: translate3d(-50%, -50%, 0) scaleX(1.16) scaleY(1.04);
+      opacity: 0.85;
+    }
+    25% {
+      transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+      opacity: 0;
+    }
+  }
+
+  @keyframes emberDropTop {
+    0% {
+      transform: translateY(-2px) scaleY(0.84);
+      opacity: 0.76;
+    }
+    50% {
+      transform: translateY(7px) scaleY(1.08);
+      opacity: 0.98;
+    }
+    100% {
+      transform: translateY(-2px) scaleY(0.84);
+      opacity: 0.76;
+    }
+  }
+
+  @keyframes topFlamePulse {
+    0% {
+      transform: translateY(0px);
+      opacity: 0.55;
+    }
+    50% {
+      transform: translateY(9px);
+      opacity: 0.92;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 0.55;
+    }
   }
 
   .hero-pro-card {
@@ -497,12 +674,12 @@
   }
 
   @keyframes popupScale {
-    0% { opacity: 0; transform: translateY(6px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 
   .animate-popup {
-    animation: popupScale 0.16s ease-out forwards;
+    animation: popupScale 0.14s ease-out forwards;
   }
 
   body.modal-open {
@@ -588,6 +765,7 @@
   .pt-3 { padding-top: 0.75rem; }
   .pt-3\.5 { padding-top: 0.875rem; }
   .pb-1 { padding-bottom: 0.25rem; }
+  .pb-2 { padding-bottom: 0.5rem; }
   .pr-1 { padding-right: 0.25rem; }
   .pr-2 { padding-right: 0.5rem; }
   .pr-8 { padding-right: 2rem; }
@@ -850,6 +1028,17 @@
     <div id="slot-banner-320" class="ad-slot-box"></div>
   </div>
 
+  <div id="fire-promo-box" class="bento-card rounded-3xl p-2 flex items-center justify-center overflow-hidden">
+    <a id="fire-promo-link" href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="fire-cta-box" aria-label="Klik di sini untuk daftar">
+      <div class="fire-cta-track-wrap">
+        <span class="fire-sentence fire-s1">TEMPAT SAYA BERMAIN BBFS 8D</span>
+        <span class="fire-sentence fire-s2">SAYA TIDAK PROMO JIKA TERTARIK GAS</span>
+        <span class="fire-sentence fire-s3">TERSEDIA PASARAN POOLS &amp; LOTTO</span>
+        <span class="fire-sentence fire-s4 fire-cta-click-last">KLIK DISINI</span>
+      </div>
+    </a>
+  </div>
+
   <div class="bento-card rounded-3xl p-4 space-y-4">
     <section class="text-warm-body leading-relaxed">
       <div class="mb-2.5 pb-2 border-b border-rose-500/20">
@@ -887,7 +1076,7 @@
     <section class="bento-card rounded-2xl p-3.5 relative overflow-hidden">
       <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-rose-500/20 gap-2">
         <div class="inline-flex items-center gap-2 text-rose-300 text-xs-custom font-cyber font-extrabold uppercase tracking-wider">
-          
+          <span>ALAT RACIK CEPAT</span>
         </div>
       </div>
 
@@ -1110,7 +1299,7 @@
   </section>
 </header>
 
-<main class="relative z-10 w-full container-mobile px-4 py-4 flex<main class="relative z-10 w-full container-mobile px-4 py-4 flex-grow space-y-5">
+<main class="relative z-10 w-full container-mobile px-4 py-4 flex-grow space-y-5">
   <section aria-label="Menu Prediksi">
     <div class="grid grid-cols-2 gap-2.5">
       <a href="https://tunggalpaito.online/live-draw/" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between">
@@ -1154,7 +1343,6 @@
       </a>
     </div>
   </section>
-
 
   <section id="market-section" class="space-y-3.5" aria-label="Pilih Pasaran">
     <div class="flex items-center justify-between px-0.5 gap-2">
@@ -1356,6 +1544,19 @@
   </section>
 </main>
 
+<section class="relative z-10 w-full container-mobile px-4 pt-1 pb-2 flex justify-center" aria-label="Promo Tambahan">
+  <div id="fire-promo-box-bottom" class="bento-card rounded-3xl p-2 flex items-center justify-center overflow-hidden w-full">
+    <a id="fire-promo-link-bottom" href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="fire-cta-box" aria-label="Klik di sini untuk daftar">
+      <div class="fire-cta-track-wrap">
+        <span class="fire-sentence fire-s1">TEMPAT SAYA BERMAIN BBFS 8D</span>
+        <span class="fire-sentence fire-s2">SAYA TIDAK PROMO JIKA TERTARIK GAS</span>
+        <span class="fire-sentence fire-s3">TERSEDIA PASARAN POOLS &amp; LOTTO</span>
+        <span class="fire-sentence fire-s4 fire-cta-click-last">KLIK DISINI</span>
+      </div>
+    </a>
+  </div>
+</section>
+
 <section class="relative z-10 w-full container-mobile px-4 pt-2 pb-1 text-center">
   <div class="glass-panel rounded-2xl p-4 border border-rose-500/25">
     <p class="text-warm-body leading-relaxed">
@@ -1540,8 +1741,22 @@
 (function() {
   "use strict";
 
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_22_final_v23";
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_23_final_v35";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
+  const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
+
+  const FIREBASE_DB_CONFIG = {
+    databaseURL: window.TP_FIREBASE_DB_URL || "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
+  };
+
+  const FIREBASE_BO_PATH = "live/bo-rekomendasi";
+  const DEFAULT_BO_LINK = "https://indo200-live.com/register?r=2oajlu";
+  const PROMO_BOX_IDS = ["fire-promo-box", "fire-promo-box-bottom"];
+  const PROMO_LINK_IDS = ["fire-promo-link", "fire-promo-link-bottom"];
+
+  let boLinksList = [DEFAULT_BO_LINK];
+  let currentActiveBoLink = DEFAULT_BO_LINK;
+  let isFireBoxInViewport = true;
 
   function safeSessionSet(key, val) {
     try { window.sessionStorage.setItem(key, val); } catch (e) {}
@@ -1550,10 +1765,229 @@
   function isSafeHttpUrl(rawUrl) {
     if (!rawUrl || typeof rawUrl !== "string") return false;
     try {
-      const parsed = new URL(rawUrl, window.location.href);
+      const parsed = new URL(rawUrl.trim(), window.location.href);
       return parsed.protocol === "https:" || parsed.protocol === "http:";
     } catch (e) {
       return false;
+    }
+  }
+
+  function readClickedBoLinks() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_CLICKED_BO_KEY);
+      const parsed = JSON.parse(raw || "[]");
+      if (!Array.isArray(parsed)) return [];
+      return parsed.filter(function(u) { return isSafeHttpUrl(u); }).map(function(u) { return u.trim(); });
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveClickedBoLink(url) {
+    if (!isSafeHttpUrl(url)) return;
+    const clean = url.trim();
+    const list = readClickedBoLinks();
+    if (!list.includes(clean)) {
+      list.push(clean);
+      try {
+        window.localStorage.setItem(STORAGE_CLICKED_BO_KEY, JSON.stringify(list));
+      } catch (e) {}
+    }
+  }
+
+  function extractUrlsFromFirebaseValue(val) {
+    const found = [];
+    const seen = new Set();
+
+    function pushUrl(candidate) {
+      if (typeof candidate === "string") {
+        const cleaned = candidate.trim();
+        if (isSafeHttpUrl(cleaned) && !seen.has(cleaned)) {
+          seen.add(cleaned);
+          found.push(cleaned);
+        }
+      } else if (candidate && typeof candidate === "object") {
+        if (typeof candidate.url === "string") pushUrl(candidate.url);
+        else if (typeof candidate.link === "string") pushUrl(candidate.link);
+        else if (typeof candidate.href === "string") pushUrl(candidate.href);
+      }
+    }
+
+    if (Array.isArray(val)) {
+      val.forEach(pushUrl);
+    } else if (val && typeof val === "object") {
+      if (Array.isArray(val.links)) val.links.forEach(pushUrl);
+      if (Array.isArray(val.list)) val.list.forEach(pushUrl);
+      if (Array.isArray(val.items)) val.items.forEach(pushUrl);
+      Object.keys(val).forEach(function(k) {
+        if (k !== "links" && k !== "list" && k !== "items") {
+          pushUrl(val[k]);
+        }
+      });
+    } else if (typeof val === "string") {
+      val.split(/[\n,]+/).forEach(pushUrl);
+    }
+
+    return found;
+  }
+
+  function pickNextUnclickedBoLink(excludeCurrent) {
+    if (!Array.isArray(boLinksList) || !boLinksList.length) return DEFAULT_BO_LINK;
+    if (boLinksList.length === 1) {
+      return isSafeHttpUrl(boLinksList[0]) ? boLinksList[0].trim() : DEFAULT_BO_LINK;
+    }
+
+    const clickedSet = new Set(readClickedBoLinks());
+    let unclicked = boLinksList.filter(function(u) {
+      return !clickedSet.has(u.trim());
+    });
+
+    if (!unclicked.length) {
+      try {
+        window.localStorage.removeItem(STORAGE_CLICKED_BO_KEY);
+      } catch (e) {}
+      unclicked = boLinksList.slice();
+    }
+
+    let candidates = unclicked;
+    if (excludeCurrent && unclicked.length > 1) {
+      const withoutCurrent = unclicked.filter(function(u) {
+        return u.trim() !== excludeCurrent.trim();
+      });
+      if (withoutCurrent.length) candidates = withoutCurrent;
+    }
+
+    const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+    return isSafeHttpUrl(chosen) ? chosen.trim() : DEFAULT_BO_LINK;
+  }
+
+  function getActiveBoLink() {
+    if (!isSafeHttpUrl(currentActiveBoLink) || !boLinksList.includes(currentActiveBoLink.trim())) {
+      currentActiveBoLink = pickNextUnclickedBoLink("");
+    }
+    return currentActiveBoLink;
+  }
+
+  function applyCurrentBoLinkToPromo() {
+    const activeHref = getActiveBoLink();
+    PROMO_LINK_IDS.forEach(function(id) {
+      const anchor = document.getElementById(id);
+      if (anchor) anchor.setAttribute("href", activeHref);
+    });
+  }
+
+  function rotateBoLink() {
+    currentActiveBoLink = pickNextUnclickedBoLink(currentActiveBoLink);
+    applyCurrentBoLinkToPromo();
+  }
+
+  function updateBoLinksFromData(rawData) {
+    const extracted = extractUrlsFromFirebaseValue(rawData);
+    boLinksList = extracted.length ? extracted : [DEFAULT_BO_LINK];
+    currentActiveBoLink = pickNextUnclickedBoLink("");
+    applyCurrentBoLinkToPromo();
+  }
+
+  function initFirebaseBoListener() {
+    PROMO_LINK_IDS.forEach(function(id) {
+      const promoAnchor = document.getElementById(id);
+      if (!promoAnchor) return;
+      promoAnchor.addEventListener("pointerdown", function() {
+        applyCurrentBoLinkToPromo();
+      }, { passive: true });
+      promoAnchor.addEventListener("click", function() {
+        const clickedHref = promoAnchor.getAttribute("href") || getActiveBoLink();
+        saveClickedBoLink(clickedHref);
+        currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+        applyCurrentBoLinkToPromo();
+      });
+    });
+
+    const dbUrl = String(FIREBASE_DB_CONFIG.databaseURL || "").trim().replace(/\/+$/, "");
+    if (!dbUrl || !isSafeHttpUrl(dbUrl)) return;
+
+    const restUrl = dbUrl + "/" + FIREBASE_BO_PATH + ".json";
+
+    function fetchRestBoLinks() {
+      if (typeof fetch !== "function") return;
+      fetch(restUrl + "?t=" + Date.now(), { cache: "no-store" })
+        .then(function(res) { return res.ok ? res.json() : null; })
+        .then(function(data) {
+          if (data !== null) updateBoLinksFromData(data);
+        })
+        .catch(function() {});
+    }
+
+    function attachSdkRealtime(dbApp) {
+      try {
+        if (dbApp && typeof dbApp.ref === "function") {
+          dbApp.ref(FIREBASE_BO_PATH).on("value", function(snap) {
+            updateBoLinksFromData(snap && typeof snap.val === "function" ? snap.val() : null);
+          });
+          return true;
+        }
+      } catch (e) {}
+      return false;
+    }
+
+    function ensureFirebaseSdkAndListen() {
+      if (window.firebase && typeof window.firebase.database === "function") {
+        try {
+          const app = window.firebase.apps && window.firebase.apps.length
+            ? window.firebase.app()
+            : window.firebase.initializeApp({ databaseURL: dbUrl });
+          if (attachSdkRealtime(window.firebase.database(app))) return;
+        } catch (e) {}
+      }
+
+      fetchRestBoLinks();
+
+      if (document.getElementById("tp-fb-app-sdk") || document.getElementById("tp-fb-db-sdk")) return;
+      const appScript = document.createElement("script");
+      appScript.id = "tp-fb-app-sdk";
+      appScript.async = true;
+      appScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";
+      appScript.onerror = function() { fetchRestBoLinks(); };
+      appScript.onload = function() {
+        const dbScript = document.createElement("script");
+        dbScript.id = "tp-fb-db-sdk";
+        dbScript.async = true;
+        dbScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js";
+        dbScript.onerror = function() { fetchRestBoLinks(); };
+        dbScript.onload = function() {
+          try {
+            const app = window.firebase.apps && window.firebase.apps.length
+              ? window.firebase.app()
+              : window.firebase.initializeApp({ databaseURL: dbUrl });
+            attachSdkRealtime(window.firebase.database(app));
+          } catch (e) {
+            fetchRestBoLinks();
+          }
+        };
+        document.head.appendChild(dbScript);
+      };
+      document.head.appendChild(appScript);
+    }
+
+    if (document.readyState === "complete") ensureFirebaseSdkAndListen();
+    else window.addEventListener("load", ensureFirebaseSdkAndListen, { once: true });
+
+    setInterval(function() {
+      if (!document.hidden) fetchRestBoLinks();
+    }, 30000);
+  }
+
+  let boCycleTimer = null;
+  function startBoLinkCycle() {
+    if (boCycleTimer || document.hidden) return;
+    boCycleTimer = setInterval(function() {
+      if (!document.hidden && isFireBoxInViewport) rotateBoLink();
+    }, 4000);
+  }
+  function stopBoLinkCycle() {
+    if (boCycleTimer) {
+      clearInterval(boCycleTimer);
+      boCycleTimer = null;
     }
   }
 
@@ -1570,6 +2004,88 @@
 
   purgeStaleClientCaches();
   safeSessionSet(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
+  currentActiveBoLink = pickNextUnclickedBoLink("");
+  applyCurrentBoLinkToPromo();
+  initFirebaseBoListener();
+  startBoLinkCycle();
+
+  function getPromoBoxes() {
+    return PROMO_BOX_IDS.map(function(id) { return document.getElementById(id); }).filter(Boolean);
+  }
+
+  function getPromoSentences() {
+    return document.querySelectorAll("#fire-promo-box .fire-sentence, #fire-promo-box-bottom .fire-sentence");
+  }
+
+  function applyFirePlayState() {
+    const boxes = getPromoBoxes();
+    const sentences = getPromoSentences();
+    if (!boxes.length || !sentences.length) return;
+
+    const shouldRun = !document.hidden && isFireBoxInViewport;
+    const nextState = shouldRun ? "running" : "paused";
+
+    boxes.forEach(function(box) {
+      box.style.setProperty("--fire-play-state", nextState);
+    });
+    sentences.forEach(function(item) {
+      item.style.animationPlayState = nextState;
+    });
+  }
+
+  function refreshFireMarqueeState() {
+    const sentences = getPromoSentences();
+    applyFirePlayState();
+
+    if (!document.hidden && isFireBoxInViewport && sentences.length) {
+      sentences.forEach(function(item) {
+        item.style.animation = "none";
+        void item.offsetWidth;
+        item.style.animation = "";
+        item.style.animationPlayState = "running";
+      });
+    }
+  }
+
+  function initFireViewportPause() {
+    const boxes = getPromoBoxes();
+    if (!boxes.length) return;
+
+    if ("IntersectionObserver" in window) {
+      const visibleMap = new Map();
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.target && entry.target.id) {
+            visibleMap.set(entry.target.id, Boolean(entry.isIntersecting));
+          }
+        });
+        isFireBoxInViewport = Array.from(visibleMap.values()).some(Boolean);
+        applyFirePlayState();
+      }, {
+        root: null,
+        rootMargin: "20px 0px",
+        threshold: 0.01
+      });
+      boxes.forEach(function(box) {
+        visibleMap.set(box.id, true);
+        observer.observe(box);
+      });
+    } else {
+      window.addEventListener("scroll", function() {
+        const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+        isFireBoxInViewport = boxes.some(function(box) {
+          const rect = box.getBoundingClientRect();
+          return rect.bottom > -20 && rect.top < vh + 20;
+        });
+        applyFirePlayState();
+      }, { passive: true });
+    }
+  }
+
+  initFireViewportPause();
+
+  window.addEventListener("focus", refreshFireMarqueeState, { passive: true });
+  window.addEventListener("pageshow", refreshFireMarqueeState, { passive: true });
 
   const yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
@@ -1664,12 +2180,12 @@
           if (settled) return;
           settled = true;
           if (cb) cb(err);
-          setTimeout(resolve, 180);
+          setTimeout(resolve, 220);
         };
 
         script.addEventListener("load", function() { finish(onLoad); }, { once: true });
         script.addEventListener("error", function(err) { finish(onError, err); }, { once: true });
-        setTimeout(function() { finish(onLoad); }, 1400);
+        setTimeout(function() { finish(onLoad); }, 1500);
 
         container.appendChild(script);
       });
@@ -1723,7 +2239,7 @@
         width: 320,
         params: {}
       },
-      function() { banner468Timer = setTimeout(loadBanner468, 400); },
+      function() { banner468Timer = setTimeout(loadBanner468, 450); },
       function() {
         banner320Error = true;
         loadBanner468();
@@ -1731,7 +2247,7 @@
       }
     );
 
-    banner468Timer = setTimeout(loadBanner468, 2000);
+    banner468Timer = setTimeout(loadBanner468, 2200);
   }
 
   function loadNativeAd(scriptId) {
@@ -1758,11 +2274,8 @@
     clearTimeout(adRetryTimer);
     adRetryTimer = setTimeout(function() {
       syncAdSlotsLayout();
-      if (!hasRenderedNativeAd() && !nativeAdError) {
-        loadNativeAd("native-ad-retry-script");
-      }
       setTimeout(revealAdblockNoticeIfBlocked, 1200);
-    }, 2800);
+    }, 3200);
   }
 
   if (document.readyState === "complete") checkAdNetworkHealth();
@@ -2249,18 +2762,29 @@
   }
 
   function startBuyerLoop() {
-    if (!buyerIntervalId) buyerIntervalId = setInterval(showRandomBuyer, 22000);
+    if (!buyerIntervalId && !document.hidden) buyerIntervalId = setInterval(showRandomBuyer, 22000);
+  }
+  function stopBuyerLoop() {
+    if (buyerIntervalId) {
+      clearInterval(buyerIntervalId);
+      buyerIntervalId = null;
+    }
   }
 
   buyerStartTimer = setTimeout(function() { showRandomBuyer(); startBuyerLoop(); }, 5000);
 
   document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
+      stopBoLinkCycle();
+      stopBuyerLoop();
       clearTimeout(hideNotifTimer);
+      applyFirePlayState();
       const box = document.getElementById("buyer-notification");
       if (box) box.classList.remove("show");
     } else {
+      startBoLinkCycle();
       startBuyerLoop();
+      refreshFireMarqueeState();
     }
   });
 
@@ -2270,7 +2794,8 @@
     clearTimeout(adRetryTimer);
     clearTimeout(banner468Timer);
     clearTimeout(resizeSyncTimer);
-    if (buyerIntervalId) { clearInterval(buyerIntervalId); buyerIntervalId = null; }
+    stopBoLinkCycle();
+    stopBuyerLoop();
   }, { passive: true });
 
   const progressBar = document.getElementById("top-nav-progress");
@@ -2283,6 +2808,10 @@
   }
   window.addEventListener("pageshow", function(e) {
     resetProgress();
+    refreshFireMarqueeState();
+    applyCurrentBoLinkToPromo();
+    startBoLinkCycle();
+    startBuyerLoop();
     if (e.persisted) {
       modalIds.forEach(closeModalById);
       syncMarketFilterStatus();
@@ -2305,4 +2834,4 @@
 })();
 </script>
 </body>
-  </html>
+</html>
