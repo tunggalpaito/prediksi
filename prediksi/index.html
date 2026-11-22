@@ -16,10 +16,11 @@
 <meta name="description" content="Pusat prediksi angka togel jitu hari ini untuk pasaran Sydney (SDY), Singapore (SGP), Hongkong (HK), SDY Lotto, dan HK Lotto dengan analisa lengkap, paito warna, dan live draw di Tunggal Paito.">
 <link rel="canonical" href="https://tunggalpaito.online/prediksi/">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link rel="dns-prefetch" href="https://brijmohan.org">
+<link rel="dns-prefetch" href="https://tunggalpaito.online">
 
 <link rel="preload" as="image" href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg">
 
@@ -109,16 +110,16 @@
     width: 100%;
     max-width: 100%;
     overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
   }
   body {
     margin: 0;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--bg-main);
     color: #f3f4f6;
-    user-select: none;
-    -webkit-user-select: none;
     width: 100%;
     max-width: 100%;
+    min-height: 100svh;
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
@@ -131,16 +132,15 @@
   }
   body ::selection { background-color: #e11d48; color: #ffffff; }
 
-  /* Bingkai atas + kiri + kanan saja (tanpa garis bawah) */
   #screen-frame-border {
     position: fixed;
     top: var(--frame-gap);
     left: var(--frame-gap);
     right: var(--frame-gap);
-    bottom: 0;
-    border-top: 1px solid rgba(255, 30, 86, 0.36);
-    border-left: 1px solid rgba(255, 30, 86, 0.36);
-    border-right: 1px solid rgba(255, 30, 86, 0.36);
+    height: calc(100svh - var(--frame-gap));
+    border-top: 1px solid rgba(255, 30, 86, 0.38);
+    border-left: 1px solid rgba(255, 30, 86, 0.38);
+    border-right: 1px solid rgba(255, 30, 86, 0.38);
     border-bottom: none;
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
@@ -148,7 +148,7 @@
     border-bottom-right-radius: 0;
     pointer-events: none;
     z-index: 40;
-    box-shadow: inset 0 12px 18px -12px rgba(255, 30, 86, 0.12);
+    box-shadow: inset 0 12px 18px -12px rgba(255, 30, 86, 0.14);
   }
   #screen-frame-border::before {
     content: "";
@@ -157,14 +157,12 @@
     left: -1px;
     width: 14px;
     height: 14px;
-    border-top: 2px solid rgba(255, 95, 130, 0.85);
-    border-left: 2px solid rgba(255, 95, 130, 0.85);
+    border-top: 2px solid rgba(255, 95, 130, 0.88);
+    border-left: 2px solid rgba(255, 95, 130, 0.88);
     border-top-left-radius: 18px;
     pointer-events: none;
   }
-  #screen-frame-border::after {
-    content: none;
-  }
+  #screen-frame-border::after { content: none; }
   @media (min-width: 640px) {
     :root { --frame-gap: 8px; }
     #screen-frame-border {
@@ -174,6 +172,55 @@
     #screen-frame-border::before {
       border-top-left-radius: 22px;
     }
+  }
+
+  /* 5 bingkai utama terkunci rapi dalam 1 layar saat dibuka */
+  #first-screen-lock {
+    width: 100%;
+    min-height: calc(100svh - 52px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.4rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0.5rem;
+    flex-shrink: 0;
+    transform: none !important;
+    animation: none !important;
+    contain: layout style;
+  }
+  #first-screen-lock > * {
+    flex-shrink: 0;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  #first-screen-lock .bento-card:active,
+  #first-screen-lock .tap-responsive:active,
+  #first-screen-lock .cyber-btn-red:hover {
+    transform: none !important;
+  }
+
+  /* Bobot tinggi atas-bawah bingkai APK Favorit & Jasa Buat Website */
+  .sub-action-card {
+    min-height: 48px;
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+  }
+
+  /* Ukuran tagar #liveprediksi dll diseragamkan agar tidak besar */
+  .first-screen-tags {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    margin-top: 0.4rem;
+    overflow: hidden;
+  }
+  .first-screen-tag {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+    padding: 0.2rem 0.4rem !important;
+    white-space: nowrap;
   }
 
   .bg-mesh {
@@ -223,10 +270,6 @@
   }
   .tap-responsive:active { transform: scale(0.97); filter: brightness(1.08); }
 
-  input, textarea, #ad-slots-wrapper, .ad-slot-box, .ad-slot-box * {
-    user-select: auto;
-    -webkit-user-select: auto;
-  }
   a { text-decoration: none; color: inherit; }
   a, button, .bento-card, .tab-btn {
     touch-action: manipulation;
@@ -248,6 +291,11 @@
     border: 1px solid rgba(255, 30, 86, 0.16);
     padding: 4px;
     position: relative;
+  }
+  #slot-banner-320 {
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
   }
   .ad-slot-box iframe {
     max-width: 100% !important;
@@ -345,10 +393,10 @@
     box-shadow: 0 0 10px rgba(255, 30, 86, 0.8);
     z-index: 100000;
     opacity: 0;
-    transition: width 0.28s ease, opacity 0.18s ease;
+    transition: width 0.2s ease, opacity 0.15s ease;
     pointer-events: none;
   }
-  #top-nav-progress.active { opacity: 1; width: 82%; }
+  #top-nav-progress.active { opacity: 1; width: 85%; }
 
   #particle-canvas {
     position: fixed;
@@ -654,7 +702,7 @@
 <canvas id="particle-canvas" aria-hidden="true"></canvas>
 <div id="top-nav-progress" aria-hidden="true"></div>
 
-<nav class="sticky top-0 z-50 w-full glass-panel border-b border-rose-500/25" aria-label="Navigasi Utama">
+<nav class="sticky top-0 z-50 w-full glass-panel border-b border-rose-500/25 shrink-0" aria-label="Navigasi Utama">
   <div class="container-mobile px-4 py-2.5 flex items-center justify-between gap-2">
     <a href="https://tunggalpaito.online/prediksi/" class="tap-responsive flex items-center gap-2 min-w-0 group">
       <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#ff1e56] to-red-900 flex items-center justify-center text-white border border-rose-400/40 group-hover:scale-105 shrink-0">
@@ -683,16 +731,28 @@
   </div>
 </nav>
 
-<div class="relative z-10 w-full container-mobile px-4 pt-3.5 space-y-2.5">
-  <div class="rounded-2xl bg-gradient-to-r from-[#240913]/90 via-[#140a10]/90 to-[#0d080c]/95 border border-rose-500/40 p-3 backdrop-blur-md">
-    <div class="flex items-start gap-2.5">
+<div id="first-screen-lock" class="relative z-10 w-full container-mobile px-4">
+  <!-- 1. PUSAT INFORMASI & ANALISA -->
+  <section class="glass-panel rounded-2xl p-2.5 text-[10.5px] text-gray-300 leading-snug border border-rose-500/30">
+    <h2 class="font-cyber text-[10.5px] font-extrabold text-rose-400 mb-0.5 uppercase tracking-wide">Pusat Informasi &amp; Analisa Angka Main Setiap Hari</h2>
+    <p>Selamat datang di halaman resmi prediksi togel hari ini dari <strong class="text-white">Tunggal Paito</strong>. Kami menyajikan ulasan lengkap mengenai analisa angka jitu, live draw, paito warna serta banyak lagi yang lainnya untuk berbagai pasaran resmi seperti Sydney (SDY), Singapore (SGP), dan Hongkong (HK).</p>
+  </section>
+
+  <!-- 2. IKLAN PERTAMA YANG KECIL -->
+  <div id="top-small-ad" class="glass-panel rounded-2xl p-1 flex items-center justify-center overflow-hidden">
+    <div id="slot-banner-320" class="ad-slot-box min-h-[60px]"></div>
+  </div>
+
+  <!-- 3. PEMBERITAHUAN PENTING -->
+  <div class="rounded-2xl bg-gradient-to-r from-[#240913]/90 via-[#140a10]/90 to-[#0d080c]/95 border border-rose-500/40 p-2.5 backdrop-blur-md">
+    <div class="flex items-start gap-2">
       <div class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 border border-rose-500/40 mt-0.5">
         <i class="fa-solid fa-shield-halved text-xs" aria-hidden="true"></i>
       </div>
-      <div class="text-[11px] text-gray-300 leading-relaxed">
+      <div class="text-[10px] text-gray-300 leading-snug">
         <div class="flex items-center justify-between mb-0.5">
-          <span class="font-cyber text-rose-400 uppercase tracking-wider font-extrabold text-[10px]">Pemberitahuan Penting</span>
-          <span class="text-[9px] px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/35 font-cyber font-semibold">Anti-BO</span>
+          <span class="font-cyber text-rose-400 uppercase tracking-wider font-extrabold text-[9.5px]">Pemberitahuan Penting</span>
+          <span class="text-[8.5px] px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/35 font-cyber font-semibold">Anti-BO</span>
         </div>
         <p class="font-medium text-gray-200">
           Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia jaringan iklan pihak ketiga dan <strong class="text-white">BUKAN dari kita</strong>. Tunggal Paito tidak pernah bekerja sama, merekomendasikan, atau menjadi bagian dari pihak BO manapun. Jika dibawa ke halaman iklan liar, trik atasinya <strong class="text-rose-400">kembali 1x kemudian coba lagi</strong>, jika masih terobos saja. Salam HOKI — Teruslah Berjuang kita sama-sama sebagai musuh bandar!
@@ -701,7 +761,74 @@
     </div>
   </div>
 
-  <div id="adblock-friendly-banner" class="hidden rounded-2xl bg-[#1a0a11]/95 border border-amber-500/45 p-3">
+  <!-- 4. DOWNLOAD APK TUNGGAL PAITO + APK FAVORIT & JASA BUAT WEBSITE -->
+  <div class="grid grid-cols-2 gap-1.5">
+    <button type="button" onclick="openDownloadModal(event)" class="col-span-2 flex items-center justify-between text-white font-extrabold py-2.5 px-3 rounded-2xl cursor-pointer cyber-btn-red">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-black/30 border border-white/20 flex items-center justify-center text-sm shrink-0">
+          <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
+        </div>
+        <div class="text-left">
+          <div class="text-xs sm:text-sm font-extrabold leading-tight">Download APK Tunggal Paito</div>
+          <div class="text-[9.5px] font-semibold text-rose-100/90">Versi Resmi • Ringan &amp; Anti Blokir</div>
+        </div>
+      </div>
+      <span class="px-2.5 py-1 rounded-lg bg-black/60 border border-rose-300/30 text-white font-cyber text-[9.5px] font-extrabold uppercase tracking-wider shrink-0">Unduh</span>
+    </button>
+
+    <a href="https://tunggalpaito.online/prediksi/angka-main/" class="sub-action-card flex items-center justify-between glass-panel hover:border-rose-500/60 text-white px-3 rounded-xl">
+      <div class="flex items-center gap-2 min-w-0">
+        <div class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/35 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-fire-flame-curved text-rose-400 text-xs" aria-hidden="true"></i>
+        </div>
+        <div class="min-w-0">
+          <div class="font-cyber text-[10px] font-extrabold uppercase tracking-wide text-white truncate">APK FAVORIT</div>
+          <div class="text-[8px] text-gray-400 truncate">Angka Main Andalan</div>
+        </div>
+      </div>
+      <span class="text-[8px] font-cyber font-extrabold uppercase px-1.5 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 shrink-0">Hot</span>
+    </a>
+
+    <button type="button" onclick="openWebDevModal(event)" class="sub-action-card flex items-center justify-between text-left glass-panel hover:border-rose-500/60 text-white px-3 rounded-xl cursor-pointer">
+      <div class="flex items-center gap-2 min-w-0">
+        <div class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/35 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-laptop-code text-rose-400 text-xs" aria-hidden="true"></i>
+        </div>
+        <div class="min-w-0">
+          <div class="font-cyber text-[10px] font-extrabold leading-tight text-white truncate">Jasa Buat Website</div>
+          <div class="text-[8px] text-gray-400 truncate">Web &amp; APK Custom</div>
+        </div>
+      </div>
+      <span class="text-[8px] font-cyber font-extrabold uppercase px-1.5 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 shrink-0">Custom</span>
+    </button>
+  </div>
+
+  <!-- 5. PREDIKSI TOGEL HARI INI / SALAM HOKI -->
+  <div class="relative overflow-hidden rounded-2xl glass-panel border border-rose-500/35 p-3">
+    <div class="absolute -right-10 -top-10 w-36 h-36 bg-rose-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-red-800/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-500/15 border border-rose-500/35 text-rose-400 text-[9px] font-cyber font-bold uppercase tracking-wider mb-1">
+      <i class="fa-solid fa-chart-line text-rose-500" aria-hidden="true"></i> Prediksi Togel Hari Ini
+    </div>
+    <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white leading-snug">
+      Prediksi Togel Jitu Hari Ini — <span class="font-cyber neon-glow-red tracking-wide">Tunggal Paito ✔️</span>
+    </h1>
+    <p class="text-[10.5px] text-gray-300 mt-0.5 leading-snug">
+      Menyediakan prediksi angka pasaran populer yang banyak diminati dari berbagai kalangan, JP kita prioritas utama. <span class="text-rose-400 font-semibold">⇲ Salam hoki satu hati</span>
+    </p>
+
+    <div class="first-screen-tags">
+      <span class="first-screen-tag font-mono-num rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#liveprediksi</span>
+      <span class="first-screen-tag font-mono-num rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitosdy</span>
+      <span class="first-screen-tag font-mono-num rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitosgp</span>
+      <span class="first-screen-tag font-mono-num rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitohk</span>
+    </div>
+  </div>
+</div>
+
+<header class="relative z-10 w-full container-mobile px-4 pt-2">
+  <div id="adblock-friendly-banner" class="hidden rounded-2xl bg-[#1a0a11]/95 border border-amber-500/45 p-3 mb-2.5">
     <div class="flex items-start gap-2.5">
       <div class="w-7 h-7 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/40 mt-0.5">
         <i class="fa-solid fa-circle-info text-xs" aria-hidden="true"></i>
@@ -718,94 +845,12 @@
     </div>
   </div>
 
-  <div id="ad-slots-wrapper" class="glass-panel rounded-2xl p-2 flex flex-col items-center gap-2 overflow-hidden">
-    <div id="slot-banner-320" class="ad-slot-box min-h-[58px]">
-      <script>
-        (function() {
-          window.atOptions = { key: "119c8bb3217ed264a8fa223c3197bf69", format: "iframe", height: 50, width: 320, params: {} };
-        })();
-      </script>
-      <script id="ad-script-320" data-cfasync="false" referrerpolicy="no-referrer-when-downgrade" src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
-    </div>
-
-    <div id="slot-banner-468" class="ad-slot-box min-h-[68px]">
-      <script>
-        (function() {
-          window.atOptions = { key: "9a986a45c62dcea8d8216b9210f159cb", format: "iframe", height: 60, width: 468, params: {} };
-        })();
-      </script>
-      <script id="ad-script-468" data-cfasync="false" referrerpolicy="no-referrer-when-downgrade" src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
-    </div>
+  <div id="ad-slots-wrapper" class="glass-panel rounded-2xl p-2 flex flex-col items-center gap-2 overflow-hidden mb-3">
+    <div id="slot-banner-468" class="ad-slot-box min-h-[68px]"></div>
 
     <div id="slot-native-box" class="ad-slot-box min-h-[70px]">
       <div id="container-3f09897b852339f736b82a3190a40259" class="w-full overflow-hidden flex justify-center"></div>
-      <script id="native-ad-script" async data-cfasync="false" referrerpolicy="no-referrer-when-downgrade" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
     </div>
-  </div>
-</div>
-
-<header class="relative z-10 w-full container-mobile px-4 pt-4">
-  <div class="relative overflow-hidden rounded-3xl glass-panel border border-rose-500/35 p-5 mb-4">
-    <div class="absolute -right-10 -top-10 w-40 h-40 bg-rose-500/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -left-10 -bottom-10 w-36 h-36 bg-red-800/20 rounded-full blur-3xl pointer-events-none"></div>
-
-    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/15 border border-rose-500/35 text-rose-400 text-[10px] font-cyber font-bold uppercase tracking-wider mb-3">
-      <i class="fa-solid fa-chart-line text-rose-500" aria-hidden="true"></i> Prediksi Togel Hari Ini
-    </div>
-    <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white leading-snug">
-      Prediksi Togel Jitu Hari Ini — <span class="font-cyber neon-glow-red tracking-wide">Tunggal Paito ✔️</span>
-    </h1>
-    <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-      Menyediakan prediksi angka pasaran populer yang banyak diminati dari berbagai kalangan, JP kita prioritas utama. <span class="text-rose-400 font-semibold">⇲ Salam hoki satu hati</span>
-    </p>
-
-    <div class="flex flex-wrap gap-1.5 mt-3.5">
-      <span class="text-[10px] font-mono-num px-2 py-0.5 rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#liveprediksi</span>
-      <span class="text-[10px] font-mono-num px-2 py-0.5 rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitosdy</span>
-      <span class="text-[10px] font-mono-num px-2 py-0.5 rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitosgp</span>
-      <span class="text-[10px] font-mono-num px-2 py-0.5 rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/25">#tunggalpaitohk</span>
-    </div>
-  </div>
-
-  <div class="grid grid-cols-2 gap-2.5 mb-3">
-    <button type="button" onclick="openDownloadModal(event)" class="tap-responsive cyber-btn-red col-span-2 flex items-center justify-between text-white font-extrabold p-3.5 rounded-2xl cursor-pointer group">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-black/30 border border-white/20 flex items-center justify-center text-lg shrink-0">
-          <i class="fa-solid fa-cloud-arrow-down group-hover:translate-y-0.5" aria-hidden="true"></i>
-        </div>
-        <div class="text-left">
-          <div class="text-sm font-extrabold leading-tight">Download APK Tunggal Paito</div>
-          <div class="text-[10px] font-semibold text-rose-100/90">Versi Resmi • Ringan &amp; Anti Blokir</div>
-        </div>
-      </div>
-      <span class="px-2.5 py-1 rounded-lg bg-black/60 border border-rose-300/30 text-white font-cyber text-[10px] font-extrabold uppercase tracking-wider shrink-0">Unduh</span>
-    </button>
-
-    <a href="https://tunggalpaito.online/prediksi/angka-main/" class="tap-responsive flex flex-col justify-between glass-panel hover:border-rose-500/60 text-white p-3.5 rounded-2xl">
-      <div class="flex items-center justify-between mb-2">
-        <div class="w-8 h-8 rounded-xl bg-rose-500/20 border border-rose-500/35 flex items-center justify-center">
-          <i class="fa-solid fa-fire-flame-curved text-rose-400 text-sm" aria-hidden="true"></i>
-        </div>
-        <span class="text-[9px] font-cyber font-extrabold uppercase px-2 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300">Hot</span>
-      </div>
-      <div>
-        <div class="font-cyber text-xs font-extrabold uppercase tracking-wide text-white">APK FAVORIT</div>
-        <div class="text-[10px] text-gray-400 mt-0.5">Angka Main Andalan</div>
-      </div>
-    </a>
-
-    <button type="button" onclick="openWebDevModal(event)" class="tap-responsive flex flex-col justify-between text-left glass-panel hover:border-rose-500/60 text-white p-3.5 rounded-2xl cursor-pointer">
-      <div class="flex items-center justify-between mb-2">
-        <div class="w-8 h-8 rounded-xl bg-rose-500/20 border border-rose-500/35 flex items-center justify-center">
-          <i class="fa-solid fa-laptop-code text-rose-400 text-sm" aria-hidden="true"></i>
-        </div>
-        <span class="text-[9px] font-cyber font-extrabold uppercase px-2 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300">Custom</span>
-      </div>
-      <div>
-        <div class="font-cyber text-xs font-extrabold leading-tight text-white">Jasa Buat Website</div>
-        <div class="text-[10px] text-gray-400 mt-0.5">Web &amp; APK Profesional</div>
-      </div>
-    </button>
   </div>
 
   <div class="bento-card rounded-3xl p-4 mb-3 relative overflow-hidden">
@@ -951,11 +996,6 @@
 </header>
 
 <main class="relative z-10 w-full container-mobile px-4 py-4 flex-grow space-y-5">
-  <section class="glass-panel rounded-2xl p-4 text-[11px] text-gray-300 leading-relaxed">
-    <h2 class="font-cyber text-xs font-extrabold text-rose-400 mb-1.5 uppercase tracking-wide">Pusat Informasi &amp; Analisa Angka Main Setiap Hari</h2>
-    <p>Selamat datang di halaman resmi prediksi togel hari ini dari <strong class="text-white">Tunggal Paito</strong>. Kami menyajikan ulasan lengkap mengenai analisa angka jitu, live draw, paito warna serta banyak lagi yang lainnya untuk berbagai pasaran resmi seperti Sydney (SDY), Singapore (SGP), dan Hongkong (HK).</p>
-  </section>
-
   <div>
     <div class="flex items-center justify-between mb-2.5 px-0.5">
       <h2 class="font-cyber text-xs font-extrabold uppercase tracking-wider text-gray-100">Perlengkapan &amp; Pilihan Prediksi</h2>
@@ -1405,9 +1445,18 @@
 
 <script>
 (function() {
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_22_final_v3";
+  "use strict";
+
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_22_final_v9";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
   const RELOAD_GUARD_KEY = "tp_prediksi_reloaded_for";
+
+  function safeSessionGet(key) {
+    try { return window.sessionStorage.getItem(key); } catch (e) { return null; }
+  }
+  function safeSessionSet(key, val) {
+    try { window.sessionStorage.setItem(key, val); } catch (e) {}
+  }
 
   function isSafeHttpUrl(rawUrl) {
     if (!rawUrl || typeof rawUrl !== "string") return false;
@@ -1420,64 +1469,66 @@
   }
 
   function purgeStaleClientCaches() {
-    if ("caches" in window && typeof caches.keys === "function") {
-      caches.keys().then(function(keys) {
-        keys.forEach(function(key) {
-          if (!String(key).includes(CACHE_BUILD_VERSION)) {
-            caches.delete(key).catch(function() {});
-          }
-        });
-      }).catch(function() {});
-    }
+    if (!("caches" in window) || typeof caches.keys !== "function") return;
+    caches.keys().then(function(keys) {
+      for (let i = 0; i < keys.length; i++) {
+        if (!String(keys[i]).includes(CACHE_BUILD_VERSION)) {
+          caches.delete(keys[i]).catch(function() {});
+        }
+      }
+    }).catch(function() {});
   }
 
-  function runAutoCacheRefresh(forceFreshCheck) {
+  function runAutoCacheRefresh() {
     purgeStaleClientCaches();
-    try {
-      const prevVersion = sessionStorage.getItem(CACHE_KEY_NAME);
-      if (prevVersion && prevVersion !== CACHE_BUILD_VERSION) {
-        sessionStorage.setItem(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
-        const alreadyReloaded = sessionStorage.getItem(RELOAD_GUARD_KEY) === CACHE_BUILD_VERSION;
-        if (!alreadyReloaded) {
-          sessionStorage.setItem(RELOAD_GUARD_KEY, CACHE_BUILD_VERSION);
-          window.location.reload();
+    const prevVersion = safeSessionGet(CACHE_KEY_NAME);
+    if (prevVersion && prevVersion !== CACHE_BUILD_VERSION) {
+      safeSessionSet(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
+      if (safeSessionGet(RELOAD_GUARD_KEY) !== CACHE_BUILD_VERSION) {
+        safeSessionSet(RELOAD_GUARD_KEY, CACHE_BUILD_VERSION);
+        try {
+          window.location.replace(window.location.href);
           return true;
-        }
-      } else {
-        sessionStorage.setItem(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
+        } catch (e) {}
       }
-
-      if (forceFreshCheck && typeof fetch === "function" && window.location.protocol.startsWith("http")) {
-        fetch(window.location.href, {
-          method: "GET",
-          cache: "no-store",
-          headers: { "X-Requested-With": "CacheCheck" }
-        }).then(function(res) {
-          if (!res || !res.ok) return null;
-          return res.text();
-        }).then(function(htmlText) {
-          if (!htmlText) return;
-          const match = htmlText.match(/CACHE_BUILD_VERSION\s*=\s*["']([^"']+)["']/);
-          const remoteVer = match && match[1] ? match[1] : "";
-          if (remoteVer && remoteVer !== CACHE_BUILD_VERSION) {
-            sessionStorage.setItem(CACHE_KEY_NAME, remoteVer);
-            if (sessionStorage.getItem(RELOAD_GUARD_KEY) !== remoteVer) {
-              sessionStorage.setItem(RELOAD_GUARD_KEY, remoteVer);
-              window.location.reload();
-            }
-          }
-        }).catch(function() {});
-      }
-    } catch (e) {}
+    } else {
+      safeSessionSet(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
+    }
     return false;
   }
 
-  if (runAutoCacheRefresh(false)) return;
+  if (runAutoCacheRefresh()) return;
 
   const yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  // Proses download gambar berjalan bersamaan dengan link bawaan (tanpa redirect liar)
+  // Prefetch instan link internal saat diarahkan / disentuh
+  const prefetchedUrls = new Set();
+  function prefetchInternalUrl(href) {
+    if (!href || prefetchedUrls.has(href) || !isSafeHttpUrl(href)) return;
+    try {
+      const urlObj = new URL(href, window.location.href);
+      if (urlObj.origin !== window.location.origin) return;
+      prefetchedUrls.add(urlObj.href);
+      const link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = urlObj.href;
+      link.as = "document";
+      document.head.appendChild(link);
+    } catch (e) {}
+  }
+
+  document.addEventListener("pointerenter", function(e) {
+    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (a) prefetchInternalUrl(a.getAttribute("href"));
+  }, { passive: true, capture: true });
+
+  document.addEventListener("touchstart", function(e) {
+    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (a) prefetchInternalUrl(a.getAttribute("href"));
+  }, { passive: true, capture: true });
+
+  // Unduh file gambar panduan bersamaan dengan pembukaan link/tab tujuan
   document.addEventListener("click", function(e) {
     const guideLink = e.target && e.target.closest ? e.target.closest("a[data-guide-download]") : null;
     if (!guideLink) return;
@@ -1500,7 +1551,7 @@
         document.body.appendChild(dl);
         dl.click();
         dl.remove();
-        setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 3000);
+        setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 2500);
       })
       .catch(function() {});
   }, { passive: true });
@@ -1521,40 +1572,146 @@
       }
     });
   }
-  syncAdSlotsLayout();
 
   let adRetryTimer = null;
-  function checkAdNetworkHealth() {
-    const nativeScript = document.getElementById("native-ad-script");
-    const nativeBox = document.getElementById("container-3f09897b852339f736b82a3190a40259");
+  let banner468Timer = null;
+  let banner320Error = false;
+  let banner468Error = false;
+  let nativeAdError = false;
+
+  function revealAdblockNoticeIfBlocked() {
     const noticeBanner = document.getElementById("adblock-friendly-banner");
     if (!noticeBanner) return;
+    const slot320 = document.getElementById("slot-banner-320");
+    const slot468 = document.getElementById("slot-banner-468");
+    const nativeBox = document.getElementById("container-3f09897b852339f736b82a3190a40259");
 
-    let scriptFailed = false;
-    if (nativeScript) {
-      nativeScript.addEventListener("error", function() {
-        scriptFailed = true;
-        noticeBanner.classList.remove("hidden");
-      }, { once: true });
+    const has320 = Boolean(slot320 && slot320.querySelector("iframe"));
+    const has468 = Boolean(slot468 && slot468.querySelector("iframe"));
+    const hasNative = Boolean(nativeBox && (nativeBox.children.length > 0 || nativeBox.innerHTML.trim().length > 10));
+
+    if ((banner320Error && banner468Error && nativeAdError) || (!has320 && !has468 && !hasNative)) {
+      noticeBanner.classList.remove("hidden");
     }
+  }
+
+  function injectAdScript(container, id, src, optionsObj, onLoad, onError) {
+    if (!container) return;
+    window.atOptions = optionsObj;
+    const existing = document.getElementById(id);
+    if (existing) existing.remove();
+
+    const script = document.createElement("script");
+    script.id = id;
+    script.async = true;
+    script.setAttribute("data-cfasync", "false");
+    script.referrerPolicy = "no-referrer-when-downgrade";
+    script.src = src;
+    if (onLoad) script.addEventListener("load", onLoad, { once: true });
+    if (onError) script.addEventListener("error", onError, { once: true });
+    container.appendChild(script);
+  }
+
+  function loadSequentialBanners() {
+    const slot320 = document.getElementById("slot-banner-320");
+    const slot468 = document.getElementById("slot-banner-468");
+    let chainStarted = false;
+
+    function loadBanner468() {
+      if (chainStarted) return;
+      chainStarted = true;
+      clearTimeout(banner468Timer);
+      if (!slot468) return;
+
+      injectAdScript(
+        slot468,
+        "ad-script-468",
+        "https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb",
+        {
+          key: "9a986a45c62dcea8d8216b9210f159cb",
+          format: "iframe",
+          height: 60,
+          width: 468,
+          params: {}
+        },
+        function() { syncAdSlotsLayout(); },
+        function() {
+          banner468Error = true;
+          revealAdblockNoticeIfBlocked();
+        }
+      );
+    }
+
+    if (!slot320) {
+      loadBanner468();
+      return;
+    }
+
+    injectAdScript(
+      slot320,
+      "ad-script-320",
+      "https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69",
+      {
+        key: "119c8bb3217ed264a8fa223c3197bf69",
+        format: "iframe",
+        height: 50,
+        width: 320,
+        params: {}
+      },
+      function() { banner468Timer = setTimeout(loadBanner468, 150); },
+      function() {
+        banner320Error = true;
+        loadBanner468();
+        revealAdblockNoticeIfBlocked();
+      }
+    );
+
+    banner468Timer = setTimeout(loadBanner468, 1600);
+  }
+
+  function loadNativeAd() {
+    const nativeBox = document.getElementById("container-3f09897b852339f736b82a3190a40259");
+    if (!nativeBox || document.getElementById("native-ad-script")) return;
+
+    const nativeScript = document.createElement("script");
+    nativeScript.id = "native-ad-script";
+    nativeScript.async = true;
+    nativeScript.setAttribute("data-cfasync", "false");
+    nativeScript.referrerPolicy = "no-referrer-when-downgrade";
+    nativeScript.src = "https://brijmohan.org/21/3f09897b852339f736b82a3190a40259";
+    nativeScript.addEventListener("error", function() {
+      nativeAdError = true;
+      revealAdblockNoticeIfBlocked();
+    }, { once: true });
+    document.body.appendChild(nativeScript);
+  }
+
+  function checkAdNetworkHealth() {
+    loadNativeAd();
+    loadSequentialBanners();
 
     clearTimeout(adRetryTimer);
     adRetryTimer = setTimeout(function() {
       syncAdSlotsLayout();
-      if (scriptFailed) return;
+      const nativeBox = document.getElementById("container-3f09897b852339f736b82a3190a40259");
       const hasNativeContent = Boolean(nativeBox && (nativeBox.children.length > 0 || nativeBox.innerHTML.trim().length > 10));
-      if (!hasNativeContent && !document.getElementById("native-ad-retry-script")) {
+      if (!hasNativeContent && !nativeAdError && !document.getElementById("native-ad-retry-script")) {
         const retryScript = document.createElement("script");
         retryScript.id = "native-ad-retry-script";
         retryScript.async = true;
         retryScript.setAttribute("data-cfasync", "false");
         retryScript.referrerPolicy = "no-referrer-when-downgrade";
         retryScript.src = "https://brijmohan.org/21/3f09897b852339f736b82a3190a40259";
-        retryScript.addEventListener("error", function() { noticeBanner.classList.remove("hidden"); }, { once: true });
+        retryScript.addEventListener("error", function() {
+          nativeAdError = true;
+          revealAdblockNoticeIfBlocked();
+        }, { once: true });
         document.body.appendChild(retryScript);
       }
-    }, 3500);
+      setTimeout(revealAdblockNoticeIfBlocked, 1200);
+    }, 2800);
   }
+
   if (document.readyState === "complete") checkAdNetworkHealth();
   else window.addEventListener("load", checkAdNetworkHealth, { once: true });
 
@@ -1597,14 +1754,14 @@
 
     resizeParticleCanvas();
     const particlesArray = [];
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 12; i++) {
       particlesArray.push({
         x: Math.random() * particleCanvas.width,
         y: Math.random() * particleCanvas.height,
-        size: Math.random() * 1.6 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.32,
-        speedY: (Math.random() - 0.5) * 0.32,
-        color: Math.random() > 0.4 ? "rgba(255, 30, 86, 0.4)" : "rgba(200, 20, 60, 0.26)"
+        size: Math.random() * 1.5 + 0.5,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        color: Math.random() > 0.4 ? "rgba(255, 30, 86, 0.38)" : "rgba(200, 20, 60, 0.25)"
       });
     }
 
@@ -1632,8 +1789,8 @@
           const dx = particlesArray[a].x - particlesArray[b].x;
           const dy = particlesArray[a].y - particlesArray[b].y;
           const distSq = dx * dx + dy * dy;
-          if (distSq < 9600) {
-            ctx.strokeStyle = "rgba(255, 30, 86, " + (0.1 * (1 - Math.sqrt(distSq) / 98)) + ")";
+          if (distSq < 9000) {
+            ctx.strokeStyle = "rgba(255, 30, 86, " + (0.09 * (1 - Math.sqrt(distSq) / 95)) + ")";
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -1653,7 +1810,7 @@
   }
 
   if ("requestIdleCallback" in window) requestIdleCallback(startParticles, { timeout: 600 });
-  else startParticles();
+  else setTimeout(startParticles, 250);
 
   function isElementVisible(el) {
     if (!el || !el.isConnected) return false;
@@ -1702,7 +1859,7 @@
       syncAdSlotsLayout();
       resizeParticleCanvas();
       window.scheduleGuideCropSync();
-    }, 80);
+    }, 60);
   }, { passive: true });
 
   window.addEventListener("orientationchange", function() {
@@ -1710,7 +1867,7 @@
       syncAdSlotsLayout();
       resizeParticleCanvas();
       window.scheduleGuideCropSync();
-    }, 100);
+    }, 80);
   }, { passive: true });
 
   let activeMarketFilter = "all";
@@ -1749,7 +1906,7 @@
     addItem("Download APK Tunggal Paito", "Versi Resmi • Ringan & Anti Blokir", "", "download", "");
     addItem("Jasa Buat Website", "Web & APK Profesional Custom", "", "webdev", "");
 
-    document.querySelectorAll("nav a[href], header a[href], main a[href]").forEach(function(a) {
+    document.querySelectorAll("nav a[href], #first-screen-lock a[href], header a[href], main a[href]").forEach(function(a) {
       const href = (a.getAttribute("href") || "").trim();
       if (!href || !isSafeHttpUrl(href) || href.startsWith("https://s.shopee.co.id") || href.startsWith("https://www.facebook.com")) return;
       const rawText = (a.textContent || "").replace(/\s+/g, " ").trim();
@@ -2061,9 +2218,12 @@
 
   function getPersistentBuyers() {
     let list = [];
-    try { list = JSON.parse(localStorage.getItem("tp_persistent_buyers") || "[]"); } catch (e) { list = []; }
-    const latestTs = Number(Array.isArray(list) && list.length ? list[list.length - 1].timestamp : NaN);
-    if (!Array.isArray(list) || !list.length || !Number.isFinite(latestTs) || Math.abs(Date.now() - latestTs) > 10800000) {
+    try {
+      const parsed = JSON.parse(localStorage.getItem("tp_persistent_buyers") || "[]");
+      if (Array.isArray(parsed)) list = parsed;
+    } catch (e) { list = []; }
+    const latestTs = Number(list.length ? list[list.length - 1].timestamp : NaN);
+    if (!list.length || !Number.isFinite(latestTs) || Math.abs(Date.now() - latestTs) > 10800000) {
       list = generateBuyersBatch(50);
       writePersistentBuyers(list);
     }
@@ -2106,7 +2266,6 @@
     } else {
       if (typeof animateParticlesFn === "function") animateParticlesFn();
       startBuyerLoop();
-      runAutoCacheRefresh(true);
     }
   });
 
@@ -2115,23 +2274,10 @@
     clearTimeout(buyerStartTimer);
     clearTimeout(hideNotifTimer);
     clearTimeout(adRetryTimer);
+    clearTimeout(banner468Timer);
     clearTimeout(resizeSyncTimer);
     if (buyerIntervalId) { clearInterval(buyerIntervalId); buyerIntervalId = null; }
   }, { passive: true });
-
-  document.addEventListener("contextmenu", function(e) {
-    if (!e.target || !e.target.closest("#ad-slots-wrapper, #ads-popup")) e.preventDefault();
-  });
-  document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") return;
-    const key = (e.key || "").toLowerCase();
-    if (key === "f12" || (e.ctrlKey && e.shiftKey && ["i", "c", "j"].includes(key)) || (e.ctrlKey && key === "u")) e.preventDefault();
-  });
-  document.addEventListener("copy", function(e) {
-    const tag = (e.target && e.target.tagName || "").toLowerCase();
-    if (tag === "input" || tag === "textarea" || (e.target && e.target.closest("#ad-slots-wrapper"))) return;
-    e.preventDefault();
-  });
 
   const progressBar = document.getElementById("top-nav-progress");
   let progressFallbackTimer = null;
@@ -2141,9 +2287,8 @@
     progressBar.classList.remove("active");
     progressBar.style.removeProperty("width");
   }
-  window.addEventListener("pageshow", function(e) {
+  window.addEventListener("pageshow", function() {
     resetProgress();
-    runAutoCacheRefresh(Boolean(e && e.persisted));
     syncAdSlotsLayout();
     window.scheduleGuideCropSync();
   });
@@ -2156,7 +2301,7 @@
     if (progressBar) {
       progressBar.classList.add("active");
       clearTimeout(progressFallbackTimer);
-      progressFallbackTimer = setTimeout(resetProgress, link.getAttribute("target") === "_blank" ? 600 : 3500);
+      progressFallbackTimer = setTimeout(resetProgress, link.getAttribute("target") === "_blank" ? 500 : 2800);
     }
   }, { passive: true });
 })();
