@@ -1,294 +1,527 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<meta name="app-version" content="2026.11.22.2">
-<title>Paito Warna Populer Tunggal Paito</title>
-<meta name="description" content="Paito warna terlengkap dari website tunggal paito. Data pengeluaran Singapore Sydney Hongkong, tabel paito warna SGP HK SDY mingguan, prediksi angka jitu, dan live draw SGP HK SDY di Tunggal Paito.">
-<meta name="keywords" content="paito warna sgp sdy hk, data sgp sdy hk, paito singapore sydney hongkong, pengeluaran sgp hk sdy, live sgp sdy hk, result sgp hk sdy, tunggal paito">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050508">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="app-version" content="2026.11.22.2">
+  <title>Paito Warna Populer Tunggal Paito</title>
+  <meta name="description" content="Paito warna terlengkap dari website tunggal paito. Data pengeluaran Singapore Sydney Hongkong, tabel paito warna SGP HK SDY mingguan, prediksi angka jitu, dan live draw SGP HK SDY di Tunggal Paito.">
+  <meta name="keywords" content="paito warna sgp sdy hk, data sgp sdy hk, paito singapore sydney hongkong, pengeluaran sgp hk sdy, live sgp sdy hk, result sgp hk sdy, tunggal paito">
 
-<!-- Auto-clear browser cache & check latest HTML version on load -->
-<script>
-(function() {
-  const CURRENT_VER = document.querySelector('meta[name="app-version"]')?.content || '1';
-  const VER_KEY = 'tp_menu_html_ver';
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://crypotential.com" crossorigin>
+  <link rel="preconnect" href="https://tunggalpaito.online" crossorigin>
 
-  async function clearBrowserCaches() {
-    try {
-      if ('caches' in window) {
-        const keys = await caches.keys();
-        await Promise.all(keys.map(k => caches.delete(k)));
-      }
-      if ('serviceWorker' in navigator) {
-        const regs = await navigator.serviceWorker.getRegistrations();
-        await Promise.all(regs.map(r => r.unregister()));
-      }
-    } catch (_) {}
-  }
-
-  clearBrowserCaches();
-
-  const savedVer = sessionStorage.getItem(VER_KEY);
-  if (savedVer && savedVer !== CURRENT_VER) {
-    sessionStorage.setItem(VER_KEY, CURRENT_VER);
-    const url = new URL(window.location.href);
-    url.searchParams.set('_v', CURRENT_VER);
-    window.location.replace(url.toString());
-    return;
-  }
-  sessionStorage.setItem(VER_KEY, CURRENT_VER);
-
-  fetch(window.location.pathname + '?_check=' + Date.now(), {
-    cache: 'no-store',
-    headers: { 'Cache-Control': 'no-cache' }
-  })
-  .then(res => res.ok ? res.text() : null)
-  .then(html => {
-    if (!html) return;
-    const match = html.match(/<meta\s+name=["']app-version["']\s+content=["']([^"']+)["']/i);
-    if (match && match[1] && match[1] !== CURRENT_VER) {
-      sessionStorage.setItem(VER_KEY, match[1]);
-      const nextUrl = new URL(window.location.href);
-      nextUrl.searchParams.set('_v', match[1]);
-      window.location.replace(nextUrl.toString());
-    }
-  })
-  .catch(() => {});
-})();
-</script>
-
-<style>
-:root{
-  --primary-color:#1b263b;
-  --secondary-color:#415a77;
-  --accent-color:#e63946;
-  --bg-color:#f8f9fa;
-  --card-bg:#ffffff;
-  --text-color:#212529;
-  --border-color:#dee2e6
-}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
-body{background-color:var(--bg-color);color:var(--text-color);line-height:1.5;padding:10px;overflow-x:hidden}
-.container{max-width:1000px;margin:0 auto}
-header{text-align:center;margin-bottom:15px}
-h1{color:var(--primary-color);font-size:1.5rem;margin-bottom:3px}
-p.subtitle{color:var(--secondary-color);font-size:.85rem}
-
-.ads-container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:10px;
-  margin-bottom:15px;
-  background:#fff;
-  padding:10px;
-  border-radius:8px;
-  box-shadow:0 2px 4px rgba(0,0,0,.05)
-}
-.ad-box{
-  background:#f1f3f5;
-  border:1px dashed #adb5bd;
-  border-radius:6px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:60px;
-  overflow:hidden;
-  padding:5px
-}
-
-.nav-links-container{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;position:relative;z-index:10}
-.nav-link-btn{
-  display:block;
-  text-align:center;
-  background:var(--primary-color);
-  color:#fff;
-  text-decoration:none;
-  padding:11px;
-  border-radius:6px;
-  font-weight:600;
-  font-size:.9rem;
-  box-shadow:0 2px 4px rgba(0,0,0,.05);
-  transition:background .15s ease
-}
-.nav-link-btn:hover{background:var(--secondary-color)}
-
-.seo-section{margin-top:20px;font-size:.8rem;color:#6c757d;background:#fff;padding:12px;border-radius:8px;border:1px solid var(--border-color)}
-footer{text-align:center;margin-top:15px;padding:10px;font-size:.85rem;color:var(--secondary-color);border-top:1px solid var(--border-color)}
-
-/* ================= POP-UP FLOATING APK CSS ================= */
-.apk-float-popup{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  z-index:99999;
-  background:linear-gradient(135deg,#1b263b,#0d1b2a);
-  color:#fff;
-  padding:16px 20px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.35),0 0 12px rgba(27,38,59,.5);
-  display:flex;
-  align-items:center;
-  gap:12px;
-  max-width:340px;
-  border:1px solid rgba(255,255,255,.12);
-  will-change:transform,opacity;
-  animation:popupSlideUp .35s ease-out forwards
-}
-@keyframes popupSlideUp{
-  from{transform:translateY(30px);opacity:0}
-  to{transform:translateY(0);opacity:1}
-}
-.apk-icon{
-  width:48px;height:48px;background:#e63946;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  box-shadow:0 4px 10px rgba(230,57,70,.4)
-}
-.apk-icon svg{width:26px;height:26px;fill:#fff}
-.apk-info{flex-grow:1}
-.apk-info h4{font-size:14px;font-weight:bold;color:#fff;margin-bottom:2px}
-.apk-info p{font-size:11px;color:#adb5bd;margin-bottom:8px}
-.btn-download-apk{
-  display:inline-block;
-  background:linear-gradient(90deg,#e63946,#ffb703);
-  color:#fff!important;
-  text-decoration:none;
-  font-size:12px;
-  font-weight:bold;
-  padding:6px 14px;
-  border-radius:20px;
-  box-shadow:0 3px 8px rgba(230,57,70,.35);
-  transition:transform .15s ease
-}
-.btn-download-apk:hover{transform:scale(1.04)}
-.apk-close-btn{
-  position:absolute;top:-8px;right:-8px;background:#e63946;color:#fff;
-  border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;
-  font-weight:bold;font-size:12px;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.3)
-}
-.apk-reopen-btn{
-  position:fixed;bottom:20px;right:20px;z-index:99998;background:#1b263b;color:#fff;
-  border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:10px 16px;
-  font-weight:bold;font-size:13px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);
-  display:none;align-items:center;gap:8px
-}
-@media (max-width:480px){
-  .apk-float-popup{left:10px;right:10px;bottom:15px;max-width:none}
-}
-</style>
-</head>
-<body>
-<div class="container">
-  <header>
-    <h1>Paito Warna Tunggal Paito</h1>
-    <p class="subtitle">Data Pengeluaran &amp; Paito Warna Lengkap</p>
-  </header>
-
-  <!-- Slot Iklan -->
-  <div class="ads-container">
-    <div class="ad-box" id="ad-slot-1"></div>
-    <div class="ad-box" id="ad-slot-2"></div>
-    <div class="ad-box" id="ad-slot-3"></div>
-    <div class="ad-box" id="ad-slot-4"></div>
-  </div>
+  <!-- Auto-clear browser cache & check latest HTML version on load -->
   <script>
   (function() {
-    const slots = ["ad-slot-1", "ad-slot-2", "ad-slot-3", "ad-slot-4"];
-    const adConfig = {
-      key: "119c8bb3217ed264a8fa223c3197bf69",
-      format: "iframe",
-      height: 50,
-      width: 320,
-      params: {}
-    };
-    slots.forEach(function(id) {
-      const box = document.getElementById(id);
-      if (!box) return;
-      const cfgScript = document.createElement("script");
-      cfgScript.type = "text/javascript";
-      cfgScript.text = "atOptions = " + JSON.stringify(adConfig) + ";";
-      const invokeScript = document.createElement("script");
-      invokeScript.type = "text/javascript";
-      invokeScript.async = true;
-      invokeScript.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
-      box.appendChild(cfgScript);
-      box.appendChild(invokeScript);
-    });
+    "use strict";
+    const metaVer = document.querySelector('meta[name="app-version"]');
+    const CURRENT_VER = (metaVer && metaVer.content) ? metaVer.content.trim() : "1";
+    const VER_KEY = "tp_paito_menu_html_ver";
+
+    async function clearBrowserCaches() {
+      try {
+        if ("caches" in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.map(function(k) { return caches.delete(k); }));
+        }
+        if ("serviceWorker" in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map(function(r) { return r.unregister(); }));
+        }
+      } catch (_) {}
+    }
+
+    clearBrowserCaches();
+
+    try {
+      const savedVer = sessionStorage.getItem(VER_KEY);
+      if (savedVer && savedVer !== CURRENT_VER) {
+        sessionStorage.setItem(VER_KEY, CURRENT_VER);
+        const url = new URL(window.location.href);
+        if (url.searchParams.get("_v") !== CURRENT_VER) {
+          url.searchParams.set("_v", CURRENT_VER);
+          window.location.replace(url.toString());
+          return;
+        }
+      }
+      sessionStorage.setItem(VER_KEY, CURRENT_VER);
+    } catch (_) {}
+
+    fetch(window.location.pathname + "?_check=" + Date.now(), {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache" }
+    })
+    .then(function(res) { return res.ok ? res.text() : null; })
+    .then(function(html) {
+      if (!html) return;
+      const match = html.match(/<meta\s+name=["']app-version["']\s+content=["']([^"']+)["']/i);
+      const remoteVer = match && match[1] ? match[1].trim() : "";
+      if (remoteVer && remoteVer !== CURRENT_VER) {
+        try { sessionStorage.setItem(VER_KEY, remoteVer); } catch (_) {}
+        const nextUrl = new URL(window.location.href);
+        if (nextUrl.searchParams.get("_v") !== remoteVer) {
+          nextUrl.searchParams.set("_v", remoteVer);
+          window.location.replace(nextUrl.toString());
+        }
+      }
+    })
+    .catch(function() {});
   })();
   </script>
 
-  <!-- Navigasi Paito Warna -->
-  <nav class="nav-links-container" aria-label="Navigasi Pasaran Paito Warna">
-    <a href="https://tunggalpaito.online/paito-warna/cambodia" class="nav-link-btn">CAMBODIA</a>
-    <a href="https://tunggalpaito.online/paito-warna/sdy" class="nav-link-btn">SYDNEY POOLS</a>
-    <a href="https://tunggalpaito.online/paito-warna/sdylotto" class="nav-link-btn">SYDNEY LOTTO</a>
-    <a href="https://tunggalpaito.online/paito-warna/china" class="nav-link-btn">CHINA</a>
-    <a href="https://tunggalpaito.online/paito-warna/japan" class="nav-link-btn">JAPAN</a>
-    <a href="https://tunggalpaito.online/paito-warna/sgp" class="nav-link-btn">SINGAPORE</a>
-    <a href="https://tunggalpaito.online/paito-warna/taiwan" class="nav-link-btn">TAIWAN</a>
-    <a href="https://tunggalpaito.online/paito-warna/hk" class="nav-link-btn">HONGKONG POOLS</a>
-    <a href="https://tunggalpaito.online/paito-warna/hklotto" class="nav-link-btn">HONGKONG LOTTO</a>
-    <a href="https://tunggalpaito.online/paito-warna/macau-4d" class="nav-link-btn">MACAU 4D</a>
-    <a href="https://tunggalpaito.online/paito-warna/macau-5d" class="nav-link-btn">MACAU 5D</a>
-  </nav>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
-  <div class="seo-section">
-    <h4>Informasi &amp; Kata Kunci Terkait</h4>
-    <p>
-      Paito warna SGP HK SDY, data pengeluaran Singapore SGP HK SDY Pools, live result SGP SDY HK, paito harian sdy hk sgp, paito 4D SGP SDY HK, angka jitu sgp hk sdy, bocoran togel SGP HK SDY, situs resmi Tunggal Paito.
-    </p>
+    :root {
+      --bg-main: #050508;
+      --bg-card: #12090e;
+      --bg-card-deep: #090407;
+      --maroon-accent: #ff1e56;
+      --maroon-crimson: #e11d48;
+      --maroon-dark: #881337;
+      --maroon-border: rgba(255, 30, 86, 0.28);
+      --maroon-border-bright: rgba(255, 77, 121, 0.55);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      -webkit-overflow-scrolling: touch;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 30, 86, 0.18) 0%, rgba(22, 10, 16, 0.92) 55%, #050508 100%),
+        linear-gradient(rgba(255, 30, 86, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 30, 86, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px, 24px 24px;
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 12px 10px 96px 10px;
+      min-height: 100dvh;
+    }
+
+    body ::selection {
+      background-color: #e11d48;
+      color: #ffffff;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 14px;
+      padding: 16px 14px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(26, 10, 17, 0.94), rgba(10, 5, 8, 0.98));
+      border: 1px solid var(--maroon-border);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
+    }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 5px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .ads-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+      background: linear-gradient(145deg, rgba(22, 9, 15, 0.92), rgba(9, 4, 7, 0.97));
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid var(--maroon-border);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+    }
+
+    .ad-box {
+      background: rgba(11, 5, 8, 0.85);
+      border: 1px solid rgba(255, 30, 86, 0.18);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      overflow: hidden;
+      padding: 4px;
+    }
+
+    .nav-links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .nav-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(28, 11, 18, 0.95), rgba(13, 6, 10, 0.98));
+      color: #fecdd3;
+      text-decoration: none;
+      padding: 11px 16px;
+      border-radius: 13px;
+      border: 1px solid var(--maroon-border);
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.6px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+      transition: all 0.2s ease;
+    }
+
+    .nav-link-btn:hover {
+      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      color: #ffffff;
+      border-color: rgba(255, 130, 160, 0.5);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(255, 30, 86, 0.35);
+    }
+
+    .nav-link-btn:active {
+      transform: scale(0.985);
+    }
+
+    .seo-section {
+      margin-top: 8px;
+      margin-bottom: 14px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      background: linear-gradient(145deg, rgba(22, 9, 15, 0.9), rgba(9, 4, 7, 0.96));
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--maroon-border);
+    }
+
+    .seo-section h4 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      color: #fda4af;
+      margin-bottom: 6px;
+      letter-spacing: 0.4px;
+    }
+
+    .seo-section p {
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 12px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    footer strong {
+      font-family: "Orbitron", sans-serif;
+      color: #ff1e56;
+    }
+
+    .apk-float-popup {
+      position: fixed;
+      bottom: 16px;
+      right: 12px;
+      z-index: 99999;
+      background: linear-gradient(145deg, rgba(26, 10, 17, 0.97), rgba(9, 4, 7, 0.99));
+      color: #ffffff;
+      padding: 13px 16px;
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.8), 0 0 18px rgba(255, 30, 86, 0.28);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 310px;
+      max-width: calc(100vw - 24px);
+      border: 1px solid var(--maroon-border-bright);
+      will-change: transform, opacity;
+      animation: popupSlideUp 0.35s ease-out forwards;
+    }
+
+    @keyframes popupSlideUp {
+      from { transform: translateY(24px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .apk-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #ff1e56, #881337);
+      border: 1px solid rgba(255, 130, 160, 0.35);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(255, 30, 86, 0.35);
+    }
+
+    .apk-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    .apk-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .apk-info h4 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .apk-info p {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+    }
+
+    .btn-download-apk {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      border: 1px solid rgba(255, 130, 160, 0.4);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 13px;
+      border-radius: 20px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 4px 12px rgba(255, 30, 86, 0.35);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn-download-apk:hover {
+      transform: scale(1.03);
+      filter: brightness(1.08);
+    }
+
+    .apk-close-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #1d0e16;
+      color: #fda4af;
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    }
+
+    .apk-close-btn:hover {
+      background: #e11d48;
+      color: #ffffff;
+    }
+
+    .apk-reopen-btn {
+      position: fixed;
+      bottom: 16px;
+      right: 12px;
+      z-index: 99998;
+      min-height: 38px;
+      background: linear-gradient(145deg, rgba(26, 10, 17, 0.96), rgba(9, 4, 7, 0.99));
+      color: #fecdd3;
+      border: 1px solid var(--maroon-border-bright);
+      border-radius: 30px;
+      padding: 8px 15px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+      display: none;
+      align-items: center;
+      gap: 7px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Paito Warna Tunggal Paito</h1>
+      <p class="subtitle">Data Pengeluaran &amp; Paito Warna Lengkap</p>
+    </header>
+
+    <div class="ads-container">
+      <div class="ad-box" id="ad-slot-1"></div>
+      <div class="ad-box" id="ad-slot-2"></div>
+      <div class="ad-box" id="ad-slot-3"></div>
+      <div class="ad-box" id="ad-slot-4"></div>
+    </div>
+
+    <nav class="nav-links-container" aria-label="Navigasi Pasaran Paito Warna">
+      <a href="https://tunggalpaito.online/paito-warna/cambodia" class="nav-link-btn">CAMBODIA</a>
+      <a href="https://tunggalpaito.online/paito-warna/sdy" class="nav-link-btn">SYDNEY POOLS</a>
+      <a href="https://tunggalpaito.online/paito-warna/sdylotto" class="nav-link-btn">SYDNEY LOTTO</a>
+      <a href="https://tunggalpaito.online/paito-warna/china" class="nav-link-btn">CHINA</a>
+      <a href="https://tunggalpaito.online/paito-warna/japan" class="nav-link-btn">JAPAN</a>
+      <a href="https://tunggalpaito.online/paito-warna/sgp" class="nav-link-btn">SINGAPORE</a>
+      <a href="https://tunggalpaito.online/paito-warna/taiwan" class="nav-link-btn">TAIWAN</a>
+      <a href="https://tunggalpaito.online/paito-warna/hk" class="nav-link-btn">HONGKONG POOLS</a>
+      <a href="https://tunggalpaito.online/paito-warna/hklotto" class="nav-link-btn">HONGKONG LOTTO</a>
+      <a href="https://tunggalpaito.online/paito-warna/macau-4d" class="nav-link-btn">MACAU 4D</a>
+      <a href="https://tunggalpaito.online/paito-warna/macau-5d" class="nav-link-btn">MACAU 5D</a>
+    </nav>
+
+    <div class="seo-section">
+      <h4>Informasi &amp; Kata Kunci Terkait</h4>
+      <p>
+        Paito warna SGP HK SDY, data pengeluaran Singapore SGP HK SDY Pools, live result SGP SDY HK, paito harian sdy hk sgp, paito 4D SGP SDY HK, angka jitu sgp hk sdy, bocoran togel SGP HK SDY, situs resmi Tunggal Paito.
+      </p>
+    </div>
+
+    <footer>
+      &copy; <span id="currentYear"></span> <strong>TUNGGAL PAITO</strong>. All Rights Reserved.
+    </footer>
   </div>
 
-  <footer>
-    &copy; <span id="currentYear"></span> Tunggal Paito. All Rights Reserved.
-  </footer>
-</div>
-
-<!-- ================= ELEMENT POP-UP APK PAITO WARNA ================= -->
-<div class="apk-float-popup" id="apkPopup">
-  <button type="button" class="apk-close-btn" onclick="closeApkPopup(event)" aria-label="Tutup">&times;</button>
-  <div class="apk-icon">
-    <svg viewBox="0 0 24 24">
-      <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
-    </svg>
+  <div class="apk-float-popup" id="apkPopup">
+    <button type="button" class="apk-close-btn" id="btnCloseApk" aria-label="Tutup">&times;</button>
+    <div class="apk-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+      </svg>
+    </div>
+    <div class="apk-info">
+      <h4>APK Paito Warna Resmi</h4>
+      <p>Analisis Data &amp; Angka Jitu Lebih Mudah &amp; Cepat!</p>
+      <a href="https://drive.google.com/file/d/17r1TjhBCMQ4ySvMIbPA13iBTQ207RVq0/view?usp=drivesdk"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn-download-apk"
+         id="btnDownloadApk">DOWNLOAD APK</a>
+    </div>
   </div>
-  <div class="apk-info">
-    <h4>APK Paito Warna Resmi</h4>
-    <p>Analisis Data &amp; Angka Jitu Lebih Mudah &amp; Cepat!</p>
-    <a href="https://drive.google.com/file/d/17r1TjhBCMQ4ySvMIbPA13iBTQ207RVq0/view?usp=drivesdk"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="btn-download-apk"
-       onclick="handleApkDownload(event)">DOWNLOAD APK</a>
-  </div>
-</div>
 
-<button type="button" class="apk-reopen-btn" id="apkReopenBtn" onclick="openApkPopup(event)">
-  &#128241; Download APK
-</button>
+  <button type="button" class="apk-reopen-btn" id="apkReopenBtn">
+    &#128241; Download APK
+  </button>
 
-<script>
-document.getElementById("currentYear").textContent = new Date().getFullYear();
+  <script>
+  (function() {
+    "use strict";
 
-function closeApkPopup(e) {
-  if (e) e.stopPropagation();
-  document.getElementById("apkPopup").style.display = "none";
-  document.getElementById("apkReopenBtn").style.display = "flex";
-}
+    const yearEl = document.getElementById("currentYear");
+    if (yearEl) {
+      yearEl.textContent = String(new Date().getFullYear());
+    }
 
-function openApkPopup(e) {
-  if (e) e.stopPropagation();
-  document.getElementById("apkPopup").style.display = "flex";
-  document.getElementById("apkReopenBtn").style.display = "none";
-}
+    const apkPopup = document.getElementById("apkPopup");
+    const apkReopenBtn = document.getElementById("apkReopenBtn");
+    const btnCloseApk = document.getElementById("btnCloseApk");
+    const btnDownloadApk = document.getElementById("btnDownloadApk");
 
-function handleApkDownload(e) {
-  if (e) e.stopPropagation();
-}
-</script>
+    if (btnCloseApk) {
+      btnCloseApk.addEventListener("click", function(e) {
+        e.stopPropagation();
+        if (apkPopup) apkPopup.style.display = "none";
+        if (apkReopenBtn) apkReopenBtn.style.display = "flex";
+      });
+    }
+
+    if (apkReopenBtn) {
+      btnReopenBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        if (apkPopup) apkPopup.style.display = "flex";
+        apkReopenBtn.style.display = "none";
+      });
+    }
+
+    if (btnDownloadApk) {
+      btnDownloadApk.addEventListener("click", function(e) {
+        e.stopPropagation();
+      });
+    }
+
+    const slots = ["ad-slot-1", "ad-slot-2", "ad-slot-3", "ad-slot-4"]
+      .map(function(id) { return document.getElementById(id); })
+      .filter(Boolean);
+
+    function loadBannerSequentially(index) {
+      if (index >= slots.length) return;
+      const box = slots[index];
+      window.atOptions = {
+        key: "119c8bb3217ed264a8fa223c3197bf69",
+        format: "iframe",
+        height: 50,
+        width: 320,
+        params: {}
+      };
+      const invokeScript = document.createElement("script");
+      invokeScript.async = false;
+      invokeScript.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
+      invokeScript.addEventListener("load", function() {
+        setTimeout(function() { loadBannerSequentially(index + 1); }, 180);
+      }, { once: true });
+      invokeScript.addEventListener("error", function() {
+        setTimeout(function() { loadBannerSequentially(index + 1); }, 180);
+      }, { once: true });
+      box.appendChild(invokeScript);
+      setTimeout(function() { loadBannerSequentially(index + 1); }, 1400);
+    }
+
+    if (document.readyState === "complete") {
+      loadBannerSequentially(0);
+    } else {
+      window.addEventListener("load", function() { loadBannerSequentially(0); }, { once: true });
+    }
+  })();
+  </script>
 </body>
 </html>
