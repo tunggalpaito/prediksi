@@ -254,6 +254,11 @@ h2{
   border-color:#fb7185;
   box-shadow:0 0 0 3px rgba(225,29,72,.22);
 }
+.bo-btn-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
 .btn-kirim{
   background:linear-gradient(135deg,#e11d48 0%,#9f1239 55%,#7f1d1d 100%);
   border:1px solid rgba(253,164,175,.38);
@@ -261,12 +266,12 @@ h2{
   padding:12px;
   border-radius:12px;
   font-weight:800;
-  font-size:13px;
+  font-size:12.5px;
   cursor:pointer;
   text-transform:uppercase;
   transition:all .22s ease;
   box-shadow:0 6px 20px rgba(190,18,60,.45),inset 0 1px 0 rgba(255,255,255,.22);
-  letter-spacing:.06em;
+  letter-spacing:.05em;
 }
 .btn-kirim:hover:not(:disabled){
   filter:brightness(1.1);
@@ -274,6 +279,15 @@ h2{
   transform:translateY(-1px);
 }
 .btn-kirim:disabled{opacity:.55;cursor:not-allowed}
+.btn-hapus-link{
+  background:linear-gradient(135deg,#9f1239 0%,#4c0519 100%);
+  padding:12px 13px;
+}
+.btn-timpa{
+  background:rgba(24,7,13,.95);
+  border-color:rgba(251,113,133,.32);
+  padding:12px 12px;
+}
 
 .prediksi-panel{
   display:flex;
@@ -499,16 +513,24 @@ footer span{color:#fb7185;font-weight:800}
 
   <div class="section-title">🔗 Link Iklan Banner</div>
   <div class="input-result-box">
-    <label for="inputBoBannerLink">Teks Link Banner (1 atau beberapa link pisah koma)</label>
+    <label for="inputBoBannerLink">Teks Link Banner (pisah spasi / koma)</label>
     <input
       type="text"
       id="inputBoBannerLink"
-      placeholder="https://contoh-link-1.com, https://contoh-link-2.com"
+      placeholder="https://link1.com https://link2.com"
       autocomplete="off"
     />
-    <button type="button" id="btnSaveBoLink" class="btn-kirim" onclick="saveBoBannerLink()">
-      Kirim Link Banner
-    </button>
+    <div class="bo-btn-row">
+      <button type="button" id="btnSaveBoLink" class="btn-kirim" style="flex:1;min-width:130px" onclick="saveBoBannerLink('append')">
+        ➕ Sambung Link
+      </button>
+      <button type="button" id="btnDeleteBoLink" class="btn-kirim btn-hapus-link" onclick="deleteBoBannerLinkByInput()">
+        🗑️ Hapus Link
+      </button>
+      <button type="button" id="btnOverwriteBoLink" class="btn-kirim btn-timpa" onclick="saveBoBannerLink('overwrite')">
+        ♻️ Timpa
+      </button>
+    </div>
     <div id="boLinkStatus" class="status-firebase"></div>
   </div>
 </div>
@@ -727,43 +749,95 @@ function showLatestDataPaito(marketKey) {
   });
 }
 
-function loadBoBannerLink() {
-  const inputEl = document.getElementById("inputBoBannerLink");
+// Pisah spasi, koma, atau baris baru
+function normalizeBoLinks(rawText) {
+  return (rawText || "")
+    .split(/[\s,]+/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((url) => (/^https?:\/\//i.test(url) ? url : `https://${url}`));
+}
+
+function extractExistingBoLinks(val) {
+  const found = [];
+  const seen = new Set();
+
+  function addItem(raw) {
+    if (typeof raw === "string") {
+      normalizeBoLinks(raw).forEach((u) => {
+        if (!seen.has(u)) {
+          seen.add(u);
+          found.push(u);
+        }
+      });
+    } else if (raw && typeof raw === "object") {
+      const candidate = raw.url || raw.link || raw.href || "";
+      if (typeof candidate === "string") addItem(candidate);
+    }
+  }
+
+  if (Array.isArray(val)) {
+    val.forEach(addItem);
+  } else if (val && typeof val === "object") {
+    if (Array.isArray(val.links)) val.links.forEach(addItem);
+    Object.keys(val).forEach((k) => {
+      if (k !== "links") addItem(val[k]);
+    });
+  } else if (typeof val === "string") {
+    addItem(val);
+  }
+
+  return found;
+}
+
+function renderBoActiveSummary(links) {
   const statusEl = document.getElementById("boLinkStatus");
-  if (!inputEl || !statusEl) return;
+  if (!statusEl) return;
+
+  if (Array.isArray(links) && links.length) {
+    statusEl.style.color = "#d4b5bc";
+    statusEl.innerHTML = `📌 <b>Link Aktif (${links.length}):</b> <span style="color:#fde68a;">${links.join(" • ")}</span>`;
+  } else {
+    statusEl.style.color = "#9c7a82";
+    statusEl.textContent = "Belum ada link banner di Firebase.";
+  }
+}
+
+function loadBoBannerLink() {
+  const statusEl = document.getElementById("boLinkStatus");
+  if (!statusEl) return;
 
   statusEl.style.color = "#fda4af";
   statusEl.textContent = "⏳ Memuat link banner...";
 
   database.ref(BO_BANNER_DB_PATH).once("value").then((snapshot) => {
-    const val = snapshot.val();
-    let displayText = "";
-
-    if (Array.isArray(val)) {
-      displayText = val.filter(Boolean).join(", ");
-    } else if (val && typeof val === "object") {
-      displayText = Object.values(val).filter(Boolean).join(", ");
-    } else if (typeof val === "string") {
-      displayText = val.trim();
-    }
-
-    if (displayText) {
-      inputEl.value = displayText;
-      statusEl.style.color = "#d4b5bc";
-      statusEl.innerHTML = `📌 <b>Link Aktif:</b> <span style="color:#fde68a;">${displayText}</span>`;
-    } else {
-      statusEl.style.color = "#9c7a82";
-      statusEl.textContent = "Belum ada link banner di Firebase.";
-    }
+    renderBoActiveSummary(extractExistingBoLinks(snapshot.val()));
   }).catch(() => {
     statusEl.textContent = "";
   });
 }
 
-function saveBoBannerLink() {
+function setBoActionButtonsDisabled(disabled) {
+  ["btnSaveBoLink", "btnDeleteBoLink", "btnOverwriteBoLink"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = Boolean(disabled);
+  });
+}
+
+function writeBoLinksPayload(links) {
+  const unique = Array.from(new Set((links || []).map((u) => String(u || "").trim()).filter(Boolean)));
+  const ref = database.ref(BO_BANNER_DB_PATH);
+  if (!unique.length) {
+    return ref.remove().then(() => []);
+  }
+  const payload = unique.length === 1 ? unique[0] : unique;
+  return ref.set(payload).then(() => unique);
+}
+
+function saveBoBannerLink(mode) {
+  const saveMode = mode === "overwrite" ? "overwrite" : "append";
   const inputEl = document.getElementById("inputBoBannerLink");
   const statusEl = document.getElementById("boLinkStatus");
-  const btnEl = document.getElementById("btnSaveBoLink");
 
   if (!firebase.auth().currentUser) {
     statusEl.style.color = "#fda4af";
@@ -772,41 +846,113 @@ function saveBoBannerLink() {
     return;
   }
 
-  const rawText = (inputEl.value || "").trim();
-  if (!rawText) {
+  const inputLinks = normalizeBoLinks(inputEl.value);
+  if (!inputLinks.length) {
     statusEl.style.color = "#fda4af";
-    statusEl.textContent = "Link tidak boleh kosong!";
+    statusEl.textContent = "Masukkan minimal 1 link (pisah spasi jika lebih dari 1).";
     return;
   }
 
-  const links = rawText
-    .split(/[\n,]+/)
-    .map((item) => item.trim())
-    .filter(Boolean)
-    .map((url) => (/^https?:\/\//i.test(url) ? url : `https://${url}`));
-
-  if (!links.length) {
-    statusEl.style.color = "#fda4af";
-    statusEl.textContent = "Link tidak valid!";
-    return;
-  }
-
-  inputEl.value = links.join(", ");
-  btnEl.disabled = true;
+  setBoActionButtonsDisabled(true);
   statusEl.style.color = "#fda4af";
-  statusEl.textContent = "Mengirim link ke Firebase...";
+  statusEl.textContent = saveMode === "overwrite"
+    ? "Menimpa link di Firebase..."
+    : "Menyambungkan link ke Firebase...";
 
-  const payload = links.length === 1 ? links[0] : links;
+  const ref = database.ref(BO_BANNER_DB_PATH);
+  const task = saveMode === "overwrite"
+    ? Promise.resolve(Array.from(new Set(inputLinks)))
+    : ref.once("value").then((snap) => {
+        const existing = extractExistingBoLinks(snap.val());
+        return Array.from(new Set(existing.concat(inputLinks)));
+      });
 
-  database.ref(BO_BANNER_DB_PATH).set(payload).then(() => {
-    statusEl.style.color = "#6ee7b7";
-    statusEl.innerHTML = `Berhasil dikirim: <span style="color:#fde68a;">${links.join(", ")}</span>`;
-  }).catch((err) => {
+  task
+    .then((merged) => writeBoLinksPayload(merged))
+    .then((savedLinks) => {
+      inputEl.value = "";
+      statusEl.style.color = "#6ee7b7";
+      statusEl.innerHTML = `${saveMode === "overwrite" ? "Berhasil ditimpa" : "Berhasil disambung"} (${savedLinks.length}): <span style="color:#fde68a;">${savedLinks.join(" • ")}</span>`;
+    })
+    .catch((err) => {
+      statusEl.style.color = "#fda4af";
+      statusEl.textContent = "Gagal mengirim link: " + err.message;
+    })
+    .finally(() => {
+      setBoActionButtonsDisabled(false);
+    });
+}
+
+function deleteBoBannerLinkByInput() {
+  const inputEl = document.getElementById("inputBoBannerLink");
+  const statusEl = document.getElementById("boLinkStatus");
+
+  if (!firebase.auth().currentUser) {
     statusEl.style.color = "#fda4af";
-    statusEl.textContent = "Gagal mengirim link: " + err.message;
-  }).finally(() => {
-    btnEl.disabled = false;
+    statusEl.textContent = "Sesi login berakhir. Silakan login ulang terlebih dahulu.";
+    document.getElementById("adminLoginOverlay").style.display = "flex";
+    return;
+  }
+
+  const targets = normalizeBoLinks(inputEl.value);
+  if (!targets.length) {
+    statusEl.style.color = "#fda4af";
+    statusEl.textContent = "Masukkan link usang yang ingin dihapus (pisah spasi jika lebih dari 1).";
+    return;
+  }
+
+  // Cocokkan URL penuh maupun host/path tanpa protokol
+  const targetSet = new Set();
+  targets.forEach((u) => {
+    targetSet.add(u.toLowerCase());
+    targetSet.add(u.replace(/^https?:\/\//i, "").replace(/\/+$/, "").toLowerCase());
   });
+
+  function isTargetMatch(existingUrl) {
+    const cleanFull = existingUrl.trim().toLowerCase();
+    const cleanHostPath = existingUrl.trim().replace(/^https?:\/\//i, "").replace(/\/+$/, "").toLowerCase();
+    return targetSet.has(cleanFull) || targetSet.has(cleanHostPath);
+  }
+
+  setBoActionButtonsDisabled(true);
+  statusEl.style.color = "#fda4af";
+  statusEl.textContent = "Menghapus link usang...";
+
+  const ref = database.ref(BO_BANNER_DB_PATH);
+  ref.once("value")
+    .then((snap) => {
+      const existing = extractExistingBoLinks(snap.val());
+      const removed = existing.filter(isTargetMatch);
+      const remaining = existing.filter((u) => !isTargetMatch(u));
+
+      if (!removed.length) {
+        return { notFound: true, remaining: existing, removed: [] };
+      }
+
+      return writeBoLinksPayload(remaining).then((savedLinks) => ({
+        notFound: false,
+        remaining: savedLinks,
+        removed
+      }));
+    })
+    .then((res) => {
+      if (res.notFound) {
+        statusEl.style.color = "#fde68a";
+        statusEl.textContent = "Link tersebut tidak ditemukan di daftar aktif.";
+        return;
+      }
+      inputEl.value = "";
+      statusEl.style.color = "#6ee7b7";
+      const sisaText = res.remaining.length ? res.remaining.join(" • ") : "Kosong (pakai link default)";
+      statusEl.innerHTML = `Dihapus: <span style="color:#fde68a;">${res.removed.join(", ")}</span> | Aktif: <span style="color:#fde68a;">${sisaText}</span>`;
+    })
+    .catch((err) => {
+      statusEl.style.color = "#fda4af";
+      statusEl.textContent = "Gagal menghapus link: " + err.message;
+    })
+    .finally(() => {
+      setBoActionButtonsDisabled(false);
+    });
 }
 
 function refreshAllFormPreviews() {
