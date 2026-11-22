@@ -330,6 +330,7 @@ h2{
   margin-top:4px;
   font-weight:700;
   line-height:1.45;
+  word-break:break-all;
 }
 footer{
   text-align:center;
@@ -495,6 +496,21 @@ footer span{color:#fb7185;font-weight:800}
       <div id="prediksiButtonsBox" class="prediksi-btn-wrap"></div>
     </div>
   </div>
+
+  <div class="section-title">🔗 Link Iklan Banner</div>
+  <div class="input-result-box">
+    <label for="inputBoBannerLink">Teks Link Banner (1 atau beberapa link pisah koma)</label>
+    <input
+      type="text"
+      id="inputBoBannerLink"
+      placeholder="https://contoh-link-1.com, https://contoh-link-2.com"
+      autocomplete="off"
+    />
+    <button type="button" id="btnSaveBoLink" class="btn-kirim" onclick="saveBoBannerLink()">
+      Kirim Link Banner
+    </button>
+    <div id="boLinkStatus" class="status-firebase"></div>
+  </div>
 </div>
 
 <footer>
@@ -516,6 +532,8 @@ const firebaseConfig = {
 firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+const BO_BANNER_DB_PATH = "live/bo-rekomendasi";
+
 const JADWAL_PASARAN = [
   { key: "data-macau4d-pt6", dbKey: "data-macau4d", label: "MACAU 4D PT6", startMinute: 1, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
   { key: "data-cambodia", dbKey: "data-cambodia", label: "CAMBODIA", startMinute: 11 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-cambodia/" },
@@ -536,7 +554,6 @@ const JADWAL_PASARAN = [
   { key: "data-hklotto", dbKey: "data-hklotto", label: "HK LOT", startMinute: 23 * 60 + 20, url: "https://tunggalpaito.online/bbfs2d-hklotto/" }
 ];
 
-// Begitu admin memilih atau mengubah pasaran, kunci ke manual agar tidak ketimpa jadwal otomatis
 let isManualMarketSelection = true;
 
 function updateSelectionModeBadge() {
@@ -710,6 +727,88 @@ function showLatestDataPaito(marketKey) {
   });
 }
 
+function loadBoBannerLink() {
+  const inputEl = document.getElementById("inputBoBannerLink");
+  const statusEl = document.getElementById("boLinkStatus");
+  if (!inputEl || !statusEl) return;
+
+  statusEl.style.color = "#fda4af";
+  statusEl.textContent = "⏳ Memuat link banner...";
+
+  database.ref(BO_BANNER_DB_PATH).once("value").then((snapshot) => {
+    const val = snapshot.val();
+    let displayText = "";
+
+    if (Array.isArray(val)) {
+      displayText = val.filter(Boolean).join(", ");
+    } else if (val && typeof val === "object") {
+      displayText = Object.values(val).filter(Boolean).join(", ");
+    } else if (typeof val === "string") {
+      displayText = val.trim();
+    }
+
+    if (displayText) {
+      inputEl.value = displayText;
+      statusEl.style.color = "#d4b5bc";
+      statusEl.innerHTML = `📌 <b>Link Aktif:</b> <span style="color:#fde68a;">${displayText}</span>`;
+    } else {
+      statusEl.style.color = "#9c7a82";
+      statusEl.textContent = "Belum ada link banner di Firebase.";
+    }
+  }).catch(() => {
+    statusEl.textContent = "";
+  });
+}
+
+function saveBoBannerLink() {
+  const inputEl = document.getElementById("inputBoBannerLink");
+  const statusEl = document.getElementById("boLinkStatus");
+  const btnEl = document.getElementById("btnSaveBoLink");
+
+  if (!firebase.auth().currentUser) {
+    statusEl.style.color = "#fda4af";
+    statusEl.textContent = "Sesi login berakhir. Silakan login ulang terlebih dahulu.";
+    document.getElementById("adminLoginOverlay").style.display = "flex";
+    return;
+  }
+
+  const rawText = (inputEl.value || "").trim();
+  if (!rawText) {
+    statusEl.style.color = "#fda4af";
+    statusEl.textContent = "Link tidak boleh kosong!";
+    return;
+  }
+
+  const links = rawText
+    .split(/[\n,]+/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((url) => (/^https?:\/\//i.test(url) ? url : `https://${url}`));
+
+  if (!links.length) {
+    statusEl.style.color = "#fda4af";
+    statusEl.textContent = "Link tidak valid!";
+    return;
+  }
+
+  inputEl.value = links.join(", ");
+  btnEl.disabled = true;
+  statusEl.style.color = "#fda4af";
+  statusEl.textContent = "Mengirim link ke Firebase...";
+
+  const payload = links.length === 1 ? links[0] : links;
+
+  database.ref(BO_BANNER_DB_PATH).set(payload).then(() => {
+    statusEl.style.color = "#6ee7b7";
+    statusEl.innerHTML = `Berhasil dikirim: <span style="color:#fde68a;">${links.join(", ")}</span>`;
+  }).catch((err) => {
+    statusEl.style.color = "#fda4af";
+    statusEl.textContent = "Gagal mengirim link: " + err.message;
+  }).finally(() => {
+    btnEl.disabled = false;
+  });
+}
+
 function refreshAllFormPreviews() {
   const selectedMarket = document.getElementById("marketSelect")?.value;
   if (selectedMarket) {
@@ -737,6 +836,7 @@ function loginAdmin() {
   firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
     document.getElementById("adminLoginOverlay").style.display = "none";
     errorEl.innerText = "";
+    loadBoBannerLink();
   }).catch((err) => {
     errorEl.style.color = "#fda4af";
     if (
@@ -808,7 +908,6 @@ function saveDataPaito() {
     msgEl.style.color = "#6ee7b7";
     msgEl.textContent = `Berhasil menyimpan data ${cfg.label} untuk tanggal ${formattedDate}!`;
     document.getElementById("inputNumbers").value = "";
-    // Tetap pertahankan pilihan pasaran saat ini setelah simpan agar tidak meloncat ke pasaran lain
     setTimeout(() => showLatestDataPaito(marketKey), 2500);
   }).catch((err) => {
     msgEl.style.color = "#fda4af";
@@ -822,10 +921,10 @@ document.addEventListener("DOMContentLoaded", () => {
   autoSetDates();
   applyInitialMarketByTime();
   refreshAllFormPreviews();
+  loadBoBannerLink();
 
   let lastTrackedKey = document.getElementById("marketSelect")?.value || "";
 
-  // Hanya ganti otomatis jika mode Auto WIB aktif (tidak menimpa pilihan manual admin)
   setInterval(() => {
     if (isManualMarketSelection) return;
     const activeMarket = getScheduledMarketByTime();
@@ -868,6 +967,7 @@ document.addEventListener("DOMContentLoaded", () => {
           statusBadge.innerHTML = `🟢 Status : <b>LOGIN</b> (${user.email})`;
         }
         if (logoutBtn) logoutBtn.style.display = "inline-block";
+        loadBoBannerLink();
       } else {
         if (overlay) overlay.style.display = "flex";
         if (statusBadge) {
