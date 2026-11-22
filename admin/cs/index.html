@@ -444,6 +444,7 @@ footer span{color:#fb7185;font-weight:800}
     </div>
     <nav class="main-nav">
       <a href="https://tunggalpaito.online/prediksi" class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
+      <a href="https://indo200-live.com/" target="_blank" rel="noopener noreferrer" class="btn-sub c-white">BO</a>
       <a href="https://gemini.google.com/app?hl=id" target="_blank" rel="noopener noreferrer" class="btn-sub c-white">Gemini</a>
       <a href="https://beta.publishers.adsterra.com/payout-information" target="_blank" rel="noopener noreferrer" class="btn-sub c-top2d">Pembayaran Adsterra 1</a>
       <a href="https://beta.publishers.adsterra.com/payouts" target="_blank" rel="noopener noreferrer" class="btn-sub c-top2d">Pembayaran Adsterra Status</a>
@@ -451,12 +452,12 @@ footer span{color:#fb7185;font-weight:800}
     </nav>
   </div>
 
-  <div class="section-title">📡 Update Data Paito Warna</div>
+  <div class="section-title">📡 Update Result</div>
   <div class="input-result-box">
     <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
       <label for="marketSelect" style="margin:0">Pilih Pasaran</label>
       <div style="display:flex;align-items:center;gap:6px">
-        <span id="selectionModeBadge" class="mode-badge mode-manual">🔒 Mode Manual</span>
+        <span id="selectionModeBadge" class="mode-badge mode-manual">Mode Manual</span>
         <button type="button" id="btnResetAutoMarket" class="btn-reset-auto" onclick="resetToAutoMarket()">Ikut Jam WIB</button>
       </div>
     </div>
@@ -484,7 +485,7 @@ footer span{color:#fb7185;font-weight:800}
     <input type="date" id="inputDate">
 
     <label for="inputNumbers">Masukkan Angka Mingguan<br>Pisahkan dengan koma</label>
-    <textarea id="inputNumbers" placeholder="Contoh: 1234, 5678, 9012, 3456, 7890"></textarea>
+    <textarea id="inputNumbers" placeholder="Contoh: 1234,5678,9012,3456,7890"></textarea>
 
     <button type="button" id="btnUpdatePaito" class="btn-kirim" onclick="saveDataPaito()">Update</button>
     <div id="message" class="status-firebase"></div>
@@ -545,11 +546,11 @@ function updateSelectionModeBadge() {
 
   if (isManualMarketSelection) {
     badge.className = "mode-badge mode-manual";
-    badge.textContent = "🔒 Pilihan Dikunci Manual";
+    badge.textContent = "Kunci";
     if (resetBtn) resetBtn.style.display = "inline-block";
   } else {
     badge.className = "mode-badge mode-auto";
-    badge.textContent = "🕒 Auto WIB";
+    badge.textContent = "🕒 Auto";
     if (resetBtn) resetBtn.style.display = "none";
   }
 }
@@ -699,7 +700,7 @@ function showLatestDataPaito(marketKey) {
       const items = latest.data.split(",").map((item) => item.trim()).filter(Boolean);
       const lastValue = items.length > 0 ? items[items.length - 1] : latest.data;
       msgEl.style.color = "#d4b5bc";
-      msgEl.innerHTML = `📌 <b>Data Terakhir ${cfg.label}${latest.date ? " (" + latest.date + ")" : ""}:</b> <span style="color:#fde68a;font-size:14px;font-weight:800;">${lastValue}</span>`;
+      msgEl.innerHTML = `📌<b>Data Terakhir ${cfg.label}${latest.date ? " (" + latest.date + ")" : ""}:</b> <span style="color:#fde68a;font-size:14px;font-weight:800;">${lastValue}</span>`;
     } else {
       msgEl.style.color = "#9c7a82";
       msgEl.innerText = `Belum ada data paito ${cfg.label}`;
@@ -864,14 +865,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (overlay) overlay.style.display = "none";
         if (statusBadge) {
           statusBadge.className = "auth-status-badge status-logged-in";
-          statusBadge.innerHTML = `🟢 Status: <b>SUDAH LOGIN</b> (${user.email})`;
+          statusBadge.innerHTML = `🟢 Status : <b>LOGIN</b> (${user.email})`;
         }
         if (logoutBtn) logoutBtn.style.display = "inline-block";
       } else {
         if (overlay) overlay.style.display = "flex";
         if (statusBadge) {
           statusBadge.className = "auth-status-badge status-logged-out";
-          statusBadge.innerHTML = "🔴 Status: <b>BELUM LOGIN / LOGOUT</b>";
+          statusBadge.innerHTML = "🔴 Status : <b>LOGOUT / LOGOUT</b>";
         }
         if (logoutBtn) logoutBtn.style.display = "none";
       }
