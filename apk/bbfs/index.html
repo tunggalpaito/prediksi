@@ -8,7 +8,7 @@
   <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#050508">
   <meta name="color-scheme" content="dark">
-  <meta name="app-version" content="2026.11.23.3">
+  <meta name="app-version" content="2026.11.23.32">
   <title>PREDIKSI ANGKA BBFS APK FAVORIT TUNGGAL PAITO</title>
   <meta name="description" content="Kumpulan APK Paporit dan bocoran angka jitu BBFS, paito warna, serta update keluaran tercepat dari Tunggal Paito.">
   <meta name="keywords" content="apk bbfs togel, tunggal paito bbfs, bbfs cambodia, bbfs sydney, bbfs hongkong, apk paporit">
@@ -21,13 +21,14 @@
   <link rel="preconnect" href="https://crypotential.com" crossorigin>
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://tunggalpaito.online" crossorigin>
+  <link rel="dns-prefetch" href="https://brijmohan.org">
 
   <!-- Auto-clear stale cache & check latest HTML version -->
   <script>
   (function() {
     "use strict";
     const metaVer = document.querySelector('meta[name="app-version"]');
-    const CURRENT_VER = metaVer ? metaVer.content : "2026.11.23.3";
+    const CURRENT_VER = metaVer ? metaVer.content : "2026.11.23.32";
     const VER_KEY = "tp_bbfs_maroon_ver";
     const RELOAD_GUARD_KEY = "tp_bbfs_maroon_reloaded";
 
@@ -92,8 +93,8 @@
       --maroon-accent: #ff1e56;
       --maroon-crimson: #e11d48;
       --maroon-dark: #881337;
-      --maroon-border: rgba(255, 30, 86, 0.28);
-      --maroon-border-bright: rgba(255, 77, 121, 0.55);
+      --maroon-border: rgba(255, 30, 86, 0.34);
+      --maroon-border-bright: rgba(255, 77, 121, 0.58);
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
     }
@@ -123,8 +124,8 @@
       color: var(--text-main);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 12px 10px 96px 10px;
+      align-items: stretch;
+      padding: 0 0 96px 0;
       min-height: 100dvh;
     }
 
@@ -133,12 +134,89 @@
       color: #ffffff;
     }
 
+    /* Pembungkus utama mepet sisi kiri & kanan layar perangkat secara otomatis */
     .page-shell {
       width: 100%;
-      max-width: 480px;
+      max-width: 100%;
       display: flex;
       flex-direction: column;
+      align-items: stretch;
+    }
+
+    /* Pembungkus banner BO penuh ke sisi kiri & kanan layar, tinggi ringkas seukuran judul */
+    .top-bo-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      background: #080406;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      contain: layout style;
+    }
+
+    .bo-banner-wrap {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    /* Lapisan konten mepet pas di bawah banner sticky dan mepet kiri-kanan layar perangkat */
+    .content-layer {
+      width: 100%;
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background: linear-gradient(155deg, rgba(24, 10, 16, 0.96), rgba(9, 4, 7, 0.99));
+      border-top: none;
+      border-left: 1px solid var(--maroon-border);
+      border-right: 1px solid var(--maroon-border);
+      border-bottom: none;
+      border-radius: 0;
+      padding: 12px 12px 22px 12px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Slot banner 468x60 di bagian atas halaman */
+    .top-banner-468-wrap {
+      width: 100%;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .top-banner-468-slot {
+      width: 100%;
+      max-width: 476px;
+      height: 68px;
+      min-height: 68px;
+      background-color: #070407;
+      border: 1px solid rgba(255, 30, 86, 0.25);
+      border-radius: 12px;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .top-banner-468-slot iframe {
+      display: block;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      background: transparent !important;
+      border: 0 !important;
+      margin: 0 auto !important;
     }
 
     .btn-back-main {
@@ -147,74 +225,72 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 44px;
-      background: linear-gradient(145deg, rgba(28, 11, 18, 0.92), rgba(12, 6, 9, 0.96));
+      min-height: 46px;
+      background: rgba(12, 5, 9, 0.78);
       color: #fda4af;
       text-decoration: none;
       font-weight: 700;
       font-size: 13px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid var(--maroon-border);
+      padding: 12px 4px;
+      border-top: 1px solid rgba(255, 30, 86, 0.2);
+      border-bottom: 1px solid rgba(255, 30, 86, 0.2);
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+      margin-top: 2px;
       margin-bottom: 14px;
       transition: all 0.2s ease;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
     }
 
     .btn-back-main:hover {
-      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      background: rgba(34, 12, 22, 0.9);
       color: #ffffff;
-      border-color: rgba(255, 130, 160, 0.5);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(255, 30, 86, 0.35);
+      border-top-color: rgba(255, 77, 121, 0.45);
+      border-bottom-color: rgba(255, 77, 121, 0.45);
     }
 
+    /* Slot iklan berjejer di atas judul dalam satu bingkai dengan APLIKASI BBFS TUNGGAL PAITO */
     .ads-container {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
-    .ad-box {
+    .ad-plain-slot {
       width: 100%;
-      max-width: 340px;
-      height: 56px;
-      background-color: rgba(12, 6, 9, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 50px;
       overflow: hidden;
-      border-radius: 12px;
-      border: 1px solid var(--maroon-border);
-      padding: 3px;
+      position: relative;
     }
 
-    .ad-inner {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+    .ad-plain-slot iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 320px;
+      height: 50px;
+      border: 0;
+      display: block;
     }
 
     .visitor-card {
       width: 100%;
-      background: linear-gradient(145deg, rgba(24, 10, 16, 0.94), rgba(10, 5, 8, 0.98));
-      border: 1px solid var(--maroon-border);
-      border-radius: 16px;
-      padding: 12px 16px;
+      background: rgba(12, 5, 9, 0.78);
+      border-top: 1px solid rgba(255, 30, 86, 0.2);
+      border-bottom: 1px solid rgba(255, 30, 86, 0.2);
+      border-left: none;
+      border-right: none;
+      padding: 12px 4px;
       margin-bottom: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
     .visitor-card .visitor-info {
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 700;
       color: #d1d5db;
       display: flex;
@@ -228,44 +304,24 @@
       background-color: #fb7185;
       border-radius: 50%;
       box-shadow: 0 0 12px #ff1e56;
-      animation: blink 1.5s infinite;
     }
 
     .visitor-card .visitor-count {
       font-family: "Orbitron", sans-serif;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 800;
       color: #ff4d79;
       letter-spacing: 0.5px;
     }
 
-    @keyframes blink {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.85); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
     .sawer-card {
       width: 100%;
-      background: linear-gradient(145deg, rgba(29, 11, 19, 0.95), rgba(9, 4, 7, 0.99));
-      border: 1px solid var(--maroon-border);
-      border-radius: 18px;
+      background: rgba(13, 6, 10, 0.72);
+      border: 1px solid rgba(255, 30, 86, 0.2);
+      border-radius: 14px;
       padding: 16px 14px;
       margin-bottom: 16px;
       text-align: center;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sawer-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #ff1e56, #be123c, transparent);
     }
 
     .sawer-card h2 {
@@ -278,17 +334,22 @@
     }
 
     .sawer-card p {
-      font-size: 11.5px;
+      font-size: 12px;
       color: #d1d5db;
       margin-bottom: 14px;
-      line-height: 1.5;
+      line-height: 1.55;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .sawer-btn {
       width: 100%;
-      min-height: 44px;
-      padding: 12px 14px;
-      font-size: 12.5px;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 46px;
+      padding: 12px 16px;
+      font-size: 13px;
       font-weight: 800;
       border-radius: 12px;
       border: 1px solid rgba(255, 130, 160, 0.45);
@@ -331,57 +392,22 @@
       box-shadow: 0 10px 26px rgba(225, 29, 72, 0.45);
       display: none;
       z-index: 9999;
-      animation: popUp 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes popUp {
-      0% { transform: translate(-50%, 16px); opacity: 0; }
-      100% { transform: translate(-50%, 0); opacity: 1; }
     }
 
     .apk-card {
       width: 100%;
-      background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
-      border: 1px solid var(--maroon-border);
-      border-radius: 20px;
-      padding: 18px 14px;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+      background: transparent;
+      border: none;
+      padding: 0;
       margin-bottom: 16px;
-    }
-
-    .apk-main-header {
-      text-align: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 30, 86, 0.22);
-    }
-
-    .apk-main-header h1 {
-      font-family: "Orbitron", sans-serif;
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: 0.7px;
-      background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-transform: uppercase;
-      line-height: 1.35;
-    }
-
-    .apk-main-header span {
-      display: block;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 4px;
-      font-weight: 600;
     }
 
     .market-section {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .market-section:last-child {
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .market-header {
@@ -390,9 +416,9 @@
       justify-content: space-between;
       padding: 10px 14px;
       border-radius: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-family: "Orbitron", sans-serif;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
       letter-spacing: 0.6px;
       background: linear-gradient(90deg, rgba(255, 30, 86, 0.22) 0%, rgba(136, 19, 55, 0.08) 100%);
@@ -404,19 +430,18 @@
     }
 
     .market-tag {
-      font-size: 11px;
+      font-size: 9.5px;
       font-weight: 800;
-      padding: 5px 11px;
-      min-width: 68px;
-      border-radius: 8px;
+      padding: 3px 8px;
+      border-radius: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 30, 86, 0.22);
+      background: rgba(255, 30, 86, 0.18);
       color: #fecdd3;
-      border: 1px solid rgba(255, 77, 121, 0.35);
+      border: 1px solid rgba(255, 77, 121, 0.3);
       flex-shrink: 0;
     }
 
@@ -427,18 +452,17 @@
     }
 
     .apk-item {
-      background: rgba(13, 6, 10, 0.92);
+      background: rgba(13, 6, 10, 0.9);
       border: 1px solid rgba(255, 30, 86, 0.18);
       border-radius: 12px;
       padding: 10px 12px;
-      min-height: 48px;
+      min-height: 46px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
 
     .apk-item:hover {
@@ -456,6 +480,7 @@
       align-items: center;
       gap: 10px;
       min-width: 0;
+      flex: 1;
     }
 
     .apk-num {
@@ -475,123 +500,85 @@
     }
 
     .apk-name {
-      font-size: 12.5px;
-      font-weight: 700;
+      font-size: 13.5px;
+      font-weight: 800;
       color: #f9fafb;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.25px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .apk-action {
-      font-size: 11.5px;
+      font-size: 9.5px;
       font-weight: 800;
-      color: #ffffff;
-      background: linear-gradient(135deg, #ff1e56, #9f1239);
-      border: 1px solid rgba(255, 130, 160, 0.35);
-      padding: 6px 11px;
-      min-width: 64px;
-      border-radius: 8px;
-      letter-spacing: 0.4px;
+      color: #fecdd3;
+      background: linear-gradient(135deg, rgba(255, 30, 86, 0.85), rgba(159, 18, 57, 0.9));
+      border: 1px solid rgba(255, 130, 160, 0.32);
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.35px;
+      line-height: 1.2;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 3px;
       flex-shrink: 0;
-      transition: filter 0.2s ease;
+      transition: filter 0.2s ease, background 0.2s ease;
     }
 
     .apk-item:hover .apk-action {
+      color: #ffffff;
       filter: brightness(1.12);
     }
 
-    /* 1 Bingkai Gabungan Banner BO + APLIKASI BBFS TUNGGAL PAITO */
-    .bo-keywords-frame {
-      width: 100%;
-      background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
-      border: 1px solid var(--maroon-border);
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
-      contain: layout style;
-    }
-
-    .bo-banner-wrap {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    /* Banner BO penuh lebar, tinggi ringkas seukuran judul dengan gelombang sinar lambat */
     .fire-cta-box {
       width: 100%;
-      max-width: 340px;
-      height: 58px;
-      min-height: 58px;
-      max-height: 58px;
-      border-radius: 0.75rem;
+      max-width: 100%;
+      height: 44px;
+      min-height: 44px;
+      max-height: 44px;
+      border-radius: 0;
       text-decoration: none;
-      background: linear-gradient(180deg, rgba(74, 18, 7, 0.92) 0%, rgba(22, 68, 38, 0.42) 52%, rgba(28, 92, 48, 0.34) 100%);
-      border: 1px solid rgba(74, 222, 128, 0.55);
-      box-shadow: 0 6px 18px rgba(234, 88, 12, 0.22), 0 0 14px rgba(74, 222, 128, 0.14), inset 0 6px 14px rgba(251, 146, 60, 0.28);
+      background: linear-gradient(90deg, #070406 0%, #16060b 50%, #070406 100%);
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.65);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 4px 10px;
+      padding: 2px 10px;
       overflow: hidden;
       position: relative;
-      transition: border-color 0.16s ease, filter 0.14s ease;
+      transition: filter 0.15s ease;
     }
 
+    /* Gelombang sinar halus & lambat menyatu merah-putih-hitam */
     .fire-cta-box::before {
       content: "";
       position: absolute;
-      left: -10%;
-      right: -10%;
-      top: -12px;
-      height: 36px;
+      inset: 0;
       z-index: 0;
       pointer-events: none;
-      background:
-        radial-gradient(ellipse 20px 28px at 10% 0%, rgba(254, 240, 138, 0.86) 0%, rgba(249, 115, 22, 0.72) 52%, transparent 78%),
-        radial-gradient(ellipse 24px 32px at 28% 0%, rgba(251, 146, 60, 0.84) 0%, rgba(250, 204, 21, 0.62) 56%, transparent 80%),
-        radial-gradient(ellipse 22px 30px at 48% 0%, rgba(254, 249, 195, 0.88) 0%, rgba(234, 88, 12, 0.74) 52%, transparent 78%),
-        radial-gradient(ellipse 25px 32px at 68% 0%, rgba(251, 146, 60, 0.84) 0%, rgba(250, 204, 21, 0.62) 56%, transparent 80%),
-        radial-gradient(ellipse 21px 28px at 86% 0%, rgba(254, 240, 138, 0.85) 0%, rgba(249, 115, 22, 0.7) 52%, transparent 78%);
-      filter: blur(2.6px);
-      transform-origin: top center;
-      animation: emberDropTop 2.1s ease-in-out infinite;
-      animation-play-state: var(--fire-play-state, running);
-    }
-
-    .fire-cta-box::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 22px;
-      z-index: 2;
-      pointer-events: none;
-      background:
-        radial-gradient(circle 3.5px at 16% 25%, rgba(250, 204, 21, 0.9) 0%, rgba(251, 146, 60, 0.42) 60%, transparent 100%),
-        radial-gradient(circle 4px at 41% 20%, rgba(254, 240, 138, 0.88) 0%, rgba(234, 88, 12, 0.38) 60%, transparent 100%),
-        radial-gradient(circle 3.5px at 64% 28%, rgba(250, 204, 21, 0.9) 0%, rgba(251, 146, 60, 0.42) 60%, transparent 100%),
-        radial-gradient(circle 4px at 84% 22%, rgba(254, 240, 138, 0.86) 0%, rgba(234, 88, 12, 0.38) 60%, transparent 100%);
-      filter: blur(1px);
-      animation: topFlamePulse 1.8s ease-in-out infinite;
+      background: linear-gradient(
+        90deg,
+        rgba(8, 5, 7, 0.92) 0%,
+        rgba(225, 29, 72, 0.24) 24%,
+        rgba(255, 255, 255, 0.34) 50%,
+        rgba(225, 29, 72, 0.24) 76%,
+        rgba(8, 5, 7, 0.92) 100%
+      );
+      background-size: 220% 100%;
+      will-change: background-position, opacity;
+      animation: slowLightWave 7.5s ease-in-out infinite;
       animation-play-state: var(--fire-play-state, running);
     }
 
     .fire-cta-box:hover {
-      border-color: rgba(134, 239, 172, 0.85);
-      filter: brightness(1.05);
+      filter: brightness(1.06);
     }
 
     .fire-cta-track-wrap {
@@ -613,15 +600,15 @@
       text-align: center;
       white-space: nowrap;
       font-family: "Plus Jakarta Sans", sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.84rem;
       font-weight: 900;
       letter-spacing: 0.03em;
-      line-height: 1.15;
-      color: #facc15;
+      line-height: 1.1;
+      color: #bef264;
       text-shadow:
-        0 0 8px rgba(250, 204, 21, 0.82),
-        0 0 16px rgba(253, 224, 71, 0.46),
-        0 2px 3px rgba(0, 0, 0, 0.96);
+        0 0 7px rgba(190, 242, 100, 0.62),
+        0 0 14px rgba(163, 230, 53, 0.48),
+        0 2px 3px rgba(0, 0, 0, 0.98);
       transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
       opacity: 0;
       will-change: transform, opacity;
@@ -630,19 +617,20 @@
     }
 
     .fire-cta-click-last {
-      color: #fef08a;
-      font-size: 0.95rem;
+      color: #ffffff;
+      font-size: 0.9rem;
       letter-spacing: 0.06em;
       text-shadow:
-        0 0 10px rgba(254, 240, 138, 0.65),
-        0 0 14px rgba(250, 204, 21, 0.5),
-        0 2px 3px rgba(0, 0, 0, 0.96);
+        0 0 9px rgba(255, 255, 255, 0.92),
+        0 0 16px rgba(225, 29, 72, 0.92),
+        0 2px 3px rgba(0, 0, 0, 0.98);
     }
 
     .fire-s1 { animation-delay: 0s; }
-    .fire-s2 { animation-delay: -4s; }
-    .fire-s3 { animation-delay: -8s; }
-    .fire-s4 { animation-delay: -12s; }
+.fire-s2 { animation-delay: 4s; }
+.fire-s3 { animation-delay: 8s; }
+.fire-s4 { animation-delay: 12s; }
+
 
     .fire-cta-box:hover .fire-sentence,
     .fire-cta-box:active .fire-sentence {
@@ -676,48 +664,37 @@
       }
     }
 
-    @keyframes emberDropTop {
+    @keyframes slowLightWave {
       0% {
-        transform: translateY(-2px) scaleY(0.84);
-        opacity: 0.76;
-      }
-      50% {
-        transform: translateY(7px) scaleY(1.08);
-        opacity: 0.98;
-      }
-      100% {
-        transform: translateY(-2px) scaleY(0.84);
-        opacity: 0.76;
-      }
-    }
-
-    @keyframes topFlamePulse {
-      0% {
-        transform: translateY(0px);
+        background-position: 100% 0;
         opacity: 0.55;
       }
       50% {
-        transform: translateY(9px);
-        opacity: 0.92;
+        background-position: 0% 0;
+        opacity: 0.9;
       }
       100% {
-        transform: translateY(0px);
+        background-position: 100% 0;
         opacity: 0.55;
       }
     }
 
     .keywords-section {
       width: 100%;
-      background: rgba(11, 5, 8, 0.88);
-      border-radius: 14px;
-      padding: 13px;
+      background: rgba(11, 5, 8, 0.72);
+      border-radius: 12px;
+      padding: 14px;
       text-align: center;
-      border: 1px solid rgba(255, 30, 86, 0.2);
+      border-top: 1px solid rgba(255, 30, 86, 0.2);
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      margin-bottom: 6px;
     }
 
     .keywords-section h3 {
       font-family: "Orbitron", sans-serif;
-      font-size: 12px;
+      font-size: 12.5px;
       color: #fda4af;
       margin-bottom: 6px;
       font-weight: 800;
@@ -725,7 +702,7 @@
     }
 
     .keywords-section p {
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-muted);
       line-height: 1.6;
     }
@@ -760,7 +737,6 @@
       align-items: center;
       gap: 10px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.78), 0 0 18px rgba(255, 30, 86, 0.25);
-      animation: slideInPopup 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .mini-apk-popup::before {
@@ -771,11 +747,6 @@
       right: 16px;
       height: 2px;
       background: linear-gradient(90deg, transparent, #ff1e56, #fda4af, transparent);
-    }
-
-    @keyframes slideInPopup {
-      0% { opacity: 0; transform: translateY(24px) scale(0.96); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .mini-apk-icon {
@@ -860,151 +831,148 @@
 </head>
 <body>
   <main class="page-shell">
-    <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
-      <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-      <span>Kembali ke Menu Utama</span>
-    </a>
-
-    <div class="ads-container" id="adsContainer">
-      <div class="ad-box" id="adSlot1"><div class="ad-inner"></div></div>
-      <div class="ad-box" id="adSlot2"><div class="ad-inner"></div></div>
-      <div class="ad-box" id="adSlot3"><div class="ad-inner"></div></div>
-      <div class="ad-box" id="adSlot4"><div class="ad-inner"></div></div>
-    </div>
-
-    <section class="visitor-card" aria-label="Status Pengunjung Online">
-      <div class="visitor-info">
-        <div class="online-dot" aria-hidden="true"></div>
-        <span>Pengunjung Online</span>
-      </div>
-      <div class="visitor-count" id="visitor-count-text"></div>
-    </section>
-
-    <section class="sawer-card" aria-label="Dukungan Operasional">
-      <h2>🔥 Salam HOKI Satu HATI</h2>
-      <p>"Prediksi Pools 100% Gratis &amp; Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit seikhlasnya melalui DANA untuk mendukung operasional admin."</p>
-      <button type="button" class="sawer-btn" id="btn-copy-dana">
-        <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-.25c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zM19 19H5V5h14v14z"/></svg>
-        <span>Salin Nomor DANA: 082152036787</span>
-      </button>
-    </section>
-
-    <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Nomor DANA berhasil disalin!</div>
-
-    <section class="apk-card" aria-label="Daftar Pasaran BBFS">
-      <div class="apk-main-header">
-        <h1>APLIKASI BBFS</h1>
-        <span>⚡⚡⚡</span>
-      </div>
-
-      <div class="market-section">
-        <div class="market-header">
-          <span>PILIHAN PASARAN</span>
-          <span class="market-tag">BBFS</span>
-        </div>
-        <div class="apk-list" id="marketList">
-          <a href="https://tunggalpaito.online/bbfs2d-cambodia" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">1</span>
-              <span class="apk-name">BBFS CAMBODIA</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-sdy" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">2</span>
-              <span class="apk-name">BBFS SYDNEY POOLS</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-sdylotto/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">3</span>
-              <span class="apk-name">BBFS SYDNEY LOTTO</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-china" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">4</span>
-              <span class="apk-name">BBFS CHINA</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-japan" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">5</span>
-              <span class="apk-name">BBFS JAPAN</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-sgp" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">6</span>
-              <span class="apk-name">BBFS SINGAPORE</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-taiwan" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">7</span>
-              <span class="apk-name">BBFS TAIWAN</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-hk" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">8</span>
-              <span class="apk-name">BBFS HONGKONG POOLS</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-hklotto" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">9</span>
-              <span class="apk-name">BBFS HONGKONG LOTTO</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-macau4d" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">10</span>
-              <span class="apk-name">BBFS MACAU 4D</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-macau5d" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">11</span>
-              <span class="apk-name">BBFS MACAU 5D</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <div class="bo-keywords-frame" id="fire-promo-box" aria-label="Rekomendasi BO & Informasi Ringkas">
+    <header class="top-bo-sticky" id="fire-promo-box" aria-label="Rekomendasi BO">
       <div class="bo-banner-wrap">
         <a id="fire-promo-link" href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="fire-cta-box" aria-label="Klik di sini untuk daftar">
           <div class="fire-cta-track-wrap">
-            <span class="fire-sentence fire-s1">TEMPAT SAYA BERMAIN BBFS 8D</span>
-            <span class="fire-sentence fire-s2">SAYA TIDAK PROMO JIKA TERTARIK GAS</span>
-            <span class="fire-sentence fire-s3">TERSEDIA PASARAN POOLS &amp; LOTTO</span>
+            <span class="fire-sentence fire-s1">TEMPAT BERMAIN BBFS 8D</span>
+            <span class="fire-sentence fire-s3">TEMPAT HANCURKAN BANDOT</span>
+            <span class="fire-sentence fire-s2">TERSEDIA PASARAN POOLS &amp; LOTTO</span>
             <span class="fire-sentence fire-s4 fire-cta-click-last">KLIK DISINI</span>
           </div>
         </a>
       </div>
+    </header>
+
+    <div class="content-layer">
+      <div class="top-banner-468-wrap" aria-label="Banner Iklan 468x60">
+        <div id="topBanner468" class="top-banner-468-slot"></div>
+      </div>
+
+      <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">Kembali ke Menu Utama</a>
+
+      <section class="visitor-card" aria-label="Status Pengunjung Online">
+        <div class="visitor-info">
+          <div class="online-dot" aria-hidden="true"></div>
+          <span>Pengunjung Online</span>
+        </div>
+        <div class="visitor-count" id="visitor-count-text"></div>
+      </section>
+
+      <section class="sawer-card" aria-label="Dukungan Operasional">
+        <h2>🔥 Salam HOKI Satu HATI</h2>
+        <p>"Prediksi Pools 100% Gratis &amp; Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit seikhlasnya melalui DANA untuk mendukung operasional admin."</p>
+        <button type="button" class="sawer-btn" id="btn-copy-dana">
+          <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-.25c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zM19 19H5V5h14v14z"/></svg>
+          <span>Salin Nomor DANA: 082152036787</span>
+        </button>
+      </section>
+
+      <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Nomor DANA berhasil disalin!</div>
+
+      <section class="apk-card" aria-label="Daftar Pasaran BBFS">
+        <div class="market-section">
+          <div class="market-header">
+            <span>PILIHAN PASARAN</span>
+            <span class="market-tag">BBFS</span>
+          </div>
+          <div class="apk-list" id="marketList">
+            <a href="https://tunggalpaito.online/bbfs2d-cambodia" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">1</span>
+                <span class="apk-name">BBFS CAMBODIA</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-sdy" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">2</span>
+                <span class="apk-name">BBFS SYDNEY POOLS</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-sdylotto/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">3</span>
+                <span class="apk-name">BBFS SYDNEY LOTTO</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-china" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">4</span>
+                <span class="apk-name">BBFS CHINA</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-japan" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">5</span>
+                <span class="apk-name">BBFS JAPAN</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-sgp" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">6</span>
+                <span class="apk-name">BBFS SINGAPORE</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-taiwan" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">7</span>
+                <span class="apk-name">BBFS TAIWAN</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-hk" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">8</span>
+                <span class="apk-name">BBFS HONGKONG POOLS</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-hklotto" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">9</span>
+                <span class="apk-name">BBFS HONGKONG LOTTO</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-macau4d" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">10</span>
+                <span class="apk-name">BBFS MACAU 4D</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-macau5d" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-num">11</span>
+                <span class="apk-name">BBFS MACAU 5D</span>
+              </div>
+              <span class="apk-action">GAS ➔</span>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <section class="keywords-section" aria-label="Informasi Ringkas">
+        <div class="ads-container" id="adsContainer">
+          <div class="ad-plain-slot" id="adSlot1"></div>
+          <div class="ad-plain-slot" id="adSlot2"></div>
+          <div class="ad-plain-slot" id="adSlot3"></div>
+          <div class="ad-plain-slot" id="adSlot4"></div>
+        </div>
         <h3>APLIKASI BBFS TUNGGAL PAITO</h3>
         <p>Kumpulan Aplikasi Analisa BBFS Terlengkap dan Terakurat dari Tunggal Paito untuk berbagai pasaran populer pilihan Anda.</p>
       </section>
-    </div>
 
-    <footer class="footer">
-      &copy; <span id="auto-year"></span> <strong>TUNGGAL PAITO</strong>. All rights reserved.
-    </footer>
+      <footer class="footer">
+        &copy; <span id="auto-year"></span> <strong>TUNGGAL PAITO</strong>. All rights reserved.
+      </footer>
+    </div>
   </main>
 
   <div class="mini-apk-popup" id="mini-apk-popup">
@@ -1358,7 +1326,7 @@
 
     function renderVisitorCount() {
       if (visitorText) {
-        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " Online";
+        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + "";
       }
     }
 
@@ -1385,17 +1353,97 @@
     window.addEventListener("scroll", function() { scrollScore += 1; }, { passive: true });
     scheduleNextVisitorUpdate();
 
-    // Load banners sequentially to avoid atOptions race condition
+    // Banner 468x60 di bagian atas halaman
+    const topBanner468El = document.getElementById("topBanner468");
+
+    function fitTopBanner468() {
+      if (!topBanner468El) return;
+      const availW = Math.max(0, topBanner468El.clientWidth - 8);
+      topBanner468El.querySelectorAll("iframe").forEach(function(iframe) {
+        iframe.style.maxWidth = "100%";
+        iframe.style.maxHeight = "100%";
+        iframe.style.background = "transparent";
+        iframe.style.removeProperty("transform");
+        const attrW = parseFloat(iframe.getAttribute("width") || "0");
+        if (availW > 0 && Number.isFinite(attrW) && attrW > availW) {
+          const ratio = Math.max(0.6, availW / attrW);
+          iframe.style.width = attrW + "px";
+          iframe.style.transformOrigin = "left center";
+          iframe.style.transform = "scale(" + ratio.toFixed(4) + ")";
+        }
+      });
+    }
+
+    function loadTopBanner468() {
+      if (!topBanner468El || topBanner468El.dataset.adLoaded === "1") return;
+      topBanner468El.dataset.adLoaded = "1";
+
+      window.atOptions = {
+        key: "9a986a45c62dcea8d8216b9210f159cb",
+        format: "iframe",
+        height: 60,
+        width: 468,
+        params: {}
+      };
+
+      const sc = document.createElement("script");
+      sc.id = "ad-script-top-468";
+      sc.async = false;
+      sc.setAttribute("data-cfasync", "false");
+      sc.referrerPolicy = "strict-origin-when-cross-origin";
+      sc.src = "https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb";
+      sc.addEventListener("load", fitTopBanner468, { once: true });
+      sc.addEventListener("error", fitTopBanner468, { once: true });
+      topBanner468El.appendChild(sc);
+      setTimeout(fitTopBanner468, 600);
+    }
+
+    // Load banners sequentially into 2-column grid with original provider config
     const adSlots = [
-      document.querySelector("#adSlot1 .ad-inner"),
-      document.querySelector("#adSlot2 .ad-inner"),
-      document.querySelector("#adSlot3 .ad-inner"),
-      document.querySelector("#adSlot4 .ad-inner")
+      document.getElementById("adSlot1"),
+      document.getElementById("adSlot2"),
+      document.getElementById("adSlot3"),
+      document.getElementById("adSlot4")
     ].filter(Boolean);
 
+    function fitIframeToSlot(slotEl) {
+      if (!slotEl) return;
+      const iframe = slotEl.querySelector("iframe");
+      if (!iframe) return;
+
+      const slotWidth = slotEl.clientWidth;
+      const iframeWidth = parseInt(iframe.getAttribute("width"), 10) || 320;
+      const iframeHeight = parseInt(iframe.getAttribute("height"), 10) || 50;
+
+      if (slotWidth > 0 && iframeWidth > 0) {
+        const scale = slotWidth / iframeWidth;
+        iframe.style.width = iframeWidth + "px";
+        iframe.style.height = iframeHeight + "px";
+        iframe.style.transformOrigin = "top left";
+        iframe.style.transform = "scale(" + scale + ")";
+        const lockedHeight = Math.round(iframeHeight * scale);
+        slotEl.style.height = lockedHeight + "px";
+      }
+    }
+
+    function fitAllAdSlots() {
+      fitTopBanner468();
+      adSlots.forEach(fitIframeToSlot);
+    }
+
     function loadSequentialSlots(index) {
-      if (index >= adSlots.length) return;
+      if (index >= adSlots.length) {
+        fitAllAdSlots();
+        return;
+      }
       const target = adSlots[index];
+      if (target.dataset.adLoaded === "1") {
+        fitIframeToSlot(target);
+        loadSequentialSlots(index + 1);
+        return;
+      }
+      target.dataset.adLoaded = "1";
+
       window.atOptions = {
         key: "119c8bb3217ed264a8fa223c3197bf69",
         format: "iframe",
@@ -1403,21 +1451,34 @@
         width: 320,
         params: {}
       };
+
       const sc = document.createElement("script");
       sc.async = false;
       sc.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
-      sc.addEventListener("load", function() {
-        setTimeout(function() { loadSequentialSlots(index + 1); }, 180);
-      }, { once: true });
-      sc.addEventListener("error", function() {
-        setTimeout(function() { loadSequentialSlots(index + 1); }, 180);
-      }, { once: true });
+
+      let movedNext = false;
+      function nextSlot() {
+        fitIframeToSlot(target);
+        if (movedNext) return;
+        movedNext = true;
+        setTimeout(function() {
+          fitIframeToSlot(target);
+          loadSequentialSlots(index + 1);
+        }, 180);
+      }
+
+      sc.addEventListener("load", nextSlot, { once: true });
+      sc.addEventListener("error", nextSlot, { once: true });
       target.appendChild(sc);
-      setTimeout(function() { loadSequentialSlots(index + 1); }, 1400);
+      setTimeout(function() { fitIframeToSlot(target); }, 500);
+      setTimeout(nextSlot, 1400);
     }
 
+    window.addEventListener("resize", fitAllAdSlots, { passive: true });
+
     function onPageReady() {
-      loadSequentialSlots(0);
+      loadTopBanner468();
+      setTimeout(function() { loadSequentialSlots(0); }, 350);
       initFirebaseBoListener();
     }
 
@@ -1438,6 +1499,7 @@
       } else {
         startBoLinkCycle();
         refreshFireMarqueeState();
+        fitAllAdSlots();
       }
     });
 
@@ -1446,6 +1508,7 @@
       applyCurrentBoLinkToPromo();
       startBoLinkCycle();
       refreshFireMarqueeState();
+      fitAllAdSlots();
     }, { passive: true });
 
     let clickCount = 0;
