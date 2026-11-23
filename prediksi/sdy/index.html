@@ -1,763 +1,1723 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050508">
+<meta name="color-scheme" content="dark">
 <title>Prediksi TOP SDY Update Setiap Hari - Tunggal Paito</title>
 <link rel="canonical" href="https://tunggalpaito.online/prediksi/sdy">
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<!-- Library html2canvas -->
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://crypotential.com" crossorigin>
+<link rel="preconnect" href="https://tunggalpaito.online" crossorigin>
+<link rel="dns-prefetch" href="https://brijmohan.org">
+<link rel="dns-prefetch" href="https://ahuramazda.org">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root {
-  --bg-main: #0d0b14;
-  --card-bg: rgba(22, 19, 34, 0.75);
-  --accent-gold: #ffe600;
-  --accent-glow: rgba(255, 230, 0, 0.35);
-  --accent-red: #ff3366;
-  --accent-green: #00ff88;
-  --text-main: #f1f5f9;
-  --text-sub: #94a3b8;
-  --border-card: rgba(255, 230, 0, 0.25);
+  --bg-main: #050508;
+  --bg-card: #12090e;
+  --bg-card-deep: #090407;
+  --maroon-accent: #ff1e56;
+  --maroon-crimson: #e11d48;
+  --maroon-dark: #881337;
+  --maroon-border: rgba(255, 30, 86, 0.34);
+  --maroon-border-bright: rgba(255, 77, 121, 0.58);
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --shadow-3d: 0 12px 28px rgba(0, 0, 0, 0.65);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
+}
 
 body {
-  background: var(--bg-main);
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(255, 230, 0, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 51, 102, 0.05) 0%, transparent 40%);
+  background-color: var(--bg-main);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(255, 30, 86, 0.18) 0%, rgba(22, 10, 16, 0.92) 55%, #050508 100%),
+    linear-gradient(rgba(255, 30, 86, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 30, 86, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px, 24px 24px;
   color: var(--text-main);
+  padding: 0 0 72px 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+body ::selection {
+  background-color: #e11d48;
+  color: #ffffff;
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.top-bo-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  background: #080406;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  contain: layout style;
+}
+
+.bo-banner-wrap {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.fire-cta-box {
+  width: 100%;
+  max-width: 100%;
+  height: 54px;
+  min-height: 54px;
+  max-height: 54px;
+  border-radius: 0;
+  text-decoration: none;
+  background: linear-gradient(90deg, #070406 0%, #16060b 50%, #070406 100%);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  overflow: hidden;
+  position: relative;
+  transition: filter 0.15s ease;
+}
+
+.fire-cta-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(8, 5, 7, 0.92) 0%,
+    rgba(225, 29, 72, 0.24) 24%,
+    rgba(255, 255, 255, 0.34) 50%,
+    rgba(225, 29, 72, 0.24) 76%,
+    rgba(8, 5, 7, 0.92) 100%
+  );
+  background-size: 220% 100%;
+  will-change: background-position, opacity;
+  animation: slowLightWave 7.5s ease-in-out infinite;
+  animation-play-state: var(--fire-play-state, running);
+}
+
+.fire-cta-box:hover {
+  filter: brightness(1.06);
+}
+
+.fire-cta-track-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fire-sentence {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.08rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: #bef264;
+  text-shadow:
+    0 0 8px rgba(190, 242, 100, 0.68),
+    0 0 16px rgba(163, 230, 53, 0.52),
+    0 2px 4px rgba(0, 0, 0, 0.98);
+  transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: expandFromCenterSlow 16s ease-out infinite;
+  animation-play-state: var(--fire-play-state, running);
+}
+
+@media (min-width: 640px) {
+  .fire-cta-box {
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
+  }
+
+  .fire-sentence {
+    font-size: 1.28rem;
+  }
+}
+
+.fire-cta-click-last {
+  color: #ffffff;
+  font-size: 1.16rem;
+  letter-spacing: 0.07em;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.95),
+    0 0 18px rgba(225, 29, 72, 0.95),
+    0 2px 4px rgba(0, 0, 0, 0.98);
+}
+
+@media (min-width: 640px) {
+  .fire-cta-click-last {
+    font-size: 1.38rem;
+  }
+}
+
+.fire-s1 { animation-delay: 0s; }
+.fire-s2 { animation-delay: 4s; }
+.fire-s3 { animation-delay: 8s; }
+.fire-s4 { animation-delay: 12s; }
+
+.fire-cta-box:hover .fire-sentence,
+.fire-cta-box:active .fire-sentence {
+  animation-play-state: paused;
+}
+
+@keyframes expandFromCenterSlow {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+    opacity: 0;
+  }
+  5% {
+    transform: translate3d(-50%, -50%, 0) scaleX(0.75) scaleY(0.95);
+    opacity: 0.96;
+  }
+  11% {
+    transform: translate3d(-50%, -50%, 0) scaleX(1.05) scaleY(1.02);
+    opacity: 1;
+  }
+  20% {
+    transform: translate3d(-50%, -50%, 0) scaleX(1.16) scaleY(1.04);
+    opacity: 0.85;
+  }
+  25% {
+    transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+    opacity: 0;
+  }
+}
+
+@keyframes slowLightWave {
+  0% {
+    background-position: 100% 0;
+    opacity: 0.55;
+  }
+  50% {
+    background-position: 0% 0;
+    opacity: 0.9;
+  }
+  100% {
+    background-position: 100% 0;
+    opacity: 0.55;
+  }
+}
+
+.content-layer {
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: linear-gradient(155deg, rgba(24, 10, 16, 0.96), rgba(9, 4, 7, 0.99));
+  border-top: none;
+  border-left: 1px solid var(--maroon-border);
+  border-right: 1px solid var(--maroon-border);
+  border-bottom: none;
+  border-radius: 0;
+  padding: 12px 12px 22px 12px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+}
+
+/* Pembungkus 1 Banner Iklan 468x60 + 3 Banner Gambar BO Tetap */
+#ad-slots-wrapper.bento-card {
+  width: 100%;
+  background: linear-gradient(145deg, rgba(20, 12, 17, 0.98) 0%, rgba(10, 7, 10, 0.99) 100%);
+  border: 1px solid rgba(251, 113, 133, 0.25);
+  border-radius: 24px;
+  padding: 10px;
+  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px 12px;
-  min-height: 100vh;
-  cursor: pointer;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
 }
 
-/* TOMBOL KEMBALI */
+.ad-slot-box-468 {
+  width: 100%;
+  max-width: 476px;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #070407;
+  border: 1px solid rgba(251, 113, 133, 0.16);
+  padding: 4px;
+  position: relative;
+  contain: layout style;
+}
+
+.ad-slot-box-468 iframe {
+  display: block;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.bo-img-banner-link {
+  width: 100%;
+  max-width: 476px;
+  height: 68px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+  background-color: #090407;
+  border: 1px solid rgba(255, 77, 121, 0.45);
+  position: relative;
+  text-decoration: none;
+}
+
+.bo-img-banner-link:hover {
+  border-color: rgba(255, 130, 160, 0.85);
+}
+
+.bo-img-banner-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .btn-back-main {
   width: 100%;
-  max-width: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--accent-gold);
+  background: linear-gradient(135deg, rgba(28, 11, 18, 0.95), rgba(13, 6, 10, 0.98));
+  color: #fecdd3;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 13px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.5px;
   padding: 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border-card);
-  margin-bottom: 16px;
-  backdrop-filter: blur(10px);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 44px;
+  border-radius: 13px;
+  border: 1px solid var(--maroon-border);
+  margin-bottom: 14px;
+  transition: all 0.2s ease;
 }
+
 .btn-back-main:hover {
-  background: var(--accent-gold);
-  color: #000;
-  box-shadow: 0 0 15px var(--accent-glow);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ff1e56, #9f1239);
+  color: #ffffff;
+  border-color: rgba(255, 130, 160, 0.5);
+  transform: translateY(-1px);
 }
 
-/* STYLING AREA IKLAN UTAMA */
-.top-ads-wrapper {
+.ads-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+  margin-bottom: 14px;
   width: 100%;
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  background-color: #0b1a10;
-  border: 1px solid rgba(0, 255, 102, 0.3);
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 4px 15px rgba(0, 255, 102, 0.2);
 }
-.ad-slot {
+
+.ad-plain-slot {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50px;
+  height: 50px;
   overflow: hidden;
-  border-radius: 6px;
+  position: relative;
 }
 
-/* CARDS COMMON STYLES */
+.ad-plain-slot iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 50px;
+  border: 0;
+  display: block;
+}
+
 .glass-card {
   width: 100%;
-  max-width: 420px;
-  background: var(--card-bg);
-  border: 1px solid var(--border-card);
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 18px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
+  border: 1px solid var(--maroon-border);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-3d);
 }
 
-/* VISITOR CARD */
 .visitor-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 18px;
+  padding: 12px 16px;
 }
+
 .visitor-info {
   font-size: 13px;
-  color: var(--text-sub);
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 600;
+  font-weight: 700;
 }
+
 .online-dot {
   width: 9px;
   height: 9px;
-  background-color: var(--accent-green);
+  background-color: #ff1e56;
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-green);
+  box-shadow: 0 0 10px rgba(255, 30, 86, 0.7);
   animation: blink 1.5s infinite;
 }
+
 .visitor-count {
-  font-size: 15px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
   font-weight: 800;
-  color: var(--accent-gold);
+  color: #fda4af;
   letter-spacing: 0.5px;
 }
-@keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
 
-/* GENERATOR CARD */
-.generator-card { text-align: center; }
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.generator-card {
+  text-align: center;
+}
+
 .generator-card h3 {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--accent-gold);
-  letter-spacing: 1px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.7px;
   margin-bottom: 10px;
   text-transform: uppercase;
 }
+
 .generator-card .guide-text {
   font-size: 12px;
-  color: var(--text-sub);
+  color: var(--text-muted);
   margin-bottom: 14px;
-  line-height: 1.5;
+  line-height: 1.55;
   text-align: left;
-  background: rgba(255,255,255,0.03);
+  background: rgba(11, 5, 8, 0.85);
+  border: 1px solid rgba(255, 30, 86, 0.16);
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: 10px;
 }
+
+.generator-card .guide-text strong {
+  color: #fda4af;
+}
+
 .generator-card input {
   width: 100%;
-  max-width: 220px;
+  max-width: 240px;
   padding: 10px;
   font-size: 18px;
+  font-family: "Courier New", Courier, monospace;
   font-weight: 700;
   text-align: center;
   border-radius: 10px;
-  border: 1.5px solid var(--border-card);
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  border: 1px solid rgba(255, 30, 86, 0.3);
+  background: rgba(11, 5, 8, 0.92);
+  color: #fecdd3;
   margin-bottom: 12px;
   outline: 0;
   letter-spacing: 2px;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.generator-card input:focus { border-color: var(--accent-gold); box-shadow: 0 0 10px var(--accent-glow); }
+
+.generator-card input:focus {
+  border-color: var(--maroon-border-bright);
+  box-shadow: 0 0 0 3px rgba(255, 30, 86, 0.15);
+}
+
 .generator-card button {
-  background: linear-gradient(135deg, var(--accent-gold), #ffd000);
-  color: #000;
-  border: none;
-  padding: 10px 24px;
-  font-size: 14px;
+  background: linear-gradient(135deg, #ff1e56 0%, #9f1239 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 130, 160, 0.45);
+  padding: 11px 24px;
+  min-height: 44px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 12.5px;
   font-weight: 800;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.6px;
+  box-shadow: 0 6px 20px rgba(255, 30, 86, 0.35);
+  transition: transform 0.15s, filter 0.2s;
 }
-.generator-card button:active { transform: scale(0.96); }
+
+.generator-card button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.generator-card button:active {
+  transform: scale(0.97);
+}
+
 .generator-result {
-  margin-top: 15px;
+  margin-top: 14px;
   text-align: left;
   font-size: 13px;
   display: none;
 }
+
 .generator-result div {
   margin-bottom: 8px;
-  background: rgba(255, 230, 0, 0.08);
+  background: rgba(11, 5, 8, 0.92);
+  color: #fecdd3;
   padding: 10px 12px;
-  border-radius: 8px;
-  border-left: 3px solid var(--accent-gold);
+  border-radius: 10px;
+  border-left: 3px solid #ff1e56;
+  border-top: 1px solid rgba(255, 30, 86, 0.18);
+  border-right: 1px solid rgba(255, 30, 86, 0.18);
+  border-bottom: 1px solid rgba(255, 30, 86, 0.18);
 }
 
-/* SAWER CARD */
-.sawer-card { text-align: center; }
-.sawer-card h3 { font-size: 16px; font-weight: 800; color: var(--accent-gold); margin-bottom: 8px; letter-spacing: 0.5px; }
-.sawer-card p { font-size: 12px; color: var(--text-sub); margin-bottom: 16px; line-height: 1.5; }
-.sawer-btn-group { display: flex; gap: 10px; justify-content: center; }
+.sawer-card {
+  text-align: center;
+}
+
+.sawer-card h3 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #fda4af;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sawer-card p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+
+.sawer-btn-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
 .sawer-btn {
   flex: 1;
-  padding: 12px;
-  font-size: 13px;
-  font-weight: 700;
-  border-radius: 10px;
+  min-height: 42px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 11px;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 7px;
   transition: all 0.2s ease;
 }
-.btn-sawer-wa { background: rgba(0, 255, 136, 0.15); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.4); }
-.btn-sawer-wa:hover { background: #00ff88; color: #000; box-shadow: 0 0 15px rgba(0, 255, 136, 0.4); }
-.btn-sawer-qr { background: rgba(255, 230, 0, 0.15); color: var(--accent-gold); border: 1px solid var(--border-card); }
-.btn-sawer-qr:hover { background: var(--accent-gold); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
 
-/* MAIN PREDICTION CARD (CANVAS DOWNLOAD) */
+.btn-sawer-wa {
+  background: rgba(255, 30, 86, 0.18);
+  color: #fecdd3;
+  border: 1px solid rgba(255, 77, 121, 0.45);
+}
+
+.btn-sawer-wa:hover {
+  background: linear-gradient(135deg, #ff1e56, #9f1239);
+  color: #ffffff;
+}
+
+.btn-sawer-qr {
+  background: rgba(136, 19, 55, 0.28);
+  color: #fda4af;
+  border: 1px solid rgba(255, 77, 121, 0.35);
+}
+
+.btn-sawer-qr:hover {
+  background: linear-gradient(135deg, #e11d48, #881337);
+  color: #ffffff;
+}
+
 .main-card {
   width: 100%;
-  max-width: 420px;
-  background: linear-gradient(180deg, #181227 0%, #0d0a17 100%);
-  border: 1.5px solid var(--accent-gold);
-  border-radius: 16px;
-  padding: 20px 15px 15px 15px;
+  background: linear-gradient(155deg, rgba(24, 10, 16, 0.96), rgba(9, 4, 7, 0.99));
+  border: 1px solid var(--maroon-border-bright);
+  border-radius: 18px;
+  padding: 18px 14px 14px 14px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 230, 0, 0.1);
-  margin-bottom: 15px;
+  box-shadow: var(--shadow-3d);
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
 }
-h1 { font-size: 20px; font-weight: 800; margin-bottom: 16px; letter-spacing: 1px; color: var(--accent-gold); text-shadow: 0 0 10px var(--accent-glow); line-height: 1.35; }
-.pred-date-sub { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); letter-spacing: 0.3px; margin-top: 4px; }
 
-/* TREK CONTAINER & ROW */
-.trek-container { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-bottom: 12px; }
+.main-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff1e56, #fda4af, transparent);
+}
+
+h1 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  margin-bottom: 14px;
+  letter-spacing: 0.7px;
+  background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.pred-date-sub {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #fecdd3;
+  -webkit-text-fill-color: #fecdd3;
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+.trek-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
 .trek-row {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  padding: 8px 12px;
+  background: rgba(11, 5, 8, 0.9);
+  border: 1px solid rgba(255, 30, 86, 0.22);
+  border-radius: 11px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 6px;
 }
-.trek-balls { display: flex; align-items: center; gap: 6px; }
 
-/* BALLS DESIGN */
+.trek-balls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
 .ball {
-  width: 28px;
-  height: 28px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Courier New", Courier, monospace;
   font-weight: 800;
   font-size: 13px;
 }
+
 .ball-red {
-  background: linear-gradient(135deg, #ff3366, #990026);
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(255, 51, 102, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-.ball-white {
-  background: linear-gradient(135deg, #ffffff, #cbd5e1);
-  color: #000;
-  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
-  border: 1px solid #fff;
+  background: linear-gradient(135deg, #ff1e56, #881337);
+  color: #ffffff;
+  border: 1px solid rgba(255, 130, 160, 0.45);
 }
 
-.trek-colon { color: var(--accent-gold); font-weight: bold; margin: 0 2px; }
+.ball-white {
+  background: linear-gradient(135deg, #ffffff, #fecdd3);
+  color: #12090e;
+  border: 1px solid #fda4af;
+}
+
+.trek-colon {
+  color: #fda4af;
+  font-weight: 800;
+  margin: 0 2px;
+}
+
 .trek-badge {
-  background: rgba(255, 230, 0, 0.1);
-  color: var(--accent-gold);
-  border: 1px solid var(--border-card);
+  background: rgba(255, 30, 86, 0.16);
+  color: #fecdd3;
+  border: 1px solid rgba(255, 77, 121, 0.4);
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 7px;
+  font-family: "Orbitron", sans-serif;
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
-  min-width: 55px;
+  min-width: 54px;
   text-align: center;
+  flex-shrink: 0;
 }
 
-/* WEBSITE FOOTER INSIDE CARD */
 .card-website-footer {
   display: block;
   font-size: 11px;
-  color: var(--accent-gold);
+  color: #fda4af;
   text-decoration: none;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   padding-top: 10px;
-  border-top: 1px dashed rgba(255, 230, 0, 0.2);
+  border-top: 1px dashed rgba(255, 30, 86, 0.28);
+  word-break: break-all;
 }
 
-/* DOWNLOAD BUTTON CONTAINER */
-.action-download-container { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; }
+.action-download-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
 .btn-download-img {
   width: 100%;
-  background: linear-gradient(135deg, #00ff88, #00b359);
-  color: #000;
-  border: none;
-  padding: 14px;
-  font-size: 14px;
+  min-height: 46px;
+  background: linear-gradient(135deg, #ff1e56 0%, #9f1239 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 130, 160, 0.45);
+  padding: 13px 14px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 12.5px;
   font-weight: 800;
+  letter-spacing: 0.5px;
   border-radius: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 6px 20px rgba(255, 30, 86, 0.35);
   transition: all 0.2s ease;
 }
-.btn-download-img:hover { opacity: 0.95; transform: translateY(-2px); }
+
+.btn-download-img:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
 
 .keywords-section {
   width: 100%;
-  max-width: 420px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 20px;
+  background: linear-gradient(145deg, rgba(22, 9, 15, 0.9), rgba(9, 4, 7, 0.96));
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 12px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--maroon-border);
 }
-.keywords-section h3 { font-size: 13px; color: var(--accent-gold); margin-bottom: 6px; font-weight: 700; }
-.keywords-section p { font-size: 11px; color: var(--text-sub); line-height: 1.6; }
 
-.footer { margin-top: auto; padding: 10px 0; color: var(--accent-gold); font-size: 12px; font-weight: 700; text-align: center; }
+.keywords-section h3 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 12px;
+  color: #fda4af;
+  margin-bottom: 6px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.keywords-section p {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 12px 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(18, 9, 14, 0.85);
+  border: 1px solid rgba(255, 30, 86, 0.18);
+  border-radius: 14px;
+}
+
+.footer strong {
+  font-family: "Orbitron", sans-serif;
+  color: #ff1e56;
+}
 </style>
 </head>
 <body>
+  <div class="page-shell">
+    <header class="top-bo-sticky" id="fire-promo-box" aria-label="Rekomendasi BO">
+      <div class="bo-banner-wrap">
+        <a id="fire-promo-link" href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="fire-cta-box" aria-label="Klik di sini untuk daftar">
+          <div class="fire-cta-track-wrap">
+            <span class="fire-sentence fire-s1">TEMPAT BERMAIN BBFS 8D</span>
+            <span class="fire-sentence fire-s3">TEMPAT HANCURKAN BANDOT</span>
+            <span class="fire-sentence fire-s2">TERSEDIA PASARAN POOLS &amp; LOTTO</span>
+            <span class="fire-sentence fire-s4 fire-cta-click-last">KLIK DISINI</span>
+          </div>
+        </a>
+      </div>
+    </header>
 
-<!-- TOMBOL KEMBALI KE MENU UTAMA -->
-<a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
-  <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-  <span>Kembali ke Menu Utama</span>
-</a>
+    <div class="content-layer">
+      <div id="ad-slots-wrapper" class="bento-card rounded-3xl p-3 flex flex-col items-center gap-2 overflow-hidden mb-3.5" aria-label="Banner Iklan & Gambar BO">
+        <div id="slot-banner-468-1" class="ad-slot-box-468"></div>
 
-<!-- ================================================================= -->
-<!-- KONTEN PALING ATAS: BANNER & NATIVE ADS -->
-<!-- ================================================================= -->
-<div class="top-ads-wrapper">
-  <!-- Banner 320x50 (Pas di lebar layar HP 420px) -->
-  <div class="ad-slot" style="min-height:50px">
-    <script>
-      atOptions = {
-        'key' : '119c8bb3217ed264a8fa223c3197bf69',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
-      };
-    </script>
-    <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
-  </div>
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="1" aria-label="Banner Gambar BO 1">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZUu6Bb9SHtQhksYp0tIcxK4BXlRJ53-PQX8yPbES3tNtWRH30bvo4j7JDONGLZqrQHVpyldNMmWSDBtHLHu_R35BZtvuqb3lYc72WOf1_oCbbHNZPOlyhZZe6JhpazPKzGbZ2AecWoZI7HY3DbkffQ2LtRcG65keeXg6SBEPDJWBOTSTI9Y87OsaHYu6H/s728/1787315798141.webp" alt="Banner BO Rekomendasi 1" class="bo-img-banner-photo" loading="eager">
+        </a>
 
-  <!-- Banner 468x60 (Di-scale otomatis agar pas di layar mobile) -->
-  <div class="ad-slot" style="min-height:60px">
-    <div style="transform:scale(0.82);transform-origin:center center">
-      <script>
-        atOptions = {
-          'key' : '9a986a45c62dcea8d8216b9210f159cb',
-          'format' : 'iframe',
-          'height' : 60,
-          'width' : 468,
-          'params' : {}
-        };
-      </script>
-      <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="2" aria-label="Banner Gambar BO 2">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFKTQ61YTpSNGbt1lvGmdny2qGburdYSZX-Qywhyphenhyphenmroh-3jcerAS9TUegu2x3BucsBpVVB7BZQaB78mlqTh9HOQVnFoDQXVAcEqAKeZ03lkvTMvfjJY8C1UGcEy0yAMxdO_3ycnwkPX77QfqSUbKy0VKmzLWgcR4FeU5SSTog7KkCFGwbnWsEzFyU2Ag-s/s728/GacorGas.gif" alt="Banner BO Rekomendasi 2" class="bo-img-banner-photo" loading="eager">
+        </a>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="3" aria-label="Banner Gambar BO 3">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4wHqPjBj8M_uCyHP5v0_KnqYElaEeuoMXF554e73kENux60h3hoZLQ7JEIfgkFm_JQeFp20uX7kUbUDpjOQsF9FkHyI3pYaAZV4Rdn2gaX1FwqwN1Le6Kbz0f__dpJGAq4GsBxpu2yj0IvbS9kbRijsHoqU6QzAl8n7ZfxWUaKhSlisYRjXnhR7h70xM/s320/login.gif" alt="Banner BO Rekomendasi 3" class="bo-img-banner-photo" loading="eager">
+        </a>
+      </div>
+
+      <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
+        <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        <span>Kembali ke Menu Utama</span>
+      </a>
+
+      <!-- KARTU STATUS PENGUNJUNG ONLINE -->
+      <div class="glass-card visitor-card">
+        <div class="visitor-info">
+          <div class="online-dot"></div>
+          <span>Pengunjung Online :</span>
+        </div>
+        <div class="visitor-count" id="visitor-count-text">0</div>
+      </div>
+
+      <!-- GENERATOR CARD -->
+      <div class="glass-card generator-card">
+        <h3>GENERATOR ANGKA SDY</h3>
+        <div class="guide-text">
+          <strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas SDY akan membedah indeks mistik, taysen, dan pola angka paten secara presisi.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
+        </div>
+        <input id="input-angka" maxlength="4" placeholder="Contoh: 9267">
+        <br>
+        <button type="button" id="btn-generate">GENERATE</button>
+        <div class="generator-result" id="generator-result">
+          <div><strong>Angka Main :</strong> <span id="res-bbfs"></span></div>
+          <div><strong>Colok Bebas :</strong> <span id="res-cb"></span></div>
+        </div>
+      </div>
+
+      <!-- KARTU SISTEM SAWERAN & TITIP PASANG -->
+      <div class="glass-card sawer-card">
+        <h3>Salam HOKI Satu HATI</h3>
+        <p>
+          "Posisi kami berada di pihak pemain, kami tidak promosi agen bo apapun, kami hanya fokus untuk memberikan racikan angka jitu Prediksi Tunggal Paito 100% Gratis &amp; Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit uang seikhlasnya untuk mendukung operasional admin."
+        </p>
+        <div class="sawer-btn-group">
+          <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20Titip%20Pasang%20Angka%20SDY%20hari%20ini" target="_blank" rel="noopener noreferrer" class="sawer-btn btn-sawer-wa">
+            <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>Titip Pasang</span>
+          </a>
+          <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20angka%20SDY%20saya%20tembus%20JP%20hari%20ini,%20mau%20kirim%20sawer%20mahar%20sukarela" target="_blank" rel="noopener noreferrer" id="btn-sawer-bebas" class="sawer-btn btn-sawer-qr">
+            <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Sawer</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- KARTU UTAMA PREDIKSI -->
+      <div class="main-card" id="capture-card">
+        <h1 id="main-title">PREDIKSI SDY</h1>
+        <div class="trek-container" id="trek-container"></div>
+        <a href="#" id="dynamic-site-link" target="_blank" rel="noopener noreferrer" class="card-website-footer"></a>
+      </div>
+
+      <!-- TOMBOL DOWNLOAD -->
+      <div class="action-download-container">
+        <button type="button" class="btn-download-img" id="btn-download">
+          <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>Download Gambar Prediksi</span>
+        </button>
+      </div>
+
+      <div class="ads-container" id="adsContainer">
+        <div class="ad-plain-slot" id="adSlot1"></div>
+        <div class="ad-plain-slot" id="adSlot2"></div>
+        <div class="ad-plain-slot" id="adSlot3"></div>
+        <div class="ad-plain-slot" id="adSlot4"></div>
+      </div>
+
+      <div class="keywords-section">
+        <h3>PREDIKSI TUNGGAL PAITO SYDNEY</h3>
+        <p>
+          Prediksi SDY Hari Ini, Bocoran Togel Sydney Jitu, Angka Main SDY Akurat, Paito Warna Sydney, Tunggal Paito Sidni, Keluaran SDY Tercepat, Live Draw Sydney Pools, Data Sydney Pools, Angka Jitu 2D 3D 4D Syd, Rumus Jitu SDY Hari Ini, Prediksi Jitu Togel Sydney Pools, Bocoran Togel Sidni Terakurat.
+        </p>
+      </div>
+
+      <div class="footer">
+        &copy; <span id="auto-year"></span> <strong>TUNGGAL PAITO</strong>. All Rights Reserved.
+      </div>
     </div>
   </div>
 
-  <!-- Native Banner -->
-  <div class="ad-slot">
-    <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
-    <div id="container-3f09897b852339f736b82a3190a40259"></div>
-  </div>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-  <!-- Script Banner / Direct -->
-  <div class="ad-slot">
-    <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-  </div>
-</div>
-<!-- ================================================================= -->
+  document.getElementById("auto-year").textContent = String(new Date().getFullYear());
 
-<!-- KARTU STATUS PENGUNJUNG ONLINE -->
-<div class="glass-card visitor-card">
-  <div class="visitor-info">
-    <div class="online-dot"></div>
-    <span>Pengunjung Online :</span>
-  </div>
-  <div class="visitor-count" id="visitor-count-text">0</div>
-</div>
+  const currentUrl = window.location.href;
+  const linkElement = document.getElementById("dynamic-site-link");
+  linkElement.href = currentUrl;
+  linkElement.textContent = currentUrl;
 
-<!-- GENERATOR CARD -->
-<div class="glass-card generator-card">
-  <h3>GENERATOR ANGKA SDY</h3>
-  <div class="guide-text">
-    <strong>Cara Pakai:</strong> Masukkan 4 digit angka result terakhir Anda. Algoritma paito cerdas SDY akan membedah indeks mistik, taysen, dan pola angka paten secara presisi.<br><em>Solusi iklan:</em> Jika halaman membuka tab iklan baru, cukup tekan kembali ke halaman lalu klik GENERATE ulang—hasil pasti muncul seketika!
-  </div>
-  <input id="input-angka" maxlength="4" placeholder="Contoh: 9267">
-  <br>
-  <button id="btn-generate">GENERATE</button>
-  <div class="generator-result" id="generator-result">
-    <div><strong>Angka Main :</strong> <span id="res-bbfs"></span></div>
-    <div><strong>Colok Bebas :</strong> <span id="res-cb"></span></div>
-  </div>
-</div>
+  const FIREBASE_DB_URL = window.TP_FIREBASE_DB_URL || "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/";
+  const app = initializeApp({ databaseURL: FIREBASE_DB_URL });
+  const db = getDatabase(app);
 
-<!-- KARTU SISTEM SAWERAN & TITIP PASANG -->
-<div class="glass-card sawer-card">
-  <h3>🎉 Salam HOKI Satu HATI</h3>
-  <p>
-    "Posisi kami berada di pihak pemain, kami tidak promosi agen bo apapun, kami hanya fokus untuk memberikan racikan angka jitu Prediksi Tunggal Paito 100% Gratis & Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit uang seikhlasnya untuk mendukung operasional admin."
-  </p>
-  <div class="sawer-btn-group">
-    <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20saya%20mau%20Titip%20Pasang%20Angka%20SDY%20hari%20ini" target="_blank" class="sawer-btn btn-sawer-wa">
-      <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-      <span>Titip Pasang</span>
-    </a>
-    <a href="https://wa.me/6288970383950?text=Halo%20Admin,%20angka%20SDY%20saya%20tembus%20JP%20hari%20ini,%20mau%20kirim%20sawer%20mahar%20sukarela" target="_blank" id="btn-sawer-bebas" class="sawer-btn btn-sawer-qr">
-      <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      <span>Sawer</span>
-    </a>
-  </div>
-</div>
+  const PASARAN_LABEL = "SDY";
+  const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  const BULAN_ID = [
+    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+  ];
 
-<!-- KARTU UTAMA PREDIKSI -->
-<div class="main-card" id="capture-card">
-  <h1 id="main-title">PREDIKSI SDY</h1>
-  <div class="trek-container" id="trek-container"></div>
-  <a href="#" id="dynamic-site-link" target="_blank" class="card-website-footer"></a>
-</div>
-
-<!-- TOMBOL DOWNLOAD -->
-<div class="action-download-container">
-  <button class="btn-download-img" id="btn-download">
-    <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-    <span>Download Gambar Prediksi</span>
-  </button>
-</div>
-
-<div class="keywords-section">
-  <h3>PREDIKSI TUNGGAL PAITO SYDNEY</h3>
-  <p>
-    Prediksi SDY Hari Ini, Bocoran Togel Sydney Jitu, Angka Main SDY Akurat, Paito Warna Sydney, Tunggal Paito Sidni, Keluaran SDY Tercepat, Live Draw Sydney Pools, Data Sydney Pools, Angka Jitu 2D 3D 4D Syd, Rumus Jitu SDY Hari Ini, Prediksi Jitu Togel Sydney Pools, Bocoran Togel Sidni Terakurat.
-  </p>
-</div>
-
-<div class="footer">
-  &copy; <span id="auto-year"></span> TUNGGAL PAITO All Rights Reserved.
-</div>
-
-<script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-document.getElementById("auto-year").textContent=(new Date).getFullYear();
-
-const currentUrl = window.location.href;
-const linkElement = document.getElementById("dynamic-site-link");
-linkElement.href = currentUrl;
-linkElement.textContent = currentUrl;
-
-const firebaseConfig={databaseURL:"https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/"},
-      app=initializeApp(firebaseConfig),
-      db=getDatabase(app);
-
-const PASARAN_LABEL = "SDY";
-const HARI_ID = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-const BULAN_ID = [
-  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-];
-
-/**
- * Parsing tanggal DD-MM-YYYY menjadi Date object (noon local time agar aman dari pergeseran DST/TZ)
- */
-function parseDateKey(dateStr) {
-  const parts = String(dateStr).trim().split("-");
-  if (parts.length === 3) {
-    const d = Number(parts[0]);
-    const m = Number(parts[1]) - 1;
-    const y = Number(parts[2]);
-    const dt = new Date(y, m, d, 12, 0, 0);
-    if (!isNaN(dt.getTime())) return dt;
-  }
-  return null;
-}
-
-/**
- * Format tanggal menjadi "Hari, DD Bulan YYYY" tanpa tanda kurung ()
- */
-function formatTanggalTanpaKurung(dateObj) {
-  const hari = HARI_ID[dateObj.getDay()];
-  const tgl = String(dateObj.getDate()).padStart(2, "0");
-  const bulan = BULAN_ID[dateObj.getMonth()];
-  const tahun = dateObj.getFullYear();
-  return `${hari}, ${tgl} ${bulan} ${tahun}`;
-}
-
-/**
- * Memperbarui judul halaman (<title>) dan heading (<h1>) dengan nama pasaran (PREDIKSI SDY)
- * serta hari & tanggal tanpa tanda kurung () untuk prediksi hari besoknya.
- */
-function updateJudulPrediksiBesok(latestDateObj) {
-  const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
-    ? latestDateObj
-    : new Date();
-
-  const nextDayDate = new Date(baseDate.getTime());
-  nextDayDate.setDate(nextDayDate.getDate() + 1);
-
-  const labelBesok = formatTanggalTanpaKurung(nextDayDate);
-  const titleEl = document.getElementById("main-title");
-  if (titleEl) {
-    titleEl.innerHTML = `PREDIKSI ${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
-  }
-  document.title = `Prediksi TOP ${PASARAN_LABEL} ${labelBesok} - Tunggal Paito`;
-}
-
-/**
- * Mengambil semua result 4D valid dari sebuah nilai di Firebase:
- * - Deretan koma (lama -> terbaru, paling kanan = terbaru), mengabaikan "xxxx"
- * - String 1 hari / 4 digit tunggal
- */
-function extract4DResults(rawValue) {
-  if (rawValue === null || rawValue === undefined) return [];
-  const str = String(rawValue).trim();
-  if (!str) return [];
-
-  if (str.includes(",")) {
-    return str
-      .split(",")
-      .map(s => s.trim())
-      .filter(s => /^\d{4,}$/.test(s))
-      .map(s => s.slice(-4));
-  }
-
-  const digitsOnly = str.replace(/\D/g, "");
-  if (digitsOnly.length >= 4) {
-    return [digitsOnly.slice(-4)];
-  }
-
-  return [];
-}
-
-// Pantau update 1x24 jam dari Firebase secara real-time (onValue)
-const dataRef = ref(db, "live/data-sdy");
-onValue(dataRef, (snapshot) => {
-    if (snapshot.exists() && snapshot.val()) {
-        const data = snapshot.val();
-
-        const validKeyItems = Object.keys(data)
-            .map(dateStr => ({ dateStr, dateObj: parseDateKey(dateStr) }))
-            .filter(entry => entry.dateObj !== null)
-            .sort((a, b) => a.dateObj - b.dateObj);
-
-        let latestDateObj = null;
-        for (let i = validKeyItems.length - 1; i >= 0; i--) {
-            if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
-                latestDateObj = validKeyItems[i].dateObj;
-                break;
-            }
-        }
-        updateJudulPrediksiBesok(latestDateObj);
-
-        const allResults = [];
-        validKeyItems.forEach(({ dateStr, dateObj }) => {
-            const list4d = extract4DResults(data[dateStr]);
-            list4d.forEach((val4d, idx) => {
-                allResults.push({
-                    dateStr,
-                    dateObj,
-                    idx,
-                    val: val4d
-                });
-            });
-        });
-
-        const last7 = allResults.slice(-7);
-        const trekContainer = document.getElementById("trek-container");
-        trekContainer.innerHTML = "";
-
-        last7.forEach((item, index) => {
-            const result4d = item.val;
-            if (result4d.length < 4) return;
-
-            const digits = result4d.slice(-4).split("").map(Number);
-
-            // RUMUS ASLI SDY TETAP AMAN
-            let scores = {}; for(let i=0; i<=9; i++) scores[i]=1;
-            let as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
-            scores[(as * 2 + ekor * 5) % 10] += 8;
-            scores[(kop * kepala + as) % 10] += 6;
-            scores[Math.abs(kop * 3 - kepala) % 10] += 5;
-            scores[(kepala + ekor) % 10] += 4;
-            let predDigits = Object.keys(scores).sort((x, y) => scores[y] - scores[x]).map(Number).slice(0, 2);
-            
-            const globalPos = allResults.length - last7.length + index;
-            const nextItem = allResults[globalIndexFix(globalPos, allResults)];
-
-            function globalIndexFix(pos, arr) {
-                return pos + 1 < arr.length ? pos + 1 : null;
-            }
-
-            let status = "?";
-            let badgeClass = "trek-badge";
-
-            if (index === last7.length - 1 || !nextItem) {
-                status = "?";
-            } else {
-                const next4d = nextItem.val;
-                const nKepala = Number(next4d[2]);
-                const nEkor = Number(next4d[3]);
-                const isTwin = (nKepala === nEkor);
-
-                const hasKepala = predDigits.includes(nKepala);
-                const hasEkor = predDigits.includes(nEkor);
-
-                if (isTwin && (hasKepala || hasEkor)) {
-                    status = "TWIN";
-                } else if (hasKepala && hasEkor) {
-                    status = "2D";
-                } else if (hasEkor) {
-                    status = "EKOR";
-                } else if (hasKepala) {
-                    status = "KPLA";
-                } else {
-                    status = "ZONK";
-                }
-            }
-
-            let rowHtml = `<div class="trek-row"><div class="trek-balls">`;
-            
-            digits.forEach(d => {
-                rowHtml += `<div class="ball ball-red">${d}</div>`;
-            });
-
-            rowHtml += `<span class="trek-colon">:</span>`;
-
-            predDigits.forEach(d => {
-                rowHtml += `<div class="ball ball-white">${d}</div>`;
-            });
-
-            rowHtml += `</div><div class="${badgeClass}">${status}</div></div>`;
-
-            trekContainer.insertAdjacentHTML('beforeend', rowHtml);
-        });
-    } else {
-        updateJudulPrediksiBesok(null);
+  function parseDateKey(dateStr) {
+    const parts = String(dateStr).trim().split("-");
+    if (parts.length === 3) {
+      const d = Number(parts[0]);
+      const m = Number(parts[1]) - 1;
+      const y = Number(parts[2]);
+      const dt = new Date(y, m, d, 12, 0, 0);
+      if (!isNaN(dt.getTime())) return dt;
     }
-}, (e) => {
+    return null;
+  }
+
+  function formatTanggalTanpaKurung(dateObj) {
+    const hari = HARI_ID[dateObj.getDay()];
+    const tgl = String(dateObj.getDate()).padStart(2, "0");
+    const bulan = BULAN_ID[dateObj.getMonth()];
+    const tahun = dateObj.getFullYear();
+    return `${hari}, ${tgl} ${bulan} ${tahun}`;
+  }
+
+  function updateJudulPrediksiBesok(latestDateObj) {
+    const baseDate = latestDateObj instanceof Date && !isNaN(latestDateObj.getTime())
+      ? latestDateObj
+      : new Date();
+
+    const nextDayDate = new Date(baseDate.getTime());
+    nextDayDate.setDate(nextDayDate.getDate() + 1);
+
+    const labelBesok = formatTanggalTanpaKurung(nextDayDate);
+    const titleEl = document.getElementById("main-title");
+    if (titleEl) {
+      titleEl.innerHTML = `PREDIKSI ${PASARAN_LABEL}<span class="pred-date-sub">${labelBesok}</span>`;
+    }
+    document.title = `Prediksi TOP ${PASARAN_LABEL} ${labelBesok} - Tunggal Paito`;
+  }
+
+  function extract4DResults(rawValue) {
+    if (rawValue === null || rawValue === undefined) return [];
+    const str = String(rawValue).trim();
+    if (!str) return [];
+
+    if (str.includes(",")) {
+      return str
+        .split(",")
+        .map(function(s) { return s.trim(); })
+        .filter(function(s) { return /^\d{4,}$/.test(s); })
+        .map(function(s) { return s.slice(-4); });
+    }
+
+    const digitsOnly = str.replace(/\D/g, "");
+    if (digitsOnly.length >= 4) {
+      return [digitsOnly.slice(-4)];
+    }
+
+    return [];
+  }
+
+  function globalIndexFix(pos, arr) {
+    return pos + 1 < arr.length ? pos + 1 : null;
+  }
+
+  const dataRef = ref(db, "live/data-sdy");
+  onValue(dataRef, function(snapshot) {
+    if (snapshot.exists() && snapshot.val()) {
+      const data = snapshot.val();
+
+      const validKeyItems = Object.keys(data)
+        .map(function(dateStr) { return { dateStr: dateStr, dateObj: parseDateKey(dateStr) }; })
+        .filter(function(entry) { return entry.dateObj !== null; })
+        .sort(function(a, b) { return a.dateObj - b.dateObj; });
+
+      let latestDateObj = null;
+      for (let i = validKeyItems.length - 1; i >= 0; i--) {
+        if (extract4DResults(data[validKeyItems[i].dateStr]).length > 0) {
+          latestDateObj = validKeyItems[i].dateObj;
+          break;
+        }
+      }
+      updateJudulPrediksiBesok(latestDateObj);
+
+      const allResults = [];
+      validKeyItems.forEach(function(entry) {
+        const list4d = extract4DResults(data[entry.dateStr]);
+        list4d.forEach(function(val4d, idx) {
+          allResults.push({
+            dateStr: entry.dateStr,
+            dateObj: entry.dateObj,
+            idx: idx,
+            val: val4d
+          });
+        });
+      });
+
+      const last7 = allResults.slice(-7);
+      const trekContainer = document.getElementById("trek-container");
+      trekContainer.innerHTML = "";
+
+      last7.forEach(function(item, index) {
+        const result4d = item.val;
+        if (result4d.length < 4) return;
+
+        const digits = result4d.slice(-4).split("").map(Number);
+        const scores = {};
+        for (let i = 0; i <= 9; i++) scores[i] = 1;
+        const as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
+        scores[(as * 2 + ekor * 5) % 10] += 8;
+        scores[(kop * kepala + as) % 10] += 6;
+        scores[Math.abs(kop * 3 - kepala) % 10] += 5;
+        scores[(kepala + ekor) % 10] += 4;
+        const predDigits = Object.keys(scores)
+          .sort(function(x, y) { return scores[y] - scores[x]; })
+          .map(Number)
+          .slice(0, 2);
+
+        const globalPos = allResults.length - last7.length + index;
+        const nextIdx = globalIndexFix(globalPos, allResults);
+        const nextItem = nextIdx !== null ? allResults[nextIdx] : null;
+
+        let status = "?";
+        if (index === last7.length - 1 || !nextItem) {
+          status = "?";
+        } else {
+          const next4d = nextItem.val;
+          const nKepala = Number(next4d[2]);
+          const nEkor = Number(next4d[3]);
+          const isTwin = (nKepala === nEkor);
+          const hasKepala = predDigits.includes(nKepala);
+          const hasEkor = predDigits.includes(nEkor);
+
+          if (isTwin && (hasKepala || hasEkor)) {
+            status = "TWIN";
+          } else if (hasKepala && hasEkor) {
+            status = "2D";
+          } else if (hasEkor) {
+            status = "EKOR";
+          } else if (hasKepala) {
+            status = "KPLA";
+          } else {
+            status = "ZONK";
+          }
+        }
+
+        let rowHtml = '<div class="trek-row"><div class="trek-balls">';
+        digits.forEach(function(d) {
+          rowHtml += '<div class="ball ball-red">' + d + '</div>';
+        });
+        rowHtml += '<span class="trek-colon">:</span>';
+        predDigits.forEach(function(d) {
+          rowHtml += '<div class="ball ball-white">' + d + '</div>';
+        });
+        rowHtml += '</div><div class="trek-badge">' + status + '</div></div>';
+        trekContainer.insertAdjacentHTML("beforeend", rowHtml);
+      });
+    } else {
+      updateJudulPrediksiBesok(null);
+    }
+  }, function(e) {
     console.error("Gagal mengambil data Sydney dari Firebase:", e);
-});
+  });
 
-// GENERATOR ANGKA SDY (6 DIGIT & 2 DIGIT COLOK BEBAS)
-document.getElementById("btn-generate").addEventListener("click",(function(){
-  const e=document.getElementById("input-angka").value.trim();
-  if(4!==e.length||isNaN(e))return void alert("Masukkan tepat 4 digit angka result terakhir!");
-  
-  let t=e.split("").map(Number);
-  let a={}; for(let i=0;i<=9;i++)a[i]=2;
-  let as = t[0], kop = t[1], kepala = t[2], ekor = t[3];
-  
-  a[(as * ekor + kop) % 10] += 6;
-  a[(kop * kepala + as) % 10] += 5;
-  a[Math.abs(as * 2 - ekor)] += 4;
-  a[(kop + kepala + ekor) % 10] += 3;
-  a[(as + kop + kepala + ekor) % 10] += 3;
+  document.getElementById("btn-generate").addEventListener("click", function() {
+    const e = document.getElementById("input-angka").value.trim();
+    if (e.length !== 4 || isNaN(e)) {
+      alert("Masukkan tepat 4 digit angka result terakhir!");
+      return;
+    }
 
-  let sortedDigits = Object.keys(a).sort(((x,y)=>a[y]-a[x])).map(Number);
-  let main6 = sortedDigits.slice(0, 6).join(" ");
-  let colok2 = sortedDigits.slice(0, 2).join(" ");
+    const t = e.split("").map(Number);
+    const a = {};
+    for (let i = 0; i <= 9; i++) a[i] = 2;
+    const as = t[0], kop = t[1], kepala = t[2], ekor = t[3];
 
-  document.getElementById("res-bbfs").textContent = main6;
-  document.getElementById("res-cb").textContent = colok2;
-  document.getElementById("generator-result").style.display="block";
-}));
+    a[(as * ekor + kop) % 10] += 6;
+    a[(kop * kepala + as) % 10] += 5;
+    a[Math.abs(as * 2 - ekor)] += 4;
+    a[(kop + kepala + ekor) % 10] += 3;
+    a[(as + kop + kepala + ekor) % 10] += 3;
 
-document.getElementById("btn-download").addEventListener("click", function() {
+    const sortedDigits = Object.keys(a)
+      .sort(function(x, y) { return a[y] - a[x]; })
+      .map(Number);
+    const main6 = sortedDigits.slice(0, 6).join(" ");
+    const colok2 = sortedDigits.slice(0, 2).join(" ");
+
+    document.getElementById("res-bbfs").textContent = main6;
+    document.getElementById("res-cb").textContent = colok2;
+    document.getElementById("generator-result").style.display = "block";
+  });
+
+  document.getElementById("btn-download").addEventListener("click", function() {
     const cardElement = document.getElementById("capture-card");
     const originalText = this.innerHTML;
     this.innerHTML = "<span>Sedang Memproses Gambar...</span>";
     this.disabled = true;
 
     html2canvas(cardElement, {
-        backgroundColor: "#181227",
-        scale: 2
-    }).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "Prediksi-Togel-Sydney-Tunggal-Paito.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
+      backgroundColor: "#0e060b",
+      scale: 2
+    }).then(function(canvas) {
+      const link = document.createElement("a");
+      link.download = "Prediksi-Togel-Sydney-Tunggal-Paito.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
 
-        this.innerHTML = originalText;
-        this.disabled = false;
-    }).catch(err => {
-        console.error("Gagal mendownload gambar:", err);
-        alert("Terjadi kesalahan saat mengunduh gambar.");
-        this.innerHTML = originalText;
-        this.disabled = false;
-    });
-});
+      this.innerHTML = originalText;
+      this.disabled = false;
+    }.bind(this)).catch(function(err) {
+      console.error("Gagal mendownload gambar:", err);
+      alert("Terjadi kesalahan saat mengunduh gambar.");
+      this.innerHTML = originalText;
+      this.disabled = false;
+    }.bind(this));
+  });
 
-let currentVisitors = Math.floor(Math.random() * 151) + 150; 
-let updateTimer = null;
-const visitorText = document.getElementById("visitor-count-text");
+  let currentVisitors = Math.floor(Math.random() * 151) + 150;
+  let updateTimer = null;
+  const visitorText = document.getElementById("visitor-count-text");
+  visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
 
-visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
-
-function updateVisitorCount() {
-    let isIncrease = Math.random() > 0.4;
-    let change = Math.floor(Math.random() * 8) + 1;
-
-    if (isIncrease) { currentVisitors += change; } else { currentVisitors -= change; }
-    if (currentVisitors > 5000) { currentVisitors = 5000; } else if (currentVisitors < 80) { currentVisitors = 80; }
-
+  function updateVisitorCount() {
+    const isIncrease = Math.random() > 0.4;
+    const change = Math.floor(Math.random() * 8) + 1;
+    if (isIncrease) {
+      currentVisitors += change;
+    } else {
+      currentVisitors -= change;
+    }
+    if (currentVisitors > 5000) currentVisitors = 5000;
+    else if (currentVisitors < 80) currentVisitors = 80;
     visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " ";
     scheduleNextUpdate();
-}
-
-function scheduleNextUpdate() {
-    clearTimeout(updateTimer);
-    let randomDelay = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
-    updateTimer = setTimeout(() => { updateVisitorCount(); }, randomDelay);
-}
-scheduleNextUpdate();
-
-let clickCount=0;
-const adLink="https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
-document.addEventListener("click",(function(e){
-  const btnSawer = document.getElementById("btn-sawer-bebas");
-  if (btnSawer && (e.target === btnSawer || btnSawer.contains(e.target))) return;
-  if (e.target.closest('a[href*="wa.me"]')) return;
-  if (e.target.closest('.btn-back-main')) return;
-  if (e.target.closest('#btn-download')) return;
-  if (e.target.closest('.card-website-footer')) return;
-  
-  clickCount++;
-  if (1 === clickCount || (clickCount - 1) % 3 === 0) {
-    window.open(adLink, "_blank");
   }
-}), !0);
 
-document.addEventListener("contextmenu",(e=>e.preventDefault()));
-document.onkeydown=function(e){return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="I".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="C".charCodeAt(0))&&(!e.ctrlKey||!e.shiftKey||e.keyCode!="J".charCodeAt(0))&&(!e.ctrlKey||e.keyCode!="U".charCodeAt(0))&&void 0}
-</script>
+  function scheduleNextUpdate() {
+    clearTimeout(updateTimer);
+    const randomDelay = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
+    updateTimer = setTimeout(updateVisitorCount, randomDelay);
+  }
+  scheduleNextUpdate();
 
-<!-- POPUNDER SCRIPT (Ditempatkan di bawah agar tidak mengganggu tata letak konten) -->
-<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
+  let clickCount = 0;
+  const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
+  document.addEventListener("click", function(e) {
+    const btnSawer = document.getElementById("btn-sawer-bebas");
+    if (btnSawer && (e.target === btnSawer || btnSawer.contains(e.target))) return;
+    if (e.target.closest('a[href*="wa.me"]')) return;
+    if (e.target.closest(".btn-back-main")) return;
+    if (e.target.closest("#btn-download")) return;
+    if (e.target.closest(".card-website-footer")) return;
+    if (e.target.closest("#fire-promo-link") || e.target.closest("[data-bo-img-banner]")) return;
+
+    clickCount++;
+    if (clickCount === 1 || (clickCount - 1) % 3 === 0) {
+      window.open(adLink, "_blank");
+    }
+  }, true);
+
+  // Sticky BO + Firebase live/bo-rekomendasi + Banner 468x60 + 3 Banner BO + Grid 2x2 320x50
+  const FIREBASE_BO_PATH = "live/bo-rekomendasi";
+  const DEFAULT_BO_LINK = "https://indo200-live.com/register?r=2oajlu";
+  const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
+  const promoBoxEl = document.getElementById("fire-promo-box");
+  const promoAnchorEl = document.getElementById("fire-promo-link");
+  const boImgBannerEls = Array.from(document.querySelectorAll("[data-bo-img-banner]"));
+
+  let boLinksList = [DEFAULT_BO_LINK];
+  let currentActiveBoLink = DEFAULT_BO_LINK;
+  let isFireBoxInViewport = true;
+
+  function isSafeHttpUrl(rawUrl) {
+    if (!rawUrl || typeof rawUrl !== "string") return false;
+    try {
+      const parsed = new URL(rawUrl.trim(), window.location.href);
+      return parsed.protocol === "https:" || parsed.protocol === "http:";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function readClickedBoLinks() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_CLICKED_BO_KEY);
+      const parsed = JSON.parse(raw || "[]");
+      if (!Array.isArray(parsed)) return [];
+      return parsed.filter(function(u) { return isSafeHttpUrl(u); }).map(function(u) { return u.trim(); });
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveClickedBoLink(url) {
+    if (!isSafeHttpUrl(url)) return;
+    const clean = url.trim();
+    const list = readClickedBoLinks();
+    if (!list.includes(clean)) {
+      list.push(clean);
+      try {
+        window.localStorage.setItem(STORAGE_CLICKED_BO_KEY, JSON.stringify(list));
+      } catch (_) {}
+    }
+  }
+
+  function extractUrlsFromFirebaseValue(val) {
+    const found = [];
+    const seen = new Set();
+
+    function pushUrl(candidate) {
+      if (typeof candidate === "string") {
+        const cleaned = candidate.trim();
+        if (isSafeHttpUrl(cleaned) && !seen.has(cleaned)) {
+          seen.add(cleaned);
+          found.push(cleaned);
+        }
+      } else if (candidate && typeof candidate === "object") {
+        if (typeof candidate.url === "string") pushUrl(candidate.url);
+        else if (typeof candidate.link === "string") pushUrl(candidate.link);
+        else if (typeof candidate.href === "string") pushUrl(candidate.href);
+      }
+    }
+
+    if (Array.isArray(val)) {
+      val.forEach(pushUrl);
+    } else if (val && typeof val === "object") {
+      if (Array.isArray(val.links)) val.links.forEach(pushUrl);
+      if (Array.isArray(val.list)) val.list.forEach(pushUrl);
+      if (Array.isArray(val.items)) val.items.forEach(pushUrl);
+      Object.keys(val).forEach(function(k) {
+        if (k !== "links" && k !== "list" && k !== "items") {
+          pushUrl(val[k]);
+        }
+      });
+    } else if (typeof val === "string") {
+      val.split(/[\n,]+/).forEach(pushUrl);
+    }
+
+    return found;
+  }
+
+  function pickNextUnclickedBoLink(excludeCurrent) {
+    if (!Array.isArray(boLinksList) || !boLinksList.length) return DEFAULT_BO_LINK;
+    if (boLinksList.length === 1) {
+      return isSafeHttpUrl(boLinksList[0]) ? boLinksList[0].trim() : DEFAULT_BO_LINK;
+    }
+
+    const clickedSet = new Set(readClickedBoLinks());
+    let unclicked = boLinksList.filter(function(u) {
+      return !clickedSet.has(u.trim());
+    });
+
+    if (!unclicked.length) {
+      try {
+        window.localStorage.removeItem(STORAGE_CLICKED_BO_KEY);
+      } catch (_) {}
+      unclicked = boLinksList.slice();
+    }
+
+    let candidates = unclicked;
+    if (excludeCurrent && unclicked.length > 1) {
+      const withoutCurrent = unclicked.filter(function(u) {
+        return u.trim() !== excludeCurrent.trim();
+      });
+      if (withoutCurrent.length) candidates = withoutCurrent;
+    }
+
+    const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+    return isSafeHttpUrl(chosen) ? chosen.trim() : DEFAULT_BO_LINK;
+  }
+
+  function getActiveBoLink() {
+    if (!isSafeHttpUrl(currentActiveBoLink) || !boLinksList.includes(currentActiveBoLink.trim())) {
+      currentActiveBoLink = pickNextUnclickedBoLink("");
+    }
+    return currentActiveBoLink;
+  }
+
+  function syncBoImageBanners() {
+    const primaryLink = getActiveBoLink();
+    boImgBannerEls.forEach(function(bannerEl, idx) {
+      const linkForSlot = boLinksList.length > 1
+        ? boLinksList[idx % boLinksList.length]
+        : primaryLink;
+      const safeHref = isSafeHttpUrl(linkForSlot) ? linkForSlot.trim() : DEFAULT_BO_LINK;
+      bannerEl.setAttribute("href", safeHref);
+    });
+  }
+
+  function applyCurrentBoLinkToPromo() {
+    if (promoAnchorEl) {
+      promoAnchorEl.setAttribute("href", getActiveBoLink());
+    }
+    syncBoImageBanners();
+  }
+
+  function rotateBoLink() {
+    currentActiveBoLink = pickNextUnclickedBoLink(currentActiveBoLink);
+    applyCurrentBoLinkToPromo();
+  }
+
+  function updateBoLinksFromData(rawData) {
+    const extracted = extractUrlsFromFirebaseValue(rawData);
+    boLinksList = extracted.length ? extracted : [DEFAULT_BO_LINK];
+    currentActiveBoLink = pickNextUnclickedBoLink("");
+    applyCurrentBoLinkToPromo();
+  }
+
+  function applyFirePlayState() {
+    if (!promoBoxEl) return;
+    const sentences = promoBoxEl.querySelectorAll(".fire-sentence");
+    const nextState = (!document.hidden && isFireBoxInViewport) ? "running" : "paused";
+    promoBoxEl.style.setProperty("--fire-play-state", nextState);
+    sentences.forEach(function(item) {
+      item.style.animationPlayState = nextState;
+    });
+  }
+
+  function refreshFireMarqueeState() {
+    applyFirePlayState();
+    if (!document.hidden && isFireBoxInViewport && promoBoxEl) {
+      const sentences = promoBoxEl.querySelectorAll(".fire-sentence");
+      sentences.forEach(function(item) {
+        item.style.animation = "none";
+        void item.offsetWidth;
+        item.style.animation = "";
+        item.style.animationPlayState = "running";
+      });
+    }
+  }
+
+  if (promoBoxEl && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        isFireBoxInViewport = Boolean(entry.isIntersecting);
+        applyFirePlayState();
+      });
+    }, { root: null, rootMargin: "20px 0px", threshold: 0.01 });
+    io.observe(promoBoxEl);
+  }
+
+  if (promoAnchorEl) {
+    promoAnchorEl.addEventListener("pointerdown", function() {
+      applyCurrentBoLinkToPromo();
+    }, { passive: true });
+    promoAnchorEl.addEventListener("click", function() {
+      const clickedHref = promoAnchorEl.getAttribute("href") || getActiveBoLink();
+      saveClickedBoLink(clickedHref);
+      currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+      applyCurrentBoLinkToPromo();
+    });
+  }
+
+  boImgBannerEls.forEach(function(bannerEl) {
+    bannerEl.addEventListener("click", function() {
+      const clickedHref = bannerEl.getAttribute("href") || getActiveBoLink();
+      saveClickedBoLink(clickedHref);
+      currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+      applyCurrentBoLinkToPromo();
+    });
+  });
+
+  currentActiveBoLink = pickNextUnclickedBoLink("");
+  applyCurrentBoLinkToPromo();
+
+  let boCycleTimer = null;
+  function startBoLinkCycle() {
+    if (boCycleTimer || document.hidden) return;
+    boCycleTimer = setInterval(function() {
+      if (!document.hidden) rotateBoLink();
+    }, 4000);
+  }
+  function stopBoLinkCycle() {
+    if (boCycleTimer) {
+      clearInterval(boCycleTimer);
+      boCycleTimer = null;
+    }
+  }
+
+  const cleanDbUrl = String(FIREBASE_DB_URL || "").trim().replace(/\/+$/, "");
+  const restUrl = (cleanDbUrl && isSafeHttpUrl(cleanDbUrl)) ? (cleanDbUrl + "/" + FIREBASE_BO_PATH + ".json") : "";
+
+  function fetchRestBoLinks() {
+    if (!restUrl || typeof fetch !== "function") return;
+    fetch(restUrl + "?t=" + Date.now(), { cache: "no-store" })
+      .then(function(res) { return res.ok ? res.json() : null; })
+      .then(function(data) {
+        if (data !== null) updateBoLinksFromData(data);
+      })
+      .catch(function() {});
+  }
+
+  function initFirebaseBoListener() {
+    if (!restUrl) return;
+    onValue(ref(db, FIREBASE_BO_PATH), function(snap) {
+      updateBoLinksFromData(snap && typeof snap.val === "function" ? snap.val() : null);
+    }, function() {
+      fetchRestBoLinks();
+    });
+    fetchRestBoLinks();
+  }
+
+  startBoLinkCycle();
+
+  const TOP_468_BANNERS = [
+    {
+      slotId: "slot-banner-468-1",
+      scriptId: "ad-script-468-1",
+      key: "9a986a45c62dcea8d8216b9210f159cb",
+      src: "https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"
+    }
+  ];
+
+  const top468WrapperEl = document.getElementById("ad-slots-wrapper");
+  const top468SlotEls = TOP_468_BANNERS.map(function(cfg) {
+    return document.getElementById(cfg.slotId);
+  }).filter(Boolean);
+
+  function syncTop468WrapperVisibility() {
+    if (!top468WrapperEl) return;
+    top468WrapperEl.style.display = "flex";
+  }
+
+  function fitSingle468Slot(slotEl) {
+    if (!slotEl) return;
+    slotEl.style.display = "flex";
+    slotEl.style.visibility = "visible";
+    slotEl.style.opacity = "1";
+
+    const availW = Math.max(0, slotEl.clientWidth - 8);
+    const iframes = slotEl.querySelectorAll("iframe");
+    if (!iframes.length) {
+      slotEl.style.height = "68px";
+      return;
+    }
+
+    iframes.forEach(function(iframe) {
+      const attrW = parseFloat(iframe.getAttribute("width") || "468") || 468;
+      const attrH = parseFloat(iframe.getAttribute("height") || "60") || 60;
+      const ratio = (availW > 0 && attrW > availW) ? (availW / attrW) : 1;
+      const scaledW = attrW * ratio;
+      const scaledH = Math.round(attrH * ratio);
+
+      iframe.style.position = "relative";
+      iframe.style.left = "50%";
+      iframe.style.top = "0";
+      iframe.style.width = attrW + "px";
+      iframe.style.height = attrH + "px";
+      iframe.style.maxWidth = "none";
+      iframe.style.maxHeight = "none";
+      iframe.style.margin = "0";
+      iframe.style.background = "transparent";
+      iframe.style.transformOrigin = "top center";
+      iframe.style.transform = "translate3d(-50%, 0, 0) scale(" + ratio.toFixed(4) + ")";
+      iframe.style.marginLeft = "-" + (scaledW / 2).toFixed(2) + "px";
+      iframe.style.marginRight = "-" + (scaledW / 2).toFixed(2) + "px";
+      iframe.style.marginBottom = "-" + Math.max(0, attrH - scaledH) + "px";
+
+      slotEl.style.height = Math.max(68, scaledH + 8) + "px";
+    });
+  }
+
+  function fitAllTop468Banners() {
+    top468SlotEls.forEach(fitSingle468Slot);
+    syncTop468WrapperVisibility();
+  }
+
+  function observeSlotForIframe(slotEl) {
+    if (!slotEl || slotEl.dataset.obsAttached === "1") return;
+    slotEl.dataset.obsAttached = "1";
+
+    if ("MutationObserver" in window) {
+      const mo = new MutationObserver(function() {
+        fitSingle468Slot(slotEl);
+        syncTop468WrapperVisibility();
+      });
+      mo.observe(slotEl, { childList: true, subtree: true });
+    }
+
+    let checks = 0;
+    const poll = setInterval(function() {
+      checks += 1;
+      fitSingle468Slot(slotEl);
+      syncTop468WrapperVisibility();
+      if (slotEl.querySelector("iframe") || checks >= 24) {
+        clearInterval(poll);
+      }
+    }, 250);
+  }
+
+  function loadSingle468Banner(cfg) {
+    return new Promise(function(resolve) {
+      const slotEl = document.getElementById(cfg.slotId);
+      if (!slotEl) {
+        resolve();
+        return;
+      }
+      observeSlotForIframe(slotEl);
+
+      if (slotEl.dataset.adLoaded === "1") {
+        fitSingle468Slot(slotEl);
+        resolve();
+        return;
+      }
+      slotEl.dataset.adLoaded = "1";
+
+      window.atOptions = {
+        key: cfg.key,
+        format: "iframe",
+        height: 60,
+        width: 468,
+        params: {}
+      };
+
+      const sc = document.createElement("script");
+      sc.id = cfg.scriptId;
+      sc.async = false;
+      sc.setAttribute("data-cfasync", "false");
+      sc.referrerPolicy = "strict-origin-when-cross-origin";
+      sc.src = cfg.src;
+
+      let finished = false;
+      function done() {
+        if (finished) return;
+        finished = true;
+        fitSingle468Slot(slotEl);
+        syncTop468WrapperVisibility();
+        setTimeout(function() {
+          fitSingle468Slot(slotEl);
+          syncTop468WrapperVisibility();
+          resolve();
+        }, 1200);
+      }
+
+      sc.addEventListener("load", done, { once: true });
+      sc.addEventListener("error", done, { once: true });
+      setTimeout(done, 2400);
+      slotEl.appendChild(sc);
+    });
+  }
+
+  function loadAllTop468Banners() {
+    syncTop468WrapperVisibility();
+    return TOP_468_BANNERS.reduce(function(chain, cfg) {
+      return chain.then(function() {
+        return loadSingle468Banner(cfg);
+      });
+    }, Promise.resolve());
+  }
+
+  const adSlots = [
+    document.getElementById("adSlot1"),
+    document.getElementById("adSlot2"),
+    document.getElementById("adSlot3"),
+    document.getElementById("adSlot4")
+  ].filter(Boolean);
+
+  function fitIframeToSlot(slotEl) {
+    if (!slotEl) return;
+    const iframe = slotEl.querySelector("iframe");
+    if (!iframe) return;
+
+    const slotWidth = slotEl.clientWidth;
+    const iframeWidth = parseInt(iframe.getAttribute("width"), 10) || 320;
+    const iframeHeight = parseInt(iframe.getAttribute("height"), 10) || 50;
+
+    if (slotWidth > 0 && iframeWidth > 0) {
+      const scale = slotWidth / iframeWidth;
+      iframe.style.width = iframeWidth + "px";
+      iframe.style.height = iframeHeight + "px";
+      iframe.style.transformOrigin = "top left";
+      iframe.style.transform = "scale(" + scale + ")";
+      const lockedHeight = Math.round(iframeHeight * scale);
+      slotEl.style.height = lockedHeight + "px";
+    }
+  }
+
+  function fitAllAdSlots() {
+    fitAllTop468Banners();
+    adSlots.forEach(fitIframeToSlot);
+  }
+
+  function loadBannersSequentially(index) {
+    if (index >= adSlots.length) {
+      fitAllAdSlots();
+      return;
+    }
+    const box = adSlots[index];
+    if (!box) {
+      loadBannersSequentially(index + 1);
+      return;
+    }
+    if (box.dataset.adLoaded === "1") {
+      fitIframeToSlot(box);
+      loadBannersSequentially(index + 1);
+      return;
+    }
+    box.dataset.adLoaded = "1";
+
+    window.atOptions = {
+      key: "119c8bb3217ed264a8fa223c3197bf69",
+      format: "iframe",
+      height: 50,
+      width: 320,
+      params: {}
+    };
+
+    const scriptEl = document.createElement("script");
+    scriptEl.async = false;
+    scriptEl.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
+
+    let movedNext = false;
+    function nextSlot() {
+      fitIframeToSlot(box);
+      if (movedNext) return;
+      movedNext = true;
+      setTimeout(function() {
+        fitIframeToSlot(box);
+        loadBannersSequentially(index + 1);
+      }, 180);
+    }
+
+    scriptEl.addEventListener("load", nextSlot, { once: true });
+    scriptEl.addEventListener("error", nextSlot, { once: true });
+    box.appendChild(scriptEl);
+    setTimeout(function() { fitIframeToSlot(box); }, 500);
+    setTimeout(nextSlot, 1400);
+  }
+
+  window.addEventListener("resize", fitAllAdSlots, { passive: true });
+
+  function onPageReady() {
+    loadAllTop468Banners().then(function() {
+      loadBannersSequentially(0);
+    });
+    initFirebaseBoListener();
+  }
+
+  if (document.readyState === "complete") {
+    onPageReady();
+  } else {
+    window.addEventListener("load", onPageReady, { once: true });
+  }
+
+  const fbPollTimer = setInterval(function() {
+    if (!document.hidden) fetchRestBoLinks();
+  }, 30000);
+
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      stopBoLinkCycle();
+      applyFirePlayState();
+    } else {
+      startBoLinkCycle();
+      refreshFireMarqueeState();
+      fitAllAdSlots();
+    }
+  });
+
+  window.addEventListener("focus", refreshFireMarqueeState, { passive: true });
+  window.addEventListener("pageshow", function() {
+    applyCurrentBoLinkToPromo();
+    startBoLinkCycle();
+    refreshFireMarqueeState();
+    fitAllAdSlots();
+  }, { passive: true });
+
+  window.addEventListener("pagehide", function() {
+    clearInterval(fbPollTimer);
+    clearTimeout(updateTimer);
+    stopBoLinkCycle();
+  }, { passive: true });
+  </script>
+
+  <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 </body>
 </html>
