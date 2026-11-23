@@ -14,6 +14,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://crypotential.com" crossorigin>
+  <link rel="preconnect" href="https://tunggalpaito.online" crossorigin>
+  <link rel="dns-prefetch" href="https://brijmohan.org">
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -28,8 +31,8 @@
       --maroon-accent: #ff1e56;
       --maroon-crimson: #e11d48;
       --maroon-dark: #881337;
-      --maroon-border: rgba(255, 30, 86, 0.28);
-      --maroon-border-bright: rgba(255, 77, 121, 0.55);
+      --maroon-border: rgba(255, 30, 86, 0.34);
+      --maroon-border-bright: rgba(255, 77, 121, 0.58);
       --accent-gradient: linear-gradient(135deg, #ff1e56 0%, #be123c 55%, #881337 100%);
       --neon-glow-maroon: 0 0 20px rgba(255, 30, 86, 0.35);
       --text-main: #ffffff;
@@ -64,8 +67,8 @@
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 12px 10px 96px 10px;
+      align-items: stretch;
+      padding: 0 0 96px 0;
     }
 
     body ::selection {
@@ -75,27 +78,293 @@
 
     .container {
       width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
+      max-width: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
     }
 
-    header {
+    .top-bo-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 120;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      background: #080406;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      contain: layout style;
+    }
+
+    .bo-banner-wrap {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    .content-layer {
+      width: 100%;
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background: linear-gradient(155deg, rgba(24, 10, 16, 0.96), rgba(9, 4, 7, 0.99));
+      border-top: none;
+      border-left: 1px solid var(--maroon-border);
+      border-right: 1px solid var(--maroon-border);
+      border-bottom: none;
+      border-radius: 0;
+      padding: 12px 12px 22px 12px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Pembungkus 1 Banner Iklan 468x60 + 3 Banner Gambar BO Tetap */
+    #ad-slots-wrapper.bento-card {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(20, 12, 17, 0.98) 0%, rgba(10, 7, 10, 0.99) 100%);
+      border: 1px solid rgba(251, 113, 133, 0.25);
+      border-radius: 24px;
+      padding: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .ad-slot-box-468 {
+      width: 100%;
+      max-width: 476px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: #070407;
+      border: 1px solid rgba(251, 113, 133, 0.16);
+      padding: 4px;
+      position: relative;
+      contain: layout style;
+    }
+
+    .ad-slot-box-468 iframe {
+      display: block;
+      background: transparent !important;
+      border: 0 !important;
+    }
+
+    .bo-img-banner-link {
+      width: 100%;
+      max-width: 476px;
+      height: 68px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: block;
+      background-color: #090407;
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      position: relative;
+      text-decoration: none;
+    }
+
+    .bo-img-banner-link:hover {
+      border-color: rgba(255, 130, 160, 0.85);
+    }
+
+    .bo-img-banner-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .fire-cta-box {
+      width: 100%;
+      max-width: 100%;
+      height: 54px;
+      min-height: 54px;
+      max-height: 54px;
+      border-radius: 0;
+      text-decoration: none;
+      background: linear-gradient(90deg, #070406 0%, #16060b 50%, #070406 100%);
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 10px;
+      overflow: hidden;
+      position: relative;
+      transition: filter 0.15s ease;
+    }
+
+    .fire-cta-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(8, 5, 7, 0.92) 0%,
+        rgba(225, 29, 72, 0.24) 24%,
+        rgba(255, 255, 255, 0.34) 50%,
+        rgba(225, 29, 72, 0.24) 76%,
+        rgba(8, 5, 7, 0.92) 100%
+      );
+      background-size: 220% 100%;
+      will-change: background-position, opacity;
+      animation: slowLightWave 7.5s ease-in-out infinite;
+      animation-play-state: var(--fire-play-state, running);
+    }
+
+    .fire-cta-box:hover {
+      filter: brightness(1.06);
+    }
+
+    .fire-cta-track-wrap {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fire-sentence {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: #bef264;
+      text-shadow:
+        0 0 8px rgba(190, 242, 100, 0.68),
+        0 0 16px rgba(163, 230, 53, 0.52),
+        0 2px 4px rgba(0, 0, 0, 0.98);
+      transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: expandFromCenterSlow 16s ease-out infinite;
+      animation-play-state: var(--fire-play-state, running);
+    }
+
+    @media (min-width: 640px) {
+      .fire-cta-box {
+        height: 60px;
+        min-height: 60px;
+        max-height: 60px;
+      }
+
+      .fire-sentence {
+        font-size: 1.28rem;
+      }
+    }
+
+    .fire-cta-click-last {
+      color: #ffffff;
+      font-size: 1.16rem;
+      letter-spacing: 0.07em;
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.95),
+        0 0 18px rgba(225, 29, 72, 0.95),
+        0 2px 4px rgba(0, 0, 0, 0.98);
+    }
+
+    @media (min-width: 640px) {
+      .fire-cta-click-last {
+        font-size: 1.38rem;
+      }
+    }
+
+    .fire-s1 { animation-delay: 0s; }
+    .fire-s2 { animation-delay: 4s; }
+    .fire-s3 { animation-delay: 8s; }
+    .fire-s4 { animation-delay: 12s; }
+
+    .fire-cta-box:hover .fire-sentence,
+    .fire-cta-box:active .fire-sentence {
+      animation-play-state: paused;
+    }
+
+    @keyframes expandFromCenterSlow {
+      0% {
+        transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+        opacity: 0;
+      }
+      5% {
+        transform: translate3d(-50%, -50%, 0) scaleX(0.75) scaleY(0.95);
+        opacity: 0.96;
+      }
+      11% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.05) scaleY(1.02);
+        opacity: 1;
+      }
+      20% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.16) scaleY(1.04);
+        opacity: 0.85;
+      }
+      25% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+        opacity: 0;
+      }
+      100% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slowLightWave {
+      0% {
+        background-position: 100% 0;
+        opacity: 0.55;
+      }
+      50% {
+        background-position: 0% 0;
+        opacity: 0.9;
+      }
+      100% {
+        background-position: 100% 0;
+        opacity: 0.55;
+      }
+    }
+
+    header.live-header {
       background: linear-gradient(145deg, rgba(26, 10, 17, 0.94), rgba(10, 5, 8, 0.98));
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--maroon-border);
       padding: 18px 14px;
       text-align: center;
-      position: sticky;
-      top: 8px;
-      z-index: 100;
+      position: relative;
+      z-index: 10;
       box-shadow: 0 14px 32px rgba(0, 0, 0, 0.65);
       width: 100%;
       border-radius: 18px;
       margin-bottom: 14px;
     }
 
-    header h1 {
+    header.live-header h1 {
       font-family: "Orbitron", sans-serif;
       font-size: 19px;
       font-weight: 900;
@@ -137,30 +406,30 @@
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 30, 86, 0); }
     }
 
-    .top-ads-wrapper {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+    .ads-container {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 14px;
       margin-bottom: 14px;
-      background: linear-gradient(145deg, rgba(22, 9, 15, 0.92), rgba(9, 4, 7, 0.97));
-      border: 1px solid var(--maroon-border);
-      border-radius: 18px;
-      padding: 12px 10px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+      width: 100%;
     }
 
-    .ad-slot {
+    .ad-plain-slot {
       width: 100%;
-      min-height: 52px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 50px;
       overflow: hidden;
-      border-radius: 10px;
-      background: rgba(11, 5, 8, 0.75);
-      border: 1px solid rgba(255, 30, 86, 0.14);
+      position: relative;
+    }
+
+    .ad-plain-slot iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 320px;
+      height: 50px;
+      border: 0;
+      display: block;
     }
 
     .nav-top-container {
@@ -779,154 +1048,151 @@
 </head>
 <body>
   <div class="container">
-    <div class="top-ads-wrapper" id="topAdsWrapper">
-      <div class="ad-slot">
-        <script>
-          window.atOptions = {
-            key: "9a986a45c62dcea8d8216b9210f159cb",
-            format: "iframe",
-            height: 60,
-            width: 468,
-            params: {}
-          };
-        </script>
-        <script src="https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"></script>
-      </div>
-
-      <div class="ad-slot">
-        <script async="async" data-cfasync="false" src="https://brijmohan.org/21/3f09897b852339f736b82a3190a40259"></script>
-        <div id="container-3f09897b852339f736b82a3190a40259"></div>
-      </div>
-
-      <div class="ad-slot">
-        <script data-cfasync="false" src="https://brijmohan.org/14/250749c9a0ef9bf5ad50433019f54230"></script>
-      </div>
-
-      <div class="ad-slot">
-        <script>
-          window.atOptions = {
-            key: "119c8bb3217ed264a8fa223c3197bf69",
-            format: "iframe",
-            height: 50,
-            width: 320,
-            params: {}
-          };
-        </script>
-        <script src="https://brijmohan.org/22/119c8bb3217ed264a8fa223c3197bf69"></script>
-      </div>
-
-      <div class="ad-slot">
-        <script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
-      </div>
-    </div>
-
-    <div class="nav-top-container">
-      <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
-      <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
-    </div>
-
-    <header>
-      <h1>TUNGGAL PAITO</h1>
-      <div class="live-badge">
-        <span></span> Live SGP | HK | SDY Resmi Tercepat
+    <header class="top-bo-sticky" id="fire-promo-box" aria-label="Rekomendasi BO">
+      <div class="bo-banner-wrap">
+        <a id="fire-promo-link" href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="fire-cta-box" aria-label="Klik di sini untuk daftar">
+          <div class="fire-cta-track-wrap">
+            <span class="fire-sentence fire-s1">TEMPAT BERMAIN BBFS 8D</span>
+            <span class="fire-sentence fire-s3">TEMPAT HANCURKAN BANDOT</span>
+            <span class="fire-sentence fire-s2">TERSEDIA PASARAN POOLS &amp; LOTTO</span>
+            <span class="fire-sentence fire-s4 fire-cta-click-last">KLIK DISINI</span>
+          </div>
+        </a>
       </div>
     </header>
 
-    <div class="disclaimer-marquee-container">
-      <div class="disclaimer-marquee">
-        <span>🚨 DISCLAIMER: konten di halaman ini adalah sarana informasi dan hiburan semata. mohon gunakan layanan dengan bijak dan tetap mengikuti ketentuan serta regulasi yang berlaku ditempat anda berada. Terima kasih atas kunjungan nya!</span>
-      </div>
-    </div>
+    <div class="content-layer">
+      <div id="ad-slots-wrapper" class="bento-card rounded-3xl p-3 flex flex-col items-center gap-2 overflow-hidden mb-3.5" aria-label="Banner Iklan & Gambar BO">
+        <div id="slot-banner-468-1" class="ad-slot-box-468"></div>
 
-    <div class="prediction-main-grid">
-      <a href="https://tunggalpaito.online/prediksi/hk/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/hk/">
-        <h4>🎯 Prediksi HK</h4>
-      </a>
-      <a href="https://tunggalpaito.online/prediksi/sgp/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sgp/">
-        <h4>🎯 Prediksi SGP</h4>
-      </a>
-      <a href="https://tunggalpaito.online/prediksi/sdy/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sdy/">
-        <h4>🎯 Prediksi SDY</h4>
-      </a>
-    </div>
-
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr id="table-headers">
-            <th>TANGGAL</th>
-            <th>HARI</th>
-            <th data-market="hk">HK</th>
-            <th data-market="sgp">SGP</th>
-            <th data-market="sdy">SDY</th>
-          </tr>
-        </thead>
-        <tbody id="live-draw-data">
-        </tbody>
-      </table>
-    </div>
-
-    <div class="action-download-container">
-      <button type="button" class="btn-refresh-live" id="btn-refresh">
-        <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
-        <span>Refresh Live</span>
-      </button>
-      <button type="button" class="btn-download-img" id="btn-download">
-        <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-        <span>Download Result</span>
-      </button>
-    </div>
-
-    <div class="paito-warna-box">
-      <div class="paito-warna-title">🎨 Lihat Paito Warna Pasaran</div>
-      <div class="paito-warna-grid">
-        <a href="https://tunggalpaito.online/paito-warna/hk/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/hk/">
-          <span>HK</span>
-          <small>Paito Warna</small>
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="1" aria-label="Banner Gambar BO 1">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZUu6Bb9SHtQhksYp0tIcxK4BXlRJ53-PQX8yPbES3tNtWRH30bvo4j7JDONGLZqrQHVpyldNMmWSDBtHLHu_R35BZtvuqb3lYc72WOf1_oCbbHNZPOlyhZZe6JhpazPKzGbZ2AecWoZI7HY3DbkffQ2LtRcG65keeXg6SBEPDJWBOTSTI9Y87OsaHYu6H/s728/1787315798141.webp" alt="Banner BO Rekomendasi 1" class="bo-img-banner-photo" loading="eager">
         </a>
-        <a href="https://tunggalpaito.online/paito-warna/sgp/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sgp/">
-          <span>SGP</span>
-          <small>Paito Warna</small>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="2" aria-label="Banner Gambar BO 2">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFKTQ61YTpSNGbt1lvGmdny2qGburdYSZX-Qywhyphenhyphenmroh-3jcerAS9TUegu2x3BucsBpVVB7BZQaB78mlqTh9HOQVnFoDQXVAcEqAKeZ03lkvTMvfjJY8C1UGcEy0yAMxdO_3ycnwkPX77QfqSUbKy0VKmzLWgcR4FeU5SSTog7KkCFGwbnWsEzFyU2Ag-s/s728/GacorGas.gif" alt="Banner BO Rekomendasi 2" class="bo-img-banner-photo" loading="eager">
         </a>
-        <a href="https://tunggalpaito.online/paito-warna/sdy/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sdy/">
-          <span>SDY</span>
-          <small>Paito Warna</small>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="3" aria-label="Banner Gambar BO 3">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4wHqPjBj8M_uCyHP5v0_KnqYElaEeuoMXF554e73kENux60h3hoZLQ7JEIfgkFm_JQeFp20uX7kUbUDpjOQsF9FkHyI3pYaAZV4Rdn2gaX1FwqwN1Le6Kbz0f__dpJGAq4GsBxpu2yj0IvbS9kbRijsHoqU6QzAl8n7ZfxWUaKhSlisYRjXnhR7h70xM/s320/login.gif" alt="Banner BO Rekomendasi 3" class="bo-img-banner-photo" loading="eager">
         </a>
       </div>
-    </div>
 
-    <div class="download-card-wrapper" id="downloadCardTarget" aria-hidden="true">
-      <div class="dl-card-header">
-        <h2>Tunggal Paito</h2>
-        <div class="dl-card-badge">✨ Live Result HK | SGP | SDY Tercepat</div>
+      <div class="nav-top-container">
+        <a href="https://tunggalpaito.online/prediksi/" class="nav-btn">⬅ Menu Utama</a>
+        <a href="https://tunggalpaito.online/prediksi/angka-main/" class="nav-btn apk">⭐ Menu Favorit</a>
       </div>
-      <table class="dl-table">
-        <thead>
-          <tr>
-            <th>TANGGAL</th>
-            <th>HARI</th>
-            <th>HK</th>
-            <th>SGP</th>
-            <th>SDY</th>
-          </tr>
-        </thead>
-        <tbody id="dl-table-body">
-        </tbody>
-      </table>
-      <div class="dl-card-footer">
-        &copy; <span class="current-year"></span> Tunggal Paito. All Rights Reserved.
+
+      <header class="live-header">
+        <h1>TUNGGAL PAITO</h1>
+        <div class="live-badge">
+          <span></span> Live SGP | HK | SDY Resmi Tercepat
+        </div>
+      </header>
+
+      <div class="disclaimer-marquee-container">
+        <div class="disclaimer-marquee">
+          <span>🚨 DISCLAIMER: konten di halaman ini adalah sarana informasi dan hiburan semata. mohon gunakan layanan dengan bijak dan tetap mengikuti ketentuan serta regulasi yang berlaku ditempat anda berada. Terima kasih atas kunjungan nya!</span>
+        </div>
       </div>
-    </div>
 
-    <div class="seo-section">
-      <h3>Pusat Live Draw Result SGP, HK, dan SDY Tercepat</h3>
-      <p>Selamat datang di situs resmi <strong>Tunggal Paito</strong>, penyedia informasi live draw dan result pasaran togel terpopuler seperti Singapore (SGP), Hongkong (HK), dan Sydney (SDY). Halaman ini dirancang khusus dengan kecepatan akses optimal agar Anda dapat memantau angka keluaran secara real-time dan akurat setiap harinya tanpa hambatan.</p>
-      <p>Gunakan data paito warna dan hasil live draw kami untuk menyusun strategi angka jitu. Seluruh data result disinkronkan langsung dari server resmi masing-masing pasaran dengan pembaruan otomatis setiap hari sesuai jadwal keluaran.</p>
-    </div>
+      <div class="prediction-main-grid">
+        <a href="https://tunggalpaito.online/prediksi/hk/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/hk/">
+          <h4>🎯 Prediksi HK</h4>
+        </a>
+        <a href="https://tunggalpaito.online/prediksi/sgp/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sgp/">
+          <h4>🎯 Prediksi SGP</h4>
+        </a>
+        <a href="https://tunggalpaito.online/prediksi/sdy/" target="_blank" rel="noopener noreferrer" class="pred-card" data-pred-url="https://tunggalpaito.online/prediksi/sdy/">
+          <h4>🎯 Prediksi SDY</h4>
+        </a>
+      </div>
 
-    <footer>
-      &copy; <span class="current-year"></span> <strong>TUNGGAL PAITO</strong>. All Rights Reserved.
-    </footer>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr id="table-headers">
+              <th>TANGGAL</th>
+              <th>HARI</th>
+              <th data-market="hk">HK</th>
+              <th data-market="sgp">SGP</th>
+              <th data-market="sdy">SDY</th>
+            </tr>
+          </thead>
+          <tbody id="live-draw-data">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="action-download-container">
+        <button type="button" class="btn-refresh-live" id="btn-refresh">
+          <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+          <span>Refresh Live</span>
+        </button>
+        <button type="button" class="btn-download-img" id="btn-download">
+          <svg style="width:15px;height:15px;fill:currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+          <span>Download Result</span>
+        </button>
+      </div>
+
+      <div class="paito-warna-box">
+        <div class="paito-warna-title">🎨 Lihat Paito Warna Pasaran</div>
+        <div class="paito-warna-grid">
+          <a href="https://tunggalpaito.online/paito-warna/hk/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/hk/">
+            <span>HK</span>
+            <small>Paito Warna</small>
+          </a>
+          <a href="https://tunggalpaito.online/paito-warna/sgp/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sgp/">
+            <span>SGP</span>
+            <small>Paito Warna</small>
+          </a>
+          <a href="https://tunggalpaito.online/paito-warna/sdy/" target="_blank" rel="noopener noreferrer" class="paito-card" data-pred-url="https://tunggalpaito.online/paito-warna/sdy/">
+            <span>SDY</span>
+            <small>Paito Warna</small>
+          </a>
+        </div>
+      </div>
+
+      <div class="download-card-wrapper" id="downloadCardTarget" aria-hidden="true">
+        <div class="dl-card-header">
+          <h2>Tunggal Paito</h2>
+          <div class="dl-card-badge">✨ Live Result HK | SGP | SDY Tercepat</div>
+        </div>
+        <table class="dl-table">
+          <thead>
+            <tr>
+              <th>TANGGAL</th>
+              <th>HARI</th>
+              <th>HK</th>
+              <th>SGP</th>
+              <th>SDY</th>
+            </tr>
+          </thead>
+          <tbody id="dl-table-body">
+          </tbody>
+        </table>
+        <div class="dl-card-footer">
+          &copy; <span class="current-year"></span> Tunggal Paito. All Rights Reserved.
+        </div>
+      </div>
+
+      <div class="ads-container" id="adsContainer">
+        <div class="ad-plain-slot" id="adSlot1"></div>
+        <div class="ad-plain-slot" id="adSlot2"></div>
+        <div class="ad-plain-slot" id="adSlot3"></div>
+        <div class="ad-plain-slot" id="adSlot4"></div>
+      </div>
+
+      <div class="seo-section">
+        <h3>Pusat Live Draw Result SGP, HK, dan SDY Tercepat</h3>
+        <p>Selamat datang di situs resmi <strong>Tunggal Paito</strong>, penyedia informasi live draw dan result pasaran togel terpopuler seperti Singapore (SGP), Hongkong (HK), dan Sydney (SDY). Halaman ini dirancang khusus dengan kecepatan akses optimal agar Anda dapat memantau angka keluaran secara real-time dan akurat setiap harinya tanpa hambatan.</p>
+        <p>Gunakan data paito warna dan hasil live draw kami untuk menyusun strategi angka jitu. Seluruh data result disinkronkan langsung dari server resmi masing-masing pasaran dengan pembaruan otomatis setiap hari sesuai jadwal keluaran.</p>
+      </div>
+
+      <footer>
+        &copy; <span class="current-year"></span> <strong>TUNGGAL PAITO</strong>. All Rights Reserved.
+      </footer>
+    </div>
   </div>
 
   <div class="apk-float-popup" id="apkPopup">
@@ -973,7 +1239,7 @@
       if (!target || typeof target.closest !== "function") return false;
       return Boolean(
         target.closest(
-          "a, [href], [data-pred-url], [onclick], #apkPopup, #apkReopenBtn, .prediction-main-grid, .paito-warna-box, .nav-top-container, .action-download-container, iframe, .top-ads-wrapper"
+          "a, [href], [data-pred-url], [onclick], #apkPopup, #apkReopenBtn, .prediction-main-grid, .paito-warna-box, .nav-top-container, .action-download-container, iframe, #ad-slots-wrapper, #adsContainer, #fire-promo-box"
         ) ||
         target.tagName === "A" ||
         target.tagName === "IFRAME"
@@ -1010,13 +1276,488 @@
       el.textContent = String(currentYear);
     });
 
-    const firebaseConfig = {
-      databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
+    const FIREBASE_DB_CONFIG = {
+      databaseURL: window.TP_FIREBASE_DB_URL || "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
     };
     if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
+      firebase.initializeApp(FIREBASE_DB_CONFIG);
     }
     const db = firebase.database();
+
+    const FIREBASE_BO_PATH = "live/bo-rekomendasi";
+    const DEFAULT_BO_LINK = "https://indo200-live.com/register?r=2oajlu";
+    const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
+    const promoBoxEl = document.getElementById("fire-promo-box");
+    const promoAnchorEl = document.getElementById("fire-promo-link");
+    const boImgBannerEls = Array.from(document.querySelectorAll("[data-bo-img-banner]"));
+
+    let boLinksList = [DEFAULT_BO_LINK];
+    let currentActiveBoLink = DEFAULT_BO_LINK;
+    let isFireBoxInViewport = true;
+
+    function isSafeHttpUrl(rawUrl) {
+      if (!rawUrl || typeof rawUrl !== "string") return false;
+      try {
+        const parsed = new URL(rawUrl.trim(), window.location.href);
+        return parsed.protocol === "https:" || parsed.protocol === "http:";
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function readClickedBoLinks() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_CLICKED_BO_KEY);
+        const parsed = JSON.parse(raw || "[]");
+        if (!Array.isArray(parsed)) return [];
+        return parsed.filter(function(u) { return isSafeHttpUrl(u); }).map(function(u) { return u.trim(); });
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function saveClickedBoLink(url) {
+      if (!isSafeHttpUrl(url)) return;
+      const clean = url.trim();
+      const list = readClickedBoLinks();
+      if (!list.includes(clean)) {
+        list.push(clean);
+        try {
+          window.localStorage.setItem(STORAGE_CLICKED_BO_KEY, JSON.stringify(list));
+        } catch (_) {}
+      }
+    }
+
+    function extractUrlsFromFirebaseValue(val) {
+      const found = [];
+      const seen = new Set();
+
+      function pushUrl(candidate) {
+        if (typeof candidate === "string") {
+          const cleaned = candidate.trim();
+          if (isSafeHttpUrl(cleaned) && !seen.has(cleaned)) {
+            seen.add(cleaned);
+            found.push(cleaned);
+          }
+        } else if (candidate && typeof candidate === "object") {
+          if (typeof candidate.url === "string") pushUrl(candidate.url);
+          else if (typeof candidate.link === "string") pushUrl(candidate.link);
+          else if (typeof candidate.href === "string") pushUrl(candidate.href);
+        }
+      }
+
+      if (Array.isArray(val)) {
+        val.forEach(pushUrl);
+      } else if (val && typeof val === "object") {
+        if (Array.isArray(val.links)) val.links.forEach(pushUrl);
+        if (Array.isArray(val.list)) val.list.forEach(pushUrl);
+        if (Array.isArray(val.items)) val.items.forEach(pushUrl);
+        Object.keys(val).forEach(function(k) {
+          if (k !== "links" && k !== "list" && k !== "items") {
+            pushUrl(val[k]);
+          }
+        });
+      } else if (typeof val === "string") {
+        val.split(/[\n,]+/).forEach(pushUrl);
+      }
+
+      return found;
+    }
+
+    function pickNextUnclickedBoLink(excludeCurrent) {
+      if (!Array.isArray(boLinksList) || !boLinksList.length) return DEFAULT_BO_LINK;
+      if (boLinksList.length === 1) {
+        return isSafeHttpUrl(boLinksList[0]) ? boLinksList[0].trim() : DEFAULT_BO_LINK;
+      }
+
+      const clickedSet = new Set(readClickedBoLinks());
+      let unclicked = boLinksList.filter(function(u) {
+        return !clickedSet.has(u.trim());
+      });
+
+      if (!unclicked.length) {
+        try {
+          window.localStorage.removeItem(STORAGE_CLICKED_BO_KEY);
+        } catch (_) {}
+        unclicked = boLinksList.slice();
+      }
+
+      let candidates = unclicked;
+      if (excludeCurrent && unclicked.length > 1) {
+        const withoutCurrent = unclicked.filter(function(u) {
+          return u.trim() !== excludeCurrent.trim();
+        });
+        if (withoutCurrent.length) candidates = withoutCurrent;
+      }
+
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+      return isSafeHttpUrl(chosen) ? chosen.trim() : DEFAULT_BO_LINK;
+    }
+
+    function getActiveBoLink() {
+      if (!isSafeHttpUrl(currentActiveBoLink) || !boLinksList.includes(currentActiveBoLink.trim())) {
+        currentActiveBoLink = pickNextUnclickedBoLink("");
+      }
+      return currentActiveBoLink;
+    }
+
+    function syncBoImageBanners() {
+      const primaryLink = getActiveBoLink();
+      boImgBannerEls.forEach(function(bannerEl, idx) {
+        const linkForSlot = boLinksList.length > 1
+          ? boLinksList[idx % boLinksList.length]
+          : primaryLink;
+        const safeHref = isSafeHttpUrl(linkForSlot) ? linkForSlot.trim() : DEFAULT_BO_LINK;
+        bannerEl.setAttribute("href", safeHref);
+      });
+    }
+
+    function applyCurrentBoLinkToPromo() {
+      if (promoAnchorEl) {
+        promoAnchorEl.setAttribute("href", getActiveBoLink());
+      }
+      syncBoImageBanners();
+    }
+
+    function rotateBoLink() {
+      currentActiveBoLink = pickNextUnclickedBoLink(currentActiveBoLink);
+      applyCurrentBoLinkToPromo();
+    }
+
+    function updateBoLinksFromData(rawData) {
+      const extracted = extractUrlsFromFirebaseValue(rawData);
+      boLinksList = extracted.length ? extracted : [DEFAULT_BO_LINK];
+      currentActiveBoLink = pickNextUnclickedBoLink("");
+      applyCurrentBoLinkToPromo();
+    }
+
+    function applyFirePlayState() {
+      if (!promoBoxEl) return;
+      const sentences = promoBoxEl.querySelectorAll(".fire-sentence");
+      const nextState = (!document.hidden && isFireBoxInViewport) ? "running" : "paused";
+      promoBoxEl.style.setProperty("--fire-play-state", nextState);
+      sentences.forEach(function(item) {
+        item.style.animationPlayState = nextState;
+      });
+    }
+
+    function refreshFireMarqueeState() {
+      applyFirePlayState();
+      if (!document.hidden && isFireBoxInViewport && promoBoxEl) {
+        const sentences = promoBoxEl.querySelectorAll(".fire-sentence");
+        sentences.forEach(function(item) {
+          item.style.animation = "none";
+          void item.offsetWidth;
+          item.style.animation = "";
+          item.style.animationPlayState = "running";
+        });
+      }
+    }
+
+    if (promoBoxEl && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          isFireBoxInViewport = Boolean(entry.isIntersecting);
+          applyFirePlayState();
+        });
+      }, { root: null, rootMargin: "20px 0px", threshold: 0.01 });
+      io.observe(promoBoxEl);
+    }
+
+    if (promoAnchorEl) {
+      promoAnchorEl.addEventListener("pointerdown", function() {
+        applyCurrentBoLinkToPromo();
+      }, { passive: true });
+      promoAnchorEl.addEventListener("click", function() {
+        const clickedHref = promoAnchorEl.getAttribute("href") || getActiveBoLink();
+        saveClickedBoLink(clickedHref);
+        currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+        applyCurrentBoLinkToPromo();
+      });
+    }
+
+    boImgBannerEls.forEach(function(bannerEl) {
+      bannerEl.addEventListener("click", function() {
+        const clickedHref = bannerEl.getAttribute("href") || getActiveBoLink();
+        saveClickedBoLink(clickedHref);
+        currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+        applyCurrentBoLinkToPromo();
+      });
+    });
+
+    currentActiveBoLink = pickNextUnclickedBoLink("");
+    applyCurrentBoLinkToPromo();
+
+    let boCycleTimer = null;
+    function startBoLinkCycle() {
+      if (boCycleTimer || document.hidden) return;
+      boCycleTimer = setInterval(function() {
+        if (!document.hidden) rotateBoLink();
+      }, 4000);
+    }
+    function stopBoLinkCycle() {
+      if (boCycleTimer) {
+        clearInterval(boCycleTimer);
+        boCycleTimer = null;
+      }
+    }
+
+    const dbUrl = String(FIREBASE_DB_CONFIG.databaseURL || "").trim().replace(/\/+$/, "");
+    const restUrl = (dbUrl && isSafeHttpUrl(dbUrl)) ? (dbUrl + "/" + FIREBASE_BO_PATH + ".json") : "";
+
+    function fetchRestBoLinks() {
+      if (!restUrl || typeof fetch !== "function") return;
+      fetch(restUrl + "?t=" + Date.now(), { cache: "no-store" })
+        .then(function(res) { return res.ok ? res.json() : null; })
+        .then(function(data) {
+          if (data !== null) updateBoLinksFromData(data);
+        })
+        .catch(function() {});
+    }
+
+    function attachSdkRealtime() {
+      try {
+        const ref = db.ref(FIREBASE_BO_PATH);
+        const cb = function(snap) {
+          updateBoLinksFromData(snap && typeof snap.val === "function" ? snap.val() : null);
+        };
+        ref.on("value", cb);
+        activeListeners.push({ ref: ref, cb: cb });
+        return true;
+      } catch (_) {}
+      return false;
+    }
+
+    function initFirebaseBoListener() {
+      if (!attachSdkRealtime()) {
+        fetchRestBoLinks();
+      }
+    }
+
+    startBoLinkCycle();
+
+    const TOP_468_BANNERS = [
+      {
+        slotId: "slot-banner-468-1",
+        scriptId: "ad-script-468-1",
+        key: "9a986a45c62dcea8d8216b9210f159cb",
+        src: "https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"
+      }
+    ];
+
+    const top468WrapperEl = document.getElementById("ad-slots-wrapper");
+    const top468SlotEls = TOP_468_BANNERS.map(function(cfg) {
+      return document.getElementById(cfg.slotId);
+    }).filter(Boolean);
+
+    function syncTop468WrapperVisibility() {
+      if (!top468WrapperEl) return;
+      top468WrapperEl.style.display = "flex";
+    }
+
+    function fitSingle468Slot(slotEl) {
+      if (!slotEl) return;
+      slotEl.style.display = "flex";
+      slotEl.style.visibility = "visible";
+      slotEl.style.opacity = "1";
+
+      const availW = Math.max(0, slotEl.clientWidth - 8);
+      const iframes = slotEl.querySelectorAll("iframe");
+      if (!iframes.length) {
+        slotEl.style.height = "68px";
+        return;
+      }
+
+      iframes.forEach(function(iframe) {
+        const attrW = parseFloat(iframe.getAttribute("width") || "468") || 468;
+        const attrH = parseFloat(iframe.getAttribute("height") || "60") || 60;
+        const ratio = (availW > 0 && attrW > availW) ? (availW / attrW) : 1;
+        const scaledW = attrW * ratio;
+        const scaledH = Math.round(attrH * ratio);
+
+        iframe.style.position = "relative";
+        iframe.style.left = "50%";
+        iframe.style.top = "0";
+        iframe.style.width = attrW + "px";
+        iframe.style.height = attrH + "px";
+        iframe.style.maxWidth = "none";
+        iframe.style.maxHeight = "none";
+        iframe.style.margin = "0";
+        iframe.style.background = "transparent";
+        iframe.style.transformOrigin = "top center";
+        iframe.style.transform = "translate3d(-50%, 0, 0) scale(" + ratio.toFixed(4) + ")";
+        iframe.style.marginLeft = "-" + (scaledW / 2).toFixed(2) + "px";
+        iframe.style.marginRight = "-" + (scaledW / 2).toFixed(2) + "px";
+        iframe.style.marginBottom = "-" + Math.max(0, attrH - scaledH) + "px";
+
+        slotEl.style.height = Math.max(68, scaledH + 8) + "px";
+      });
+    }
+
+    function fitAllTop468Banners() {
+      top468SlotEls.forEach(fitSingle468Slot);
+      syncTop468WrapperVisibility();
+    }
+
+    function observeSlotForIframe(slotEl) {
+      if (!slotEl || slotEl.dataset.obsAttached === "1") return;
+      slotEl.dataset.obsAttached = "1";
+
+      if ("MutationObserver" in window) {
+        const mo = new MutationObserver(function() {
+          fitSingle468Slot(slotEl);
+          syncTop468WrapperVisibility();
+        });
+        mo.observe(slotEl, { childList: true, subtree: true });
+      }
+
+      let checks = 0;
+      const poll = setInterval(function() {
+        checks += 1;
+        fitSingle468Slot(slotEl);
+        syncTop468WrapperVisibility();
+        if (slotEl.querySelector("iframe") || checks >= 24) {
+          clearInterval(poll);
+        }
+      }, 250);
+    }
+
+    function loadSingle468Banner(cfg) {
+      return new Promise(function(resolve) {
+        const slotEl = document.getElementById(cfg.slotId);
+        if (!slotEl) {
+          resolve();
+          return;
+        }
+        observeSlotForIframe(slotEl);
+
+        if (slotEl.dataset.adLoaded === "1") {
+          fitSingle468Slot(slotEl);
+          resolve();
+          return;
+        }
+        slotEl.dataset.adLoaded = "1";
+
+        window.atOptions = {
+          key: cfg.key,
+          format: "iframe",
+          height: 60,
+          width: 468,
+          params: {}
+        };
+
+        const sc = document.createElement("script");
+        sc.id = cfg.scriptId;
+        sc.async = false;
+        sc.setAttribute("data-cfasync", "false");
+        sc.referrerPolicy = "strict-origin-when-cross-origin";
+        sc.src = cfg.src;
+
+        let finished = false;
+        function done() {
+          if (finished) return;
+          finished = true;
+          fitSingle468Slot(slotEl);
+          syncTop468WrapperVisibility();
+          setTimeout(function() {
+            fitSingle468Slot(slotEl);
+            syncTop468WrapperVisibility();
+            resolve();
+          }, 1200);
+        }
+
+        sc.addEventListener("load", done, { once: true });
+        sc.addEventListener("error", done, { once: true });
+        setTimeout(done, 2400);
+        slotEl.appendChild(sc);
+      });
+    }
+
+    function loadAllTop468Banners() {
+      syncTop468WrapperVisibility();
+      return TOP_468_BANNERS.reduce(function(chain, cfg) {
+        return chain.then(function() {
+          return loadSingle468Banner(cfg);
+        });
+      }, Promise.resolve());
+    }
+
+    const adSlots = [
+      document.getElementById("adSlot1"),
+      document.getElementById("adSlot2"),
+      document.getElementById("adSlot3"),
+      document.getElementById("adSlot4")
+    ].filter(Boolean);
+
+    function fitIframeToSlot(slotEl) {
+      if (!slotEl) return;
+      const iframe = slotEl.querySelector("iframe");
+      if (!iframe) return;
+
+      const slotWidth = slotEl.clientWidth;
+      const iframeWidth = parseInt(iframe.getAttribute("width"), 10) || 320;
+      const iframeHeight = parseInt(iframe.getAttribute("height"), 10) || 50;
+
+      if (slotWidth > 0 && iframeWidth > 0) {
+        const scale = slotWidth / iframeWidth;
+        iframe.style.width = iframeWidth + "px";
+        iframe.style.height = iframeHeight + "px";
+        iframe.style.transformOrigin = "top left";
+        iframe.style.transform = "scale(" + scale + ")";
+        const lockedHeight = Math.round(iframeHeight * scale);
+        slotEl.style.height = lockedHeight + "px";
+      }
+    }
+
+    function fitAllAdSlots() {
+      fitAllTop468Banners();
+      adSlots.forEach(fitIframeToSlot);
+    }
+
+    function loadSequentialSlots(index) {
+      if (index >= adSlots.length) {
+        fitAllAdSlots();
+        return;
+      }
+      const target = adSlots[index];
+      if (target.dataset.adLoaded === "1") {
+        fitIframeToSlot(target);
+        loadSequentialSlots(index + 1);
+        return;
+      }
+      target.dataset.adLoaded = "1";
+
+      window.atOptions = {
+        key: "119c8bb3217ed264a8fa223c3197bf69",
+        format: "iframe",
+        height: 50,
+        width: 320,
+        params: {}
+      };
+
+      const sc = document.createElement("script");
+      sc.async = false;
+      sc.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
+
+      let movedNext = false;
+      function nextSlot() {
+        fitIframeToSlot(target);
+        if (movedNext) return;
+        movedNext = true;
+        setTimeout(function() {
+          fitIframeToSlot(target);
+          loadSequentialSlots(index + 1);
+        }, 180);
+      }
+
+      sc.addEventListener("load", nextSlot, { once: true });
+      sc.addEventListener("error", nextSlot, { once: true });
+      target.appendChild(sc);
+      setTimeout(function() { fitIframeToSlot(target); }, 500);
+      setTimeout(nextSlot, 1400);
+    }
+
+    window.addEventListener("resize", fitAllAdSlots, { passive: true });
 
     const CYCLE_ORDER = ["sdy", "sgp", "hk"];
     const FOCUS_MARKETS = CYCLE_ORDER;
@@ -1476,13 +2217,51 @@
       renderAllCells();
     }
 
-    window.addEventListener("pageshow", syncOnReturn);
-    window.addEventListener("focus", syncOnReturn);
+    function onPageReady() {
+      loadAllTop468Banners().then(function() {
+        loadSequentialSlots(0);
+      });
+      initFirebaseBoListener();
+    }
+
+    if (document.readyState === "complete") {
+      onPageReady();
+    } else {
+      window.addEventListener("load", onPageReady, { once: true });
+    }
+
+    const fbPollTimer = setInterval(function() {
+      if (!document.hidden) fetchRestBoLinks();
+    }, 30000);
+
     document.addEventListener("visibilitychange", function() {
-      if (!document.hidden) syncOnReturn();
+      if (document.hidden) {
+        stopBoLinkCycle();
+        applyFirePlayState();
+      } else {
+        startBoLinkCycle();
+        refreshFireMarqueeState();
+        fitAllAdSlots();
+        syncOnReturn();
+      }
     });
 
+    window.addEventListener("focus", function() {
+      refreshFireMarqueeState();
+      syncOnReturn();
+    }, { passive: true });
+
+    window.addEventListener("pageshow", function() {
+      applyCurrentBoLinkToPromo();
+      startBoLinkCycle();
+      refreshFireMarqueeState();
+      fitAllAdSlots();
+      syncOnReturn();
+    }, { passive: true });
+
     window.addEventListener("pagehide", function() {
+      clearInterval(fbPollTimer);
+      stopBoLinkCycle();
       activeListeners.forEach(function(item) {
         try {
           item.ref.off("value", item.cb);
