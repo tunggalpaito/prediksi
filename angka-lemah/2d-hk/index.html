@@ -288,6 +288,8 @@ function extract4DResults(rawValue) {
   return [];
 }
 
+const trekContainer = document.getElementById("trek-container");
+
 // AMBIL DATA 7 RESULT TERAKHIR DARI live/data-hk
 const dataRef = ref(db, "live/data-hk");
 onValue(dataRef, (snapshot) => {
@@ -320,60 +322,86 @@ onValue(dataRef, (snapshot) => {
         });
 
         const last7 = entries.slice(-7);
-        const trekContainer = document.getElementById("trek-container");
-        trekContainer.innerHTML = "";
+        const fragment = document.createDocumentFragment();
 
-        last7.forEach((item, index) => {
-            const result4d = item.val;
-            if (result4d.length < 4) return;
+        last7.forEach(function(item, index) {
+          const result4d = item.val;
+          if (result4d.length < 4) return;
 
-            const digits = result4d.slice(-4).split("").map(Number);
+          const digits = result4d.slice(-4).split("").map(Number);
+          const scores = {};
+          for (let i = 0; i <= 9; i++) scores[i] = 1;
+          const as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
+          scores[Math.abs(as * 2 - ekor * 2)] += 6;
+          scores[Math.abs(kop * 2 - kepala * 2)] += 5;
+          scores[(as * ekor + kop * kepala) % 10] += 4;
+          scores[(as + kop + kepala + ekor) % 10] += 3;
 
-            let kepala = digits[2], ekor = digits[3];
-            let r1 = (kepala + 1) % 10;
-            let r2 = (ekor + 2) % 10;
-            let predDigits = [r1, r2];
+          const predDigits = Object.keys(scores)
+            .sort(function(x, y) { return scores[y] - scores[x]; })
+            .map(Number)
+            .slice(0, 2);
 
-            const globalPos = entries.length - last7.length + index;
-            const nextItem = globalPos + 1 < entries.length ? entries[globalPos + 1] : null;
-            
-            let status = "?";
-            let statusColor = "#ef4444";
+          const globalPos = entries.length - last7.length + index;
+          const nextItem = globalPos + 1 < entries.length ? entries[globalPos + 1] : null;
 
-            if (index === last7.length - 1 || !nextItem) {
-                status = "?";
-            } else {
-                const next4d = nextItem.val;
-                const nextKepala = Number(next4d[2]);
-                const nextEkor = Number(next4d[3]);
+          let status = "?";
+          let statusColor = "#ef4444";
 
-                const isMatch = predDigits.includes(nextKepala) || predDigits.includes(nextEkor);
+          if (index === last7.length - 1 || !nextItem) {
+              status = "?";
+          } else {
+              const next4d = nextItem.val;
+              const nextKepala = Number(next4d[2]);
+              const nextEkor = Number(next4d[3]);
 
-                if (!isMatch) {
-                    status = "✔"; 
-                    statusColor = "#22c55e"; 
-                } else {
-                    status = "✕"; 
-                    statusColor = "#ef4444"; 
-                }
-            }
+              const isMatch = predDigits.includes(nextKepala) || predDigits.includes(nextEkor);
 
-            let rowHtml = `<div class="trek-row"><div class="trek-balls">`;
-            
-            digits.forEach(d => {
-                rowHtml += `<div class="ball ball-blue">${d}</div>`;
-            });
+              if (!isMatch) {
+                  status = "✔"; 
+                  statusColor = "#22c55e"; 
+              } else {
+                  status = "✕"; 
+                  statusColor = "#ef4444"; 
+              }
+          }
 
-            rowHtml += `<span class="trek-colon">:</span>`;
+          const rowEl = document.createElement("div");
+          rowEl.className = "trek-row";
 
-            predDigits.forEach(d => {
-                rowHtml += `<div class="ball ball-white">${d}</div>`;
-            });
+          const ballsWrap = document.createElement("div");
+          ballsWrap.className = "trek-balls";
 
-            rowHtml += `</div><div class="trek-badge" style="color: ${statusColor};">${status}</div></div>`;
+          digits.forEach(d => {
+              const ball = document.createElement("div");
+              ball.className = "ball ball-blue";
+              ball.textContent = String(d);
+              ballsWrap.appendChild(ball);
+          });
 
-            trekContainer.insertAdjacentHTML('beforeend', rowHtml);
+          const colon = document.createElement("span");
+          colon.className = "trek-colon";
+          colon.textContent = ":";
+          ballsWrap.appendChild(colon);
+
+          predDigits.forEach(d => {
+              const ball = document.createElement("div");
+              ball.className = "ball ball-white";
+              ball.textContent = String(d);
+              ballsWrap.appendChild(ball);
+          });
+
+          const badge = document.createElement("div");
+          badge.className = "trek-badge";
+          badge.style.color = statusColor;
+          badge.textContent = status;
+
+          rowEl.appendChild(ballsWrap);
+          rowEl.appendChild(badge);
+          fragment.appendChild(rowEl);
         });
+
+        trekContainer.replaceChildren(fragment);
     } else {
         updateJudulPrediksiBesok(null);
     }
