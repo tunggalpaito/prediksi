@@ -10,10 +10,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://crypotential.com" crossorigin>
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://tunggalpaito.online" crossorigin>
+  <link rel="dns-prefetch" href="https://brijmohan.org">
 
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap");
 
     :root {
       --bg-main: #050508;
@@ -22,8 +24,8 @@
       --maroon-accent: #ff1e56;
       --maroon-crimson: #e11d48;
       --maroon-dark: #881337;
-      --maroon-border: rgba(255, 30, 86, 0.28);
-      --maroon-border-bright: rgba(255, 77, 121, 0.55);
+      --maroon-border: rgba(255, 30, 86, 0.34);
+      --maroon-border-bright: rgba(255, 77, 121, 0.58);
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
       --shadow-3d: 0 12px 28px rgba(0, 0, 0, 0.65);
@@ -56,7 +58,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 16px 10px 24px 10px;
+      padding: 0 0 24px 0;
     }
 
     body ::selection {
@@ -66,57 +68,153 @@
 
     .container {
       width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .ads-container {
+      max-width: 100%;
+      margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 16px;
-      width: 100%;
-      align-items: center;
+      align-items: stretch;
     }
 
-    .ad-box {
-      background: linear-gradient(145deg, rgba(24, 10, 16, 0.94), rgba(9, 4, 7, 0.99));
-      border: 1px solid var(--maroon-border);
-      border-radius: 14px;
-      padding: 6px;
-      min-height: 56px;
-      box-shadow: var(--shadow-3d);
+    .top-bo-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 40;
       width: 100%;
+      max-width: 100%;
+      padding: 0;
+      background: #080406;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.65);
       display: flex;
-      justify-content: center;
+      align-items: stretch;
+      justify-content: stretch;
+      contain: layout style;
+    }
+
+    .bo-banner-wrap {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    .content-layer {
+      width: 100%;
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background: linear-gradient(155deg, rgba(24, 10, 16, 0.96), rgba(9, 4, 7, 0.99));
+      border-top: none;
+      border-left: 1px solid var(--maroon-border);
+      border-right: 1px solid var(--maroon-border);
+      border-bottom: none;
+      border-radius: 0;
+      padding: 12px 12px 22px 12px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Pembungkus 1 Banner Iklan 468x60 + 3 Banner Gambar BO Tetap */
+    #ad-slots-wrapper.bento-card {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(20, 12, 17, 0.98) 0%, rgba(10, 7, 10, 0.99) 100%);
+      border: 1px solid rgba(251, 113, 133, 0.25);
+      border-radius: 24px;
+      padding: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      gap: 8px;
       overflow: hidden;
     }
 
+    .ad-slot-box-468 {
+      width: 100%;
+      max-width: 476px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: #070407;
+      border: 1px solid rgba(251, 113, 133, 0.16);
+      padding: 4px;
+      position: relative;
+      contain: layout style;
+    }
+
+    .ad-slot-box-468 iframe {
+      display: block;
+      background: transparent !important;
+      border: 0 !important;
+    }
+
+    .bo-img-banner-link {
+      width: 100%;
+      max-width: 476px;
+      height: 68px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: block;
+      background-color: #090407;
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      position: relative;
+      text-decoration: none;
+    }
+
+    .bo-img-banner-link:hover {
+      border-color: rgba(255, 130, 160, 0.85);
+    }
+
+    .bo-img-banner-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ads-container {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+      width: 100%;
+    }
+
+    .ad-plain-slot {
+      width: 100%;
+      height: 50px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ad-plain-slot iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 320px;
+      height: 50px;
+      border: 0;
+      display: block;
+    }
+
     .guide-card {
-      background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
-      border: 1px solid var(--maroon-border);
-      border-radius: 20px;
-      padding: 20px 16px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-3d);
+      background: rgba(13, 6, 10, 0.72);
+      border: 1px solid rgba(255, 30, 86, 0.2);
+      border-radius: 16px;
+      padding: 18px 14px;
+      margin-bottom: 14px;
       position: relative;
       overflow: hidden;
     }
 
-    .guide-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #ff1e56, #fda4af, transparent);
-    }
-
     .guide-card h1 {
       font-family: "Orbitron", sans-serif;
-      font-size: 17px;
+      font-size: 16.5px;
       font-weight: 900;
       text-align: center;
       margin-bottom: 14px;
@@ -129,22 +227,22 @@
 
     .guide-card img {
       width: 100%;
+      max-width: 540px;
       height: auto;
       display: block;
+      margin: 0 auto;
       border-radius: 12px;
       border: 1px solid rgba(255, 30, 86, 0.22);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
     }
 
     .menu-card {
-      background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
-      border: 1px solid var(--maroon-border);
-      border-radius: 20px;
-      padding: 20px 16px;
-      box-shadow: var(--shadow-3d);
+      background: transparent;
+      border: none;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn-rumus {
@@ -152,12 +250,12 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      min-height: 48px;
+      min-height: 50px;
       padding: 13px 16px;
       background: linear-gradient(135deg, #ff1e56 0%, #9f1239 100%);
       border: 1px solid rgba(255, 130, 160, 0.45);
       color: #ffffff;
-      border-radius: 13px;
+      border-radius: 12px;
       font-family: "Orbitron", sans-serif;
       font-size: 13px;
       font-weight: 800;
@@ -191,9 +289,171 @@
       color: #fda4af;
     }
 
+    .fire-cta-box {
+      width: 100%;
+      max-width: 100%;
+      height: 54px;
+      min-height: 54px;
+      max-height: 54px;
+      border-radius: 0;
+      text-decoration: none;
+      background: linear-gradient(90deg, #070406 0%, #16060b 50%, #070406 100%);
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 10px;
+      overflow: hidden;
+      position: relative;
+      transition: filter 0.15s ease;
+    }
+
+    .fire-cta-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(8, 5, 7, 0.92) 0%,
+        rgba(225, 29, 72, 0.24) 24%,
+        rgba(255, 255, 255, 0.34) 50%,
+        rgba(225, 29, 72, 0.24) 76%,
+        rgba(8, 5, 7, 0.92) 100%
+      );
+      background-size: 220% 100%;
+      will-change: background-position, opacity;
+      animation: slowLightWave 7.5s ease-in-out infinite;
+      animation-play-state: var(--fire-play-state, running);
+    }
+
+    .fire-cta-box:hover {
+      filter: brightness(1.06);
+    }
+
+    .fire-cta-track-wrap {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fire-sentence {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: #bef264;
+      text-shadow:
+        0 0 8px rgba(190, 242, 100, 0.68),
+        0 0 16px rgba(163, 230, 53, 0.52),
+        0 2px 4px rgba(0, 0, 0, 0.98);
+      transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: expandFromCenterSlow 16s ease-out infinite;
+      animation-play-state: var(--fire-play-state, running);
+    }
+
+    @media (min-width: 640px) {
+      .fire-cta-box {
+        height: 60px;
+        min-height: 60px;
+        max-height: 60px;
+      }
+
+      .fire-sentence {
+        font-size: 1.28rem;
+      }
+    }
+
+    .fire-cta-click-last {
+      color: #ffffff;
+      font-size: 1.16rem;
+      letter-spacing: 0.07em;
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.95),
+        0 0 18px rgba(225, 29, 72, 0.95),
+        0 2px 4px rgba(0, 0, 0, 0.98);
+    }
+
+    @media (min-width: 640px) {
+      .fire-cta-click-last {
+        font-size: 1.38rem;
+      }
+    }
+
+    .fire-s1 { animation-delay: 0s; }
+    .fire-s2 { animation-delay: 4s; }
+    .fire-s3 { animation-delay: 8s; }
+    .fire-s4 { animation-delay: 12s; }
+
+    .fire-cta-box:hover .fire-sentence,
+    .fire-cta-box:active .fire-sentence {
+      animation-play-state: paused;
+    }
+
+    @keyframes expandFromCenterSlow {
+      0% {
+        transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+        opacity: 0;
+      }
+      5% {
+        transform: translate3d(-50%, -50%, 0) scaleX(0.75) scaleY(0.95);
+        opacity: 0.96;
+      }
+      11% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.05) scaleY(1.02);
+        opacity: 1;
+      }
+      20% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.16) scaleY(1.04);
+        opacity: 0.85;
+      }
+      25% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+        opacity: 0;
+      }
+      100% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slowLightWave {
+      0% {
+        background-position: 100% 0;
+        opacity: 0.55;
+      }
+      50% {
+        background-position: 0% 0;
+        opacity: 0.9;
+      }
+      100% {
+        background-position: 100% 0;
+        opacity: 0.55;
+      }
+    }
+
     footer {
       text-align: center;
-      padding: 18px 8px 8px 8px;
+      padding: 16px 8px 8px 8px;
       font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
@@ -207,23 +467,54 @@
 </head>
 <body>
   <div class="container">
-    <div class="ads-container" id="adsContainer">
-      <div class="ad-box" id="adSlot1"></div>
-      <div class="ad-box" id="adSlot2"></div>
-      <div class="ad-box" id="adSlot3"></div>
-      <div class="ad-box" id="adSlot4"></div>
+    <header class="top-bo-sticky" id="fire-promo-box" aria-label="Rekomendasi BO">
+      <div class="bo-banner-wrap">
+        <a id="fire-promo-link" href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="fire-cta-box" aria-label="Klik di sini untuk daftar">
+          <div class="fire-cta-track-wrap">
+            <span class="fire-sentence fire-s1">TEMPAT BERMAIN BBFS 8D</span>
+            <span class="fire-sentence fire-s3">TEMPAT HANCURKAN BANDOT</span>
+            <span class="fire-sentence fire-s2">TERSEDIA PASARAN POOLS &amp; LOTTO</span>
+            <span class="fire-sentence fire-s4 fire-cta-click-last">KLIK DISINI</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <div class="content-layer">
+      <div id="ad-slots-wrapper" class="bento-card rounded-3xl p-3 flex flex-col items-center gap-2 overflow-hidden mb-3.5" aria-label="Banner Iklan & Gambar BO">
+        <div id="slot-banner-468-1" class="ad-slot-box-468"></div>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="1" aria-label="Banner Gambar BO 1">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZUu6Bb9SHtQhksYp0tIcxK4BXlRJ53-PQX8yPbES3tNtWRH30bvo4j7JDONGLZqrQHVpyldNMmWSDBtHLHu_R35BZtvuqb3lYc72WOf1_oCbbHNZPOlyhZZe6JhpazPKzGbZ2AecWoZI7HY3DbkffQ2LtRcG65keeXg6SBEPDJWBOTSTI9Y87OsaHYu6H/s728/1787315798141.webp" alt="Banner BO Rekomendasi 1" class="bo-img-banner-photo" loading="eager">
+        </a>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="2" aria-label="Banner Gambar BO 2">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFKTQ61YTpSNGbt1lvGmdny2qGburdYSZX-Qywhyphenhyphenmroh-3jcerAS9TUegu2x3BucsBpVVB7BZQaB78mlqTh9HOQVnFoDQXVAcEqAKeZ03lkvTMvfjJY8C1UGcEy0yAMxdO_3ycnwkPX77QfqSUbKy0VKmzLWgcR4FeU5SSTog7KkCFGwbnWsEzFyU2Ag-s/s728/GacorGas.gif" alt="Banner BO Rekomendasi 2" class="bo-img-banner-photo" loading="eager">
+        </a>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="3" aria-label="Banner Gambar BO 3">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4wHqPjBj8M_uCyHP5v0_KnqYElaEeuoMXF554e73kENux60h3hoZLQ7JEIfgkFm_JQeFp20uX7kUbUDpjOQsF9FkHyI3pYaAZV4Rdn2gaX1FwqwN1Le6Kbz0f__dpJGAq4GsBxpu2yj0IvbS9kbRijsHoqU6QzAl8n7ZfxWUaKhSlisYRjXnhR7h70xM/s320/login.gif" alt="Banner BO Rekomendasi 3" class="bo-img-banner-photo" loading="eager">
+        </a>
+      </div>
+
+      <section class="guide-card">
+        <h1>CONTOH APK</h1>
+        <img src="https://tunggalpaito.online/rumus2.png" alt="Panduan Rumus Togel">
+      </section>
+
+      <nav class="menu-card" aria-label="Pilihan Rumus APK">
+        <a href="https://tunggalpaito.online/versus2dhk" class="btn-rumus hk">APK HKG</a>
+        <a href="https://tunggalpaito.online/linesgp" class="btn-rumus sgp">APK SGP</a>
+        <a href="https://tunggalpaito.online/versussdypools" class="btn-rumus sdy">APK SDY</a>
+      </nav>
+
+      <div class="ads-container" id="adsContainer">
+        <div class="ad-plain-slot" id="adSlot1"></div>
+        <div class="ad-plain-slot" id="adSlot2"></div>
+        <div class="ad-plain-slot" id="adSlot3"></div>
+        <div class="ad-plain-slot" id="adSlot4"></div>
+      </div>
     </div>
-
-    <section class="guide-card">
-      <h1>CONTOH APK</h1>
-      <img src="https://tunggalpaito.online/rumus2.png" alt="Panduan Rumus Togel">
-    </section>
-
-    <nav class="menu-card" aria-label="Pilihan Rumus APK">
-      <a href="https://tunggalpaito.online/versus2dhk" class="btn-rumus hk">APK HKG</a>
-      <a href="https://tunggalpaito.online/linesgp" class="btn-rumus sgp">APK SGP</a>
-      <a href="https://tunggalpaito.online/versussdypools" class="btn-rumus sdy">APK SDY</a>
-    </nav>
   </div>
 
   <footer>
@@ -239,42 +530,561 @@
       yearEl.textContent = String(new Date().getFullYear());
     }
 
-    const slotIds = ["adSlot1", "adSlot2", "adSlot3", "adSlot4"];
-    const adConfig = {
-      key: "119c8bb3217ed264a8fa223c3197bf69",
-      format: "iframe",
-      height: 50,
-      width: 320,
-      params: {}
+    const FIREBASE_DB_CONFIG = {
+      databaseURL: window.TP_FIREBASE_DB_URL || "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
     };
+    const FIREBASE_BO_PATH = "live/bo-rekomendasi";
+    const DEFAULT_BO_LINK = "https://indo200-live.com/register?r=2oajlu";
+    const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
+    const promoBoxEl = document.getElementById("fire-promo-box");
+    const promoAnchorEl = document.getElementById("fire-promo-link");
+    const boImgBannerEls = Array.from(document.querySelectorAll("[data-bo-img-banner]"));
+
+    let boLinksList = [DEFAULT_BO_LINK];
+    let currentActiveBoLink = DEFAULT_BO_LINK;
+    let isFireBoxInViewport = true;
+
+    function isSafeHttpUrl(rawUrl) {
+      if (!rawUrl || typeof rawUrl !== "string") return false;
+      try {
+        const parsed = new URL(rawUrl.trim(), window.location.href);
+        return parsed.protocol === "https:" || parsed.protocol === "http:";
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function readClickedBoLinks() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_CLICKED_BO_KEY);
+        const parsed = JSON.parse(raw || "[]");
+        if (!Array.isArray(parsed)) return [];
+        return parsed.filter(function(u) { return isSafeHttpUrl(u); }).map(function(u) { return u.trim(); });
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function saveClickedBoLink(url) {
+      if (!isSafeHttpUrl(url)) return;
+      const clean = url.trim();
+      const list = readClickedBoLinks();
+      if (!list.includes(clean)) {
+        list.push(clean);
+        try {
+          window.localStorage.setItem(STORAGE_CLICKED_BO_KEY, JSON.stringify(list));
+        } catch (_) {}
+      }
+    }
+
+    function extractUrlsFromFirebaseValue(val) {
+      const found = [];
+      const seen = new Set();
+
+      function pushUrl(candidate) {
+        if (typeof candidate === "string") {
+          const cleaned = candidate.trim();
+          if (isSafeHttpUrl(cleaned) && !seen.has(cleaned)) {
+            seen.add(cleaned);
+            found.push(cleaned);
+          }
+        } else if (candidate && typeof candidate === "object") {
+          if (typeof candidate.url === "string") pushUrl(candidate.url);
+          else if (typeof candidate.link === "string") pushUrl(candidate.link);
+          else if (typeof candidate.href === "string") pushUrl(candidate.href);
+        }
+      }
+
+      if (Array.isArray(val)) {
+        val.forEach(pushUrl);
+      } else if (val && typeof val === "object") {
+        if (Array.isArray(val.links)) val.links.forEach(pushUrl);
+        if (Array.isArray(val.list)) val.list.forEach(pushUrl);
+        if (Array.isArray(val.items)) val.items.forEach(pushUrl);
+        Object.keys(val).forEach(function(k) {
+          if (k !== "links" && k !== "list" && k !== "items") {
+            pushUrl(val[k]);
+          }
+        });
+      } else if (typeof val === "string") {
+        val.split(/[\n,]+/).forEach(pushUrl);
+      }
+
+      return found;
+    }
+
+    function pickNextUnclickedBoLink(excludeCurrent) {
+      if (!Array.isArray(boLinksList) || !boLinksList.length) return DEFAULT_BO_LINK;
+      if (boLinksList.length === 1) {
+        return isSafeHttpUrl(boLinksList[0]) ? boLinksList[0].trim() : DEFAULT_BO_LINK;
+      }
+
+      const clickedSet = new Set(readClickedBoLinks());
+      let unclicked = boLinksList.filter(function(u) {
+        return !clickedSet.has(u.trim());
+      });
+
+      if (!unclicked.length) {
+        try {
+          window.localStorage.removeItem(STORAGE_CLICKED_BO_KEY);
+        } catch (_) {}
+        unclicked = boLinksList.slice();
+      }
+
+      let candidates = unclicked;
+      if (excludeCurrent && unclicked.length > 1) {
+        const withoutCurrent = unclicked.filter(function(u) {
+          return u.trim() !== excludeCurrent.trim();
+        });
+        if (withoutCurrent.length) candidates = withoutCurrent;
+      }
+
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+      return isSafeHttpUrl(chosen) ? chosen.trim() : DEFAULT_BO_LINK;
+    }
+
+    function getActiveBoLink() {
+      if (!isSafeHttpUrl(currentActiveBoLink) || !boLinksList.includes(currentActiveBoLink.trim())) {
+        currentActiveBoLink = pickNextUnclickedBoLink("");
+      }
+      return currentActiveBoLink;
+    }
+
+    function syncBoImageBanners() {
+      const primaryLink = getActiveBoLink();
+      boImgBannerEls.forEach(function(bannerEl, idx) {
+        const linkForSlot = boLinksList.length > 1
+          ? boLinksList[idx % boLinksList.length]
+          : primaryLink;
+        const safeHref = isSafeHttpUrl(linkForSlot) ? linkForSlot.trim() : DEFAULT_BO_LINK;
+        bannerEl.setAttribute("href", safeHref);
+      });
+    }
+
+    function applyCurrentBoLinkToPromo() {
+      if (promoAnchorEl) {
+        promoAnchorEl.setAttribute("href", getActiveBoLink());
+      }
+      syncBoImageBanners();
+    }
+
+    function rotateBoLink() {
+      currentActiveBoLink = pickNextUnclickedBoLink(currentActiveBoLink);
+      applyCurrentBoLinkToPromo();
+    }
+
+    function updateBoLinksFromData(rawData) {
+      const extracted = extractUrlsFromFirebaseValue(rawData);
+      boLinksList = extracted.length ? extracted : [DEFAULT_BO_LINK];
+      currentActiveBoLink = pickNextUnclickedBoLink("");
+      applyCurrentBoLinkToPromo();
+    }
+
+    function applyFirePlayState() {
+      if (!promoBoxEl) return;
+      const sentences = promoBoxEl.querySelectorAll(".fire-sentence");
+      const nextState = (!document.hidden && isFireBoxInViewport) ? "running" : "paused";
+      promoBoxEl.style.setProperty("--fire-play-state", nextState);
+      sentences.forEach(function(item) {
+        item.style.animationPlayState = nextState;
+      });
+    }
+
+    function refreshFireMarqueeState() {
+      applyFirePlayState();
+      if (!document.hidden && isFireBoxInViewport && promoBoxEl) {
+        const sentences = promoBoxEl.querySelectorAll(".fire-sentence");
+        sentences.forEach(function(item) {
+          item.style.animation = "none";
+          void item.offsetWidth;
+          item.style.animation = "";
+          item.style.animationPlayState = "running";
+        });
+      }
+    }
+
+    if (promoBoxEl && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          isFireBoxInViewport = Boolean(entry.isIntersecting);
+          applyFirePlayState();
+        });
+      }, { root: null, rootMargin: "20px 0px", threshold: 0.01 });
+      io.observe(promoBoxEl);
+    }
+
+    if (promoAnchorEl) {
+      promoAnchorEl.addEventListener("pointerdown", function() {
+        applyCurrentBoLinkToPromo();
+      }, { passive: true });
+      promoAnchorEl.addEventListener("click", function() {
+        const clickedHref = promoAnchorEl.getAttribute("href") || getActiveBoLink();
+        saveClickedBoLink(clickedHref);
+        currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+        applyCurrentBoLinkToPromo();
+      });
+    }
+
+    boImgBannerEls.forEach(function(bannerEl) {
+      bannerEl.addEventListener("click", function() {
+        const clickedHref = bannerEl.getAttribute("href") || getActiveBoLink();
+        saveClickedBoLink(clickedHref);
+        currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+        applyCurrentBoLinkToPromo();
+      });
+    });
+
+    currentActiveBoLink = pickNextUnclickedBoLink("");
+    applyCurrentBoLinkToPromo();
+
+    let boCycleTimer = null;
+    function startBoLinkCycle() {
+      if (boCycleTimer || document.hidden) return;
+      boCycleTimer = setInterval(function() {
+        if (!document.hidden) rotateBoLink();
+      }, 4000);
+    }
+    function stopBoLinkCycle() {
+      if (boCycleTimer) {
+        clearInterval(boCycleTimer);
+        boCycleTimer = null;
+      }
+    }
+
+    const dbUrl = String(FIREBASE_DB_CONFIG.databaseURL || "").trim().replace(/\/+$/, "");
+    const restUrl = (dbUrl && isSafeHttpUrl(dbUrl)) ? (dbUrl + "/" + FIREBASE_BO_PATH + ".json") : "";
+
+    function fetchRestBoLinks() {
+      if (!restUrl || typeof fetch !== "function") return;
+      fetch(restUrl + "?t=" + Date.now(), { cache: "no-store" })
+        .then(function(res) { return res.ok ? res.json() : null; })
+        .then(function(data) {
+          if (data !== null) updateBoLinksFromData(data);
+        })
+        .catch(function() {});
+    }
+
+    function attachSdkRealtime(dbApp) {
+      try {
+        if (dbApp && typeof dbApp.ref === "function") {
+          dbApp.ref(FIREBASE_BO_PATH).on("value", function(snap) {
+            updateBoLinksFromData(snap && typeof snap.val === "function" ? snap.val() : null);
+          });
+          return true;
+        }
+      } catch (_) {}
+      return false;
+    }
+
+    function initFirebaseBoListener() {
+      if (!restUrl) return;
+      if (window.firebase && typeof window.firebase.database === "function") {
+        try {
+          const app = window.firebase.apps && window.firebase.apps.length
+            ? window.firebase.app()
+            : window.firebase.initializeApp({ databaseURL: dbUrl });
+          if (attachSdkRealtime(window.firebase.database(app))) return;
+        } catch (_) {}
+      }
+
+      fetchRestBoLinks();
+
+      if (document.getElementById("tp-fb-app-sdk") || document.getElementById("tp-fb-db-sdk")) return;
+      const appScript = document.createElement("script");
+      appScript.id = "tp-fb-app-sdk";
+      appScript.async = true;
+      appScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";
+      appScript.onerror = function() { fetchRestBoLinks(); };
+      appScript.onload = function() {
+        const dbScript = document.createElement("script");
+        dbScript.id = "tp-fb-db-sdk";
+        dbScript.async = true;
+        dbScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js";
+        dbScript.onerror = function() { fetchRestBoLinks(); };
+        dbScript.onload = function() {
+          try {
+            const app = window.firebase.apps && window.firebase.apps.length
+              ? window.firebase.app()
+              : window.firebase.initializeApp({ databaseURL: dbUrl });
+            attachSdkRealtime(window.firebase.database(app));
+          } catch (_) {
+            fetchRestBoLinks();
+          }
+        };
+        document.head.appendChild(dbScript);
+      };
+      document.head.appendChild(appScript);
+    }
+
+    startBoLinkCycle();
+
+    const TOP_468_BANNERS = [
+      {
+        slotId: "slot-banner-468-1",
+        scriptId: "ad-script-468-1",
+        key: "9a986a45c62dcea8d8216b9210f159cb",
+        src: "https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"
+      }
+    ];
+
+    const top468WrapperEl = document.getElementById("ad-slots-wrapper");
+    const top468SlotEls = TOP_468_BANNERS.map(function(cfg) {
+      return document.getElementById(cfg.slotId);
+    }).filter(Boolean);
+
+    function syncTop468WrapperVisibility() {
+      if (!top468WrapperEl) return;
+      top468WrapperEl.style.display = "flex";
+    }
+
+    function fitSingle468Slot(slotEl) {
+      if (!slotEl) return;
+      slotEl.style.display = "flex";
+      slotEl.style.visibility = "visible";
+      slotEl.style.opacity = "1";
+
+      const availW = Math.max(0, slotEl.clientWidth - 8);
+      const iframes = slotEl.querySelectorAll("iframe");
+      if (!iframes.length) {
+        slotEl.style.height = "68px";
+        return;
+      }
+
+      iframes.forEach(function(iframe) {
+        const attrW = parseFloat(iframe.getAttribute("width") || "468") || 468;
+        const attrH = parseFloat(iframe.getAttribute("height") || "60") || 60;
+        const ratio = (availW > 0 && attrW > availW) ? (availW / attrW) : 1;
+        const scaledW = attrW * ratio;
+        const scaledH = Math.round(attrH * ratio);
+
+        iframe.style.position = "relative";
+        iframe.style.left = "50%";
+        iframe.style.top = "0";
+        iframe.style.width = attrW + "px";
+        iframe.style.height = attrH + "px";
+        iframe.style.maxWidth = "none";
+        iframe.style.maxHeight = "none";
+        iframe.style.margin = "0";
+        iframe.style.background = "transparent";
+        iframe.style.transformOrigin = "top center";
+        iframe.style.transform = "translate3d(-50%, 0, 0) scale(" + ratio.toFixed(4) + ")";
+        iframe.style.marginLeft = "-" + (scaledW / 2).toFixed(2) + "px";
+        iframe.style.marginRight = "-" + (scaledW / 2).toFixed(2) + "px";
+        iframe.style.marginBottom = "-" + Math.max(0, attrH - scaledH) + "px";
+
+        slotEl.style.height = Math.max(68, scaledH + 8) + "px";
+      });
+    }
+
+    function fitAllTop468Banners() {
+      top468SlotEls.forEach(fitSingle468Slot);
+      syncTop468WrapperVisibility();
+    }
+
+    function observeSlotForIframe(slotEl) {
+      if (!slotEl || slotEl.dataset.obsAttached === "1") return;
+      slotEl.dataset.obsAttached = "1";
+
+      if ("MutationObserver" in window) {
+        const mo = new MutationObserver(function() {
+          fitSingle468Slot(slotEl);
+          syncTop468WrapperVisibility();
+        });
+        mo.observe(slotEl, { childList: true, subtree: true });
+      }
+
+      let checks = 0;
+      const poll = setInterval(function() {
+        checks += 1;
+        fitSingle468Slot(slotEl);
+        syncTop468WrapperVisibility();
+        if (slotEl.querySelector("iframe") || checks >= 24) {
+          clearInterval(poll);
+        }
+      }, 250);
+    }
+
+    function loadSingle468Banner(cfg) {
+      return new Promise(function(resolve) {
+        const slotEl = document.getElementById(cfg.slotId);
+        if (!slotEl) {
+          resolve();
+          return;
+        }
+        observeSlotForIframe(slotEl);
+
+        if (slotEl.dataset.adLoaded === "1") {
+          fitSingle468Slot(slotEl);
+          resolve();
+          return;
+        }
+        slotEl.dataset.adLoaded = "1";
+
+        window.atOptions = {
+          key: cfg.key,
+          format: "iframe",
+          height: 60,
+          width: 468,
+          params: {}
+        };
+
+        const sc = document.createElement("script");
+        sc.id = cfg.scriptId;
+        sc.async = false;
+        sc.setAttribute("data-cfasync", "false");
+        sc.referrerPolicy = "strict-origin-when-cross-origin";
+        sc.src = cfg.src;
+
+        let finished = false;
+        function done() {
+          if (finished) return;
+          finished = true;
+          fitSingle468Slot(slotEl);
+          syncTop468WrapperVisibility();
+          setTimeout(function() {
+            fitSingle468Slot(slotEl);
+            syncTop468WrapperVisibility();
+            resolve();
+          }, 1200);
+        }
+
+        sc.addEventListener("load", done, { once: true });
+        sc.addEventListener("error", done, { once: true });
+        setTimeout(done, 2400);
+        slotEl.appendChild(sc);
+      });
+    }
+
+    function loadAllTop468Banners() {
+      syncTop468WrapperVisibility();
+      return TOP_468_BANNERS.reduce(function(chain, cfg) {
+        return chain.then(function() {
+          return loadSingle468Banner(cfg);
+        });
+      }, Promise.resolve());
+    }
+
+    const adSlots = [
+      document.getElementById("adSlot1"),
+      document.getElementById("adSlot2"),
+      document.getElementById("adSlot3"),
+      document.getElementById("adSlot4")
+    ].filter(Boolean);
+
+    function fitIframeToSlot(slotEl) {
+      if (!slotEl) return;
+      const iframe = slotEl.querySelector("iframe");
+      if (!iframe) return;
+
+      const slotWidth = slotEl.clientWidth;
+      const iframeWidth = parseInt(iframe.getAttribute("width"), 10) || 320;
+      const iframeHeight = parseInt(iframe.getAttribute("height"), 10) || 50;
+
+      if (slotWidth > 0 && iframeWidth > 0) {
+        const scale = slotWidth / iframeWidth;
+        iframe.style.width = iframeWidth + "px";
+        iframe.style.height = iframeHeight + "px";
+        iframe.style.transformOrigin = "top left";
+        iframe.style.transform = "scale(" + scale + ")";
+        const lockedHeight = Math.round(iframeHeight * scale);
+        slotEl.style.height = lockedHeight + "px";
+      }
+    }
+
+    function fitAllAdSlots() {
+      fitAllTop468Banners();
+      adSlots.forEach(fitIframeToSlot);
+    }
 
     function loadBannersSequentially(index) {
-      if (index >= slotIds.length) return;
-      const box = document.getElementById(slotIds[index]);
+      if (index >= adSlots.length) {
+        fitAllAdSlots();
+        return;
+      }
+      const box = adSlots[index];
       if (!box) {
         loadBannersSequentially(index + 1);
         return;
       }
+      if (box.dataset.adLoaded === "1") {
+        fitIframeToSlot(box);
+        loadBannersSequentially(index + 1);
+        return;
+      }
+      box.dataset.adLoaded = "1";
 
-      window.atOptions = adConfig;
+      window.atOptions = {
+        key: "119c8bb3217ed264a8fa223c3197bf69",
+        format: "iframe",
+        height: 50,
+        width: 320,
+        params: {}
+      };
+
       const scriptEl = document.createElement("script");
       scriptEl.async = false;
       scriptEl.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
-      scriptEl.addEventListener("load", function() {
-        setTimeout(function() { loadBannersSequentially(index + 1); }, 180);
-      }, { once: true });
-      scriptEl.addEventListener("error", function() {
-        setTimeout(function() { loadBannersSequentially(index + 1); }, 180);
-      }, { once: true });
+
+      let movedNext = false;
+      function nextSlot() {
+        fitIframeToSlot(box);
+        if (movedNext) return;
+        movedNext = true;
+        setTimeout(function() {
+          fitIframeToSlot(box);
+          loadBannersSequentially(index + 1);
+        }, 180);
+      }
+
+      scriptEl.addEventListener("load", nextSlot, { once: true });
+      scriptEl.addEventListener("error", nextSlot, { once: true });
       box.appendChild(scriptEl);
-      setTimeout(function() { loadBannersSequentially(index + 1); }, 1400);
+      setTimeout(function() { fitIframeToSlot(box); }, 500);
+      setTimeout(nextSlot, 1400);
+    }
+
+    window.addEventListener("resize", fitAllAdSlots, { passive: true });
+
+    function onPageReady() {
+      loadAllTop468Banners().then(function() {
+        loadBannersSequentially(0);
+      });
+      initFirebaseBoListener();
     }
 
     if (document.readyState === "complete") {
-      loadBannersSequentially(0);
+      onPageReady();
     } else {
-      window.addEventListener("load", function() { loadBannersSequentially(0); }, { once: true });
+      window.addEventListener("load", onPageReady, { once: true });
     }
+
+    const fbPollTimer = setInterval(function() {
+      if (!document.hidden) fetchRestBoLinks();
+    }, 30000);
+
+    document.addEventListener("visibilitychange", function() {
+      if (document.hidden) {
+        stopBoLinkCycle();
+        applyFirePlayState();
+      } else {
+        startBoLinkCycle();
+        refreshFireMarqueeState();
+        fitAllAdSlots();
+      }
+    });
+
+    window.addEventListener("focus", refreshFireMarqueeState, { passive: true });
+    window.addEventListener("pageshow", function() {
+      applyCurrentBoLinkToPromo();
+      startBoLinkCycle();
+      refreshFireMarqueeState();
+      fitAllAdSlots();
+    }, { passive: true });
+
+    window.addEventListener("pagehide", function() {
+      clearInterval(fbPollTimer);
+      stopBoLinkCycle();
+    }, { passive: true });
   })();
   </script>
 </body>
