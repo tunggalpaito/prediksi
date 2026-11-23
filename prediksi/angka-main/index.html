@@ -15,10 +15,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://crypotential.com" crossorigin>
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://tunggalpaito.online" crossorigin>
+  <link rel="dns-prefetch" href="https://brijmohan.org">
 
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Orbitron:wght@700;800;900&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Orbitron:wght@700;800;900&display=swap");
 
     :root {
       --bg-main: #050508;
@@ -27,8 +29,8 @@
       --maroon-accent: #ff1e56;
       --maroon-crimson: #e11d48;
       --maroon-dark: #881337;
-      --maroon-border: rgba(255, 30, 86, 0.28);
-      --maroon-border-bright: rgba(255, 77, 121, 0.55);
+      --maroon-border: rgba(255, 30, 86, 0.34);
+      --maroon-border-bright: rgba(255, 77, 121, 0.58);
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
     }
@@ -58,8 +60,8 @@
       color: var(--text-main);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 12px 10px 96px 10px;
+      align-items: stretch;
+      padding: 0 0 96px 0;
       min-height: 100dvh;
     }
 
@@ -70,10 +72,112 @@
 
     .page-shell {
       width: 100%;
-      max-width: 480px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .top-bo-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      background: #080406;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      contain: layout style;
+    }
+
+    .bo-banner-wrap {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    .content-layer {
+      width: 100%;
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background: linear-gradient(155deg, rgba(24, 10, 16, 0.96), rgba(9, 4, 7, 0.99));
+      border-top: none;
+      border-left: 1px solid var(--maroon-border);
+      border-right: 1px solid var(--maroon-border);
+      border-bottom: none;
+      border-radius: 0;
+      padding: 12px 12px 22px 12px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Pembungkus 1 Banner Iklan 468x60 + 3 Banner Gambar BO Tetap */
+    #ad-slots-wrapper.bento-card {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(20, 12, 17, 0.98) 0%, rgba(10, 7, 10, 0.99) 100%);
+      border: 1px solid rgba(251, 113, 133, 0.25);
+      border-radius: 24px;
+      padding: 10px;
+      margin-bottom: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .ad-slot-box-468 {
+      width: 100%;
+      max-width: 476px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: #070407;
+      border: 1px solid rgba(251, 113, 133, 0.16);
+      padding: 4px;
+      position: relative;
+      contain: layout style;
+    }
+
+    .ad-slot-box-468 iframe {
+      display: block;
+      background: transparent !important;
+      border: 0 !important;
+    }
+
+    .bo-img-banner-link {
+      width: 100%;
+      max-width: 476px;
+      height: 68px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: block;
+      background-color: #090407;
+      border: 1px solid rgba(255, 77, 121, 0.45);
+      position: relative;
+      text-decoration: none;
+    }
+
+    .bo-img-banner-link:hover {
+      border-color: rgba(255, 130, 160, 0.85);
+    }
+
+    .bo-img-banner-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .btn-back-main {
@@ -82,74 +186,71 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 44px;
-      background: linear-gradient(145deg, rgba(28, 11, 18, 0.92), rgba(12, 6, 9, 0.96));
+      min-height: 46px;
+      background: rgba(12, 5, 9, 0.78);
       color: #fda4af;
       text-decoration: none;
       font-weight: 700;
       font-size: 13px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid var(--maroon-border);
+      padding: 12px 4px;
+      border-top: 1px solid rgba(255, 30, 86, 0.2);
+      border-bottom: 1px solid rgba(255, 30, 86, 0.2);
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+      margin-top: 2px;
       margin-bottom: 14px;
       transition: all 0.2s ease;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
     }
 
     .btn-back-main:hover {
-      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      background: rgba(34, 12, 22, 0.9);
       color: #ffffff;
-      border-color: rgba(255, 130, 160, 0.5);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(255, 30, 86, 0.35);
+      border-top-color: rgba(255, 77, 121, 0.45);
+      border-bottom-color: rgba(255, 77, 121, 0.45);
     }
 
     .ads-container {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
-    .ad-box {
+    .ad-plain-slot {
       width: 100%;
-      max-width: 340px;
-      height: 56px;
-      background-color: rgba(12, 6, 9, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 50px;
       overflow: hidden;
-      border-radius: 12px;
-      border: 1px solid var(--maroon-border);
-      padding: 3px;
+      position: relative;
     }
 
-    .ad-inner {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+    .ad-plain-slot iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 320px;
+      height: 50px;
+      border: 0;
+      display: block;
     }
 
     .visitor-card {
       width: 100%;
-      background: linear-gradient(145deg, rgba(24, 10, 16, 0.94), rgba(10, 5, 8, 0.98));
-      border: 1px solid var(--maroon-border);
-      border-radius: 16px;
-      padding: 12px 16px;
+      background: rgba(12, 5, 9, 0.78);
+      border-top: 1px solid rgba(255, 30, 86, 0.2);
+      border-bottom: 1px solid rgba(255, 30, 86, 0.2);
+      border-left: none;
+      border-right: none;
+      padding: 12px 4px;
       margin-bottom: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
     .visitor-card .visitor-info {
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 700;
       color: #d1d5db;
       display: flex;
@@ -163,44 +264,24 @@
       background-color: #fb7185;
       border-radius: 50%;
       box-shadow: 0 0 12px #ff1e56;
-      animation: blink 1.5s infinite;
     }
 
     .visitor-card .visitor-count {
       font-family: "Orbitron", sans-serif;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 800;
       color: #ff4d79;
       letter-spacing: 0.5px;
     }
 
-    @keyframes blink {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.85); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
     .sawer-card {
       width: 100%;
-      background: linear-gradient(145deg, rgba(29, 11, 19, 0.95), rgba(9, 4, 7, 0.99));
-      border: 1px solid var(--maroon-border);
-      border-radius: 18px;
+      background: rgba(13, 6, 10, 0.72);
+      border: 1px solid rgba(255, 30, 86, 0.2);
+      border-radius: 14px;
       padding: 16px 14px;
       margin-bottom: 16px;
       text-align: center;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sawer-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #ff1e56, #be123c, transparent);
     }
 
     .sawer-card h2 {
@@ -213,17 +294,22 @@
     }
 
     .sawer-card p {
-      font-size: 11.5px;
+      font-size: 12px;
       color: #d1d5db;
       margin-bottom: 14px;
-      line-height: 1.5;
+      line-height: 1.55;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .sawer-btn {
       width: 100%;
-      min-height: 44px;
-      padding: 12px 14px;
-      font-size: 12.5px;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 46px;
+      padding: 12px 16px;
+      font-size: 13px;
       font-weight: 800;
       border-radius: 12px;
       border: 1px solid rgba(255, 130, 160, 0.45);
@@ -266,49 +352,14 @@
       box-shadow: 0 10px 26px rgba(225, 29, 72, 0.45);
       display: none;
       z-index: 9999;
-      animation: popUp 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes popUp {
-      0% { transform: translate(-50%, 16px); opacity: 0; }
-      100% { transform: translate(-50%, 0); opacity: 1; }
     }
 
     .apk-card {
       width: 100%;
-      background: linear-gradient(150deg, rgba(24, 10, 16, 0.95), rgba(9, 4, 7, 0.99));
-      border: 1px solid var(--maroon-border);
-      border-radius: 20px;
-      padding: 18px 14px;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+      background: transparent;
+      border: none;
+      padding: 0;
       margin-bottom: 16px;
-    }
-
-    .apk-main-header {
-      text-align: center;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 30, 86, 0.22);
-    }
-
-    .apk-main-header h1 {
-      font-family: "Orbitron", sans-serif;
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: 0.7px;
-      background: linear-gradient(90deg, #ff4d79, #fda4af, #ff8c00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-transform: uppercase;
-      line-height: 1.35;
-    }
-
-    .apk-main-header span {
-      display: block;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 4px;
-      font-weight: 600;
     }
 
     .market-section {
@@ -323,11 +374,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-radius: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-family: "Orbitron", sans-serif;
-      font-size: 12.5px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: 0.6px;
       background: linear-gradient(90deg, rgba(255, 30, 86, 0.22) 0%, rgba(136, 19, 55, 0.08) 100%);
@@ -345,41 +396,43 @@
     }
 
     .market-tag {
-      font-size: 11px;
+      width: 66px;
+      height: 25px;
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 10.5px;
       font-weight: 800;
-      padding: 5px 11px;
-      min-width: 68px;
-      border-radius: 8px;
+      padding: 0;
+      border-radius: 7px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
+      line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 30, 86, 0.22);
+      background: rgba(255, 30, 86, 0.18);
       color: #fecdd3;
-      border: 1px solid rgba(255, 77, 121, 0.35);
+      border: 1px solid rgba(255, 77, 121, 0.3);
       flex-shrink: 0;
     }
 
     .apk-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 9px;
     }
 
     .apk-item {
-      background: rgba(13, 6, 10, 0.92);
+      background: rgba(13, 6, 10, 0.9);
       border: 1px solid rgba(255, 30, 86, 0.18);
       border-radius: 12px;
-      padding: 10px 12px;
-      min-height: 48px;
+      padding: 12px 14px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
 
     .apk-item:hover {
@@ -397,69 +450,240 @@
       align-items: center;
       gap: 10px;
       min-width: 0;
-    }
-
-    .apk-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 7px;
-      background: rgba(255, 30, 86, 0.16);
-      border: 1px solid rgba(255, 77, 121, 0.35);
-      color: #fecdd3;
-      font-family: "Orbitron", sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      flex: 1;
     }
 
     .apk-name {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #f9fafb;
-      letter-spacing: 0.2px;
+      font-size: 17px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 0.4px;
+      line-height: 1.25;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
+    @media (min-width: 640px) {
+      .apk-name {
+        font-size: 18.5px;
+      }
+    }
+
     .apk-action {
-      font-size: 11.5px;
+      width: 66px;
+      height: 25px;
+      font-size: 10.5px;
       font-weight: 800;
       color: #ffffff;
-      background: linear-gradient(135deg, #ff1e56, #9f1239);
+      background: linear-gradient(135deg, rgba(255, 30, 86, 0.9), rgba(159, 18, 57, 0.95));
       border: 1px solid rgba(255, 130, 160, 0.35);
-      padding: 6px 11px;
-      min-width: 64px;
-      border-radius: 8px;
+      padding: 0;
+      border-radius: 7px;
       letter-spacing: 0.4px;
+      line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
       flex-shrink: 0;
-      transition: filter 0.2s ease;
+      transition: filter 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .apk-action svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
     }
 
     .apk-item:hover .apk-action {
+      color: #ffffff;
       filter: brightness(1.12);
+    }
+
+    .apk-item:hover .apk-action svg {
+      transform: translateX(2px);
+    }
+
+    .fire-cta-box {
+      width: 100%;
+      max-width: 100%;
+      height: 54px;
+      min-height: 54px;
+      max-height: 54px;
+      border-radius: 0;
+      text-decoration: none;
+      background: linear-gradient(90deg, #070406 0%, #16060b 50%, #070406 100%);
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 10px;
+      overflow: hidden;
+      position: relative;
+      transition: filter 0.15s ease;
+    }
+
+    .fire-cta-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(8, 5, 7, 0.92) 0%,
+        rgba(225, 29, 72, 0.24) 24%,
+        rgba(255, 255, 255, 0.34) 50%,
+        rgba(225, 29, 72, 0.24) 76%,
+        rgba(8, 5, 7, 0.92) 100%
+      );
+      background-size: 220% 100%;
+      will-change: background-position, opacity;
+      animation: slowLightWave 7.5s ease-in-out infinite;
+      animation-play-state: var(--fire-play-state, running);
+    }
+
+    .fire-cta-box:hover {
+      filter: brightness(1.06);
+    }
+
+    .fire-cta-track-wrap {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fire-sentence {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: #bef264;
+      text-shadow:
+        0 0 8px rgba(190, 242, 100, 0.68),
+        0 0 16px rgba(163, 230, 53, 0.52),
+        0 2px 4px rgba(0, 0, 0, 0.98);
+      transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: expandFromCenterSlow 16s ease-out infinite;
+      animation-play-state: var(--fire-play-state, running);
+    }
+
+    @media (min-width: 640px) {
+      .fire-cta-box {
+        height: 60px;
+        min-height: 60px;
+        max-height: 60px;
+      }
+
+      .fire-sentence {
+        font-size: 1.28rem;
+      }
+    }
+
+    .fire-cta-click-last {
+      color: #ffffff;
+      font-size: 1.16rem;
+      letter-spacing: 0.07em;
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.95),
+        0 0 18px rgba(225, 29, 72, 0.95),
+        0 2px 4px rgba(0, 0, 0, 0.98);
+    }
+
+    @media (min-width: 640px) {
+      .fire-cta-click-last {
+        font-size: 1.38rem;
+      }
+    }
+
+    .fire-s1 { animation-delay: 0s; }
+    .fire-s2 { animation-delay: 4s; }
+    .fire-s3 { animation-delay: 8s; }
+    .fire-s4 { animation-delay: 12s; }
+
+    .fire-cta-box:hover .fire-sentence,
+    .fire-cta-box:active .fire-sentence {
+      animation-play-state: paused;
+    }
+
+    @keyframes expandFromCenterSlow {
+      0% {
+        transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
+        opacity: 0;
+      }
+      5% {
+        transform: translate3d(-50%, -50%, 0) scaleX(0.75) scaleY(0.95);
+        opacity: 0.96;
+      }
+      11% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.05) scaleY(1.02);
+        opacity: 1;
+      }
+      20% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.16) scaleY(1.04);
+        opacity: 0.85;
+      }
+      25% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+        opacity: 0;
+      }
+      100% {
+        transform: translate3d(-50%, -50%, 0) scaleX(1.26) scaleY(1.05);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slowLightWave {
+      0% {
+        background-position: 100% 0;
+        opacity: 0.55;
+      }
+      50% {
+        background-position: 0% 0;
+        opacity: 0.9;
+      }
+      100% {
+        background-position: 100% 0;
+        opacity: 0.55;
+      }
     }
 
     .keywords-section {
       width: 100%;
-      background: rgba(18, 9, 14, 0.85);
-      border-radius: 16px;
-      padding: 15px;
-      margin-bottom: 16px;
+      background: rgba(11, 5, 8, 0.72);
+      border-radius: 12px;
+      padding: 14px;
       text-align: center;
-      border: 1px solid rgba(255, 30, 86, 0.22);
+      border-top: 1px solid rgba(255, 30, 86, 0.2);
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      margin-bottom: 6px;
     }
 
     .keywords-section h3 {
       font-family: "Orbitron", sans-serif;
-      font-size: 12px;
+      font-size: 12.5px;
       color: #fda4af;
       margin-bottom: 6px;
       font-weight: 800;
@@ -467,7 +691,7 @@
     }
 
     .keywords-section p {
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-muted);
       line-height: 1.6;
     }
@@ -502,7 +726,6 @@
       align-items: center;
       gap: 10px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.78), 0 0 18px rgba(255, 30, 86, 0.25);
-      animation: slideInPopup 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .mini-apk-popup::before {
@@ -513,11 +736,6 @@
       right: 16px;
       height: 2px;
       background: linear-gradient(90deg, transparent, #ff1e56, #fda4af, transparent);
-    }
-
-    @keyframes slideInPopup {
-      0% { opacity: 0; transform: translateY(24px) scale(0.96); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .mini-apk-icon {
@@ -602,186 +820,236 @@
 </head>
 <body>
   <main class="page-shell">
-    <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">
-      <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-      <span>Kembali ke Menu Utama</span>
-    </a>
+    <header class="top-bo-sticky" id="fire-promo-box" aria-label="Rekomendasi BO">
+      <div class="bo-banner-wrap">
+        <a id="fire-promo-link" href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="fire-cta-box" aria-label="Klik di sini untuk daftar">
+          <div class="fire-cta-track-wrap">
+            <span class="fire-sentence fire-s1">TEMPAT BERMAIN BBFS 8D</span>
+            <span class="fire-sentence fire-s3">TEMPAT HANCURKAN BANDOT</span>
+            <span class="fire-sentence fire-s2">TERSEDIA PASARAN POOLS &amp; LOTTO</span>
+            <span class="fire-sentence fire-s4 fire-cta-click-last">KLIK DISINI</span>
+          </div>
+        </a>
+      </div>
+    </header>
 
-    <div class="ads-container" id="adsContainer">
-      <div class="ad-box" id="adSlot1"><div class="ad-inner"></div></div>
-      <div class="ad-box" id="adSlot2"><div class="ad-inner"></div></div>
-      <div class="ad-box" id="adSlot3"><div class="ad-inner"></div></div>
-      <div class="ad-box" id="adSlot4"><div class="ad-inner"></div></div>
+    <div class="content-layer">
+      <div id="ad-slots-wrapper" class="bento-card rounded-3xl p-3 flex flex-col items-center gap-2 overflow-hidden mb-3.5" aria-label="Banner Iklan & Gambar BO">
+        <div id="slot-banner-468-1" class="ad-slot-box-468"></div>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="1" aria-label="Banner Gambar BO 1">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZUu6Bb9SHtQhksYp0tIcxK4BXlRJ53-PQX8yPbES3tNtWRH30bvo4j7JDONGLZqrQHVpyldNMmWSDBtHLHu_R35BZtvuqb3lYc72WOf1_oCbbHNZPOlyhZZe6JhpazPKzGbZ2AecWoZI7HY3DbkffQ2LtRcG65keeXg6SBEPDJWBOTSTI9Y87OsaHYu6H/s728/1787315798141.webp" alt="Banner BO Rekomendasi 1" class="bo-img-banner-photo" loading="eager">
+        </a>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="2" aria-label="Banner Gambar BO 2">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFKTQ61YTpSNGbt1lvGmdny2qGburdYSZX-Qywhyphenhyphenmroh-3jcerAS9TUegu2x3BucsBpVVB7BZQaB78mlqTh9HOQVnFoDQXVAcEqAKeZ03lkvTMvfjJY8C1UGcEy0yAMxdO_3ycnwkPX77QfqSUbKy0VKmzLWgcR4FeU5SSTog7KkCFGwbnWsEzFyU2Ag-s/s728/GacorGas.gif" alt="Banner BO Rekomendasi 2" class="bo-img-banner-photo" loading="eager">
+        </a>
+
+        <a href="https://indo200-live.com/register?r=2oajlu" target="_blank" rel="noopener noreferrer nofollow" class="bo-img-banner-link" data-bo-img-banner="3" aria-label="Banner Gambar BO 3">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4wHqPjBj8M_uCyHP5v0_KnqYElaEeuoMXF554e73kENux60h3hoZLQ7JEIfgkFm_JQeFp20uX7kUbUDpjOQsF9FkHyI3pYaAZV4Rdn2gaX1FwqwN1Le6Kbz0f__dpJGAq4GsBxpu2yj0IvbS9kbRijsHoqU6QzAl8n7ZfxWUaKhSlisYRjXnhR7h70xM/s320/login.gif" alt="Banner BO Rekomendasi 3" class="bo-img-banner-photo" loading="eager">
+        </a>
+      </div>
+
+      <a href="https://tunggalpaito.online/prediksi" class="btn-back-main">Kembali ke Menu Utama</a>
+
+      <section class="visitor-card" aria-label="Status Pengunjung Online">
+        <div class="visitor-info">
+          <div class="online-dot" aria-hidden="true"></div>
+          <span>Pengunjung Online</span>
+        </div>
+        <div class="visitor-count" id="visitor-count-text"></div>
+      </section>
+
+      <section class="sawer-card" aria-label="Dukungan Operasional">
+        <h2>🔥 Salam HOKI Satu HATI</h2>
+        <p>"Prediksi Pools 100% Gratis &amp; Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit seikhlasnya melalui DANA untuk mendukung operasional admin."</p>
+        <button type="button" class="sawer-btn" id="btn-copy-dana">
+          <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-.25c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zM19 19H5V5h14v14z"/></svg>
+          <span>Salin Nomor DANA : 082152036787</span>
+        </button>
+      </section>
+
+      <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Nomor DANA berhasil disalin!</div>
+
+      <section class="apk-card" aria-label="Daftar APK Paporit">
+        <div class="market-section">
+          <div class="market-header">
+            <span>SYDNEY POOLS</span>
+            <span class="market-tag">SDY</span>
+          </div>
+          <div class="apk-list">
+            <a href="https://tunggalpaito.online/prediksi/angka-main/sdy/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">ANGKA MAIN SDY</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">MASTER PEMBUNUH ANGKA SDY</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-sdy" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">CONTROL BBFS SDY</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/angka-lemah/2d-sdy/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">ANGKA LEMAH SDY</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="market-section">
+          <div class="market-header">
+            <span>SINGAPORE POOLS</span>
+            <span class="market-tag">SGP</span>
+          </div>
+          <div class="apk-list">
+            <a href="https://tunggalpaito.online/prediksi/angka-main/sgp/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">ANGKA MAIN SGP</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sgp/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">MASTER PEMBUNUH ANGKA SGP</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-sgp" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">CONTROL BBFS SGP</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/angka-lemah/2d-sgp/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">ANGKA LEMAH SGP</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="market-section">
+          <div class="market-header">
+            <span>HONGKONG POOLS</span>
+            <span class="market-tag">HK</span>
+          </div>
+          <div class="apk-list">
+            <a href="https://tunggalpaito.online/prediksi/angka-main/hk/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">ANGKA MAIN HK</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/hk/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">MASTER PEMBUNUH ANGKA HK</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/bbfs2d-hk" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">CONTROL BBFS HK</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/angka-lemah/2d-hk/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">ANGKA LEMAH HK</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="market-section">
+          <div class="market-header header-lotto">
+            <span>PREDIKSI LOTTO</span>
+            <span class="market-tag">LOTTO</span>
+          </div>
+          <div class="apk-list">
+            <a href="https://tunggalpaito.online/prediksi/angka-main/sdy-lotto/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">ANGKA MAIN SDY LOTTO</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="https://tunggalpaito.online/prediksi/angka-main/hk-lotto/" class="apk-item">
+              <div class="apk-left">
+                <span class="apk-name">ANGKA MAIN HK LOTTO</span>
+              </div>
+              <span class="apk-action">
+                <span>GAS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="keywords-section" aria-label="Informasi Ringkas">
+        <div class="ads-container" id="adsContainer">
+          <div class="ad-plain-slot" id="adSlot1"></div>
+          <div class="ad-plain-slot" id="adSlot2"></div>
+          <div class="ad-plain-slot" id="adSlot3"></div>
+          <div class="ad-plain-slot" id="adSlot4"></div>
+        </div>
+        <h3>APLIKASI PREDIKSI TUNGGAL PAITO</h3>
+        <p>Kumpulan Aplikasi Prediksi Togel Terlengkap dan Terakurat BBFS dari Tunggal Paito untuk pasaran Sydney, Singapore, dan Hongkong Pools.</p>
+      </section>
+
+      <footer class="footer">
+        &copy; <span id="auto-year"></span> <strong>TUNGGAL PAITO</strong>. All rights reserved.
+      </footer>
     </div>
-
-    <section class="visitor-card" aria-label="Status Pengunjung Online">
-      <div class="visitor-info">
-        <div class="online-dot" aria-hidden="true"></div>
-        <span>Pengunjung Online</span>
-      </div>
-      <div class="visitor-count" id="visitor-count-text"></div>
-    </section>
-
-    <section class="sawer-card" aria-label="Dukungan Operasional">
-      <h2>🔥 Salam HOKI Satu HATI</h2>
-      <p>"Prediksi Pools 100% Gratis &amp; Tanpa Jamu! Jika angka kami membantu Anda JP hari ini, sisihkan sedikit seikhlasnya melalui DANA untuk mendukung operasional admin."</p>
-      <button type="button" class="sawer-btn" id="btn-copy-dana">
-        <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-.25c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zM19 19H5V5h14v14z"/></svg>
-        <span>Salin Nomor DANA: 082152036787</span>
-      </button>
-    </section>
-
-    <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Nomor DANA berhasil disalin!</div>
-
-    <section class="apk-card" aria-label="Daftar APK Paporit">
-      <div class="apk-main-header">
-        <h1>APK PAPORIT</h1>
-        <span>⚡⚡⚡</span>
-      </div>
-
-      <div class="market-section">
-        <div class="market-header">
-          <span>🇦🇺 SYDNEY POOLS</span>
-          <span class="market-tag">SDY</span>
-        </div>
-        <div class="apk-list">
-          <a href="https://tunggalpaito.online/prediksi/angka-main/sdy/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">1</span>
-              <span class="apk-name">ANGKA MAIN SDY</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sdy/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">2</span>
-              <span class="apk-name">MASTER PEMBUNUH ANGKA SDY</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-sdy" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">3</span>
-              <span class="apk-name">CONTROL BBFS SDY</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/angka-lemah/2d-sdy/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">4</span>
-              <span class="apk-name">ANGKA LEMAH SDY</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="market-section">
-        <div class="market-header">
-          <span>🇸🇬 SINGAPORE POOLS</span>
-          <span class="market-tag">SGP</span>
-        </div>
-        <div class="apk-list">
-          <a href="https://tunggalpaito.online/prediksi/angka-main/sgp/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">1</span>
-              <span class="apk-name">ANGKA MAIN SGP</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/sgp/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">2</span>
-              <span class="apk-name">MASTER PEMBUNUH ANGKA SGP</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-sgp" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">3</span>
-              <span class="apk-name">CONTROL BBFS SGP</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/angka-lemah/2d-sgp/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">4</span>
-              <span class="apk-name">ANGKA LEMAH SGP</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="market-section">
-        <div class="market-header">
-          <span>🇭🇰 HONGKONG POOLS</span>
-          <span class="market-tag">HK</span>
-        </div>
-        <div class="apk-list">
-          <a href="https://tunggalpaito.online/prediksi/angka-main/hk/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">1</span>
-              <span class="apk-name">ANGKA MAIN HK</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/apk/master-pembunuh-angka/hk/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">2</span>
-              <span class="apk-name">MASTER PEMBUNUH ANGKA HK</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/bbfs2d-hk" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">3</span>
-              <span class="apk-name">CONTROL BBFS HK</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/angka-lemah/2d-hk/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">4</span>
-              <span class="apk-name">ANGKA LEMAH HK</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="market-section">
-        <div class="market-header header-lotto">
-          <span>PREDIKSI LOTTO</span>
-          <span class="market-tag">LOTTO</span>
-        </div>
-        <div class="apk-list">
-          <a href="https://tunggalpaito.online/prediksi/angka-main/sdy-lotto/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">1</span>
-              <span class="apk-name">ANGKA MAIN SDY LOTTO</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-          <a href="https://tunggalpaito.online/prediksi/angka-main/hk-lotto/" class="apk-item">
-            <div class="apk-left">
-              <span class="apk-num">2</span>
-              <span class="apk-name">ANGKA MAIN HK LOTTO</span>
-            </div>
-            <span class="apk-action">GAS ➔</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="keywords-section" aria-label="Informasi Ringkas">
-      <h3>APLIKASI PREDIKSI TUNGGAL PAITO</h3>
-      <p>Kumpulan Aplikasi Prediksi Togel Terlengkap dan Terakurat BBFS dari Tunggal Paito untuk pasaran Sydney, Singapore, dan Hongkong Pools.</p>
-    </section>
-
-    <footer class="footer">
-      &copy; <span id="auto-year"></span> <strong>TUNGGAL PAITO</strong>. All rights reserved.
-    </footer>
   </main>
 
   <div class="mini-apk-popup" id="mini-apk-popup">
@@ -846,21 +1114,309 @@
 
         if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
           navigator.clipboard.writeText(danaNumber).then(function() {
-            showToast("Nomor DANA berhasil disalin!", 2000);
+            showToast("Nomor DANA berhasil disalin : " + danaNumber, 2000);
           }).catch(function() {
             if (fallbackCopy(danaNumber)) {
-              showToast("Nomor DANA berhasil disalin!", 2000);
+              showToast("Nomor DANA berhasil disalin : " + danaNumber, 2000);
             } else {
-              showToast("Salin manual nomor DANA: " + danaNumber, 3500);
+              showToast("Salin manual nomor DANA : " + danaNumber, 3500);
             }
           });
         } else if (fallbackCopy(danaNumber)) {
-          showToast("Nomor DANA berhasil disalin!", 2000);
+          showToast("Nomor DANA berhasil disalin : " + danaNumber, 2000);
         } else {
-          showToast("Salin manual nomor DANA: " + danaNumber, 3500);
+          showToast("Salin manual nomor DANA : " + danaNumber, 3500);
         }
       });
     }
+
+    const FIREBASE_DB_CONFIG = {
+      databaseURL: window.TP_FIREBASE_DB_URL || "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+    const FIREBASE_BO_PATH = "live/bo-rekomendasi";
+    const DEFAULT_BO_LINK = "https://indo200-live.com/register?r=2oajlu";
+    const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
+    const promoBoxEl = document.getElementById("fire-promo-box");
+    const promoAnchorEl = document.getElementById("fire-promo-link");
+    const boImgBannerEls = Array.from(document.querySelectorAll("[data-bo-img-banner]"));
+
+    let boLinksList = [DEFAULT_BO_LINK];
+    let currentActiveBoLink = DEFAULT_BO_LINK;
+    let isFireBoxInViewport = true;
+
+    function isSafeHttpUrl(rawUrl) {
+      if (!rawUrl || typeof rawUrl !== "string") return false;
+      try {
+        const parsed = new URL(rawUrl.trim(), window.location.href);
+        return parsed.protocol === "https:" || parsed.protocol === "http:";
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function readClickedBoLinks() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_CLICKED_BO_KEY);
+        const parsed = JSON.parse(raw || "[]");
+        if (!Array.isArray(parsed)) return [];
+        return parsed.filter(function(u) { return isSafeHttpUrl(u); }).map(function(u) { return u.trim(); });
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function saveClickedBoLink(url) {
+      if (!isSafeHttpUrl(url)) return;
+      const clean = url.trim();
+      const list = readClickedBoLinks();
+      if (!list.includes(clean)) {
+        list.push(clean);
+        try {
+          window.localStorage.setItem(STORAGE_CLICKED_BO_KEY, JSON.stringify(list));
+        } catch (_) {}
+      }
+    }
+
+    function extractUrlsFromFirebaseValue(val) {
+      const found = [];
+      const seen = new Set();
+
+      function pushUrl(candidate) {
+        if (typeof candidate === "string") {
+          const cleaned = candidate.trim();
+          if (isSafeHttpUrl(cleaned) && !seen.has(cleaned)) {
+            seen.add(cleaned);
+            found.push(cleaned);
+          }
+        } else if (candidate && typeof candidate === "object") {
+          if (typeof candidate.url === "string") pushUrl(candidate.url);
+          else if (typeof candidate.link === "string") pushUrl(candidate.link);
+          else if (typeof candidate.href === "string") pushUrl(candidate.href);
+        }
+      }
+
+      if (Array.isArray(val)) {
+        val.forEach(pushUrl);
+      } else if (val && typeof val === "object") {
+        if (Array.isArray(val.links)) val.links.forEach(pushUrl);
+        if (Array.isArray(val.list)) val.list.forEach(pushUrl);
+        if (Array.isArray(val.items)) val.items.forEach(pushUrl);
+        Object.keys(val).forEach(function(k) {
+          if (k !== "links" && k !== "list" && k !== "items") {
+            pushUrl(val[k]);
+          }
+        });
+      } else if (typeof val === "string") {
+        val.split(/[\n,]+/).forEach(pushUrl);
+      }
+
+      return found;
+    }
+
+    function pickNextUnclickedBoLink(excludeCurrent) {
+      if (!Array.isArray(boLinksList) || !boLinksList.length) return DEFAULT_BO_LINK;
+      if (boLinksList.length === 1) {
+        return isSafeHttpUrl(boLinksList[0]) ? boLinksList[0].trim() : DEFAULT_BO_LINK;
+      }
+
+      const clickedSet = new Set(readClickedBoLinks());
+      let unclicked = boLinksList.filter(function(u) {
+        return !clickedSet.has(u.trim());
+      });
+
+      if (!unclicked.length) {
+        try {
+          window.localStorage.removeItem(STORAGE_CLICKED_BO_KEY);
+        } catch (_) {}
+        unclicked = boLinksList.slice();
+      }
+
+      let candidates = unclicked;
+      if (excludeCurrent && unclicked.length > 1) {
+        const withoutCurrent = unclicked.filter(function(u) {
+          return u.trim() !== excludeCurrent.trim();
+        });
+        if (withoutCurrent.length) candidates = withoutCurrent;
+      }
+
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+      return isSafeHttpUrl(chosen) ? chosen.trim() : DEFAULT_BO_LINK;
+    }
+
+    function getActiveBoLink() {
+      if (!isSafeHttpUrl(currentActiveBoLink) || !boLinksList.includes(currentActiveBoLink.trim())) {
+        currentActiveBoLink = pickNextUnclickedBoLink("");
+      }
+      return currentActiveBoLink;
+    }
+
+    function syncBoImageBanners() {
+      const primaryLink = getActiveBoLink();
+      boImgBannerEls.forEach(function(bannerEl, idx) {
+        const linkForSlot = boLinksList.length > 1
+          ? boLinksList[idx % boLinksList.length]
+          : primaryLink;
+        const safeHref = isSafeHttpUrl(linkForSlot) ? linkForSlot.trim() : DEFAULT_BO_LINK;
+        bannerEl.setAttribute("href", safeHref);
+      });
+    }
+
+    function applyCurrentBoLinkToPromo() {
+      if (promoAnchorEl) {
+        promoAnchorEl.setAttribute("href", getActiveBoLink());
+      }
+      syncBoImageBanners();
+    }
+
+    function rotateBoLink() {
+      currentActiveBoLink = pickNextUnclickedBoLink(currentActiveBoLink);
+      applyCurrentBoLinkToPromo();
+    }
+
+    function updateBoLinksFromData(rawData) {
+      const extracted = extractUrlsFromFirebaseValue(rawData);
+      boLinksList = extracted.length ? extracted : [DEFAULT_BO_LINK];
+      currentActiveBoLink = pickNextUnclickedBoLink("");
+      applyCurrentBoLinkToPromo();
+    }
+
+    function applyFirePlayState() {
+      if (!promoBoxEl) return;
+      const sentences = promoBoxEl.querySelectorAll(".fire-sentence");
+      const nextState = (!document.hidden && isFireBoxInViewport) ? "running" : "paused";
+      promoBoxEl.style.setProperty("--fire-play-state", nextState);
+      sentences.forEach(function(item) {
+        item.style.animationPlayState = nextState;
+      });
+    }
+
+    function refreshFireMarqueeState() {
+      applyFirePlayState();
+      if (!document.hidden && isFireBoxInViewport && promoBoxEl) {
+        const sentences = promoBoxEl.querySelectorAll(".fire-sentence");
+        sentences.forEach(function(item) {
+          item.style.animation = "none";
+          void item.offsetWidth;
+          item.style.animation = "";
+          item.style.animationPlayState = "running";
+        });
+      }
+    }
+
+    if (promoBoxEl && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          isFireBoxInViewport = Boolean(entry.isIntersecting);
+          applyFirePlayState();
+        });
+      }, { root: null, rootMargin: "20px 0px", threshold: 0.01 });
+      io.observe(promoBoxEl);
+    }
+
+    if (promoAnchorEl) {
+      promoAnchorEl.addEventListener("pointerdown", function() {
+        applyCurrentBoLinkToPromo();
+      }, { passive: true });
+      promoAnchorEl.addEventListener("click", function() {
+        const clickedHref = promoAnchorEl.getAttribute("href") || getActiveBoLink();
+        saveClickedBoLink(clickedHref);
+        currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+        applyCurrentBoLinkToPromo();
+      });
+    }
+
+    boImgBannerEls.forEach(function(bannerEl) {
+      bannerEl.addEventListener("click", function() {
+        const clickedHref = bannerEl.getAttribute("href") || getActiveBoLink();
+        saveClickedBoLink(clickedHref);
+        currentActiveBoLink = pickNextUnclickedBoLink(clickedHref);
+        applyCurrentBoLinkToPromo();
+      });
+    });
+
+    currentActiveBoLink = pickNextUnclickedBoLink("");
+    applyCurrentBoLinkToPromo();
+
+    let boCycleTimer = null;
+    function startBoLinkCycle() {
+      if (boCycleTimer || document.hidden) return;
+      boCycleTimer = setInterval(function() {
+        if (!document.hidden) rotateBoLink();
+      }, 4000);
+    }
+    function stopBoLinkCycle() {
+      if (boCycleTimer) {
+        clearInterval(boCycleTimer);
+        boCycleTimer = null;
+      }
+    }
+
+    const dbUrl = String(FIREBASE_DB_CONFIG.databaseURL || "").trim().replace(/\/+$/, "");
+    const restUrl = (dbUrl && isSafeHttpUrl(dbUrl)) ? (dbUrl + "/" + FIREBASE_BO_PATH + ".json") : "";
+
+    function fetchRestBoLinks() {
+      if (!restUrl || typeof fetch !== "function") return;
+      fetch(restUrl + "?t=" + Date.now(), { cache: "no-store" })
+        .then(function(res) { return res.ok ? res.json() : null; })
+        .then(function(data) {
+          if (data !== null) updateBoLinksFromData(data);
+        })
+        .catch(function() {});
+    }
+
+    function attachSdkRealtime(dbApp) {
+      try {
+        if (dbApp && typeof dbApp.ref === "function") {
+          dbApp.ref(FIREBASE_BO_PATH).on("value", function(snap) {
+            updateBoLinksFromData(snap && typeof snap.val === "function" ? snap.val() : null);
+          });
+          return true;
+        }
+      } catch (_) {}
+      return false;
+    }
+
+    function initFirebaseBoListener() {
+      if (!restUrl) return;
+      if (window.firebase && typeof window.firebase.database === "function") {
+        try {
+          const app = window.firebase.apps && window.firebase.apps.length
+            ? window.firebase.app()
+            : window.firebase.initializeApp({ databaseURL: dbUrl });
+          if (attachSdkRealtime(window.firebase.database(app))) return;
+        } catch (_) {}
+      }
+
+      fetchRestBoLinks();
+
+      if (document.getElementById("tp-fb-app-sdk") || document.getElementById("tp-fb-db-sdk")) return;
+      const appScript = document.createElement("script");
+      appScript.id = "tp-fb-app-sdk";
+      appScript.async = true;
+      appScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";
+      appScript.onerror = function() { fetchRestBoLinks(); };
+      appScript.onload = function() {
+        const dbScript = document.createElement("script");
+        dbScript.id = "tp-fb-db-sdk";
+        dbScript.async = true;
+        dbScript.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js";
+        dbScript.onerror = function() { fetchRestBoLinks(); };
+        dbScript.onload = function() {
+          try {
+            const app = window.firebase.apps && window.firebase.apps.length
+              ? window.firebase.app()
+              : window.firebase.initializeApp({ databaseURL: dbUrl });
+            attachSdkRealtime(window.firebase.database(app));
+          } catch (_) {
+            fetchRestBoLinks();
+          }
+        };
+        document.head.appendChild(dbScript);
+      };
+      document.head.appendChild(appScript);
+    }
+
+    startBoLinkCycle();
 
     let currentVisitors = Math.floor(151 * Math.random()) + 150;
     let scrollScore = 0;
@@ -869,7 +1425,7 @@
 
     function renderVisitorCount() {
       if (visitorText) {
-        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + " Online";
+        visitorText.textContent = currentVisitors.toLocaleString("id-ID") + "";
       }
     }
 
@@ -896,17 +1452,197 @@
     window.addEventListener("scroll", function() { scrollScore += 1; }, { passive: true });
     scheduleNextVisitorUpdate();
 
-    // Load banners sequentially to avoid atOptions race condition
+    const TOP_468_BANNERS = [
+      {
+        slotId: "slot-banner-468-1",
+        scriptId: "ad-script-468-1",
+        key: "9a986a45c62dcea8d8216b9210f159cb",
+        src: "https://brijmohan.org/22/9a986a45c62dcea8d8216b9210f159cb"
+      }
+    ];
+
+    const top468WrapperEl = document.getElementById("ad-slots-wrapper");
+    const top468SlotEls = TOP_468_BANNERS.map(function(cfg) {
+      return document.getElementById(cfg.slotId);
+    }).filter(Boolean);
+
+    function syncTop468WrapperVisibility() {
+      if (!top468WrapperEl) return;
+      top468WrapperEl.style.display = "flex";
+    }
+
+    function fitSingle468Slot(slotEl) {
+      if (!slotEl) return;
+      slotEl.style.display = "flex";
+      slotEl.style.visibility = "visible";
+      slotEl.style.opacity = "1";
+
+      const availW = Math.max(0, slotEl.clientWidth - 8);
+      const iframes = slotEl.querySelectorAll("iframe");
+      if (!iframes.length) {
+        slotEl.style.height = "68px";
+        return;
+      }
+
+      iframes.forEach(function(iframe) {
+        const attrW = parseFloat(iframe.getAttribute("width") || "468") || 468;
+        const attrH = parseFloat(iframe.getAttribute("height") || "60") || 60;
+        const ratio = (availW > 0 && attrW > availW) ? (availW / attrW) : 1;
+        const scaledW = attrW * ratio;
+        const scaledH = Math.round(attrH * ratio);
+
+        iframe.style.position = "relative";
+        iframe.style.left = "50%";
+        iframe.style.top = "0";
+        iframe.style.width = attrW + "px";
+        iframe.style.height = attrH + "px";
+        iframe.style.maxWidth = "none";
+        iframe.style.maxHeight = "none";
+        iframe.style.margin = "0";
+        iframe.style.background = "transparent";
+        iframe.style.transformOrigin = "top center";
+        iframe.style.transform = "translate3d(-50%, 0, 0) scale(" + ratio.toFixed(4) + ")";
+        iframe.style.marginLeft = "-" + (scaledW / 2).toFixed(2) + "px";
+        iframe.style.marginRight = "-" + (scaledW / 2).toFixed(2) + "px";
+        iframe.style.marginBottom = "-" + Math.max(0, attrH - scaledH) + "px";
+
+        slotEl.style.height = Math.max(68, scaledH + 8) + "px";
+      });
+    }
+
+    function fitAllTop468Banners() {
+      top468SlotEls.forEach(fitSingle468Slot);
+      syncTop468WrapperVisibility();
+    }
+
+    function observeSlotForIframe(slotEl) {
+      if (!slotEl || slotEl.dataset.obsAttached === "1") return;
+      slotEl.dataset.obsAttached = "1";
+
+      if ("MutationObserver" in window) {
+        const mo = new MutationObserver(function() {
+          fitSingle468Slot(slotEl);
+          syncTop468WrapperVisibility();
+        });
+        mo.observe(slotEl, { childList: true, subtree: true });
+      }
+
+      let checks = 0;
+      const poll = setInterval(function() {
+        checks += 1;
+        fitSingle468Slot(slotEl);
+        syncTop468WrapperVisibility();
+        if (slotEl.querySelector("iframe") || checks >= 24) {
+          clearInterval(poll);
+        }
+      }, 250);
+    }
+
+    function loadSingle468Banner(cfg) {
+      return new Promise(function(resolve) {
+        const slotEl = document.getElementById(cfg.slotId);
+        if (!slotEl) {
+          resolve();
+          return;
+        }
+        observeSlotForIframe(slotEl);
+
+        if (slotEl.dataset.adLoaded === "1") {
+          fitSingle468Slot(slotEl);
+          resolve();
+          return;
+        }
+        slotEl.dataset.adLoaded = "1";
+
+        window.atOptions = {
+          key: cfg.key,
+          format: "iframe",
+          height: 60,
+          width: 468,
+          params: {}
+        };
+
+        const sc = document.createElement("script");
+        sc.id = cfg.scriptId;
+        sc.async = false;
+        sc.setAttribute("data-cfasync", "false");
+        sc.referrerPolicy = "strict-origin-when-cross-origin";
+        sc.src = cfg.src;
+
+        let finished = false;
+        function done() {
+          if (finished) return;
+          finished = true;
+          fitSingle468Slot(slotEl);
+          syncTop468WrapperVisibility();
+          setTimeout(function() {
+            fitSingle468Slot(slotEl);
+            syncTop468WrapperVisibility();
+            resolve();
+          }, 1200);
+        }
+
+        sc.addEventListener("load", done, { once: true });
+        sc.addEventListener("error", done, { once: true });
+        setTimeout(done, 2400);
+        slotEl.appendChild(sc);
+      });
+    }
+
+    function loadAllTop468Banners() {
+      syncTop468WrapperVisibility();
+      return TOP_468_BANNERS.reduce(function(chain, cfg) {
+        return chain.then(function() {
+          return loadSingle468Banner(cfg);
+        });
+      }, Promise.resolve());
+    }
+
     const adSlots = [
-      document.querySelector("#adSlot1 .ad-inner"),
-      document.querySelector("#adSlot2 .ad-inner"),
-      document.querySelector("#adSlot3 .ad-inner"),
-      document.querySelector("#adSlot4 .ad-inner")
+      document.getElementById("adSlot1"),
+      document.getElementById("adSlot2"),
+      document.getElementById("adSlot3"),
+      document.getElementById("adSlot4")
     ].filter(Boolean);
 
+    function fitIframeToSlot(slotEl) {
+      if (!slotEl) return;
+      const iframe = slotEl.querySelector("iframe");
+      if (!iframe) return;
+
+      const slotWidth = slotEl.clientWidth;
+      const iframeWidth = parseInt(iframe.getAttribute("width"), 10) || 320;
+      const iframeHeight = parseInt(iframe.getAttribute("height"), 10) || 50;
+
+      if (slotWidth > 0 && iframeWidth > 0) {
+        const scale = slotWidth / iframeWidth;
+        iframe.style.width = iframeWidth + "px";
+        iframe.style.height = iframeHeight + "px";
+        iframe.style.transformOrigin = "top left";
+        iframe.style.transform = "scale(" + scale + ")";
+        const lockedHeight = Math.round(iframeHeight * scale);
+        slotEl.style.height = lockedHeight + "px";
+      }
+    }
+
+    function fitAllAdSlots() {
+      fitAllTop468Banners();
+      adSlots.forEach(fitIframeToSlot);
+    }
+
     function loadSequentialSlots(index) {
-      if (index >= adSlots.length) return;
+      if (index >= adSlots.length) {
+        fitAllAdSlots();
+        return;
+      }
       const target = adSlots[index];
+      if (target.dataset.adLoaded === "1") {
+        fitIframeToSlot(target);
+        loadSequentialSlots(index + 1);
+        return;
+      }
+      target.dataset.adLoaded = "1";
+
       window.atOptions = {
         key: "119c8bb3217ed264a8fa223c3197bf69",
         format: "iframe",
@@ -914,24 +1650,66 @@
         width: 320,
         params: {}
       };
+
       const sc = document.createElement("script");
       sc.async = false;
       sc.src = "https://crypotential.com/119c8bb3217ed264a8fa223c3197bf69/invoke.js";
-      sc.addEventListener("load", function() {
-        setTimeout(function() { loadSequentialSlots(index + 1); }, 180);
-      }, { once: true });
-      sc.addEventListener("error", function() {
-        setTimeout(function() { loadSequentialSlots(index + 1); }, 180);
-      }, { once: true });
+
+      let movedNext = false;
+      function nextSlot() {
+        fitIframeToSlot(target);
+        if (movedNext) return;
+        movedNext = true;
+        setTimeout(function() {
+          fitIframeToSlot(target);
+          loadSequentialSlots(index + 1);
+        }, 180);
+      }
+
+      sc.addEventListener("load", nextSlot, { once: true });
+      sc.addEventListener("error", nextSlot, { once: true });
       target.appendChild(sc);
-      setTimeout(function() { loadSequentialSlots(index + 1); }, 1400);
+      setTimeout(function() { fitIframeToSlot(target); }, 500);
+      setTimeout(nextSlot, 1400);
+    }
+
+    window.addEventListener("resize", fitAllAdSlots, { passive: true });
+
+    function onPageReady() {
+      loadAllTop468Banners().then(function() {
+        loadSequentialSlots(0);
+      });
+      initFirebaseBoListener();
     }
 
     if (document.readyState === "complete") {
-      loadSequentialSlots(0);
+      onPageReady();
     } else {
-      window.addEventListener("load", function() { loadSequentialSlots(0); }, { once: true });
+      window.addEventListener("load", onPageReady, { once: true });
     }
+
+    const fbPollTimer = setInterval(function() {
+      if (!document.hidden) fetchRestBoLinks();
+    }, 30000);
+
+    document.addEventListener("visibilitychange", function() {
+      if (document.hidden) {
+        stopBoLinkCycle();
+        applyFirePlayState();
+      } else {
+        startBoLinkCycle();
+        refreshFireMarqueeState();
+        fitAllAdSlots();
+      }
+    });
+
+    window.addEventListener("focus", refreshFireMarqueeState, { passive: true });
+    window.addEventListener("pageshow", function() {
+      applyCurrentBoLinkToPromo();
+      startBoLinkCycle();
+      refreshFireMarqueeState();
+      fitAllAdSlots();
+    }, { passive: true });
 
     let clickCount = 0;
     const adLink = "https://crypotential.com/mgccvrvt?key=b52217ccca9c3fd4b13e5d26673bceec";
@@ -942,7 +1720,9 @@
         target.closest("#btn-copy-dana") ||
         target.closest(".btn-back-main") ||
         target.closest(".apk-item") ||
-        target.closest(".mini-apk-popup")
+        target.closest(".mini-apk-popup") ||
+        target.closest("#fire-promo-link") ||
+        target.closest("[data-bo-img-banner]")
       ) {
         return;
       }
@@ -955,6 +1735,8 @@
     window.addEventListener("pagehide", function() {
       clearTimeout(visitorTimer);
       clearTimeout(toastTimer);
+      clearInterval(fbPollTimer);
+      stopBoLinkCycle();
     }, { passive: true });
   })();
   </script>
