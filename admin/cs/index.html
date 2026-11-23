@@ -511,6 +511,26 @@ footer span{color:#fb7185;font-weight:800}
     </div>
   </div>
 
+  <div class="section-title">📱 Nomor WhatsApp Aktif</div>
+  <div class="input-result-box">
+    <label for="inputWaNumber">Nomor WhatsApp Admin / CS (08... / 628...)</label>
+    <input
+      type="tel"
+      id="inputWaNumber"
+      placeholder="Contoh: 088970383950 atau 6288970383950"
+      autocomplete="off"
+    />
+    <div class="bo-btn-row">
+      <button type="button" id="btnSaveWaNumber" class="btn-kirim" style="flex:1;min-width:140px" onclick="saveWaNumber()">
+        📲 Simpan Nomor
+      </button>
+      <button type="button" id="btnResetWaNumber" class="btn-kirim btn-timpa" onclick="resetDefaultWaNumber()">
+        ♻️ Reset Default
+      </button>
+    </div>
+    <div id="waNumberStatus" class="status-firebase"></div>
+  </div>
+
   <div class="section-title">🔗 Link Iklan Banner</div>
   <div class="input-result-box">
     <label for="inputBoBannerLink">Teks Link Banner (pisah spasi / koma)</label>
@@ -555,6 +575,8 @@ firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const BO_BANNER_DB_PATH = "live/bo-rekomendasi";
+const WA_NUMBER_DB_PATH = "live/wa";
+const DEFAULT_WA_NUMBER = "6288970383950";
 
 const JADWAL_PASARAN = [
   { key: "data-macau4d-pt6", dbKey: "data-macau4d", label: "MACAU 4D PT6", startMinute: 1, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
@@ -747,6 +769,162 @@ function showLatestDataPaito(marketKey) {
   }).catch(() => {
     msgEl.innerText = "";
   });
+}
+
+function normalizeWaNumber(rawInput) {
+  if (rawInput === null || rawInput === undefined) return "";
+  let digits = String(rawInput).replace(/\D/g, "");
+  if (!digits) return "";
+  if (digits.startsWith("00")) {
+    digits = digits.slice(2);
+  }
+  if (digits.startsWith("0")) {
+    digits = "62" + digits.slice(1);
+  } else if (digits.startsWith("8")) {
+    digits = "62" + digits;
+  }
+  if (!digits.startsWith("62") || digits.length < 9 || digits.length > 16) {
+    return "";
+  }
+  return digits;
+}
+
+function extractWaNumberFromValue(val) {
+  if (val === null || val === undefined) return "";
+  if (typeof val === "string" || typeof val === "number") {
+    const str = String(val).trim();
+    const waMatch = str.match(/wa\.me\/(\d{7,17})/i) || str.match(/phone=(\d{7,17})/i);
+    if (waMatch && waMatch[1]) {
+      const fromUrl = normalizeWaNumber(waMatch[1]);
+      if (fromUrl) return fromUrl;
+    }
+    return normalizeWaNumber(str);
+  }
+  if (Array.isArray(val)) {
+    for (let i = 0; i < val.length; i++) {
+      const found = extractWaNumberFromValue(val[i]);
+      if (found) return found;
+    }
+    return "";
+  }
+  if (typeof val === "object") {
+    const preferredKeys = ["wa", "whatsapp", "nomor", "number", "phone", "hp", "no_wa", "wa_number", "link", "url"];
+    for (let i = 0; i < preferredKeys.length; i++) {
+      const k = preferredKeys[i];
+      if (Object.prototype.hasOwnProperty.call(val, k)) {
+        const found = extractWaNumberFromValue(val[k]);
+        if (found) return found;
+      }
+    }
+    const keys = Object.keys(val);
+    for (let i = 0; i < keys.length; i++) {
+      const found = extractWaNumberFromValue(val[keys[i]]);
+      if (found) return found;
+    }
+  }
+  return "";
+}
+
+function renderWaNumberSummary(waNumber, isDefaultFallback) {
+  const statusEl = document.getElementById("waNumberStatus");
+  const inputEl = document.getElementById("inputWaNumber");
+  if (!statusEl) return;
+
+  const clean = normalizeWaNumber(waNumber) || DEFAULT_WA_NUMBER;
+  if (inputEl && !inputEl.value.trim()) {
+    inputEl.value = clean;
+  }
+  statusEl.style.color = "#d4b5bc";
+  statusEl.innerHTML = `📌 <b>WA Aktif${isDefaultFallback ? " (Default)" : ""}:</b> <span style="color:#fde68a;">+${clean}</span> (<span style="color:#6ee7b7;">wa.me/${clean}</span>)`;
+}
+
+function loadWaNumber() {
+  const statusEl = document.getElementById("waNumberStatus");
+  if (!statusEl) return;
+
+  statusEl.style.color = "#fda4af";
+  statusEl.textContent = "⏳ Memuat nomor WhatsApp aktif...";
+
+  database.ref(WA_NUMBER_DB_PATH).once("value").then((snapshot) => {
+    const extracted = snapshot.exists() ? extractWaNumberFromValue(snapshot.val()) : "";
+    renderWaNumberSummary(extracted || DEFAULT_WA_NUMBER, !extracted);
+  }).catch(() => {
+    statusEl.textContent = "";
+  });
+}
+
+function setWaActionButtonsDisabled(disabled) {
+  ["btnSaveWaNumber", "btnResetWaNumber"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = Boolean(disabled);
+  });
+}
+
+function saveWaNumber() {
+  const inputEl = document.getElementById("inputWaNumber");
+  const statusEl = document.getElementById("waNumberStatus");
+
+  if (!firebase.auth().currentUser) {
+    statusEl.style.color = "#fda4af";
+    statusEl.textContent = "Sesi login berakhir. Silakan login ulang terlebih dahulu.";
+    document.getElementById("adminLoginOverlay").style.display = "flex";
+    return;
+  }
+
+  const normalized = normalizeWaNumber(inputEl.value);
+  if (!normalized) {
+    statusEl.style.color = "#fda4af";
+    statusEl.textContent = "Masukkan nomor WhatsApp valid (contoh: 088970383950 atau 6288970383950).";
+    return;
+  }
+
+  setWaActionButtonsDisabled(true);
+  statusEl.style.color = "#fda4af";
+  statusEl.textContent = "Menyimpan nomor WhatsApp ke Firebase...";
+
+  database.ref(WA_NUMBER_DB_PATH).set(normalized)
+    .then(() => {
+      inputEl.value = normalized;
+      statusEl.style.color = "#6ee7b7";
+      statusEl.innerHTML = `Berhasil disimpan: <span style="color:#fde68a;">+${normalized}</span> (<span style="color:#fde68a;">wa.me/${normalized}</span>)`;
+    })
+    .catch((err) => {
+      statusEl.style.color = "#fda4af";
+      statusEl.textContent = "Gagal menyimpan nomor WA: " + err.message;
+    })
+    .finally(() => {
+      setWaActionButtonsDisabled(false);
+    });
+}
+
+function resetDefaultWaNumber() {
+  const inputEl = document.getElementById("inputWaNumber");
+  const statusEl = document.getElementById("waNumberStatus");
+
+  if (!firebase.auth().currentUser) {
+    statusEl.style.color = "#fda4af";
+    statusEl.textContent = "Sesi login berakhir. Silakan login ulang terlebih dahulu.";
+    document.getElementById("adminLoginOverlay").style.display = "flex";
+    return;
+  }
+
+  setWaActionButtonsDisabled(true);
+  statusEl.style.color = "#fda4af";
+  statusEl.textContent = "Mengembalikan nomor WhatsApp ke default...";
+
+  database.ref(WA_NUMBER_DB_PATH).set(DEFAULT_WA_NUMBER)
+    .then(() => {
+      if (inputEl) inputEl.value = DEFAULT_WA_NUMBER;
+      statusEl.style.color = "#6ee7b7";
+      statusEl.innerHTML = `Direset ke default: <span style="color:#fde68a;">+${DEFAULT_WA_NUMBER}</span>`;
+    })
+    .catch((err) => {
+      statusEl.style.color = "#fda4af";
+      statusEl.textContent = "Gagal reset nomor WA: " + err.message;
+    })
+    .finally(() => {
+      setWaActionButtonsDisabled(false);
+    });
 }
 
 // Pisah spasi, koma, atau baris baru
@@ -982,6 +1160,7 @@ function loginAdmin() {
   firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
     document.getElementById("adminLoginOverlay").style.display = "none";
     errorEl.innerText = "";
+    loadWaNumber();
     loadBoBannerLink();
   }).catch((err) => {
     errorEl.style.color = "#fda4af";
@@ -1067,6 +1246,7 @@ document.addEventListener("DOMContentLoaded", () => {
   autoSetDates();
   applyInitialMarketByTime();
   refreshAllFormPreviews();
+  loadWaNumber();
   loadBoBannerLink();
 
   let lastTrackedKey = document.getElementById("marketSelect")?.value || "";
@@ -1113,6 +1293,7 @@ document.addEventListener("DOMContentLoaded", () => {
           statusBadge.innerHTML = `🟢 Status : <b>LOGIN</b> (${user.email})`;
         }
         if (logoutBtn) logoutBtn.style.display = "inline-block";
+        loadWaNumber();
         loadBoBannerLink();
       } else {
         if (overlay) overlay.style.display = "flex";
