@@ -433,6 +433,63 @@ footer span{color:#fb7185;font-weight:800}
 }
 .login-box button:hover{filter:brightness(1.08)}
 .login-error{color:#fda4af;font-size:12px;text-align:center;margin-top:9px;font-weight:600}
+
+/* Pop-up pengingat pasaran terlewati belum ter-update */
+.missed-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(5,2,3,.82);
+  backdrop-filter:blur(5px);
+  z-index:9990;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+.missed-modal-overlay.is-open{
+  display:flex;
+}
+.missed-modal-box{
+  background:linear-gradient(165deg,#240913 0%,#0d0407 100%);
+  border:1px solid rgba(251,113,133,.48);
+  border-radius:18px;
+  padding:22px 20px;
+  width:100%;
+  max-width:400px;
+  box-shadow:0 20px 50px rgba(0,0,0,.9),0 0 0 1px rgba(244,63,94,.18);
+  text-align:center;
+}
+.missed-modal-text{
+  color:#fff1f2;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.65;
+  white-space:pre-line;
+  margin-bottom:18px;
+}
+.missed-modal-actions{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.missed-modal-btn{
+  background:linear-gradient(135deg,#e11d48 0%,#9f1239 100%);
+  border:1px solid rgba(253,164,175,.4);
+  color:#fff1f2;
+  padding:10px 18px;
+  border-radius:11px;
+  font-weight:800;
+  font-size:12px;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  transition:.2s ease;
+}
+.missed-modal-btn:hover{
+  filter:brightness(1.12);
+  transform:translateY(-1px);
+}
 </style>
 </head>
 <body>
@@ -443,6 +500,16 @@ footer span{color:#fb7185;font-weight:800}
     <input type="password" id="adminPassword" placeholder="Kata Sandi Staff">
     <button type="button" id="btnLoginSubmit" onclick="loginAdmin()">MASUK PANEL CS</button>
     <div id="loginErrorMsg" class="login-error"></div>
+  </div>
+</div>
+
+<div id="missedMarketModal" class="missed-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="missedMarketText">
+  <div class="missed-modal-box">
+    <div id="missedMarketText" class="missed-modal-text"></div>
+    <div class="missed-modal-actions">
+      <button type="button" id="btnSelectMissedMarket" class="missed-modal-btn" onclick="focusMissedMarketAndClose()">Update Sekarang</button>
+      <button type="button" id="btnCloseMissedModal" class="missed-modal-btn" style="background:rgba(24,7,13,.95)" onclick="closeMissedMarketModal()">Tutup</button>
+    </div>
   </div>
 </div>
 
@@ -601,6 +668,9 @@ const JADWAL_PASARAN = [
 ];
 
 let isManualMarketSelection = true;
+let firstMissedMarketKey = "";
+let shownMissedPopupSignature = "";
+let missedPopupCheckInFlight = false;
 
 function updateSelectionModeBadge() {
   const badge = document.getElementById("selectionModeBadge");
@@ -644,6 +714,7 @@ function getWIBTimeInfo() {
 
   return {
     dateStr: `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
+    dbDateKey: `${String(day).padStart(2, "0")}-${String(month).padStart(2, "0")}-${year}`,
     totalMinutes: hour * 60 + minute,
     dayOfWeek
   };
@@ -669,6 +740,90 @@ function getScheduledMarketByTime() {
     }
   }
   return activeMarket;
+}
+
+function hasValidDateResult(rawEntry) {
+  if (rawEntry === null || rawEntry === undefined) return false;
+  const str = Array.isArray(rawEntry)
+    ? rawEntry.join(",")
+    : (typeof rawEntry === "object" ? Object.values(rawEntry).join(",") : String(rawEntry));
+  return parsePaitoItems(str).length > 0;
+}
+
+function openMissedMarketPopup(missedItems, dbDateKey) {
+  const modal = document.getElementById("missedMarketModal");
+  const textEl = document.getElementById("missedMarketText");
+  if (!modal || !textEl || !Array.isArray(missedItems) || !missedItems.length) return;
+
+  const labelsText = missedItems.map((m) => m.label).join(", ");
+  const signature = `${dbDateKey}:${missedItems.map((m) => m.key).join("|")}`;
+  if (signature === shownMissedPopupSignature && modal.classList.contains("is-open")) {
+    return;
+  }
+
+  shownMissedPopupSignature = signature;
+  firstMissedMarketKey = missedItems[0].key;
+  textEl.textContent = `Hai Admin Maaf Menggangu\nSaya Ingin Menyampaikan Kalau Pasaran (${labelsText}) Belum Anda Update 🙏`;
+  modal.classList.add("is-open");
+}
+
+function closeMissedMarketModal() {
+  const modal = document.getElementById("missedMarketModal");
+  if (modal) modal.classList.remove("is-open");
+}
+
+function focusMissedMarketAndClose() {
+  closeMissedMarketModal();
+  if (!firstMissedMarketKey) return;
+  const selectEl = document.getElementById("marketSelect");
+  if (selectEl) {
+    selectEl.value = firstMissedMarketKey;
+    isManualMarketSelection = true;
+    updateSelectionModeBadge();
+    refreshAllFormPreviews();
+    selectEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+function checkMissedScheduledMarkets() {
+  if (!firebase.auth().currentUser || missedPopupCheckInFlight) return;
+
+  const { totalMinutes, dayOfWeek, dbDateKey } = getWIBTimeInfo();
+  const dueMarkets = JADWAL_PASARAN.filter((item) => {
+    const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
+    return !isClosedToday && totalMinutes >= item.startMinute;
+  });
+
+  if (!dueMarkets.length) return;
+
+  const uniqueDbKeys = Array.from(new Set(dueMarkets.map((item) => item.dbKey)));
+  missedPopupCheckInFlight = true;
+
+  Promise.all(
+    uniqueDbKeys.map((dbKey) =>
+      database
+        .ref(`live/${dbKey}/${dbDateKey}`)
+        .once("value")
+        .then((snap) => ({ dbKey, hasResult: snap.exists() && hasValidDateResult(snap.val()) }))
+        .catch(() => ({ dbKey, hasResult: true }))
+    )
+  )
+    .then((results) => {
+      const updatedMap = {};
+      results.forEach((r) => {
+        updatedMap[r.dbKey] = r.hasResult;
+      });
+
+      const missedMarkets = dueMarkets.filter((item) => !updatedMap[item.dbKey]);
+      if (missedMarkets.length > 0) {
+        openMissedMarketPopup(missedMarkets, dbDateKey);
+      } else {
+        closeMissedMarketModal();
+      }
+    })
+    .finally(() => {
+      missedPopupCheckInFlight = false;
+    });
 }
 
 function renderPrediksiButtons(selectedKey) {
@@ -812,70 +967,6 @@ function normalizeWaNumber(rawInput) {
   return digits;
 }
 
-function extractWaNumberFromValue(val) {
-  if (val === null || val === undefined) return "";
-  if (typeof val === "string" || typeof val === "number") {
-    const str = String(val).trim();
-    const waMatch = str.match(/wa\.me\/(\d{7,17})/i) || str.match(/phone=(\d{7,17})/i);
-    if (waMatch && waMatch[1]) {
-      const fromUrl = normalizeWaNumber(waMatch[1]);
-      if (fromUrl) return fromUrl;
-    }
-    return normalizeWaNumber(str);
-  }
-  if (Array.isArray(val)) {
-    for (let i = 0; i < val.length; i++) {
-      const found = extractWaNumberFromValue(val[i]);
-      if (found) return found;
-    }
-    return "";
-  }
-  if (typeof val === "object") {
-    const preferredKeys = ["wa", "whatsapp", "nomor", "number", "phone", "hp", "no_wa", "wa_number", "link", "url"];
-    for (let i = 0; i < preferredKeys.length; i++) {
-      const k = preferredKeys[i];
-      if (Object.prototype.hasOwnProperty.call(val, k)) {
-        const found = extractWaNumberFromValue(val[k]);
-        if (found) return found;
-      }
-    }
-    const keys = Object.keys(val);
-    for (let i = 0; i < keys.length; i++) {
-      const found = extractWaNumberFromValue(val[keys[i]]);
-      if (found) return found;
-    }
-  }
-  return "";
-}
-
-function renderWaNumberSummary(waNumber, isDefaultFallback) {
-  const statusEl = document.getElementById("waNumberStatus");
-  const inputEl = document.getElementById("inputWaNumber");
-  if (!statusEl) return;
-
-  const clean = normalizeWaNumber(waNumber) || DEFAULT_WA_NUMBER;
-  if (inputEl && !inputEl.value.trim()) {
-    inputEl.value = clean;
-  }
-  statusEl.style.color = "#d4b5bc";
-  statusEl.innerHTML = `📌 <b>WA Aktif${isDefaultFallback ? " (Default)" : ""}:</b> <span style="color:#fde68a;">+${clean}</span> (<span style="color:#6ee7b7;">wa.me/${clean}</span>)`;
-}
-
-function loadWaNumber() {
-  const statusEl = document.getElementById("waNumberStatus");
-  if (!statusEl) return;
-
-  statusEl.style.color = "#fda4af";
-  statusEl.textContent = "⏳ Memuat nomor WhatsApp aktif...";
-
-  database.ref(WA_NUMBER_DB_PATH).once("value").then((snapshot) => {
-    const extracted = snapshot.exists() ? extractWaNumberFromValue(snapshot.val()) : "";
-    renderWaNumberSummary(extracted || DEFAULT_WA_NUMBER, !extracted);
-  }).catch(() => {
-    statusEl.textContent = "";
-  });
-}
-
 function setWaActionButtonsDisabled(disabled) {
   ["btnSaveWaNumber", "btnResetWaNumber"].forEach((id) => {
     const el = document.getElementById(id);
@@ -988,33 +1079,6 @@ function extractExistingBoLinks(val) {
   }
 
   return found;
-}
-
-function renderBoActiveSummary(links) {
-  const statusEl = document.getElementById("boLinkStatus");
-  if (!statusEl) return;
-
-  if (Array.isArray(links) && links.length) {
-    statusEl.style.color = "#d4b5bc";
-    statusEl.innerHTML = `📌 <b>Link Aktif (${links.length}):</b> <span style="color:#fde68a;">${links.join(" • ")}</span>`;
-  } else {
-    statusEl.style.color = "#9c7a82";
-    statusEl.textContent = "Belum ada link banner di Firebase.";
-  }
-}
-
-function loadBoBannerLink() {
-  const statusEl = document.getElementById("boLinkStatus");
-  if (!statusEl) return;
-
-  statusEl.style.color = "#fda4af";
-  statusEl.textContent = "⏳ Memuat link banner...";
-
-  database.ref(BO_BANNER_DB_PATH).once("value").then((snapshot) => {
-    renderBoActiveSummary(extractExistingBoLinks(snapshot.val()));
-  }).catch(() => {
-    statusEl.textContent = "";
-  });
 }
 
 function setBoActionButtonsDisabled(disabled) {
@@ -1181,8 +1245,7 @@ function loginAdmin() {
   firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
     document.getElementById("adminLoginOverlay").style.display = "none";
     errorEl.innerText = "";
-    loadWaNumber();
-    loadBoBannerLink();
+    checkMissedScheduledMarkets();
   }).catch((err) => {
     errorEl.style.color = "#fda4af";
     if (
@@ -1203,6 +1266,7 @@ function loginAdmin() {
 
 function logoutAdmin() {
   firebase.auth().signOut().then(() => {
+    closeMissedMarketModal();
     alert("Berhasil Logout dari Panel CS.");
   }).catch((err) => {
     alert("Gagal logout: " + err.message);
@@ -1263,6 +1327,8 @@ function saveDataPaito() {
     msgEl.style.color = "#6ee7b7";
     msgEl.textContent = `Berhasil menyimpan data ${cfg.label} tgl ${formattedDate}${roundSuffix}!`;
     document.getElementById("inputNumbers").value = "";
+    shownMissedPopupSignature = "";
+    checkMissedScheduledMarkets();
     setTimeout(() => showLatestDataPaito(marketKey), 2500);
   }).catch((err) => {
     msgEl.style.color = "#fda4af";
@@ -1276,12 +1342,11 @@ document.addEventListener("DOMContentLoaded", () => {
   autoSetDates();
   applyInitialMarketByTime();
   refreshAllFormPreviews();
-  loadWaNumber();
-  loadBoBannerLink();
 
   let lastTrackedKey = document.getElementById("marketSelect")?.value || "";
 
   setInterval(() => {
+    checkMissedScheduledMarkets();
     if (isManualMarketSelection) return;
     const activeMarket = getScheduledMarketByTime();
     if (activeMarket.key !== lastTrackedKey) {
@@ -1323,8 +1388,7 @@ document.addEventListener("DOMContentLoaded", () => {
           statusBadge.innerHTML = `🟢 Status : <b>LOGIN</b> (${user.email})`;
         }
         if (logoutBtn) logoutBtn.style.display = "inline-block";
-        loadWaNumber();
-        loadBoBannerLink();
+        checkMissedScheduledMarkets();
       } else {
         if (overlay) overlay.style.display = "flex";
         if (statusBadge) {
@@ -1332,6 +1396,7 @@ document.addEventListener("DOMContentLoaded", () => {
           statusBadge.innerHTML = "🔴 Status : <b>LOGOUT / LOGOUT</b>";
         }
         if (logoutBtn) logoutBtn.style.display = "none";
+        closeMissedMarketModal();
       }
     });
   });
