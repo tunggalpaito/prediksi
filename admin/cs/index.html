@@ -763,7 +763,8 @@ function showLatestDataPaito(marketKey) {
       const items = latest.data.split(",").map((item) => item.trim()).filter(Boolean);
       const lastValue = items.length > 0 ? items[items.length - 1] : latest.data;
       const roundCount = items.length;
-      const roundInfo = roundCount > 1 ? ` • <span style="color:#6ee7b7;">putaran ke-${roundCount}</span>` : "";
+      const hasRoundSystem = dbPath === "data-macau4d";
+      const roundInfo = (hasRoundSystem && roundCount > 1) ? ` • <span style="color:#6ee7b7;">putaran ke-${roundCount}</span>` : "";
       const dateInfo = latest.date ? ` • tgl <b>${latest.date}</b>` : "";
 
       msgEl.style.color = "#d4b5bc";
@@ -1238,7 +1239,8 @@ function saveDataPaito() {
     currentRound = items.length > 0 ? items.length : 1;
     return ref.update({ [formattedDate]: finalNumbers });
   }).then(() => {
-    const roundSuffix = currentRound > 1 ? ` (putaran ke-${currentRound})` : "";
+    const hasRoundSystem = dbPath === "data-macau4d";
+    const roundSuffix = (hasRoundSystem && currentRound > 1) ? ` (putaran ke-${currentRound})` : "";
     msgEl.style.color = "#6ee7b7";
     msgEl.textContent = `Berhasil menyimpan data ${cfg.label} tgl ${formattedDate}${roundSuffix}!`;
     document.getElementById("inputNumbers").value = "";
