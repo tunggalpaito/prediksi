@@ -317,9 +317,9 @@ h2{
   align-items:center;
   justify-content:center;
   text-decoration:none;
-  background:linear-gradient(135deg,#be123c 0%,#881337 100%);
-  border:1px solid rgba(253,164,175,.32);
-  color:#fff1f2;
+  background:linear-gradient(135deg,#059669 0%,#047857 100%);
+  border:1px solid rgba(110,231,183,.35);
+  color:#d1fae5;
   padding:6px 11px;
   border-radius:8px;
   font-weight:800;
@@ -328,13 +328,15 @@ h2{
   text-transform:uppercase;
   letter-spacing:.04em;
   transition:all .2s ease;
-  box-shadow:0 4px 12px rgba(136,19,55,.45);
+  box-shadow:0 4px 12px rgba(4,120,87,.45);
   line-height:1.15;
 }
 .btn-prediksi-kecil:hover{
   filter:brightness(1.12);
-  border-color:#fda4af;
+  border-color:#6ee7b7;
+  color:#ecfdf5;
   transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(16,185,129,.45);
 }
 
 .status-firebase{
@@ -760,8 +762,12 @@ function showLatestDataPaito(marketKey) {
       const latest = getLatestEntryFromObject(snapshot.val());
       const items = latest.data.split(",").map((item) => item.trim()).filter(Boolean);
       const lastValue = items.length > 0 ? items[items.length - 1] : latest.data;
+      const roundCount = items.length;
+      const roundInfo = roundCount > 1 ? ` • <span style="color:#6ee7b7;">putaran ke-${roundCount}</span>` : "";
+      const dateInfo = latest.date ? ` • tgl <b>${latest.date}</b>` : "";
+
       msgEl.style.color = "#d4b5bc";
-      msgEl.innerHTML = `📌<b>Data Terakhir ${cfg.label}${latest.date ? " (" + latest.date + ")" : ""}:</b> <span style="color:#fde68a;font-size:14px;font-weight:800;">${lastValue}</span>`;
+      msgEl.innerHTML = `📌<b>Data Terakhir ${cfg.label}:</b> <span style="color:#fde68a;font-size:14px;font-weight:800;">${lastValue}</span>${dateInfo}${roundInfo}`;
     } else {
       msgEl.style.color = "#9c7a82";
       msgEl.innerText = `Belum ada data paito ${cfg.label}`;
@@ -927,7 +933,6 @@ function resetDefaultWaNumber() {
     });
 }
 
-// Pisah spasi, koma, atau baris baru
 function normalizeBoLinks(rawText) {
   return (rawText || "")
     .split(/[\s,]+/)
@@ -1079,7 +1084,6 @@ function deleteBoBannerLinkByInput() {
     return;
   }
 
-  // Cocokkan URL penuh maupun host/path tanpa protokol
   const targetSet = new Set();
   targets.forEach((u) => {
     targetSet.add(u.toLowerCase());
@@ -1219,6 +1223,8 @@ function saveDataPaito() {
   msgEl.style.color = "#fda4af";
   msgEl.textContent = `Menyimpan data ${cfg.label}...`;
 
+  let currentRound = 1;
+
   ref.once("value").then((snapshot) => {
     const existingObj = snapshot.val();
     let finalNumbers = rawNumbers;
@@ -1228,10 +1234,13 @@ function saveDataPaito() {
         finalNumbers = prevData + "," + rawNumbers;
       }
     }
+    const items = finalNumbers.split(",").map((item) => item.trim()).filter(Boolean);
+    currentRound = items.length > 0 ? items.length : 1;
     return ref.update({ [formattedDate]: finalNumbers });
   }).then(() => {
+    const roundSuffix = currentRound > 1 ? ` (putaran ke-${currentRound})` : "";
     msgEl.style.color = "#6ee7b7";
-    msgEl.textContent = `Berhasil menyimpan data ${cfg.label} untuk tanggal ${formattedDate}!`;
+    msgEl.textContent = `Berhasil menyimpan data ${cfg.label} tgl ${formattedDate}${roundSuffix}!`;
     document.getElementById("inputNumbers").value = "";
     setTimeout(() => showLatestDataPaito(marketKey), 2500);
   }).catch((err) => {
