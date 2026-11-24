@@ -502,7 +502,7 @@ footer span{color:#fb7185;font-weight:800}
     <input type="date" id="inputDate">
 
     <label for="inputNumbers">Masukkan Angka Mingguan<br>Pisahkan dengan koma</label>
-    <textarea id="inputNumbers" placeholder="Contoh: 1234,5678,9012,3456,7890"></textarea>
+    <textarea id="inputNumbers" placeholder="Contoh 5D: 12345 atau 12345,67890 | Contoh 4D: 1234,5678"></textarea>
 
     <button type="button" id="btnUpdatePaito" class="btn-kirim" onclick="saveDataPaito()">Update</button>
     <div id="message" class="status-firebase"></div>
@@ -726,6 +726,13 @@ function resetToAutoMarket() {
   refreshAllFormPreviews();
 }
 
+function parsePaitoItems(rawData) {
+  return String(rawData || "")
+    .split(/[\s,]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
 function getLatestEntryFromObject(obj) {
   if (!obj) return { date: "", data: "" };
   if (typeof obj !== "object") return { date: "", data: String(obj) };
@@ -744,7 +751,14 @@ function getLatestEntryFromObject(obj) {
   });
 
   const latestKey = keys[keys.length - 1];
-  return { date: latestKey, data: String(obj[latestKey]) };
+  const rawLatestVal = obj[latestKey];
+  const normalizedData = Array.isArray(rawLatestVal)
+    ? rawLatestVal.join(",")
+    : (rawLatestVal && typeof rawLatestVal === "object"
+        ? Object.values(rawLatestVal).join(",")
+        : String(rawLatestVal));
+
+  return { date: latestKey, data: normalizedData };
 }
 
 function showLatestDataPaito(marketKey) {
@@ -760,11 +774,13 @@ function showLatestDataPaito(marketKey) {
   database.ref(`live/${dbPath}`).once("value").then((snapshot) => {
     if (snapshot.exists()) {
       const latest = getLatestEntryFromObject(snapshot.val());
-      const items = latest.data.split(",").map((item) => item.trim()).filter(Boolean);
+      const items = parsePaitoItems(latest.data);
       const lastValue = items.length > 0 ? items[items.length - 1] : latest.data;
       const roundCount = items.length;
       const hasRoundSystem = dbPath === "data-macau4d" || dbPath === "data-macau5d";
-      const roundInfo = (hasRoundSystem && roundCount > 1) ? ` • <span style="color:#6ee7b7;">putaran ke-${roundCount}</span>` : "";
+      const roundInfo = hasRoundSystem
+        ? ` • <span style="color:${roundCount > 1 ? "#6ee7b7" : "#fde68a"};">putaran ke-${roundCount}</span>`
+        : "";
       const dateInfo = latest.date ? ` • tgl <b>${latest.date}</b>` : "";
 
       msgEl.style.color = "#d4b5bc";
@@ -897,7 +913,7 @@ function saveWaNumber() {
     })
     .catch((err) => {
       statusEl.style.color = "#fda4af";
-      statusEl.textContent = "" + err.message;
+      statusEl.textContent = "Gagal menyimpan nomor WA: " + err.message;
     })
     .finally(() => {
       setWaActionButtonsDisabled(false);
@@ -1231,16 +1247,19 @@ function saveDataPaito() {
     let finalNumbers = rawNumbers;
     if (existingObj && typeof existingObj === "object" && existingObj[formattedDate]) {
       const prevData = existingObj[formattedDate];
-      if (typeof prevData === "string" && prevData.trim() !== "") {
-        finalNumbers = prevData + "," + rawNumbers;
+      const prevStr = Array.isArray(prevData)
+        ? prevData.join(",")
+        : (typeof prevData === "string" ? prevData.trim() : "");
+      if (prevStr !== "") {
+        finalNumbers = prevStr + "," + rawNumbers;
       }
     }
-    const items = finalNumbers.split(",").map((item) => item.trim()).filter(Boolean);
+    const items = parsePaitoItems(finalNumbers);
     currentRound = items.length > 0 ? items.length : 1;
     return ref.update({ [formattedDate]: finalNumbers });
   }).then(() => {
     const hasRoundSystem = dbPath === "data-macau4d" || dbPath === "data-macau5d";
-    const roundSuffix = (hasRoundSystem && currentRound > 1) ? ` (putaran ke-${currentRound})` : "";
+    const roundSuffix = hasRoundSystem ? ` (putaran ke-${currentRound})` : "";
     msgEl.style.color = "#6ee7b7";
     msgEl.textContent = `Berhasil menyimpan data ${cfg.label} tgl ${formattedDate}${roundSuffix}!`;
     document.getElementById("inputNumbers").value = "";
