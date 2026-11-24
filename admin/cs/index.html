@@ -897,7 +897,7 @@ function saveWaNumber() {
     })
     .catch((err) => {
       statusEl.style.color = "#fda4af";
-      statusEl.textContent = "Gagal menyimpan nomor WA: " + err.message;
+      statusEl.textContent = "" + err.message;
     })
     .finally(() => {
       setWaActionButtonsDisabled(false);
