@@ -455,7 +455,7 @@ footer span{color:#fb7185;font-weight:800}
   border-radius:18px;
   padding:22px 20px;
   width:100%;
-  max-width:400px;
+  max-width:410px;
   box-shadow:0 20px 50px rgba(0,0,0,.9),0 0 0 1px rgba(244,63,94,.18);
   text-align:center;
 }
@@ -668,7 +668,7 @@ const JADWAL_PASARAN = [
 ];
 
 let isManualMarketSelection = true;
-let firstMissedMarketKey = "";
+let firstMissedMarketTarget = null;
 let shownMissedPopupSignature = "";
 let missedPopupCheckInFlight = false;
 
@@ -686,6 +686,20 @@ function updateSelectionModeBadge() {
     badge.textContent = "🕒 Auto";
     if (resetBtn) resetBtn.style.display = "none";
   }
+}
+
+function formatDbDateKeyFromUTCDate(utcDate) {
+  const y = utcDate.getUTCFullYear();
+  const m = String(utcDate.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(utcDate.getUTCDate()).padStart(2, "0");
+  return `${d}-${m}-${y}`;
+}
+
+function formatInputDateFromUTCDate(utcDate) {
+  const y = utcDate.getUTCFullYear();
+  const m = String(utcDate.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(utcDate.getUTCDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
 }
 
 function getWIBTimeInfo() {
@@ -710,13 +724,20 @@ function getWIBTimeInfo() {
   const day = Number(map.day);
   const hour = Number(map.hour === "24" ? "0" : map.hour);
   const minute = Number(map.minute);
-  const dayOfWeek = new Date(Date.UTC(year, month - 1, day)).getUTCDay();
+
+  const todayUtc = new Date(Date.UTC(year, month - 1, day));
+  const yesterdayUtc = new Date(Date.UTC(year, month - 1, day - 1));
+  const dayOfWeek = todayUtc.getUTCDay();
+  const prevDayOfWeek = yesterdayUtc.getUTCDay();
 
   return {
-    dateStr: `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
-    dbDateKey: `${String(day).padStart(2, "0")}-${String(month).padStart(2, "0")}-${year}`,
+    dateStr: formatInputDateFromUTCDate(todayUtc),
+    prevDateStr: formatInputDateFromUTCDate(yesterdayUtc),
+    dbDateKey: formatDbDateKeyFromUTCDate(todayUtc),
+    prevDbDateKey: formatDbDateKeyFromUTCDate(yesterdayUtc),
     totalMinutes: hour * 60 + minute,
-    dayOfWeek
+    dayOfWeek,
+    prevDayOfWeek
   };
 }
 
@@ -742,28 +763,95 @@ function getScheduledMarketByTime() {
   return activeMarket;
 }
 
-function hasValidDateResult(rawEntry) {
-  if (rawEntry === null || rawEntry === undefined) return false;
+function getSavedRoundCount(rawEntry) {
+  if (rawEntry === null || rawEntry === undefined) return 0;
   const str = Array.isArray(rawEntry)
     ? rawEntry.join(",")
     : (typeof rawEntry === "object" ? Object.values(rawEntry).join(",") : String(rawEntry));
-  return parsePaitoItems(str).length > 0;
+  return parsePaitoItems(str).length;
 }
 
-function openMissedMarketPopup(missedItems, dbDateKey) {
+function getDueCheckTargets() {
+  const { totalMinutes, dayOfWeek, prevDayOfWeek, dbDateKey, prevDbDateKey, dateStr, prevDateStr } = getWIBTimeInfo();
+  const targets = [];
+
+  // 1. Cek pasaran malam hari kemarin (contoh HK semalam) yang mungkin lupa di-update
+  JADWAL_PASARAN.forEach((item) => {
+    const isClosedYesterday = Array.isArray(item.closedDays) && item.closedDays.includes(prevDayOfWeek);
+    const isNightMarket = item.startMinute >= 20 * 60;
+    if (!isClosedYesterday && isNightMarket) {
+      targets.push({
+        id: `prev:${item.key}:${prevDbDateKey}`,
+        key: item.key,
+        dbKey: item.dbKey,
+        dbDateKey: prevDbDateKey,
+        inputDateStr: prevDateStr,
+        label: `${item.label} (Kemarin ${prevDbDateKey})`,
+        expectedMinRounds: 1
+      });
+    }
+  });
+
+  // 2. Cek pasaran hari ini yang jadwalnya sudah lewat/jatuh tempo
+  const dueTodayItems = JADWAL_PASARAN.filter((item) => {
+    const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
+    return !isClosedToday && totalMinutes >= item.startMinute;
+  });
+
+  // Hitung putaran yang jatuh tempo untuk dbKey multi-putaran (seperti data-macau4d / data-macau5d)
+  const dueCountByDbKey = {};
+  dueTodayItems.forEach((item) => {
+    dueCountByDbKey[item.dbKey] = (dueCountByDbKey[item.dbKey] || 0) + 1;
+  });
+
+  const seenTodayDbKey = new Set();
+  dueTodayItems.forEach((item) => {
+    const isMultiRound = item.dbKey === "data-macau4d" || item.dbKey === "data-macau5d";
+    if (isMultiRound) {
+      if (seenTodayDbKey.has(item.dbKey)) return;
+      seenTodayDbKey.add(item.dbKey);
+      const expectedRounds = dueCountByDbKey[item.dbKey] || 1;
+      const baseLabel = item.dbKey === "data-macau4d" ? "MACAU 4D" : "MACAU 5D";
+      targets.push({
+        id: `today:${item.dbKey}:${dbDateKey}:r${expectedRounds}`,
+        key: item.key,
+        dbKey: item.dbKey,
+        dbDateKey,
+        inputDateStr: dateStr,
+        label: expectedRounds > 1 ? `${baseLabel} (Putaran ke-${expectedRounds})` : item.label,
+        expectedMinRounds: expectedRounds
+      });
+    } else {
+      targets.push({
+        id: `today:${item.key}:${dbDateKey}`,
+        key: item.key,
+        dbKey: item.dbKey,
+        dbDateKey,
+        inputDateStr: dateStr,
+        label: item.label,
+        expectedMinRounds: 1
+      });
+    }
+  });
+
+  return targets;
+}
+
+function openMissedMarketPopup(missedTargets) {
   const modal = document.getElementById("missedMarketModal");
   const textEl = document.getElementById("missedMarketText");
-  if (!modal || !textEl || !Array.isArray(missedItems) || !missedItems.length) return;
+  if (!modal || !textEl || !Array.isArray(missedTargets) || !missedTargets.length) return;
 
-  const labelsText = missedItems.map((m) => m.label).join(", ");
-  const signature = `${dbDateKey}:${missedItems.map((m) => m.key).join("|")}`;
+  const signature = missedTargets.map((m) => m.id).join("|");
   if (signature === shownMissedPopupSignature && modal.classList.contains("is-open")) {
     return;
   }
 
   shownMissedPopupSignature = signature;
-  firstMissedMarketKey = missedItems[0].key;
-  textEl.textContent = `Hai Admin Maaf Menggangu\nSaya Ingin Menyampaikan Kalau Pasaran (${labelsText}) Belum Anda Update 🙏`;
+  firstMissedMarketTarget = missedTargets[0];
+
+  const labelsText = missedTargets.map((m) => m.label).join(", ");
+  textEl.textContent = `Hai Admin Maaf Mengganggu\nPasaran yang jadwalnya sudah terlewat dan belum ter-update adalah:\n(${labelsText}) 🙏`;
   modal.classList.add("is-open");
 }
 
@@ -774,49 +862,60 @@ function closeMissedMarketModal() {
 
 function focusMissedMarketAndClose() {
   closeMissedMarketModal();
-  if (!firstMissedMarketKey) return;
+  if (!firstMissedMarketTarget) return;
+
   const selectEl = document.getElementById("marketSelect");
+  const inputDateEl = document.getElementById("inputDate");
+
   if (selectEl) {
-    selectEl.value = firstMissedMarketKey;
+    selectEl.value = firstMissedMarketTarget.key;
     isManualMarketSelection = true;
     updateSelectionModeBadge();
-    refreshAllFormPreviews();
-    selectEl.scrollIntoView({ behavior: "smooth", block: "center" });
   }
+  if (inputDateEl && firstMissedMarketTarget.inputDateStr) {
+    inputDateEl.value = firstMissedMarketTarget.inputDateStr;
+  }
+
+  refreshAllFormPreviews();
+  selectEl?.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 function checkMissedScheduledMarkets() {
   if (!firebase.auth().currentUser || missedPopupCheckInFlight) return;
 
-  const { totalMinutes, dayOfWeek, dbDateKey } = getWIBTimeInfo();
-  const dueMarkets = JADWAL_PASARAN.filter((item) => {
-    const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
-    return !isClosedToday && totalMinutes >= item.startMinute;
-  });
+  const targets = getDueCheckTargets();
+  if (!targets.length) {
+    closeMissedMarketModal();
+    return;
+  }
 
-  if (!dueMarkets.length) return;
-
-  const uniqueDbKeys = Array.from(new Set(dueMarkets.map((item) => item.dbKey)));
   missedPopupCheckInFlight = true;
 
   Promise.all(
-    uniqueDbKeys.map((dbKey) =>
+    targets.map((target) =>
       database
-        .ref(`live/${dbKey}/${dbDateKey}`)
+        .ref(`live/${target.dbKey}/${target.dbDateKey}`)
         .once("value")
-        .then((snap) => ({ dbKey, hasResult: snap.exists() && hasValidDateResult(snap.val()) }))
-        .catch(() => ({ dbKey, hasResult: true }))
+        .then((snap) => {
+          const savedRounds = snap.exists() ? getSavedRoundCount(snap.val()) : 0;
+          return {
+            target,
+            isUpdated: savedRounds >= target.expectedMinRounds
+          };
+        })
+        .catch(() => ({
+          target,
+          isUpdated: true
+        }))
     )
   )
     .then((results) => {
-      const updatedMap = {};
-      results.forEach((r) => {
-        updatedMap[r.dbKey] = r.hasResult;
-      });
+      const missedTargets = results
+        .filter((r) => !r.isUpdated)
+        .map((r) => r.target);
 
-      const missedMarkets = dueMarkets.filter((item) => !updatedMap[item.dbKey]);
-      if (missedMarkets.length > 0) {
-        openMissedMarketPopup(missedMarkets, dbDateKey);
+      if (missedTargets.length > 0) {
+        openMissedMarketPopup(missedTargets);
       } else {
         closeMissedMarketModal();
       }
@@ -877,6 +976,7 @@ function applyInitialMarketByTime() {
 
 function resetToAutoMarket() {
   isManualMarketSelection = false;
+  autoSetDates();
   applyInitialMarketByTime();
   refreshAllFormPreviews();
 }
@@ -1245,6 +1345,7 @@ function loginAdmin() {
   firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
     document.getElementById("adminLoginOverlay").style.display = "none";
     errorEl.innerText = "";
+    shownMissedPopupSignature = "";
     checkMissedScheduledMarkets();
   }).catch((err) => {
     errorEl.style.color = "#fda4af";
@@ -1388,6 +1489,7 @@ document.addEventListener("DOMContentLoaded", () => {
           statusBadge.innerHTML = `🟢 Status : <b>LOGIN</b> (${user.email})`;
         }
         if (logoutBtn) logoutBtn.style.display = "inline-block";
+        shownMissedPopupSignature = "";
         checkMissedScheduledMarkets();
       } else {
         if (overlay) overlay.style.display = "flex";
