@@ -1748,7 +1748,7 @@
         </ol>
       </div>
     </div>
-    <a href="https://drive.google.com/file/d/1JlcdXBP7y6IxF9txlxtmuCnCQ_XiS0AR/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" onclick="closeDownloadModal()" class="tap-responsive cyber-btn-red w-full flex items-center justify-center space-x-2 font-extrabold py-3 px-4 rounded-2xl">
+    <a id="modal-apk-download-link" href="https://drive.google.com/file/d/1JlcdXBP7y6IxF9txlxtmuCnCQ_XiS0AR/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" onclick="closeDownloadModal()" class="tap-responsive cyber-btn-red w-full flex items-center justify-center space-x-2 font-extrabold py-3 px-4 rounded-2xl">
       <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i> <span>Lanjutkan Download APK</span>
     </a>
   </div>
@@ -1796,7 +1796,7 @@
 (function() {
   "use strict";
 
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_23_final_v35";
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_25_final_v36";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
   const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
 
@@ -2887,18 +2887,38 @@
     }
   }, { passive: true });
 
-  // Wajib download APK saat klik halaman lain jika belum pakai ?akses_apk=tp_resmi
+  // Wajib download APK saat klik halaman lain jika belum pakai ?akses_apk=tp_resmi atau belum tersimpan di browser
   const APK_DOWNLOAD_URL = "https://drive.google.com/file/d/1JlcdXBP7y6IxF9txlxtmuCnCQ_XiS0AR/view?usp=drivesdk";
   const HIMBAUAN_APK_TEXT = "Download APK dulu bosku biar kita gass!";
+  const APK_ACCESS_STORAGE_KEY = "tp_apk_unlocked_v1";
   let apkRedirectTimer = null;
+
+  function markApkAccessGranted() {
+    try {
+      window.localStorage.setItem(APK_ACCESS_STORAGE_KEY, "1");
+    } catch (e) {}
+  }
 
   function hasAuthorizedApkAccess() {
     try {
       const params = new URLSearchParams(window.location.search);
-      return params.get("akses_apk") === "tp_resmi";
+      if (params.get("akses_apk") === "tp_resmi") {
+        markApkAccessGranted();
+        return true;
+      }
+      return window.localStorage.getItem(APK_ACCESS_STORAGE_KEY) === "1";
     } catch (e) {
       return false;
     }
+  }
+
+  hasAuthorizedApkAccess();
+
+  const modalDownloadBtn = document.getElementById("modal-apk-download-link");
+  if (modalDownloadBtn) {
+    modalDownloadBtn.addEventListener("click", function() {
+      markApkAccessGranted();
+    }, { passive: true });
   }
 
   function showApkGateBanner(message) {
