@@ -239,6 +239,55 @@ h2{
   transform:translateY(-1px);
 }
 .btn-kirim:disabled{opacity:.55;cursor:not-allowed}
+.prediksi-panel{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:2px;
+  padding-top:11px;
+  border-top:1px solid rgba(251,113,133,.16);
+  flex-wrap:wrap;
+}
+.prediksi-label{
+  font-size:10.5px;
+  font-weight:800;
+  color:#d4b5bc;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.prediksi-btn-wrap{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.btn-prediksi-kecil{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  background:linear-gradient(135deg,#059669 0%,#047857 100%);
+  border:1px solid rgba(110,231,183,.35);
+  color:#d1fae5;
+  padding:6px 11px;
+  border-radius:8px;
+  font-weight:800;
+  font-size:10.5px;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  transition:all .2s ease;
+  box-shadow:0 4px 12px rgba(4,120,87,.45);
+  line-height:1.15;
+}
+.btn-prediksi-kecil:hover{
+  filter:brightness(1.12);
+  border-color:#6ee7b7;
+  color:#ecfdf5;
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(16,185,129,.45);
+}
 .status-firebase{
   font-size:11.5px;
   text-align:center;
@@ -463,6 +512,11 @@ footer span{color:#fb7185;font-weight:800}
 
     <button type="button" id="btnUpdatePaito" class="btn-kirim" onclick="saveDataPaito()">Update</button>
     <div id="message" class="status-firebase"></div>
+
+    <div class="prediksi-panel">
+      <span class="prediksi-label">⚡ Prediksi</span>
+      <div id="prediksiButtonsBox" class="prediksi-btn-wrap"></div>
+    </div>
   </div>
 </div>
 
@@ -500,23 +554,23 @@ const MACAU_5D_ROUNDS = [
 ];
 
 const JADWAL_PASARAN = [
-  { key: "data-macau4d-pt6", dbKey: "data-macau4d", roundIndex: 6, label: "MACAU 4D PT6", startMinute: 1 },
-  { key: "data-cambodia", dbKey: "data-cambodia", label: "CAMBODIA", startMinute: 11 * 60 + 45 },
-  { key: "data-macau4d-pt1", dbKey: "data-macau4d", roundIndex: 1, label: "MACAU 4D PT1", startMinute: 13 * 60 },
-  { key: "data-sdy", dbKey: "data-sdy", label: "SDYPOL", startMinute: 13 * 60 + 45 },
-  { key: "data-sdylotto", dbKey: "data-sdylotto", label: "SDYLOT", startMinute: 14 * 60 },
-  { key: "data-macau5d-pt1", dbKey: "data-macau5d", roundIndex: 1, label: "MACAU 5D PT1", startMinute: 15 * 60 },
-  { key: "data-china", dbKey: "data-china", label: "CHINA", startMinute: 15 * 60 + 30 },
-  { key: "data-macau4d-pt2", dbKey: "data-macau4d", roundIndex: 2, label: "MACAU 4D PT2", startMinute: 16 * 60 },
-  { key: "data-japan", dbKey: "data-japan", label: "JAPAN", startMinute: 17 * 60 + 25 },
-  { key: "data-sgp", dbKey: "data-sgp", label: "SGP", startMinute: 17 * 60 + 45, closedDays: [2, 5] },
-  { key: "data-macau4d-pt3", dbKey: "data-macau4d", roundIndex: 3, label: "MACAU 4D PT3", startMinute: 19 * 60 },
-  { key: "data-taiwan", dbKey: "data-taiwan", label: "TAIWAN", startMinute: 20 * 60 + 45 },
-  { key: "data-macau5d-pt2", dbKey: "data-macau5d", roundIndex: 2, label: "MACAU 5D PT2", startMinute: 21 * 60 },
-  { key: "data-macau4d-pt4", dbKey: "data-macau4d", roundIndex: 4, label: "MACAU 4D PT4", startMinute: 22 * 60 },
-  { key: "data-hk", dbKey: "data-hk", label: "HKPOL", startMinute: 23 * 60 },
-  { key: "data-macau4d-pt5", dbKey: "data-macau4d", roundIndex: 5, label: "MACAU 4D PT5", startMinute: 23 * 60 + 10 },
-  { key: "data-hklotto", dbKey: "data-hklotto", label: "HK LOT", startMinute: 23 * 60 + 20 }
+  { key: "data-macau4d-pt6", dbKey: "data-macau4d", roundIndex: 6, label: "MACAU 4D PT6", startMinute: 1, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-cambodia", dbKey: "data-cambodia", label: "CAMBODIA", startMinute: 11 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-cambodia/" },
+  { key: "data-macau4d-pt1", dbKey: "data-macau4d", roundIndex: 1, label: "MACAU 4D PT1", startMinute: 13 * 60, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-sdy", dbKey: "data-sdy", label: "SDYPOL", startMinute: 13 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-sdy" },
+  { key: "data-sdylotto", dbKey: "data-sdylotto", label: "SDYLOT", startMinute: 14 * 60, url: "https://tunggalpaito.online/bbfs2d-sdylotto/" },
+  { key: "data-macau5d-pt1", dbKey: "data-macau5d", roundIndex: 1, label: "MACAU 5D PT1", startMinute: 15 * 60, url: "https://tunggalpaito.online/bbfs2d-macau5d/" },
+  { key: "data-china", dbKey: "data-china", label: "CHINA", startMinute: 15 * 60 + 30, url: "https://tunggalpaito.online/bbfs2d-china/" },
+  { key: "data-macau4d-pt2", dbKey: "data-macau4d", roundIndex: 2, label: "MACAU 4D PT2", startMinute: 16 * 60, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-japan", dbKey: "data-japan", label: "JAPAN", startMinute: 17 * 60 + 25, url: "https://tunggalpaito.online/bbfs2d-japan/" },
+  { key: "data-sgp", dbKey: "data-sgp", label: "SGP", startMinute: 17 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-sgp", closedDays: [2, 5] },
+  { key: "data-macau4d-pt3", dbKey: "data-macau4d", roundIndex: 3, label: "MACAU 4D PT3", startMinute: 19 * 60, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-taiwan", dbKey: "data-taiwan", label: "TAIWAN", startMinute: 20 * 60 + 45, url: "https://tunggalpaito.online/bbfs2d-taiwan/" },
+  { key: "data-macau5d-pt2", dbKey: "data-macau5d", roundIndex: 2, label: "MACAU 5D PT2", startMinute: 21 * 60, url: "https://tunggalpaito.online/bbfs2d-macau5d/" },
+  { key: "data-macau4d-pt4", dbKey: "data-macau4d", roundIndex: 4, label: "MACAU 4D PT4", startMinute: 22 * 60, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-hk", dbKey: "data-hk", label: "HKPOL", startMinute: 23 * 60, url: "https://tunggalpaito.online/bbfs2d-hk" },
+  { key: "data-macau4d-pt5", dbKey: "data-macau4d", roundIndex: 5, label: "MACAU 4D PT5", startMinute: 23 * 60 + 10, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
+  { key: "data-hklotto", dbKey: "data-hklotto", label: "HK LOT", startMinute: 23 * 60 + 20, url: "https://tunggalpaito.online/bbfs2d-hklotto/" }
 ];
 
 let isManualMarketSelection = false;
@@ -810,6 +864,41 @@ function checkMissedScheduledMarkets() {
     });
 }
 
+function renderPrediksiButtons(selectedKey) {
+  const box = document.getElementById("prediksiButtonsBox");
+  if (!box) return;
+
+  const { dayOfWeek } = getWIBTimeInfo();
+  const startIndex = JADWAL_PASARAN.findIndex((item) => item.key === selectedKey);
+  const safeStart = startIndex >= 0 ? startIndex : 0;
+
+  const picked = [];
+  const usedUrls = new Set();
+
+  for (let i = safeStart; i < JADWAL_PASARAN.length; i++) {
+    const item = JADWAL_PASARAN[i];
+    if (!item.url) continue;
+    const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
+    if (isClosedToday) continue;
+
+    if (!usedUrls.has(item.url)) {
+      usedUrls.add(item.url);
+      picked.push(item);
+    }
+
+    if (picked.length === 2 || item.key === "data-hklotto") {
+      break;
+    }
+  }
+
+  box.innerHTML = picked
+    .map(
+      (item) =>
+        `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-prediksi-kecil">${item.label}</a>`
+    )
+    .join("");
+}
+
 function autoSetDates() {
   const inputDate = document.getElementById("inputDate");
   if (inputDate) inputDate.value = getTodayString();
@@ -823,6 +912,7 @@ function syncMarketToCurrentRound(baseMarket) {
   if (!isMultiRound) {
     selectEl.value = baseMarket.key;
     updateSelectionModeBadge();
+    renderPrediksiButtons(baseMarket.key);
     showLatestDataPaito(baseMarket.key);
     return;
   }
@@ -841,12 +931,14 @@ function syncMarketToCurrentRound(baseMarket) {
       const optionKey = getMacauRoundOptionKey(baseMarket.dbKey, targetRound) || baseMarket.key;
       selectEl.value = optionKey;
       updateSelectionModeBadge();
+      renderPrediksiButtons(optionKey);
       showLatestDataPaito(optionKey);
     })
     .catch(() => {
       if (!isManualMarketSelection) {
         selectEl.value = baseMarket.key;
         updateSelectionModeBadge();
+        renderPrediksiButtons(baseMarket.key);
         showLatestDataPaito(baseMarket.key);
       }
     });
@@ -859,6 +951,7 @@ function applyInitialMarketByTime() {
     selectEl.value = activeMarket.key;
   }
   updateSelectionModeBadge();
+  renderPrediksiButtons(activeMarket.key);
   syncMarketToCurrentRound(activeMarket);
 }
 
@@ -933,6 +1026,7 @@ function showLatestDataPaito(marketKey) {
 function refreshAllFormPreviews() {
   const selectedMarket = document.getElementById("marketSelect")?.value;
   if (selectedMarket) {
+    renderPrediksiButtons(selectedMarket);
     showLatestDataPaito(selectedMarket);
   }
 }
@@ -1040,13 +1134,16 @@ function saveDataPaito() {
     msgEl.textContent = `Berhasil menyimpan data ${cfg.label} tgl ${formattedDate}${roundSuffix}!`;
     document.getElementById("inputNumbers").value = "";
 
+    let activeKeyAfterSave = marketKey;
     if (!isManualMarketSelection && hasRoundSystem) {
       const nextRound = currentRound + 1;
       const nextKey = getMacauRoundOptionKey(dbPath, nextRound);
       if (nextKey) {
         document.getElementById("marketSelect").value = nextKey;
+        activeKeyAfterSave = nextKey;
       }
     }
+    renderPrediksiButtons(activeKeyAfterSave);
 
     shownMissedPopupSignature = "";
     checkMissedScheduledMarkets();
