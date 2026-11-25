@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panel CS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
+body{
+  background:
+    radial-gradient(circle at 50% -8%,rgba(190,18,60,.28),rgba(13,5,8,.96) 52%,#050203 100%);
+  background-color:#050203;
+  color:#f3e8ea;
+  padding:20px 16px 32px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  min-height:100vh;
+}
+.admin-container{
+  background:linear-gradient(165deg,rgba(26,8,14,.96) 0%,rgba(11,4,7,.99) 100%);
+  width:100%;
+  max-width:500px;
+  padding:22px 20px 24px;
+  border-radius:20px;
+  box-shadow:0 16px 40px rgba(0,0,0,.85),0 0 0 1px rgba(244,63,94,.12);
+  border:1px solid rgba(251,113,133,.22);
+  margin-bottom:18px;
+}
+.header{
+  text-align:center;
+  margin-bottom:20px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(251,113,133,.18);
+}
+h2{
+  color:#fda4af;
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:.08em;
+  margin-bottom:10px;
+  text-transform:uppercase;
+  text-shadow:0 2px 16px rgba(225,29,72,.35);
+}
+.status-row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  margin-bottom:10px;
+}
+.auth-status-badge{
+  font-size:11px;
+  font-weight:700;
+  padding:5px 12px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  letter-spacing:.02em;
+}
+.status-logged-in{
+  background:rgba(16,185,129,.14);
+  color:#6ee7b7;
+  border:1px solid rgba(52,211,153,.35);
+}
+.status-logged-out{
+  background:rgba(225,29,72,.18);
+  color:#fda4af;
+  border:1px solid rgba(251,113,133,.4);
+}
+.mode-badge{
+  font-size:10.5px;
+  font-weight:700;
+  padding:5px 10px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border:1px solid transparent;
+}
+.mode-manual{
+  background:rgba(251,191,36,.14);
+  color:#fde68a;
+  border-color:rgba(251,191,36,.38);
+}
+.mode-auto{
+  background:rgba(244,63,94,.14);
+  color:#fecdd3;
+  border-color:rgba(251,113,133,.28);
+}
+.btn-reset-auto{
+  background:rgba(255,255,255,.06);
+  color:#fecdd3;
+  border:1px solid rgba(251,113,133,.3);
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.btn-reset-auto:hover{
+  background:rgba(225,29,72,.28);
+  border-color:#fb7185;
+  color:#fff1f2;
+}
+.main-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  margin-top:12px;
+}
+.btn-utama{
+  flex:1 1 100%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:12px;
+  color:#fff1f2;
+  transition:.2s ease;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  box-shadow:0 6px 16px rgba(136,19,55,.45);
+}
+.btn-menu-awal{
+  background:linear-gradient(135deg,#be123c 0%,#881337 100%);
+  border:1px solid rgba(253,164,175,.35);
+}
+.btn-menu-awal:hover{
+  filter:brightness(1.1);
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(190,18,60,.55);
+}
+.section-title{
+  font-size:11.5px;
+  font-weight:800;
+  color:#fda4af;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  text-align:left;
+  margin:14px 0 11px 4px;
+  display:flex;
+  align-items:center;
+}
+.section-title::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,rgba(251,113,133,.32),transparent);
+  margin-left:10px;
+}
+.input-result-box{
+  background:rgba(14,4,8,.92);
+  border:1px solid rgba(251,113,133,.22);
+  padding:16px;
+  border-radius:16px;
+  margin-bottom:8px;
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+  box-shadow:inset 0 2px 10px rgba(0,0,0,.65);
+}
+.input-result-box label{
+  font-size:11px;
+  font-weight:700;
+  color:#fda4af;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.input-result-box input,.input-result-box select,.input-result-box textarea{
+  width:100%;
+  background:#070204;
+  border:1px solid rgba(251,113,133,.25);
+  color:#fff1f2;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:14px;
+  outline:0;
+  transition:.2s ease;
+  font-weight:700;
+}
+.input-result-box input[type=date]{
+  text-align:center!important;
+  color:#fde68a!important;
+  background:#120409!important;
+  border:1px solid rgba(251,113,133,.45)!important;
+  font-size:14.5px!important;
+  font-weight:800!important;
+  color-scheme:dark;
+  font-family:'JetBrains Mono',monospace;
+}
+.input-result-box textarea{
+  resize:vertical;
+  height:116px;
+  font-family:'JetBrains Mono',monospace;
+  text-align:left;
+  font-weight:500;
+  font-size:13px;
+  line-height:1.5;
+}
+.input-result-box input:focus,.input-result-box select:focus,.input-result-box textarea:focus{
+  border-color:#fb7185;
+  box-shadow:0 0 0 3px rgba(225,29,72,.22);
+}
+.btn-kirim{
+  background:linear-gradient(135deg,#e11d48 0%,#9f1239 55%,#7f1d1d 100%);
+  border:1px solid rgba(253,164,175,.38);
+  color:#fff1f2;
+  padding:12px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:12.5px;
+  cursor:pointer;
+  text-transform:uppercase;
+  transition:all .22s ease;
+  box-shadow:0 6px 20px rgba(190,18,60,.45),inset 0 1px 0 rgba(255,255,255,.22);
+  letter-spacing:.05em;
+}
+.btn-kirim:hover:not(:disabled){
+  filter:brightness(1.1);
+  box-shadow:0 8px 26px rgba(225,29,72,.65);
+  transform:translateY(-1px);
+}
+.btn-kirim:disabled{opacity:.55;cursor:not-allowed}
+.status-firebase{
+  font-size:11.5px;
+  text-align:center;
+  color:#d4b5bc;
+  margin-top:4px;
+  font-weight:700;
+  line-height:1.45;
+  word-break:break-all;
+}
+footer{
+  text-align:center;
+  font-size:12px;
+  color:#9c7a82;
+  margin-top:6px;
+  margin-bottom:16px;
+}
+footer span{color:#fb7185;font-weight:800}
+.btn-logout-admin{
+  background:rgba(159,18,57,.28);
+  color:#fecdd3;
+  border:1px solid rgba(251,113,133,.4);
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:10.5px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:4px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  transition:.2s ease;
+}
+.btn-logout-admin:hover{
+  background:#be123c;
+  color:#fff1f2;
+}
+.login-overlay{
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:rgba(5,2,3,.95);
+  backdrop-filter:blur(6px);
+  z-index:9999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+.login-box{
+  background:linear-gradient(165deg,#1b070e 0%,#0b0306 100%);
+  border:1px solid rgba(251,113,133,.35);
+  padding:24px 22px;
+  border-radius:18px;
+  width:100%;
+  max-width:380px;
+  box-shadow:0 18px 40px rgba(0,0,0,.85);
+}
+.login-box h3{
+  color:#fda4af;
+  text-align:center;
+  margin-bottom:16px;
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.login-box input{
+  width:100%;
+  background:#070204;
+  border:1px solid rgba(251,113,133,.28);
+  color:#fff1f2;
+  padding:11px 12px;
+  border-radius:10px;
+  margin-bottom:12px;
+  font-size:14px;
+  font-weight:600;
+  outline:0;
+}
+.login-box input:focus{
+  border-color:#fb7185;
+  box-shadow:0 0 0 3px rgba(225,29,72,.22);
+}
+.login-box button{
+  width:100%;
+  background:linear-gradient(135deg,#e11d48 0%,#881337 100%);
+  border:1px solid rgba(253,164,175,.35);
+  color:#fff1f2;
+  padding:12px;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.login-box button:hover{filter:brightness(1.08)}
+.login-error{color:#fda4af;font-size:12px;text-align:center;margin-top:9px;font-weight:600}
+
+.missed-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(5,2,3,.82);
+  backdrop-filter:blur(5px);
+  z-index:9990;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+.missed-modal-overlay.is-open{
+  display:flex;
+}
+.missed-modal-box{
+  background:linear-gradient(165deg,#240913 0%,#0d0407 100%);
+  border:1px solid rgba(251,113,133,.48);
+  border-radius:18px;
+  padding:22px 20px;
+  width:100%;
+  max-width:410px;
+  box-shadow:0 20px 50px rgba(0,0,0,.9),0 0 0 1px rgba(244,63,94,.18);
+  text-align:center;
+}
+.missed-modal-text{
+  color:#fff1f2;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.65;
+  white-space:pre-line;
+  margin-bottom:18px;
+}
+.missed-modal-actions{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.missed-modal-btn{
+  background:linear-gradient(135deg,#e11d48 0%,#9f1239 100%);
+  border:1px solid rgba(253,164,175,.4);
+  color:#fff1f2;
+  padding:10px 18px;
+  border-radius:11px;
+  font-weight:800;
+  font-size:12px;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  transition:.2s ease;
+}
+.missed-modal-btn:hover{
+  filter:brightness(1.12);
+  transform:translateY(-1px);
+}
+</style>
+</head>
+<body>
+<div id="adminLoginOverlay" class="login-overlay" style="display:flex">
+  <div class="login-box">
+    <h3>Login Staff / Admin CS</h3>
+    <input type="email" id="adminEmail" placeholder="Email Staff">
+    <input type="password" id="adminPassword" placeholder="Kata Sandi Staff">
+    <button type="button" id="btnLoginSubmit" onclick="loginAdmin()">MASUK PANEL CS</button>
+    <div id="loginErrorMsg" class="login-error"></div>
+  </div>
+</div>
+
+<div id="missedMarketModal" class="missed-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="missedMarketText">
+  <div class="missed-modal-box">
+    <div id="missedMarketText" class="missed-modal-text"></div>
+    <div class="missed-modal-actions">
+      <button type="button" id="btnSelectMissedMarket" class="missed-modal-btn" onclick="focusMissedMarketAndClose()">Update Sekarang</button>
+      <button type="button" id="btnCloseMissedModal" class="missed-modal-btn" style="background:rgba(24,7,13,.95)" onclick="closeMissedMarketModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-container">
+  <div class="header">
+    <h2>PANEL ADMIN CS</h2>
+    <div class="status-row">
+      <div id="authStatusIndicator" class="auth-status-badge status-logged-out">Memeriksa Status Login...</div>
+    </div>
+    <div>
+      <button type="button" id="btnLogout" class="btn-logout-admin" style="display:none" onclick="logoutAdmin()">🚪 LOGOUT AKUN</button>
+    </div>
+    <nav class="main-nav">
+      <a href="/prediksi" class="btn-utama btn-menu-awal">🏠 MENU UTAMA</a>
+    </nav>
+  </div>
+
+  <div class="section-title">📡 Update Result</div>
+  <div class="input-result-box">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+      <label for="marketSelect" style="margin:0">Pilih Pasaran</label>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span id="selectionModeBadge" class="mode-badge mode-auto">🕒 Auto</span>
+        <button type="button" id="btnResetAutoMarket" class="btn-reset-auto" onclick="resetToAutoMarket()" style="display:none">Ikut Jam WIB</button>
+      </div>
+    </div>
+    <select id="marketSelect">
+      <option value="data-macau4d-pt6">MACAU 4D PT6</option>
+      <option value="data-cambodia">CAMBODIA</option>
+      <option value="data-macau4d-pt1">MACAU 4D PT1</option>
+      <option value="data-sdy">SDYPOL</option>
+      <option value="data-sdylotto">SDYLOT</option>
+      <option value="data-macau5d-pt1">MACAU 5D PT1</option>
+      <option value="data-china">CHINA</option>
+      <option value="data-macau4d-pt2">MACAU 4D PT2</option>
+      <option value="data-japan">JAPAN</option>
+      <option value="data-sgp">SGP</option>
+      <option value="data-macau4d-pt3">MACAU 4D PT3</option>
+      <option value="data-taiwan">TAIWAN</option>
+      <option value="data-macau5d-pt2">MACAU 5D PT2</option>
+      <option value="data-macau4d-pt4">MACAU 4D PT4</option>
+      <option value="data-hk">HKPOL</option>
+      <option value="data-macau4d-pt5">MACAU 4D PT5</option>
+      <option value="data-hklotto">HK LOT</option>
+    </select>
+
+    <label for="inputDate">Pilih Tanggal Pengeluaran</label>
+    <input type="date" id="inputDate">
+
+    <label for="inputNumbers">Masukkan Angka Mingguan<br>Pisahkan dengan koma</label>
+    <textarea id="inputNumbers" placeholder="Contoh 5D: 12345 atau 12345,67890 | Contoh 4D: 1234,5678"></textarea>
+
+    <button type="button" id="btnUpdatePaito" class="btn-kirim" onclick="saveDataPaito()">Update</button>
+    <div id="message" class="status-firebase"></div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 <span>PANEL CS</span>. All Rights Reserved.</p>
+</footer>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCUaQixhT9BARrtqM6roT73FbDihy8WLAA",
+  authDomain: "komentar-web-f9e2e.firebaseapp.com",
+  databaseURL: "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "komentar-web-f9e2e",
+  storageBucket: "komentar-web-f9e2e.firebasestorage.app",
+  messagingSenderId: "126095632925",
+  appId: "1:126095632925:web:77383efdc2daea2e7034f4",
+  measurementId: "G-C3CVJPFTMN"
+};
+
+firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+const MACAU_4D_ROUNDS = [
+  "data-macau4d-pt1",
+  "data-macau4d-pt2",
+  "data-macau4d-pt3",
+  "data-macau4d-pt4",
+  "data-macau4d-pt5",
+  "data-macau4d-pt6"
+];
+
+const MACAU_5D_ROUNDS = [
+  "data-macau5d-pt1",
+  "data-macau5d-pt2"
+];
+
+const JADWAL_PASARAN = [
+  { key: "data-macau4d-pt6", dbKey: "data-macau4d", roundIndex: 6, label: "MACAU 4D PT6", startMinute: 1 },
+  { key: "data-cambodia", dbKey: "data-cambodia", label: "CAMBODIA", startMinute: 11 * 60 + 45 },
+  { key: "data-macau4d-pt1", dbKey: "data-macau4d", roundIndex: 1, label: "MACAU 4D PT1", startMinute: 13 * 60 },
+  { key: "data-sdy", dbKey: "data-sdy", label: "SDYPOL", startMinute: 13 * 60 + 45 },
+  { key: "data-sdylotto", dbKey: "data-sdylotto", label: "SDYLOT", startMinute: 14 * 60 },
+  { key: "data-macau5d-pt1", dbKey: "data-macau5d", roundIndex: 1, label: "MACAU 5D PT1", startMinute: 15 * 60 },
+  { key: "data-china", dbKey: "data-china", label: "CHINA", startMinute: 15 * 60 + 30 },
+  { key: "data-macau4d-pt2", dbKey: "data-macau4d", roundIndex: 2, label: "MACAU 4D PT2", startMinute: 16 * 60 },
+  { key: "data-japan", dbKey: "data-japan", label: "JAPAN", startMinute: 17 * 60 + 25 },
+  { key: "data-sgp", dbKey: "data-sgp", label: "SGP", startMinute: 17 * 60 + 45, closedDays: [2, 5] },
+  { key: "data-macau4d-pt3", dbKey: "data-macau4d", roundIndex: 3, label: "MACAU 4D PT3", startMinute: 19 * 60 },
+  { key: "data-taiwan", dbKey: "data-taiwan", label: "TAIWAN", startMinute: 20 * 60 + 45 },
+  { key: "data-macau5d-pt2", dbKey: "data-macau5d", roundIndex: 2, label: "MACAU 5D PT2", startMinute: 21 * 60 },
+  { key: "data-macau4d-pt4", dbKey: "data-macau4d", roundIndex: 4, label: "MACAU 4D PT4", startMinute: 22 * 60 },
+  { key: "data-hk", dbKey: "data-hk", label: "HKPOL", startMinute: 23 * 60 },
+  { key: "data-macau4d-pt5", dbKey: "data-macau4d", roundIndex: 5, label: "MACAU 4D PT5", startMinute: 23 * 60 + 10 },
+  { key: "data-hklotto", dbKey: "data-hklotto", label: "HK LOT", startMinute: 23 * 60 + 20 }
+];
+
+let isManualMarketSelection = false;
+let firstMissedMarketTarget = null;
+let shownMissedPopupSignature = "";
+let missedPopupCheckInFlight = false;
+
+function getMacauRoundOptionKey(dbKey, roundNumber) {
+  const safeRound = Math.max(1, Number(roundNumber) || 1);
+  if (dbKey === "data-macau4d") {
+    return MACAU_4D_ROUNDS[Math.min(safeRound - 1, MACAU_4D_ROUNDS.length - 1)];
+  }
+  if (dbKey === "data-macau5d") {
+    return MACAU_5D_ROUNDS[Math.min(safeRound - 1, MACAU_5D_ROUNDS.length - 1)];
+  }
+  return null;
+}
+
+function updateSelectionModeBadge() {
+  const badge = document.getElementById("selectionModeBadge");
+  const resetBtn = document.getElementById("btnResetAutoMarket");
+  if (!badge) return;
+
+  if (isManualMarketSelection) {
+    badge.className = "mode-badge mode-manual";
+    badge.textContent = "Kunci";
+    if (resetBtn) resetBtn.style.display = "inline-block";
+  } else {
+    badge.className = "mode-badge mode-auto";
+    badge.textContent = "🕒 Auto";
+    if (resetBtn) resetBtn.style.display = "none";
+  }
+}
+
+function formatDbDateKeyFromUTCDate(utcDate) {
+  const y = utcDate.getUTCFullYear();
+  const m = String(utcDate.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(utcDate.getUTCDate()).padStart(2, "0");
+  return `${d}-${m}-${y}`;
+}
+
+function formatInputDateFromUTCDate(utcDate) {
+  const y = utcDate.getUTCFullYear();
+  const m = String(utcDate.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(utcDate.getUTCDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+function getWIBTimeInfo() {
+  const now = new Date();
+  const wibFormatter = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Jakarta",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  });
+  const parts = wibFormatter.formatToParts(now);
+  const map = {};
+  parts.forEach((p) => {
+    map[p.type] = p.value;
+  });
+
+  const year = Number(map.year);
+  const month = Number(map.month);
+  const day = Number(map.day);
+  const hour = Number(map.hour === "24" ? "0" : map.hour);
+  const minute = Number(map.minute);
+
+  const todayUtc = new Date(Date.UTC(year, month - 1, day));
+  const yesterdayUtc = new Date(Date.UTC(year, month - 1, day - 1));
+  const dayOfWeek = todayUtc.getUTCDay();
+  const prevDayOfWeek = yesterdayUtc.getUTCDay();
+
+  return {
+    dateStr: formatInputDateFromUTCDate(todayUtc),
+    prevDateStr: formatInputDateFromUTCDate(yesterdayUtc),
+    dbDateKey: formatDbDateKeyFromUTCDate(todayUtc),
+    prevDbDateKey: formatDbDateKeyFromUTCDate(yesterdayUtc),
+    totalMinutes: hour * 60 + minute,
+    dayOfWeek,
+    prevDayOfWeek
+  };
+}
+
+function getTodayString() {
+  return getWIBTimeInfo().dateStr;
+}
+
+function getMarketConfig(marketKey) {
+  return JADWAL_PASARAN.find((item) => item.key === marketKey) || JADWAL_PASARAN[0];
+}
+
+function getScheduledMarketByTime() {
+  const { totalMinutes, dayOfWeek } = getWIBTimeInfo();
+  let activeMarket = JADWAL_PASARAN[JADWAL_PASARAN.length - 1];
+
+  for (let i = 0; i < JADWAL_PASARAN.length; i++) {
+    const item = JADWAL_PASARAN[i];
+    const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
+    if (!isClosedToday && totalMinutes >= item.startMinute) {
+      activeMarket = item;
+    }
+  }
+  return activeMarket;
+}
+
+function parsePaitoItems(rawData) {
+  return String(rawData || "")
+    .split(/[\s,]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function getSavedRoundCount(rawEntry) {
+  if (rawEntry === null || rawEntry === undefined) return 0;
+  const str = Array.isArray(rawEntry)
+    ? rawEntry.join(",")
+    : (typeof rawEntry === "object" ? Object.values(rawEntry).join(",") : String(rawEntry));
+  return parsePaitoItems(str).length;
+}
+
+function getDueCheckTargets() {
+  const { totalMinutes, dayOfWeek, prevDayOfWeek, dbDateKey, prevDbDateKey, dateStr, prevDateStr } = getWIBTimeInfo();
+  const targets = [];
+
+  JADWAL_PASARAN.forEach((item) => {
+    const isClosedYesterday = Array.isArray(item.closedDays) && item.closedDays.includes(prevDayOfWeek);
+    const isNightMarket = item.startMinute >= 20 * 60;
+    if (!isClosedYesterday && isNightMarket) {
+      targets.push({
+        id: `prev:${item.key}:${prevDbDateKey}`,
+        key: item.key,
+        dbKey: item.dbKey,
+        dbDateKey: prevDbDateKey,
+        inputDateStr: prevDateStr,
+        label: `${item.label} (Kemarin ${prevDbDateKey})`,
+        expectedMinRounds: 1
+      });
+    }
+  });
+
+  const dueTodayItems = JADWAL_PASARAN.filter((item) => {
+    const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
+    return !isClosedToday && totalMinutes >= item.startMinute;
+  });
+
+  const dueCountByDbKey = {};
+  dueTodayItems.forEach((item) => {
+    dueCountByDbKey[item.dbKey] = (dueCountByDbKey[item.dbKey] || 0) + 1;
+  });
+
+  const seenTodayDbKey = new Set();
+  dueTodayItems.forEach((item) => {
+    const isMultiRound = item.dbKey === "data-macau4d" || item.dbKey === "data-macau5d";
+    if (isMultiRound) {
+      if (seenTodayDbKey.has(item.dbKey)) return;
+      seenTodayDbKey.add(item.dbKey);
+      const expectedRounds = dueCountByDbKey[item.dbKey] || 1;
+      const baseLabel = item.dbKey === "data-macau4d" ? "MACAU 4D" : "MACAU 5D";
+      targets.push({
+        id: `today:${item.dbKey}:${dbDateKey}:r${expectedRounds}`,
+        key: item.key,
+        dbKey: item.dbKey,
+        isMultiRound: true,
+        dbDateKey,
+        inputDateStr: dateStr,
+        label: expectedRounds > 1 ? `${baseLabel} (Putaran ke-${expectedRounds})` : item.label,
+        expectedMinRounds: expectedRounds
+      });
+    } else {
+      targets.push({
+        id: `today:${item.key}:${dbDateKey}`,
+        key: item.key,
+        dbKey: item.dbKey,
+        isMultiRound: false,
+        dbDateKey,
+        inputDateStr: dateStr,
+        label: item.label,
+        expectedMinRounds: 1
+      });
+    }
+  });
+
+  return targets;
+}
+
+function openMissedMarketPopup(missedTargets) {
+  const modal = document.getElementById("missedMarketModal");
+  const textEl = document.getElementById("missedMarketText");
+  if (!modal || !textEl || !Array.isArray(missedTargets) || !missedTargets.length) return;
+
+  const signature = missedTargets.map((m) => m.id).join("|");
+  if (signature === shownMissedPopupSignature && modal.classList.contains("is-open")) {
+    return;
+  }
+
+  shownMissedPopupSignature = signature;
+  firstMissedMarketTarget = missedTargets[0];
+
+  const labelsText = missedTargets.map((m) => m.label).join(", ");
+  textEl.textContent = `Hai Admin Maaf Mengganggu\nPasaran yang jadwalnya sudah terlewat dan belum ter-update adalah:\n(${labelsText}) 🙏`;
+  modal.classList.add("is-open");
+}
+
+function closeMissedMarketModal() {
+  const modal = document.getElementById("missedMarketModal");
+  if (modal) modal.classList.remove("is-open");
+}
+
+function focusMissedMarketAndClose() {
+  closeMissedMarketModal();
+  if (!firstMissedMarketTarget) return;
+
+  const selectEl = document.getElementById("marketSelect");
+  const inputDateEl = document.getElementById("inputDate");
+
+  const resolvedKey = firstMissedMarketTarget.targetSelectKey || firstMissedMarketTarget.key;
+  if (selectEl) {
+    selectEl.value = resolvedKey;
+    isManualMarketSelection = true;
+    updateSelectionModeBadge();
+  }
+  if (inputDateEl && firstMissedMarketTarget.inputDateStr) {
+    inputDateEl.value = firstMissedMarketTarget.inputDateStr;
+  }
+
+  refreshAllFormPreviews();
+  selectEl?.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function checkMissedScheduledMarkets() {
+  if (!firebase.auth().currentUser || missedPopupCheckInFlight) return;
+
+  const targets = getDueCheckTargets();
+  if (!targets.length) {
+    closeMissedMarketModal();
+    return;
+  }
+
+  missedPopupCheckInFlight = true;
+
+  Promise.all(
+    targets.map((target) =>
+      database
+        .ref(`live/${target.dbKey}/${target.dbDateKey}`)
+        .once("value")
+        .then((snap) => {
+          const savedRounds = snap.exists() ? getSavedRoundCount(snap.val()) : 0;
+          const nextRoundNumber = Math.min(savedRounds + 1, target.expectedMinRounds);
+          const roundOptionKey = target.isMultiRound
+            ? getMacauRoundOptionKey(target.dbKey, nextRoundNumber)
+            : target.key;
+          const baseName = target.dbKey === "data-macau4d"
+            ? "MACAU 4D"
+            : (target.dbKey === "data-macau5d" ? "MACAU 5D" : null);
+          const currentRoundLabel = target.isMultiRound
+            ? `${baseName} (Putaran ke-${nextRoundNumber})`
+            : target.label;
+
+          return {
+            target: {
+              ...target,
+              targetSelectKey: roundOptionKey || target.key,
+              label: currentRoundLabel
+            },
+            isUpdated: savedRounds >= target.expectedMinRounds
+          };
+        })
+        .catch(() => ({
+          target,
+          isUpdated: true
+        }))
+    )
+  )
+    .then((results) => {
+      const missedTargets = results
+        .filter((r) => !r.isUpdated)
+        .map((r) => r.target);
+
+      if (missedTargets.length > 0) {
+        openMissedMarketPopup(missedTargets);
+      } else {
+        closeMissedMarketModal();
+      }
+    })
+    .finally(() => {
+      missedPopupCheckInFlight = false;
+    });
+}
+
+function autoSetDates() {
+  const inputDate = document.getElementById("inputDate");
+  if (inputDate) inputDate.value = getTodayString();
+}
+
+function syncMarketToCurrentRound(baseMarket) {
+  const selectEl = document.getElementById("marketSelect");
+  if (!selectEl || !baseMarket) return;
+
+  const isMultiRound = baseMarket.dbKey === "data-macau4d" || baseMarket.dbKey === "data-macau5d";
+  if (!isMultiRound) {
+    selectEl.value = baseMarket.key;
+    updateSelectionModeBadge();
+    showLatestDataPaito(baseMarket.key);
+    return;
+  }
+
+  const { dbDateKey } = getWIBTimeInfo();
+  const maxRound = baseMarket.dbKey === "data-macau4d" ? 6 : 2;
+  const scheduledRound = Number(baseMarket.roundIndex) || 1;
+
+  database
+    .ref(`live/${baseMarket.dbKey}/${dbDateKey}`)
+    .once("value")
+    .then((snap) => {
+      if (isManualMarketSelection) return;
+      const savedRounds = snap.exists() ? getSavedRoundCount(snap.val()) : 0;
+      const targetRound = Math.min(maxRound, Math.max(scheduledRound, savedRounds + 1));
+      const optionKey = getMacauRoundOptionKey(baseMarket.dbKey, targetRound) || baseMarket.key;
+      selectEl.value = optionKey;
+      updateSelectionModeBadge();
+      showLatestDataPaito(optionKey);
+    })
+    .catch(() => {
+      if (!isManualMarketSelection) {
+        selectEl.value = baseMarket.key;
+        updateSelectionModeBadge();
+        showLatestDataPaito(baseMarket.key);
+      }
+    });
+}
+
+function applyInitialMarketByTime() {
+  const activeMarket = getScheduledMarketByTime();
+  const selectEl = document.getElementById("marketSelect");
+  if (selectEl) {
+    selectEl.value = activeMarket.key;
+  }
+  updateSelectionModeBadge();
+  syncMarketToCurrentRound(activeMarket);
+}
+
+function resetToAutoMarket() {
+  isManualMarketSelection = false;
+  autoSetDates();
+  applyInitialMarketByTime();
+}
+
+function getLatestEntryFromObject(obj) {
+  if (!obj) return { date: "", data: "" };
+  if (typeof obj !== "object") return { date: "", data: String(obj) };
+  const keys = Object.keys(obj);
+  if (keys.length === 0) return { date: "", data: "" };
+
+  keys.sort((a, b) => {
+    const partsA = a.split("-");
+    const partsB = b.split("-");
+    if (partsA.length === 3 && partsB.length === 3) {
+      const timeA = new Date(`${partsA[2]}-${partsA[1]}-${partsA[0]}`).getTime();
+      const timeB = new Date(`${partsB[2]}-${partsB[1]}-${partsB[0]}`).getTime();
+      if (!isNaN(timeA) && !isNaN(timeB)) return timeA - timeB;
+    }
+    return a.localeCompare(b);
+  });
+
+  const latestKey = keys[keys.length - 1];
+  const rawLatestVal = obj[latestKey];
+  const normalizedData = Array.isArray(rawLatestVal)
+    ? rawLatestVal.join(",")
+    : (rawLatestVal && typeof rawLatestVal === "object"
+        ? Object.values(rawLatestVal).join(",")
+        : String(rawLatestVal));
+
+  return { date: latestKey, data: normalizedData };
+}
+
+function showLatestDataPaito(marketKey) {
+  const msgEl = document.getElementById("message");
+  if (!msgEl) return;
+
+  const cfg = getMarketConfig(marketKey);
+  const dbPath = cfg.dbKey;
+
+  msgEl.style.color = "#fda4af";
+  msgEl.innerText = "⏳ Memuat data paito terakhir...";
+
+  database.ref(`live/${dbPath}`).once("value").then((snapshot) => {
+    if (snapshot.exists()) {
+      const latest = getLatestEntryFromObject(snapshot.val());
+      const items = parsePaitoItems(latest.data);
+      const lastValue = items.length > 0 ? items[items.length - 1] : latest.data;
+      const roundCount = items.length;
+      const hasRoundSystem = dbPath === "data-macau4d" || dbPath === "data-macau5d";
+      const nextRound = roundCount + 1;
+      const roundInfo = hasRoundSystem
+        ? ` • <span style="color:${roundCount > 1 ? "#6ee7b7" : "#fde68a"};">putaran ke-${roundCount} (berikutnya ke-${nextRound})</span>`
+        : "";
+      const dateInfo = latest.date ? ` • tgl <b>${latest.date}</b>` : "";
+
+      msgEl.style.color = "#d4b5bc";
+      msgEl.innerHTML = `📌<b>Data Terakhir ${cfg.label}:</b> <span style="color:#fde68a;font-size:14px;font-weight:800;">${lastValue}</span>${dateInfo}${roundInfo}`;
+    } else {
+      msgEl.style.color = "#9c7a82";
+      msgEl.innerText = `Belum ada data paito ${cfg.label}`;
+    }
+  }).catch(() => {
+    msgEl.innerText = "";
+  });
+}
+
+function refreshAllFormPreviews() {
+  const selectedMarket = document.getElementById("marketSelect")?.value;
+  if (selectedMarket) {
+    showLatestDataPaito(selectedMarket);
+  }
+}
+
+function loginAdmin() {
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value.trim();
+  const errorEl = document.getElementById("loginErrorMsg");
+  const submitBtn = document.getElementById("btnLoginSubmit");
+
+  if (!email || !password) {
+    errorEl.style.color = "#fda4af";
+    errorEl.innerText = "⚠️ Email dan Password wajib di isi!";
+    return;
+  }
+
+  submitBtn.disabled = true;
+  errorEl.style.color = "#fda4af";
+  errorEl.innerText = "⏳ Memverifikasi...";
+
+  firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+    document.getElementById("adminLoginOverlay").style.display = "none";
+    errorEl.innerText = "";
+    shownMissedPopupSignature = "";
+    checkMissedScheduledMarkets();
+  }).catch((err) => {
+    errorEl.style.color = "#fda4af";
+    if (
+      err.code === "auth/wrong-password" ||
+      err.code === "auth/invalid-credential" ||
+      err.code === "auth/invalid-email"
+    ) {
+      errorEl.innerText = "❌ Kata sandi atau email salah!";
+    } else if (err.code === "auth/user-not-found") {
+      errorEl.innerText = "❌ Akun staff tidak ditemukan!";
+    } else {
+      errorEl.innerText = "❌ Gagal: " + err.message;
+    }
+  }).finally(() => {
+    submitBtn.disabled = false;
+  });
+}
+
+function logoutAdmin() {
+  firebase.auth().signOut().then(() => {
+    closeMissedMarketModal();
+    alert("Berhasil Logout dari Panel CS.");
+  }).catch((err) => {
+    alert("Gagal logout: " + err.message);
+  });
+}
+
+function saveDataPaito() {
+  const msgEl = document.getElementById("message");
+  const btnUpdate = document.getElementById("btnUpdatePaito");
+
+  if (!firebase.auth().currentUser) {
+    msgEl.style.color = "#fda4af";
+    msgEl.textContent = "Sesi login berakhir. Silakan login ulang terlebih dahulu.";
+    document.getElementById("adminLoginOverlay").style.display = "flex";
+    return;
+  }
+
+  const marketKey = document.getElementById("marketSelect").value;
+  const cfg = getMarketConfig(marketKey);
+  const dbPath = cfg.dbKey;
+  const rawDate = document.getElementById("inputDate").value || getTodayString();
+  const rawNumbers = document.getElementById("inputNumbers").value.trim();
+
+  if (!rawNumbers) {
+    msgEl.style.color = "#fda4af";
+    msgEl.textContent = "Angka tidak boleh kosong!";
+    return;
+  }
+
+  const dateParts = rawDate.split("-");
+  const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  const ref = database.ref("live/" + dbPath);
+
+  btnUpdate.disabled = true;
+  msgEl.style.color = "#fda4af";
+  msgEl.textContent = `Menyimpan data ${cfg.label}...`;
+
+  let currentRound = 1;
+
+  ref.once("value").then((snapshot) => {
+    const existingObj = snapshot.val();
+    let finalNumbers = rawNumbers;
+    if (existingObj && typeof existingObj === "object" && existingObj[formattedDate]) {
+      const prevData = existingObj[formattedDate];
+      const prevStr = Array.isArray(prevData)
+        ? prevData.join(",")
+        : (typeof prevData === "string" ? prevData.trim() : "");
+      if (prevStr !== "") {
+        finalNumbers = prevStr + "," + rawNumbers;
+      }
+    }
+    const items = parsePaitoItems(finalNumbers);
+    currentRound = items.length > 0 ? items.length : 1;
+    return ref.update({ [formattedDate]: finalNumbers });
+  }).then(() => {
+    const hasRoundSystem = dbPath === "data-macau4d" || dbPath === "data-macau5d";
+    const roundSuffix = hasRoundSystem ? ` (putaran ke-${currentRound})` : "";
+    msgEl.style.color = "#6ee7b7";
+    msgEl.textContent = `Berhasil menyimpan data ${cfg.label} tgl ${formattedDate}${roundSuffix}!`;
+    document.getElementById("inputNumbers").value = "";
+
+    if (!isManualMarketSelection && hasRoundSystem) {
+      const nextRound = currentRound + 1;
+      const nextKey = getMacauRoundOptionKey(dbPath, nextRound);
+      if (nextKey) {
+        document.getElementById("marketSelect").value = nextKey;
+      }
+    }
+
+    shownMissedPopupSignature = "";
+    checkMissedScheduledMarkets();
+    setTimeout(() => showLatestDataPaito(document.getElementById("marketSelect").value), 1200);
+  }).catch((err) => {
+    msgEl.style.color = "#fda4af";
+    msgEl.textContent = "Gagal menyimpan: " + err.message;
+  }).finally(() => {
+    btnUpdate.disabled = false;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  autoSetDates();
+  applyInitialMarketByTime();
+
+  let lastTrackedKey = document.getElementById("marketSelect")?.value || "";
+
+  setInterval(() => {
+    checkMissedScheduledMarkets();
+    if (isManualMarketSelection) return;
+    const activeMarket = getScheduledMarketByTime();
+    if (activeMarket.key !== lastTrackedKey) {
+      lastTrackedKey = activeMarket.key;
+      syncMarketToCurrentRound(activeMarket);
+    }
+  }, 15000);
+
+  document.getElementById("marketSelect")?.addEventListener("change", (e) => {
+    isManualMarketSelection = true;
+    lastTrackedKey = e.target.value;
+    updateSelectionModeBadge();
+    refreshAllFormPreviews();
+  });
+
+  ["adminEmail", "adminPassword"].forEach((id) => {
+    document.getElementById(id)?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        loginAdmin();
+      }
+    });
+  });
+
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      const overlay = document.getElementById("adminLoginOverlay");
+      const statusBadge = document.getElementById("authStatusIndicator");
+      const logoutBtn = document.getElementById("btnLogout");
+
+      if (user) {
+        if (overlay) overlay.style.display = "none";
+        if (statusBadge) {
+          statusBadge.className = "auth-status-badge status-logged-in";
+          statusBadge.innerHTML = `🟢 Status : <b>LOGIN</b> (${user.email})`;
+        }
+        if (logoutBtn) logoutBtn.style.display = "inline-block";
+        shownMissedPopupSignature = "";
+        checkMissedScheduledMarkets();
+        if (!isManualMarketSelection) {
+          syncMarketToCurrentRound(getScheduledMarketByTime());
+        }
+      } else {
+        if (overlay) overlay.style.display = "flex";
+        if (statusBadge) {
+          statusBadge.className = "auth-status-badge status-logged-out";
+          statusBadge.innerHTML = "🔴 Status : <b>LOGOUT</b>";
+        }
+        if (logoutBtn) logoutBtn.style.display = "none";
+        closeMissedMarketModal();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
