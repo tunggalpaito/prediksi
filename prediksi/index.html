@@ -504,6 +504,101 @@
     scroll-snap-align: start;
   }
 
+  /* === ARENA POLLING GEN-Z CYBER STYLE === */
+  .cyber-arena-shell {
+    background:
+      radial-gradient(circle at 85% 10%, rgba(251, 191, 36, 0.14) 0%, transparent 45%),
+      radial-gradient(circle at 15% 90%, rgba(255, 30, 86, 0.22) 0%, transparent 50%),
+      linear-gradient(160deg, rgba(28, 10, 20, 0.98) 0%, rgba(10, 5, 9, 0.99) 100%);
+    border: 1px solid rgba(255, 77, 121, 0.48);
+    box-shadow: 0 14px 32px -12px rgba(255, 30, 86, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .live-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background-color: #4ade80;
+    box-shadow: 0 0 10px #4ade80;
+    display: inline-block;
+    animation: pulseLiveDot 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulseLiveDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.35); opacity: 0.55; }
+  }
+
+  .grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .digit-chip-btn {
+    padding: 0.65rem 0.25rem;
+    border-radius: 0.85rem;
+    background: linear-gradient(180deg, rgba(32, 12, 22, 0.95) 0%, rgba(14, 6, 10, 0.98) 100%);
+    border: 1px solid rgba(255, 77, 121, 0.35);
+    color: #ffffff;
+    font-family: 'Orbitron', 'JetBrains Mono', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: transform 0.1s ease, border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+
+  .digit-chip-btn:hover {
+    border-color: rgba(253, 164, 175, 0.8);
+    background: rgba(255, 30, 86, 0.24);
+  }
+
+  .digit-chip-btn:active {
+    transform: scale(0.94);
+  }
+
+  .digit-chip-btn.picked {
+    border-color: #fbbf24;
+    background: linear-gradient(135deg, rgba(255, 30, 86, 0.45) 0%, rgba(251, 191, 36, 0.25) 100%);
+    box-shadow: 0 0 14px rgba(251, 191, 36, 0.35);
+    color: #fef08a;
+  }
+
+  .neon-bar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 77, 121, 0.25);
+    border-radius: 9999px;
+    height: 0.55rem;
+    overflow: hidden;
+  }
+
+  .neon-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #ff1e56 0%, #fb7185 55%, #fbbf24 100%);
+    transition: width 0.35s ease;
+  }
+
+  .line2d-big-box {
+    font-family: 'Orbitron', 'JetBrains Mono', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(255, 30, 86, 0.18) 0%, rgba(7, 4, 7, 0.98) 100%);
+    border: 1.5px solid rgba(255, 77, 121, 0.5);
+    color: #fde047;
+    text-shadow: 0 0 12px rgba(250, 204, 21, 0.45);
+  }
+
+  .feed-item-card {
+    background: linear-gradient(90deg, rgba(26, 10, 18, 0.92) 0%, rgba(12, 6, 10, 0.96) 100%);
+    border: 1px solid rgba(255, 77, 121, 0.28);
+    transition: border-color 0.15s ease;
+  }
+
+  .feed-item-card:hover {
+    border-color: rgba(251, 191, 36, 0.55);
+  }
+
   .bg-mesh {
     background-color: #050508;
     background-image:
@@ -822,10 +917,12 @@
   .p-5 { padding: 1.25rem; }
   .pt-1 { padding-top: 0.25rem; }
   .pt-2 { padding-top: 0.5rem; }
+  .pt-2\.5 { padding-top: 0.625rem; }
   .pt-3 { padding-top: 0.75rem; }
   .pt-3\.5 { padding-top: 0.875rem; }
   .pb-1 { padding-bottom: 0.25rem; }
   .pb-2 { padding-bottom: 0.5rem; }
+  .pb-2\.5 { padding-bottom: 0.625rem; }
   .pr-1 { padding-right: 0.25rem; }
   .pr-2 { padding-right: 0.5rem; }
   .pr-8 { padding-right: 2rem; }
@@ -884,6 +981,7 @@
   .w-2 { width: 0.5rem; }
   .w-2\.5 { width: 0.625rem; }
   .w-6 { width: 1.5rem; }
+  .w-7 { width: 1.75rem; }
   .w-8 { width: 2rem; }
   .w-9 { width: 2.25rem; }
   .w-10 { width: 2.5rem; }
@@ -900,6 +998,8 @@
   .max-h-\[60vh\] { max-height: 60vh; }
   .max-h-\[62vh\] { max-height: 62vh; }
   .max-h-\[82vh\] { max-height: 82vh; }
+  .max-h-\[15rem\] { max-height: 15rem; }
+  .min-h-\[1\.15rem\] { min-height: 1.15rem; }
   .aspect-square { aspect-ratio: 1 / 1; }
   .object-cover { object-fit: cover; }
   .object-contain { object-fit: contain; }
@@ -917,12 +1017,15 @@
   .border-rose-400\/40 { border-color: rgba(255, 77, 121, 0.5); }
   .border-rose-400\/60 { border-color: rgba(255, 77, 121, 0.72); }
   .border-rose-500\/20 { border-color: rgba(255, 30, 86, 0.3); }
+  .border-rose-500\/22 { border-color: rgba(255, 30, 86, 0.32); }
   .border-rose-500\/25 { border-color: rgba(255, 30, 86, 0.35); }
   .border-rose-500\/30 { border-color: rgba(255, 30, 86, 0.4); }
   .border-rose-500\/35 { border-color: rgba(255, 30, 86, 0.45); }
   .border-rose-500\/40 { border-color: rgba(255, 30, 86, 0.52); }
   .border-rose-500\/45 { border-color: rgba(255, 30, 86, 0.58); }
   .border-rose-500\/50 { border-color: rgba(255, 30, 86, 0.65); }
+  .border-amber-400\/45 { border-color: rgba(251, 191, 36, 0.55); }
+  .border-amber-400\/50 { border-color: rgba(251, 191, 36, 0.6); }
   .border-amber-500\/35 { border-color: rgba(251, 191, 36, 0.45); }
   .border-amber-500\/40 { border-color: rgba(251, 191, 36, 0.5); }
   .border-amber-500\/45 { border-color: rgba(251, 191, 36, 0.55); }
@@ -932,7 +1035,10 @@
   .bg-black\/85 { background-color: rgba(0, 0, 0, 0.88); }
   .bg-white\/5 { background-color: rgba(255, 255, 255, 0.08); }
   .bg-white\/95 { background-color: rgba(255, 255, 255, 0.96); }
+  .bg-\[\#050305\] { background-color: #050305; }
   .bg-\[\#070407\]\/95 { background-color: rgba(13, 6, 10, 0.96); }
+  .bg-\[\#090407\]\/85 { background-color: rgba(9, 4, 7, 0.88); }
+  .bg-\[\#090407\]\/95 { background-color: rgba(9, 4, 7, 0.96); }
   .bg-\[\#0b060a\] { background-color: #13060c; }
   .bg-\[\#0b060a\]\/85 { background-color: rgba(19, 6, 12, 0.92); }
   .bg-\[\#0b060a\]\/90 { background-color: rgba(19, 6, 12, 0.94); }
@@ -967,6 +1073,7 @@
   .text-amber-200 { color: #fef08a; }
   .text-amber-300 { color: #fcd34d; }
   .text-left { text-align: left; }
+  .text-right { text-align: right; }
   .text-center { text-align: center; }
   .font-medium { font-weight: 600; }
   .font-semibold { font-weight: 700; }
@@ -1015,12 +1122,15 @@
   .hover\:border-rose-500\/50:hover { border-color: rgba(255, 77, 121, 0.62); }
   .hover\:border-rose-500\/70:hover { border-color: rgba(255, 130, 160, 0.82); }
   .hover\:text-rose-200:hover { color: #ffffff; }
+  .focus\:border-amber-300:focus { border-color: #fcd34d; }
   .focus\:border-rose-500\/80:focus { border-color: rgba(255, 77, 121, 0.9); }
   .focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
+  .disabled\:opacity-45:disabled { opacity: 0.45; cursor: not-allowed; }
 
   .hidden { display: none !important; }
 </style>
 </head>
+
 <body class="bg-mesh">
 
 <div id="screen-frame-border" aria-hidden="true"></div>
@@ -1121,9 +1231,9 @@
           <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
         </div>
         <div class="text-left min-w-0">
-          <div class="font-extrabold leading-tight text-warm-bright">Download APK Tunggal Paito</div>
-          <div class="text-xs-custom font-semibold text-rose-100/90">Ringan &amp; Anti Error</div>
-        </div>
+  <div class="font-extrabold leading-tight text-warm-bright">DOWNLOAD APK TUNGGAL PAITO</div>
+  <div class="text-xs-custom font-semibold text-rose-100/90 lowercase">ringan &amp; anti error</div>
+</div>
       </div>
       <span class="text-xs-custom px-2.5 py-1 rounded-lg bg-black/60 border border-rose-300/30 text-rose-200 font-cyber font-extrabold uppercase tracking-wider shrink-0">Unduh</span>
     </button>
@@ -1355,6 +1465,134 @@
 </header>
 
 <main class="relative z-10 w-full container-mobile px-4 py-4 flex-grow space-y-5">
+  <!-- AREA TENGAH DI ANTARA IKLAN: ARENA POLLING MASTER POOLS (SDY, SGP LIBUR SELASA & JUMAT, HK) -->
+  <section id="arcade-streak-zone" class="cyber-arena-shell rounded-3xl p-4 space-y-3.5 relative overflow-hidden" aria-label="Arena Polling Angka Tunggal dan Line 2D">
+    <!-- HEADER ARENA -->
+    <div class="flex items-center justify-between pb-2.5 border-b border-rose-500/25 gap-2">
+      <div class="min-w-0">
+        <div class="inline-flex items-center gap-1.5 text-xs-custom font-cyber font-extrabold text-amber-300 uppercase tracking-wider">
+          <span class="live-pulse-dot" aria-hidden="true"></span>
+          <span>POLLING MASTER POOLS</span>
+        </div>
+        <h2 id="poll-arena-title" class="section-heading font-cyber font-extrabold text-warm-bright uppercase tracking-wide mt-0.5">Sydney Pools (SDY)</h2>
+      </div>
+      <div class="text-right shrink-0">
+  <span id="poll-total-badge" class="text-xs-custom font-mono-num font-extrabold px-2.5 py-1 rounded-xl bg-rose-500/20 text-rose-200 border border-rose-500/45 inline-block">0 PESERTA</span>
+</div>
+
+    </div>
+
+    <!-- PILIH PASARAN POOLS -->
+    <div class="grid grid-cols-3 gap-1.5 bg-[#090407]/95 p-1.5 rounded-2xl border border-rose-500/30">
+      <button type="button" id="poll-mkt-sdy" onclick="switchPollMarket('sdy')" class="tab-btn active text-xs-custom py-2 px-2 rounded-xl font-cyber font-extrabold uppercase tracking-wide text-warm-body border border-transparent cursor-pointer">
+        🇦🇺 SDY Pools
+      </button>
+      <button type="button" id="poll-mkt-sgp" onclick="switchPollMarket('sgp')" class="tab-btn text-xs-custom py-2 px-2 rounded-xl font-cyber font-extrabold uppercase tracking-wide text-warm-body border border-transparent hover:bg-rose-500/10 cursor-pointer">
+        🇸🇬 SGP Pools
+      </button>
+      <button type="button" id="poll-mkt-hk" onclick="switchPollMarket('hk')" class="tab-btn text-xs-custom py-2 px-2 rounded-xl font-cyber font-extrabold uppercase tracking-wide text-warm-body border border-transparent hover:bg-rose-500/10 cursor-pointer">
+        🇭🇰 HK Pools
+      </button>
+    </div>
+
+    <!-- BANNER LIBUR SGP (SELASA & JUMAT) -->
+    <div id="sgp-holiday-notice" class="hidden rounded-2xl bg-amber-500/15 border border-amber-400/50 p-3 text-center space-y-1">
+      <div class="text-xs-custom font-cyber font-extrabold text-amber-300 uppercase tracking-wider">
+        <i class="fa-solid fa-calendar-xmark mr-1" aria-hidden="true"></i> PASARAN SGP POOLS LIBUR HARI INI
+      </div>
+      <p class="text-xs-custom text-warm-body">
+        Jadwal resmi Singapore Pools <strong>LIBUR setiap hari Selasa &amp; Jumat</strong>. Polling SGP ditutup sementara dan dibuka kembali besok.
+      </p>
+    </div>
+
+    <!-- STEP 1: KARTU IDENTITAS / NAMA PENANDA WAJIB -->
+    <div class="bg-[#090407]/95 border border-rose-500/35 rounded-2xl p-3 space-y-2">
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-xs-custom font-cyber font-bold text-rose-200 uppercase tracking-wider">
+          <i class="fa-solid fa-id-badge text-amber-300 mr-1" aria-hidden="true"></i> 1. Pasang Nama Master
+        </span>
+        <span id="poll-marker-status" class="text-xs-custom font-mono-num font-bold px-2 py-0.5 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/35">Wajib Diisi</span>
+      </div>
+
+      <div class="flex items-center gap-2 min-w-0">
+        <input id="poll-marker-input" type="text" maxlength="16" placeholder="Contoh: SultanJP / Rian99" class="text-sm-custom flex-1 min-w-0 bg-[#050305] text-warm-bright rounded-xl px-3 py-2 border border-rose-500/35 focus:border-amber-300 focus:outline-none">
+        <button type="button" onclick="setPollMarkerName()" class="tap-responsive cyber-btn-red font-cyber font-extrabold py-2 px-3 rounded-xl text-xs-custom uppercase tracking-wider cursor-pointer shrink-0">
+          Kunci ID
+        </button>
+      </div>
+    </div>
+
+    <!-- MODE SWITCHER TAB -->
+    <div class="grid grid-cols-2 gap-1.5 bg-[#090407]/95 p-1.5 rounded-2xl border border-rose-500/25">
+      <button type="button" id="poll-tab-tunggal" onclick="switchPollMode('tunggal')" class="tab-btn active text-xs-custom py-2.5 px-2 rounded-xl font-cyber font-extrabold uppercase tracking-wide text-warm-body border border-transparent cursor-pointer">
+        🎯 Tunggal (0–9)
+      </button>
+      <button type="button" id="poll-tab-line2d" onclick="switchPollMode('line2d')" class="tab-btn text-xs-custom py-2.5 px-2 rounded-xl font-cyber font-extrabold uppercase tracking-wide text-warm-body border border-transparent hover:bg-rose-500/10 cursor-pointer">
+        🔥 Line 2D (00–99)
+      </button>
+    </div>
+
+    <!-- PANEL 1: POLLING ANGKA TUNGGAL 0-9 -->
+    <div id="poll-panel-tunggal" class="bg-[#090407]/95 border border-rose-500/30 rounded-2xl p-3.5 space-y-3">
+      <div class="flex items-center justify-between text-xs-custom">
+        <span class="text-warm-body font-bold">Pilih 1 Angka Jagoan (0–9):</span>
+        <span class="text-warm-muted">Dipilih: <strong id="selected-tunggal-label" class="text-amber-300 font-mono-num">-</strong></span>
+      </div>
+
+      <div id="tunggal-grid-buttons" class="grid grid-cols-5 gap-2"></div>
+
+      <button type="button" id="btn-submit-tunggal" onclick="submitTunggalVote()" disabled class="tap-responsive cyber-btn-red w-full font-cyber font-extrabold py-2.5 px-4 rounded-xl text-xs-custom uppercase tracking-wider cursor-pointer disabled:opacity-45">
+        <i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Sumbang Angka Tunggal
+      </button>
+
+      <!-- STATISTIK LIVE BAR TUNGGAL -->
+      <div class="pt-2.5 border-t border-rose-500/20 space-y-2">
+        <div class="flex items-center justify-between text-xs-custom">
+          <span class="font-cyber font-bold text-rose-200 uppercase">Klasemen Tunggal Hari Ini</span>
+          <span id="tunggal-vote-count" class="font-mono-num text-amber-300 font-bold">0 suara</span>
+        </div>
+        <div id="tunggal-bars-list" class="space-y-1.5"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: POLLING LINE 2D (00-99) -->
+    <div id="poll-panel-line2d" class="hidden bg-[#090407]/95 border border-rose-500/30 rounded-2xl p-3 space-y-3 overflow-hidden">
+      <div class="text-xs-custom text-warm-body font-bold text-center">
+        Masukkan 2 Digit Bom / Line 2D Andalanmu (00–99):
+      </div>
+
+      <div class="flex items-center gap-2 min-w-0 w-full">
+        <input id="line2d-input" type="text" inputmode="numeric" maxlength="2" placeholder="88" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,2)" class="line2d-big-box flex-1 min-w-0 w-full rounded-xl py-2 px-2 focus:border-amber-300 focus:outline-none">
+        <button type="button" id="btn-submit-line2d" onclick="submitLine2dVote()" disabled class="tap-responsive cyber-btn-red font-cyber font-extrabold py-2.5 px-3 rounded-xl text-xs-custom uppercase tracking-normal cursor-pointer shrink-0 disabled:opacity-45" style="white-space: nowrap;">
+          Kirim 2D
+        </button>
+      </div>
+
+      <!-- TOP 10 LINE 2D TERKUAT -->
+      <div class="pt-2.5 border-t border-rose-500/20 space-y-2">
+        <div class="flex items-center justify-between text-xs-custom">
+          <span class="font-cyber font-bold text-rose-200 uppercase">Top 10 Line 2D Terbanyak</span>
+          <span id="line2d-vote-count" class="font-mono-num text-amber-300 font-bold">0 suara</span>
+        </div>
+        <div id="line2d-top-grid" class="grid grid-cols-2 gap-1.5"></div>
+      </div>
+    </div>
+
+    <!-- PESAN STATUS INTERAKTIF -->
+    <div id="poll-feedback-msg" class="text-xs-custom text-center font-semibold text-rose-200 min-h-[1.15rem]"></div>
+
+    <!-- LIVE PAPAN PENANDA & SKOR PUBLIK -->
+    <div class="pt-2.5 border-t border-rose-500/25">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs-custom font-cyber font-extrabold text-rose-200 uppercase tracking-wider">
+          <i class="fa-solid fa-trophy text-amber-300 mr-1" aria-hidden="true"></i> Daftar Nama Master (Publik)
+        </span>
+        <span class="text-xs-custom text-warm-muted">Reset 00:00 WIB</span>
+      </div>
+      <div id="leaderboard-list" class="space-y-1.5 text-sm-custom max-h-[15rem] overflow-y-auto pr-1"></div>
+    </div>
+  </section>
+
   <section aria-label="Menu Prediksi">
     <div class="grid grid-cols-2 gap-2.5">
       <a href="https://tunggalpaito.online/live-draw/" class="bento-card hover:border-rose-500/70 p-3.5 rounded-2xl flex flex-col justify-between">
@@ -1712,7 +1950,7 @@
         <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
       </div>
       <div>
-        <h3 id="download-modal-title" class="modal-title font-cyber font-bold text-warm-bright uppercase tracking-wider">Download APK Tunggal Paito</h3>
+        <h3 id="download-modal-title" class="modal-title font-cyber font-bold text-warm-bright uppercase tracking-wider">CARA DOWNLOAD APK TUNGGAL PAITO</h3>
         <p class="text-xs-custom text-amber-300 font-medium">Akses opsional lewat APK Resmi TUNGGAL PAITO</p>
       </div>
     </div>
@@ -1796,7 +2034,7 @@
 (function() {
   "use strict";
 
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_26_standard_v39";
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_26_standard_v41";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
   const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
 
@@ -2145,6 +2383,463 @@
   const yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
+  // --- ARENA POLLING GEN-Z: KHUSUS SDY, SGP (LIBUR SELASA & JUMAT), HK POOLS ---
+  const MARKER_NAME_KEY = "tp_poll_marker_name_v3";
+  const VOTED_FLAG_KEY = "tp_poll_voted_log_v3";
+  const POLL_MARKETS = {
+    sdy: { label: "Sydney Pools (SDY)", short: "SDY" },
+    sgp: { label: "Singapore Pools (SGP)", short: "SGP" },
+    hk:  { label: "Hongkong Pools (HK)", short: "HK" }
+  };
+
+  let activePollMarket = "sdy";
+  let activeMarkerName = "";
+  let selectedTunggalDigit = null;
+
+  function getWibNowDate() {
+    return new Date(Date.now() + 7 * 3600 * 1000);
+  }
+
+  function getWibDateKey() {
+    return getWibNowDate().toISOString().slice(0, 10);
+  }
+
+  // Cek hari libur SGP Pools: Selasa (2) & Jumat (5) waktu WIB
+  function isSgpHolidayWib() {
+    const dayWib = getWibNowDate().getUTCDay();
+    return dayWib === 2 || dayWib === 5;
+  }
+
+  function isCurrentMarketClosed() {
+    return activePollMarket === "sgp" && isSgpHolidayWib();
+  }
+
+  function getPollFirebaseBaseUrl() {
+    const base = String(FIREBASE_DB_CONFIG.databaseURL || "").trim().replace(/\/+$/, "");
+    return base + "/live/polling-harian/" + getWibDateKey() + "/" + activePollMarket;
+  }
+
+  function sanitizeNick(raw) {
+    return String(raw || "").trim().replace(/[<>&"'/\\]/g, "").slice(0, 16);
+  }
+
+  function setFeedback(text, isWarn) {
+    const el = document.getElementById("poll-feedback-msg");
+    if (!el) return;
+    el.textContent = text;
+    el.style.color = isWarn ? "#fde047" : "#fecdd3";
+  }
+
+  function readVotedLog() {
+    const today = getWibDateKey();
+    const defaultMarketLog = { tunggal: false, line2dCount: 0 };
+    try {
+      const obj = JSON.parse(localStorage.getItem(VOTED_FLAG_KEY) || "{}");
+      if (obj.date === today && obj.markets && obj.markets[activePollMarket]) {
+        return obj.markets[activePollMarket];
+      }
+    } catch (e) {}
+    return defaultMarketLog;
+  }
+
+  function writeVotedLog(marketLog) {
+    const today = getWibDateKey();
+    let root = { date: today, markets: {} };
+    try {
+      const existing = JSON.parse(localStorage.getItem(VOTED_FLAG_KEY) || "{}");
+      if (existing.date === today && existing.markets) root = existing;
+    } catch (e) {}
+    root.markets[activePollMarket] = marketLog;
+    try {
+      localStorage.setItem(VOTED_FLAG_KEY, JSON.stringify(root));
+    } catch (e) {}
+  }
+
+  function syncMarkerAndButtonsUI() {
+    const titleEl = document.getElementById("poll-arena-title");
+    const holidayBox = document.getElementById("sgp-holiday-notice");
+    const statusEl = document.getElementById("poll-marker-status");
+    const inputEl = document.getElementById("poll-marker-input");
+    const btnTunggal = document.getElementById("btn-submit-tunggal");
+    const btnLine2d = document.getElementById("btn-submit-line2d");
+    const line2dInput = document.getElementById("line2d-input");
+
+    if (titleEl && POLL_MARKETS[activePollMarket]) {
+      titleEl.textContent = POLL_MARKETS[activePollMarket].label;
+    }
+
+    const closed = isCurrentMarketClosed();
+    if (holidayBox) holidayBox.classList.toggle("hidden", !closed);
+
+    const log = readVotedLog();
+    const hasName = Boolean(activeMarkerName);
+
+    if (statusEl) {
+      statusEl.textContent = hasName ? "ID: " + activeMarkerName : "Wajib Diisi";
+      statusEl.style.color = hasName ? "#86efac" : "#fcd34d";
+    }
+    if (inputEl && hasName && !inputEl.value) {
+      inputEl.value = activeMarkerName;
+    }
+
+    if (btnTunggal) {
+      if (closed) {
+        btnTunggal.disabled = true;
+        btnTunggal.innerHTML = '<i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> SGP Libur (Selasa & Jumat)';
+      } else {
+        btnTunggal.disabled = !hasName || selectedTunggalDigit === null || log.tunggal;
+        btnTunggal.innerHTML = log.tunggal
+          ? '<i class="fa-solid fa-check mr-1" aria-hidden="true"></i> Tunggal ' + POLL_MARKETS[activePollMarket].short + ' Terkirim'
+          : '<i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Sumbang Tunggal ' + POLL_MARKETS[activePollMarket].short;
+      }
+    }
+
+    if (line2dInput) line2dInput.disabled = closed;
+
+    if (btnLine2d) {
+      if (closed) {
+        btnLine2d.disabled = true;
+        btnLine2d.textContent = "SGP Libur";
+      } else {
+        const count2d = Number(log.line2dCount) || 0;
+        const maxed2d = count2d >= 2;
+        btnLine2d.disabled = !hasName || maxed2d;
+        btnLine2d.textContent = maxed2d ? "Selesai (2/2)" : "Kirim 2D (" + count2d + "/2)";
+      }
+    }
+  }
+
+  window.switchPollMarket = function(mkt) {
+    if (!POLL_MARKETS[mkt]) return;
+    activePollMarket = mkt;
+    ["sdy", "sgp", "hk"].forEach(function(code) {
+      const btn = document.getElementById("poll-mkt-" + code);
+      if (btn) btn.classList.toggle("active", code === mkt);
+    });
+    setFeedback("", false);
+    syncMarkerAndButtonsUI();
+    fetchPollState();
+  };
+
+  window.setPollMarkerName = function() {
+    const inputEl = document.getElementById("poll-marker-input");
+    const clean = sanitizeNick(inputEl ? inputEl.value : "");
+    if (clean.length < 2) {
+      setFeedback("⚠️ Isi Nama Penanda minimal 2 karakter sebelum menebak!", true);
+      if (inputEl) inputEl.focus();
+      return;
+    }
+    activeMarkerName = clean;
+    try { localStorage.setItem(MARKER_NAME_KEY, clean); } catch (e) {}
+    setFeedback("✅ ID " + clean + " terkunci! Silakan sumbang angka untuk " + POLL_MARKETS[activePollMarket].label + ".", false);
+    syncMarkerAndButtonsUI();
+  };
+
+  window.switchPollMode = function(mode) {
+    const isTunggal = mode === "tunggal";
+    const tabT = document.getElementById("poll-tab-tunggal");
+    const tabL = document.getElementById("poll-tab-line2d");
+    const panelT = document.getElementById("poll-panel-tunggal");
+    const panelL = document.getElementById("poll-panel-line2d");
+
+    if (tabT) tabT.classList.toggle("active", isTunggal);
+    if (tabL) tabL.classList.toggle("active", !isTunggal);
+    if (panelT) panelT.classList.toggle("hidden", !isTunggal);
+    if (panelL) panelL.classList.toggle("hidden", isTunggal);
+  };
+
+  function buildTunggalButtons() {
+    const grid = document.getElementById("tunggal-grid-buttons");
+    if (!grid) return;
+    grid.textContent = "";
+    for (let d = 0; d <= 9; d++) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "digit-chip-btn";
+      btn.textContent = String(d);
+      btn.setAttribute("data-digit", String(d));
+      btn.addEventListener("click", function() {
+        if (isCurrentMarketClosed()) {
+          setFeedback("⚠️ SGP Pools libur setiap hari Selasa & Jumat.", true);
+          return;
+        }
+        selectedTunggalDigit = d;
+        const lbl = document.getElementById("selected-tunggal-label");
+        if (lbl) lbl.textContent = String(d);
+        grid.querySelectorAll("button").forEach(function(b) {
+          b.classList.toggle("picked", b.getAttribute("data-digit") === String(d));
+        });
+        if (!activeMarkerName) {
+          setFeedback("⚠️ Pasang Nama Penanda di atas dulu agar tombol kirim aktif!", true);
+        }
+        syncMarkerAndButtonsUI();
+      });
+      grid.appendChild(btn);
+    }
+  }
+
+  function postVoteRecord(category, pickValue) {
+    const nowWib = getWibNowDate();
+    const jamStr = nowWib.toISOString().slice(11, 16) + " WIB";
+
+    const payload = {
+      name: activeMarkerName,
+      market: activePollMarket,
+      category: category,
+      pick: pickValue,
+      time: jamStr,
+      ts: Date.now()
+    };
+
+    return fetch(getPollFirebaseBaseUrl() + "/feed.json", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function(res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    });
+  }
+
+  window.submitTunggalVote = function() {
+    if (isCurrentMarketClosed()) {
+      setFeedback("⚠️ SGP Pools libur setiap hari Selasa & Jumat.", true);
+      return;
+    }
+    if (!activeMarkerName) {
+      setFeedback("⚠️ Wajib pasang Nama Penanda dulu sebelum menyumbang!", true);
+      return;
+    }
+    if (selectedTunggalDigit === null) {
+      setFeedback("Pilih salah satu angka 0–9 terlebih dahulu.", true);
+      return;
+    }
+    const log = readVotedLog();
+    if (log.tunggal) {
+      setFeedback("Kamu sudah menyumbang angka tunggal " + POLL_MARKETS[activePollMarket].short + " hari ini.", true);
+      return;
+    }
+
+    const btn = document.getElementById("btn-submit-tunggal");
+    if (btn) { btn.disabled = true; btn.textContent = "MENGIRIM..."; }
+
+    postVoteRecord("TUNGGAL", String(selectedTunggalDigit))
+      .then(function() {
+        log.tunggal = true;
+        writeVotedLog(log);
+        setFeedback("🔥 Masuk papan skor " + POLL_MARKETS[activePollMarket].short + "! " + activeMarkerName + " sumbang Tunggal " + selectedTunggalDigit, false);
+        syncMarkerAndButtonsUI();
+        fetchPollState();
+      })
+      .catch(function(err) {
+        setFeedback("⚠️ Gagal kirim (" + err.message + "), silakan coba kirim ulang.", true);
+        syncMarkerAndButtonsUI();
+      });
+  };
+
+  window.submitLine2dVote = function() {
+    if (isCurrentMarketClosed()) {
+      setFeedback("⚠️ SGP Pools libur setiap hari Selasa & Jumat.", true);
+      return;
+    }
+    if (!activeMarkerName) {
+      setFeedback("⚠️ Wajib pasang Nama Penanda dulu sebelum menyumbang!", true);
+      return;
+    }
+    const input = document.getElementById("line2d-input");
+    const raw = (input ? input.value : "").replace(/[^0-9]/g, "");
+    if (raw.length === 0) {
+      setFeedback("Ketik angka Line 2D (00 sampai 99).", true);
+      if (input) input.focus();
+      return;
+    }
+    const formatted2d = raw.padStart(2, "0");
+    const log = readVotedLog();
+    if ((Number(log.line2dCount) || 0) >= 2) {
+      setFeedback("Kuota sumbang Line 2D " + POLL_MARKETS[activePollMarket].short + " hari ini (2x) sudah terpakai.", true);
+      return;
+    }
+
+    const btn = document.getElementById("btn-submit-line2d");
+    if (btn) { btn.disabled = true; btn.textContent = "..."; }
+
+    postVoteRecord("LINE 2D", formatted2d)
+      .then(function() {
+        log.line2dCount = (Number(log.line2dCount) || 0) + 1;
+        writeVotedLog(log);
+        if (input) input.value = "";
+        setFeedback("🔥 Masuk papan skor " + POLL_MARKETS[activePollMarket].short + "! " + activeMarkerName + " sumbang Line 2D " + formatted2d, false);
+        syncMarkerAndButtonsUI();
+        fetchPollState();
+      })
+      .catch(function(err) {
+        setFeedback("⚠️ Gagal kirim (" + err.message + "), silakan coba kirim ulang.", true);
+        syncMarkerAndButtonsUI();
+      });
+  };
+
+  function renderPollBoard(feedObj) {
+    const singleCounts = { "0":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0 };
+    const line2dCounts = {};
+    const rows = [];
+
+    if (feedObj && typeof feedObj === "object") {
+      Object.keys(feedObj).forEach(function(k) {
+        const item = feedObj[k];
+        if (!item || typeof item.name !== "string" || typeof item.pick !== "string") return;
+        rows.push(item);
+        if (item.category === "TUNGGAL" && Object.prototype.hasOwnProperty.call(singleCounts, item.pick)) {
+          singleCounts[item.pick] += 1;
+        } else if (item.category === "LINE 2D" && /^[0-9]{2}$/.test(item.pick)) {
+          line2dCounts[item.pick] = (line2dCounts[item.pick] || 0) + 1;
+        }
+      });
+    }
+
+    const totalBadge = document.getElementById("poll-total-badge");
+if (totalBadge) totalBadge.textContent = rows.length + " PESERTA";
+
+
+    const totalSingle = Object.values(singleCounts).reduce(function(a, b) { return a + b; }, 0);
+    const singleCountEl = document.getElementById("tunggal-vote-count");
+    if (singleCountEl) singleCountEl.textContent = totalSingle + " suara";
+
+    const barsList = document.getElementById("tunggal-bars-list");
+    if (barsList) {
+      barsList.textContent = "";
+      const sortedDigits = Object.keys(singleCounts).sort(function(a, b) {
+        return singleCounts[b] - singleCounts[a] || Number(a) - Number(b);
+      });
+      sortedDigits.forEach(function(digit, idx) {
+        const count = singleCounts[digit];
+        const pct = totalSingle > 0 ? Math.round((count / totalSingle) * 100) : 0;
+
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "flex items-center gap-2 text-xs-custom";
+
+        const label = document.createElement("span");
+        label.className = "font-cyber font-extrabold w-6 text-center shrink-0 " + (idx === 0 && count > 0 ? "text-amber-300" : "text-rose-200");
+        label.textContent = digit;
+
+        const track = document.createElement("div");
+        track.className = "neon-bar-track flex-1";
+
+        const fill = document.createElement("div");
+        fill.className = "neon-bar-fill";
+        fill.style.width = pct + "%";
+        track.appendChild(fill);
+
+        const stat = document.createElement("span");
+        stat.className = "font-mono-num text-warm-muted shrink-0 text-right";
+        stat.style.minWidth = "4.8rem";
+        stat.textContent = count + " (" + pct + "%)";
+
+        rowDiv.append(label, track, stat);
+        barsList.appendChild(rowDiv);
+      });
+    }
+
+    const total2d = Object.values(line2dCounts).reduce(function(a, b) { return a + b; }, 0);
+    const line2dCountEl = document.getElementById("line2d-vote-count");
+    if (line2dCountEl) line2dCountEl.textContent = total2d + " suara";
+
+    const top2dGrid = document.getElementById("line2d-top-grid");
+    if (top2dGrid) {
+      top2dGrid.textContent = "";
+      const top2dEntries = Object.keys(line2dCounts)
+        .map(function(num) { return { num: num, count: line2dCounts[num] }; })
+        .sort(function(a, b) { return b.count - a.count; })
+        .slice(0, 10);
+
+      if (!top2dEntries.length) {
+        const empty2d = document.createElement("div");
+        empty2d.className = "col-span-2 text-xs-custom text-warm-muted text-center py-2.5";
+        empty2d.textContent = "Belum ada Line 2D " + POLL_MARKETS[activePollMarket].short + " masuk.";
+        top2dGrid.appendChild(empty2d);
+      } else {
+        top2dEntries.forEach(function(item, i) {
+          const box = document.createElement("div");
+          box.className = "flex items-center justify-between bg-[#050305] border border-rose-500/30 rounded-xl px-2.5 py-2 text-xs-custom";
+          const left = document.createElement("span");
+          left.className = "font-cyber font-extrabold text-amber-300";
+          left.textContent = (i + 1) + ". " + item.num;
+          const right = document.createElement("span");
+          right.className = "font-mono-num font-bold text-rose-200";
+          right.textContent = item.count + "x";
+          box.append(left, right);
+          top2dGrid.appendChild(box);
+        });
+      }
+    }
+
+    const boardList = document.getElementById("leaderboard-list");
+    if (boardList) {
+      boardList.textContent = "";
+      rows.sort(function(a, b) { return (Number(b.ts) || 0) - (Number(a.ts) || 0); });
+      if (!rows.length) {
+        const emptyBoard = document.createElement("div");
+        emptyBoard.className = "text-xs-custom text-warm-muted bg-[#090407]/85 border border-rose-500/20 rounded-xl p-3 text-center";
+        emptyBoard.textContent = "Daftar Master " + POLL_MARKETS[activePollMarket].label + " masih kosong.";
+        boardList.appendChild(emptyBoard);
+        return;
+      }
+
+      rows.slice(0, 25).forEach(function(r, idx) {
+        const rowCard = document.createElement("div");
+        rowCard.className = "feed-item-card flex items-center justify-between rounded-xl px-3 py-2 gap-2.5";
+
+        const leftWrap = document.createElement("div");
+        leftWrap.className = "flex items-center gap-2.5 min-w-0";
+
+        const numCol = document.createElement("span");
+        numCol.className = "font-mono-num font-extrabold text-xs-custom text-amber-300 w-6 text-center shrink-0";
+        numCol.textContent = String(idx + 1);
+
+        const infoCol = document.createElement("div");
+        infoCol.className = "min-w-0";
+        const nameEl = document.createElement("div");
+        nameEl.className = "font-bold text-warm-bright truncate";
+        nameEl.textContent = r.name;
+        const timeEl = document.createElement("div");
+        timeEl.className = "text-xs-custom text-warm-muted";
+        timeEl.textContent = POLL_MARKETS[activePollMarket].short + " • " + (r.category || "TEBAKAN") + " • " + (r.time || "");
+        infoCol.append(nameEl, timeEl);
+
+        leftWrap.append(numCol, infoCol);
+
+        const badge = document.createElement("span");
+        badge.className = "font-cyber font-extrabold px-2.5 py-1 rounded-lg bg-rose-500/25 text-amber-300 border border-amber-400/45 shrink-0";
+        badge.textContent = r.pick;
+
+        rowCard.append(leftWrap, badge);
+        boardList.appendChild(rowCard);
+      });
+    }
+  }
+
+  function fetchPollState() {
+    const requestedMarket = activePollMarket;
+    const url = getPollFirebaseBaseUrl() + "/feed.json?t=" + Date.now();
+    if (!isSafeHttpUrl(url) || typeof fetch !== "function") return;
+    fetch(url, { cache: "no-store" })
+      .then(function(res) { return res.ok ? res.json() : null; })
+      .then(function(data) {
+        if (requestedMarket === activePollMarket) renderPollBoard(data);
+      })
+      .catch(function() {});
+  }
+
+  try {
+    activeMarkerName = sanitizeNick(localStorage.getItem(MARKER_NAME_KEY) || "");
+  } catch (e) {}
+  buildTunggalButtons();
+  syncMarkerAndButtonsUI();
+  fetchPollState();
+  setInterval(function() {
+    if (!document.hidden) fetchPollState();
+  }, 12000);
+  // --- AKHIR ARENA POLLING GEN-Z ---
+
   const prefetchedUrls = new Set();
   function prefetchInternalUrl(href) {
     if (!href || prefetchedUrls.has(href) || !isSafeHttpUrl(href)) return;
@@ -2419,7 +3114,7 @@
 
   window.filterMarket = function(market, btn) {
     activeMarketFilter = market || "all";
-    document.querySelectorAll(".tab-btn").forEach(function(b) {
+    document.querySelectorAll(".tab-btn[data-tab]").forEach(function(b) {
       const isTarget = btn ? b === btn : b.getAttribute("data-tab") === activeMarketFilter;
       b.classList.toggle("active", isTarget);
       b.setAttribute("aria-selected", isTarget ? "true" : "false");
@@ -2433,6 +3128,9 @@
     const lottoGrid = document.getElementById("lotto-grid");
     if (lottoGrid) {
       lottoGrid.classList.toggle("hidden", !Array.from(lottoGrid.querySelectorAll(".market-block")).some(function(el) { return !el.classList.contains("hidden"); }));
+    }
+    if (typeof window.switchPollMarket === "function" && (activeMarketFilter === "sdy" || activeMarketFilter === "sgp" || activeMarketFilter === "hk")) {
+      window.switchPollMarket(activeMarketFilter);
     }
     syncMarketFilterStatus();
     const searchModal = document.getElementById("search-modal");
