@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin CS</title>
+<title>Panel CS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -544,6 +544,7 @@ const LOCK_STORAGE_KEY = "panel_cs_active_email_locks_v1";
 const LOCK_TTL_MS = 12000;
 let currentLockedEmail = "";
 let bypassLockOnce = false;
+let lastTrackedKey = "";
 
 function readEmailLocks() {
   try {
@@ -766,14 +767,17 @@ function getDueCheckTargets() {
     const isClosedYesterday = Array.isArray(item.closedDays) && item.closedDays.includes(prevDayOfWeek);
     const isNightMarket = item.startMinute >= 20 * 60;
     if (!isClosedYesterday && isNightMarket) {
+      const isMultiRound = item.dbKey === "data-macau4d" || item.dbKey === "data-macau5d";
       targets.push({
         id: `prev:${item.key}:${prevDbDateKey}`,
         key: item.key,
         dbKey: item.dbKey,
+        isMultiRound,
         dbDateKey: prevDbDateKey,
         inputDateStr: prevDateStr,
         label: `${item.label} (Kemarin ${prevDbDateKey})`,
-        expectedMinRounds: 1
+        expectedMinRounds: 1,
+        maxRounds: item.dbKey === "data-macau4d" ? 6 : (item.dbKey === "data-macau5d" ? 2 : 1)
       });
     }
   });
@@ -804,7 +808,8 @@ function getDueCheckTargets() {
         dbDateKey,
         inputDateStr: dateStr,
         label: expectedRounds > 1 ? `${baseLabel} (Putaran ke-${expectedRounds})` : item.label,
-        expectedMinRounds: expectedRounds
+        expectedMinRounds: expectedRounds,
+        maxRounds: item.dbKey === "data-macau4d" ? 6 : 2
       });
     } else {
       targets.push({
@@ -815,7 +820,8 @@ function getDueCheckTargets() {
         dbDateKey,
         inputDateStr: dateStr,
         label: item.label,
-        expectedMinRounds: 1
+        expectedMinRounds: 1,
+        maxRounds: 1
       });
     }
   });
@@ -828,7 +834,7 @@ function openMissedMarketPopup(missedTargets) {
   const textEl = document.getElementById("missedMarketText");
   if (!modal || !textEl || !Array.isArray(missedTargets) || !missedTargets.length) return;
 
-  const signature = missedTargets.map((m) => m.id).join("|");
+  const signature = missedTargets.map((m) => `${m.id}:${m.targetSelectKey || m.key}`).join("|");
   if (signature === shownMissedPopupSignature && modal.classList.contains("is-open")) return;
 
   shownMissedPopupSignature = signature;
@@ -854,6 +860,7 @@ function focusMissedMarketAndClose() {
   const resolvedKey = firstMissedMarketTarget.targetSelectKey || firstMissedMarketTarget.key;
   if (selectEl) {
     selectEl.value = resolvedKey;
+    lastTrackedKey = resolvedKey;
     isManualMarketSelection = true;
     updateSelectionModeBadge();
   }
@@ -883,7 +890,7 @@ function checkMissedScheduledMarkets() {
         .once("value")
         .then((snap) => {
           const savedRounds = snap.exists() ? getSavedRoundCount(snap.val()) : 0;
-          const nextRoundNumber = Math.min(savedRounds + 1, target.expectedMinRounds);
+          const nextRoundNumber = Math.min(savedRounds + 1, target.expectedMinRounds, target.maxRounds || target.expectedMinRounds);
           const roundOptionKey = target.isMultiRound
             ? getMacauRoundOptionKey(target.dbKey, nextRoundNumber)
             : target.key;
@@ -957,6 +964,7 @@ function syncMarketToCurrentRound(baseMarket) {
   const isMultiRound = baseMarket.dbKey === "data-macau4d" || baseMarket.dbKey === "data-macau5d";
   if (!isMultiRound) {
     selectEl.value = baseMarket.key;
+    lastTrackedKey = baseMarket.key;
     updateSelectionModeBadge();
     renderPrediksiButtons(baseMarket.key);
     showLatestDataPaito(baseMarket.key);
@@ -976,6 +984,7 @@ function syncMarketToCurrentRound(baseMarket) {
       const targetRound = Math.min(maxRound, Math.max(scheduledRound, savedRounds + 1));
       const optionKey = getMacauRoundOptionKey(baseMarket.dbKey, targetRound) || baseMarket.key;
       selectEl.value = optionKey;
+      lastTrackedKey = optionKey;
       updateSelectionModeBadge();
       renderPrediksiButtons(optionKey);
       showLatestDataPaito(optionKey);
@@ -983,6 +992,7 @@ function syncMarketToCurrentRound(baseMarket) {
     .catch(() => {
       if (!isManualMarketSelection) {
         selectEl.value = baseMarket.key;
+        lastTrackedKey = baseMarket.key;
         updateSelectionModeBadge();
         renderPrediksiButtons(baseMarket.key);
         showLatestDataPaito(baseMarket.key);
@@ -994,6 +1004,7 @@ function applyInitialMarketByTime() {
   const activeMarket = getScheduledMarketByTime();
   const selectEl = document.getElementById("marketSelect");
   if (selectEl) selectEl.value = activeMarket.key;
+  lastTrackedKey = activeMarket.key;
   updateSelectionModeBadge();
   renderPrediksiButtons(activeMarket.key);
   syncMarketToCurrentRound(activeMarket);
@@ -1199,6 +1210,7 @@ function saveDataPaito() {
       const nextKey = getMacauRoundOptionKey(dbPath, nextRound);
       if (nextKey) {
         document.getElementById("marketSelect").value = nextKey;
+        lastTrackedKey = nextKey;
         activeKeyAfterSave = nextKey;
       }
     }
@@ -1219,7 +1231,7 @@ document.addEventListener("DOMContentLoaded", () => {
   autoSetDates();
   applyInitialMarketByTime();
 
-  let lastTrackedKey = document.getElementById("marketSelect")?.value || "";
+  lastTrackedKey = document.getElementById("marketSelect")?.value || "";
 
   setInterval(() => {
     checkMissedScheduledMarkets();
