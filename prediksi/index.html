@@ -10,7 +10,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:large">
 <meta name="author" content="Tunggal Paito">
-<meta name="keywords" content="prediksi togel hari ini, tunggal paito, prediksi sdy jitu, prediksi sgp hari ini, prediksi hk malam ini, paito warna terlengkap, live draw sdy sgp hk, generator bbfs, line 2d jitu, sdy lotto, hk lotto, analisa sdy, analisa sgp, analisa hk, bbfs 2d sdy, bbfs 2d sgp, bbfs 2d hk, kumat 2d sdy, kumat 2d sgp, kumat 2d hk, angka lemah kepala ekor, prediksi angka main sdy lotto, prediksi angka main hk lotto">
+<meta name="keywords" content="prediksi togel hari ini, tunggal paito, prediksi sdy jitu, prediksi sgp hari ini, prediksi hk malam ini, paito warna lengkap, live draw sdy sgp hk, generator bbfs, line 2d jitu, sdy lotto, hk lotto, analisa sdy, analisa sgp, analisa hk, bbfs 2d sdy, bbfs 2d sgp, bbfs 2d hk, kumat 2d sdy, kumat 2d sgp, kumat 2d hk, angka lemah kepala ekor, prediksi angka main sdy lotto, prediksi angka main hk lotto">
 
 <title>Prediksi Togel Jitu Hari Ini - Live Analisa &amp; Angka Main | Tunggal Paito</title>
 <meta name="description" content="Pusat prediksi angka togel jitu hari ini, untuk pasaran Sydney (SDY), Singapore (SGP), Hongkong (HK), SDY Lotto, dan HK Lotto dengan analisa lengkap, paito warna, dan live draw di Tunggal Paito.">
@@ -1709,15 +1709,15 @@
     </button>
     <div class="flex items-center space-x-3 mb-3.5 pb-3 border-b border-rose-500/20">
       <div class="w-10 h-10 rounded-2xl bg-amber-500/15 text-amber-300 flex items-center justify-center shrink-0 border border-amber-500/40">
-        <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+        <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
       </div>
       <div>
-        <h3 id="download-modal-title" class="modal-title font-cyber font-bold text-warm-bright uppercase tracking-wider">Wajib Download APK Dulu</h3>
-        <p class="text-xs-custom text-amber-300 font-medium">Buka fitur lewat APK Resmi TUNGGAL PAITO</p>
+        <h3 id="download-modal-title" class="modal-title font-cyber font-bold text-warm-bright uppercase tracking-wider">Download APK Tunggal Paito</h3>
+        <p class="text-xs-custom text-amber-300 font-medium">Akses opsional lewat APK Resmi TUNGGAL PAITO</p>
       </div>
     </div>
     <div class="text-sm-custom text-warm-body space-y-2.5 mb-4 max-h-[62vh] overflow-y-auto pr-1 leading-relaxed">
-      <p id="download-modal-status-msg" class="font-semibold text-amber-200 bg-amber-500/15 p-3 rounded-xl border border-amber-500/35">Silakan download APK terlebih dahulu melalui tombol di bawah agar bisa lanjut dan membuka lewat APK. Jika sudah diunduh, otomatis tidak perlu download ulang.</p>
+      <p id="download-modal-status-msg" class="font-semibold text-amber-200 bg-amber-500/15 p-3 rounded-xl border border-amber-500/35">Situs dapat diakses langsung tanpa wajib download. Jika ingin memakai aplikasi APK Tunggal Paito, silakan unduh melalui tombol di bawah.</p>
       <div>
         <p class="text-xs-custom font-cyber font-bold text-rose-300 uppercase tracking-wider mb-1.5">Gambar Panduan Download APK</p>
         <div class="grid grid-cols-3 gap-2">
@@ -1736,7 +1736,7 @@
         </div>
       </div>
       <div>
-        <p class="font-bold text-warm-bright mb-1.5">Langkah Selanjutnya:</p>
+        <p class="font-bold text-warm-bright mb-1.5">Langkah Instalasi (Jika Diperlukan):</p>
         <ol class="list-decimal list-inside space-y-1.5 text-warm-muted pl-1">
           <li>Buka aplikasi <strong class="text-warm-body">Google Play Store</strong> di HP Anda.</li>
           <li>Ketuk foto profil akun Anda di pojok kanan atas layar.</li>
@@ -1748,7 +1748,7 @@
         </ol>
       </div>
     </div>
-    <a id="modal-apk-download-link" href="https://drive.google.com/file/d/1JlcdXBP7y6IxF9txlxtmuCnCQ_XiS0AR/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" onclick="markApkDownloadedAndProceed(event)" class="tap-responsive cyber-btn-red w-full flex items-center justify-center space-x-2 font-extrabold py-3 px-4 rounded-2xl">
+    <a id="modal-apk-download-link" href="https://drive.google.com/file/d/1JlcdXBP7y6IxF9txlxtmuCnCQ_XiS0AR/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" onclick="closeDownloadModal()" class="tap-responsive cyber-btn-red w-full flex items-center justify-center space-x-2 font-extrabold py-3 px-4 rounded-2xl">
       <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i> <span id="modal-apk-download-label">Download APK Sekarang</span>
     </a>
   </div>
@@ -1796,13 +1796,9 @@
 (function() {
   "use strict";
 
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_26_final_v38";
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_26_standard_v39";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
   const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
-  const STORAGE_APK_DOWNLOADED_KEY = "tp_apk_downloaded_v1";
-  const STORAGE_APK_SESSION_KEY = "tp_apk_session_valid_v1";
-  const APK_ACCESS_TOKEN = "tp_resmi";
-  const APK_COOKIE_NAME = "tp_apk_access";
 
   const FIREBASE_DB_CONFIG = {
     databaseURL: window.TP_FIREBASE_DB_URL || "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app"
@@ -1813,13 +1809,6 @@
   const PROMO_BOX_IDS = ["fire-promo-box", "fire-promo-box-bottom"];
   const PROMO_LINK_IDS = ["fire-promo-link", "fire-promo-link-bottom"];
 
-  // Konfigurasi APK & Gate Unduh
-  const APK_SCHEME = "tunggalpaito";
-  const APK_HOST = "open";
-  const ANDROID_PACKAGE = "online.tunggalpaito.app";
-  const APK_DOWNLOAD_URL = "https://drive.google.com/file/d/1JlcdXBP7y6IxF9txlxtmuCnCQ_XiS0AR/view?usp=drivesdk";
-
-  let pendingTargetUrl = "";
   let boLinksList = [DEFAULT_BO_LINK];
   let currentActiveBoLink = DEFAULT_BO_LINK;
   let isFireBoxInViewport = true;
@@ -1837,180 +1826,6 @@
       return false;
     }
   }
-
-  function isSameDomainTp(hostname) {
-    if (!hostname) return false;
-    const h = String(hostname).toLowerCase();
-    return h === "tunggalpaito.online" || h.endsWith(".tunggalpaito.online");
-  }
-
-  function readApkCookie() {
-    try {
-      const match = document.cookie.match(new RegExp("(?:^|;\\s*)" + APK_COOKIE_NAME + "=([^;]*)"));
-      return match ? decodeURIComponent(match[1]) : "";
-    } catch (e) {
-      return "";
-    }
-  }
-
-  function writeApkCookie() {
-    try {
-      const domainPart = isSameDomainTp(window.location.hostname) ? "; domain=.tunggalpaito.online" : "";
-      const securePart = window.location.protocol === "https:" ? "; Secure" : "";
-      document.cookie = APK_COOKIE_NAME + "=" + encodeURIComponent(APK_ACCESS_TOKEN) +
-        "; max-age=2592000; path=/" + domainPart + "; SameSite=Lax" + securePart;
-    } catch (e) {}
-  }
-
-  function hasValidApkTokenInUrl() {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("akses_apk") === APK_ACCESS_TOKEN || params.get("from_apk") === "1";
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function saveApkAccessGrant() {
-    try { window.localStorage.setItem(STORAGE_APK_SESSION_KEY, "1"); } catch (e) {}
-    try { window.localStorage.setItem(STORAGE_APK_DOWNLOADED_KEY, "1"); } catch (e) {}
-    safeSessionSet(STORAGE_APK_SESSION_KEY, "1");
-    try { window.name = "TP_APK_SESSION_" + APK_ACCESS_TOKEN; } catch (e) {}
-    writeApkCookie();
-  }
-
-  function hasSavedApkGrant() {
-    let fromLocal = false;
-    let fromSession = false;
-    try {
-      fromLocal =
-        window.localStorage.getItem(STORAGE_APK_SESSION_KEY) === "1" ||
-        window.localStorage.getItem(STORAGE_APK_DOWNLOADED_KEY) === "1";
-    } catch (e) {}
-    try {
-      fromSession = window.sessionStorage.getItem(STORAGE_APK_SESSION_KEY) === "1";
-    } catch (e) {}
-    const fromWindowName = window.name === "TP_APK_SESSION_" + APK_ACCESS_TOKEN;
-    const fromCookie = readApkCookie() === APK_ACCESS_TOKEN;
-    return fromLocal || fromSession || fromWindowName || fromCookie;
-  }
-
-  if (hasValidApkTokenInUrl()) {
-    saveApkAccessGrant();
-  }
-
-  function isInsideApp() {
-    if (hasValidApkTokenInUrl() || hasSavedApkGrant()) {
-      saveApkAccessGrant();
-      return true;
-    }
-    const ua = navigator.userAgent || "";
-    const isCustomUa = /TunggalPaitoApp|WebIntoApp|wv\b/i.test(ua);
-    const isAndroidWebView =
-      /Android/i.test(ua) &&
-      /Version\/\d+\.\d+/i.test(ua) &&
-      !/Chrome\/\d+/i.test(ua);
-    if (isCustomUa || isAndroidWebView) {
-      saveApkAccessGrant();
-      return true;
-    }
-    return false;
-  }
-
-  function appendApkTokenIfNeeded(rawHref) {
-    if (!rawHref || rawHref.startsWith("#") || rawHref.toLowerCase().startsWith("javascript:")) {
-      return rawHref;
-    }
-    try {
-      const urlObj = new URL(rawHref, window.location.href);
-      if (!isSameDomainTp(urlObj.hostname) && urlObj.origin !== window.location.origin) {
-        return rawHref;
-      }
-      if (!urlObj.searchParams.has("akses_apk")) {
-        urlObj.searchParams.set("akses_apk", APK_ACCESS_TOKEN);
-      }
-      return urlObj.toString();
-    } catch (e) {
-      return rawHref;
-    }
-  }
-
-  function hasDownloadedApk() {
-    if (isInsideApp()) return true;
-    try {
-      return window.localStorage.getItem(STORAGE_APK_DOWNLOADED_KEY) === "1";
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function setApkDownloadedFlag() {
-    saveApkAccessGrant();
-    syncDownloadPromptUI();
-  }
-
-  function syncDownloadPromptUI() {
-    const alreadyDone = hasDownloadedApk();
-    const statusMsg = document.getElementById("download-modal-status-msg");
-    const modalBtnLabel = document.getElementById("modal-apk-download-label");
-    const modalTitle = document.getElementById("download-modal-title");
-
-    if (modalTitle) {
-      modalTitle.textContent = alreadyDone ? "APK Sudah Terunduh" : "Wajib Download APK Dulu";
-    }
-    if (statusMsg) {
-      statusMsg.textContent = alreadyDone
-        ? "Status unduhan APK sudah tercatat. Anda tidak perlu mendownload lagi — klik tombol di bawah untuk membuka lewat APK atau lanjutkan ke halaman tujuan."
-        : "Silakan download APK terlebih dahulu melalui tombol di bawah agar bisa lanjut dan membuka lewat APK. Setelah didownload, otomatis tidak diminta download lagi.";
-    }
-    if (modalBtnLabel) {
-      modalBtnLabel.textContent = alreadyDone
-        ? (pendingTargetUrl ? "Buka Lewat APK / Lanjutkan" : "Buka APK Tunggal Paito")
-        : "Download APK Sekarang";
-    }
-  }
-
-  function buildAndroidIntentUrl(targetUrl) {
-    const encodedPath = encodeURIComponent(targetUrl || window.location.href);
-    return (
-      "intent://" +
-      APK_HOST +
-      "?url=" +
-      encodedPath +
-      "#Intent;scheme=" +
-      APK_SCHEME +
-      ";package=" +
-      ANDROID_PACKAGE +
-      ";end"
-    );
-  }
-
-  function attemptOpenViaApk(targetUrl) {
-    const finalTarget = appendApkTokenIfNeeded(targetUrl);
-    const intentUrl = buildAndroidIntentUrl(finalTarget);
-    const start = Date.now();
-    window.location.href = intentUrl;
-
-    setTimeout(function() {
-      if (!document.hidden && Date.now() - start >= 1100 && finalTarget) {
-        window.location.href = finalTarget;
-      }
-    }, 1250);
-  }
-
-  window.markApkDownloadedAndProceed = function(e) {
-    const wasAlreadyDownloaded = hasDownloadedApk();
-    setApkDownloadedFlag();
-
-    const targetAfter = pendingTargetUrl;
-    pendingTargetUrl = "";
-    closeDownloadModal();
-
-    if (wasAlreadyDownloaded && targetAfter) {
-      if (e && e.preventDefault) e.preventDefault();
-      attemptOpenViaApk(targetAfter);
-    }
-  };
 
   function readClickedBoLinks() {
     try {
@@ -2244,7 +2059,6 @@
 
   purgeStaleClientCaches();
   safeSessionSet(CACHE_KEY_NAME, CACHE_BUILD_VERSION);
-  syncDownloadPromptUI();
   currentActiveBoLink = pickNextUnclickedBoLink("");
   applyCurrentBoLinkToPromo();
   initFirebaseBoListener();
@@ -2766,7 +2580,7 @@
         fragment.appendChild(btn);
       } else if (isSafeHttpUrl(it.href)) {
         const a = document.createElement("a");
-        a.href = isInsideApp() ? appendApkTokenIfNeeded(it.href) : it.href;
+        a.href = it.href;
         a.className = "tap-responsive flex items-center justify-between bg-[#0b060a]/90 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl";
         a.addEventListener("click", function() { closeSearchModal(); });
 
@@ -2876,19 +2690,13 @@
     });
   };
   window.closeSearchModal = function() { closeModalById("search-modal"); };
-  window.openDownloadModal = function(e, targetUrl) {
-    if (targetUrl) pendingTargetUrl = targetUrl;
-    else if (!e || !e.currentTarget || !e.currentTarget.closest("#download-modal")) pendingTargetUrl = "";
-    syncDownloadPromptUI();
+  window.openDownloadModal = function(e) {
     openModalById("download-modal", e, function(el) {
       window.scheduleGuideCropSync();
       focusFirstFocusable(el);
     });
   };
-  window.closeDownloadModal = function() {
-    pendingTargetUrl = "";
-    closeModalById("download-modal");
-  };
+  window.closeDownloadModal = function() { closeModalById("download-modal"); };
   window.openWebDevModal = function(e) { openModalById("webdev-popup", e); };
   window.closeWebDevModal = function() { closeModalById("webdev-popup"); };
 
@@ -3055,7 +2863,6 @@
   }
   window.addEventListener("pageshow", function(e) {
     resetProgress();
-    syncDownloadPromptUI();
     refreshFireMarqueeState();
     applyCurrentBoLinkToPromo();
     startBoLinkCycle();
@@ -3079,59 +2886,6 @@
       progressFallbackTimer = setTimeout(resetProgress, link.getAttribute("target") === "_blank" ? 500 : 2800);
     }
   }, { passive: true });
-
-  // Catat unduhan otomatis saat klik link download APK / panduan download
-  document.addEventListener("click", function(e) {
-    const anchor = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if (!anchor) return;
-    const href = (anchor.getAttribute("href") || "").trim();
-    if (href === APK_DOWNLOAD_URL || anchor.hasAttribute("download")) {
-      setApkDownloadedFlag();
-    }
-  }, true);
-
-  // Tempelkan otomatis ?akses_apk=tp_resmi ke link internal saat berada di mode APK
-  document.addEventListener("click", function(e) {
-    if (!isInsideApp()) return;
-    const anchor = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if (!anchor) return;
-    const currentHref = (anchor.getAttribute("href") || "").trim();
-    const updatedHref = appendApkTokenIfNeeded(currentHref);
-    if (updatedHref && updatedHref !== currentHref) {
-      anchor.setAttribute("href", updatedHref);
-    }
-  }, true);
-
-  // Wajib download dulu sebelum bisa lanjut (kecuali sudah download atau sudah di dalam APK)
-  document.addEventListener("click", function(e) {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    if (hasDownloadedApk()) return;
-
-    const anchor = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if (!anchor) return;
-    if (anchor.closest("#download-modal") || anchor.hasAttribute("download")) return;
-
-    const rawHref = (anchor.getAttribute("href") || "").trim();
-    if (!rawHref || rawHref === "#" || rawHref.toLowerCase().startsWith("javascript:")) return;
-    if (rawHref === APK_DOWNLOAD_URL) return;
-
-    let parsedUrl;
-    try {
-      parsedUrl = new URL(rawHref, window.location.href);
-    } catch (err) {
-      return;
-    }
-
-    const isSameSite =
-      parsedUrl.origin === window.location.origin ||
-      isSameDomainTp(parsedUrl.hostname);
-
-    if (!isSameSite) return;
-
-    e.preventDefault();
-    e.stopPropagation();
-    window.openDownloadModal(null, parsedUrl.href);
-  }, true);
 })();
 </script>
 </body>
