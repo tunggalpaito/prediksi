@@ -288,7 +288,6 @@ h2{
   border-color:rgba(251,113,133,.32);
   padding:12px 12px;
 }
-
 .prediksi-panel{
   display:flex;
   align-items:center;
@@ -338,7 +337,6 @@ h2{
   transform:translateY(-1px);
   box-shadow:0 6px 16px rgba(16,185,129,.45);
 }
-
 .status-firebase{
   font-size:11.5px;
   text-align:center;
@@ -434,7 +432,6 @@ footer span{color:#fb7185;font-weight:800}
 .login-box button:hover{filter:brightness(1.08)}
 .login-error{color:#fda4af;font-size:12px;text-align:center;margin-top:9px;font-weight:600}
 
-/* Pop-up pengingat pasaran terlewati belum ter-update */
 .missed-modal-overlay{
   position:fixed;
   inset:0;
@@ -583,19 +580,10 @@ footer span{color:#fb7185;font-weight:800}
   <div class="section-title">📱 Nomor WhatsApp Aktif</div>
   <div class="input-result-box">
     <label for="inputWaNumber">Nomor WhatsApp Admin / CS (08... / 628...)</label>
-    <input
-      type="tel"
-      id="inputWaNumber"
-      placeholder="Contoh: 088970383950 atau 6288970383950"
-      autocomplete="off"
-    />
+    <input type="tel" id="inputWaNumber" placeholder="Contoh: 088970383950 atau 6288970383950" autocomplete="off">
     <div class="bo-btn-row">
-      <button type="button" id="btnSaveWaNumber" class="btn-kirim" style="flex:1;min-width:140px" onclick="saveWaNumber()">
-        📲 Simpan Nomor
-      </button>
-      <button type="button" id="btnResetWaNumber" class="btn-kirim btn-timpa" onclick="resetDefaultWaNumber()">
-        ♻️ Reset Default
-      </button>
+      <button type="button" id="btnSaveWaNumber" class="btn-kirim" style="flex:1;min-width:140px" onclick="saveWaNumber()">📲 Simpan Nomor</button>
+      <button type="button" id="btnResetWaNumber" class="btn-kirim btn-timpa" onclick="resetDefaultWaNumber()">♻️ Reset Default</button>
     </div>
     <div id="waNumberStatus" class="status-firebase"></div>
   </div>
@@ -603,22 +591,11 @@ footer span{color:#fb7185;font-weight:800}
   <div class="section-title">🔗 Link Iklan Banner</div>
   <div class="input-result-box">
     <label for="inputBoBannerLink">Teks Link Banner (pisah spasi / koma)</label>
-    <input
-      type="text"
-      id="inputBoBannerLink"
-      placeholder="https://link1.com https://link2.com"
-      autocomplete="off"
-    />
+    <input type="text" id="inputBoBannerLink" placeholder="https://link1.com https://link2.com" autocomplete="off">
     <div class="bo-btn-row">
-      <button type="button" id="btnSaveBoLink" class="btn-kirim" style="flex:1;min-width:130px" onclick="saveBoBannerLink('append')">
-        ➕ Sambung Link
-      </button>
-      <button type="button" id="btnDeleteBoLink" class="btn-kirim btn-hapus-link" onclick="deleteBoBannerLinkByInput()">
-        🗑️ Hapus Link
-      </button>
-      <button type="button" id="btnOverwriteBoLink" class="btn-kirim btn-timpa" onclick="saveBoBannerLink('overwrite')">
-        ♻️ Timpa
-      </button>
+      <button type="button" id="btnSaveBoLink" class="btn-kirim" style="flex:1;min-width:130px" onclick="saveBoBannerLink('append')">➕ Sambung Link</button>
+      <button type="button" id="btnDeleteBoLink" class="btn-kirim btn-hapus-link" onclick="deleteBoBannerLinkByInput()">🗑️ Hapus Link</button>
+      <button type="button" id="btnOverwriteBoLink" class="btn-kirim btn-timpa" onclick="saveBoBannerLink('overwrite')">♻️ Timpa</button>
     </div>
     <div id="boLinkStatus" class="status-firebase"></div>
   </div>
@@ -646,6 +623,73 @@ const database = firebase.database();
 const BO_BANNER_DB_PATH = "live/bo-rekomendasi";
 const WA_NUMBER_DB_PATH = "live/wa";
 const DEFAULT_WA_NUMBER = "6288970383950";
+
+const TAB_ID = "tab_" + Math.random().toString(36).slice(2, 10) + "_" + Date.now();
+const LOCK_STORAGE_KEY = "panel_cs_active_email_locks_v1";
+const LOCK_TTL_MS = 12000;
+let currentLockedEmail = "";
+let bypassLockOnce = false;
+
+function readEmailLocks() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(LOCK_STORAGE_KEY) || "{}");
+    const now = Date.now();
+    const cleaned = {};
+    Object.keys(raw || {}).forEach((email) => {
+      const item = raw[email];
+      if (item && item.tabId && (now - Number(item.updatedAt || 0)) <= LOCK_TTL_MS) {
+        cleaned[email] = item;
+      }
+    });
+    localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(cleaned));
+    return cleaned;
+  } catch (e) {
+    return {};
+  }
+}
+
+function isEmailUsedInAnotherTab(email) {
+  const cleanEmail = String(email || "").trim().toLowerCase();
+  if (!cleanEmail) return false;
+  const locks = readEmailLocks();
+  const existing = locks[cleanEmail];
+  return Boolean(existing && existing.tabId !== TAB_ID);
+}
+
+function claimEmailLock(email) {
+  const cleanEmail = String(email || "").trim().toLowerCase();
+  if (!cleanEmail) return false;
+  if (isEmailUsedInAnotherTab(cleanEmail)) return false;
+
+  const locks = readEmailLocks();
+  locks[cleanEmail] = { tabId: TAB_ID, updatedAt: Date.now() };
+  localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(locks));
+  currentLockedEmail = cleanEmail;
+  return true;
+}
+
+function releaseEmailLock(email) {
+  const target = String(email || currentLockedEmail || "").trim().toLowerCase();
+  if (!target) return;
+  try {
+    const locks = readEmailLocks();
+    if (locks[target] && locks[target].tabId === TAB_ID) {
+      delete locks[target];
+      localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(locks));
+    }
+  } catch (e) {}
+  if (target === currentLockedEmail) currentLockedEmail = "";
+}
+
+setInterval(() => {
+  if (currentLockedEmail && firebase.auth().currentUser) {
+    claimEmailLock(currentLockedEmail);
+  }
+}, 5000);
+
+window.addEventListener("beforeunload", () => {
+  releaseEmailLock(currentLockedEmail);
+});
 
 const JADWAL_PASARAN = [
   { key: "data-macau4d-pt6", dbKey: "data-macau4d", label: "MACAU 4D PT6", startMinute: 1, url: "https://tunggalpaito.online/bbfs2d-macau4d/" },
@@ -715,9 +759,7 @@ function getWIBTimeInfo() {
   });
   const parts = wibFormatter.formatToParts(now);
   const map = {};
-  parts.forEach((p) => {
-    map[p.type] = p.value;
-  });
+  parts.forEach((p) => { map[p.type] = p.value; });
 
   const year = Number(map.year);
   const month = Number(map.month);
@@ -727,8 +769,6 @@ function getWIBTimeInfo() {
 
   const todayUtc = new Date(Date.UTC(year, month - 1, day));
   const yesterdayUtc = new Date(Date.UTC(year, month - 1, day - 1));
-  const dayOfWeek = todayUtc.getUTCDay();
-  const prevDayOfWeek = yesterdayUtc.getUTCDay();
 
   return {
     dateStr: formatInputDateFromUTCDate(todayUtc),
@@ -736,8 +776,8 @@ function getWIBTimeInfo() {
     dbDateKey: formatDbDateKeyFromUTCDate(todayUtc),
     prevDbDateKey: formatDbDateKeyFromUTCDate(yesterdayUtc),
     totalMinutes: hour * 60 + minute,
-    dayOfWeek,
-    prevDayOfWeek
+    dayOfWeek: todayUtc.getUTCDay(),
+    prevDayOfWeek: yesterdayUtc.getUTCDay()
   };
 }
 
@@ -763,6 +803,13 @@ function getScheduledMarketByTime() {
   return activeMarket;
 }
 
+function parsePaitoItems(rawData) {
+  return String(rawData || "")
+    .split(/[\s,]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
 function getSavedRoundCount(rawEntry) {
   if (rawEntry === null || rawEntry === undefined) return 0;
   const str = Array.isArray(rawEntry)
@@ -775,7 +822,6 @@ function getDueCheckTargets() {
   const { totalMinutes, dayOfWeek, prevDayOfWeek, dbDateKey, prevDbDateKey, dateStr, prevDateStr } = getWIBTimeInfo();
   const targets = [];
 
-  // 1. Cek pasaran malam hari kemarin (contoh HK semalam) yang mungkin lupa di-update
   JADWAL_PASARAN.forEach((item) => {
     const isClosedYesterday = Array.isArray(item.closedDays) && item.closedDays.includes(prevDayOfWeek);
     const isNightMarket = item.startMinute >= 20 * 60;
@@ -792,13 +838,11 @@ function getDueCheckTargets() {
     }
   });
 
-  // 2. Cek pasaran hari ini yang jadwalnya sudah lewat/jatuh tempo
   const dueTodayItems = JADWAL_PASARAN.filter((item) => {
     const isClosedToday = Array.isArray(item.closedDays) && item.closedDays.includes(dayOfWeek);
     return !isClosedToday && totalMinutes >= item.startMinute;
   });
 
-  // Hitung putaran yang jatuh tempo untuk dbKey multi-putaran (seperti data-macau4d / data-macau5d)
   const dueCountByDbKey = {};
   dueTodayItems.forEach((item) => {
     dueCountByDbKey[item.dbKey] = (dueCountByDbKey[item.dbKey] || 0) + 1;
@@ -843,9 +887,7 @@ function openMissedMarketPopup(missedTargets) {
   if (!modal || !textEl || !Array.isArray(missedTargets) || !missedTargets.length) return;
 
   const signature = missedTargets.map((m) => m.id).join("|");
-  if (signature === shownMissedPopupSignature && modal.classList.contains("is-open")) {
-    return;
-  }
+  if (signature === shownMissedPopupSignature && modal.classList.contains("is-open")) return;
 
   shownMissedPopupSignature = signature;
   firstMissedMarketTarget = missedTargets[0];
@@ -896,29 +938,17 @@ function checkMissedScheduledMarkets() {
       database
         .ref(`live/${target.dbKey}/${target.dbDateKey}`)
         .once("value")
-        .then((snap) => {
-          const savedRounds = snap.exists() ? getSavedRoundCount(snap.val()) : 0;
-          return {
-            target,
-            isUpdated: savedRounds >= target.expectedMinRounds
-          };
-        })
-        .catch(() => ({
+        .then((snap) => ({
           target,
-          isUpdated: true
+          isUpdated: (snap.exists() ? getSavedRoundCount(snap.val()) : 0) >= target.expectedMinRounds
         }))
+        .catch(() => ({ target, isUpdated: true }))
     )
   )
     .then((results) => {
-      const missedTargets = results
-        .filter((r) => !r.isUpdated)
-        .map((r) => r.target);
-
-      if (missedTargets.length > 0) {
-        openMissedMarketPopup(missedTargets);
-      } else {
-        closeMissedMarketModal();
-      }
+      const missedTargets = results.filter((r) => !r.isUpdated).map((r) => r.target);
+      if (missedTargets.length > 0) openMissedMarketPopup(missedTargets);
+      else closeMissedMarketModal();
     })
     .finally(() => {
       missedPopupCheckInFlight = false;
@@ -945,17 +975,11 @@ function renderPrediksiButtons(selectedKey) {
       usedUrls.add(item.url);
       picked.push(item);
     }
-
-    if (picked.length === 2 || item.key === "data-hklotto") {
-      break;
-    }
+    if (picked.length === 2 || item.key === "data-hklotto") break;
   }
 
   box.innerHTML = picked
-    .map(
-      (item) =>
-        `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-prediksi-kecil">${item.label}</a>`
-    )
+    .map((item) => `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-prediksi-kecil">${item.label}</a>`)
     .join("");
 }
 
@@ -967,9 +991,7 @@ function autoSetDates() {
 function applyInitialMarketByTime() {
   const activeMarket = getScheduledMarketByTime();
   const selectEl = document.getElementById("marketSelect");
-  if (selectEl) {
-    selectEl.value = activeMarket.key;
-  }
+  if (selectEl) selectEl.value = activeMarket.key;
   updateSelectionModeBadge();
   renderPrediksiButtons(activeMarket.key);
 }
@@ -979,13 +1001,6 @@ function resetToAutoMarket() {
   autoSetDates();
   applyInitialMarketByTime();
   refreshAllFormPreviews();
-}
-
-function parsePaitoItems(rawData) {
-  return String(rawData || "")
-    .split(/[\s,]+/)
-    .map((item) => item.trim())
-    .filter(Boolean);
 }
 
 function getLatestEntryFromObject(obj) {
@@ -1053,17 +1068,10 @@ function normalizeWaNumber(rawInput) {
   if (rawInput === null || rawInput === undefined) return "";
   let digits = String(rawInput).replace(/\D/g, "");
   if (!digits) return "";
-  if (digits.startsWith("00")) {
-    digits = digits.slice(2);
-  }
-  if (digits.startsWith("0")) {
-    digits = "62" + digits.slice(1);
-  } else if (digits.startsWith("8")) {
-    digits = "62" + digits;
-  }
-  if (!digits.startsWith("62") || digits.length < 9 || digits.length > 16) {
-    return "";
-  }
+  if (digits.startsWith("00")) digits = digits.slice(2);
+  if (digits.startsWith("0")) digits = "62" + digits.slice(1);
+  else if (digits.startsWith("8")) digits = "62" + digits;
+  if (!digits.startsWith("62") || digits.length < 9 || digits.length > 16) return "";
   return digits;
 }
 
@@ -1106,9 +1114,7 @@ function saveWaNumber() {
       statusEl.style.color = "#fda4af";
       statusEl.textContent = "Gagal menyimpan nomor WA: " + err.message;
     })
-    .finally(() => {
-      setWaActionButtonsDisabled(false);
-    });
+    .finally(() => setWaActionButtonsDisabled(false));
 }
 
 function resetDefaultWaNumber() {
@@ -1136,9 +1142,7 @@ function resetDefaultWaNumber() {
       statusEl.style.color = "#fda4af";
       statusEl.textContent = "Gagal reset nomor WA: " + err.message;
     })
-    .finally(() => {
-      setWaActionButtonsDisabled(false);
-    });
+    .finally(() => setWaActionButtonsDisabled(false));
 }
 
 function normalizeBoLinks(rawText) {
@@ -1167,16 +1171,11 @@ function extractExistingBoLinks(val) {
     }
   }
 
-  if (Array.isArray(val)) {
-    val.forEach(addItem);
-  } else if (val && typeof val === "object") {
+  if (Array.isArray(val)) val.forEach(addItem);
+  else if (val && typeof val === "object") {
     if (Array.isArray(val.links)) val.links.forEach(addItem);
-    Object.keys(val).forEach((k) => {
-      if (k !== "links") addItem(val[k]);
-    });
-  } else if (typeof val === "string") {
-    addItem(val);
-  }
+    Object.keys(val).forEach((k) => { if (k !== "links") addItem(val[k]); });
+  } else if (typeof val === "string") addItem(val);
 
   return found;
 }
@@ -1191,9 +1190,7 @@ function setBoActionButtonsDisabled(disabled) {
 function writeBoLinksPayload(links) {
   const unique = Array.from(new Set((links || []).map((u) => String(u || "").trim()).filter(Boolean)));
   const ref = database.ref(BO_BANNER_DB_PATH);
-  if (!unique.length) {
-    return ref.remove().then(() => []);
-  }
+  if (!unique.length) return ref.remove().then(() => []);
   const payload = unique.length === 1 ? unique[0] : unique;
   return ref.set(payload).then(() => unique);
 }
@@ -1219,17 +1216,12 @@ function saveBoBannerLink(mode) {
 
   setBoActionButtonsDisabled(true);
   statusEl.style.color = "#fda4af";
-  statusEl.textContent = saveMode === "overwrite"
-    ? "Menimpa link di Firebase..."
-    : "Menyambungkan link ke Firebase...";
+  statusEl.textContent = saveMode === "overwrite" ? "Menimpa link di Firebase..." : "Menyambungkan link ke Firebase...";
 
   const ref = database.ref(BO_BANNER_DB_PATH);
   const task = saveMode === "overwrite"
     ? Promise.resolve(Array.from(new Set(inputLinks)))
-    : ref.once("value").then((snap) => {
-        const existing = extractExistingBoLinks(snap.val());
-        return Array.from(new Set(existing.concat(inputLinks)));
-      });
+    : ref.once("value").then((snap) => Array.from(new Set(extractExistingBoLinks(snap.val()).concat(inputLinks))));
 
   task
     .then((merged) => writeBoLinksPayload(merged))
@@ -1242,9 +1234,7 @@ function saveBoBannerLink(mode) {
       statusEl.style.color = "#fda4af";
       statusEl.textContent = "Gagal mengirim link: " + err.message;
     })
-    .finally(() => {
-      setBoActionButtonsDisabled(false);
-    });
+    .finally(() => setBoActionButtonsDisabled(false));
 }
 
 function deleteBoBannerLinkByInput() {
@@ -1287,16 +1277,8 @@ function deleteBoBannerLinkByInput() {
       const existing = extractExistingBoLinks(snap.val());
       const removed = existing.filter(isTargetMatch);
       const remaining = existing.filter((u) => !isTargetMatch(u));
-
-      if (!removed.length) {
-        return { notFound: true, remaining: existing, removed: [] };
-      }
-
-      return writeBoLinksPayload(remaining).then((savedLinks) => ({
-        notFound: false,
-        remaining: savedLinks,
-        removed
-      }));
+      if (!removed.length) return { notFound: true, remaining: existing, removed: [] };
+      return writeBoLinksPayload(remaining).then((savedLinks) => ({ notFound: false, remaining: savedLinks, removed }));
     })
     .then((res) => {
       if (res.notFound) {
@@ -1313,9 +1295,7 @@ function deleteBoBannerLinkByInput() {
       statusEl.style.color = "#fda4af";
       statusEl.textContent = "Gagal menghapus link: " + err.message;
     })
-    .finally(() => {
-      setBoActionButtonsDisabled(false);
-    });
+    .finally(() => setBoActionButtonsDisabled(false));
 }
 
 function refreshAllFormPreviews() {
@@ -1338,11 +1318,26 @@ function loginAdmin() {
     return;
   }
 
+  if (isEmailUsedInAnotherTab(email)) {
+    errorEl.style.color = "#fda4af";
+    errorEl.innerText = "❌ Email ini sedang dipakai di tab lain!";
+    return;
+  }
+
   submitBtn.disabled = true;
   errorEl.style.color = "#fda4af";
   errorEl.innerText = "⏳ Memverifikasi...";
 
-  firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+  firebase.auth().signInWithEmailAndPassword(email, password).then((cred) => {
+    const signedEmail = cred?.user?.email || email;
+    if (!claimEmailLock(signedEmail)) {
+      bypassLockOnce = true;
+      return firebase.auth().signOut().then(() => {
+        document.getElementById("adminLoginOverlay").style.display = "flex";
+        errorEl.style.color = "#fda4af";
+        errorEl.innerText = "❌ Email ini sedang dipakai di tab lain!";
+      });
+    }
     document.getElementById("adminLoginOverlay").style.display = "none";
     errorEl.innerText = "";
     shownMissedPopupSignature = "";
@@ -1366,6 +1361,8 @@ function loginAdmin() {
 }
 
 function logoutAdmin() {
+  const emailToRelease = currentLockedEmail || firebase.auth().currentUser?.email || "";
+  releaseEmailLock(emailToRelease);
   firebase.auth().signOut().then(() => {
     closeMissedMarketModal();
     alert("Berhasil Logout dari Panel CS.");
@@ -1415,9 +1412,7 @@ function saveDataPaito() {
       const prevStr = Array.isArray(prevData)
         ? prevData.join(",")
         : (typeof prevData === "string" ? prevData.trim() : "");
-      if (prevStr !== "") {
-        finalNumbers = prevStr + "," + rawNumbers;
-      }
+      if (prevStr !== "") finalNumbers = prevStr + "," + rawNumbers;
     }
     const items = parsePaitoItems(finalNumbers);
     currentRound = items.length > 0 ? items.length : 1;
@@ -1481,8 +1476,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const overlay = document.getElementById("adminLoginOverlay");
       const statusBadge = document.getElementById("authStatusIndicator");
       const logoutBtn = document.getElementById("btnLogout");
+      const errorEl = document.getElementById("loginErrorMsg");
 
       if (user) {
+        if (bypassLockOnce) {
+          bypassLockOnce = false;
+          return;
+        }
+        if (!claimEmailLock(user.email)) {
+          bypassLockOnce = true;
+          firebase.auth().signOut();
+          if (overlay) overlay.style.display = "flex";
+          if (errorEl) {
+            errorEl.style.color = "#fda4af";
+            errorEl.innerText = "❌ Email ini sedang dipakai di tab lain!";
+          }
+          return;
+        }
+
         if (overlay) overlay.style.display = "none";
         if (statusBadge) {
           statusBadge.className = "auth-status-badge status-logged-in";
@@ -1492,10 +1503,11 @@ document.addEventListener("DOMContentLoaded", () => {
         shownMissedPopupSignature = "";
         checkMissedScheduledMarkets();
       } else {
+        releaseEmailLock(currentLockedEmail);
         if (overlay) overlay.style.display = "flex";
         if (statusBadge) {
           statusBadge.className = "auth-status-badge status-logged-out";
-          statusBadge.innerHTML = "🔴 Status : <b>LOGOUT / LOGOUT</b>";
+          statusBadge.innerHTML = "🔴 Status : <b>LOGOUT</b>";
         }
         if (logoutBtn) logoutBtn.style.display = "none";
         closeMissedMarketModal();
