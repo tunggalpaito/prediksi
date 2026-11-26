@@ -577,6 +577,7 @@ h2.section-title {
   font-size: 15px;
   font-weight: 900;
   line-height: 1.2;
+  font-variant-numeric: tabular-nums;
 }
 
 .rekap-box-masuk .rekap-value {
@@ -601,9 +602,11 @@ h2.section-title {
 }
 
 .result-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content max-content;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   background: rgba(11, 5, 8, 0.92);
   padding: 8px 12px;
   border-radius: 10px;
@@ -611,14 +614,23 @@ h2.section-title {
   font-family: "Orbitron", "Plus Jakarta Sans", sans-serif;
   font-size: 13.5px;
   font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
   color: var(--text-main);
   letter-spacing: 1px;
   white-space: nowrap;
 }
 
+.result-row span.target-num,
+.result-row span.bbfs-num {
+  font-family: inherit;
+  font-variant-numeric: inherit;
+  font-feature-settings: inherit;
+  white-space: nowrap;
+}
+
 .result-row span.bbfs-num {
   color: #fda4af;
-  margin-left: 8px;
 }
 
 .status-msg {
@@ -863,7 +875,7 @@ h2.section-title {
 
   const CACHE_KEY = "tp_macau5d_bbfs8d_cache_v2";
   const CACHE_TTL_MS = 60 * 1000;
-  const CACHE_BUILD_VERSION = "v45_macau5d_30trek_bbfs_dl_iklan";
+  const CACHE_BUILD_VERSION = "v46_macau5d_30trek_bbfs_tabular_dl_iklan";
   window.TP_CACHE_BUILD_VERSION = CACHE_BUILD_VERSION;
 
   const yearEl = document.getElementById("auto-year");
@@ -1003,6 +1015,7 @@ h2.section-title {
       rowDiv.dataset.index = String(i);
 
       const targetSpan = document.createElement("span");
+      targetSpan.className = "target-num";
       targetSpan.textContent = `${current.target5D} :`;
 
       const bbfsSpan = document.createElement("span");
@@ -1218,18 +1231,21 @@ h2.section-title {
         last16Rows.forEach(rowEl => {
           const clonedRow = rowEl.cloneNode(true);
           clonedRow.style.flex = "1";
+          clonedRow.style.display = "grid";
+          clonedRow.style.gridTemplateColumns = "max-content max-content";
+          clonedRow.style.justifyContent = "center";
+          clonedRow.style.alignItems = "center";
+          clonedRow.style.gap = "24px";
           clonedRow.style.fontSize = "60px";
+          clonedRow.style.fontVariantNumeric = "tabular-nums";
+          clonedRow.style.fontFeatureSettings = '"tnum" 1, "lnum" 1';
           clonedRow.style.letterSpacing = "4px";
+          clonedRow.style.whiteSpace = "nowrap";
           clonedRow.style.borderRadius = "16px";
           clonedRow.style.border = "3px solid rgba(255, 77, 121, 0.45)";
           clonedRow.style.backgroundColor = "#14080f";
           clonedRow.style.padding = "0 30px";
           clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
-
-          const bbfsNum = clonedRow.querySelector(".bbfs-num");
-          if (bbfsNum) {
-            bbfsNum.style.marginLeft = "24px";
-          }
 
           rowsWrapper.appendChild(clonedRow);
         });
