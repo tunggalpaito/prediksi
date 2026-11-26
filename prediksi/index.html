@@ -2887,79 +2887,80 @@
     }
   }, { passive: true });
 
-  // Wajib download APK saat klik halaman lain jika belum pakai ?akses_apk=tp_resmi atau belum tersimpan di browser
+  // Coba buka APK via intent/scheme saat klik halaman internal dari luar APK; jika tidak merespons, beri fallback tanpa loop download
+  const APK_SCHEME = "tunggalpaito";
+  const APK_HOST = "open";
+  const ANDROID_PACKAGE = "online.tunggalpaito.app"; // sesuaikan dengan package name APK Anda
   const APK_DOWNLOAD_URL = "https://drive.google.com/file/d/1JlcdXBP7y6IxF9txlxtmuCnCQ_XiS0AR/view?usp=drivesdk";
-  const HIMBAUAN_APK_TEXT = "Download APK dulu bosku biar kita gass!";
-  const APK_ACCESS_STORAGE_KEY = "tp_apk_unlocked_v1";
-  let apkRedirectTimer = null;
 
-  function markApkAccessGranted() {
-    try {
-      window.localStorage.setItem(APK_ACCESS_STORAGE_KEY, "1");
-    } catch (e) {}
+  function isInsideApp() {
+    const ua = navigator.userAgent || "";
+    const params = new URLSearchParams(window.location.search);
+    return /TunggalPaitoApp/i.test(ua) || params.get("from_apk") === "1";
   }
 
-  function hasAuthorizedApkAccess() {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("akses_apk") === "tp_resmi") {
-        markApkAccessGranted();
-        return true;
+  function buildAndroidIntentUrl(targetUrl) {
+    const encodedPath = encodeURIComponent(targetUrl || window.location.href);
+    return (
+      "intent://" +
+      APK_HOST +
+      "?url=" +
+      encodedPath +
+      "#Intent;scheme=" +
+      APK_SCHEME +
+      ";package=" +
+      ANDROID_PACKAGE +
+      ";end"
+    );
+  }
+
+  function showOpenApkFallback(targetUrl) {
+    let box = document.getElementById("tp-open-apk-notice");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "tp-open-apk-notice";
+      box.setAttribute("role", "status");
+      box.style.cssText =
+        "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:2147483647;" +
+        "max-width:92vw;padding:12px 16px;border-radius:14px;background:#160a10;" +
+        "border:1px solid rgba(251,191,36,0.85);color:#fff;font-size:13.5px;text-align:center;" +
+        "box-shadow:0 12px 28px rgba(0,0,0,0.75);";
+      document.body.appendChild(box);
+    }
+
+    box.innerHTML =
+      '<div style="font-weight:800;margin-bottom:6px;">APK tidak terbuka otomatis</div>' +
+      '<div style="opacity:0.9;margin-bottom:8px;">Melanjutkan ke halaman tujuan. Jika belum punya APK, Anda bisa mengunduhnya di bawah:</div>' +
+      '<a href="' + APK_DOWNLOAD_URL + '" target="_blank" rel="noopener noreferrer" ' +
+      'style="display:inline-block;padding:6px 12px;border-radius:8px;background:#ff1e56;color:#fff;font-weight:800;margin-right:8px;">Download APK</a>' +
+      '<button type="button" id="tp-close-apk-notice" ' +
+      'style="padding:6px 10px;border-radius:8px;background:#2a1420;color:#fff;border:1px solid rgba(255,255,255,0.2);cursor:pointer;">Buka Sekarang</button>';
+
+    const closeBtn = document.getElementById("tp-close-apk-notice");
+    if (closeBtn) {
+      closeBtn.onclick = function() {
+        box.remove();
+        if (targetUrl) window.location.href = targetUrl;
+      };
+    }
+
+    setTimeout(function() {
+      if (document.getElementById("tp-open-apk-notice") && targetUrl) {
+        window.location.href = targetUrl;
       }
-      return window.localStorage.getItem(APK_ACCESS_STORAGE_KEY) === "1";
-    } catch (e) {
-      return false;
-    }
-  }
-
-  hasAuthorizedApkAccess();
-
-  const modalDownloadBtn = document.getElementById("modal-apk-download-link");
-  if (modalDownloadBtn) {
-    modalDownloadBtn.addEventListener("click", function() {
-      markApkAccessGranted();
-    }, { passive: true });
-  }
-
-  function showApkGateBanner(message) {
-    let banner = document.getElementById("tp-apk-gate-toast");
-    if (!banner) {
-      banner = document.createElement("div");
-      banner.id = "tp-apk-gate-toast";
-      banner.setAttribute("role", "status");
-      banner.style.cssText = [
-        "position:fixed",
-        "left:50%",
-        "bottom:24px",
-        "transform:translateX(-50%)",
-        "z-index:2147483647",
-        "max-width:92vw",
-        "padding:12px 18px",
-        "border-radius:14px",
-        "background:linear-gradient(135deg,#ff1e56 0%,#1a0912 100%)",
-        "border:1px solid rgba(251,191,36,0.85)",
-        "color:#ffffff",
-        "font-weight:800",
-        "font-size:14px",
-        "text-align:center",
-        "box-shadow:0 12px 28px rgba(0,0,0,0.72)",
-        "pointer-events:none"
-      ].join(";");
-      document.body.appendChild(banner);
-    }
-    banner.textContent = message;
-    banner.style.display = "block";
+    }, 2200);
   }
 
   document.addEventListener("click", function(e) {
-    if (hasAuthorizedApkAccess()) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    if (isInsideApp()) return;
 
     const anchor = e.target && e.target.closest ? e.target.closest("a[href]") : null;
     if (!anchor) return;
+    if (anchor.closest("#download-modal")) return;
 
     const rawHref = (anchor.getAttribute("href") || "").trim();
     if (!rawHref || rawHref === "#" || rawHref.toLowerCase().startsWith("javascript:")) return;
-    if (anchor.closest("#download-modal")) return;
 
     let parsedUrl;
     try {
@@ -2978,12 +2979,15 @@
     e.preventDefault();
     e.stopPropagation();
 
-    showApkGateBanner(HIMBAUAN_APK_TEXT);
+    const intentUrl = buildAndroidIntentUrl(parsedUrl.href);
+    const start = Date.now();
+    window.location.href = intentUrl;
 
-    clearTimeout(apkRedirectTimer);
-    apkRedirectTimer = setTimeout(function() {
-      window.location.href = APK_DOWNLOAD_URL;
-    }, 900);
+    setTimeout(function() {
+      if (!document.hidden && Date.now() - start >= 1100) {
+        showOpenApkFallback(parsedUrl.href);
+      }
+    }, 1200);
   }, true);
 })();
 </script>
