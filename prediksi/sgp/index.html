@@ -1030,7 +1030,7 @@ h1 {
 
       <nav class="perlengkapan-section" aria-label="Perlengkapan">
         <div class="perlengkapan-group">
-          <a href="https://tunggalpaito.online/angka-main-2d/singapore" class="perlengkapan-btn is-active-page" aria-current="page"><span class="perlengkapan-btn-label">ANGKA MAIN 2D</span></a>
+          <a href="https://tunggalpaito.online/prediksi/sgp/" class="perlengkapan-btn is-active-page" aria-current="page"><span class="perlengkapan-btn-label">ANGKA MAIN 2D</span></a>
           <a href="https://tunggalpaito.online/angka-main-3d/singapore" class="perlengkapan-btn"><span class="perlengkapan-btn-label">ANGKA MAIN 3D</span></a>
           <a href="https://tunggalpaito.online/angka-main-4d/singapore" class="perlengkapan-btn"><span class="perlengkapan-btn-label">ANGKA MAIN 4D</span></a>
 
@@ -1100,7 +1100,7 @@ h1 {
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getDatabase, ref, onValue, query, orderByKey, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-  const CACHE_BUILD_VERSION = "v43_sgp_7result_limit";
+  const CACHE_BUILD_VERSION = "v44_sgp_7result_rumus_terakhir";
   window.TP_CACHE_BUILD_VERSION = CACHE_BUILD_VERSION;
 
   const TREK_LIMIT = 7;
@@ -1288,6 +1288,21 @@ h1 {
     return rekapWrap;
   }
 
+  function computePredDigitsFromResult4D(result4d) {
+    const digits = result4d.slice(-4).split("").map(Number);
+    const scores = {};
+    for (let i = 0; i <= 9; i++) scores[i] = 1;
+    const as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
+    scores[Math.abs(as * 2 - ekor * 2)] += 6;
+    scores[Math.abs(kop * 2 - kepala * 2)] += 5;
+    scores[(as * ekor + kop * kepala) % 10] += 4;
+    scores[(as + kop + kepala + ekor) % 10] += 3;
+    return Object.keys(scores)
+      .sort(function(x, y) { return scores[y] - scores[x]; })
+      .map(Number)
+      .slice(0, 2);
+  }
+
   function renderSgpPredictions(data) {
     const trekContainer = document.getElementById("trek-container");
     if (!data || typeof data !== "object") {
@@ -1335,22 +1350,13 @@ h1 {
       if (result4d.length < 4) return;
 
       const digits = result4d.slice(-4).split("").map(Number);
-      const scores = {};
-      for (let i = 0; i <= 9; i++) scores[i] = 1;
-      const as = digits[0], kop = digits[1], kepala = digits[2], ekor = digits[3];
-      scores[(((as + ekor) * 7 + kop * 3 + 2) % 10 + 10) % 10] += 9;
-      scores[(Math.abs((kepala * 9) - (as * 4 + ekor * 2)) % 10 + 10) % 10] += 6;
-      scores[(((kop * ekor) + (as * 3) + (kepala * 5) + 8) % 10 + 10) % 10] += 5;
-      scores[(Math.abs((as * kop) - (kepala * ekor)) % 10 + 10) % 10] += 4;
-      const predDigits = Object.keys(scores)
-        .sort(function(x, y) { return scores[y] - scores[x]; })
-        .map(Number)
-        .slice(0, 2);
+      const predDigits = computePredDigitsFromResult4D(result4d);
 
-      const nextItem = index + 1 < latest7.length ? latest7[index + 1] : null;
+      const globalPos = allResults.length - latest7.length + index;
+      const nextItem = globalPos + 1 < allResults.length ? allResults[globalPos + 1] : null;
 
       let status = "?";
-      if (!nextItem) {
+      if (index === latest7.length - 1 || !nextItem) {
         status = "?";
       } else {
         const next4d = nextItem.val;
