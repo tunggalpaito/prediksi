@@ -539,6 +539,73 @@ const firebaseConfig = {
 firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+const TAB_ID = "tab_" + Math.random().toString(36).slice(2, 10) + "_" + Date.now();
+const LOCK_STORAGE_KEY = "panel_cs_active_email_locks_v1";
+const LOCK_TTL_MS = 12000;
+let currentLockedEmail = "";
+let bypassLockOnce = false;
+
+function readEmailLocks() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(LOCK_STORAGE_KEY) || "{}");
+    const now = Date.now();
+    const cleaned = {};
+    Object.keys(raw || {}).forEach((email) => {
+      const item = raw[email];
+      if (item && item.tabId && (now - Number(item.updatedAt || 0)) <= LOCK_TTL_MS) {
+        cleaned[email] = item;
+      }
+    });
+    localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(cleaned));
+    return cleaned;
+  } catch (e) {
+    return {};
+  }
+}
+
+function isEmailUsedInAnotherTab(email) {
+  const cleanEmail = String(email || "").trim().toLowerCase();
+  if (!cleanEmail) return false;
+  const locks = readEmailLocks();
+  const existing = locks[cleanEmail];
+  return Boolean(existing && existing.tabId !== TAB_ID);
+}
+
+function claimEmailLock(email) {
+  const cleanEmail = String(email || "").trim().toLowerCase();
+  if (!cleanEmail) return false;
+  if (isEmailUsedInAnotherTab(cleanEmail)) return false;
+
+  const locks = readEmailLocks();
+  locks[cleanEmail] = { tabId: TAB_ID, updatedAt: Date.now() };
+  localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(locks));
+  currentLockedEmail = cleanEmail;
+  return true;
+}
+
+function releaseEmailLock(email) {
+  const target = String(email || currentLockedEmail || "").trim().toLowerCase();
+  if (!target) return;
+  try {
+    const locks = readEmailLocks();
+    if (locks[target] && locks[target].tabId === TAB_ID) {
+      delete locks[target];
+      localStorage.setItem(LOCK_STORAGE_KEY, JSON.stringify(locks));
+    }
+  } catch (e) {}
+  if (target === currentLockedEmail) currentLockedEmail = "";
+}
+
+setInterval(() => {
+  if (currentLockedEmail && firebase.auth().currentUser) {
+    claimEmailLock(currentLockedEmail);
+  }
+}, 5000);
+
+window.addEventListener("beforeunload", () => {
+  releaseEmailLock(currentLockedEmail);
+});
+
 const MACAU_4D_ROUNDS = [
   "data-macau4d-pt1",
   "data-macau4d-pt2",
@@ -632,9 +699,7 @@ function getWIBTimeInfo() {
   });
   const parts = wibFormatter.formatToParts(now);
   const map = {};
-  parts.forEach((p) => {
-    map[p.type] = p.value;
-  });
+  parts.forEach((p) => { map[p.type] = p.value; });
 
   const year = Number(map.year);
   const month = Number(map.month);
@@ -644,8 +709,6 @@ function getWIBTimeInfo() {
 
   const todayUtc = new Date(Date.UTC(year, month - 1, day));
   const yesterdayUtc = new Date(Date.UTC(year, month - 1, day - 1));
-  const dayOfWeek = todayUtc.getUTCDay();
-  const prevDayOfWeek = yesterdayUtc.getUTCDay();
 
   return {
     dateStr: formatInputDateFromUTCDate(todayUtc),
@@ -653,8 +716,8 @@ function getWIBTimeInfo() {
     dbDateKey: formatDbDateKeyFromUTCDate(todayUtc),
     prevDbDateKey: formatDbDateKeyFromUTCDate(yesterdayUtc),
     totalMinutes: hour * 60 + minute,
-    dayOfWeek,
-    prevDayOfWeek
+    dayOfWeek: todayUtc.getUTCDay(),
+    prevDayOfWeek: yesterdayUtc.getUTCDay()
   };
 }
 
@@ -766,9 +829,7 @@ function openMissedMarketPopup(missedTargets) {
   if (!modal || !textEl || !Array.isArray(missedTargets) || !missedTargets.length) return;
 
   const signature = missedTargets.map((m) => m.id).join("|");
-  if (signature === shownMissedPopupSignature && modal.classList.contains("is-open")) {
-    return;
-  }
+  if (signature === shownMissedPopupSignature && modal.classList.contains("is-open")) return;
 
   shownMissedPopupSignature = signature;
   firstMissedMarketTarget = missedTargets[0];
@@ -842,22 +903,13 @@ function checkMissedScheduledMarkets() {
             isUpdated: savedRounds >= target.expectedMinRounds
           };
         })
-        .catch(() => ({
-          target,
-          isUpdated: true
-        }))
+        .catch(() => ({ target, isUpdated: true }))
     )
   )
     .then((results) => {
-      const missedTargets = results
-        .filter((r) => !r.isUpdated)
-        .map((r) => r.target);
-
-      if (missedTargets.length > 0) {
-        openMissedMarketPopup(missedTargets);
-      } else {
-        closeMissedMarketModal();
-      }
+      const missedTargets = results.filter((r) => !r.isUpdated).map((r) => r.target);
+      if (missedTargets.length > 0) openMissedMarketPopup(missedTargets);
+      else closeMissedMarketModal();
     })
     .finally(() => {
       missedPopupCheckInFlight = false;
@@ -885,17 +937,11 @@ function renderPrediksiButtons(selectedKey) {
       usedUrls.add(item.url);
       picked.push(item);
     }
-
-    if (picked.length === 2 || item.key === "data-hklotto") {
-      break;
-    }
+    if (picked.length === 2 || item.key === "data-hklotto") break;
   }
 
   box.innerHTML = picked
-    .map(
-      (item) =>
-        `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-prediksi-kecil">${item.label}</a>`
-    )
+    .map((item) => `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-prediksi-kecil">${item.label}</a>`)
     .join("");
 }
 
@@ -947,9 +993,7 @@ function syncMarketToCurrentRound(baseMarket) {
 function applyInitialMarketByTime() {
   const activeMarket = getScheduledMarketByTime();
   const selectEl = document.getElementById("marketSelect");
-  if (selectEl) {
-    selectEl.value = activeMarket.key;
-  }
+  if (selectEl) selectEl.value = activeMarket.key;
   updateSelectionModeBadge();
   renderPrediksiButtons(activeMarket.key);
   syncMarketToCurrentRound(activeMarket);
@@ -1043,11 +1087,26 @@ function loginAdmin() {
     return;
   }
 
+  if (isEmailUsedInAnotherTab(email)) {
+    errorEl.style.color = "#fda4af";
+    errorEl.innerText = "❌ Email ini sedang dipakai di tab lain!";
+    return;
+  }
+
   submitBtn.disabled = true;
   errorEl.style.color = "#fda4af";
   errorEl.innerText = "⏳ Memverifikasi...";
 
-  firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+  firebase.auth().signInWithEmailAndPassword(email, password).then((cred) => {
+    const signedEmail = cred?.user?.email || email;
+    if (!claimEmailLock(signedEmail)) {
+      bypassLockOnce = true;
+      return firebase.auth().signOut().then(() => {
+        document.getElementById("adminLoginOverlay").style.display = "flex";
+        errorEl.style.color = "#fda4af";
+        errorEl.innerText = "❌ Email ini sedang dipakai di tab lain!";
+      });
+    }
     document.getElementById("adminLoginOverlay").style.display = "none";
     errorEl.innerText = "";
     shownMissedPopupSignature = "";
@@ -1071,6 +1130,8 @@ function loginAdmin() {
 }
 
 function logoutAdmin() {
+  const emailToRelease = currentLockedEmail || firebase.auth().currentUser?.email || "";
+  releaseEmailLock(emailToRelease);
   firebase.auth().signOut().then(() => {
     closeMissedMarketModal();
     alert("Berhasil Logout dari Panel CS.");
@@ -1120,9 +1181,7 @@ function saveDataPaito() {
       const prevStr = Array.isArray(prevData)
         ? prevData.join(",")
         : (typeof prevData === "string" ? prevData.trim() : "");
-      if (prevStr !== "") {
-        finalNumbers = prevStr + "," + rawNumbers;
-      }
+      if (prevStr !== "") finalNumbers = prevStr + "," + rawNumbers;
     }
     const items = parsePaitoItems(finalNumbers);
     currentRound = items.length > 0 ? items.length : 1;
@@ -1193,8 +1252,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const overlay = document.getElementById("adminLoginOverlay");
       const statusBadge = document.getElementById("authStatusIndicator");
       const logoutBtn = document.getElementById("btnLogout");
+      const errorEl = document.getElementById("loginErrorMsg");
 
       if (user) {
+        if (bypassLockOnce) {
+          bypassLockOnce = false;
+          return;
+        }
+        if (!claimEmailLock(user.email)) {
+          bypassLockOnce = true;
+          firebase.auth().signOut();
+          if (overlay) overlay.style.display = "flex";
+          if (errorEl) {
+            errorEl.style.color = "#fda4af";
+            errorEl.innerText = "❌ Email ini sedang dipakai di tab lain!";
+          }
+          return;
+        }
+
         if (overlay) overlay.style.display = "none";
         if (statusBadge) {
           statusBadge.className = "auth-status-badge status-logged-in";
@@ -1207,6 +1282,7 @@ document.addEventListener("DOMContentLoaded", () => {
           syncMarketToCurrentRound(getScheduledMarketByTime());
         }
       } else {
+        releaseEmailLock(currentLockedEmail);
         if (overlay) overlay.style.display = "flex";
         if (statusBadge) {
           statusBadge.className = "auth-status-badge status-logged-out";
