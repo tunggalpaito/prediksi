@@ -1581,15 +1581,29 @@
     <!-- PESAN STATUS INTERAKTIF -->
     <div id="poll-feedback-msg" class="text-xs-custom text-center font-semibold text-rose-200 min-h-[1.15rem]"></div>
 
-    <!-- LIVE PAPAN PENANDA & SKOR PUBLIK -->
-    <div class="pt-2.5 border-t border-rose-500/25">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs-custom font-cyber font-extrabold text-rose-200 uppercase tracking-wider">
-          <i class="fa-solid fa-trophy text-amber-300 mr-1" aria-hidden="true"></i> Daftar Nama Master (Publik)
-        </span>
-        <span class="text-xs-custom text-warm-muted">Reset 00:00 WIB</span>
+        <!-- LIVE PAPAN PENANDA TERPISAH: TUNGGAL & LINE 2D -->
+    <div class="pt-2.5 border-t border-rose-500/25 grid grid-cols-1 gap-2.5">
+      <!-- BINGKAI 1: DAFTAR NAMA MASTER TUNGGAL -->
+      <div class="bg-[#090407]/95 border border-rose-500/35 rounded-2xl p-3">
+        <div class="flex items-center justify-between mb-2 gap-2">
+          <span class="text-xs-custom font-cyber font-extrabold text-rose-200 uppercase tracking-wider">
+            <i class="fa-solid fa-crosshairs text-amber-300 mr-1" aria-hidden="true"></i> Master Tunggal (0–9)
+          </span>
+          <span class="text-xs-custom text-warm-muted shrink-0">Reset 00:00 WIB</span>
+        </div>
+        <div id="leaderboard-tunggal-list" class="space-y-1.5 text-sm-custom max-h-[12rem] overflow-y-auto pr-1"></div>
       </div>
-      <div id="leaderboard-list" class="space-y-1.5 text-sm-custom max-h-[15rem] overflow-y-auto pr-1"></div>
+
+      <!-- BINGKAI 2: DAFTAR NAMA MASTER LINE 2D -->
+      <div class="bg-[#090407]/95 border border-amber-400/35 rounded-2xl p-3">
+        <div class="flex items-center justify-between mb-2 gap-2">
+          <span class="text-xs-custom font-cyber font-extrabold text-amber-300 uppercase tracking-wider">
+            <i class="fa-solid fa-fire text-rose-400 mr-1" aria-hidden="true"></i> Master Line 2D (00–99)
+          </span>
+          <span class="text-xs-custom text-warm-muted shrink-0">Reset 00:00 WIB</span>
+        </div>
+        <div id="leaderboard-line2d-list" class="space-y-1.5 text-sm-custom max-h-[12rem] overflow-y-auto pr-1"></div>
+      </div>
     </div>
   </section>
 
@@ -2772,19 +2786,24 @@ if (totalBadge) totalBadge.textContent = rows.length + " PESERTA";
       }
     }
 
-    const boardList = document.getElementById("leaderboard-list");
-    if (boardList) {
+        function renderCategoryBoard(containerId, categoryName, emptyText) {
+      const boardList = document.getElementById(containerId);
+      if (!boardList) return;
       boardList.textContent = "";
-      rows.sort(function(a, b) { return (Number(b.ts) || 0) - (Number(a.ts) || 0); });
-      if (!rows.length) {
+
+      const filteredRows = rows
+        .filter(function(r) { return r.category === categoryName; })
+        .sort(function(a, b) { return (Number(b.ts) || 0) - (Number(a.ts) || 0); });
+
+      if (!filteredRows.length) {
         const emptyBoard = document.createElement("div");
-        emptyBoard.className = "text-xs-custom text-warm-muted bg-[#090407]/85 border border-rose-500/20 rounded-xl p-3 text-center";
-        emptyBoard.textContent = "Daftar Master " + POLL_MARKETS[activePollMarket].label + " masih kosong.";
+        emptyBoard.className = "text-xs-custom text-warm-muted bg-[#050305] border border-rose-500/20 rounded-xl p-3 text-center";
+        emptyBoard.textContent = emptyText;
         boardList.appendChild(emptyBoard);
         return;
       }
 
-      rows.slice(0, 25).forEach(function(r, idx) {
+      filteredRows.slice(0, 20).forEach(function(r, idx) {
         const rowCard = document.createElement("div");
         rowCard.className = "feed-item-card flex items-center justify-between rounded-xl px-3 py-2 gap-2.5";
 
@@ -2802,7 +2821,7 @@ if (totalBadge) totalBadge.textContent = rows.length + " PESERTA";
         nameEl.textContent = r.name;
         const timeEl = document.createElement("div");
         timeEl.className = "text-xs-custom text-warm-muted";
-        timeEl.textContent = POLL_MARKETS[activePollMarket].short + " • " + (r.category || "TEBAKAN") + " • " + (r.time || "");
+        timeEl.textContent = POLL_MARKETS[activePollMarket].short + " • " + (r.time || "");
         infoCol.append(nameEl, timeEl);
 
         leftWrap.append(numCol, infoCol);
@@ -2815,6 +2834,18 @@ if (totalBadge) totalBadge.textContent = rows.length + " PESERTA";
         boardList.appendChild(rowCard);
       });
     }
+
+    renderCategoryBoard(
+      "leaderboard-tunggal-list",
+      "TUNGGAL",
+      "Belum ada Master Tunggal " + POLL_MARKETS[activePollMarket].short + " hari ini."
+    );
+    renderCategoryBoard(
+      "leaderboard-line2d-list",
+      "LINE 2D",
+      "Belum ada Master Line 2D " + POLL_MARKETS[activePollMarket].short + " hari ini."
+    );
+
   }
 
   function fetchPollState() {
