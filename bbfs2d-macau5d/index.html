@@ -601,36 +601,54 @@ h2.section-title {
   width: 100%;
 }
 
+/* PERBAIKAN TREK: Angka biasa sejajar simetris (tabular-nums) + Background khas Macau 5D */
 .result-row {
-  display: grid;
-  grid-template-columns: max-content max-content;
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  background: rgba(11, 5, 8, 0.92);
-  padding: 8px 12px;
+  gap: 10px;
+  background: linear-gradient(90deg, #071124 0%, #0d1f3c 50%, #071124 100%);
+  padding: 9px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 30, 86, 0.24);
-  font-family: "Orbitron", "Plus Jakarta Sans", sans-serif;
-  font-size: 13.5px;
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  box-shadow: inset 0 1px 0 rgba(125, 211, 252, 0.12);
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1;
-  color: var(--text-main);
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   white-space: nowrap;
 }
 
-.result-row span.target-num,
-.result-row span.bbfs-num {
+.result-row span.target-num {
+  display: inline-block;
+  min-width: 7.2ch;
+  text-align: right;
   font-family: inherit;
   font-variant-numeric: inherit;
   font-feature-settings: inherit;
+  color: #fde047; /* Warna Angka Kiri: Kuning Emas */
   white-space: nowrap;
 }
 
+.result-row span.row-sep {
+  display: inline-block;
+  color: #94a3b8;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: center;
+}
+
 .result-row span.bbfs-num {
-  color: #fda4af;
+  display: inline-block;
+  min-width: 10.6ch;
+  text-align: left;
+  font-family: inherit;
+  font-variant-numeric: inherit;
+  font-feature-settings: inherit;
+  color: #38bdf8; /* Warna Angka Kanan: Biru Cyan Macau */
+  white-space: nowrap;
 }
 
 .status-msg {
@@ -875,7 +893,7 @@ h2.section-title {
 
   const CACHE_KEY = "tp_macau5d_bbfs8d_cache_v2";
   const CACHE_TTL_MS = 60 * 1000;
-  const CACHE_BUILD_VERSION = "v46_macau5d_30trek_bbfs_tabular_dl_iklan";
+  const CACHE_BUILD_VERSION = "v47_macau5d_30trek_bbfs_sejajar_warna";
   window.TP_CACHE_BUILD_VERSION = CACHE_BUILD_VERSION;
 
   const yearEl = document.getElementById("auto-year");
@@ -1016,13 +1034,18 @@ h2.section-title {
 
       const targetSpan = document.createElement("span");
       targetSpan.className = "target-num";
-      targetSpan.textContent = `${current.target5D} :`;
+      targetSpan.textContent = current.target5D;
+
+      const sepSpan = document.createElement("span");
+      sepSpan.className = "row-sep";
+      sepSpan.textContent = ":";
 
       const bbfsSpan = document.createElement("span");
       bbfsSpan.className = "bbfs-num";
       bbfsSpan.textContent = current.bbfsStr;
 
       rowDiv.appendChild(targetSpan);
+      rowDiv.appendChild(sepSpan);
       rowDiv.appendChild(bbfsSpan);
       fragment.appendChild(rowDiv);
     }
@@ -1193,7 +1216,7 @@ h2.section-title {
       const redirectUrl = (btn.dataset.redirectUrl || DOWNLOAD_AD_URL).trim();
 
       btn.disabled = true;
-      btn.textContent = "Memproses Gambar 9:16...";
+      btn.textContent = "Memproses Gambar...";
 
       let cloneWrapper = null;
       let downloadTriggered = false;
@@ -1213,7 +1236,7 @@ h2.section-title {
         cloneWrapper.style.top = "0";
         cloneWrapper.style.width = "1080px";
         cloneWrapper.style.height = "1920px";
-        cloneWrapper.style.backgroundColor = "#0b0509";
+        cloneWrapper.style.backgroundColor = "#040914";
         cloneWrapper.style.display = "flex";
         cloneWrapper.style.flexDirection = "column";
         cloneWrapper.style.justifyContent = "space-between";
@@ -1231,21 +1254,41 @@ h2.section-title {
         last16Rows.forEach(rowEl => {
           const clonedRow = rowEl.cloneNode(true);
           clonedRow.style.flex = "1";
-          clonedRow.style.display = "grid";
-          clonedRow.style.gridTemplateColumns = "max-content max-content";
+          clonedRow.style.display = "flex";
           clonedRow.style.justifyContent = "center";
           clonedRow.style.alignItems = "center";
-          clonedRow.style.gap = "24px";
-          clonedRow.style.fontSize = "60px";
+          clonedRow.style.gap = "28px";
+          clonedRow.style.fontFamily = '"Plus Jakarta Sans", sans-serif';
+          clonedRow.style.fontSize = "62px";
+          clonedRow.style.fontWeight = "800";
           clonedRow.style.fontVariantNumeric = "tabular-nums";
           clonedRow.style.fontFeatureSettings = '"tnum" 1, "lnum" 1';
-          clonedRow.style.letterSpacing = "4px";
+          clonedRow.style.letterSpacing = "6px";
           clonedRow.style.whiteSpace = "nowrap";
           clonedRow.style.borderRadius = "16px";
-          clonedRow.style.border = "3px solid rgba(255, 77, 121, 0.45)";
-          clonedRow.style.backgroundColor = "#14080f";
+          clonedRow.style.border = "3px solid rgba(56, 189, 248, 0.42)";
+          clonedRow.style.background = "linear-gradient(90deg, #071124 0%, #0d1f3c 50%, #071124 100%)";
           clonedRow.style.padding = "0 30px";
-          clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.5)";
+          clonedRow.style.boxShadow = "0 8px 25px rgba(0,0,0,0.55)";
+
+          const leftSpan = clonedRow.querySelector(".target-num");
+          const sepSpan = clonedRow.querySelector(".row-sep");
+          const rightSpan = clonedRow.querySelector(".bbfs-num");
+
+          if (leftSpan) {
+            leftSpan.style.minWidth = "6.8ch";
+            leftSpan.style.textAlign = "right";
+            leftSpan.style.color = "#fde047";
+          }
+          if (sepSpan) {
+            sepSpan.style.color = "#94a3b8";
+            sepSpan.style.letterSpacing = "0";
+          }
+          if (rightSpan) {
+            rightSpan.style.minWidth = "10.2ch";
+            rightSpan.style.textAlign = "left";
+            rightSpan.style.color = "#38bdf8";
+          }
 
           rowsWrapper.appendChild(clonedRow);
         });
@@ -1258,7 +1301,7 @@ h2.section-title {
           height: 1920,
           scale: 1,
           useCORS: true,
-          backgroundColor: "#0b0509"
+          backgroundColor: "#040914"
         });
 
         const fileName = `Analisis-Target-5D-Macau5D-16Trek-${formatLocalISODate(new Date())}.jpg`;
