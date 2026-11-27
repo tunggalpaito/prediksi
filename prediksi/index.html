@@ -189,6 +189,10 @@
     overflow-wrap: anywhere;
   }
 
+  #poll-feedback-msg {
+    white-space: pre-line;
+  }
+
   .text-xs-custom { font-size: 0.86rem; line-height: 1.35; }
   .text-sm-custom { font-size: 0.98rem; line-height: 1.42; }
 
@@ -1395,32 +1399,31 @@
     </div>
 
     <div class="rounded-2xl px-3 py-2.5 space-y-1.5" style="background: linear-gradient(145deg, rgba(159, 18, 57, 0.24), rgba(69, 10, 24, 0.32)); border: 1px solid rgba(255, 77, 121, 0.5);">
-  <div class="flex items-baseline justify-between gap-2">
-    <span class="font-extrabold text-rose-300 tracking-wide" style="font-size: 1.05rem;">PERSYARATAN</span>
-    <span class="font-medium text-rose-100 text-right" style="font-size: 0.78rem;"><strong>Email</strong> &amp; <strong>Nama</strong></span>
-  </div>
+      <div class="flex items-baseline justify-between gap-2">
+        <span class="font-extrabold text-rose-300 tracking-wide" style="font-size: 1.05rem;">PERSYARATAN</span>
+        <span class="font-medium text-rose-100 text-right" style="font-size: 0.78rem;"><strong>Email</strong> &amp; <strong>Nama</strong></span>
+      </div>
 
-  <div class="flex items-baseline justify-between gap-2">
-    <span class="font-extrabold text-rose-300 tracking-wide" style="font-size: 1.05rem;">PASARAN</span>
-    <span class="font-medium text-rose-100 text-right" style="font-size: 0.78rem;"><strong>SYDNEY POOLS</strong> • <strong>SINGAPORE</strong> • <strong>HONGKONG POOLS</strong></span>
-  </div>
+      <div class="flex items-baseline justify-between gap-2">
+        <span class="font-extrabold text-rose-300 tracking-wide" style="font-size: 1.05rem;">PASARAN</span>
+        <span class="font-medium text-rose-100 text-right" style="font-size: 0.78rem;"><strong>SYDNEY POOLS</strong> • <strong>SINGAPORE</strong> • <strong>HONGKONG POOLS</strong></span>
+      </div>
 
-  <div class="flex items-baseline justify-between gap-2">
-    <span class="font-extrabold text-rose-300 tracking-wide" style="font-size: 1.05rem;">ANGKA MAIN 3D</span>
-    <span class="font-medium text-rose-100 text-right" style="font-size: 0.78rem;"><strong>( 1 2 3 )</strong></span>
-  </div>
+      <div class="flex items-baseline justify-between gap-2">
+        <span class="font-extrabold text-rose-300 tracking-wide" style="font-size: 1.05rem;">ANGKA MAIN 3D</span>
+        <span class="font-medium text-rose-100 text-right" style="font-size: 0.78rem;"><strong>( 1 2 3 )</strong></span>
+      </div>
 
-  <div class="flex items-baseline justify-between gap-2">
-    <span class="font-extrabold text-rose-300 tracking-wide" style="font-size: 1.05rem;">LINE 2D</span>
-    <span class="font-medium text-rose-100 text-right" style="font-size: 0.78rem;"><strong>( 10 Angka Jadi )</strong></span>
-  </div>
+      <div class="flex items-baseline justify-between gap-2">
+        <span class="font-extrabold text-rose-300 tracking-wide" style="font-size: 1.05rem;">LINE 2D</span>
+        <span class="font-medium text-rose-100 text-right" style="font-size: 0.78rem;"><strong>( 10 Angka Jadi )</strong></span>
+      </div>
 
-  <div class="pt-1.5 mt-1 flex items-baseline justify-between gap-2" style="border-top: 1px solid rgba(255, 77, 121, 0.35);">
-    <span class="font-extrabold text-rose-400 tracking-wide" style="font-size: 1.08rem;">BONUS</span>
-    <span class="font-medium text-rose-200 text-right" style="font-size: 0.78rem;">Hadiah di tanggal akhir bln bagi <strong>Master</strong> yang masuk <strong>10 besar</strong></span>
-  </div>
-</div>
-
+      <div class="pt-1.5 mt-1 flex items-baseline justify-between gap-2" style="border-top: 1px solid rgba(255, 77, 121, 0.35);">
+        <span class="font-extrabold text-rose-400 tracking-wide" style="font-size: 1.08rem;">BONUS</span>
+        <span class="font-medium text-rose-200 text-right" style="font-size: 0.78rem;">Hadiah di tanggal akhir bln bagi <strong>Master</strong> yang masuk <strong>10 besar</strong></span>
+      </div>
+    </div>
 
     <!-- PILIH PASARAN -->
     <div class="grid grid-cols-3 gap-1.5 bg-[#090407]/95 p-1.5 rounded-2xl border border-rose-500/30">
@@ -1487,7 +1490,7 @@
     <div id="poll-panel-3d" class="bg-[#090407]/95 border border-rose-500/30 rounded-2xl p-3.5 space-y-3">
       <div class="flex items-center justify-between text-xs-custom">
         <span class="text-warm-body font-bold">Masukkan Angka Main 3 Digit</span>
-        
+        <span id="digit-3d-counter" class="font-mono-num text-amber-300 font-bold">0/3 digit</span>
       </div>
 
       <input
@@ -1502,7 +1505,7 @@
         class="prediksi-big-box w-full rounded-xl py-2.5 px-3 focus:border-amber-300 focus:outline-none"
       >
 
-      <button type="button" id="btn-submit-3d" onclick="submitAm3dComment()" disabled class="tap-responsive cyber-btn-red w-full font-cyber font-extrabold py-2.5 px-4 rounded-xl text-xs-custom uppercase tracking-wider cursor-pointer disabled:opacity-45">
+      <button type="button" id="btn-submit-3d" onclick="submitAm3dComment()" class="tap-responsive cyber-btn-red w-full font-cyber font-extrabold py-2.5 px-4 rounded-xl text-xs-custom uppercase tracking-wider cursor-pointer disabled:opacity-45">
         <i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Angka Main 3D
       </button>
     </div>
@@ -1511,7 +1514,7 @@
     <div id="poll-panel-line2d" class="hidden bg-[#090407]/95 border border-rose-500/30 rounded-2xl p-3.5 space-y-3 overflow-hidden">
       <div class="flex items-center justify-between text-xs-custom gap-2">
         <span class="text-warm-body font-bold">10 Line 2D</span>
-        
+        <span id="line2d-10-counter" class="font-mono-num text-amber-300 font-bold">0/10 line</span>
       </div>
 
       <input
@@ -1524,20 +1527,21 @@
         class="text-sm-custom font-mono-num w-full bg-[#050305] text-warm-bright rounded-xl px-3 py-2.5 border border-rose-500/35 focus:border-amber-300 focus:outline-none"
       >
 
-      
+      <div id="line2d-star-preview" class="line10-mono-box rounded-xl px-3 py-2 text-center break-all">
+        --*--*--*--*--*--*--*--*--*--
+      </div>
 
       <button
         type="button"
         id="btn-submit-line2d"
         onclick="submitLine2dTenComment()"
-        disabled
         class="tap-responsive cyber-btn-red w-full font-cyber font-extrabold py-2.5 px-4 rounded-xl text-xs-custom uppercase tracking-wider cursor-pointer disabled:opacity-45"
       >
         <i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Line 2D (10 Line)
       </button>
     </div>
 
-    <div id="poll-feedback-msg" class="text-xs-custom text-center font-semibold text-rose-200 min-h-[1.15rem]"></div>
+    <div id="poll-feedback-msg" class="text-xs-custom text-left font-semibold text-rose-200 bg-[#050305] border border-rose-500/25 rounded-xl px-3 py-2 min-h-[2.25rem] leading-relaxed"></div>
 
     <!-- RESULT RESMI 4D -->
     <div id="market-result-check-box" class="bg-[#090407]/95 border border-rose-500/35 rounded-2xl p-3 space-y-2.5">
@@ -1557,7 +1561,7 @@
       </div>
 
       <div id="poll-match-summary" class="points-framed-box text-xs-custom text-warm-body font-medium">
-        Komentar prediksi tersimpan otomatis ke Firebase dengan ID &amp; email pengirim.
+        Komentar prediksi telah tersimpan otomatis dengan ID &amp; email pengirim.
       </div>
     </div>
 
@@ -2026,7 +2030,7 @@
 (function() {
   "use strict";
 
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_27_komen_v48";
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_27_komen_v49";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
   const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
 
@@ -2426,8 +2430,6 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email || "").trim());
   }
 
-  // Parse input 10 line 2D (contoh: "10 12 13 34 56 78 90 12 34 44" atau "10*12*...")
-  // Mengembalikan array string 2 digit jika tepat 10 pasang
   function parseTenLine2dPairs(rawText) {
     const digitsOnly = String(rawText || "").replace(/[^0-9]/g, "");
     if (digitsOnly.length !== 20) return null;
@@ -2466,11 +2468,71 @@
     el.style.color = isWarn ? "#fde047" : "#86efac";
   }
 
+  function getValidationIssues(mode) {
+    const issues = [];
+    const emailEl = document.getElementById("comment-email-input");
+    const idEl = document.getElementById("poll-marker-input");
+    const email = String(emailEl ? emailEl.value : "").trim();
+    const rawId = String(idEl ? idEl.value : "").trim();
+    const cleanId = sanitizeNick(rawId);
+
+    if (!email) {
+      issues.push("Email wajib diisi (contoh: nama@gmail.com).");
+    } else if (!isValidEmail(email)) {
+      issues.push("Format email belum benar (harus ada @ dan domain, misal: nama@gmail.com).");
+    }
+
+    if (!rawId) {
+      issues.push("ID / Nama prediktor wajib diisi (2–16 karakter).");
+    } else if (cleanId.length < 2) {
+      issues.push("ID / Nama minimal 2 karakter setelah karakter ilegal dihapus.");
+    } else if (cleanId.length > 16) {
+      issues.push("ID / Nama maksimal 16 karakter.");
+    }
+
+    if (mode === "3d") {
+      const am3dEl = document.getElementById("am3d-input");
+      const digits3 = String(am3dEl ? am3dEl.value : "").replace(/[^0-9]/g, "");
+      if (digits3.length !== 3) {
+        issues.push("Angka Main 3D wajib tepat 3 digit angka (saat ini terisi " + digits3.length + "/3 digit).");
+      }
+    } else {
+      const line10El = document.getElementById("line2d-10-input");
+      const raw10 = String(line10El ? line10El.value : "");
+      const digits20 = raw10.replace(/[^0-9]/g, "");
+      const pairsCount = Math.floor(digits20.length / 2);
+      const hasTrailingHalfDigit = digits20.length % 2 === 1;
+
+      if (digits20.length !== 20) {
+        let msg = "Line 2D wajib 10 line masing-masing 2 digit (saat ini terisi " + pairsCount + "/10 line";
+        if (hasTrailingHalfDigit) msg += ", dan ada 1 digit gantung yang belum genap 2 digit";
+        msg += "; contoh: 10 12 13 34 56 78 90 12 34 44).";
+        issues.push(msg);
+      }
+    }
+
+    return issues;
+  }
+
+  function renderMissingFormatHint() {
+    if (isCurrentMarketClosed()) {
+      setFeedback("Pasaran SINGAPORE libur setiap hari Selasa dan Jumat.", true);
+      return;
+    }
+    const issues = getValidationIssues(activePollMode);
+    if (issues.length > 0) {
+      setFeedback("Format belum terpenuhi:\n• " + issues.join("\n• "), true);
+    } else {
+      setFeedback("Semua format sudah terpenuhi. Siap dikirim!", false);
+    }
+  }
+
   window.handleAm3dInput = function(el) {
     if (!el) return;
     const cleaned = String(el.value || "").replace(/[^0-9]/g, "").slice(0, 3);
     if (el.value !== cleaned) el.value = cleaned;
     syncMarkerAndButtonsUI();
+    renderMissingFormatHint();
   };
 
   window.handleLine2dTenInput = function(el) {
@@ -2480,6 +2542,7 @@
     const formattedInput = spaced ? spaced.join(" ") : "";
     if (el.value !== formattedInput) el.value = formattedInput;
     syncMarkerAndButtonsUI();
+    renderMissingFormatHint();
   };
 
   function syncMarkerAndButtonsUI() {
@@ -2501,22 +2564,15 @@
     const closed = isCurrentMarketClosed();
     if (holidayBox) holidayBox.classList.toggle("hidden", !closed);
 
-    const emailVal = String((document.getElementById("comment-email-input") || {}).value || "").trim();
-    const idVal = sanitizeNick((document.getElementById("poll-marker-input") || {}).value || "");
-    const identityValid = isValidEmail(emailVal) && idVal.length >= 2 && idVal.length <= 16;
-
     const val3d = am3dInput ? String(am3dInput.value || "").replace(/[^0-9]/g, "") : "";
     if (d3Counter) d3Counter.textContent = val3d.length + "/3 digit";
     if (am3dInput) am3dInput.disabled = closed;
 
     if (btn3d) {
-      if (closed) {
-        btn3d.disabled = true;
-        btn3d.innerHTML = '<i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> SINGAPORE Libur (Selasa & Jumat)';
-      } else {
-        btn3d.disabled = !(identityValid && val3d.length === 3);
-        btn3d.innerHTML = '<i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Angka Main 3D (' + mktInfo.short + ')';
-      }
+      btn3d.disabled = closed;
+      btn3d.innerHTML = closed
+        ? '<i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> SINGAPORE Libur (Selasa & Jumat)'
+        : '<i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Angka Main 3D (' + mktInfo.short + ')';
     }
 
     const raw10 = line10Input ? String(line10Input.value || "") : "";
@@ -2530,20 +2586,21 @@
     }
 
     if (btnLine2d) {
-      if (closed) {
-        btnLine2d.disabled = true;
-        btnLine2d.innerHTML = '<i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> SINGAPORE Libur';
-      } else {
-        const valid10 = parseTenLine2dPairs(raw10) !== null;
-        btnLine2d.disabled = !(identityValid && valid10);
-        btnLine2d.innerHTML = '<i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Line 2D 10 Line (' + mktInfo.short + ')';
-      }
+      btnLine2d.disabled = closed;
+      btnLine2d.innerHTML = closed
+        ? '<i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> SINGAPORE Libur'
+        : '<i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Line 2D 10 Line (' + mktInfo.short + ')';
     }
   }
 
   ["comment-email-input", "poll-marker-input"].forEach(function(id) {
     const el = document.getElementById(id);
-    if (el) el.addEventListener("input", syncMarkerAndButtonsUI);
+    if (el) {
+      el.addEventListener("input", function() {
+        syncMarkerAndButtonsUI();
+        renderMissingFormatHint();
+      });
+    }
   });
 
   window.switchPollMarket = function(mkt) {
@@ -2553,8 +2610,8 @@
       const btn = document.getElementById("poll-mkt-" + code);
       if (btn) btn.classList.toggle("active", code === mkt);
     });
-    setFeedback("", false);
     syncMarkerAndButtonsUI();
+    renderMissingFormatHint();
     fetchPollState();
   };
 
@@ -2571,6 +2628,7 @@
     if (panel3d) panel3d.classList.toggle("hidden", !is3d);
     if (panelL) panelL.classList.toggle("hidden", is3d);
     syncMarkerAndButtonsUI();
+    renderMissingFormatHint();
   };
 
   function postKomentarPrediksi(category, formattedPick, rawPick) {
@@ -2600,8 +2658,17 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     }).then(function(res) {
-      if (!res || !res.ok) throw new Error("Gagal menyimpan komentar ke Firebase");
-      return res.json();
+      return res.text().then(function(bodyText) {
+        if (!res.ok) {
+          let detail = bodyText;
+          try {
+            const parsedErr = JSON.parse(bodyText);
+            if (parsedErr && parsedErr.error) detail = parsedErr.error;
+          } catch (e) {}
+          throw new Error("Server menolak (HTTP " + res.status + "): " + (detail || ""));
+        }
+        try { return JSON.parse(bodyText); } catch (e) { return {}; }
+      });
     });
   }
 
@@ -2610,24 +2677,15 @@
       setFeedback("SINGAPORE libur setiap hari Selasa dan Jumat.", true);
       return;
     }
-    const email = String((document.getElementById("comment-email-input") || {}).value || "").trim();
-    const nick = sanitizeNick((document.getElementById("poll-marker-input") || {}).value || "");
+
+    const issues = getValidationIssues("3d");
+    if (issues.length > 0) {
+      setFeedback("Belum bisa dikirim — format belum terpenuhi:\n• " + issues.join("\n• "), true);
+      return;
+    }
+
     const am3dInput = document.getElementById("am3d-input");
     const digits3 = String(am3dInput ? am3dInput.value : "").replace(/[^0-9]/g, "");
-
-    if (!isValidEmail(email)) {
-      setFeedback("Masukkan alamat email yang valid terlebih dahulu.", true);
-      return;
-    }
-    if (nick.length < 2 || nick.length > 16) {
-      setFeedback("ID / Nama harus 2–16 karakter.", true);
-      return;
-    }
-    if (!/^[0-9]{3}$/.test(digits3)) {
-      setFeedback("Angka Main 3D harus tepat 3 digit (contoh: 123), tidak kurang atau lebih.", true);
-      return;
-    }
-
     const btn = document.getElementById("btn-submit-3d");
     if (btn) { btn.disabled = true; btn.textContent = "MENGIRIM..."; }
 
@@ -2639,7 +2697,7 @@
         fetchPollState();
       })
       .catch(function(err) {
-        setFeedback(err && err.message ? err.message : "Gagal mengirim komentar.", true);
+        setFeedback(err && err.message ? err.message : "Gagal mengirim komentar karena gangguan jaringan.", true);
         syncMarkerAndButtonsUI();
       });
   };
@@ -2649,25 +2707,15 @@
       setFeedback("SINGAPORE libur setiap hari Selasa dan Jumat.", true);
       return;
     }
-    const email = String((document.getElementById("comment-email-input") || {}).value || "").trim();
-    const nick = sanitizeNick((document.getElementById("poll-marker-input") || {}).value || "");
+
+    const issues = getValidationIssues("line2d");
+    if (issues.length > 0) {
+      setFeedback("Belum bisa dikirim — format belum terpenuhi:\n• " + issues.join("\n• "), true);
+      return;
+    }
+
     const line10Input = document.getElementById("line2d-10-input");
-    const raw10 = String(line10Input ? line10Input.value : "");
-    const pairs = parseTenLine2dPairs(raw10);
-
-    if (!isValidEmail(email)) {
-      setFeedback("Masukkan alamat email yang valid terlebih dahulu.", true);
-      return;
-    }
-    if (nick.length < 2 || nick.length > 16) {
-      setFeedback("ID / Nama harus 2–16 karakter.", true);
-      return;
-    }
-    if (!pairs || pairs.length !== 10) {
-      setFeedback("Line 2D harus tepat 10 line (masing-masing 2 digit, contoh: 10 12 13 34 56 78 90 12 34 44).", true);
-      return;
-    }
-
+    const pairs = parseTenLine2dPairs(line10Input ? line10Input.value : "");
     const starredValue = pairs.join("*");
     const btn = document.getElementById("btn-submit-line2d");
     if (btn) { btn.disabled = true; btn.textContent = "MENGIRIM..."; }
@@ -2680,7 +2728,7 @@
         fetchPollState();
       })
       .catch(function(err) {
-        setFeedback(err && err.message ? err.message : "Gagal mengirim komentar.", true);
+        setFeedback(err && err.message ? err.message : "Gagal mengirim komentar karena gangguan jaringan.", true);
         syncMarkerAndButtonsUI();
       });
   };
@@ -2737,8 +2785,7 @@
     const parts = clean.split("@");
     if (parts.length !== 2) return "-";
     const user = parts[0];
-    const head = user.slice(0, 2);
-    return head + "***@" + parts[1];
+    return user.slice(0, 2) + "***@" + parts[1];
   }
 
   function renderPollBoard(feedObj, resultData) {
@@ -2879,6 +2926,7 @@
   }
 
   syncMarkerAndButtonsUI();
+  renderMissingFormatHint();
   fetchPollState();
   setInterval(function() {
     if (!document.hidden) fetchPollState();
