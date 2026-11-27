@@ -23,8 +23,6 @@
 <link rel="dns-prefetch" href="https://brijmohan.org">
 <link rel="dns-prefetch" href="https://tunggalpaito.online">
 
-<link rel="preload" as="image" href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg">
-
 <meta property="og:locale" content="id_ID">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tunggal Paito">
@@ -221,7 +219,6 @@
     border-top-right-radius: 18px;
     pointer-events: none;
     z-index: 40;
-    contain: layout style paint;
   }
 
   @media (min-width: 640px) {
@@ -240,12 +237,10 @@
     padding-top: 0.7rem;
     padding-bottom: 0.45rem;
     flex-shrink: 0;
-    contain: layout style;
   }
 
   #first-screen-lock > * {
     flex-shrink: 0;
-    contain: layout style;
   }
 
   .fire-cta-box {
@@ -257,7 +252,7 @@
     border-radius: 0.75rem;
     background: linear-gradient(180deg, rgba(96, 20, 10, 0.96) 0%, rgba(24, 80, 44, 0.56) 52%, rgba(30, 104, 54, 0.46) 100%);
     border: 1px solid rgba(134, 239, 172, 0.72);
-    box-shadow: 0 6px 20px rgba(255, 30, 86, 0.3), 0 0 16px rgba(74, 222, 128, 0.2), inset 0 6px 14px rgba(251, 146, 60, 0.34);
+    box-shadow: 0 6px 18px rgba(255, 30, 86, 0.25), inset 0 6px 14px rgba(251, 146, 60, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -273,16 +268,15 @@
     left: -10%;
     right: -10%;
     top: -12px;
-    height: 36px;
+    height: 34px;
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(ellipse 20px 28px at 10% 0%, rgba(254, 240, 138, 0.9) 0%, rgba(249, 115, 22, 0.76) 52%, transparent 78%),
-      radial-gradient(ellipse 24px 32px at 28% 0%, rgba(251, 146, 60, 0.88) 0%, rgba(250, 204, 21, 0.68) 56%, transparent 80%),
-      radial-gradient(ellipse 22px 30px at 48% 0%, rgba(254, 249, 195, 0.92) 0%, rgba(234, 88, 12, 0.78) 52%, transparent 78%),
-      radial-gradient(ellipse 25px 32px at 68% 0%, rgba(251, 146, 60, 0.88) 0%, rgba(250, 204, 21, 0.68) 56%, transparent 80%),
-      radial-gradient(ellipse 21px 28px at 86% 0%, rgba(254, 240, 138, 0.9) 0%, rgba(249, 115, 22, 0.75) 52%, transparent 78%);
-    filter: blur(2.6px);
+      radial-gradient(ellipse 20px 26px at 10% 0%, rgba(254, 240, 138, 0.85) 0%, rgba(249, 115, 22, 0.7) 52%, transparent 78%),
+      radial-gradient(ellipse 24px 30px at 28% 0%, rgba(251, 146, 60, 0.82) 0%, rgba(250, 204, 21, 0.62) 56%, transparent 80%),
+      radial-gradient(ellipse 22px 28px at 48% 0%, rgba(254, 249, 195, 0.86) 0%, rgba(234, 88, 12, 0.72) 52%, transparent 78%),
+      radial-gradient(ellipse 25px 30px at 68% 0%, rgba(251, 146, 60, 0.82) 0%, rgba(250, 204, 21, 0.62) 56%, transparent 80%),
+      radial-gradient(ellipse 21px 26px at 86% 0%, rgba(254, 240, 138, 0.85) 0%, rgba(249, 115, 22, 0.7) 52%, transparent 78%);
     transform-origin: top center;
     animation: emberDropTop 2.1s ease-in-out infinite;
     animation-play-state: var(--fire-play-state, running);
@@ -294,15 +288,14 @@
     left: 0;
     right: 0;
     top: 0;
-    height: 22px;
+    height: 20px;
     z-index: 2;
     pointer-events: none;
     background:
-      radial-gradient(circle 3.5px at 16% 25%, rgba(250, 204, 21, 0.95) 0%, rgba(251, 146, 60, 0.48) 60%, transparent 100%),
-      radial-gradient(circle 4px at 41% 20%, rgba(254, 240, 138, 0.92) 0%, rgba(234, 88, 12, 0.44) 60%, transparent 100%),
-      radial-gradient(circle 3.5px at 64% 28%, rgba(250, 204, 21, 0.95) 0%, rgba(251, 146, 60, 0.48) 60%, transparent 100%),
-      radial-gradient(circle 4px at 84% 22%, rgba(254, 240, 138, 0.92) 0%, rgba(234, 88, 12, 0.44) 60%, transparent 100%);
-    filter: blur(1px);
+      radial-gradient(circle 3.5px at 16% 25%, rgba(250, 204, 21, 0.9) 0%, rgba(251, 146, 60, 0.42) 60%, transparent 100%),
+      radial-gradient(circle 4px at 41% 20%, rgba(254, 240, 138, 0.88) 0%, rgba(234, 88, 12, 0.38) 60%, transparent 100%),
+      radial-gradient(circle 3.5px at 64% 28%, rgba(250, 204, 21, 0.9) 0%, rgba(251, 146, 60, 0.42) 60%, transparent 100%),
+      radial-gradient(circle 4px at 84% 22%, rgba(254, 240, 138, 0.88) 0%, rgba(234, 88, 12, 0.38) 60%, transparent 100%);
     animation: topFlamePulse 1.8s ease-in-out infinite;
     animation-play-state: var(--fire-play-state, running);
   }
@@ -336,10 +329,7 @@
     letter-spacing: 0.03em;
     line-height: 1.15;
     color: #bef264;
-    text-shadow:
-      0 0 8px rgba(190, 242, 100, 0.72),
-      0 0 16px rgba(163, 230, 53, 0.55),
-      0 2px 4px rgba(0, 0, 0, 0.98);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.98);
     transform: translate3d(-50%, -50%, 0) scaleX(0.35) scaleY(0.75);
     opacity: 0;
     will-change: transform, opacity;
@@ -351,10 +341,7 @@
     color: #ffffff;
     font-size: 1.12rem;
     letter-spacing: 0.06em;
-    text-shadow:
-      0 0 10px rgba(255, 255, 255, 0.95),
-      0 0 18px rgba(255, 30, 86, 0.95),
-      0 2px 4px rgba(0, 0, 0, 0.98);
+    text-shadow: 0 0 10px rgba(255, 30, 86, 0.9), 0 2px 4px rgba(0, 0, 0, 0.98);
   }
 
   .fire-s1 { animation-delay: 0s; }
@@ -377,15 +364,15 @@
   }
 
   @keyframes emberDropTop {
-    0% { transform: translateY(-2px) scaleY(0.84); opacity: 0.76; }
-    50% { transform: translateY(7px) scaleY(1.08); opacity: 0.98; }
-    100% { transform: translateY(-2px) scaleY(0.84); opacity: 0.76; }
+    0% { transform: translate3d(0, -2px, 0) scaleY(0.84); opacity: 0.76; }
+    50% { transform: translate3d(0, 7px, 0) scaleY(1.08); opacity: 0.98; }
+    100% { transform: translate3d(0, -2px, 0) scaleY(0.84); opacity: 0.76; }
   }
 
   @keyframes topFlamePulse {
-    0% { transform: translateY(0px); opacity: 0.55; }
-    50% { transform: translateY(9px); opacity: 0.92; }
-    100% { transform: translateY(0px); opacity: 0.55; }
+    0% { transform: translate3d(0, 0px, 0); opacity: 0.55; }
+    50% { transform: translate3d(0, 9px, 0); opacity: 0.92; }
+    100% { transform: translate3d(0, 0px, 0); opacity: 0.55; }
   }
 
   .hero-pro-card {
@@ -481,7 +468,7 @@
     height: 8px;
     border-radius: 9999px;
     background-color: #4ade80;
-    box-shadow: 0 0 10px #4ade80;
+    box-shadow: 0 0 8px #4ade80;
     display: inline-block;
     animation: pulseLiveDot 1.5s ease-in-out infinite;
   }
@@ -500,7 +487,7 @@
     background: radial-gradient(circle at center, rgba(255, 30, 86, 0.18) 0%, rgba(7, 4, 7, 0.98) 100%);
     border: 1.5px solid rgba(255, 77, 121, 0.5);
     color: #fde047;
-    text-shadow: 0 0 12px rgba(250, 204, 21, 0.45);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
   }
 
   .line10-mono-box {
@@ -535,7 +522,6 @@
     border: 1px solid rgba(251, 191, 36, 0.45);
     border-radius: 0.75rem;
     padding: 0.45rem 0.75rem;
-    text-shadow: 0 0 12px rgba(250, 204, 21, 0.35);
     flex-shrink: 0;
   }
 
@@ -581,17 +567,17 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    will-change: opacity, filter;
-    animation: titleBlinkGlow 2.2s ease-in-out infinite;
+    will-change: opacity;
+    animation: titleBlinkGlow 2.4s ease-in-out infinite;
   }
 
   @keyframes titleBlinkGlow {
-    0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px rgba(255, 77, 121, 0.55)); }
-    42% { opacity: 1; filter: drop-shadow(0 0 14px rgba(251, 191, 36, 0.72)); }
-    48% { opacity: 0.22; filter: drop-shadow(0 0 2px rgba(255, 30, 86, 0.2)); }
-    53% { opacity: 0.96; filter: drop-shadow(0 0 12px rgba(255, 77, 121, 0.68)); }
-    57% { opacity: 0.35; filter: drop-shadow(0 0 3px rgba(255, 30, 86, 0.25)); }
-    63% { opacity: 1; filter: drop-shadow(0 0 11px rgba(255, 77, 121, 0.62)); }
+    0%, 100% { opacity: 1; }
+    42% { opacity: 1; }
+    48% { opacity: 0.28; }
+    53% { opacity: 0.96; }
+    57% { opacity: 0.4; }
+    63% { opacity: 1; }
   }
 
   .hero-brand-display {
@@ -606,7 +592,6 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 0 18px rgba(255, 30, 86, 0.45);
   }
 
   @media (min-width: 640px) {
@@ -661,7 +646,6 @@
     border: 1px solid rgba(255, 77, 121, 0.28);
     padding: 4px;
     position: relative;
-    contain: layout style;
   }
 
   #slot-banner-320 {
@@ -741,14 +725,14 @@
     z-index: 9995;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(8px);
+    transform: translate3d(0, 8px, 0);
     transition: opacity 0.18s ease, transform 0.18s ease;
   }
 
   #scroll-top-btn.visible {
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 
   @keyframes popupScale {
@@ -1060,9 +1044,8 @@
       <span class="brand-title-elegant truncate">TUNGGAL PAITO</span>
     </a>
 
-    <div class="flex items-center gap-1.5 shrink-0"> 
+    <div class="flex items-center gap-1.5 shrink-0">
       <a href="https://tunggalpaito.online/ruang-lomba/" class="tap-responsive text-xs-custom inline-flex items-center gap-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 font-extrabold py-1.5 px-2.5 rounded-full border border-amber-400/45">
-        
         <span>Ruang Lomba</span>
       </a>
       <button type="button" onclick="openSearchModal(event)" aria-label="Cari daftar isi halaman" class="tap-responsive text-sm-custom inline-flex items-center gap-1.5 bg-rose-500/15 hover:bg-rose-500/25 text-rose-200 font-extrabold py-1.5 px-3 rounded-full border border-rose-500/40 cursor-pointer">
@@ -1154,7 +1137,7 @@
         <p class="text-sm-custom text-warm-muted mt-0.5">Independen &amp; Anti BO</p>
       </div>
       <p class="font-medium text-warm-bright">
-        Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia jaringan iklan pihak ketiga dan <strong class="text-rose-200">BUKAN dari kita</strong>. Tunggal Paito tidak pernah bekerja sama, merekomendasikan, atau menjadi bagian dari pihak BO manapun. Jika dibawa ke halaman iklan liar, trik atasinya <strong class="text-amber-300">kembali 1x kemudian coba lagi</strong>, jika masih terobos saja. Salam HOKI — Teruslah Berjuang kita sama-sama sebagai musuh bandar!
+        Jika ada iklan Bandar Online (BO) yang muncul, itu murni dari layanan penyedia jaringan iklan pihak ketiga dan <strong class="text-rose-200">BUKAN dari kita</strong>. Tunggal Paito tidak pernah bekerja sama, merekomendasikan, atau menjadi bagian dari pihak BO manapun. Jika dibawa ke halaman iklan luar tekan kembali, cara atasinya <strong class="text-amber-300">kembali 1x kemudian coba lagi</strong>, jika masih kembali lagi klik lagi sampai terbuka halaman prediksi kita terobos saja itu hanya pengalihan sesaat. Salam HOKI — Teruslah Berjuang kita sama-sama sebagai musuh bandar!
       </p>
     </section>
   </div>
@@ -1467,7 +1450,6 @@
         <span class="text-xs-custom font-cyber font-bold text-amber-300 uppercase tracking-wider">
           <i class="fa-solid fa-id-card mr-1" aria-hidden="true"></i> Identitas Komentar (Wajib Email &amp; ID)
         </span>
-        
       </div>
 
       <div class="grid grid-cols-1 gap-2">
@@ -1516,7 +1498,7 @@
       >
 
       <button type="button" id="btn-submit-3d" onclick="submitAm3dComment()" class="tap-responsive cyber-btn-red w-full font-cyber font-extrabold py-2.5 px-4 rounded-xl text-xs-custom uppercase tracking-wider cursor-pointer disabled:opacity-45">
-        <i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Angka Main 3D
+        <i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> <span id="btn-submit-3d-label">Kirim Angka Main 3D (SYDNEY POOLS)</span>
       </button>
     </div>
 
@@ -1546,7 +1528,7 @@
         onclick="submitLine2dTenComment()"
         class="tap-responsive cyber-btn-red w-full font-cyber font-extrabold py-2.5 px-4 rounded-xl text-xs-custom uppercase tracking-wider cursor-pointer disabled:opacity-45"
       >
-        <i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Line 2D (10 Line)
+        <i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> <span id="btn-submit-line2d-label">Kirim Line 2D 10 Line (SYDNEY POOLS)</span>
       </button>
     </div>
 
@@ -1641,9 +1623,6 @@
   </section>
 
   <section id="market-section" class="space-y-3.5" aria-label="Pilih Pasaran">
-    <div class="flex items-center justify-between px-0.5 gap-2">
-    </div>
-
     <div class="grid grid-cols-4 gap-1.5 glass-panel p-1.5 rounded-2xl" role="tablist" aria-label="Filter Pasaran">
       <button type="button" role="tab" data-tab="all" aria-selected="true" onclick="filterMarket('all', this)" class="tab-btn text-xs-custom active py-2 px-1.5 rounded-xl font-bold text-warm-body border border-transparent cursor-pointer truncate">Semua</button>
       <button type="button" role="tab" data-tab="sdy" aria-selected="false" onclick="filterMarket('sdy', this)" class="tab-btn text-xs-custom py-2 px-1.5 rounded-xl font-bold text-warm-body border border-transparent hover:bg-rose-500/10 cursor-pointer truncate">🇦🇺 SYDNEY POOLS</button>
@@ -1670,35 +1649,35 @@
       </div>
       <div class="grid grid-cols-2 gap-2">
         <a href="https://tunggalpaito.online/prediksi/sdy" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl">
-          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi SYDNEY POOLS Hari Ini</span>
+          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>AM 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-300" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/prediksi-sdy/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Analisa SYDNEY POOLS</span>
+          <span class="text-warm-body font-medium">ANALISA</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/prediksi/2dsdy" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">LINE 2D SYDNEY POOLS</span>
+          <span class="text-warm-body font-medium">LINE 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/bbfs2d-sdy.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">BBFS 2D SYDNEY POOLS</span>
+          <span class="text-warm-body font-medium">BBFS 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/kumat-sdy.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">KUMAT 2D SYDNEY POOLS</span>
+          <span class="text-warm-body font-medium">KUMAT 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/kepala-sdy" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Lemah Kepala</span>
+          <span class="text-warm-body font-medium">LK</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/ekor-sdy" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Lemah Ekor</span>
+          <span class="text-warm-body font-medium">LE</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/2d-sdy" class="tap-responsive text-sm-custom col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>Lemah 2D SYDNEY POOLS</span>
+          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>LEMAH 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
@@ -1718,35 +1697,35 @@
       </div>
       <div class="grid grid-cols-2 gap-2">
         <a href="https://tunggalpaito.online/prediksi/sgp" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl">
-          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi SINGAPORE Hari Ini</span>
+          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>AM 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-300" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/prediksi-sgp/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Analisa SINGAPORE</span>
+          <span class="text-warm-body font-medium">ANALISA</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/prediksi/2dsgp" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">LINE 2D SINGAPORE</span>
+          <span class="text-warm-body font-medium">LINE 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/bbfs2d-sgp.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">BBFS 2D SINGAPORE</span>
+          <span class="text-warm-body font-medium">BBFS 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/kumat-sgp.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">KUMAT 2D SINGAPORE</span>
+          <span class="text-warm-body font-medium">KUMAT 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/kepala-sgp" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Lemah Kepala</span>
+          <span class="text-warm-body font-medium">LK</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/ekor-sgp" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Lemah Ekor</span>
+          <span class="text-warm-body font-medium">LE</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/2d-sgp" class="tap-responsive text-sm-custom col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>Lemah 2D SINGAPORE</span>
+          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>LEMAH 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
@@ -1766,35 +1745,35 @@
       </div>
       <div class="grid grid-cols-2 gap-2">
         <a href="https://tunggalpaito.online/prediksi/hk" class="tap-responsive col-span-2 flex items-center justify-between bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 p-3 rounded-xl">
-          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi HONGKONG POOLS Hari Ini</span>
+          <span class="text-rose-200 font-bold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>AM 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-300" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/prediksi-hk/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Analisa HONGKONG POOLS</span>
+          <span class="text-warm-body font-medium">ANALISA</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/prediksi/2dhk" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">LINE 2D HONGKONG POOLS</span>
+          <span class="text-warm-body font-medium">LINE 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/bbfs2d-hk.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">BBFS 2D HONGKONG POOLS</span>
+          <span class="text-warm-body font-medium">BBFS 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/kumat-hk.html" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">KUMAT 2D HONGKONG POOLS</span>
+          <span class="text-warm-body font-medium">KUMAT 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/kepala-hk" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Lemah Kepala</span>
+          <span class="text-warm-body font-medium">LK</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/ekor-hk" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium">Lemah Ekor</span>
+          <span class="text-warm-body font-medium">LE</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
         <a href="https://tunggalpaito.online/angka-lemah/2d-hk" class="tap-responsive text-sm-custom col-span-2 flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-2.5 rounded-xl">
-          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>Lemah 2D HONGKONG POOLS</span>
+          <span class="text-warm-body font-medium"><i class="fa-solid fa-arrow-down mr-1.5 text-rose-300" aria-hidden="true"></i>LEMAH 2D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
@@ -1814,7 +1793,7 @@
           <span class="text-xs-custom font-mono-num font-bold px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-200 border border-rose-500/30 shrink-0">LOTTO</span>
         </div>
         <a href="https://tunggalpaito.online/prediksi/angka-main/sdy-lotto/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-3 rounded-xl">
-          <span class="text-warm-body font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi Angka Main SYDNEY LOTTO hari ini</span>
+          <span class="text-warm-body font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>AM 4D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
@@ -1832,7 +1811,7 @@
           <span class="text-xs-custom font-mono-num font-bold px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-200 border border-rose-500/30 shrink-0">LOTTO</span>
         </div>
         <a href="https://tunggalpaito.online/prediksi/angka-main/hk-lotto/" class="tap-responsive text-sm-custom flex items-center justify-between bg-[#0b060a]/85 hover:bg-rose-500/15 border border-rose-500/20 hover:border-rose-500/50 p-3 rounded-xl">
-          <span class="text-warm-body font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>Prediksi Angka Main HK LOTTO hari ini</span>
+          <span class="text-warm-body font-semibold"><i class="fa-solid fa-chart-pie mr-2 text-rose-300" aria-hidden="true"></i>AM 4D</span>
           <i class="fa-solid fa-chevron-right text-rose-400" aria-hidden="true"></i>
         </a>
       </div>
@@ -1963,15 +1942,15 @@
         <p class="text-xs-custom font-cyber font-bold text-rose-300 uppercase tracking-wider mb-1.5">Gambar Panduan Download APK</p>
         <div class="grid grid-cols-3 gap-2">
           <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" download="panduan-download-apk-tunggal-paito2.jpg" target="_blank" rel="noopener noreferrer" class="tap-responsive block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
-            <img id="guide-img-1" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" alt="Panduan Langkah 1: Detail selengkapnya" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-cover">
+            <img id="guide-img-1" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.jpg" alt="Panduan Langkah 1: Detail selengkapnya" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-cover">
             <span class="text-xs-custom block text-center font-bold text-warm-body py-1 bg-[#0b060a]/95">Detail / Opsi</span>
           </a>
           <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.png" download="panduan-download-apk-tunggal-paito2.png" target="_blank" rel="noopener noreferrer" class="tap-responsive block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
-            <img id="guide-img-2" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.png" alt="Panduan Langkah 2: Tetap instal" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-cover">
+            <img id="guide-img-2" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito2.png" alt="Panduan Langkah 2: Tetap instal" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-cover">
             <span class="text-xs-custom block text-center font-bold text-warm-body py-1 bg-[#0b060a]/95">Tetap Instal</span>
           </a>
           <a href="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" download="panduan-download-apk-tunggal-paito3.jpg" target="_blank" rel="noopener noreferrer" class="tap-responsive block rounded-xl overflow-hidden border border-rose-500/25 hover:border-rose-500/70 bg-[#0b060a]">
-            <img id="guide-img-3" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" alt="Panduan Langkah 3: Tetap download" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-contain bg-white/95">
+            <img id="guide-img-3" src="https://tunggalpaito.online/panduan-download-apk-tunggal-paito3.jpg" alt="Panduan Langkah 3: Tetap download" loading="lazy" decoding="async" onerror="this.style.opacity='0.35'" onload="scheduleGuideCropSync()" class="guide-thumb object-contain bg-white/95">
             <span class="text-xs-custom block text-center font-bold text-warm-body py-1 bg-[#0b060a]/95">Tetap Download</span>
           </a>
         </div>
@@ -2037,7 +2016,7 @@
 (function() {
   "use strict";
 
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_27_komen_v50";
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_27_komen_v51";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
   const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
 
@@ -2060,6 +2039,7 @@
   let boLinksList = [DEFAULT_BO_LINK];
   let currentActiveBoLink = DEFAULT_BO_LINK;
   let isFireBoxInViewport = true;
+  let sdkRealtimeActive = false;
 
   function safeSessionSet(key, val) {
     try { window.sessionStorage.setItem(key, val); } catch (e) {}
@@ -2212,7 +2192,7 @@
     const restUrl = dbUrl + "/" + FIREBASE_BO_PATH + ".json";
 
     function fetchRestBoLinks() {
-      if (typeof fetch !== "function") return;
+      if (sdkRealtimeActive || typeof fetch !== "function") return;
       fetch(restUrl + "?t=" + Date.now(), { cache: "no-store" })
         .then(function(res) { return res.ok ? res.json() : null; })
         .then(function(data) {
@@ -2224,12 +2204,15 @@
     function attachSdkRealtime(dbApp) {
       try {
         if (dbApp && typeof dbApp.ref === "function") {
+          sdkRealtimeActive = true;
           dbApp.ref(FIREBASE_BO_PATH).on("value", function(snap) {
             updateBoLinksFromData(snap && typeof snap.val === "function" ? snap.val() : null);
           });
           return true;
         }
-      } catch (e) {}
+      } catch (e) {
+        sdkRealtimeActive = false;
+      }
       return false;
     }
 
@@ -2276,7 +2259,7 @@
     else window.addEventListener("load", ensureFirebaseSdkAndListen, { once: true });
 
     setInterval(function() {
-      if (!document.hidden) fetchRestBoLinks();
+      if (!document.hidden && !sdkRealtimeActive) fetchRestBoLinks();
     }, 30000);
   }
 
@@ -2401,6 +2384,8 @@
 
   let activePollMarket = "sdy";
   let activePollMode = "3d";
+  let lastRenderedButtonMarket = null;
+  let lastRenderedButtonClosed = null;
 
   function getDbRootUrl() {
     return String(FIREBASE_DB_CONFIG.databaseURL || "").trim().replace(/\/+$/, "");
@@ -2555,7 +2540,9 @@
     const titleEl = document.getElementById("poll-arena-title");
     const holidayBox = document.getElementById("sgp-holiday-notice");
     const btn3d = document.getElementById("btn-submit-3d");
+    const btn3dLabel = document.getElementById("btn-submit-3d-label");
     const btnLine2d = document.getElementById("btn-submit-line2d");
+    const btnLine2dLabel = document.getElementById("btn-submit-line2d-label");
     const am3dInput = document.getElementById("am3d-input");
     const line10Input = document.getElementById("line2d-10-input");
     const d3Counter = document.getElementById("digit-3d-counter");
@@ -2564,8 +2551,9 @@
     const srcLabelEl = document.getElementById("poll-result-source-label");
     const mktInfo = POLL_MARKETS[activePollMarket] || POLL_MARKETS.sdy;
 
-    if (titleEl) titleEl.textContent = mktInfo.label;
-    if (srcLabelEl) srcLabelEl.textContent = mktInfo.short + " • Result Resmi";
+    if (titleEl && titleEl.textContent !== mktInfo.label) titleEl.textContent = mktInfo.label;
+    const expectedSrc = mktInfo.short + " • Result Resmi";
+    if (srcLabelEl && srcLabelEl.textContent !== expectedSrc) srcLabelEl.textContent = expectedSrc;
 
     const closed = isCurrentMarketClosed();
     if (holidayBox) holidayBox.classList.toggle("hidden", !closed);
@@ -2573,13 +2561,6 @@
     const val3d = am3dInput ? String(am3dInput.value || "").replace(/[^0-9]/g, "") : "";
     if (d3Counter) d3Counter.textContent = val3d.length + "/3 digit";
     if (am3dInput) am3dInput.disabled = closed;
-
-    if (btn3d) {
-      btn3d.disabled = closed;
-      btn3d.innerHTML = closed
-        ? '<i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> SINGAPORE Libur (Selasa & Jumat)'
-        : '<i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Angka Main 3D (' + mktInfo.short + ')';
-    }
 
     const raw10 = line10Input ? String(line10Input.value || "") : "";
     const digits20 = raw10.replace(/[^0-9]/g, "");
@@ -2591,11 +2572,23 @@
       previewEl.textContent = getPartialTenLinePairs(raw10).join("*");
     }
 
-    if (btnLine2d) {
-      btnLine2d.disabled = closed;
-      btnLine2d.innerHTML = closed
-        ? '<i class="fa-solid fa-lock mr-1" aria-hidden="true"></i> SINGAPORE Libur'
-        : '<i class="fa-solid fa-paper-plane mr-1" aria-hidden="true"></i> Kirim Line 2D 10 Line (' + mktInfo.short + ')';
+    if (lastRenderedButtonMarket !== activePollMarket || lastRenderedButtonClosed !== closed) {
+      lastRenderedButtonMarket = activePollMarket;
+      lastRenderedButtonClosed = closed;
+
+      if (btn3d) btn3d.disabled = closed;
+      if (btn3dLabel) {
+        btn3dLabel.textContent = closed
+          ? "SINGAPORE Libur (Selasa & Jumat)"
+          : "Kirim Angka Main 3D (" + mktInfo.short + ")";
+      }
+
+      if (btnLine2d) btnLine2d.disabled = closed;
+      if (btnLine2dLabel) {
+        btnLine2dLabel.textContent = closed
+          ? "SINGAPORE Libur"
+          : "Kirim Line 2D 10 Line (" + mktInfo.short + ")";
+      }
     }
   }
 
@@ -2610,7 +2603,7 @@
   });
 
   window.switchPollMarket = function(mkt) {
-    if (!POLL_MARKETS[mkt]) return;
+    if (!POLL_MARKETS[mkt] || activePollMarket === mkt) return;
     activePollMarket = mkt;
     ["sdy", "sgp", "hk"].forEach(function(code) {
       const btn = document.getElementById("poll-mkt-" + code);
@@ -2693,17 +2686,21 @@
     const am3dInput = document.getElementById("am3d-input");
     const digits3 = String(am3dInput ? am3dInput.value : "").replace(/[^0-9]/g, "");
     const btn = document.getElementById("btn-submit-3d");
-    if (btn) { btn.disabled = true; btn.textContent = "MENGIRIM..."; }
+    const labelEl = document.getElementById("btn-submit-3d-label");
+    if (btn) btn.disabled = true;
+    if (labelEl) labelEl.textContent = "MENGIRIM...";
 
     postKomentarPrediksi("AM 3D", digits3, digits3)
       .then(function() {
         if (am3dInput) am3dInput.value = "";
         setFeedback("Komentar Angka Main 3D (" + digits3 + ") untuk " + POLL_MARKETS[activePollMarket].short + " berhasil dikirim.", false);
+        lastRenderedButtonMarket = null;
         syncMarkerAndButtonsUI();
         fetchPollState();
       })
       .catch(function(err) {
         setFeedback(err && err.message ? err.message : "Gagal mengirim komentar karena gangguan jaringan.", true);
+        lastRenderedButtonMarket = null;
         syncMarkerAndButtonsUI();
       });
   };
@@ -2724,17 +2721,21 @@
     const pairs = parseTenLine2dPairs(line10Input ? line10Input.value : "");
     const starredValue = pairs.join("*");
     const btn = document.getElementById("btn-submit-line2d");
-    if (btn) { btn.disabled = true; btn.textContent = "MENGIRIM..."; }
+    const labelEl = document.getElementById("btn-submit-line2d-label");
+    if (btn) btn.disabled = true;
+    if (labelEl) labelEl.textContent = "MENGIRIM...";
 
     postKomentarPrediksi("LINE 2D 10X", starredValue, pairs.join(" "))
       .then(function() {
         if (line10Input) line10Input.value = "";
         setFeedback("Komentar Line 2D (" + starredValue + ") untuk " + POLL_MARKETS[activePollMarket].short + " berhasil dikirim.", false);
+        lastRenderedButtonMarket = null;
         syncMarkerAndButtonsUI();
         fetchPollState();
       })
       .catch(function(err) {
         setFeedback(err && err.message ? err.message : "Gagal mengirim komentar karena gangguan jaringan.", true);
+        lastRenderedButtonMarket = null;
         syncMarkerAndButtonsUI();
       });
   };
@@ -2854,6 +2855,7 @@
         return;
       }
 
+      const frag = document.createDocumentFragment();
       filteredRows.slice(0, 20).forEach(function(r, idx) {
         const rowCard = document.createElement("div");
         rowCard.className = isLineTen
@@ -2901,8 +2903,9 @@
           rowCard.append(topRow, lineBox);
         }
 
-        boardList.appendChild(rowCard);
+        frag.appendChild(rowCard);
       });
+      boardList.appendChild(frag);
     }
 
     renderCategoryBoard(
@@ -2919,16 +2922,28 @@
     );
   }
 
+  let pollFetchInFlight = null;
   function fetchPollState() {
     const requestedMarket = activePollMarket;
     const url = getKomentarPrediksiUrl(requestedMarket) + ".json";
     if (!isSafeHttpUrl(url) || typeof fetch !== "function") return;
-    Promise.all([
+    if (pollFetchInFlight && pollFetchInFlight.market === requestedMarket) return;
+
+    const promise = Promise.all([
       fetchJsonNode(url),
       fetchMarketResult(requestedMarket)
     ]).then(function(tuple) {
+      if (pollFetchInFlight && pollFetchInFlight.market === requestedMarket) {
+        pollFetchInFlight = null;
+      }
       if (requestedMarket === activePollMarket) renderPollBoard(tuple[0], tuple[1]);
+    }).catch(function() {
+      if (pollFetchInFlight && pollFetchInFlight.market === requestedMarket) {
+        pollFetchInFlight = null;
+      }
     });
+
+    pollFetchInFlight = { market: requestedMarket, promise: promise };
   }
 
   syncMarkerAndButtonsUI();
@@ -2936,7 +2951,7 @@
   fetchPollState();
   setInterval(function() {
     if (!document.hidden) fetchPollState();
-  }, 12000);
+  }, 15000);
 
   const prefetchedUrls = new Set();
   function prefetchInternalUrl(href) {
@@ -3015,7 +3030,7 @@
         const existing = document.getElementById(id);
         if (existing) existing.remove();
 
-        window.atOptions = optionsObj;
+        window.atOptions = Object.assign({}, optionsObj);
         const script = document.createElement("script");
         script.id = id;
         script.async = false;
@@ -3028,7 +3043,7 @@
           if (settled) return;
           settled = true;
           if (cb) cb(err);
-          setTimeout(resolve, 220);
+          setTimeout(resolve, 260);
         };
 
         script.addEventListener("load", function() { finish(onLoad); }, { once: true });
@@ -3087,7 +3102,7 @@
         width: 320,
         params: {}
       },
-      function() { banner468Timer = setTimeout(loadBanner468, 450); },
+      function() { banner468Timer = setTimeout(loadBanner468, 500); },
       function() {
         banner320Error = true;
         loadBanner468();
@@ -3234,7 +3249,9 @@
     window.scrollTo({ top: y, behavior: "auto" });
   };
 
+  let cachedTocItems = null;
   function buildTocItems() {
+    if (cachedTocItems) return cachedTocItems;
     const items = [];
     const seen = new Set();
 
@@ -3279,6 +3296,7 @@
       addItem(rawText, category, href, "link", mCode);
     });
 
+    cachedTocItems = items;
     return items;
   }
 
@@ -3486,7 +3504,6 @@
   let notifShowTimer = null;
   let notifHideTimer = null;
   let notifCycleTimer = null;
-  let notifPausedByHidden = false;
 
   function showBuyerNotification() {
     if (document.hidden || document.body.classList.contains("modal-open")) return;
@@ -3595,17 +3612,13 @@
   function handleVisibilityChange() {
     applyFirePlayState();
     if (document.hidden) {
-      notifPausedByHidden = true;
       stopNotifCycle();
       stopBoLinkCycle();
     } else {
       startBoLinkCycle();
       refreshFireMarqueeState();
-      if (notifPausedByHidden) {
-        notifPausedByHidden = false;
-        showBuyerNotification();
-        startNotifCycle();
-      }
+      showBuyerNotification();
+      startNotifCycle();
       fetchPollState();
     }
   }
@@ -3637,5 +3650,6 @@
 </script>
 
 <script src="https://brijmohan.org/16/4492da72f9217003fc2e200f15a4c1b7" data-cfasync="false" async defer></script>
+<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 </body>
 </html>
