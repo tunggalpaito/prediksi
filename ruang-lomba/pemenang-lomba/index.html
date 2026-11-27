@@ -267,12 +267,6 @@ body ::selection {
   contain: layout style;
 }
 
-.ad-slot-box-468 iframe {
-  display: block;
-  background: transparent !important;
-  border: 0 !important;
-}
-
 .bo-img-banner-link {
   width: 100%;
   max-width: 476px;
@@ -337,16 +331,6 @@ body ::selection {
   height: 50px;
   overflow: hidden;
   position: relative;
-}
-
-.ad-plain-slot iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 320px;
-  height: 50px;
-  border: 0;
-  display: block;
 }
 
 .perlengkapan-section {
@@ -415,38 +399,6 @@ body ::selection {
     background 0.14s ease;
 }
 
-.perlengkapan-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -45%;
-  width: 38%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(254, 249, 195, 0.32),
-    rgba(255, 255, 255, 0.55),
-    rgba(254, 249, 195, 0.32),
-    transparent
-  );
-  transform: skewX(-22deg) translate3d(0, 0, 0);
-  pointer-events: none;
-  z-index: 2;
-  will-change: transform;
-  animation: borderGleamSlide 4.2s linear infinite;
-  animation-play-state: var(--nav-gleam-state, running);
-}
-
-body.is-scrolling .perlengkapan-btn::before {
-  animation-play-state: paused;
-}
-
-@keyframes borderGleamSlide {
-  0% { transform: skewX(-22deg) translate3d(0, 0, 0); }
-  100% { transform: skewX(-22deg) translate3d(420%, 0, 0); }
-}
-
 .perlengkapan-btn-label {
   display: inline-block;
   text-align: center;
@@ -455,58 +407,17 @@ body.is-scrolling .perlengkapan-btn::before {
   color: #f8fafc;
   font-weight: 800;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  transition: transform 0.14s ease, color 0.14s ease, text-shadow 0.14s ease;
-}
-
-.perlengkapan-btn:hover {
-  transform: translate3d(0, -2.5px, 0);
-  border-color: #fef08a;
-  background: linear-gradient(145deg, #4ade80 0%, #16a34a 100%);
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.75),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-    0 4px 0 #14532d,
-    0 8px 16px rgba(74, 222, 128, 0.35),
-    0 0 10px rgba(254, 240, 138, 0.45);
-}
-
-.perlengkapan-btn:active,
-.perlengkapan-btn.is-clicked {
-  transform: translate3d(0, -3px, 0) scale(0.985);
-  border-color: #fef9c3;
-  background: linear-gradient(135deg, #fde047 0%, #facc15 55%, #eab308 100%);
-  box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 0.9),
-    0 4px 0 #a16207,
-    0 10px 20px rgba(250, 204, 21, 0.65),
-    0 0 14px rgba(253, 224, 71, 0.85);
-}
-
-.perlengkapan-btn:active .perlengkapan-btn-label,
-.perlengkapan-btn.is-clicked .perlengkapan-btn-label {
-  color: #1a1200;
-  text-shadow: none;
 }
 
 .perlengkapan-btn.is-active-page {
   border-color: #fde047;
   background: linear-gradient(135deg, #ff1e56 0%, #be123c 55%, #881337 100%);
   transform: translate3d(0, -2px, 0);
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.65),
-    0 3px 0 #4c0519,
-    0 0 14px rgba(255, 30, 86, 0.85),
-    0 0 22px rgba(253, 224, 71, 0.45);
 }
 
-.perlengkapan-btn.is-active-page .perlengkapan-btn-label,
-.perlengkapan-btn.is-active-page:hover .perlengkapan-btn-label {
+.perlengkapan-btn.is-active-page .perlengkapan-btn-label {
   color: #ffffff;
   font-weight: 900;
-  text-shadow:
-    0 0 8px rgba(255, 255, 255, 0.95),
-    0 0 16px rgba(255, 30, 86, 0.95),
-    0 1px 2px rgba(0, 0, 0, 0.95);
 }
 
 .glass-card {
@@ -822,6 +733,12 @@ h1 {
   padding: 2px 8px;
 }
 
+.lomba-badge-guest.is-limited {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(248, 113, 113, 0.5);
+}
+
 .lomba-field-label {
   display: block;
   font-size: 12px;
@@ -1133,8 +1050,8 @@ h1 {
         <div class="lomba-tnc-box">
           <div class="lomba-tnc-title">KETENTUAN KLAIM &amp; OBROLAN</div>
           <ul class="lomba-tnc-list">
-            <li>Klaim hadiah dibatasi <strong>1x per 24 jam</strong> per peserta/email untuk mencegah spam.</li>
-            <li>Isi <strong>Nama / ID Master</strong>, <strong>Email aktif</strong>, <strong>Pasaran / Kategori</strong>, <strong>Peringkat / Hadiah</strong>, serta <strong>tujuan pencairan</strong> dan catatan klaim.</li>
+            <li>Klaim hadiah dan pesan obrolan dibatasi <strong>1x per 24 jam</strong> per email.</li>
+            <li>Isi <strong>Nama / ID Master</strong> (2–40 karakter), <strong>Email aktif</strong>, <strong>Pasaran / Kategori</strong>, <strong>Peringkat / Hadiah</strong>, serta <strong>tujuan pencairan</strong> dan catatan klaim.</li>
             <li>Dilarang mengirim spam atau promosi WA/Web/FB di ruang obrolan klaim.</li>
           </ul>
         </div>
@@ -1203,13 +1120,13 @@ h1 {
         <div id="panel-form-klaim" class="lomba-panel-box">
           <div class="lomba-panel-head">
             <span>Form Pengajuan Klaim Hadiah</span>
-            <span class="lomba-badge-guest" id="klaim-quota-badge">Batas 1x / 24 Jam</span>
+            <span class="lomba-badge-guest" id="klaim-quota-badge">Kuota: 1x / 24 Jam</span>
           </div>
 
           <div class="lomba-grid-2">
             <div>
-              <label for="klaim-nama" class="lomba-field-label">Nama / ID Master *</label>
-              <input id="klaim-nama" type="text" maxlength="30" placeholder="Nama / ID Master" class="lomba-input">
+              <label for="klaim-nama" class="lomba-field-label">Nama / ID Master * (2–40 huruf)</label>
+              <input id="klaim-nama" type="text" minlength="2" maxlength="40" placeholder="Nama / ID Master" class="lomba-input">
             </div>
             <div>
               <label for="klaim-email" class="lomba-field-label">Email Aktif *</label>
@@ -1246,13 +1163,13 @@ h1 {
           </div>
 
           <div>
-            <label for="klaim-tujuan" class="lomba-field-label">Tujuan Pencairan (E-Wallet / Rekening &amp; Atas Nama) *</label>
-            <input id="klaim-tujuan" type="text" maxlength="100" placeholder="Contoh: DANA 0812xxxx a.n Nama Master" class="lomba-input">
+            <label for="klaim-tujuan" class="lomba-field-label">Tujuan Pencairan (4–120 karakter) *</label>
+            <input id="klaim-tujuan" type="text" minlength="4" maxlength="120" placeholder="Contoh: DANA 0812xxxx a.n Nama Master" class="lomba-input">
           </div>
 
           <div>
-            <label for="klaim-catatan" class="lomba-field-label">Detail Kemenangan / Catatan Klaim *</label>
-            <textarea id="klaim-catatan" maxlength="400" placeholder="Tuliskan tanggal lomba, angka main / line 2D, atau catatan klaim..." class="lomba-textarea"></textarea>
+            <label for="klaim-catatan" class="lomba-field-label">Detail Kemenangan / Catatan Klaim (2–500 karakter) *</label>
+            <textarea id="klaim-catatan" minlength="2" maxlength="500" placeholder="Tuliskan tanggal lomba, angka main / line 2D, atau catatan klaim..." class="lomba-textarea"></textarea>
           </div>
 
           <button type="button" id="btn-kirim-klaim" onclick="kirimKlaimMaster()" class="lomba-submit-btn">
@@ -1263,13 +1180,13 @@ h1 {
         <div id="panel-ruang-obrol" class="lomba-panel-box is-hidden">
           <div class="lomba-panel-head">
             <span>Ruang Obrolan Klaim Master</span>
-            <span class="lomba-badge-guest" id="obrol-quota-badge">Batas 1x / 24 Jam</span>
+            <span class="lomba-badge-guest" id="obrol-quota-badge">Kuota: 1x / 24 Jam</span>
           </div>
 
           <div class="lomba-grid-2">
             <div>
-              <label for="obrol-nama" class="lomba-field-label">Nama / ID Master *</label>
-              <input id="obrol-nama" type="text" maxlength="30" placeholder="Nama Anda" class="lomba-input">
+              <label for="obrol-nama" class="lomba-field-label">Nama / ID Master * (2–40 huruf)</label>
+              <input id="obrol-nama" type="text" minlength="2" maxlength="40" placeholder="Nama Anda" class="lomba-input">
             </div>
             <div>
               <label for="obrol-email" class="lomba-field-label">Email (untuk Gravatar) *</label>
@@ -1278,8 +1195,8 @@ h1 {
           </div>
 
           <div>
-            <label for="obrol-isi" class="lomba-field-label">Pesan Obrolan Klaim *</label>
-            <textarea id="obrol-isi" maxlength="400" placeholder="Tulis pesan konfirmasi klaim atau diskusi pemenang..." class="lomba-textarea"></textarea>
+            <label for="obrol-isi" class="lomba-field-label">Pesan Obrolan Klaim (1–500 karakter) *</label>
+            <textarea id="obrol-isi" minlength="1" maxlength="500" placeholder="Tulis pesan konfirmasi klaim atau diskusi pemenang..." class="lomba-textarea"></textarea>
           </div>
 
           <button type="button" id="btn-kirim-obrol" onclick="kirimObrolanKlaim()" class="lomba-submit-btn">
@@ -1288,7 +1205,7 @@ h1 {
         </div>
 
         <div id="klaim-feedback-box" class="lomba-feedback-box">
-          Batas klaim dan pesan obrolan: 1x per 24 jam.
+          Batas klaim dan pesan obrolan: 1x per 24 jam per email.
         </div>
 
         <div class="lomba-board-card">
@@ -1316,7 +1233,7 @@ h1 {
         <span>Kembali ke Daftar Ruang Lomba</span>
       </a>
 
-      <a href="https://tunggalpaito.online/prediksi/" class="btn-back-main">
+      <a href="/" class="btn-back-main">
         <span>Kembali ke Menu Utama</span>
       </a>
 
@@ -1349,9 +1266,11 @@ h1 {
   const FIREBASE_DB_URL = window.TP_FIREBASE_DB_URL || "https://komentar-web-f9e2e-default-rtdb.asia-southeast1.firebasedatabase.app/";
   const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1575712575897862154/s4alaCpsKoZZY65PCDk_oZzjGLh3Esd7CNkvFGDpKAz-LMYfdCqOCHmxEMtO_DKuboGF";
   const WINDOW_24H_MS = 24 * 60 * 60 * 1000;
+  const MIN_VALID_TS = 1700000000001;
 
-  const KLAIM_PRIMARY_PATH = "klaim-hadiah-master";
-  const KLAIM_FALLBACK_PATH = "komentar/klaim-hadiah-master";
+  // Sesuai Rules: klaim-hadiah-master terbuka untuk publik (.write: !data.exists() && newData.exists())
+  const KLAIM_PATH = "klaim-hadiah-master";
+  // Sesuai Rules: komentar/klaim-hadiah & komentar/prediksi/klaim/obrolan terbuka untuk publik
   const OBROL_PRIMARY_PATH = "komentar/klaim-hadiah";
   const OBROL_FALLBACK_PATH = "komentar/prediksi/klaim/obrolan";
 
@@ -1481,9 +1400,11 @@ h1 {
     if (kBadge && kBtn) {
       if (remKlaim > 0) {
         kBadge.textContent = `Limit 24j (${formatDurationHoursMinutes(remKlaim)})`;
+        kBadge.classList.add("is-limited");
         kBtn.disabled = true;
       } else {
         kBadge.textContent = "Kuota: 1x / 24 Jam";
+        kBadge.classList.remove("is-limited");
         kBtn.disabled = false;
       }
     }
@@ -1493,23 +1414,25 @@ h1 {
     if (oBadge && oBtn) {
       if (remObrol > 0) {
         oBadge.textContent = `Limit 24j (${formatDurationHoursMinutes(remObrol)})`;
+        oBadge.classList.add("is-limited");
         oBtn.disabled = true;
       } else {
         oBadge.textContent = "Kuota: 1x / 24 Jam";
+        oBadge.classList.remove("is-limited");
         oBtn.disabled = false;
       }
     }
   }
 
-  async function writeWithFallback(primaryPath, fallbackPath, payload) {
+  async function writeObrolWithFallback(payload) {
     try {
-      const ref1 = push(ref(db, primaryPath));
+      const ref1 = push(ref(db, OBROL_PRIMARY_PATH));
       await set(ref1, { id: ref1.key, ...payload });
-      return primaryPath;
-    } catch (err1) {
-      const ref2 = push(ref(db, fallbackPath));
+      return OBROL_PRIMARY_PATH;
+    } catch (_) {
+      const ref2 = push(ref(db, OBROL_FALLBACK_PATH));
       await set(ref2, { id: ref2.key, ...payload });
-      return fallbackPath;
+      return OBROL_FALLBACK_PATH;
     }
   }
 
@@ -1548,12 +1471,20 @@ h1 {
     const tujuan = document.getElementById("klaim-tujuan").value.trim();
     const catatan = document.getElementById("klaim-catatan").value.trim();
 
-    if (!nama || !email || !tujuan || !catatan) {
-      setFeedback("Harap lengkapi Nama/ID Master, Email, Tujuan Pencairan, dan Detail Kemenangan.", true);
+    if (nama.length < 2 || nama.length > 40) {
+      setFeedback("Nama / ID Master wajib 2–40 karakter.", true);
       return;
     }
     if (!isValidEmail(email)) {
       setFeedback("Format email belum valid.", true);
+      return;
+    }
+    if (tujuan.length < 4 || tujuan.length > 120) {
+      setFeedback("Tujuan pencairan wajib 4–120 karakter.", true);
+      return;
+    }
+    if (catatan.length < 2 || catatan.length > 500) {
+      setFeedback("Detail kemenangan / catatan wajib 2–500 karakter.", true);
       return;
     }
 
@@ -1569,24 +1500,26 @@ h1 {
     btn.disabled = true;
     btn.textContent = "Mengirim Klaim...";
 
-    const tsNow = Date.now();
+    const tsNow = Math.max(Date.now(), MIN_VALID_TS);
     const waktu = getWaktuWib();
-    const payload = {
-      nama,
-      email,
-      pasaran,
-      posisi,
-      tujuan,
-      catatan,
-      waktu,
-      ts: tsNow
-    };
 
     try {
       localStorage.setItem("tp_saved_nama", nama);
       localStorage.setItem("tp_saved_email", email);
 
-      await writeWithFallback(KLAIM_PRIMARY_PATH, KLAIM_FALLBACK_PATH, payload);
+      const newRef = push(ref(db, KLAIM_PATH));
+      await set(newRef, {
+        id: newRef.key,
+        nama,
+        email,
+        pasaran,
+        posisi,
+        tujuan,
+        catatan,
+        waktu,
+        ts: tsNow
+      });
+
       writeLocal24hStamp("tp_24h_klaim", email, tsNow);
 
       const notifRes = await kirimNotifDiscordSilent(
@@ -1610,7 +1543,7 @@ h1 {
       }
     } catch (err) {
       const detailErr = err && err.message ? ` (${err.message})` : "";
-      setFeedback(`Gagal menyimpan klaim ke database${detailErr}. Periksa aturan akses Firebase Realtime Database.`, true);
+      setFeedback(`Gagal menyimpan klaim ke database${detailErr}.`, true);
     } finally {
       btn.disabled = false;
       btn.textContent = oldLabel;
@@ -1623,12 +1556,16 @@ h1 {
     const email = document.getElementById("obrol-email").value.trim().toLowerCase();
     const isi = document.getElementById("obrol-isi").value.trim();
 
-    if (!nama || !email || !isi) {
-      setFeedback("Nama/ID Master, Email, dan pesan obrolan wajib diisi.", true);
+    if (nama.length < 2 || nama.length > 40) {
+      setFeedback("Nama / ID Master wajib 2–40 karakter.", true);
       return;
     }
     if (!isValidEmail(email)) {
       setFeedback("Format email belum valid.", true);
+      return;
+    }
+    if (isi.length < 1 || isi.length > 500) {
+      setFeedback("Pesan obrolan wajib 1–500 karakter.", true);
       return;
     }
 
@@ -1644,7 +1581,7 @@ h1 {
     btn.disabled = true;
     btn.textContent = "Mengirim Pesan...";
 
-    const tsNow = Date.now();
+    const tsNow = Math.max(Date.now(), MIN_VALID_TS);
     const waktu = getWaktuWib();
     const payload = {
       nama,
@@ -1658,7 +1595,7 @@ h1 {
       localStorage.setItem("tp_saved_nama", nama);
       localStorage.setItem("tp_saved_email", email);
 
-      await writeWithFallback(OBROL_PRIMARY_PATH, OBROL_FALLBACK_PATH, payload);
+      await writeObrolWithFallback(payload);
       writeLocal24hStamp("tp_24h_obrol", email, tsNow);
 
       const notifRes = await kirimNotifDiscordSilent(
@@ -1677,7 +1614,7 @@ h1 {
       }
     } catch (err) {
       const detailErr = err && err.message ? ` (${err.message})` : "";
-      setFeedback(`Gagal mengirim pesan ke database${detailErr}. Periksa aturan akses Firebase Realtime Database.`, true);
+      setFeedback(`Gagal mengirim pesan ke database${detailErr}.`, true);
     } finally {
       btn.disabled = false;
       btn.textContent = oldLabel;
@@ -1830,24 +1767,11 @@ h1 {
     });
     sync24hQuotaBadges();
 
-    let klaimPrimaryMap = null;
-    let klaimFallbackMap = null;
-    function refreshKlaimView() {
-      renderDaftarKlaim(collectItemsFromMaps([klaimPrimaryMap, klaimFallbackMap]));
-    }
-
-    onValue(query(ref(db, KLAIM_PRIMARY_PATH), limitToLast(20)), function(snap) {
-      klaimPrimaryMap = snap.exists() ? snap.val() : null;
-      refreshKlaimView();
+    onValue(query(ref(db, KLAIM_PATH), limitToLast(30)), function(snap) {
+      const rows = collectItemsFromMaps([snap.exists() ? snap.val() : null]);
+      renderDaftarKlaim(rows);
     }, function() {
-      refreshKlaimView();
-    });
-
-    onValue(query(ref(db, KLAIM_FALLBACK_PATH), limitToLast(20)), function(snap) {
-      klaimFallbackMap = snap.exists() ? snap.val() : null;
-      refreshKlaimView();
-    }, function() {
-      refreshKlaimView();
+      renderDaftarKlaim([]);
     });
 
     let obrolPrimaryMap = null;
@@ -1856,14 +1780,14 @@ h1 {
       renderDaftarObrolan(collectItemsFromMaps([obrolPrimaryMap, obrolFallbackMap]));
     }
 
-    onValue(query(ref(db, OBROL_PRIMARY_PATH), limitToLast(25)), function(snap) {
+    onValue(query(ref(db, OBROL_PRIMARY_PATH), limitToLast(30)), function(snap) {
       obrolPrimaryMap = snap.exists() ? snap.val() : null;
       refreshObrolView();
     }, function() {
       refreshObrolView();
     });
 
-    onValue(query(ref(db, OBROL_FALLBACK_PATH), limitToLast(25)), function(snap) {
+    onValue(query(ref(db, OBROL_FALLBACK_PATH), limitToLast(30)), function(snap) {
       obrolFallbackMap = snap.exists() ? snap.val() : null;
       refreshObrolView();
     }, function() {
@@ -1875,6 +1799,5 @@ h1 {
     syncActivePerlengkapanButton(window.location.pathname || "/ruang-lomba/pemenang-lomba/");
   }, { passive: true });
   </script>
-<script data-cfasync="false" src="https://ahuramazda.org/1/469d8b1dc5275ca6a208e3b905f90da1"></script>
 </body>
 </html>
