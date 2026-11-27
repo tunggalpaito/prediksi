@@ -1060,7 +1060,11 @@
       <span class="brand-title-elegant truncate">TUNGGAL PAITO</span>
     </a>
 
-    <div class="flex items-center gap-1.5 shrink-0">
+    <div class="flex items-center gap-1.5 shrink-0"> 
+      <a href="https://tunggalpaito.online/ruang-lomba/" class="tap-responsive text-xs-custom inline-flex items-center gap-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 font-extrabold py-1.5 px-2.5 rounded-full border border-amber-400/45">
+        
+        <span>Ruang Lomba</span>
+      </a>
       <button type="button" onclick="openSearchModal(event)" aria-label="Cari daftar isi halaman" class="tap-responsive text-sm-custom inline-flex items-center gap-1.5 bg-rose-500/15 hover:bg-rose-500/25 text-rose-200 font-extrabold py-1.5 px-3 rounded-full border border-rose-500/40 cursor-pointer">
         <i class="fa-solid fa-magnifying-glass text-rose-300" aria-hidden="true"></i>
         <span>Cari</span>
@@ -1073,6 +1077,19 @@
 </nav>
 
 <div id="first-screen-lock" class="relative z-10 w-full container-mobile px-4">
+  <a href="https://tunggalpaito.online/ruang-lomba/" class="tap-responsive bento-card hover:border-amber-400/60 p-3 rounded-2xl flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-300 flex items-center justify-center border border-amber-400/40 shrink-0">
+        <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+      </div>
+      <div class="min-w-0">
+        <div class="text-sm-custom font-cyber font-extrabold text-amber-300 uppercase tracking-wide truncate">RUANG LOMBA</div>
+        <div class="text-xs-custom text-warm-muted truncate">Masuk arena lomba &amp; papan peringkat</div>
+      </div>
+    </div>
+    <i class="fa-solid fa-chevron-right text-amber-300 shrink-0" aria-hidden="true"></i>
+  </a>
+
   <div class="top-jump-bar no-scrollbar" role="navigation" aria-label="Lompat Cepat">
     <button type="button" onclick="instantJump('all')" class="quick-jump-btn active-jump" data-jump="all">Semua</button>
     <button type="button" onclick="instantJump('sdy')" class="quick-jump-btn" data-jump="sdy">🇦🇺 SYDNEY POOLS</button>
@@ -1383,7 +1400,6 @@
 </header>
 
 <main class="relative z-10 w-full container-mobile px-4 py-4 flex-grow space-y-5">
-  <!-- ARENA KOMEN PREDIKSI (TANPA DAFTAR/LOGIN AKUN, WAJIB EMAIL + ID + ANGKA 3D / LINE 2D 10 LINE) -->
   <section id="arcade-streak-zone" class="cyber-arena-shell rounded-3xl p-4 space-y-3.5 relative overflow-hidden" aria-label="Komentar Prediksi Angka Main 3D dan Line 2D">
     <div class="flex items-center justify-between pb-2.5 border-b border-rose-500/25 gap-2">
       <div class="min-w-0">
@@ -1425,7 +1441,6 @@
       </div>
     </div>
 
-    <!-- PILIH PASARAN -->
     <div class="grid grid-cols-3 gap-1.5 bg-[#090407]/95 p-1.5 rounded-2xl border border-rose-500/30">
       <button type="button" id="poll-mkt-sdy" onclick="switchPollMarket('sdy')" class="tab-btn active text-xs-custom py-2 px-1.5 rounded-xl font-cyber font-extrabold uppercase tracking-wide text-warm-body border border-transparent cursor-pointer truncate">
         🇦🇺 SYDNEY POOLS
@@ -1447,15 +1462,12 @@
       </p>
     </div>
 
-    <!-- IDENTITAS PENGUNJUNG: EMAIL & ID (TANPA LOGIN AKUN) -->
     <div class="bg-[#090407]/95 border border-rose-500/35 rounded-2xl p-3 space-y-2.5">
       <div class="flex items-center justify-between gap-2">
         <span class="text-xs-custom font-cyber font-bold text-amber-300 uppercase tracking-wider">
           <i class="fa-solid fa-id-card mr-1" aria-hidden="true"></i> Identitas Komentar (Wajib Email &amp; ID)
         </span>
-        <span class="text-xs-custom font-mono-num font-bold px-2 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/35">
-          Tanpa Akun
-        </span>
+        
       </div>
 
       <div class="grid grid-cols-1 gap-2">
@@ -1476,7 +1488,6 @@
       </div>
     </div>
 
-    <!-- PILIH FORMAT: ANGKA MAIN 3 DIGIT ATAU LINE 2D 10 LINE -->
     <div class="grid grid-cols-2 gap-1.5 bg-[#090407]/95 p-1.5 rounded-2xl border border-rose-500/25">
       <button type="button" id="poll-tab-3d" onclick="switchPollMode('3d')" class="tab-btn active text-xs-custom py-2.5 px-2 rounded-xl font-cyber font-extrabold uppercase tracking-wide text-warm-body border border-transparent cursor-pointer">
         🎯 Angka Main 3D
@@ -1486,7 +1497,6 @@
       </button>
     </div>
 
-    <!-- PANEL ANGKA MAIN 3 DIGIT (TEPAT 3 DIGIT) -->
     <div id="poll-panel-3d" class="bg-[#090407]/95 border border-rose-500/30 rounded-2xl p-3.5 space-y-3">
       <div class="flex items-center justify-between text-xs-custom">
         <span class="text-warm-body font-bold">Masukkan Angka Main 3 Digit</span>
@@ -1510,7 +1520,6 @@
       </button>
     </div>
 
-    <!-- PANEL LINE 2D 10 LINE (TEPAT 10 PASANG 2 DIGIT, OTOMATIS PISAH DENGAN *) -->
     <div id="poll-panel-line2d" class="hidden bg-[#090407]/95 border border-rose-500/30 rounded-2xl p-3.5 space-y-3 overflow-hidden">
       <div class="flex items-center justify-between text-xs-custom gap-2">
         <span class="text-warm-body font-bold">10 Line 2D</span>
@@ -1543,7 +1552,6 @@
 
     <div id="poll-feedback-msg" class="text-xs-custom text-left font-semibold text-rose-200 bg-[#050305] border border-rose-500/25 rounded-xl px-3 py-2 min-h-[2.25rem] leading-relaxed"></div>
 
-    <!-- RESULT RESMI 4D -->
     <div id="market-result-check-box" class="bg-[#090407]/95 border border-rose-500/35 rounded-2xl p-3 space-y-2.5">
       <div class="flex items-center justify-between gap-2">
         <span class="text-xs-custom font-cyber font-extrabold text-amber-300 uppercase tracking-wider">
@@ -1565,7 +1573,6 @@
       </div>
     </div>
 
-    <!-- DAFTAR KOMENTAR PREDIKSI (3D & LINE 2D TERPISAH DENGAN *) -->
     <div class="pt-2.5 border-t border-rose-500/25 grid grid-cols-1 gap-2.5">
       <div class="bg-[#090407]/95 border border-rose-500/35 rounded-2xl p-3">
         <div class="flex items-center justify-between mb-2 gap-2">
@@ -2030,7 +2037,7 @@
 (function() {
   "use strict";
 
-  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_27_komen_v49";
+  const CACHE_BUILD_VERSION = "tp_prediksi_2026_11_27_komen_v50";
   const CACHE_KEY_NAME = "tp_prediksi_build_ver";
   const STORAGE_CLICKED_BO_KEY = "tp_clicked_bo_links_v1";
 
@@ -2386,7 +2393,6 @@
   const yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  // --- KOMEN PREDIKSI LANGSUNG (EMAIL + ID + ANGKA 3D / LINE 2D 10 LINE PISAH *) ---
   const POLL_MARKETS = {
     sdy: { label: "SYDNEY POOLS", short: "SYDNEY POOLS", resultPath: "live/data-sdy" },
     sgp: { label: "SINGAPORE", short: "SINGAPORE", resultPath: "live/data-sgp" },
@@ -2931,7 +2937,6 @@
   setInterval(function() {
     if (!document.hidden) fetchPollState();
   }, 12000);
-  // --- AKHIR KOMEN PREDIKSI LANGSUNG ---
 
   const prefetchedUrls = new Set();
   function prefetchInternalUrl(href) {
@@ -3247,6 +3252,7 @@
       });
     }
 
+    addItem("Ruang Lomba", "Arena Lomba & Papan Peringkat", "https://tunggalpaito.online/ruang-lomba/", "link", "");
     addItem("Download APK Tunggal Paito", "Versi Resmi • Ringan & Anti Blokir", "", "download", "");
     addItem("Jasa Buat Website", "Web & APK Profesional Custom", "", "webdev", "");
 
@@ -3263,6 +3269,8 @@
         mCode = (marketBlock.getAttribute("data-market") || "").toLowerCase();
         const headingEl = marketBlock.querySelector(".font-extrabold");
         category = headingEl ? headingEl.textContent.trim() : (POLL_MARKETS[mCode] ? POLL_MARKETS[mCode].label : mCode.toUpperCase());
+      } else if (href.includes("/ruang-lomba/")) {
+        category = "Unggulan";
       } else if (href.includes("/apk/") || href.includes("/apk-line-2d/") || href.includes("/rumus/")) {
         category = "Perlengkapan & APK";
       } else if (href.includes("top-10-line")) {
