@@ -1100,11 +1100,12 @@ h1 {
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getDatabase, ref, onValue, query, orderByKey, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-  const CACHE_BUILD_VERSION = "v45_cmb_7trek_lite";
+  const CACHE_BUILD_VERSION = "v46_cmb_7trek_locked";
   window.TP_CACHE_BUILD_VERSION = CACHE_BUILD_VERSION;
 
-  // Batasi hanya 7 putaran terbaru untuk hemat bandwidth Firebase
+  // Tampilkan 7 putaran di layar, namun tarik 8 data dari Firebase agar baris ke-1 tetap punya patokan hari sebelumnya
   const TREK_LIMIT = 7;
+  const FIREBASE_FETCH_LIMIT = TREK_LIMIT + 1;
 
   document.getElementById("auto-year").textContent = String(new Date().getFullYear());
 
@@ -1177,9 +1178,8 @@ h1 {
   const MISTIK_LAMA = [1, 0, 5, 8, 7, 2, 9, 4, 3, 6];
   const MISTIK_BARU = [8, 7, 6, 9, 5, 4, 2, 1, 0, 3];
   const TAYSEN_MAP = [7, 4, 9, 6, 1, 8, 3, 0, 5, 2];
-  
-    
-                      function hitungAngkaMain2D(digits, prevDigits, trekIndex) {
+
+  function hitungAngkaMain2D(digits, prevDigits, trekIndex) {
     const [as, kop, kepala, ekor] = digits;
     const pAs = Array.isArray(prevDigits) ? prevDigits[0] : kop;
     const pEkor = Array.isArray(prevDigits) ? prevDigits[3] : kepala;
@@ -1199,10 +1199,8 @@ h1 {
     d2 = (hasilTambah8 + 1) % 10;
 
     return [d1, d2];
-}
+  }
 
-
-                    
   function getDigitBallClass(digit) {
     const n = Number(digit);
     return (n >= 0 && n <= 9) ? ("ball-digit-" + n) : "ball-digit-0";
@@ -1357,8 +1355,9 @@ h1 {
       });
     });
 
-    // Potong hanya 7 putaran terbaru
-    const latestTreks = allResults.slice(-TREK_LIMIT);
+    // Tampilkan hanya 7 putaran terbaru, tapi tetap simpan data ke-8 di allResults sebagai prevDigits
+    const startIndex = Math.max(0, allResults.length - TREK_LIMIT);
+    const latestTreks = allResults.slice(startIndex);
     const fragment = document.createDocumentFragment();
 
     let masukCount = 0;
@@ -1370,7 +1369,7 @@ h1 {
       if (result4d.length < 4) return;
 
       const digits = result4d.slice(-4).split("").map(Number);
-      const globalPos = allResults.length - latestTreks.length + index;
+      const globalPos = startIndex + index;
       const prevItem = globalPos > 0 ? allResults[globalPos - 1] : null;
       const prevDigits = (prevItem && prevItem.val && prevItem.val.length >= 4)
         ? prevItem.val.slice(-4).split("").map(Number)
@@ -1895,8 +1894,8 @@ h1 {
     if (firebaseInitialized || !cleanDbUrl || !isSafeHttpUrl(cleanDbUrl)) return;
     firebaseInitialized = true;
 
-    // Query Firebase dibatasi hanya 7 data terbaru (limitToLast(7))
-    const cambodiaQuery = query(ref(db, FIREBASE_DATA_CAMBODIA_PATH), orderByKey(), limitToLast(TREK_LIMIT));
+    // Query Firebase dibatasi 8 data terbaru (7 ditampilkan + 1 cadangan patokan hari sebelumnya)
+    const cambodiaQuery = query(ref(db, FIREBASE_DATA_CAMBODIA_PATH), orderByKey(), limitToLast(FIREBASE_FETCH_LIMIT));
     onValue(cambodiaQuery, function(snapshot) {
       renderCambodiaPredictions(snapshot.exists() ? snapshot.val() : null);
     }, function(e) {
